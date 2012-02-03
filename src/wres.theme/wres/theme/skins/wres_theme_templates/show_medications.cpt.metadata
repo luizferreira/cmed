@@ -1,0 +1,8 @@
+[actions]
+action.success..generate = traverse_to:string:generate_prescription
+action.success = traverse_to:string:save_medication
+action.failure = traverse_to:string:show_medications
+
+[validators]
+validators..save = show_medications_save_validator
+validators..generate = show_medications_generate_validator

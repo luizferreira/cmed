@@ -1,0 +1,1 @@
+Esta pasta deve conter somente javascripts do 'WRES Theme'.

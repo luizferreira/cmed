@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+
+<title i18n:translate="cmfuemr_clinic_search">clinic search</title>
+<metal:aux fill-slot="style_slot">
+    <link rel="Stylesheet" type="text/css"
+        tal:attributes="href string:${portal_url}/clinic_view.css" />
+</metal:aux>
+</head>
+
+<body>
+
+<div metal:fill-slot="main" id="main_chart_print"   
+	tal:define="
+        id context/getId;
+	    script context/clinic_view_script;
+        clinic context/getClinic;
+        ">
+	    
+<tal:for repeat="schemata script">
+    <fieldset id="fieldset_doc_view">
+    <legend tal:content="python:schemata[0]"> Legend </legend>
+        <fieldset id="fieldset_basico"><legend>Básico</legend>
+            <table class="tabela" border="0">
+                <tal:for2 repeat="group python:schemata[1]">
+                    <tr>
+                        <tal:for3 repeat="tupla group">
+                            <tal:def define="field python:tupla[0]; value python:tupla[1]">
+                                <td width="50px">
+                                    <div class="label"><tal:print content="field/widget/label" />:</div>
+                                <td><span class="dado"><tal:print content="value" /></span>
+                                    <br/>   
+                                </td>
+                            </tal:def>
+                        </tal:for3>
+                    </tr>
+                </tal:for2>
+            </table>
+        </fieldset>
+    </fieldset>
+</tal:for>
+
+</div>
+</body>
+</html>

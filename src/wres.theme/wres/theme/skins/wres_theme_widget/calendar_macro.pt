@@ -1,0 +1,154 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="cmfuemr">
+
+
+  <body>
+
+    <div metal:define-macro="calendarDatePickerBox" tal:define="
+     tabindex tabindex/next|tabindex|nothing;
+     input_id string:${formname}_${inputname}_${tabindex};
+     values   python:here.date_components_support(inputvalue);
+     days values/days; months values/months; 
+     years values/years;
+     minutes values/minutes; 
+     hours values/hours;
+     yearStart python:years[0]['value'];
+     yearEnd python:years[-1]['value'];">
+
+      <input type="hidden" tal:attributes="name string:$inputname;
+         id input_id;
+         value inputvalue;" />
+
+
+    <span>
+        <select
+            disabled="disabled"
+            name="ic_day"
+            id="ic_day"
+            size="1"
+            tal:attributes="tabindex tabindex;
+            name string:${inputname}_day;
+            id string:${input_id}_day;
+            onfocus onfocus|nothing;
+            onblur onblur|nothing;
+            onchange string:onChangeDayHandler('${input_id}_month','${input_id}','${input_id}_year','${input_id}_month','${input_id}_day','${input_id}_hour','${input_id}_minute');">
+        
+        <tal:repeat tal:repeat="day days">
+          <option value="subj"
+              tal:attributes="value day/value; selected day/selected"
+              i18n:translate=""
+          tal:content="day/id">day</option>
+        </tal:repeat>
+
+    </select>
+      </span>
+      <span i18n:translate="date_separator">/</span>
+      
+      <span>
+    <select
+        disabled="disabled"
+        name="ic_month"
+        id="ic_month"
+        size="1"
+        tal:attributes="tabindex tabindex;
+        name string:${inputname}_month;
+        id string:${input_id}_month;
+        onfocus onfocus|nothing;
+        onblur onblur|nothing;
+        onchange string:onChangeDateHandler('${input_id}','${input_id}_year','${input_id}_month','${input_id}_day','${input_id}_hour','${input_id}_minute');">
+
+        <tal:repeat repeat="month months">
+          <option value="subj"
+              tal:attributes="value month/value; selected month/selected"
+              i18n:translate=""
+          tal:content="month/id">month name</option>
+        </tal:repeat>
+
+    </select>
+      </span>
+      
+
+      <span i18n:translate="date_separator">/</span>
+
+      <span>
+    <select
+        disabled="disabled"
+        name="ic_year"
+        id="ic_year"
+        size="1"
+        tal:attributes="tabindex tabindex;
+        name string:${inputname}_year;
+        id string:${input_id}_year;
+        onfocus onfocus|nothing;
+        onblur onblur|nothing;
+        onchange string:onChangeDateHandler('${input_id}','${input_id}_year','${input_id}_month','${input_id}_day','${input_id}_hour','${input_id}_minute');">
+<!--
+      <option value="year"
+          tal:repeat="year years"
+          tal:attributes="value year/value; selected year/selected"
+          i18n:translate=""
+      tal:content="year/id">year</option>
+-->
+        <tal:repeat tal:repeat="year years">
+          <option value="year"
+              tal:attributes="value year/value; selected year/selected"
+              i18n:translate=""
+          tal:content="year/id">year</option>
+        </tal:repeat>
+    </select>
+      </span>
+
+
+      <a tal:attributes="onclick string:return showJsCalendar('${input_id}_month', '$input_id', '${input_id}_year', '${input_id}_month', '${input_id}_day', '${input_id}_hour', '${input_id}_minute', $yearStart, $yearEnd);"><img tal:replace="structure here/popup_calendar.gif" /></a>
+        <tal:show_hm condition="show_hm">
+            <span>
+                <select name="ic_hour"
+                    id="ic_hour"
+                    size="1"
+                        tal:attributes="tabindex tabindex;
+                        name string:${inputname}_hour;
+                        id string:${input_id}_hour;
+                        onfocus onfocus|nothing;
+                        onblur onblur|nothing;
+                        onchange string:update_date_field('${input_id}','${input_id}_year','${input_id}_month','${input_id}_day','${input_id}_hour','${input_id}_minute');">
+                    <option value="subj"
+                        tal:repeat="hour hours"
+                        tal:attributes="value hour/value; selected hour/selected"
+                        i18n:translate=""
+                        tal:content="hour/id">hour</option>
+                </select>
+            </span>
+
+            <span i18n:translate="time_separator">:</span>
+
+            <span>
+                <select name="ic_minute"
+                    id="ic_minute"
+                    size="1"
+                    tal:attributes="tabindex tabindex;
+                    name string:${inputname}_minute;
+                    id string:${input_id}_minute;
+                    onfocus onfocus|nothing;
+                    onblur onblur|nothing;
+                    onchange string:update_date_field('${input_id}','${input_id}_year','${input_id}_month','${input_id}_day','${input_id}_hour','${input_id}_minute');">
+                    <option value="subj"
+                        tal:repeat="minute minutes"
+                        tal:attributes="value minute/value; selected minute/selected"
+                        i18n:translate=""
+                        tal:content="minute/id">hour</option>
+                </select>
+            </span>
+        </tal:show_hm>
+        <tal:not_show_hm condition="not:show_hm">
+            <input tal:attributes="name string:${inputname}_hour;
+                                    id string:${input_id}_hour;"
+                 type="hidden" value="0" />
+            <input type="hidden" value="0" tal:attributes="name string:${inputname}_minute;
+                                                id string:${input_id}_minute;" />
+        </tal:not_show_hm>
+    </div>
+
+  </body>
+
+</html>

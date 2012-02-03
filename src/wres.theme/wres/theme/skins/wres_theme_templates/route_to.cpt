@@ -1,0 +1,29 @@
+<html metal:use-macro="here/main_template/macros/master"
+	i18n:domain="cmfuemr">
+	
+	<div metal:fill-slot="main">
+		<h1 i18n:translate="heading_choose_reviewer">Choose Reviewer</h1>
+		<!--<p i18n:translate="help_revise_document">Choose the user that will revise this Document. This Document will belong to the selected user.</p>-->
+		<fieldset>
+			<legend i18n:translate="legend_select_reviewer">Select Reviewer</legend>
+			<form>
+				<input type="hidden" name="form.submitted" value="1" />
+				<tal:def define="doctor context/getDoctor">
+                <table>
+                    <tr>
+                        <td tal:define="fullname string:${doctor/getFirstName} ${doctor/getLastName}">
+                            <input type="hidden" name="routable" tal:attributes="value fullname;"/>
+                                <strong tal:content="fullname">Item Name</strong>
+                        </td>
+                    </tr>
+                </table>
+                </tal:def>
+                <span i18n:translate="description_review_notes">Review Notes</span>
+                <textarea name="review_notes" rows="5"></textarea><br />
+				
+                <input type="submit" class="context" value="Rever" name="form.button.route_to" i18n:attributes="value" />
+				<input type="submit" class="context" value="Cancel" name="form.button.cancel" i18n:attributes="value" />
+			</form>
+		</fieldset>
+	</div>
+</html>

@@ -1,0 +1,141 @@
+
+<metal:define define-macro="edit">
+
+  <!-- AQUI VEM TUDO QUE ESTA ACIMA DO CORPO DO DOCUMENTO -->
+
+  <div id="top_frame" tal:define="data context/generic_richtext_script">
+
+    <div id="initial_buttons_div">
+      <span class="button" id="previous_button" style="cursor: hand; cursor: pointer">ANTERIORES</span> - <span class="button" id="templates_button" style="cursor: hand; cursor: pointer">MODELOS</span>
+    </div> 
+    <br />
+
+    <div id="content_frame">
+
+      <div id="templates" style="display:none">
+
+       <table class="listing nosort ctable" tal:define="templates data/templates">
+          <thead>
+            <tr>
+              <th style="width:30%;" class="ctable_header"> 
+                <span style="float:center">Modelos</span> 
+              </th>
+              <th style="width:70%;" class="ctable_header"> 
+                Conteúdo do Modelo
+              </th>
+              <th class="include_button" id="template_include_button" style="background-color: #205c90; color: white; width:10%">
+              Incluir</th>
+            </tr>
+          </thead>
+
+          <tr>
+          
+            <td>
+              <div class="tdleft_menu">
+                  <select id="template_select" class="doc_template_select" size="2">
+                      <tal:for repeat="template templates">
+                          <option tal:attributes="value string:template${repeat/template/number}"> 
+                            <tal:print content="template/Title" /> 
+                          </option> 
+                      </tal:for>
+                  </select> 
+              </div>             
+
+            </td>
+
+            <td colspan="2">
+                <div id="template_content" class="tdright_content">
+
+                  <tal:for repeat="template templates">
+                    <div class="templates_content" tal:attributes="id string:template${repeat/template/number}" style="display:none">
+                      <metal:macro use-macro="python:template.widget('template_body', mode='view')"> </metal:macro>
+                    </div>
+                  </tal:for>
+                </div>
+            </td>
+
+          <tr>
+        
+        </table>
+
+      </div>
+
+
+      <div id="previous_docs">
+
+        <table class="listing nosort ctable" tal:define="docs data/documents">
+          <thead>
+            <tr>
+                <th style="width:30%" class="ctable_header"> 
+                  Documentos 
+                </th>
+                <th style="width:70%" class="ctable_header"> 
+                  Conteúdo do Documento
+                </th>
+                <th class="include_button" id="document_include_button" style="background-color: #205c90; color: white; width:10%">
+                  Incluir
+                </th> 
+            <tr>
+          </thead>
+
+          <tr>
+          
+            <td>
+              <div class="tdleft_menu">
+                  <select id="doc_select" class="doc_template_select" size="2">
+                      <tal:for repeat="doc docs">
+                          <option tal:attributes="value string:doc${repeat/doc/number}"> 
+                            <tal:print content="doc/generic_document_edit_title" />
+                          </option> 
+                      </tal:for>
+                  </select> 
+              </div>             
+
+            </td>
+
+            <td colspan="2">
+                <div id="doc_content" class="tdright_content">
+                  <tal:for repeat="doc docs">
+                    <div class="docs_content" tal:attributes="id string:doc${repeat/doc/number}" style="display:none">
+                      <metal:macro use-macro="python:doc.widget('gdocument_body', mode='view')"> </metal:macro>
+                    </div>
+                  </tal:for>
+                </div>
+            </td>
+
+          <tr>
+        
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+  <!-- AQUI VEM TUDO QUE ESTA ACIMA DO CORPO DO DOCUMENTO /FIM -->
+
+  <br />
+  <br />
+  <metal:use use-macro="field_macro | context/widgets/field/macros/edit">
+    <metal:fill fill-slot="widget_body"
+                tal:define="binary python: context.isBinary(fieldName)">
+      <tal:area_format tal:condition="widget/allow_format_edit | python:1">
+          <metal:block use-macro="context/widgets/visual/macros/area_format" />
+      </tal:area_format>
+      <metal:use use-macro="context/widgets/epoz/macros/edit_area">
+        <metal:fill fill-slot="text_format"/>
+      </metal:use>
+      <div class="fieldUploadFile"
+           tal:condition="widget/allow_file_upload | python:1">
+          <span class="discreet"
+                i18n:translate="or_upload_a_file">or upload a file (existing content will be replaced)</span>
+          <input type="file"
+                 size="30"
+                 tal:attributes="name string:${fieldName}_file;
+                                 id string:${fieldName}_file;
+                                 "/>
+      </div>
+    </metal:fill>
+  </metal:use>
+</metal:define>
+

@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+
+<metal:main fill-slot="main">
+	<!--tal:define="template_data context/get_formatted_questionnaire_data;
+				formatted_data context/getFormatedChart;
+				past_history_data context/getShowPastHistoryData;
+				past_histories past_history_data/values"-->
+
+	<fieldset>
+		<legend i18n:translate="cmfuemr_text_medical_documents">Medical Documents</legend>
+		<tal:def define="past_histories context/getShowPastHistoryData;
+						 history_data past_histories/medical_history | nothing;">
+			<metal:history_from_documents use-macro="here/show_histories_macros/macros/history_from_documents" />
+		</tal:def>
+	</fieldset>
+
+	<!--fieldset>
+		<legend>Self Diseases</legend>
+		<tal:empty condition="not:template_data/self_diseases">
+			<span>The patient has no diseases.</span>
+		</tal:empty>
+		<ul condition="template_data/self_diseases">
+			<li tal:repeat="disease template_data/self_diseases">
+				<tal:text content="disease"/>
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend>Additional Illness</legend>
+		<tal:empty condition="not:formatted_data/FormatedPMH/addill">
+			<span>The patient has no additional illesses.</span>
+		</tal:empty>
+		<ul condition="formatted_data/FormatedPMH/addill">
+			<li tal:repeat="ill formatted_data/FormatedPMH/addill">
+				<tal:text replace="python:ill.title()"/>
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend>Hospitalizations List</legend>
+      <table class="listing">
+	      <thead>
+		      <th></th>
+		      <th>Operation or Illness</th>
+		      <th>City and State</th>
+		      <th>Name of Hospital</th>
+		      <th>Year</th>
+		   </thead>
+		   <tbody>
+				<tal:loop repeat="hosp formatted_data/FormatedPMH/hospit">
+					<tal:cond condition="hosp">
+						<tr tal:attributes="class python:test(repeat['hosp'].even(), 'even', 'odd')">
+							<td tal:content="repeat/hosp/number"/>
+							<td tal:content="hosp/operation_or_illness"/>
+							<td tal:content="hosp/city_and_state"/>
+							<td tal:content="hosp/name_of_hospital"/>
+							<td tal:content="hosp/year"/>
+						</tr>
+					</tal:cond>
+				</tal:loop>
+			</tbody>
+		</table>
+	</fieldset-->
+</metal:main>
+</html>

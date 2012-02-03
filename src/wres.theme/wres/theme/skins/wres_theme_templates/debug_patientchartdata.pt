@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+      
+<head>
+	<title>DEBUG - Patient Chart Data</title>
+
+	<metal:block fill-slot="style_slot">
+		<link rel="stylesheet" type="text/css" href="cmed.css" />
+	</metal:block>
+
+	<metal:block fill-slot="javascript_head_slot">
+		<!--script type="text/javascript" src="sec_desk_js.js"></script-->
+	</metal:block>
+      
+</head>
+
+<body>
+
+<div metal:fill-slot="content-title">
+
+    <h1 class="documentFirstHeading"> DEBUG - Patient Chart Data </h1>
+    
+</div>
+
+<div metal:fill-slot="content-core" 
+    tal:define="data context/debug_patientchartdata_script;
+                resumo data/resumo;
+                dics data/dics">
+
+
+    <!--div id="teste">
+        <tal:print content="context/debug_patientchartdata_script" />
+    </div-->
+    
+    <div id="resumo">
+        <fieldset class="cmed">
+            <legend> Resumo </legend>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:200px"> Atributo </th>
+                        <th style="width:600px"> Tipo de Conteúdo </th>
+                    </tr>
+                </thead>
+                <tal:for repeat="item data/resumo">
+                    <tr tal:define="attrname python:item[0]">
+                        <td> <a href="" tal:attributes="href string:debug_patientchartdata#${attrname}"><tal:print content="attrname" /> </a> </td>
+                        <td> <tal:print content="python:item[1]" /> </td>
+                    </tr>
+                </tal:for>
+            </table>
+        </fieldset>
+    </div>
+    
+    <div id="chart_info">
+        <fieldset class="cmed">
+            <legend> ChartData </legend>
+            
+                <tal:for repeat="item dics">
+                    <fieldset class="cmed" tal:attributes="id item">
+                        <legend> <tal:print content="item" /> </legend>
+                        <tal:def define="content python:dics[item]">
+                            <!--tal:if condition="content">
+                                <tal:print content="python: dics[item]" />
+                            </tal:if>
+                            <tal:ifnot condition="not:content">
+                                None
+                            </tal:ifnot-->
+                            <strong style="color:#4444FF"> NÃO FORMATADO </strong>
+                            <br />
+                            <span style="color:red"><tal:print condition="python: content==None" content="string: O atributo não possui interface de acesso." /></span>
+                            <tal:print content="content" />
+
+                            <br />
+                            <br />
+                            <strong style="color:#4444FF"> FORMATADO </strong>
+                            <!--metal: use-macro="context/debug_patientchartdata_macros/macros/tmacro" /--> 
+                            <!--tal:print content="context/debug_patientchartdata_macros/macros" /-->                           
+                            <!--tal:print content="content" /-->
+                        </tal:def>
+                    </fieldset>
+                </tal:for>
+
+                <!--div id="questionnaire">
+                    <fieldset class="cmed">
+                        <legend> Questionnaire </legend>
+                        <tal:print content="dics/questionnaire" />
+                        <tal:for repeat="item dics">
+                            <tal:print content="item" />                            
+                        </tal:for>
+                    </fieldset>
+                </div-->
+            
+
+        </fieldset>
+    </div>
+
+
+</div>        
+
+</body>
+
+</html>

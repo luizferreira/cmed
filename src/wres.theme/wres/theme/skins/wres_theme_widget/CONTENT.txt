@@ -1,0 +1,1 @@
+Esta pasta deve conter somente custom widgets e custom widgets templates do 'WRES Theme'.

@@ -1,0 +1,13 @@
+DOCTOR_GROUP = DOCTOR_ROLE = 'Doctor'
+SECRETARY_GROUP = SECRETARY_ROLE = 'Secretary'
+TRANSCRIPTIONIST_GROUP = TRANSCRIPTIONIST_ROLE = 'Transcriptionist'
+FRONTDESKTWO_GROUP = FRONTDESKTWO_ROLE = 'FrontDeskTwo'
+UEMRADMIN_GROUP = UEMRADMIN_ROLE =  'UemrAdmin'
+PATIENT_GROUP = PATIENT_ROLE = 'Patient'
+VISIT_VIEWER_ROLE = 'Visit Viewer'
+MEMBER_ROLE = 'Member'
+CONTRIBUTOR_ROLE = 'Contributor'  # bax migrando -> Access to '@@plone_portal_state' requires one of the following roles: ['Contributor', 'Editor', 'Manager', 'Reader']. 
+ANONYMOUS_ROLE = 'Anonymous'
+OWNER_ROLE = 'Owner'
+MANAGER_ROLE = 'Manager'
+REVIEWER_ROLE = 'Reviewer'

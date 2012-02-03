@@ -1,0 +1,214 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="wres.archetypes">
+
+  <!-- configure your content components here -->
+  
+  <!-- -*- extra stuff goes here -*- -->
+  <class class=".impresso.Impresso">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IImpresso"
+        />
+  </class>
+  <class class=".template.Template">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.ITemplate"
+        />
+  </class>
+  <class class=".templatefolder.TemplateFolder">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.ITemplateFolder"
+        />
+  </class>
+  <class class=".genericdocument.GenericDocument">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IGenericDocument"
+        />
+  </class>
+  <class class=".medicaldocument.MedicalDocument">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IMedicalDocument"
+        />
+  </class>
+  <class class=".uploadchartfolder.UploadChartFolder">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IUploadChartFolder"
+        />
+  </class>
+  <class class=".reviewofsystems.ReviewOfSystems">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IReviewOfSystems"
+        />
+  </class>
+  <class class=".clinic.Clinic">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IClinic"
+        />
+  </class>
+  <class class=".encounter.Encounter">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IEncounter"
+        />
+  </class>
+  <class class=".visittemp.VisitTemp">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IVisitTemp"
+        />
+  </class>
+  <class class=".visit.Visit">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IVisit"
+        />
+  </class>
+  <class class=".insurancefolder.InsuranceFolder">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IInsuranceFolder"
+        />
+  </class>
+  <class class=".insurance.Insurance">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IInsurance"
+        />
+  </class>
+  <class class=".initialvisit.InitialVisit">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IInitialVisit"
+        />
+  </class>
+  <class class=".visitfolder.VisitFolder">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IVisitFolder"
+        />
+  </class>
+  <class class=".progressnotes.ProgressNotes">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IProgressNotes"
+        />
+  </class>
+  <class class=".referringproviderfolder.ReferringProviderFolder">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IReferringProviderFolder"
+        />
+  </class>
+  <class class=".referringprovider.ReferringProvider">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IReferringProvider"
+        />
+  </class>
+  <class class=".adminfolder.AdminFolder">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IAdminFolder"
+        />
+  </class>
+  <class class=".admin.Admin">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IAdmin"
+        />
+  </class>
+  <class class=".docplastica.DocPlastica">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IDocPlastica"
+        />
+  </class>
+  <class class=".docboletim.DocBoletim">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IDocBoletim"
+        />
+  </class>
+  <class class=".examfolder.ExamFolder">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IExamFolder"
+        />
+  </class>
+  <class class=".documentfolder.DocumentFolder">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IDocumentFolder"
+        />
+  </class>
+  <class class=".chartfolder.ChartFolder">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IChartFolder"
+        />
+  </class>
+  <class class=".wresuser.WRESUser">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IWRESUser"
+        />
+  </class>
+  <class class=".transcriptionistfolder.TranscriptionistFolder">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.ITranscriptionistFolder"
+        />
+  </class>
+  <class class=".transcriptionist.Transcriptionist">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.ITranscriptionist"
+        />
+  </class>
+  <class class=".secretaryfolder.SecretaryFolder">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.ISecretaryFolder"
+        />
+  </class>
+  <class class=".secretary.Secretary">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.ISecretary"
+        />
+  </class>
+  <class class=".patient.Patient">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IPatient"
+        />
+  </class>
+  <class class=".doctor.Doctor">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IDoctor"
+        />
+  </class>
+  <class class=".patientfolder.PatientFolder">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IPatientFolder"
+        />
+  </class>
+  <class class=".doctorfolder.DoctorFolder">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IDoctorFolder"
+        />
+  </class>
+
+</configure>

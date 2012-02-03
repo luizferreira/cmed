@@ -1,0 +1,4 @@
+[actions]
+action.success = traverse_to:string:route_to_handler
+action.success..route_to = traverse_to:string:route_to_handler
+action.success..cancel = redirect_to_action:string:view

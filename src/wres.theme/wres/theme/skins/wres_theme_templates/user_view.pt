@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+
+<title i18n:translate="cmfuemr_patient_search">Patient search</title>
+
+</head>
+
+<body>
+
+<div metal:fill-slot="main"
+	tal:define="
+		title context/getFullName;
+        id context/getId;
+	    script context/user_view_script">
+	    
+	<h1>
+    	<a i18n:translate="" tal:content="string:${title} (${id})">Title</a>
+	</h1>	    
+	    
+	
+	<tal:for repeat="schemata script">
+	
+		<fieldset>
+            <legend tal:content="python:schemata[0]"> Legend </legend>
+            <table cellspacing="50" width="600px">
+            <tal:for2 repeat="group python:schemata[1]">
+                <tr>
+                <tal:for3 repeat="tupla group">
+                    <tal:def define="field python:tupla[0]; value python:tupla[1]">
+                        <td>
+                            <h3><a><tal:print content="field/widget/label" /></a></h3>
+                            <tal:print content="value" />
+                        </td>
+                    </tal:def>
+                </tal:for3>
+                </tr>
+            </tal:for2>
+            </table>
+        </fieldset>
+	
+		<!-- fieldset>
+		<table>
+			<legend tal:content="schemata"> Legend </legend>
+			<tr>
+			<tal:for2 repeat="field python:script[schemata]">
+				<tal:if condition="python:field.getAccessor(context)() is not ''">
+					<tal:def define="accessor python:field.getAccessor(context)">
+						<td padding="10"> 						 
+						<h3><a><tal:print content="field/widget/label" /></a></h3>
+						<tal:print content="accessor" />
+						</td>
+					</tal:def>
+					<br /><br />
+				</tal:if>
+			</tal:for2>
+			</tr>
+		</table>			
+		</fieldset> -->
+	</tal:for>
+	
+	
+
+</div>
+</body>
+</html>

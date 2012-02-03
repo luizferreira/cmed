@@ -1,0 +1,10 @@
+[validators]
+validators..save = show_problem_list_validator
+
+[actions]
+action.success = traverse_to:string:save_problem_list
+action.success..save = traverse_to:string:save_problem_list
+action.success..edit = traverse_to:string:edit_problem
+action.success..resolve = traverse_to:string:resolve_problem
+action.success..renew = traverse_to:string:renew_problem
+action.failure = traverse_to:string:show_problem_list

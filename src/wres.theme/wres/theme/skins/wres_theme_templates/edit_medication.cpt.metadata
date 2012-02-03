@@ -1,0 +1,5 @@
+[actions]
+action.success = traverse_to:string:edit_medication_handler
+action.success..save = traverse_to:string:edit_medication_handler
+action.success..cancel = redirect_to:string:show_medications
+action.failure = traverse_to:string:edit_medication

@@ -1,0 +1,7 @@
+[actions]
+action.success = traverse_to:string:save_allergy
+action.success..save = traverse_to:string:save_allergy
+action.failure = traverse_to:string:show_allergies
+
+[validators]
+validators = save_allergy_validator

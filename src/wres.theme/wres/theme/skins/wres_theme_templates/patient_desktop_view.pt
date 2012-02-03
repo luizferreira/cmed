@@ -1,0 +1,38 @@
+<html metal:use-macro="here/main_template/macros/master" i18n:domain="cmfuemr">
+  <head>
+    <title i18n:translate="cmfuemr_patient_desktop">Patient Desktop</title>
+    <metal:block fill-slot="javascript_head_slot">
+        <script type="text/javascript" src="calendar_aux/calendar.js"></script>
+    </metal:block>
+  </head>
+  <body>
+    <div metal:fill-slot="main"
+         tal:define="path_ python:request.get('PATH_INFO');
+                     lista python:path_.split('/');
+                     indiceStr python:path_.index('Patients/');
+                     indiceLst python:lista.index('Patients');
+                     url python:path_[:indiceStr+14] + '/' + lista[indiceLst+1];
+                     current python:request.get('PATH_INFO').split('/').pop()">
+
+                     <p>Seja bem vindo, <span tal:content="python:(here.getFirstName() or ' ')">Nome do Paciente</span>!</p>
+                     <p>Abaixo segue os links para você acessar seus dados e seu prontuário.</p>
+                    <p>
+                    <tal:aba repeat="aba python:[('Patient Data', url + '/patient_view', 'data'),
+                                                 ('Patient Chart', url + '/chartFolder/show_chart_summary', 'chart'),
+                                                 ('Preencher Formulário', url + '/chartFolder_hidden/misc/createObject?type_name=Formulario', 'chart'),]">
+                         <a tal:attributes="href python:aba[1]" class="">
+                            <span class="visualCaseSensitive" tal:content="python:aba[0]"  i18n:translate="">Patient Chart</span>
+                         </a>
+                         <br />
+                    </tal:aba>
+                    </p>
+
+                    <!--<p>
+                    <a href='createObject?type_name=Formulario'>Preencher formulário</a>
+                    </p>-->
+                     
+                     
+   </div>
+
+  </body>
+</html>

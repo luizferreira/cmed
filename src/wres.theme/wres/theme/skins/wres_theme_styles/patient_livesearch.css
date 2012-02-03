@@ -1,0 +1,12 @@
+
+#content ul {
+	list-style: none outside none; 
+	text-align:left
+}
+
+div#LSResult {
+	position:relative;
+	margin:0;
+	margin-left:auto;
+	margin-right:auto;	
+}

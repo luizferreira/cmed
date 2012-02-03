@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cmfuemr">
+    <head>
+        <metal:block fill-slot="style_slot">
+            <link rel="stylesheet" type="text/css" href="cmed.css" />
+        </metal:block>
+        <metal:block fill-slot="javascript_head_slot">
+                <script type="text/javascript" src="show_problems.js"></script>
+        </metal:block> 
+    </head>
+    <body>
+        <div metal:fill-slot="main"
+            tal:define="data context/getEditMedicationData">
+            <h1>Editar Medicamento</h1>
+            <br />
+            <div id="edit">
+                <metal:edit use-macro="here/medications_macros/macros/add_new">
+                    <metal:buttons fill-slot="buttons">
+                        <input id="add_new" type="submit" name="form.button.save" value="Salvar" class="context" i18n:attributes="value"/>
+                        <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
+                        <input type="submit" name="form.button.cancel" value="cancel" class="context" i18n:attributes="value"/>
+                        <input type="hidden" name="id" tal:attributes="value request/id | nothing" />
+                        <input type="hidden" name="state" tal:attributes="value request/state | nothing" />
+                        <input type="hidden" name="submitted_on" tal:attributes="value request/submitted_on | nothing" />
+                        <input type="hidden" name="submitted_by" tal:attributes="value request/submitted_by | nothing" />
+                    </metal:buttons>
+                </metal:edit>
+            </div>
+        </div>
+    </body>
+</html>

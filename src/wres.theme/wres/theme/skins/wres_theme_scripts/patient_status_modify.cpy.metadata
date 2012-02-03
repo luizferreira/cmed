@@ -1,0 +1,10 @@
+[default]
+title = Patient
+
+[validators]
+validators.. = validate_content_status_modify
+
+
+[actions]
+action.failure = redirect_to:string:inactivity_reason
+action.success = redirect_to:string:user_view

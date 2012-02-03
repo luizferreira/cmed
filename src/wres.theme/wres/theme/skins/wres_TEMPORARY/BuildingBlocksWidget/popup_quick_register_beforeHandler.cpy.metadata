@@ -1,0 +1,2 @@
+[actions]
+action.success = traverse_to:string:popup_quick_register_handler

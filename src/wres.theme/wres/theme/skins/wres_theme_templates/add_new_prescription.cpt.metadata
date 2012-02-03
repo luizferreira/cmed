@@ -1,0 +1,8 @@
+[validators]
+validators..add = show_prescriptions_validator
+
+[actions]
+action.success = traverse_to:string:save_prescription
+action.success..add = traverse_to:string:save_prescription
+action.success..cancel = redirect_to:string:show_medications
+action.failure = traverse_to:string:add_new_prescription

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8093/WRES" />
+<title>admin_fill_templates</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">admin_fill_templates</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/WRES</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=__ac_name</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=__ac_password</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/WRES/Patients/pteste/chartFolder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='pteste_chart_navigation_links_medical_chart']/div[4]/a/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=medication</td>
+	<td>Tylenol</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=concentration</td>
+	<td>150mg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=quantity</td>
+	<td>12 comprimidos</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=use</td>
+	<td>2 vezes ao dia durante 2 meses</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=form.button.generate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=confirm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='pteste_chart_navigation_links_summaries']/div[4]/a/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=problem</td>
+	<td>Hipotiroidismo</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=code</td>
+	<td>CID10.2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=form.button.save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=#pteste_chart_navigation_links_summaries &gt; div &gt; a &gt; div.navconteudo &gt; span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=allergy</td>
+	<td>Leite</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=reaction</td>
+	<td>Coceira</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='pteste_chart_navigation_links_medical_chart']/div[4]/a/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=medication</td>
+	<td>Venlift</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=concentration</td>
+	<td>15mg</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=quantity</td>
+	<td>2 caixas</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=use</td>
+	<td>2x ao dia</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.odd &gt; td.width-16 &gt; input[name=&quot;form.button.edit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=medication</td>
+	<td>Venlafaxina</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=add_new</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=form.button.history</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=form.button.inactivate</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=user-name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sair</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

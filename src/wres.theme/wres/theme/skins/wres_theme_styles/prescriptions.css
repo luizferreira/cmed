@@ -1,0 +1,20 @@
+/* ========= Prescriptions ============ */
+.label{
+     width: 50px;
+     float: left;
+     padding-top: 11px;
+     margin: 0px;
+}
+.mgsol{
+     width: 60px;
+     float: right;
+     text-align: left;
+     margin: 0px;
+}
+
+#end_date_div{
+	width: 280px;
+	float: right;
+}
+
+/* ========= Prescriptions ============ */

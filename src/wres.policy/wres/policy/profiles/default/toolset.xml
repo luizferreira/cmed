@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<tool-setup>
+
+ <required tool_id="vocabulary_tool"
+           class="wres.policy.VocabularyTool.VocabularyTool"/>
+
+ <required tool_id="new_vocab_tool"
+           class="wres.policy.NewVocabTool.NewVocabTool"/>
+ 
+
+</tool-setup>

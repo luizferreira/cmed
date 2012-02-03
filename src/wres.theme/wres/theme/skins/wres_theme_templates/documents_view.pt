@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+
+<title tal:content="context/Title">Document Title</title>
+
+</head>
+
+<body>
+
+<div metal:fill-slot="main"
+	tal:define="
+	    documento context/Title;
+		title context/getFullName;
+        id context/getId;
+	    script context/documents_view_script;
+	    field_macro field_macro | context/widgets/field/macros/view
+	    ">
+	    
+	<h1>
+    	<a i18n:translate="" tal:content="string:${documento} - ${title}">Title</a>
+	</h1>	    
+	    
+	
+	<tal:for repeat="schemata script">
+	
+		<fieldset>
+			<legend tal:content="python:schemata[0]"> Legend </legend>
+			<table cellspacing="50" width="600px">
+			<tal:for2 repeat="group python:schemata[1]">
+				<tr>
+				<tal:for3 repeat="tupla group">
+					<tal:def define="field python:tupla[0]; value python:tupla[1]">
+						<td valign='top'>
+							<h3><a><tal:print content="field/widget/label" /></a></h3>
+											
+				            <tal:view_macro define="purl nocall:context/portal_url;
+				                                    portal purl/getPortalObject;
+				                                    mode string:view;
+				                                    visState python:field.widget.isVisible(here, mode);
+				                                    visCondition python:field.widget.testCondition(None, portal, context);
+				                                    widget_view python:context.widget(field.getName(), mode=mode, use_label=1);
+	                                                field_macros context/widgets/field/macros;
+	                                                label_macro view_macros/label | label_macro | field_macros/label;
+	                                                data_macro view_macros/data | data_macro | field_macros/data;"
+				                            condition="python:visState == 'visible' and visCondition">
+				                    <tal:if_perm
+                                        condition="python:'view' in widget.modes and 'r' in field.mode and field.checkPermission('r',here)">
+                                      <metal:use_data use-macro="data_macro|default" />
+                                    </tal:if_perm>
+                            
+				            </tal:view_macro>
+				            
+						
+						</td>
+					</tal:def>
+				</tal:for3>
+				</tr>
+			</tal:for2>
+			</table>
+		</fieldset>
+	
+	</tal:for>
+</div>
+</body>
+</html>

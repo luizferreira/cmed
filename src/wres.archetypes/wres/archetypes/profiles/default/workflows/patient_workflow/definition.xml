@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="patient_workflow"
+             title="Default Workflow [Plone]"
+             state_variable="review_state"
+             initial_state="active">
+ <permission>wres.policy: Edit Patient</permission>
+ <permission>wres.policy: View Patient</permission>
+ <permission>wres.policy: List Patient</permission>
+ <state state_id="active" title="Ativo">
+  <exit-transition transition_id="inactivate"/>
+  <exit-transition transition_id="really_review"/>
+  <permission-map name="wres.policy: Edit Patient" acquired="True">
+  </permission-map>
+  <permission-map name="wres.policy: List Patient" acquired="True">
+  </permission-map>
+  <permission-map name="wres.policy: View Patient" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="inactive" title="Inativo">
+  <exit-transition transition_id="activate"/>
+  <exit-transition transition_id="really_review"/>
+  <permission-map name="wres.policy: Edit Patient" acquired="True">
+  </permission-map>
+  <permission-map name="wres.policy: List Patient" acquired="True">
+  </permission-map>
+  <permission-map name="wres.policy: View Patient" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="pending" title="Pending Review">
+  <exit-transition transition_id="activate"/>
+  <exit-transition transition_id="inactivate"/>
+  <permission-map name="wres.policy: Edit Patient" acquired="True">
+  </permission-map>
+  <permission-map name="wres.policy: List Patient" acquired="True">
+  </permission-map>
+  <permission-map name="wres.policy: View Patient" acquired="True">
+  </permission-map>
+ </state>
+ <transition transition_id="activate" title=""
+             new_state="active" trigger="USER"
+             before_script="" after_script="">
+  <action url="patient_status_modify?workflow_action=activate"
+          category="workflow">Ativar</action>
+  <guard>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="inactivate" title=""
+             new_state="inactive" trigger="USER"
+             before_script="" after_script="">
+  <action url="inactivity_reason" category="workflow">Desativar</action>
+  <guard>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+  </guard>
+ </transition>
+
+<!--
+ TODO:<transition transition_id="really_review" title=""
+             new_state="pending" trigger="USER"
+             before_script="" after_script="">
+  <action url="patient_status_modify?workflow_action=really_review" category="workflow">Revisar</action>
+  <guard>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+  </guard>
+ </transition>
+-->
+
+ <worklist worklist_id="active_patients" title="">
+  <description>Show only active patients</description>
+  
+  <guard>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+  </guard>
+  <match name="review_state" values="pending"/>
+ </worklist>
+ 
+ <worklist worklist_id="reviewer_queue" title="">
+  <description>Reviewer tasks</description>
+  <action url="%(portal_url)s/search?review_state=pending"
+          category="global">Pending (%(count)d)</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+  <match name="review_state" values="pending"/>
+ </worklist> 
+
+ <variable variable_id="note" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>A note to explain the inactivation</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('note', '')</expression>
+  </default>
+  <guard>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+  </guard>
+ </variable>
+ <variable variable_id="type" for_catalog="True"
+           for_status="True" update_always="True">
+  <description>Type of inactivity</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('type', '')</expression>
+  </default>
+  <guard>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+  </guard>
+ </variable>
+</dc-workflow>

@@ -1,0 +1,4 @@
+[actions]
+action.success..cancel = redirect_to_action:string:view
+action.success..sign = traverse_to:string:sign_document_handler
+action.success = traverse_to:string:sign_document_handler

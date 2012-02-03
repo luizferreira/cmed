@@ -1,0 +1,104 @@
+/* <dtml-with base_properties> (do not remove this :) */
+
+.actb_table { padding:2px;
+              border-spacing:1px;
+              position:absolute;
+              border: &dtml-borderWidth; solid &dtml-globalBorderColor;;
+              color: &dtml-linkColor;;
+              background-color: white;
+              vertical-align: top;
+              color:black;
+              font-size:90%;
+              //background-color: &dtml-contentViewBackgroundColor;;
+              /*QUADRA : so it is visible when using thickbox*/
+              z-index: 5000;
+}
+
+.actb_active { background-color: &dtml-globalBorderColor;;
+               color: White;
+}
+
+.actb_regex_match { text-decoration:underline;
+                    font-weight:bold;
+}
+
+.actb_arrow_down { background-image: url(<dtml-var portal_url>/arrowDown.gif);
+                   background-repeat: no-repeat;
+                   background-position: center center;
+                   z-index: 4;
+                   padding: 0 0 0 1em;
+                   margin: 0 1em 0 0;
+}
+
+.actb_arrow_up { background-image: url(<dtml-var portal_url>/arrowUp.gif);
+                   background-repeat: no-repeat;
+                   background-position: center center;
+                   z-index: 4;
+                   padding: 0 0 0 1em;
+                   margin: 0 1em 0 0;
+}
+
+.actb_arrow_placeholder { 
+                   z-index: 4;
+                   padding: 0 0 0 1em;
+                   margin: 0 1em 0 0;
+}
+
+.autocomplete .add_button {
+    background:transparent url(<dtml-var portal_url>/add_icon.gif) 0 0 no-repeat;
+    cursor: pointer;
+    font-size: &dtml-fontSmallSize;;
+    padding: 1px 1px 1px 15px;
+    text-transform: &dtml-textTransform;;
+    overflow: visible;
+}
+
+.autocomplete .clear_button {
+    background: transparent url(<dtml-var portal_url>/undo_icon.gif) 0 0 no-repeat;
+    cursor: pointer;
+    font-size: &dtml-fontSmallSize;;
+    padding: 1px 1px 1px 15px;
+    text-transform: &dtml-textTransform;;
+    overflow: visible;
+}
+
+.autocomplete .delete_button {
+    background: transparent url(<dtml-var portal_url>/delete_small_icon.gif) 0px -2px no-repeat;
+    cursor: pointer;
+    font-size: &dtml-fontSmallSize;;
+    padding: 1px 1px 1px 15px;
+    text-transform: &dtml-textTransform;;
+    overflow: visible;
+    border-bottom: none;
+}
+.autocomplete .delete_button span {
+    display: none;
+}
+
+.autocomplete .empty_info {
+    font-size: &dtml-fontSmallSize;;
+    text-transform: &dtml-textTransform;;
+}
+
+.autocomplete ul {
+    font-size: 90%;
+    margin: 0px;
+    padding: 0px 3px;
+    border-left: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+}
+
+.autocomplete ul li {
+    font-size: 90%;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    list-style-image: none;
+}
+
+.autocomplete .empty_info {
+    padding: 0px 3px;
+    border-left: &dtml-borderWidth; &dtml-borderStyle; &dtml-globalBorderColor;;
+}
+ 
+
+/* </dtml-with> */

@@ -1,0 +1,267 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2011-07-29 14:42+0000\n"
+"PO-Revision-Date: 2011-07-29 17:29+0000\n"
+"Last-Translator: Luiz Gustavo da FOnseca Ferreira <lgustavo.fonseca@gmail.com>\n"
+"Language-Team: Communi <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: pt-br\n"
+"Language-Name: Portugues Brasil\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: Solgema.fullcalendar\n"
+
+#: ../skins/solgemafullcalendar/createSFEvent.cpy:44
+msgid "${tname} has been created."
+msgstr "${tname} foi criado."
+
+#. Default: "all-day"
+#: ../browser/solgemafullcalendar_views.py:316
+msgid "Allday"
+msgstr "dia-todo"
+
+#. Default: "Calendar"
+#: ../browser/content.py:43
+msgid "Calendar"
+msgstr "Calendário"
+
+#: ../profiles/default/actions.xml
+#: ../upgrades/profiles/upgrade16/actions.xml
+#: ../upgrades/profiles/upgrade19/actions.xml
+msgid "Calendar properties"
+msgstr "Configurações do Calendário"
+
+#. Default: "Colors"
+#: ../browser/content.py:72
+msgid "Colors"
+msgstr "Cores"
+
+#. Default: "Day"
+#: ../browser/solgemafullcalendar_views.py:313
+msgid "Day"
+msgstr "Dia"
+
+#. Default: "Month"
+#: ../browser/solgemafullcalendar_views.py:307
+#: ../vocabularies.py:31
+msgid "Month"
+msgstr "Mês"
+
+#: ../skins/solgemafullcalendar/SFValidate_integrity.cpy:19
+msgid "Please correct the indicated errors."
+msgstr "Por favor, corrija os erros indicados."
+
+#. Default: "Query"
+#: ../browser/content.py:63
+msgid "Query"
+msgstr "Avancado"
+
+#: ../skins/solgemafullcalendar/SFContextualContentMenu.pt:4
+msgid "Reschedule"
+msgstr "Reagendar"
+
+#: ../widgets/widgets.py:80
+msgid "The entered value is not a valid dict."
+msgstr "La valeur saisie n'est pas un dictionnaire ."
+
+#: ../skins/solgemafullcalendar/SFUpdate_version_on_edit.cpy:35
+msgid "Versioning for this file has been disabled because it is too large"
+msgstr "Le versionnement de ce fichier a été désactivé parce qu'il est trop volumineux."
+
+#. Default: "Week"
+#: ../browser/solgemafullcalendar_views.py:310
+msgid "Week"
+msgstr "Semana"
+
+#. Default: "abbreviated"
+#: ../vocabularies.py:61
+msgid "abbreviated"
+msgstr "abreviado"
+
+#. Default: "Add New Event"
+#: ../browser/solgemafullcalendar_views.py:319
+msgid "addNewEvent"
+msgstr "Adicionar uma nova consulta"
+
+#. Default: "agendaDay"
+#: ../vocabularies.py:35
+msgid "agendaDay"
+msgstr "Agenda diária"
+
+#. Default: "agendaWeek"
+#: ../vocabularies.py:34
+msgid "agendaWeek"
+msgstr "Agenda Semanal"
+
+#. Default: "basicDay"
+#: ../vocabularies.py:33
+msgid "basicDay"
+msgstr "Diário básico"
+
+#. Default: "basicWeek"
+#: ../vocabularies.py:32
+msgid "basicWeek"
+msgstr "Semanal básico"
+
+#. Default: "Edit Event"
+#: ../browser/solgemafullcalendar_views.py:322
+msgid "editEvent"
+msgstr "Editar Consulta"
+
+#. Default: "Check this box to display All day option"
+#: ../interfaces.py:264
+msgid "help_allDay"
+msgstr "Cochez cette case pour afficher l'option \"Jour entier\""
+
+#: ../interfaces.py:209
+msgid "help_availableCriterias"
+msgstr "Choose topic criterions that will be displayed in the bottom of the calendar."
+
+#: ../interfaces.py:204
+msgid "help_calendarHeight"
+msgstr "Configure a altura do calendário em pixels. (exemplo: 600)"
+
+#: ../interfaces.py:153
+msgid "help_defaultCalendarView"
+msgstr "Visualização padrão no qual o calendário sera mostrado"
+
+#: ../interfaces.py:230
+msgid "help_displayNoscriptList"
+msgstr "Se selecionado, quando o javascrit não estiver ativado, uma lista de consultas será mostrada ao invés do calendário."
+
+#: ../interfaces.py:220
+msgid "help_displayUndefined"
+msgstr "Display the \"Undefined\" checkbox in the query field at the bottom of the calendar. This allows to search also for content that the searched field has not been filled."
+
+#: ../interfaces.py:174
+msgid "help_firstDay"
+msgstr "Mostra o calendário à partir desse dia"
+
+#: ../interfaces.py:185
+msgid "help_firstHour"
+msgstr "Coloque a primeira hora que será mostrada no calendário (de 0 a 23). Se essa hora for precedida por um \"+\" ou um \"-\", a hora inicial do calendário será definida com base na hora atual."
+
+#: ../interfaces.py:164
+msgid "help_headerRight"
+msgstr "Conteúdo do cabeçalho direito do calendário"
+
+#: ../interfaces.py:190
+msgid "help_minTime"
+msgstr "Coloque a primeira hora que sera visível no calendário (precisa ser do tipo '5' ou '5:30')."
+
+#: ../interfaces.py:225
+msgid "help_overrideStateForAdmin"
+msgstr "Override Review State Criterion for Admins."
+
+#: ../interfaces.py:215
+msgid "help_queryColors"
+msgstr "Você pode escolher a cor na qual serão mostradas as consultas no calendário."
+
+#: ../interfaces.py:180
+msgid "help_relativeFirstDay"
+msgstr "O calendário é mostrado à partir de um certo número de dias antes ou depois da data atual (utilize o formato '+1' ou '-1')"
+
+#: ../interfaces.py:159
+msgid "help_shortDayNameFormat"
+msgstr "Escolha o formato da abreviação do nome de dia (abreviado = 3 caracteres, curto = 2 caracteres)."
+
+#: ../interfaces.py:146
+msgid "help_slotMinutes"
+msgstr "Coloque a largura em minutos de cada retãngulo do calendário"
+
+#: ../interfaces.py:198
+msgid "help_target_folder"
+msgstr "Escolha a pasta onde o conteúdo será criado (Opção avançada, não preecha esse campo sem estar certo do que está fazendo)."
+
+#: ../interfaces.py:169
+msgid "help_weekends"
+msgstr "Mostrar Sábados e Domingos"
+
+#. Default: "Display All day option"
+#: ../interfaces.py:263
+msgid "label_allDay"
+msgstr "Afficher les cases \"Jour entier\""
+
+#: ../interfaces.py:149
+msgid "label_allDaySlot"
+msgstr "Mostrar espaço 'dia todo'"
+
+#: ../interfaces.py:207
+msgid "label_availableCriterias"
+msgstr "Search Criterias"
+
+#: ../interfaces.py:202
+msgid "label_calendarHeight"
+msgstr "Altura do calendário"
+
+#: ../interfaces.py:151
+msgid "label_defaultCalendarView"
+msgstr "Visualização Padrão"
+
+#: ../interfaces.py:228
+msgid "label_displayNoscriptList"
+msgstr "Listar eventos sem javascript"
+
+#: ../interfaces.py:218
+msgid "label_displayUndefined"
+msgstr "Indefinido"
+
+#: ../interfaces.py:172
+msgid "label_firstDay"
+msgstr "Primeiro dia da semana"
+
+#: ../interfaces.py:183
+msgid "label_firstHour"
+msgstr "Primeira hora mostrada"
+
+#: ../interfaces.py:163
+msgid "label_headerRight"
+msgstr "Cabeçalho à direita"
+
+#: ../interfaces.py:193
+msgid "label_maxTime"
+msgstr "Última hora visível"
+
+#: ../interfaces.py:188
+msgid "label_minTime"
+msgstr "Primeira hora visível"
+
+#: ../interfaces.py:223
+msgid "label_overrideStateForAdmin"
+msgstr "Override State Criterion"
+
+#: ../interfaces.py:213
+msgid "label_queryColors"
+msgstr "Cores"
+
+#: ../interfaces.py:178
+msgid "label_relativeFirstDay"
+msgstr "Primeiro dia relativo"
+
+#: ../interfaces.py:157
+msgid "label_shortDayNameFormat"
+msgstr "Nomes de dias abreviados"
+
+#: ../interfaces.py:144
+msgid "label_slotMinutes"
+msgstr "Subdivisão"
+
+#: ../interfaces.py:197
+msgid "label_target_folder"
+msgstr "Pasta Alvo"
+
+#: ../browser/solgemafullcalendar_query.pt:46
+msgid "label_undefined"
+msgstr "Indefinido"
+
+#: ../interfaces.py:168
+msgid "label_weekends"
+msgstr "Finais de Semana"
+
+#. Default: "short"
+#: ../vocabularies.py:62
+msgid "short"
+msgstr "curto"

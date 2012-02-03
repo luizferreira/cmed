@@ -1,0 +1,3 @@
+[actions]
+action.success = redirect_to_action:string:view
+action.failure = redirect_to:string:sign_document

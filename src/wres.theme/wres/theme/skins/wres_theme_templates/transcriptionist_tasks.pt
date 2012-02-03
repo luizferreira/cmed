@@ -1,0 +1,43 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="cmfuemr">
+
+<body>
+
+<!-- Transcriptionist's task portlet -->
+<div metal:define-macro="portlet"
+     tal:define="request context/REQUEST;
+                 tasks python:context.getTranscriptionistTasks(str(here.portal_membership.getAuthenticatedMember()));
+                 user python:str(request.AUTHENTICATED_USER);
+                 viewing_desktop python:request.URL.find(user + '/') != -1 or request.URL.endswith(user)"
+     tal:condition="python:tasks">
+<!--           tal:condition="python:tasks and viewing_desktop"> -->
+
+    <div class="portlet">
+        <h5 i18n:translate="cmfuemr_heading_tasks">Tasks</h5>
+        <div class="portletBody">
+          <div style="height: 300px; overflow: auto;">
+            <!-- tasks list -->
+            <tal:block tal:repeat="task tasks">
+                <div tal:define="oddrow repeat/task/odd" 
+                     tal:attributes="class python:test(oddrow, 'portletContent even', 'portletContent odd')">
+                    <!-- title or id -->
+                    <a tal:attributes="href python:task.get('url', '')">
+                        <tal:figure replace="structure here/linkTransparent.gif" />
+                        <tal:task_id replace="python:task.get('title', '')">task1</tal:task_id>
+                    </a>
+                    <!-- details -->
+                    <div class="portletDetails">
+                      <tal:date replace="python:here.toPortalTime(task.get('date', ''))">01/22/2005</tal:date>
+                    </div>
+                </div>
+            </tal:block>
+          </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone">
+
+  <head><title></title></head>
+
+  <body>
+
+    <metal:view_macro define-macro="view">
+      <tal:define define="refs python:context.getReferenceImpl(field.relationship);
+                          portal python:context.portal_url.getPortalObject();"
+                  condition="refs">
+
+        <tal:block tal:condition="not:field/multiValued"
+               tal:define="ref python:refs[0];
+                           obj ref/getTargetObject">
+
+            <a href="#"
+               tal:attributes="href obj/absolute_url;
+                               class python:obj.portal_type.replace(' ', '_')"
+               tal:content="python:obj.Title() or obj.absolute_url(relative=1)">
+              Sole target object's title
+            </a>
+
+            <a href="#"
+               tal:condition="python:portal.portal_interface.objectImplements(ref,'Products.Archetypes.interfaces.referenceengine.IContentReference')"
+               tal:attributes="href python:ref.getContentObject().absolute_url()"
+               tal:content="field/relationship">
+              reference object link
+            </a>
+
+        </tal:block>
+
+        <ul tal:condition="field/multiValued">
+          <li tal:repeat="ref refs">
+             <tal:block tal:define="obj ref/getTargetObject">
+                <a href="#"
+                   tal:attributes="href obj/absolute_url;
+                                   class python:obj.portal_type.replace(' ', '_')"
+                   tal:content="python:obj.Title() or obj.absolute_url(relative=1)">
+                  Target Title
+                </a>
+
+                <a href="#"
+                   tal:condition="python:portal.portal_interface.objectImplements(ref,'Products.Archetypes.interfaces.referenceengine.IContentReference')"
+                   tal:attributes="href python:ref.getContentObject().absolute_url()"
+                   tal:content="field/relationship">
+                  reference object link
+                </a>
+             </tal:block>
+          </li>
+        </ul>
+
+      </tal:define>
+    </metal:view_macro>
+
+    <metal:edit_macro define-macro="edit">
+      <metal:use use-macro="field_macro | context/widgets/field/macros/edit">
+
+        <div metal:fill-slot="widget_body"
+             tal:define="multiVal field/multiValued;
+                         vocab python:field.Vocabulary(here);
+                         fieldName python:fieldName+':list';
+                         uids python:same_type(value, []) and value or [value];
+                         vlen python:len(vocab);">
+
+          <input type="button"
+              tal:define="url python:context.getRosPath();
+                          window string:Revisao dos Sistemas;
+                          features string:height=550, width=900, scrollbars=yes, resizable=yes, toolbar=no, menubar=no,location=no;"
+              tal:attributes="value string:Adicionar;
+                              onClick python:'window.open(\'%s\',\'%s\',\'%s\')' % (url, window, features)"/>
+                              
+        </div>
+      </metal:use>
+    </metal:edit_macro>
+
+    <metal:search_macro define-macro="search">
+      <div metal:use-macro="context/widgets/reference/macros/edit"></div>
+    </metal:search_macro>
+
+  </body>
+</html>

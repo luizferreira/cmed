@@ -1,0 +1,483 @@
+/* Stylesheet for the 'WRES Theme' Plone theme */
+
+/* Atencao: nao coloque propriedades especificas aqui. Esse main.css
+é pra ser utilizado com muita cautela, caso precise de um css crie um
+especifico para o seu template, gera muita confusao ficar utilizando 
+o main.css.; */
+
+/* ========= Visual ============ */
+.cont{
+/*    display: block;*/
+    width: 100%;
+}
+/*    border: 1px solid green;*/
+
+.titulo_escrito{
+/*    display: block;*/
+    text-align: right;
+    padding-right: 5px;
+    width: 18%;
+    vertical-align: top;
+}
+.titulo_escrito-25{
+/*    display: block;*/
+    text-align: right;
+    padding-right: 5px;
+    width: 25%;
+    vertical-align: top;
+}
+/*    border: 1px solid blue;*/
+
+.nulo {
+    width: 1%;
+}
+
+.titulo2{
+    text-align: right;
+    padding-right: 5px;
+    width: 12%;
+}
+.titulo{
+    vertical-align: top;
+    text-align: right;
+    padding-right: 5px;
+    padding-top: 0px;
+    width: 5%;
+}
+
+.conteudo2{
+/*    display: block;*/
+    padding-left: 5px;
+    width: 80%;
+}
+/*    border: 1px solid red;*/
+
+.conteudo{
+    margin-left: 6%;
+    padding: 0px;
+}
+
+.ulista{
+    padding-left: 2%;
+    margin: 0px;
+}
+
+.pad5{
+    padding-left: 5%;
+}
+
+.collapse {
+    border-collapse: collapse;
+}
+
+.center {
+    text-align: center;
+}
+
+.pink {
+    background-color: #FFA8A8;
+}
+
+.gray {
+    background-color: #C9C9C9;
+}
+
+.green {
+    background-color: #CDE2A7;
+}
+
+.yellow {
+    background-color: #FFEBAE;
+}
+
+.opaquegreen {
+    background-color: #BCCEB5;
+}
+
+.blue {
+    background-color: #DEE7EC;
+}
+
+.width-1 {
+    width: 1%
+}
+
+.width-2 {
+    width: 2%
+}
+
+.width-3 {
+    width: 3%
+}
+
+.width-5 {
+    width: 5%
+}
+
+.width-10 {
+    width: 10%
+}
+
+.width-15 {
+    width: 15%
+}
+
+.width-16 {
+    width: 16%
+}
+
+.width-20 {
+    width: 20%
+}
+
+.width-25 {
+    width: 25%
+}
+
+.width-30 {
+    width: 30%
+}
+
+.width-33 {
+    width: 33%
+}
+
+.width-34 {
+    width: 34%
+}
+
+.width-40 {
+    width: 40%
+}
+
+.width-50 {
+    width: 50%
+}
+
+.width-60 {
+    width: 60%
+}
+
+.width-70 {
+    width: 70%
+}
+
+.width-80 {
+    width: 80%
+}
+
+.width-85 {
+    width: 85%
+}
+
+.width-90 {
+    width: 90%
+}
+
+.width-100 {
+    width: 100%
+}
+
+.title {
+    background-color: gray;
+}
+
+.bordered {
+    border: 1px;
+    border-color: black;
+    border-style: solid;
+    height: 100%;
+}
+
+.bluebordered {
+    border: 1px;
+    border-color: #8CACBB;
+    border-style: solid;
+    height: 100%;
+}
+
+.tabletitle {
+    color: green;
+    font-style: italic;
+}
+
+.pagetitle {
+    color: green;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.tablesubtitle {
+    color: #448888;
+    font-style: italic;
+}
+
+.spaced {
+    background-color: #FBFFFB;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px #74AE0B solid;
+    vertical-align: top;
+}
+
+.dados {
+    background-color: #FBFFFB;
+    padding-top: 13px;
+    padding-bottom: 0px;
+    padding-left: 13px;
+    padding-right: 10px;
+    border: 1px #74AE0B solid;
+
+}
+
+.topbox {
+    border-top: 1px;
+    border-left: 1px;
+    border-right: 1px;
+    border-bottom: 0px;
+    border-color: black;
+    border-style: solid;
+    height: 100%;
+}
+
+.bottombox {
+    border-top: 0px;
+    border-left: 1px;
+    border-right: 1px;
+    border-bottom: 1px;
+    border-color: black;
+    border-style: solid;
+    height: 100%;
+}
+
+.midbox {
+    border-top: 0px;
+    border-left: 1px;
+    border-right: 1px;
+    border-bottom: 0px;
+    border-color: black;
+    border-style: solid;
+    height: 100%;
+}
+
+.topbordered {
+    border-top: 1px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+    border-color: black;
+    border-style: solid;
+    height: 100%;
+}
+
+.bottombordered {
+    border-top: 1px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 0px;
+    border-color: black;
+    border-style: solid;
+    height: 100%;
+}
+
+.leftbordered {
+    border-top: 0px;
+    border-left: 1px;
+    border-right: 0px;
+    border-bottom: 0px;
+    border-color: black;
+    border-style: solid;
+    height: 100%;
+}
+
+.rightbordered {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 1px;
+    border-bottom: 0px;
+    border-color: black;
+    border-style: solid;
+    height: 100%;
+}
+
+.lefttop {
+    border-top: 1px;
+    border-left: 1px;
+    border-right: 0px;
+    border-bottom: 0px;
+    border-color: black;
+    border-style: solid;
+    height: 100%;
+}
+
+.righttop {
+    border-top: 1px;
+    border-left: 0px;
+    border-right: 1px;
+    border-bottom: 0px;
+    border-color: black;
+    border-style: solid;
+    height: 100%;
+}
+
+.leftbottom {
+    border-top: 0px;
+    border-left: 1px;
+    border-right: 0px;
+    border-bottom: 1px;
+    border-color: black;
+    border-style: solid;
+    height: 100%;
+}
+
+.rightbottom {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 1px;
+    border-bottom: 1px;
+    border-color: black;
+    border-style: solid;
+    height: 100%;
+}
+
+.box {
+    font-family: "Courier New";
+    border-top: 1px black solid; 
+    border-bottom: 2px black solid;
+    border-left: 1px black solid; 
+    border-right: 2px black solid; 
+    padding-left: 3px; 
+    padding-right: 3px; 
+}
+
+.bluebox {
+    font-family: "Courier New";
+    border-top: 1px #8CACBB solid; 
+    border-bottom: 1px #8CACBB solid;
+    border-left: 1px #8CACBB solid; 
+    border-right: 1px #8CACBB solid; 
+    padding-left: 3px; 
+    padding-right: 3px; 
+}
+            
+.kiste2 {
+    border: solid 1px #8cacbb;
+    width: 400px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.xbox {
+    padding-left: 5px; 
+    padding-right: 6px; 
+}
+
+.doctor_td {
+    width: 45%;
+    vertical-align: top;
+}
+
+.bigsize {
+    font-size: 13px;
+}
+
+.hugesize {
+    font-size: 14px;
+}
+
+.megasize {
+    font-size: 16px;
+}
+/* Transcriptionist desktop */
+
+.dynamic_box {
+    font-size: 12px;
+}
+
+/* Tabs of Echocardiogram */
+.whole_tab {
+    border: 1px solid red;
+    width: 100%;
+}
+
+.single_tab {
+    border: 1px;
+    border-color: #74AE0B;
+    color: #86A947;
+    border-style: solid;
+    height: 100%;
+}
+
+.chosen {
+    background-color: #CDE2A7;
+}
+
+/* Make pre tag work without any plone default */
+
+.verbatim {
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Modified square */
+
+.modified {
+    width: 5px;
+    height: 5px;
+    background-color: red;
+    float: left;
+}
+
+.navigationFooter {
+    text-align: center;
+}
+
+.little {
+    color: gray;
+    font-size: 9px;
+}
+
+/* ========= Summary ============
+.chartsummary {
+    float: left;
+    padding: 3px;
+}
+*/
+
+/* ========= Chart Navigation ============ */
+.portletContent {
+    font-size: 13px;
+}
+
+.divisor {
+    font-size: 9px;
+    color: #E0E0E0;
+}
+
+.navigation {
+    color: black;
+    padding-top: 7px;
+    padding-left: 10px;
+    height: 22px;
+    font-size: 13px;
+    font-weight: bold;
+    background-color: #E0E0E0;
+}
+
+.navtitulo {
+    padding-left: 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.navconteudo {
+    padding-left: 10px;
+    font-size: 13px;
+}
+

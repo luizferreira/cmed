@@ -1,0 +1,161 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           i18n_domain="Five">
+
+  <!-- Create permissions declared in ZCML if they don't exist already -->
+  <!--subscriber
+    for="zope.security.interfaces.IPermission
+         zope.component.interfaces.IRegistered"
+    handler=".security.create_permission_from_permission_directive"
+  /-->
+
+  <permission
+    id="wres.policy.AddContent"
+    title="wres.policy: Add Content"
+    />
+    
+  <permission
+    id="wres.policy.CreateUser"
+    title="wres.policy: Create User"
+    />
+    
+  <permission
+    id="wres.policy.EditCalendarProperties"
+    title="wres.policy: Edit Calendar Properties"
+    />    
+
+  <permission
+    id="wres.policy.EditClinic"
+    title="wres.policy: Edit Clinic"
+    />
+    
+  <permission
+    id="wres.policy.EditDoc"
+    title="wres.policy: Edit Doc"
+    />
+    
+  <permission
+    id="wres.policy.EditDoctor"
+    title="wres.policy: Edit Doctor"
+    />
+
+  <permission
+    id="wres.policy.EditInsurance"
+    title="wres.policy: Edit Insurance"
+    />
+    
+  <permission
+    id="wres.policy.EditPatient"
+    title="wres.policy: Edit Patient"
+    />
+    
+  <permission
+    id="wres.policy.EditSecretary"
+    title="wres.policy: Edit Secretary"
+    />
+    
+  <permission
+    id="wres.policy.EditVisit"
+    title="wres.policy: Edit Visit"
+    />
+    
+  <permission
+    id="wres.policy.ListPatient"
+    title="wres.policy: List Patient"
+    />
+    
+  <permission
+    id="wres.policy.ListSecretary"
+    title="wres.policy: List Secretary"
+    />
+    
+  <permission
+    id="wres.policy.ListVisit"
+    title="wres.policy: List Visit"
+    />
+    
+  <permission
+    id="wres.policy.SetSchedule"
+    title="wres.policy: Set Schedule"
+    />      
+    
+  <permission
+    id="wres.policy.SignProgressNotes"
+    title="wres.policy: Sign Progress Notes"
+    /> 
+    
+  <permission
+    id="wres.policy.ViewDoctor"
+    title="wres.policy: View Doctor"
+    /> 
+    
+  <permission
+    id="wres.policy.ViewInsurance"
+    title="wres.policy: View Insurance"
+    /> 
+    
+  <permission
+    id="wres.policy.ViewPatient"
+    title="wres.policy: View Patient"
+    /> 
+    
+  <permission
+    id="wres.policy.ViewSchedule"
+    title="wres.policy: View Schedule"
+    /> 
+    
+  <permission
+    id="wres.policy.ViewSecretary"
+    title="wres.policy: View Secretary"
+    /> 
+    
+  <permission
+    id="wres.policy.ViewVisit"
+    title="wres.policy: View Visit"
+  />
+    
+  <permission
+    id="wres.archetypes.AddWRESUser"
+    title="wres.archetypes: Add WRESUser"
+  />                                                         
+    
+  <permission
+    id="wres.archetypes.AddTranscriptionistFolder"
+    title="wres.archetypes: Add TranscriptionistFolder"
+  />
+      
+  <permission
+    id="wres.archetypes.AddTranscriptionist"
+    title="wres.archetypes: Add Transcriptionist"
+  />
+      
+  <permission
+    id="wres.archetypes.AddSecretaryFolder"
+    title="wres.archetypes: Add SecretaryFolder"
+  />
+      
+  <permission
+    id="wres.archetypes.AddSecretary"
+    title="wres.archetypes: Add Secretary"
+  />
+      
+  <permission
+    id="wres.archetypes.AddPatientFolder"
+    title="wres.archetypes: Add PatientFolder"
+  />
+      
+  <permission
+    id="wres.archetypes.AddPatient"
+    title="wres.archetypes: Add Patient"
+  />
+      
+  <permission
+    id="wres.archetypes.AddDoctorFolder"
+    title="wres.archetypes: Add DoctorFolder"
+  />    
+  
+  <permission
+    id="wres.archetypes.AddDoctor"
+    title="wres.archetypes: Add Doctor"
+  />    
+
+</configure>

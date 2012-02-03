@@ -1,0 +1,59 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="cmfuemr">
+<body>
+
+<!-- Patient portlet macro -->
+<div style="padding:10px; 
+    color:#205C90;" 
+     metal:define-macro="patient_portlet_macro"  
+     tal:define="
+        patient context/getPatient;
+        title patient/getFullName;
+        script context/patient_view_script;
+        email patient/getEmail;
+        cphone patient/getContactPhone;
+        bdate patient/getBirthDate | nothing;
+        photo patient/photo | nothing;
+        patient_url patient/absolute_url">
+
+        <table>
+            <tr>
+                <td width="110px" height="80px">
+                    <tal tal:condition="photo">
+                        <a href="" tal:attributes="href patient_url">
+                            <img width="70%" height="100%" tal:attributes="src python:photo.absolute_url();
+                            alt photo/alt;
+                            title photo/alt"/>
+                        </a>
+                    </tal>
+                    <tal tal:condition="not:photo">
+                        <a href="" tal:attributes="href patient_url">
+                            <img width="70%" height="100%" tal:attributes="src python:context.getDefaultPhoto()"/>
+                        </a>
+                    </tal>    
+                </td>
+                
+                <td style="vertical-align:top; font-size:12px; line-height:165%">
+                    <a href="" tal:attributes="href patient_url">
+                        <div style="font-weight:bold" tal:content="title"> </div>
+                    </a>
+                    <div tal:condition="bdate" style="font-style:italic">
+                        <span tal:content="python:bdate.strftime('%d/%m/%Y')"> 01/01/1990 </span>
+                        (<span tal:content="python:context.getPatientAge(bdate)"></span>
+                        <span> anos</span>)
+                    </div>
+                    <div tal:condition="email" tal:content="email" style="font-style:italic"> test@test.com </div>
+                    <div style="font-style:italic">
+                        <metal:field use-macro="python:patient.widget('contactPhone', mode='view')">
+                            Telefone de Contato
+                        </metal:field>
+                    </div>
+                    
+                </td>
+            </tr>
+        </table>
+</div>
+
+</body>
+</html>

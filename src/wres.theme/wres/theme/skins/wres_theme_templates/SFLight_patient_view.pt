@@ -1,0 +1,160 @@
+<div id="content" tal:define="portal_state context/@@plone_portal_state;
+                       context_state context/@@plone_context_state;
+                       plone_view context/@@plone;
+                       lang portal_state/language;
+                       view nocall:view | nocall: plone_view;
+                       dummy python: plone_view.mark_view(view);
+                       portal_url portal_state/portal_url;
+                       checkPermission nocall: context/portal_membership/checkPermission;
+                       site_properties context/portal_properties/site_properties;
+                       ajax_load request/ajax_load | nothing">
+
+
+        <div class="eventDetails vcard" 
+        	 tal:define="kssClassesView context/@@kss_field_decorator_view;
+                         getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                         templateId template/getId;
+                         toLocalizedTime nocall:context/@@plone/toLocalizedTime;">
+            <table class="vertical listing"
+                   summary="Event details" 
+                   i18n:attributes="summary summary_event_details;">
+
+                <tbody>
+
+					<tal:def define="name context/Title;
+									 birth context/getBirthDate;
+									 convenio context/getConvenio;
+									 matricula context/getMatricula;
+									 contact_phone context/getContactPhone;
+									 email context/getEmail;"> 
+					
+	                    <tr>
+	                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nome</th>
+	                        <td>
+                        		<tal:print content="context/Title" />
+	                            <!-- metal:field use-macro="python:context.widget('patient', mode='view')">
+	                            Categories
+	                            </metal:field> -->
+	                        </td>
+	                    </tr>
+	                    
+	                    <tr tal:condition="birth">
+	                        <th>Data de Nascimento</th>
+	                        <td>
+	                            <metal:field use-macro="python:context.widget('birthDate', mode='view')">
+	                            	Data de Nascimento
+	                            </metal:field>
+	                        </td>
+	                    </tr>
+	                    
+	                    <tr tal:condition="convenio">
+	                        <th>Convênio</th>
+	                        <td>
+                        		<tal:print content="convenio" />
+	                        </td>
+	                    </tr>	
+	                    
+	                    <tr tal:condition="matricula">
+	                        <th>Matrícula</th>
+	                        <td>
+                        		<tal:print content="matricula" />
+	                        </td>
+	                    </tr>		                                        
+	                    
+	                    <tr tal:condition="contact_phone">
+	                        <th>Telefone de Contato</th>
+	                        <td>
+	                            <metal:field use-macro="python:context.widget('contactPhone', mode='view')">
+	                            	Telefone de Contato
+	                            </metal:field>
+	                        </td>
+	                    </tr>
+	                    
+	                    <tr>
+	                        <th>E-mail</th>
+	                        <td>
+                        		<tal:print content="context/getEmail" />
+	                            <!-- metal:field use-macro="python:context.widget('patient', mode='view')">
+	                            Categories
+	                            </metal:field> -->
+	                        </td>
+	                    </tr>	                    	                    
+	                    
+	                    	                    
+	                    
+	                    <!-- tr tal:condition="context/location">
+	                        <th i18n:translate="event_where">Where</th>
+	                        <td class="location">
+	
+	                            <metal:field use-macro="python:context.widget('location', mode='view')">
+	                            Location
+	                            </metal:field>
+	                        </td>
+	                    </tr -->
+	                    <!-- tr tal:define="contact_email context/contact_email;
+	                                    contact_name python:context.contact_name() or None;"
+	                        tal:condition="python:contact_name or contact_email">
+	                        <th i18n:translate="contact_name">Contact Name</th>
+	                        <td>
+	                            <a id="parent-fieldname-contactEmail"
+	                               tal:condition="contact_email"
+	                               tal:replace="structure python: context.spamProtect(mailaddress=contact_email, mailname=contact_name, cssclass='email fn')"
+	                               />
+	                            <span class="fn"
+	                                  tal:condition="not: contact_email"
+	                                  tal:content="contact_name" />
+	                        </td>
+	                    </tr>  -->
+	                    
+	                    <!-- tr tal:condition="context/contact_phone">
+	                        <th i18n:translate="contact_phone">Contact Phone</th>
+	                        <td class="tel">
+	                            <metal:field use-macro="python:context.widget('contactPhone', mode='view')">
+	                            Phone number
+	                            </metal:field>
+	                        </td>
+	                    </tr>  -->
+                    </tal:def>
+                    <!-- tr tal:condition="context/getAttendees|nothing">
+                        <th i18n:translate="contact_attendees">Attendees</th>
+                        <td class="attendees">
+                            <metal:field use-macro="python:context.widget('attendees', mode='view')">
+                            Attendees
+                            </metal:field>
+                        </td>
+                    </tr>  -->
+                    <!-- tr>
+                        <th i18n:translate="heading_add_to_calendar">Exportar para outro calendário</th>
+                        <td tal:define="here_url context/@@plone_context_state/object_url;">
+                            <a href="#"
+                               tal:attributes="href string:$here_url/vcs_view"
+                               title="Baixar essa consulta em formato vCal"
+                               i18n:attributes="title title_add_to_vcal;">
+                                <img tal:replace="structure context/icon_export_vcal.png" src="" alt="" />
+                                <span i18n:translate="label_add_to_vcal">vCal</span></a><br />
+                            <a href="#"
+                               tal:attributes="href string:$here_url/ics_view"
+                               title="Baixar essa consulta em formato iCal"
+                               i18n:attributes="title title_add_to_ical;">
+                                <img tal:replace="structure context/icon_export_ical.png" src="" alt="" />
+                                <span i18n:translate="label_add_to_ical">iCal</span></a>
+                        </td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+
+        <p tal:condition="context/event_url|nothing">
+            <a class="url"
+               href="event_url"
+               i18n:translate="event_more_information"
+               tal:define="field python:context.getField('eventUrl');"
+                        id="parent-fieldname-eventUrl"
+                        tal:attributes="href context/event_url">
+               More information about this event&hellip;</a>
+        </p>
+
+        <span class="visualClear"><!-- --></span>
+
+</div>

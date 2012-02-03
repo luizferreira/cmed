@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone">
+
+<head>
+    <title></title>
+</head>
+
+<body>
+
+    <!-- Selection Widgets -->
+
+    <metal:view_macro define-macro="view">
+        <span tal:define="value python:accessor() or '';
+                          display python:'%s.%s.%s-%s' % (value[:3],value[3:6],value[6:9],value[9:])"
+                      tal:condition="value"
+                      tal:replace="display"/><br/>
+    </metal:view_macro>
+
+    <metal:define define-macro="edit">
+
+        <metal:use use-macro="field_macro | here/widgets/field/macros/edit">
+
+            <metal:fill fill-slot="widget_body" tal:define="value python:value or ''">
+                <input tal:attributes="name python:'a%s' % fieldName;
+                                       value python:value[:3]" type="text" size="3" maxlength="3"
+                         onchange="autoTab(this,0);" 
+                        onKeyup="autoTab(this,0);">.
+                <input tal:attributes="name python:'a%s' % fieldName;
+                                       value python:value[3:6]" type="text" size="3" maxlength="3"
+                         onchange="autoTab(this,1);" 
+                        onKeyup="autoTab(this,1);">.
+                <input tal:attributes="name python:'a%s' % fieldName;
+                                       value python:value[6:9]" type="text" size="3" maxlength="3"
+                         onchange="autoTab(this,2);" 
+                        onKeyup="autoTab(this,2);">-
+                <input tal:attributes="name python:'a%s' % fieldName;
+                                       value python:value[9:]" type="text" size="2" maxlength="2"
+                         onchange="autoTab(this,3);" 
+                        onKeyup="autoTab(this,3);">
+                <input type="hidden" tal:attributes="name fieldName;
+                                       value value" type="text" maxlength="11">
+            </metal:fill>            
+        </metal:use>
+    </metal:define>
+
+    <div metal:define-macro="search">
+      <div metal:use-macro="here/CPF/macros/edit">
+      </div>
+    </div>
+
+  </body>
+
+</html>

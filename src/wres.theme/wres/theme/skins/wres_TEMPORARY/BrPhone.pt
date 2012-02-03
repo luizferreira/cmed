@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone">
+
+<head>
+    <title></title>
+</head>
+
+<body>
+
+    <!-- Selection Widgets -->
+
+    <metal:view_macro define-macro="view"
+                      tal:define="value python:accessor() or '';
+                                  value python:((len(value)>2) and value) or '';
+                                  display python:here.phoneFormat(value,'complete');"
+                      tal:condition="value"
+                      tal:replace="display" />
+
+    <metal:define define-macro="edit">
+
+        <metal:use use-macro="field_macro | here/widgets/field/macros/edit">
+
+            <metal:fill fill-slot="widget_body"
+                        tal:define="isSpecialPhone python:str(value).startswith('0');
+                                    value python:value or '';
+                                    value python:((len(value)>2) and value) or ''">
+                    (<select tal:attributes="name python:'a%s' % fieldName;
+                                            id python:'a%s' % fieldName;
+                                            "
+                             tal:define="vocab python:here.lstDDD();
+                                            value_ddd python:here.phoneFormat(value,'ddd');" onChange="updatePhone(this);">
+
+                        <option tal:repeat="item vocab"
+                                tal:attributes="selected python:(str(item[0]) == str(value_ddd)) and 'selected' or None;
+                                                value python:item[0];"
+                                tal:content="python:item[1]"
+                                i18n:translate=""
+                                />
+
+                    </select>)
+                <input tal:attributes="name python:'a%s' % fieldName;
+                                       
+                                       value python:here.phoneFormat(value,'phone')" type="text" size="8" maxlength="8" onKeyUp="updatePhone(this);" onchange="updatePhone(this);">
+                
+                <input type="hidden" tal:attributes="name fieldName;
+                                       value value" maxlength="10">
+            </metal:fill>            
+        </metal:use>
+    </metal:define>
+
+
+    <div metal:define-macro="search">
+      <div metal:use-macro="here/BrPhone/macros/edit">
+      </div>
+    </div>
+
+  </body>
+
+</html>
+    
+    

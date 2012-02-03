@@ -1,0 +1,3 @@
+Esta pasta deve conter somente folhas de estilo do 'WRES Theme'.
+
+Dica: Arquivos css que nao possuam extensao dtml podem ser registrados na pasta browser/stylesheets

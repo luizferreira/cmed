@@ -1,0 +1,145 @@
+
+
+<metal:def define-macro="doctor_select">
+	<div id="doctor_select_div">
+
+		<select name="doctor_id" id="doctor_select">
+			<option selected="" value=""> Todos os médicos </option>
+			
+			<tal:for repeat="doctor doctors">
+				<option tal:attributes="value doctor/getId"
+						tal:content="doctor/Title">
+				</option>
+			</tal:for>
+			
+		</select>
+	
+	</div>
+</metal:def>
+
+<div metal:define-macro="show_visits" i18n:domain="cmfuemr">
+
+	<metal:slot define-slot="doctor_visits" />
+	
+	<!-- No visits message -->
+	<div tal:condition="python:not doctor_visits">
+		<br />
+		<strong>
+			<metal:no_visits define-slot="no_visits">Sem consultas hoje.</metal:no_visits>
+		</strong>
+		<br />
+	</div>
+	<!-- Table of visits -->
+	<div style="text-align: center; padding: 10px;" tal:condition="doctor_visits">
+		<br />
+		<strong>
+			<metal:slot define-slot="visits_header">Consultas de Hoje</metal:slot>
+		</strong>
+	</div>
+	<metal:visits_table_slot define-slot="visits_table">
+		<metal:visits_table use-macro="context/sec_desk_macros/macros/visits_table" />
+	</metal:visits_table_slot>
+</div>
+
+<metal:def define-macro="visits_table" i18n:domain="cmfuemr">
+	<table class="listing" width="100%" tal:condition="doctor_visits">
+		<thead>
+			<metal:thead define-slot="thead">
+				<th style="width:150px">Horário</th>
+				<th style="width:200px">Paciente</th>
+				<!-- th>Telefone</th>  -->
+				<th style="width:150px">Status</th>
+				<th>Alterar</th>
+			</metal:thead>
+		</thead>
+		<tbody>
+			<tal:for repeat="visit doctor_visits">
+				<!-- tr	tal:attributes="class python:test(repeat['visit'].odd(), 'odd', 'even');">  -->
+				<tr tal:define="doctor python:visit['getDoctor'];
+								doctor_id doctor/getId;
+								even_odd python:test(repeat['visit'].odd(), 'odd', 'even')" 
+					tal:attributes="class string:$doctor_id $even_odd">
+					<metal:trow define-slot="trow">
+					<tal:block_aux tal:define="visit_id python:visit['absolute_url'].split('/')[-1];
+											   patient python:visit['getPatient'];">
+					<td>
+						<a tal:attributes="name visit_id" />
+						<a class="visit_link" 
+						   href="javascript: void(0)"	
+						   tal:content="python:visit['start'].AMPMMinutes()" 
+						   i18n:translate=""
+                           onclick="timeClick()">Feb 1, 2005 5:17 pm</a>
+	                    <img tal:attributes="src string:${portal_url}/popup_icon.gif;" />
+                        <input id="visit_url" style="display:none" tal:attributes="value visit/absolute_url"/>
+					</td>
+					<td>
+						<!-- Link para o nome do paciente-->
+						<a id="patient_link"
+						   href="javascript: void(0)"
+                           disabled="true"
+						   tal:content="python:patient.Title()" i18n:translate="" onclick="patientClick()" > Nome do Paciente </a>
+                           <input id="patient_url" style="display:none" tal:attributes="value python:patient.absolute_url()"/>
+					</td>
+					<!-- td>
+						<a class=patient_link 
+						   tal:define="contact_phone python:visit.getContactPhone();
+									   patient_contact python:patient.getContactPhone();
+									   home_phone python:patient.getHomePhone()"
+						   tal:attributes="href python:patient.absolute_url()">
+						   <tal:contactPhone condition="python:contact_phone"
+											 content="python:context.formatPhoneNumber(contact_phone)">
+								contactPhoneNumber
+						   </tal:contactPhone>
+						   <tal:contactPhone condition="python:not contact_phone">
+						   		<metal:field use-macro="python:patient.widget('contactPhone', mode='view')">
+		                        	Telefone de Contato
+		                        </metal:field>
+						   </tal:contactPhone>					   
+						   <tal:contactPhone condition="python:not patient_contact"
+											 content="home_phone">
+								homePhoneNumber
+						   </tal:contactPhone>
+						</a>
+					</td>  -->
+					<td class="desktop_visit_status"
+	                    tal:content="python:visit['getReviewState']" i18n:translate="">Status
+					</td>
+					
+					<!-- Conteudo da celula CHANGE  -->
+					<td style="text-align: center;">
+						<img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
+						<div tal:define="repeat_number repeat/visit/number" tal:attributes="id string:change_cell_div_${repeat_number}">
+							<metal:change use-macro="here/sec_desk_macros/macros/change_cell" />
+						</div>
+					</td>   
+					</tal:block_aux>
+					</metal:trow>
+				</tr>
+			</tal:for>
+		</tbody>
+	</table>
+</metal:def>
+
+<metal:def define-macro="change_cell"
+   tal:define="review_state visit/getReviewState;
+               visit_concluded python:review_state == 'concluded';
+               doctor doctor"
+	i18n:domain="cmfuemr">
+
+	<span i18n:translate="" tal:condition="visit_concluded" tal:replace="review_state"> </span>
+    
+	<tal:notconcluded tal:condition="not:visit_concluded">
+		<tal:links repeat="action visit/getWorkflowActions">
+			<tal:defines tal:define="action_id python:action.get('id');
+                                                 visit_url visit/absolute_url"
+						 tal:condition="python:action_id != 'reschedule'">
+				<a class="change_state_link"
+				   href=""
+				   tal:define="action_id python:action.get('id')"
+				   tal:content="python:action.get('name')"
+				   tal:attributes="href python:visit_url + '/content_status_modify?workflow_action=' + action_id"></a>
+				<tal:hifen condition="not:repeat/action/end">-</tal:hifen>
+			</tal:defines>
+		</tal:links>
+	</tal:notconcluded>
+</metal:def>		

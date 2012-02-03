@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="soap_workflow" title="Soap Workflow" description="" state_variable="review_state" initial_state="signed" manager_bypass="False">
+ <permission>Access contents information</permission>
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <permission>wres.policy: Edit Doc</permission>
+ <permission>wres.policy: Sign Progress Notes</permission>
+ <state state_id="denied" title="Negado">
+  <permission-map name="Access contents information" acquired="True">
+  <permission-role>Authenticated</permission-role>
+  <permission-role>Doctor</permission-role>
+  <permission-role>Manager</permission-role>
+  <permission-role>Patient</permission-role>
+  <permission-role>Reviewer</permission-role>
+  <permission-role>Secretary</permission-role>
+  <permission-role>Transcriptionist</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+  <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+  <permission-role>Authenticated</permission-role>
+  <permission-role>Doctor</permission-role>
+  <permission-role>Manager</permission-role>
+  <permission-role>Patient</permission-role>
+  <permission-role>Secretary</permission-role>
+  <permission-role>Transcriptionist</permission-role>
+  </permission-map>
+  <permission-map name="wres.policy: Edit Doc" acquired="False">
+  <permission-role>Doctor</permission-role>
+  <permission-role>Manager</permission-role>
+  <permission-role>Secretary</permission-role>
+  <permission-role>Transcriptionist</permission-role>
+  </permission-map>
+  <permission-map name="wres.policy: Sign Progress Notes" acquired="False">
+  <permission-role>Doctor</permission-role>
+  <permission-role>Reviewer</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="draft" title="Rascunho">
+  <exit-transition transition_id="deny"/>
+  <exit-transition transition_id="really_deny"/>
+  <exit-transition transition_id="really_review"/>
+  <exit-transition transition_id="really_sign"/>
+  <exit-transition transition_id="review"/>
+  <exit-transition transition_id="sign"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Authenticated</permission-role>
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Patient</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Secretary</permission-role>
+   <permission-role>Transcriptionist</permission-role>
+   <permission-role>UemrAdmin</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Secretary</permission-role>
+   <permission-role>Transcriptionist</permission-role>
+   <permission-role>UemrAdmin</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Authenticated</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Patient</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Secretary</permission-role>
+   <permission-role>Transcriptionist</permission-role>
+   <permission-role>UemrAdmin</permission-role>
+  </permission-map>
+  <permission-map name="wres.policy: Edit Doc" acquired="False">
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Secretary</permission-role>
+   <permission-role>Transcriptionist</permission-role>
+   <permission-role>UemrAdmin</permission-role>
+  </permission-map>
+  <permission-map name="wres.policy: Sign Progress Notes" acquired="False">
+   <permission-role>Doctor</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="pending" title="Revisao Pendente">
+  <exit-transition transition_id="sign"/>
+  <exit-transition transition_id="really_sign"/>
+  <exit-transition transition_id="really_deny"/>
+  <exit-transition transition_id="deny"/>
+  <exit-transition transition_id="review"/>
+  <exit-transition transition_id="really_review"/>
+  <permission-map name="Access contents information" acquired="True">
+   <permission-role>Authenticated</permission-role>
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Patient</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Secretary</permission-role>
+   <permission-role>Transcriptionist</permission-role>
+   <permission-role>UemrAdmin</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="True">
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Secretary</permission-role>
+   <permission-role>Transcriptionist</permission-role>
+   <permission-role>UemrAdmin</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Authenticated</permission-role>
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Patient</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Secretary</permission-role>
+   <permission-role>Transcriptionist</permission-role>
+   <permission-role>UemrAdmin</permission-role>
+  </permission-map>
+  <permission-map name="wres.policy: Edit Doc" acquired="True">
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Secretary</permission-role>
+   <permission-role>Transcriptionist</permission-role>
+   <permission-role>UemrAdmin</permission-role>
+  </permission-map>
+  <permission-map name="wres.policy: Sign Progress Notes" acquired="True">
+   <permission-role>Doctor</permission-role>
+   <permission-role>Reviewer</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="signed" title="Assinado">
+  <!--permission-map name="Access contents information" acquired="True">
+  <permission-role>Authenticated</permission-role>
+  <permission-role>Doctor</permission-role>
+  <permission-role>Manager</permission-role>
+  <permission-role>Patient</permission-role>
+  <permission-role>Reviewer</permission-role>
+  <permission-role>Secretary</permission-role>
+  <permission-role>Transcriptionist</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+  <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+  <permission-role>Authenticated</permission-role>
+  <permission-role>Doctor</permission-role>
+  <permission-role>Manager</permission-role>
+  <permission-role>Patient</permission-role>
+  <permission-role>Reviewer</permission-role>
+  <permission-role>Secretary</permission-role>
+  <permission-role>Transcriptionist</permission-role>
+  </permission-map>
+  <permission-map name="wres.policy: Edit Doc" acquired="False">
+  </permission-map>
+  <permission-map name="wres.policy: Sign Progress Notes" acquired="False">
+  </permission-map-->
+
+  <!-- Permission Map Temporario - enquanto o assinatura eletronica nao
+       estiver pronto -->
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Authenticated</permission-role>
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Patient</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Secretary</permission-role>
+   <permission-role>Transcriptionist</permission-role>
+   <permission-role>UemrAdmin</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Secretary</permission-role>
+   <permission-role>Transcriptionist</permission-role>
+   <permission-role>UemrAdmin</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Authenticated</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Patient</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Secretary</permission-role>
+   <permission-role>Transcriptionist</permission-role>
+   <permission-role>UemrAdmin</permission-role>
+  </permission-map>
+  <permission-map name="wres.policy: Edit Doc" acquired="False">
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Reviewer</permission-role>
+   <permission-role>Secretary</permission-role>
+   <permission-role>Transcriptionist</permission-role>
+   <permission-role>UemrAdmin</permission-role>
+  </permission-map>
+  <!-- /Permission Map Temporario - enquanto o assinatura eletronica nao
+       estiver pronto -->
+
+ </state>
+ <transition transition_id="deny" title="Negar" new_state="" trigger="USER" before_script="" after_script="">
+  <action url="deny_reason" category="workflow" icon="">Negar</action>
+  <guard>
+   <guard-permission>wres.policy: Sign Progress Notes</guard-permission>
+   <guard-role>Owner</guard-role>
+   <guard-role>Doctor</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="really_deny" title="Negacao" new_state="denied" trigger="USER" before_script="" after_script="">
+  
+  <guard>
+   <guard-permission>wres.policy: Sign Progress Notes</guard-permission>
+  </guard>
+ </transition>
+ <transition transition_id="really_review" title="Revisao" new_state="pending" trigger="USER" before_script="" after_script="">
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="really_sign" title="Assinatura" new_state="signed" trigger="USER" before_script="add_histories_to_chartdata" after_script="">
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="review" title="Rever" new_state="" trigger="USER" before_script="" after_script="">
+  <action url="route_to" category="workflow" icon="">Rever</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="sign" title="Assinar" new_state="" trigger="USER" before_script="" after_script="">
+  <action url="sign_document" category="workflow" icon="">Assinar</action>
+  <guard>
+   <guard-permission>wres.policy: Sign Progress Notes</guard-permission>
+  </guard>
+ </transition>
+ <worklist worklist_id="reviewer_queue" title="">
+  <description>Reviewer tasks</description>
+  <action url="%(portal_url)s/search?review_state=pending" category="global" icon="">Pending (%(count)d)</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+  <match name="review_state" values="pending"/>
+ </worklist>
+ <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
+  <description>The last transition</description>
+  <default>
+   
+   <expression>transition/title_or_id|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
+  <description>The ID of the user who performed the last transition</description>
+  <default>
+   
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
+  <description>Comments about the last transition</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
+  <description>Time of the last transition</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <script script_id="add_histories_to_chartdata" type="Script (Python)" filename="workflows/soap_workflow/scripts/add_histories_to_chartdata.py" module="" function=""/>
+ <script script_id="do_transition_father_or_child" type="Script (Python)" filename="workflows/soap_workflow/scripts/do_transition_father_or_child.py" module="" function=""/>
+ <script script_id="make_route_to_user" type="Script (Python)" filename="workflows/soap_workflow/scripts/make_route_to_user.py" module="" function=""/>
+</dc-workflow>

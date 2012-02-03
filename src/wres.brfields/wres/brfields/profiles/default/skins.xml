@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<object name="portal_skins" meta_type="Plone Skins Tool">
+    <object 
+    	name="BrF_images" 
+    	meta_type="Filesystem Directory View" 
+    	directory="wres.brfields:skins/BrF_images" />
+    
+    <object 
+    	name="BrF_templates" 
+    	meta_type="Filesystem Directory View" 
+    	directory="wres.brfields:skins/BrF_templates" />
+    
+    <skin-path name="*">
+        <layer name="brF_images" insert-after="custom"/>
+        <layer name="brF_templates" insert-after="brF_images"/>
+    </skin-path>
+</object>
+

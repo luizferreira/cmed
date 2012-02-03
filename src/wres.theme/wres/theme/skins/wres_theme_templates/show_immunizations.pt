@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+    
+    <metal:main fill-slot="main" 
+        tal:define="template_data context/getShowImmunizationsData">
+        <fieldset>
+            <legend i18n:translate="cmfuemr_text_immunizations">Immunizations</legend>
+            <table class="listing">
+                <thead>
+                <th></th>
+                <th i18n:translate="cmfuemr_text_year">Year</th>
+                <th i18n:translate="cmfuemr_text_immunization">Immunization</th>
+                </thead>
+                <tbody>
+                    <tr tal:repeat="immunization template_data/immunizations" 
+                        tal:attributes="class python:test(repeat['immunization'].even(), 'even', 'odd')">
+                        <td tal:content="repeat/immunization/number"></td>
+                        <td tal:content="immunization/year"></td>
+                        <td tal:content="immunization/id"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </metal:main>
+</html>

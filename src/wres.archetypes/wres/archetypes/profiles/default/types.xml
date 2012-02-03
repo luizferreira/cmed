@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!-- This file registers new types with portal_types. The types are
+     then configured with the corresponding files in types/*.xml. Note
+     that spaces are allowed in type names, but the corresponding XML file
+     uses an underscore instead. The "Factory-based Type Information with
+     dynamic views" refers to an FTI from Products.CMFDynamicViewFTI,
+     which supports Plone's "display" menu.
+  -->
+<object name="portal_types" meta_type="Plone Types Tool">
+  <!-- -*- extra stuff goes here -*- -->
+  <object name="Impresso"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Template"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="TemplateFolder"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="GenericDocument"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="MedicalDocument"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="UploadChartFolder"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="ReviewOfSystems"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Clinic"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Encounter"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="VisitTemp"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="InsuranceFolder"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Insurance"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="InitialVisit"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Visit"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="VisitFolder"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="ProgressNotes"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="ReferringProviderFolder"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="ReferringProvider"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="AdminFolder"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Admin"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="DocPlastica"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="DocBoletim"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="ExamFolder"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="DocumentFolder"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="ChartFolder"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="WRESUser"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="TranscriptionistFolder"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Transcriptionist"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="SecretaryFolder"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Secretary"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Patient"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="Doctor"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="PatientFolder"
+    meta_type="Factory-based Type Information with dynamic views" />
+  <object name="DoctorFolder"
+    meta_type="Factory-based Type Information with dynamic views" />
+</object>

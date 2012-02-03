@@ -1,0 +1,170 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="cmfuemr">
+<body>
+
+<!-- Allergies -->
+<div metal:define-macro="allergies">
+    <div tal:define="allergies context/getAllergiesData;
+                     patient context/getPatient;
+                     portal_url context/getPortalURL">
+        <div class="allergy_portlet_div"
+        	tal:define="body_portlet_id string:${patient/id}_body_allergies_portlet">
+            <span i18n:translate="cmfuemr_box_allergies" style="color:#205C90; font-weight: bold;"> Allergies </span>
+            <div class="portletBody"
+            	tal:attributes="id body_portlet_id;
+                                style python:context.showOrHidePortlet(body_portlet_id)">
+                <link rel="stylesheet" type="text/css" media="screen"
+                        tal:attributes="href string:$portal_url/allergy_portlet.css;"/>
+                <table class="allergy_portlet">
+                    <tr tal:repeat="allergy allergies">
+                        <td>
+                            <tal:t content="allergy/allergy"/>
+                            -
+                            <tal:t i18n:translate="" content="allergy/reaction" />
+                        </td>
+                    </tr>
+                </table>
+                <div tal:condition="not:allergies">
+                <span i18n:translate="cmfuemr_text_no_allergies" style="color:green; font-style:italic;">There are no allergies.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Immunizations -->
+<div metal:define-macro="immunizations">
+    <div tal:define="records python:[list(pn.doctype.getImmunization()) for pn in context.getAllPatientProgressNotes()]">
+        <div class="portlet">
+            <h5 i18n:translate="cmfuemr_box_immunizations">Immunizations</h5>
+            <div class="portletBody">
+                <!-- Show only actives allergies -->
+                <tal:immunizations repeat="immunization_list records">
+                    <div tal:repeat="immunization immunization_list">
+                        <span tal:content="python:'- %s'%(immunization)"> </span>               
+                        <br/>
+                    </div>
+                </tal:immunizations>
+
+	            <div tal:condition="not:records">
+                    <span i18n:translate="cmfuemr_texto_no_immunization">There are no immunizations.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Problems -->
+<div metal:define-macro="problems"
+     tal:define="dxs python:context.getAllDx()">
+    <div class="portlet">
+        <h5 i18n:translate="cmfuemr_box_problems">Problems</h5>
+        <div class="portletBody">
+            <tal:forEachProgressNotes repeat="dx dxs" condition="dxs">
+                <strong><span i18n:translate="cmfuemr_text_date">
+                    Date:</span> 
+                    <span tal:define="date python:dx.get('date', '')"
+                          tal:content="string:${date/mm}/${date/dd}/${date/year}">
+                        1981/12/26
+                    </span>
+                </strong>
+                <br />
+                <tal:showDxs repeat="item python:dx.get('obj', '')">
+                    <span tal:content="repeat/item/number">1</span>.
+                    <!--<span tal:content="python:item.getId()">Problem</span>-->
+                    <span tal:content="python:item">Problem</span>
+                    <br />
+                </tal:showDxs>
+            </tal:forEachProgressNotes>
+
+            <div tal:condition="not:dxs">
+                <span i18n:translate="cmfuemr_text_no_problems">There are no problems.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Referred By -->
+<!--
+<div metal:define-macro="referred_by" tal:define="referred python:context.getReferredBy()">
+	<strong>Referred by: </strong>
+	<a href="" tal:condition="referred" tal:attributes="href string:${portal_url}/doctor_folder/${referred/getId}">
+		<span tal:content="referred/getId">Doctor</span>
+	</a>
+	<span tal:condition="not:referred">no reference</span>
+</div>
+-->
+<div metal:define-macro="referred_by" 
+     tal:define="referred python:context.chartFolder.aq_parent.getReferredBy()">
+    <div class="portlet">
+        <h5 i18n:translate="cmfuemr_box_referred_by">Referred by</h5>
+        <div class="portletBody">
+            <a href="" tal:condition="python:referred" 
+                       tal:attributes="href python:referred.absolute_url()">
+                <span tal:content="string:${referred/getFirstName} ${referred/getLastName}" i18n:translate="">DoctorLastName, doctorFirstName</span>
+            </a>
+            <span tal:condition="python:not referred">
+                No reference.
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- Insurances -->
+<div metal:define-macro="insurances" tal:define="insurances here/getInsuranceData">
+    <div class="portlet">
+        <h5 i18n:translate="cmfuemr_box_insurances">Insurances</h5>
+        <div class="portletBody">
+            <tal:insurances repeat="insurance insurances">
+                <!--<strong>Insurance <span tal:content="repeat/insurance/number">1</span>:</strong>-->
+                <span tal:content="python:'- %s' % insurance.Title()">insurance</span>
+            </tal:insurances>
+
+            <div tal:condition="not:insurances">
+                <span i18n:translate="cmfuemr_text_no_insurances">There are no insurances.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart Notes -->
+<div metal:define-macro="chart_notes"
+     tal:define="chartNotes python:[pn.getChartnote() for pn in context.getAllPatientProgressNotes()]">
+    <div class="portlet">
+        <h5 i18n:translate="cmfuemr_box_chart_notes">Chart Notes</h5>
+        <div class="portletBody">
+            <tal:forEachProgressNotes repeat="note chartNotes">
+                <div tal:condition="note"
+                      tal:content="string:- ${note}">
+                    note 1
+                </div>
+            </tal:forEachProgressNotes>
+
+            <div tal:condition="python:not chartNotes or not [n for n in chartNotes if n != '']">
+                <span i18n:translate="cmfuemr_text_no_chart_notes">There are no chart notes.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Medications -->
+<div metal:define-macro="medications"
+     tal:define="progress_notes context/progressNotes/pnSortedByDate;
+                 medications python:context.getProgressNotesAttributes(progress_notes, 'doctype.getMedication_taken', filter=True)">
+    <div class="portlet">
+        <h5 i18n:translate="cmfuemr_box_medication_taken">Medication Taken</h5>
+        <div class="portletBody">
+            <tal:forEachMedication repeat="medication medications" condition="progress_notes">
+               <span tal:content="string:- $medication">Medication Taken</span>
+            </tal:forEachMedication>
+
+            <div tal:condition="not:medications">
+                <span i18n:translate="cmfuemr_text_no_medications">There are no medications.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

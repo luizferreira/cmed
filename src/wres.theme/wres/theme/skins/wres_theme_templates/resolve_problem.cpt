@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"
+	metal:use-macro="here/main_template/macros/master"
+	i18n:domain="cmfuemr">
+	
+	<head>
+		<metal:javascript_slot fill-slot="javascript_head_slot">
+			<script type="text/javascript" src="js/general_format.js"
+				tal:attributes="src string:${portal_url}/uemr_widgets/js/general_format.js"></script>
+			<script type="text/javascript" src="js/birthdate_format.js"
+				tal:attributes="src string:${portal_url}/uemr_widgets/js/birthdate_format.js"></script>
+		</metal:javascript_slot>
+	</head>
+	<body>
+		<div metal:fill-slot="main"
+			tal:define="template_data context/getResolveProblemData">
+			<h1 i18n:translate="heading_resolve_problem">Resolve Problem</h1>
+			<div id="resolve_problem"
+				tal:define="state options/state | request/state;
+							errors state/getErrors;
+							error_message errors/error_message | nothing">
+				<div class="portalMessage"
+					tal:condition="error_message"
+					tal:content="error_message" />
+				<form tal:attributes="action template/id">
+					<input type="hidden" name="form.submitted" value="1" />
+					<table>
+						<tr>
+							<td i18n:translate="listingheader_problem">Problem: </td>
+							<td>
+								<input type="hidden" name="id"
+									tal:attributes="value template_data/id | nothing" />
+								<input type="text" class="disabled" disabled=""
+									tal:attributes="value template_data/problem | nothing" />
+							</td>
+						</tr>
+						<tr>
+							<td>Fim (dd/mm/aaaa): </td>
+							<td>
+								<input type="text" id="end_date" name="shown_end_date"
+									tal:attributes="value template_data/shown_end_date | nothing"
+													/>
+								<input type="hidden" id="hidden_end_date" name="end_date"
+									tal:attributes="value template_data/end_date | nothing" />
+							</td>
+						</tr>
+						<tr>
+							<td i18n:translate="listingheader_note">Note: </td>
+							<td>
+								<textarea name="note"
+									tal:content="template_data/note"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="submit" name="form.button.resolve" value="Resolver" class="context" i18n:attributes="value"/>
+								<input type="submit" name="form.button.cancel" value="cancel" class="context" i18n:attributes="value"/>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

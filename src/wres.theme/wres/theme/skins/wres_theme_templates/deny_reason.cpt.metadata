@@ -1,0 +1,5 @@
+[actions]
+action.success..Cancel = redirect_to_action:string:view
+action.success..Save = traverse_to:string:deny_information_handler
+action.success = traverse_to:string:deny_information_handler
+

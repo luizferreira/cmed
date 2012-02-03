@@ -1,0 +1,74 @@
+<metal:define metal:define-macro="edit"
+	i18n:domain="cmfuemr">
+
+    <metal:use use-macro="field_macro | context/widgets/field/macros/edit">
+
+        <metal:fill fill-slot="widget_body"
+                    tal:define="isSpecialPhone python:str(value).startswith('0');
+                                value python:value or '';
+                                value python:((len(value)>2) and value) or '';
+                                opener_type request/opener_type | nothing">
+
+            <tal:if condition="not:opener_type">
+
+		           
+		        <input id="cphone_residencial" type="radio" name="equal" value="is_residencial" select="TRUE" /> Residencial
+		        <input id="cphone_cell" type="radio" name="equal" value="is_cell" /> Celular    
+		        <input id="cphone_other" type="radio" name="equal" value="is_other" /> Outro 
+		        <br />            
+
+                <div id="cphone_field" style="display:none">
+
+                    (<select tal:attributes="name python:'a%s' % fieldName;
+                                            id python:'a%s' % fieldName;
+                                            "
+                             tal:define="vocab python:here.lstDDD();
+                                            value_ddd python:here.phoneFormat(value,'ddd');" onChange="updatePhone(this);">
+
+                        <option tal:repeat="item vocab"
+                                tal:attributes="selected python:(str(item[0]) == str(value_ddd)) and 'selected' or None;
+                                                value python:item[0];"
+                                tal:content="python:item[1]"
+                                i18n:translate=""
+                                />
+
+                    </select>)
+                    <input id="cphone_number"
+                    tal:attributes="name python:'a%s' % fieldName;
+                                    value python:here.phoneFormat(value,'phone')" 
+                                    type="text" size="8" maxlength="8" onKeyUp="updatePhone(this);" onchange="updatePhone(this);">
+
+                </div>
+
+                <input type="hidden" tal:attributes="name fieldName;
+                                   value value" maxlength="10">
+
+            </tal:if>
+
+            <tal:if condition="opener_type">
+                (<select tal:attributes="name python:'a%s' % fieldName;
+                                        id python:'a%s' % fieldName;
+                                        "
+                         tal:define="vocab python:here.lstDDD();
+                                        value_ddd python:here.phoneFormat(value,'ddd');" onChange="updatePhone(this);">
+
+                    <option tal:repeat="item vocab"
+                            tal:attributes="selected python:(str(item[0]) == str(value_ddd)) and 'selected' or None;
+                                            value python:item[0];"
+                            tal:content="python:item[1]"
+                            i18n:translate=""
+                            />
+
+                </select>)
+                <input id="cphone_number" tal:attributes="name python:'a%s' % fieldName;
+                                                          value python:here.phoneFormat(value,'phone')" 
+                        type="text" size="8" maxlength="8" onKeyUp="updatePhone(this);" onchange="updatePhone(this);">
+                
+                <input type="hidden" tal:attributes="name fieldName;
+                                       value value" maxlength="10">
+            </tal:if>
+
+        </metal:fill>            
+    </metal:use>
+
+</metal:define>

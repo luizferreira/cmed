@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="appointment_workflow" title="appointment workflow" description="" state_variable="review_state" initial_state="not scheduled" manager_bypass="False">
+ <permission>wres.policy: Edit Visit</permission>
+ <permission>wres.policy: List Visit</permission>
+ <permission>wres.policy: View Visit</permission>
+ <state state_id="concluded" title="Concluida">
+  <permission-map name="wres.policy: Edit Visit" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="wres.policy: List Visit" acquired="True">
+  </permission-map>
+  <permission-map name="wres.policy: View Visit" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="confirmed" title="Confirmada">
+  <exit-transition transition_id="non show"/>
+  <exit-transition transition_id="start visit"/>
+  <permission-map name="wres.policy: Edit Visit" acquired="True">
+  </permission-map>
+  <permission-map name="wres.policy: List Visit" acquired="True">
+  </permission-map>
+  <permission-map name="wres.policy: View Visit" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="non-show" title="Ausente">
+  <permission-map name="wres.policy: Edit Visit" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="wres.policy: List Visit" acquired="True">
+  </permission-map>
+  <permission-map name="wres.policy: View Visit" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="not scheduled" title="Nao agendada">
+  <exit-transition transition_id="schedule"/>
+  <permission-map name="wres.policy: Edit Visit" acquired="True">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="wres.policy: List Visit" acquired="True">
+  </permission-map>
+  <permission-map name="wres.policy: View Visit" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="running" title="Presente">
+  <exit-transition transition_id="conclude"/>
+  <permission-map name="wres.policy: Edit Visit" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="wres.policy: List Visit" acquired="True">
+  </permission-map>
+  <permission-map name="wres.policy: View Visit" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="scheduled" title="Agendada">
+  <exit-transition transition_id="confirm"/>
+  <exit-transition transition_id="non show"/>
+  <exit-transition transition_id="start visit"/>
+  <exit-transition transition_id="unconfirm"/>
+  <permission-map name="wres.policy: Edit Visit" acquired="True">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="wres.policy: List Visit" acquired="True">
+  </permission-map>
+  <permission-map name="wres.policy: View Visit" acquired="True">
+  </permission-map>
+ </state>
+ <state state_id="unscheduled" title="Desmarcada">
+ </state>
+ <transition transition_id="conclude" title="Concluir" new_state="concluded" trigger="USER" before_script="" after_script="">
+  <action url="" category="workflow" icon="">Concluir</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+   <guard-expression>python: not(here.portal_factory.isTemporary(here))</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="confirm" title="Confirmar" new_state="confirmed" trigger="USER" before_script="" after_script="">
+  <action url="" category="workflow" icon="">Confirmar</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+   <guard-expression>python: not(here.portal_factory.isTemporary(here))</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="non show" title="Ausente" new_state="non-show" trigger="USER" before_script="" after_script="">
+  <action url="" category="workflow" icon="">Ausente</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+   <guard-expression>python: not(here.portal_factory.isTemporary(here))</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="schedule" title="Agendar" new_state="scheduled" trigger="USER" before_script="" after_script="">
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="start visit" title="Presente" new_state="running" trigger="USER" before_script="" after_script="set_last_visit_date">
+  <action url="" category="workflow" icon="">Presente</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+   <guard-expression>python: not(here.portal_factory.isTemporary(here))</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="unconfirm" title="Desmarcar" new_state="unscheduled" trigger="USER" before_script="" after_script="">
+  <action url="" category="workflow" icon="">Desmarcar</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+   <guard-expression>python:not(here.portal_factory.isTemporary(here))</guard-expression>
+  </guard>
+ </transition>
+ <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
+  <description>The last transition</description>
+  <default>
+   
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
+  <description>The ID of the user who performed the last transition</description>
+  <default>
+   
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="cancelation_motive" for_catalog="True" for_status="True" update_always="True">
+  <description>Motive of cancelation process</description>
+  <default>
+   <value type="string">--</value>
+   <expression>python:state_change.kwargs.get('cancelation_motive', '')</expression>
+  </default>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
+  <description>Comments about the last transition</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="True">
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
+  <description>Time of the last transition</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <script script_id="set_last_visit_date" type="Script (Python)" filename="workflows/appointment_workflow/scripts/set_last_visit_date.py" module="" function=""/>
+</dc-workflow>

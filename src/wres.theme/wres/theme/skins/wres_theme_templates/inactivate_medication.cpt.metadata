@@ -1,0 +1,5 @@
+[actions]
+action.success = redirect_to:string:make_medication_historical
+action.success..inactivate = traverse_to:string:make_medication_historical
+action.success..cancel = redirect_to:string:show_medications
+action.failure = traverse_to:string:inactivate_medications

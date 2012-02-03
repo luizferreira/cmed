@@ -1,0 +1,96 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+      
+<head>
+    <metal:block fill-slot="style_slot">
+            <link rel="stylesheet" type="text/css" href="cmed.css" />
+    </metal:block>
+
+    <metal:block fill-slot="javascript_head_slot">
+            <script type="text/javascript" src="show_problems.js"></script>
+    </metal:block> 
+</head>
+      	
+<metal:main fill-slot="main" 
+    tal:define="state options/state | request/state;
+                portal_status_msg state/kwargs/portal_status_message | request/portal_status_message | nothing;
+                errors state/getErrors;
+                error_message errors/error_message | nothing" >
+                
+    <h1>Alergias</h1>
+
+        <!-- portal status message -->
+    <dl class="portalMessage info"
+        tal:condition="portal_status_msg"> 
+        <dt> Info </dt>
+        <dd tal:content="portal_status_msg"> Medicamento adicionado com sucesso. </dd>
+    </dl>
+    <dl class="portalMessage error"
+        tal:condition="error_message"> 
+        <dt> Erro </dt>
+        <dd tal:content="error_message"> Ocorreu algum erro. </dd>
+    </dl> 
+    
+    <fieldset class="cmed">
+        <legend> Alergia </legend>        
+        <form tal:attributes="action template/id">
+            <input type="hidden" name="form.submitted" value="1" />
+            <table class="listing width-100">
+                <thead>
+                    <th>Alergia</th>
+                    <th>Reação</th>
+                    <th>Data</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" name="allergy"
+                                tal:attributes="value data/alergy | nothing" />
+                        </td>
+                        <td>
+                            <input type="text" name="reaction"
+                                tal:attributes="value data/reaction | nothing" />
+                        </td>
+                        <td>
+                            <input type="text" name="date" size="7"
+                                tal:attributes="value data/date | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <input id="add_new" type="submit" name="form.button.save" value="Adicionar Alergia" class="context"/>
+            <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
+        </form>
+    </fieldset>
+    
+    <div tal:define="allergies context/getAllergiesData" tal:condition="allergies">
+        <fieldset class="cmed">
+            <legend i18n:translate="cmfuemr_description_allergies">Alergias Registradas</legend>
+            <table class="listing width-100">
+                <thead>
+                    <th>#</th>
+                    <th>Alergia</th>
+                    <th>Reaçao</th>
+                    <th>Data</th>
+                </thead>
+                <tbody>
+                    <tal:loop tal:repeat="allergy allergies">
+                        <tr tal:attributes="class python:test(repeat['allergy'].number()%2 == 0, 'even', 'odd')">
+                            <td class="width-1" tal:content="repeat/allergy/number">1</td>
+                            <td tal:content="allergy/allergy">Penicillin</td>
+                            <td tal:content="allergy/reaction">Rash</td>
+                            <td tal:content="allergy/date">12/11/1986</td>
+                        </tr>
+                    </tal:loop>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</metal:main>
+</html>

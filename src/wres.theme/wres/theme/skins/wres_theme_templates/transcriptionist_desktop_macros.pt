@@ -1,0 +1,186 @@
+<metal:documents define-macro="documents_to_fill"
+	i18n:domain="cmfuemr">
+	<!-- esse slot  utilizado para definir as "variveis" que esto sendo passadas para a macro -->
+	<metal:documents define-slot="args">
+		<!-- as variveis devem ser definidas globalmente -->
+		<tal:args define="global documents python:[];
+						  global id_num python:0;
+						  global div_id string:" />
+	</metal:documents>
+
+	<tal:not_docs condition="not:documents">
+		<metal:non_docs define-slot="non_docs" />
+	</tal:not_docs>
+	<tal:docs condition="documents">
+		<metal:title define-slot="title" />
+		<div tal:attributes="id div_id" style="display:none">
+			<table class="listing" id="documents_to_fill"
+				   tal:attributes="id string:documents_to_fill$id_num">
+				<thead>
+					<metal:thead define-slot="thead">
+					<th i18n:translate="listingheader_date">Date</th>
+					<th i18n:translate="listingheader_patient">Patient</th>
+					<th i18n:translate="listingheader_chart">Chart</th>
+					<th i18n:translate="listingheader_type">Type</th>
+					<th i18n:translate="listingheader_provider">Provider</th>
+	                <th>&nbsp;</th>
+					</metal:thead>
+				</thead>
+				<tbody>
+					<metal:tbody define-slot="tbody">
+					<tr tal:repeat="document documents">
+						<metal:trow define-slot="trow">
+						<tal:def_patient define="patient python:context.getPatient(document);
+	                                             patient_link patient/absolute_url_path;
+	                                             abs_link document/absolute_url_path;
+	                                             link string:${abs_link}/doctype;">
+						<td height="20">
+							<a href="" tal:attributes="href link"
+									   tal:content="python:context.getProgressNotesDate(document).strftime('%m/%d/%Y')"></a>
+						</td>
+						<td>
+							<a href="" tal:attributes="href string:${patient_link}/chartFolder"
+									   tal:content="patient/Title"></a>
+						</td>
+						<td tal:content="patient/getChart"></td>
+						<td tal:content="document/getType" i18n:translate="">Initial Visit</td>
+						<td tal:content="document/getDoctorTitle"></td>
+	                    <td align="center">
+	                        <a href="#" tal:attributes="href link" i18n:translate="label_view">
+	                            View
+	                        </a>
+	                    </td>
+						</tal:def_patient>
+						</metal:trow>
+					</tr>
+					</metal:tbody>
+				</tbody>
+			</table>
+		</div>
+	</tal:docs>
+</metal:documents>
+
+<metal:encounters define-macro="encounters_table"
+	tal:define="navigation_footer encounters/navigation_footer;
+				encounters encounters/list;"
+	i18n:domain="cmfuemr">
+
+    <table tal:condition="encounters" class="listing width-100">
+        <thead>
+            <th class="width-5" i18n:translate="listingheader_date">Date</th>
+            <th class="width-15" i18n:translate="listingheader_patient">Patient</th>
+            <th class="width-15" i18n:translate="listingheader_providers">Providers</th>
+            <th class="width-15" i18n:translate="listingheader_related">Related Documents</th>
+            <th class="width-30" i18n:translate="listingheader_note">Note</th>
+            <th class="width-15" tal:condition="pending" i18n:translate="listingheader_actions">Actions</th>
+        </thead>
+        <tbody>
+            <tr tal:repeat="encounter encounters" 
+                tal:attributes="class python:test(repeat['encounter'].odd(), 'even', 'odd')">
+                <td>
+                    <tal:txt content="encounter/date">02/08/2007</tal:txt><br />
+                </td>
+                <td>
+                    <a tal:attributes="href encounter/patient/link" tal:content="encounter/patient/title" i18n:translate="">Heloisa Helena</a>
+                </td>
+                <td>
+                    <ul>
+                        <li tal:repeat="doctor encounter/doctors" tal:content="doctor"/>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li tal:repeat="document encounter/related_documents">
+                            <a tal:attributes="href document/link" tal:content="document/title" i18n:translate="">Doc</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <tal:if condition="pending" define="div_id string:modified_${encounter/id}">
+                        <textarea tal:attributes="id string:textarea_${repeat/encounter/index};
+                                                  name string:textarea_${repeat/encounter/index}; 
+                                                  onkeypress string:set_as_modified('${div_id}')"
+                                  tal:content="encounter/note" rows="7" class="dynamic_box"></textarea>
+                        <div class="center">
+                            <div class="modified"  style="display: none"
+                                 tal:attributes="id div_id">&nbsp;</div>
+                            <input class="context" type="submit" value="save" i18n:attributes="value"
+                                   tal:attributes="onclick string:save_textarea('textarea_${repeat/encounter/index}', '${encounter/id}', '${portal_url}/saveEncounterNote', '${div_id}')"/>
+                            <input class="standalone" type="submit" value="clean"  i18n:attributes="value"
+                                   tal:attributes="onclick string:clean_textarea('textarea_${repeat/encounter/index}', '${div_id}')"/>
+                        </div>
+                    </tal:if>
+                    <tal:if condition="not:pending">
+                        <tal:txt content="encounter/note"/>
+                    </tal:if>
+                </td>
+                <td tal:condition="pending">
+                    <form method="post" class="center" tal:attributes="action string:${here/absolute_url}/${template/id}">
+                        <input class="context" type="submit" name="form.button.done" value="done" i18n:attributes="value"/><br />
+                        <input type="hidden" name="encounter_path" tal:attributes="value encounter/path"/>
+                        <select name="type_of_document">
+                            <tal:loop repeat="option options">
+                                <option tal:attributes="value option/value" tal:content="option/display"/>
+                            </tal:loop>
+                        </select>
+                        <input class="context" type="submit" name="form.button.create" value="create" i18n:attributes="value"/>
+                        <input type="hidden" name="form.submitted" value="1"/>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+	<div class="formHelp navigationFooter">
+		<a tal:condition="navigation_footer/previous" 
+		   tal:attributes="href string:transcriptionist_desktop_view?${navigation_footer/key}_start=${navigation_footer/previous/start}&${navigation_footer/other}" i18n:translate="">Previous</a>
+		<tal:c content="string:Showing ${navigation_footer/begin} to ${navigation_footer/end} of ${navigation_footer/num_results} Encounters" />
+		<a tal:condition="navigation_footer/next" 
+		   tal:attributes="href string:transcriptionist_desktop_view?${navigation_footer/key}_start=${navigation_footer/next/start}&${navigation_footer/other}" i18n:translate="">Next</a>
+	</div>
+    <tal:txt tal:condition="not:encounters" i18n:translate="condition_empty_table">
+    </tal:txt>
+</metal:encounters>
+
+<metal:doctable define-macro="doctable"
+	tal:define="navigation_footer docs/navigationFooter | nothing;
+				docs docs/list;"
+	i18n:domain="cmfuemr">
+    <table class="listing width-100">
+       <thead>
+            <th class="width-15" i18n:translate="listingheader_date">Date</th>
+            <th class="width-15" i18n:translate="listingheader_patient">Patient</th>
+            <th class="width-15" i18n:translate="listingheader_doctor">Doctor</th>
+            <th class="width-15" i18n:translate="listingheader_type">Type</th>
+            <th tal:condition="python:type != 'drafts'" class="width-40">Reviewer Note</th>
+        </thead>
+        <tbody>
+            <tr tal:repeat="doc docs" 
+                tal:attributes="class python:test(repeat['doc'].odd(), 'even', 'odd')">
+                <td class="center">
+                    <tal:txt content="doc/date">02/08/2007</tal:txt>
+                </td>
+                <td class="center">
+                    <a tal:attributes="href doc/patient/link" tal:content="doc/patient/title" i18n:translate="">Heloisa Helena</a>
+                </td>
+                <td>
+                     <tal:txt content="doc/doctor" i18n:translate="">Doctor Name</tal:txt>
+                </td>
+                <td>
+                     <a tal:attributes="href doc/document/link" tal:content="doc/document/title" i18n:translate="">Heloisa Helena</a>
+                </td>
+                <td tal:condition="python:type != 'drafts'">
+                    <tal:txt content="doc/review_notes">02/08/2007</tal:txt>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+	<div class="formHelp navigationFooter"
+		tal:condition="navigation_footer">
+		<a tal:condition="navigation_footer/previous"
+			tal:attributes="href string:transcriptionist_desktop_view?${navigation_footer/key}_start=${navigation_footer/previous/start}&key=${navigation_footer/key}" i18n:translate="">Previous</a>
+		<tal:c content="string:Showing ${navigation_footer/begin} to ${navigation_footer/end} of ${navigation_footer/num_results}" />
+		<a tal:condition="navigation_footer/next"
+			tal:attributes="href string:transcriptionist_desktop_view?${navigation_footer/key}_start=${navigation_footer/next/start}&key=${navigation_footer/key}" i18n:translate="">Next</a>
+	</div>
+</metal:doctable>
+

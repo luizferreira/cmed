@@ -1,0 +1,3 @@
+[actions]
+action.success = redirect_to:string:show_medications
+action.failure = traverse_to:string:show_medications

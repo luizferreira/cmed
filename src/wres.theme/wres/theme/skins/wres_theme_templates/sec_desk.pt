@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+      
+<head>
+	<title>Área de Trabalho da Secretária</title>
+
+	<metal:block fill-slot="style_slot">
+		<link rel="stylesheet" type="text/css" href="sec_desk_css.css" />
+	</metal:block>
+
+	<metal:block fill-slot="javascript_head_slot">
+		<script type="text/javascript" src="sec_desk_js.js"></script>
+	</metal:block>
+      
+</head>
+
+<body>
+
+	<div metal:fill-slot="main"
+		 tal:define="data context/sec_desk_script;
+		 			 doctors data/doctors;
+		 			 doctor data/logged_doctor | nothing;
+		 			 data python:modules['wres.archetypes.content.secretarydesktop'].SecretaryDesktopData(context, doctor);">
+	
+		<tal:if condition="not:doctor">
+			<metal:call_macro use-macro="context/sec_desk_macros/macros/doctor_select">
+			</metal:call_macro>
+		</tal:if>
+        
+        <!-- Idéia: colocar classes nos tr de cada visita com a id do médico. Ao mudar
+        o médico no select o sistema esconde e mostra as trs apropriadas.  -->
+	
+		<br />
+		
+		<!-- h2 id="doctor">Todos os médicos</h2>  -->
+		
+		<div id="day_buttons_div">
+			<a>	<span class="button" id="today_button">HOJE</span> </a> - <a> <span class="button" id="tomorrow_button">AMANHÃ</span> </a> 
+				<!-- button class="day_button" id="today_button">HOJE</button> - <button class="day_button" id="tomorrow_button">AMANHÃ</button>  -->
+			
+		</div> 
+		
+		<div class="show_visits" id="show_today_visits">
+	        <div metal:use-macro="context/sec_desk_macros/macros/show_visits">
+	            <metal:fill_slot fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromToday" />
+	        </div>
+        
+        </div>		
+		
+        <!-- Tomorrow's visits  -->
+        
+        <div class="show_visits" id="show_tomorrow_visits">
+        
+	        <div metal:use-macro="context/sec_desk_macros/macros/show_visits">
+	            <metal:define_visits fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromTomorrow" />
+	            <metal:no_activities fill-slot='no_visits'>
+	            Sem Consultas para Amanhã
+	            </metal:no_activities>
+	            <metal:no_activities fill-slot='visits_header'>
+	            Consultas de Amanhã
+	            </metal:no_activities>
+	        </div>        
+        
+        </div>
+        
+        <!-- tal:print content="data/getTodayTomorrowVisits" />
+        
+        <tal:def define="data data/getTodayTomorrowVisits;" >
+        	<tal:for repeat="item data">
+        		<tal:print content="item/absolute_url" />
+        	</tal:for>
+        </tal:def>  -->
+        
+        <div id="dialog_content" style="display: none">
+			<h3>DEMO</h3>
+			<p>This is a demonstration of jQuery SimpleDialog.</p>
+		</div>
+        
+        
+        		
+		
+		
+				
+		
+		
+		
+	
+	</div>
+
+</body>
+  
+        
+      
+</html>

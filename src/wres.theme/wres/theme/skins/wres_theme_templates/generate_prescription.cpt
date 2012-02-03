@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cmfuemr">
+    <head>
+        <metal:block fill-slot="style_slot">
+            <link rel="stylesheet" type="text/css" href="cmed.css" />
+        </metal:block>
+    </head>
+    <body>
+        <div metal:fill-slot="main">
+            <form tal:attributes="action template/id">
+                <h1>Gerar Prescrição</h1>
+                <br />
+                <fieldset class="cmed">
+                <legend> Prescrição </legend>    
+                    <div id="presc" tal:define="data context/getGeneratePrescriptionsData">
+                        Data: <input type="text" name="date" size="7" 
+                            tal:attributes="value data/start | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
+                        <br />
+                        <br />
+                        <table class="listing width-100">
+                            <thead>
+                                <th>#</th>
+                                <th>Medicamentos</th>
+                                <th>Concentração</th>
+                                <th>Quantidade</th>
+                                <th>Uso</th>
+                            </thead>
+                            <tbody>
+                                <tal:loop tal:repeat="registro data">
+                                <tal tal:define="medication registro/data">
+                                    <tr tal:attributes="class python:test(repeat['registro'].even(), 'even', 'odd')">
+                                        <td class="width-1" tal:content="repeat/registro/number">1</td>
+                                        <td tal:content="medication/medication">Tylenol</td>
+                                        <td tal:content="medication/concentration">100mg</td>
+                                        <td tal:content="medication/quantity">60 comprimidos</td>
+                                        <td tal:content="medication/use">2x ao dia</td>
+                                    </tr>
+                                </tal>
+                                </tal:loop>
+                            </tbody>
+                        </table>
+                        <input type="submit" id="confirm" name="form.button.confirm" value="Confirmar" class="context"/>
+                        <input type="submit" name="form.button.cancel" value="Cancelar" class="context"/>
+                        <input type="hidden" name="form.submitted" value="1" />
+                        <input type="hidden" name="checks" tal:attributes="value request/checks | nothing" />
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </body>
+</html>

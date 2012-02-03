@@ -1,0 +1,17 @@
+.allergy_portlet{
+    list-style: square;
+    color: red;
+}
+.allergy_portlet li{
+	margin-bottom: 0px;
+}
+
+.allergy_portlet_div{
+/*	border:0.1em outset #329fd7;
+	border-top: none;*/
+    font-size: 13px;    
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+/*    background: #EEE;*/
+}

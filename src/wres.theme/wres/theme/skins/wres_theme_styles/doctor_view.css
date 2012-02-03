@@ -1,0 +1,59 @@
+#label{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+    color: black;
+    font-weight: bold;
+}
+
+#main_chart_print{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+    color: black;
+}
+fieldset#fieldset_doc_view {
+    border: 0.1em solid #329fd7 ;
+    border-style: solid solid solid solid;
+    margin: 0px auto;
+    padding-bottom: 5em;
+    height: 90px;
+    width: 70em;
+}
+
+fieldset#container
+{
+  border: 1px #329fd7 solid;
+  margin: 0px auto;
+  width: 1000px;
+}
+
+
+#container form
+{
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dado
+{
+  width: 400px;
+  font-size: 12px;
+  text-align: left; 
+  color: black; 
+}
+
+.table
+{
+  width: 800px;
+  height: 190%;
+}
+fieldset#fieldset_basico {
+    border: 0.1em solid #329fd7 ;
+    border-style: solid solid solid solid;
+    margin-left: 1em;
+    padding-bottom: 5em;
+    height: 150px;
+    width: 70em;
+    text-align: left;
+    background: #C6E1FF;
+    float: center;
+}

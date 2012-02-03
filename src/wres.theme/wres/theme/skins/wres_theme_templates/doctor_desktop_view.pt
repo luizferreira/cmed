@@ -1,0 +1,100 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+
+  <head>
+    <title i18n:translate="cmfuemr_doctor_desktop">Doctor Desktop</title>
+    <metal:block fill-slot="javascript_head_slot">
+        <script type="text/javascript" src="calendar_aux/calendar.js"></script>
+    </metal:block>
+    
+    <metal:block fill-slot="head_slot"
+                 tal:define="refresh_time string: 300">
+          <META http-equiv="Refresh"
+                tal:attributes="content string:${refresh_time};; URL=${portal_url}/doctor_folder/${user/getId}/doctor_desktop_view"/>
+    </metal:block>
+  </head>
+
+  <body>
+    <div metal:fill-slot="main"
+         tal:define="days python:1;
+                     global num_tables python:0;
+                     doctor request/AUTHENTICATED_USER/getId;
+                     date python:request.get('date_str', '');
+                     today python:context.calendar_aux.getTodayDate(request.get('date_str', ''));
+                     global today_str python:request.get('date_str', '%s/%s/%s' %(today.year(), today.month(), today.day()));
+                     datum python:modules['wres.theme.secretary_desktop'].SecretaryDesktopData(context, doctor, date);">
+    <!--<a href="" onClick="window.open('quick_view', '_blank', 'width=450,height=450,scrollbars=yes,resizable=yes');event.preventDefault()">teste<a>-->
+        <h5 align="center" i18n:translate="cmfuemr_doctor_desktop">Doctor Desktop</h5>
+        <br />
+
+        <!-- Jump to date -->
+        <metal:calendar tal:define="id string:jump_to_date;
+                                    current_date python:context.calendar_aux.getTodayDate(request.get('date_str', ''));
+                                    action string:date_str;">
+            <span metal:use-macro="container/portal_skins/wres_theme_auxiliary/calendar_aux/calendarMacros/macros/date_choose" />
+        </metal:calendar>
+
+        <!-- <p tal:content="datum/getVisitsFromToday"> </p> Bax migrando -->
+        <!-- Today's visits -->
+        <div metal:use-macro="here/doctor_desktop_macros/macros/show_visits">
+            <metal:define_visits fill-slot="doctor_visits"
+               tal:define="global doctor_visits datum/getVisitsFromToday" />
+        </div>
+
+        <!-- Today's Activities -->
+        <div metal:use-macro="here/secretary_desktop_macros/macros/show_activities">
+            <metal:define_visits fill-slot="doctor_visits"
+               tal:define="global doctor_visits datum/getActivitiesFromToday" />
+        </div>
+
+        <div metal:use-macro="here/doctor_desktop_macros/macros/show_visits">
+            <metal:define_visits fill-slot="doctor_visits"
+               tal:define="global doctor_visits datum/getVisitsFromTomorrow" />
+            <metal:no_activities fill-slot='no_visits' i18n:translate="cmfuemr_no_visits_tomorrow">
+            No visits tomorrow
+            </metal:no_activities>
+            <metal:no_activities fill-slot='visits_header' i18n:translate="cmfuemr_tomorrows_visits">
+            Tomorrow's visits
+            </metal:no_activities>
+        </div>
+
+        <!-- Tomorrow's Activities -->
+        <div metal:use-macro="here/secretary_desktop_macros/macros/show_activities">
+            <metal:define_visits fill-slot="doctor_visits"
+               tal:define="global doctor_visits datum/getActivitiesFromTomorrow" />
+            <!--<metal:define_visits fill-slot="doctor_visits"
+               tal:define="global doctor_visits python:context.getVisitsFromDate(doctor, date, days+1, remove_dummy_patient=False, only_dummy_patient=True)" />-->
+            <metal:no_activities fill-slot='no_activities' i18n:translate="cmfuemr_no_activities_tomorrow">
+            No activities tomorrow
+            </metal:no_activities>
+            <metal:no_activities fill-slot='activities_header' i18n:translate="cmfuemr_tomorrows_activities">
+            Tomorrow's activities
+            </metal:no_activities>
+        </div>
+
+        <!-- "checked-in" Patients Table -->
+        <metal:checked_in use-macro="here/secretary_desktop_macros/macros/checked_in_patients">
+            <metal:block fill-slot="patient_room">
+                <span tal:content="visitRoom">Room #</span>
+            </metal:block>
+        </metal:checked_in>
+
+        <!-- Spacer and Refresh button -->
+        <div tal:content="nothing" style="height: 20px;">
+            Spacer
+        </div>
+        <hr />
+        <div>
+            <input type="button" value="Refresh" id="refresh_button"
+                   tal:attributes="onclick string:javascript:window.location=('${portal_url}/doctor_folder/${user/getId}/doctor_desktop_view');;" i18n:attributes="value"/>
+        </div>
+   </div>
+
+  </body>
+</html>

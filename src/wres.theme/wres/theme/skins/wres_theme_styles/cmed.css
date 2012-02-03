@@ -1,0 +1,31 @@
+/* ========= Definições Básicas ============ */
+
+#content fieldset.cmed{
+    border: 0.1em solid #329fd7 ;
+ /*   border: 1px solid green; */
+    border-style: solid solid solid solid;
+}
+
+#content fieldset.cmedgray {
+    border: 0.1em solid #CCCCCC ;
+ /*   border: 1px solid green; */
+    border-style: solid solid solid solid;
+    background:#EEEEEE;
+}
+
+/*#content legend 
+{
+  padding: 0.2em 0.5em;
+  border:1px solid #329fd7;
+/*  color:green; /
+  font-size:90%;
+  text-align:right;
+}*/
+
+#teste{
+    background: red;
+}
+
+/* ========= Definições Básicas ============ */
+
+

@@ -1,0 +1,86 @@
+<html i18n:domain="cmfuemr">
+
+<metal:body_macro define-macro="body_macro">
+<h1 tal:content="here/title_or_id">Title</h1><br />
+
+	<div tal:condition="not:documents">
+		<span style="font-style: italic">Não há documentos</span>
+	</div>
+
+	<metal:documents_table define-macro="documents_table">
+		<tal:show_table condition="documents">
+            <div align="center">
+                <table style="width:100%" class="listing">
+                    <thead>
+                        <tr>
+                            <th style="width:15px">#</th>
+                            <th style="width:200px">Documento</th>
+                            <th style="width:150px">Médico</th>
+                            <th style="width:120px">Data</th>
+                            <th>Nota</th>
+                            <th style="width:15px">Ações</th>
+                            <!--th>Estado</th-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tal:block repeat="document documents">
+                            <tr	tal:define="oddrow repeat/document/odd;"
+                                tal:attributes="class python:test(oddrow, 'even', 'odd')">
+
+                                <td tal:content="repeat/document/number">01</td>
+
+                                <td>
+                                    <a href="" tal:attributes="href document/absolute_url">
+                                    <span tal:content="document/Title">titulo</span>
+                                    </a>
+                                </td>
+
+                                <td tal:content="python:document.getDoctor().Title()">Doutor Teste</td>
+
+                                <td>
+                                    <span tal:define="date document/creation_date"
+                                          tal:content="python:date.strftime('%d/%m/%Y - %H:%M')">
+                                        09/26/2005
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <span tal:content="document/getMedicalNote | nothing" >
+                                        Comentarios do Documento
+                                    </span>
+                                </td>
+
+                                <td>
+
+                                    <!-- <span size="2">
+                                        <a tal:attributes="id string:document_link_${repeat/document/index};
+                                                            href document/absolute_url" i18n:translate="">
+                                            Visualizar
+                                        </a>
+                                    </span> -->
+                                    <span>
+                                        <a tal:attributes="href python: '%s/edit' % document.absolute_url()">
+                                            Editar
+                                        </a>
+                                    </span>
+                                </td>
+
+
+                                <!--td width="10%">
+                                    <tal:workflow  define="state python:document.portal_workflow.getInfoFor(document,'review_state')">
+                                        <span i18n:translate="" tal:content="state | nothing">
+                                        Estado do documento
+                                        </span>
+                                    </tal:workflow>
+                                </td-->
+                            </tr>
+                        </tal:block>
+                    </tbody>
+                </table>
+            </div>
+		</tal:show_table>
+	</metal:documents_table>
+
+</metal:body_macro>
+
+</html>

@@ -1,0 +1,147 @@
+<html tal:define="data python:context.get_popup_search_data(options=options);
+                  batch data/batch;
+                  widget nocall:data/widget;
+                  start data/start;
+                  results data/results;"
+				  i18n:domain="cmfuemr">
+				  
+<head tal:define="css python:getattr(context, 'base.css')">
+	<script type="text/javascript" charset="iso-8859-1"
+              src="http://localhost/bla/uemr_widgets/js/testebotoeswidget.js"
+              tal:attributes="src string:${here/portal_url}/uemr_widgets/js/buildingblockwidget.js">
+    </script>
+
+	<!-- Main style sheets for CSS2 capable browsers -->
+	<link href="plone.css" rel="stylesheet" type="text/css"
+	      tal:attributes="href css/absolute_url" />
+
+	<style type="text/css">
+	<!--
+	body {
+		margin-left: 5px;
+		margin-right: 5px;
+		margin-bottom: 5px;
+	}
+
+	a:hover {
+		text-decoration: underline;
+	}
+
+	-->
+	</style>
+
+	<title i18n:translate="title_popup_search">Pop up search</title>
+
+</head>
+
+<body>
+	<fieldset>
+	<legend i18n:translate="legend_filters">Filters</legend>
+	<div align="center">
+		<tal:block repeat="letter data/letters">
+			<a tal:attributes="href string:${template/id}?${letter/qs}"
+			   tal:content="letter/letter" >Letter</a>
+		</tal:block>
+	</div>
+	</fieldset>
+
+	<fieldset>
+	<legend i18n:translate="legend_search">Search</legend>
+	<div align="center">
+		<form action="" name="searchForm" tal:attributes="action string:${template/id}">
+			<input tal:repeat="input data/inputs"
+				tal:attributes="type input/type;
+								name input/name;
+								value input/value;
+								class input/klass | nothing;
+								size input/size | nothing" />
+		</form>
+	</div>
+	</fieldset>
+
+	<fieldset>
+	<legend i18n:translate="legend_results">Results</legend>
+
+	<div class="formHelp" align="center">
+		<strong i18n:translate="help_type_of_results">Type of results:</strong> 
+			<span tal:content="data/resultsType" i18n:translate="">All patients</span><br />
+		<strong i18n:translate="help_order_by">Order by:</strong> 
+			<span tal:content="data/orderBy" i18n:translate="">Date of creation</span><br />
+	</div>
+
+		<!-- There are results -->
+		<tal:block condition="batch">
+
+            <table class="listing" width="100%"
+			       tal:define="columns python:context.filter_fields_script(batch[0].getObject().Schema().fields());">
+
+				<thead>
+					<th i18n:translate="listingheader_no">No</th>
+					<th tal:content="widget/label" i18n:translate="">Id</th>
+					<th tal:repeat="column python:[column for column in columns if column.getName() != 'id']"
+					    tal:content="python:column.widget.label" i18n:translate="">outras</th>
+				</thead>
+				<tbody>
+					<metal:block tal:define="block data/block;"
+						tal:repeat="item batch">
+						<tr tal:define="oddrow repeat/item/odd" tal:attributes="class python:test(oddrow, 'odd', 'even')">
+							<td tal:content="python:start + repeat['item'].number()"></td>
+							<metal:block tal:define="filter python:block.get('filter') and (lambda b:widget.eval(block.get('filter'), {'b': b}));
+							                         filter python:filter or (lambda b:True);
+							                         field data/field;
+							                         label python:field.vocabulary_custom_label and (lambda b:widget.eval(field.vocabulary_custom_label, {'b': b}));
+							                         name python:(label and label(item)) or item.Title or item.id;
+							                         object python:item.getObject();">
+								<td>
+									<a href="#"
+									   tal:omit-tag="python:not filter(item)"
+									   tal:define="itemuid python:object.UID()"
+									   tal:attributes='onclick string:addElementAndCloseWindow(window, "${data/fieldName}", "${name}", "${itemuid}");'>
+										<span tal:content="name" i18n:translate="">patient name</span>
+									</a>
+								</td>
+								<td tal:repeat="column python:[column for column in columns if column.getName() != 'id']"
+								    tal:content="python:object[column.accessor]()">
+								</td>
+							</metal:block>
+						</tr>
+					</metal:block>
+				</tbody>
+			</table>
+
+			<div class="formHelp" align="center" i18n:translate="help_showing_results">
+				Showing of <span tal:content="python:start + 1" i18n:name="containicio">11</span> to
+				<span tal:content="python:start + len(batch)" i18n:name="contafim"></span> of
+				<span tal:content="python:len(results)" i18n:name="contatotal">55</span> results
+			</div>
+
+		</tal:block>
+
+		<!-- There are no results -->
+		<tal:block tal:condition="not:batch">
+			<br /><div align="center"><span i18n:translate="help_no_results">
+				There are no results</span><br />
+				<a href="#" onclick="javascript:window.close();" i18n:translate="label_close_window">Close this window</a>
+			</div>
+		</tal:block>
+
+		<table width="100%">
+			<tr>
+				<td width="50%" align="left">
+					<a tal:condition="data/previous"
+					   tal:attributes="href string:${request/URL0}?start:int=${data/previous/first}&${data/qs}"
+					   href="previous_url" i18n:translate="cmfuemr_previous">previous</a>
+				</td>
+
+				<td width="50%" align="right">
+						<a tal:condition="data/previous"
+					       tal:attributes="href string:${request/URL0}?start:int=${data/previous/first}&${data/qs}"
+					       href="previous_url" i18n:translate="cmfuemr_next">next</a>
+				</td>
+
+			</tr>
+		</table>
+
+	</fieldset>
+</body>
+</html>

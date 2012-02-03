@@ -1,0 +1,4 @@
+[actions]
+action.success = redirect_to:string:show_exams
+action.failure = redirect_to:string:show_exams
+

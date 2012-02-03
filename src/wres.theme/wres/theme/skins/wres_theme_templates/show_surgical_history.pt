@@ -1,0 +1,20 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+	<metal:main fill-slot="main">
+		<div>
+			<fieldset>
+				<legend i18n:translate="cmfuemr_text_surgical_history">Surgical History</legend>
+				<tal:def define="past_histories context/getShowPastHistoryData;
+								 history_data past_histories/surgical_history | nothing;">
+					<metal:history_from_documents use-macro="here/show_histories_macros/macros/history_from_documents" />
+				</tal:def>
+			</fieldset>
+		</div>
+	</metal:main>
+</html>

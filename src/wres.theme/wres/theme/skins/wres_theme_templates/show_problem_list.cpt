@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+    <head>
+        <metal:block fill-slot="style_slot">
+            <link rel="stylesheet" type="text/css" href="cmed.css" />
+            <!--link rel="stylesheet" type="text/css" href="prescriptions.css" /-->
+        </metal:block>
+
+        <metal:block fill-slot="javascript_head_slot">
+            <script type="text/javascript" src="show_problems.js"></script>
+            <script type="text/javascript" src="format_date.js"></script>
+        </metal:block>
+    </head>
+    <body>
+        <div metal:fill-slot="main"
+            tal:define="template_data context/getProblemListData;
+                        active template_data/active/problems;
+                        inactive template_data/inactive/problems">
+            <h1 i18n:translate="heading_problem_list">Problem List</h1>
+
+            <div id="tables">
+                <div id="add_new"
+                    tal:define="data template_data">
+                    <metal:add_new use-macro="here/problem_list_macros/macros/add_new" />
+                </div>
+                
+                <fieldset class="cmed" tal:condition="active">
+                    <legend> Ativos </legend>      
+                    <div id="current"
+                        tal:define="data template_data/active;
+                                    active python:True;
+                                    view python:False">
+                        <metal:active_table use-macro="here/problem_list_macros/macros/problem_list_table" />
+                    </div>
+                </fieldset>
+                <fieldset class="cmed" tal:condition="inactive">
+                    <legend> Resolvidos </legend>      
+                    <div id="historical"
+                        tal:define="data template_data/inactive;
+                                    active python:False;
+                                    view python:False">
+                        <metal:inactive_table use-macro="here/problem_list_macros/macros/problem_list_table" />
+                    </div>
+                </fieldset>               
+            </div>
+        </div>
+    </body>
+</html>

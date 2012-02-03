@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!-- This import step informs the portal_factory tool that we want it to
+     manage our content types. This tool deals with the fact that in
+     Archetypes and most CMF types, the object is actually created before
+     the first edit form is filled in. That is, there are no true "add forms".
+     The factory tool creates a temporary object in lieu of an "add form",
+     and then moves the object to the proper location after it has been
+     successfully saved.
+  -->
+<object name="portal_factory" meta_type="Plone Factory Tool">
+  <factorytypes>
+    <!-- -*- extra stuff goes here -*- -->
+    <type portal_type="Impresso" />
+    <type portal_type="Template" />
+    <type portal_type="TemplateFolder" />
+    <type portal_type="GenericDocument" />
+    <type portal_type="MedicalDocument" />
+    <type portal_type="UploadChartFolder" />
+    <type portal_type="ReviewOfSystems" />
+    <type portal_type="Clinic" />
+    <type portal_type="Encounter" />
+    <type portal_type="VisitTemp" />
+    <type portal_type="InsuranceFolder" />
+    <type portal_type="Insurance" />
+    <type portal_type="InitialVisit" />
+    <type portal_type="Visit" />
+    <type portal_type="VisitFolder" />
+    <type portal_type="ProgressNotes" />
+    <type portal_type="ReferringProviderFolder" />
+    <type portal_type="ReferringProvider" />
+    <type portal_type="AdminFolder" />
+    <type portal_type="Admin" />
+    <type portal_type="DocPlastica" />
+    <type portal_type="DocBoletim" />
+    <type portal_type="ExamFolder" />
+    <type portal_type="DocumentFolder" />
+    <type portal_type="ChartFolder" />
+    <type portal_type="WRESUser" />
+    <type portal_type="TranscriptionistFolder" />
+    <type portal_type="Transcriptionist" />
+    <type portal_type="SecretaryFolder" />
+    <type portal_type="Secretary" />
+    <type portal_type="Patient" />
+    <type portal_type="Doctor" />
+    <type portal_type="PatientFolder" />
+    <type portal_type="DoctorFolder" />
+  </factorytypes>
+</object>

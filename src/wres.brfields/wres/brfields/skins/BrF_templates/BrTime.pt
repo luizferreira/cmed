@@ -1,0 +1,71 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone">
+
+<head>
+    <title></title>
+</head>
+
+<body>
+
+    <!-- Selection Widgets -->
+
+    <metal:view_macro define-macro="view"
+                      tal:define="value python:accessor() or '';
+                                 display python:'%sh%smin' % (value[:2],value[2:])"
+                      tal:replace="display" />
+
+    <metal:define define-macro="edit">
+
+        <metal:use use-macro="field_macro | here/widgets/field/macros/edit">
+
+            <metal:fill fill-slot="widget_body"
+                        tal:define="value python:value or ''">
+                    <select tal:attributes="name python:'a%s' % fieldName;
+                                            id python:'a%s' % fieldName;
+                                            
+                                            value python:value[:2];"
+                             tal:define="vocab python:['%02d' % hora for hora in range(0,24)];
+                                         value_combo python:value[:2];" onChange="updateTime(this);">
+
+                        <option tal:repeat="item vocab"
+                                tal:attributes="value item; selected python:(str(item) == str(value_combo)) and 'selected' or None;"
+                                tal:content="item"
+                                i18n:translate=""
+                                />
+
+                    </select>&nbsp;h&nbsp;
+                    <select tal:attributes="name python:'a%s' % fieldName;
+                                            id python:'a%s' % fieldName;
+                                            
+                                            value python:value[2:];"
+                             tal:define="vocab python:['%02d' % minuto for minuto in range(0,60,5)];
+                                         value_combo python:value[2:];" onChange="updateTime(this);" onChange="updateTime(this);">min
+
+                        <option tal:repeat="item vocab"
+                                tal:attributes="value item;selected python:(str(item) == str(value_combo)) and 'selected' or None;"
+                                tal:content="item"
+                                i18n:translate=""
+                                />
+
+                    </select>&nbsp;min
+                
+                <input type="hidden" tal:attributes="name fieldName;
+                                       value value" maxlength="10">
+            </metal:fill>            
+        </metal:use>
+    </metal:define>
+
+
+    <div metal:define-macro="search">
+      <div metal:use-macro="here/BrTime/macros/edit">
+      </div>
+    </div>
+
+  </body>
+
+</html>
+    
+    

@@ -1,0 +1,5 @@
+[actions]
+#TODO Excluir este script
+action.success = redirect_to:string:show_prescriptions
+action.failure = redirect_to:string:show_prescriptions
+#TODO Excluir este script

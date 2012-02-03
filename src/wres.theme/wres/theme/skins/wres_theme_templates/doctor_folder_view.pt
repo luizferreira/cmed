@@ -1,0 +1,141 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+
+<head>
+
+<title i18n:translate="cmfuemr_patient_search">Patient search</title>
+
+</head>
+
+<body>
+
+ <div metal:fill-slot="main"
+        tal:define="title string:Buscar Médico;
+            searchableText request/searchableText | string:;
+            searchableTextt python:searchableText;
+            meta_type string:Doctor;
+            results python:context.portal_catalog.searchResults({'meta_type': meta_type, 'getParsedLastName': searchableTextt});
+            start python:int(path('request/start | nothing') or 0);
+            batch python:modules['ZTUtils'].Batch(results, size=10, start=start);
+            previous python:batch.previous;
+            next python:batch.next;">
+        <h1>
+            <a i18n:translate="" tal:content="string:${title}">Title</a>
+		</h1>
+		<div tal:define="letters string:ABCDEFGHIJKLMNOPQRSTUVWXYZ">
+			<tal:block repeat="letter letters">
+				<a tal:attributes="href string:${template/id}?searchableText=$letter*"
+                    tal:content="letter">Letter</a>
+			</tal:block>
+		</div>
+		<br />
+        
+		<div class="field">
+			<form action="" name="searchForm" tal:attributes="action string:${template/id}">
+				<label i18n:translate="cmfuemr_seach_text">Search text</label>
+                <br/>
+				<input type="text" size="25" name="searchableText" tal:attributes="value searchableText" />
+				<input class="searchButton" type="submit" name="searchButton" value="Search" i18n:attributes="value"/>
+			</form>
+		</div>
+
+		<!-- Resultados da consulta -->
+		<fieldset>
+		<legend i18n:translate="cmfuemr_results">Results</legend>
+            
+        <!-- There are results -->
+        <tal:block condition="batch">
+            <table class="listing" id="sortable">
+                <thead>
+                    <th i18n:translate="cmfuemr_id">Id</th>
+                    <th i18n:translate="cmfuemr_name">Name</th>
+                    <th i18n:translate="cmfuemr_professional">Professional</th>
+                    <th i18n:translate="cmfuemr_ssn">SSN</th>
+                    <th i18n:translate="">Dados</th>
+                </thead>
+                <tbody>
+                    <metal:block tal:repeat="item batch">
+                        <tr tal:define="oddrow repeat/item/odd" tal:attributes="class python:test(oddrow, 'odd', 'even')">
+                            <!--td tal:content="python:start + repeat['item'].number()"></td-->
+                            <metal:block tal:define="objeto item/getObject;
+                                name string:${objeto/getFirstName} ${objeto/getLastName} ;
+                                ssn string:${objeto/getSsn};
+                                prof string:${objeto/getProfessional};
+                                url_agenda string:${objeto/getAppointmentsURL}">
+                                <td tal:content="item/id">
+                                    Id
+                                </td>
+                                <td tal:content="name">
+                                    Name
+                                </td>
+                                <td i18n:translate="" tal:content="prof">
+                                    Professional
+                                </td>
+                                <td tal:content="python:test(ssn=='',ssn[:0],'.'.join((ssn[:3],ssn[3:6],ssn[6:9]))+'-'+ssn[9:12])">
+                                    SSN
+                                </td>
+                                <td tal:define="doctor_url objeto/absolute_url">
+                                    <a href="#"
+                                       tal:attributes="href string:$doctor_url" i18n:translate="">
+                                       Pessoal
+                                    </a> - 
+                                   <!--
+                                    <a href="#"
+                                       tal:attributes="href string:$doctor_url/pin_provider_edit_template" i18n:translate="cmfuemr_pins">
+                                        Pins
+                                    </a>  -->
+                                    
+                                    <a href="#"
+                                       tal:attributes="href string:$url_agenda">
+                                       Calendário
+                                    </a>
+                                </td>
+                            </metal:block>
+                        </tr>
+                    </metal:block>
+                </tbody>
+            </table>
+
+            <div class="formHelp" i18n:translate="">
+                Showing of <span i18n:name="conta_inicio" tal:content="python:start + 1">11</span> to
+                <span i18n:name="conta_fim" tal:content="python:start + len(batch)"></span> of
+                <span i18n:name="conta_total" tal:content="python:len(results)">55</span>
+                <span i18n:translate="" tal:content="string:${meta_type}" i18n:name="tipo">type</span>
+            </div>
+
+        </tal:block>
+
+			<!-- There are no results -->
+			<tal:block tal:condition="not:batch">
+				<br /><div i18n:translate="cmfuemr_there_are_no_results">
+					There are no results
+				</div><br />
+			</tal:block>
+
+			<table width="100%">
+				<tr>
+					<td width="50%" align="left">
+						<a tal:condition="previous"
+						   tal:attributes="href string:${request/URL0}?start:int=${previous/first}&searchableText=$searchableText&meta_type=$meta_type"
+						   href="previous_url" i18n:translate="cmfuemr_previous">previous</a>
+					</td>
+
+					<td width="50%" align="right">
+						<a tal:condition="next"
+						   tal:attributes="href string:${request/URL0}?start:int=${next/first}&searchableText=$searchableText&meta_type=$meta_type"
+						   href="next_url" i18n:translate="cmfuemr_next">next</a>
+					</td>
+
+				</tr>
+			</table>
+
+		</fieldset>
+	</div>
+</body>
+</html>

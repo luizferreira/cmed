@@ -1,0 +1,187 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+
+    <div metal:fill-slot="main">
+
+        <h1 i18n:translate="heading_chart_summary">Chart Summary</h1>
+        <metal:macro metal:define-macro="chart_summary" tal:define="template_data context/getChartSummaryData"><br/>
+            <table class="spaced collapse width-100">
+                <tr>
+                    <td class="center width-100 spaced" tal:define="data template_data/laboratory" colspan=2>
+                    <tal:if condition="data">
+                        <h3 class="tabletitle" i18n:translate="Laboratory">Laboratorio</h3>
+                        <table id="lab_table" class="listing center width-100">
+                            <thead>
+                                <th>#</th>
+                                <th  i18n:translate="listingheader_exam">Exam</th>
+                                <th  i18n:translate="listingheader_value">Value</th>
+                                <th  i18n:translate="listingheader_date">Date</th>
+                            </thead>
+                            <tbody>
+                            <tal:while tal:repeat="item data">
+                                <tr class="odd"
+                                    tal:attributes="class python:test(repeat['item'].number()%2 == 0, 'even', 'odd')">
+                                    <td tal:content="repeat/item/number">01</td>
+                                    <td i18n:translate="" tal:content="item/exam">Exam</td>
+                                    <td i18n:translate="" tal:content="item/value">Value</td>
+                                    <td i18n:translate="" tal:content="item/date">Date</td>
+                                </tr>
+                            </tal:while>
+                            </tbody>
+                        </table>
+                    </tal:if>
+                    <tal:else condition="not: data">
+                        <h3 class="tabletitle" i18n:translate="Laboratory">Laboratorio</h3>
+                                    <i i18n:translate="help_no_exams">There are no exams</i>
+                            </tal:else>
+                    </td>
+                </tr>
+                <tr>                
+                    <td class="center width-100 spaced" colspan=2>
+                        <h3 class="tabletitle" i18n:translate="heading_medications">Medications</h3>
+                        <div tal:define="data template_data/medications_list/active">
+                            <h5 class="tablesubtitle" i18n:translate="">Medicamentos em uso</h5>
+                            <tal:if condition="data">
+                            <table id="current_medications_table" class="listing center width-100">
+                                <thead>
+                                    <th>#</th>
+                                    <th i18n:translate="listingheader_medication">Medication</th>
+                                    <th i18n:translate="">Concentração</th>
+                                    <th i18n:translate="">Quantidade</th>
+                                    <th i18n:translate="">Uso</th>
+                                    <!--<th i18n:translate="">Data</th>-->
+                                </thead>
+                                <tbody>
+                                    <tr class="odd"
+                                        tal:repeat="item data"
+                                        tal:attributes="class python:test(repeat['item'].number()%2 == 0, 'even', 'odd')">
+                                        <td tal:content="repeat/item/number">#</td>
+                                            <td tal:content="item/medication" >Echocardiogram</td>
+                                        <td tal:content="item/concentration"></td>
+                                        <td tal:content="item/quantity"></td>
+                                        <td tal:content="item/use"></td>
+                                        <!--<td tal:content="item/start"></td>-->
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </tal:if>
+                            <tal:else condition="not:data">
+                                <i i18n:translate="help_no_current_medications">There are no current medications</i>
+                            </tal:else>
+                        </div>
+                        <!--<h5 class="tablesubtitle" i18n:translate="heading_past_medications">Past Medications</h5>
+                        <div class="width-100 center" tal:define="data template_data/medications_list/medications">
+                            <tal:if condition="data">
+                                <metal:x use-macro="here/show_medications/macros/show_medications" />
+                            </tal:if>
+                            <tal:else condition="not:data">
+                                <i i18n:translate="help_no_past_medications">There are no past medications</i>
+                            </tal:else>
+                        </div>-->
+                    </td>
+                </tr>
+                <tr>
+                    <td class="center width-50 spaced"
+                        tal:define="view python:True">
+                        <h3 class="tabletitle" i18n:translate="heading_problem_list">Problem List</h3>
+                        <div tal:define="active python:True; data template_data/problems_list/active">
+                            <h5 class="tablesubtitle" i18n:translate="heading_active">Active</h5>
+                            <tal:if condition="data/problems">
+                                <metal:x use-macro="here/problem_list_macros/macros/problem_list_table" />
+                            </tal:if>
+                            <tal:else condition="not:data/problems">
+                                <i i18n:translate="help_no_problems">There are no active problems</i>
+                            </tal:else>
+                        </div>
+                        <div tal:define="active python:False; data template_data/problems_list/inactive">
+                            <h5 class="tablesubtitle" i18n:translate="heading_inactive">Inactive</h5>
+                            <tal:if condition="data/problems">
+                                <metal:x use-macro="here/problem_list_macros/macros/problem_list_table" />
+                            </tal:if>
+                            <tal:else condition="not:data/problems">
+                                <i i18n:translate="help_no_Problems">There are no inactive Problems</i>
+                            </tal:else>
+                        </div>
+                    </td>
+                    <td class="center width-50 spaced" tal:define="data context/getAllergiesData">
+                    <tal:if condition="data">
+                        <h3 class="tabletitle"  i18n:translate="heading_allergies">Allergies</h3>
+                        <table id="allergies_table" class="listing center width-100">
+                            <thead>
+                                <th>#</th>
+                                <th  i18n:translate="listingheader_allergy">Allergy</th>
+                                <th  i18n:translate="description_reaction">Reaction</th>
+                                <th  i18n:translate="listingheader_status">Status</th>
+                            </thead>
+                            <tbody>
+                            <tal:while tal:repeat="item data">
+                                <tr class="odd"
+                                    tal:attributes="class python:test(repeat['item'].number()%2 == 0, 'even', 'odd')">
+                                    <td tal:content="repeat/item/number">01</td>
+                                    <td i18n:translate="" tal:content="item/allergy">Allergy</td>
+                                    <td i18n:translate="" tal:content="item/reaction">Rash</td>
+                                    <td i18n:translate="" tal:content="item/date">12/11/1986</td>
+                                </tr>
+                            </tal:while>
+                            </tbody>
+                        </table>
+                    </tal:if>
+                    <tal:else condition="not: data">
+                        <h3 class="tabletitle" i18n:translate="heading_allergies">Allergies</h3>
+                                    <i i18n:translate="help_no_allergies">No allergies known</i>
+                            </tal:else>
+                    </td>
+                </tr>
+                <tr>     
+                    <td class="center width-100 spaced" colspan="2">
+                        <h3 class="tabletitle" i18n:translate="heading_vital_signs">Vital Signs</h3>
+                        <div>
+                            <metal:x use-macro="here/show_vital_signs/macros/show_vital_signs" />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="center width-100 spaced" tal:define="data template_data/documents_list" colspan="2">
+                        <h3 class="tabletitle" i18n:translate="heading_documents">Documents</h3>
+                        <tal:if condition="data">
+                            <div>
+                            <table id="documents_table" class="listing center width-100">
+                                <thead>
+                                    <th style="width:30px">#</th>
+                                    <th style="width:100px">Data</th>
+                                    <th>Documento</th>
+                                    <th>Médico</th>
+                                    <!-- <th i18n:translate="listingheader_status">Status</th> -->
+                                </thead>
+                                <tbody>
+                                    <tr class="odd"
+                                        tal:repeat="item data"
+                                        tal:attributes="class python:test(repeat['item'].number()%2 == 0, 'even', 'odd')">
+                                        <td tal:content="repeat/item/number">01</td>
+                                        <td tal:content="item/date">01/01/2001</td>
+                                        <td><a tal:attributes="href item/link" tal:content="item/type">Echocardiogram</a></td>
+                                        <td tal:content="item/doctor">Doutor Teste</td>
+                                        <!-- <td i18n:translate="" tal:content="item/status" >draft</td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </div>
+                        </tal:if>
+                        <tal:else condition="not:data">
+                            <i i18n:translate="help_no_documents">There are no documents</i>
+                        </tal:else>
+                        <!--tal:def define="drafts template_data/documents_list/drafts">
+                            <metal:table_drafts use-macro="here/progress_notes_folder_view_macros/macros/table_drafts" />
+                        </tal:def-->
+                    </td>
+                </tr>
+            </table>
+        </metal:macro>
+    </div>
+</html>

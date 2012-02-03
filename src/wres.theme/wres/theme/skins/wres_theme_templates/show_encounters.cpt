@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+
+    <head>
+        <metal:javascript_slot fill-slot="javascript_head_slot">
+            <script type="text/javascript" src="js/general_format.js"
+                tal:attributes="src string:${portal_url}/uemr_widgets/js/general_format.js"></script>
+            <script type="text/javascript" src="js/birthdate_format.js"
+                tal:attributes="src string:${portal_url}/uemr_widgets/js/birthdate_format.js"></script>
+            <link rel="stylesheet" type="text/css" media="screen" href="notes.css"
+                tal:attributes="href string:${portal_url}/notes.css"/>
+
+        </metal:javascript_slot>
+    </head>
+    <body>
+        <div metal:fill-slot="main"
+            tal:define="template_data context/getShowEncountersData">
+            <form action="" name="searchForm" method="POST"
+                tal:attributes="action string:${template/id}">
+                <input type="hidden" name="form.submitted" value="1" />
+                <h1 i18n:translate="heading_show_encounters">Show Encounters</h1>
+                <table id="precription_table_add" class="listing" cellpadding="0">
+                    <thead>
+                        <th></th>
+                        <th i18n:translate="listingheader_encounter">Encounter</th>
+                        <th i18n:translate="listingheader_date">Date</th>
+                        <th i18n:translate="listingheader_related_documents">Related Documents</th>
+                        <th i18n:translate="listingheader_rx">Rx</th>
+                    </thead>
+                    <tbody>
+                        <tr tal:repeat="encounter template_data/encounters"
+                            tal:attributes="class encounter/class">
+                            <td>
+                                <tal:number content="repeat/encounter/number" />
+                            </td>
+                            <td>
+                                <a href=""
+                                    tal:content="encounter/title"
+                                    tal:attributes="href encounter/link" i18n:translate="">
+                                    Title
+                                </a>
+                            </td>
+                            <td tal:content="encounter/date_of_visit">
+                                12/31/2006
+                            </td>
+                            <td>
+                                <ul>
+                                    <li tal:repeat="document encounter/related_documents">
+                                        <a href=""
+                                            tal:attributes="href document/link"
+                                            tal:content="document/title" i18n:translate="">Doc</a>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li tal:repeat="prescription encounter/prescriptions"
+                                        tal:content="prescription" i18n:translate="">
+                                        Presc
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </body>
+</html>

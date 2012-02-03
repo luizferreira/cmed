@@ -1,0 +1,47 @@
+.label{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+    color: black;
+    font-weight: bold;
+    padding:1em;
+}
+
+.main_chart_print{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+    color: black;
+}
+fieldset#fieldset_doc_view {
+    border: 0.1em solid #329fd7 ;
+    border-style: solid solid solid solid;
+    padding: 1em;
+    padding-bottom: 1em;
+    height: 0px auto;
+    width: 900px;
+}
+
+#tabela{
+    width: 100%;
+}
+
+.dado
+{
+  width: 400px;
+  font-size: 12px;
+  text-align: left; 
+  color: black; 
+}
+
+span.botao{
+	
+	display: inline-block;
+	font-family : Verdana, Arial, Helvetica, sans-serif;
+	color:#205c90;
+	width: 0px auto;
+	padding:1px;
+	margin:0px;
+    cursor: pointer;
+}
+.botao:hover {
+    background: -moz-linear-gradient(center top , #C8E0F4 0%, #C8E0F4 100%) repeat scroll 0 0;
+}

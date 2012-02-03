@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+  
+<head>
+    <metal:block fill-slot="style_slot">
+            <link rel="stylesheet" type="text/css" href="cmed.css" />
+    </metal:block>
+
+    <metal:block fill-slot="javascript_head_slot">
+            <script type="text/javascript" src="show_problems.js"></script>
+    </metal:block> 
+</head>
+    
+  <metal:main fill-slot="main" tal:define="template_data context/getShowMedicationsData">
+  
+    <h1>Medicamentos e Prescrições</h1>
+
+    <metal:add_new use-macro="here/medications_macros/macros/add_new" />
+
+    <metal:mt use-macro="here/medications_macros/macros/medications_table" />
+    
+    <metal:mh use-macro="here/medications_macros/macros/medications_history_table" />
+    
+  </metal:main>
+</html>

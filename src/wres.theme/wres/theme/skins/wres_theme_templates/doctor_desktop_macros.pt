@@ -1,0 +1,73 @@
+<!-- Today's visits -->
+<metal:show_visits define-macro="show_visits">
+	<div metal:use-macro="here/secretary_desktop_macros/macros/show_visits">
+		<metal:define_visits fill-slot="doctor_visits">
+			<metal:dv define-slot="doctor_visits" />
+		</metal:define_visits>
+		<metal:no_visits fill-slot='no_visits' >
+			<metal:nv define-slot="no_visits" i18n:translate="cmfuemr_description_no_visits_today" >
+				No visits today
+			</metal:nv>
+		</metal:no_visits>
+		<metal:no_activities fill-slot='visits_header'>
+			<metal:nv define-slot="visits_header" i18n:translate="cmfuemr_description_today_visits">
+				Today's visits
+			</metal:nv>
+		</metal:no_activities>
+		<metal:visits_table_slot fill-slot="visits_table">
+			<metal:visits_table use-macro="here/doctor_desktop_macros/macros/visits_table" />
+		</metal:visits_table_slot>
+	</div>
+</metal:show_visits>
+
+<metal:visits_table define-macro="visits_table">
+	<metal:vt use-macro="here/secretary_desktop_macros/macros/visits_table">
+		<metal:thead fill-slot="thead">
+			<metal:macro use-macro="here/doctor_desktop_macros/macros/thead" />
+		</metal:thead>
+		<metal:trow fill-slot="trow">
+			<metal:macro use-macro="here/doctor_desktop_macros/macros/trow" />
+		</metal:trow>
+	</metal:vt>
+</metal:visits_table>
+
+<metal:thead define-macro="thead" i18n:domain="cmfuemr">
+<th i18n:translate="cmfuemr_visit">Visit</th>
+<th i18n:translate="cmfuemr_duration">Duration</th>
+<th i18n:translate="cmfuemr_last_name">Last Name</th>
+<th i18n:translate="cmfuemr_first_name">First Name</th>
+<th i18n:translate="cmfuemr_location">Location</th>
+<th i18n:translate="cmfuemr_reason">Reason</th>
+<th i18n:translate="cmfuemr_status">Status</th>
+</metal:thead>
+
+<metal:trow define-macro="trow">
+	<td style="text-align: center;">
+		<a href="#"
+		   tal:define="quick_vw python:'window.open(\'/%s/quick_view\',\'\',\'width=400, height=300, resizable=yes, scrollbars=yes\');; prevent(event);;' % visit.absolute_url(1);"
+		   tal:attributes="onclick quick_vw"
+		   tal:content="python:visit.start().AMPMMinutes()">Visit at 01/10/2005 13:38</a>
+	</td>
+	
+	<td style="text-align: center;"	tal:content="python:visit.getDuration()"> </td>
+	
+    <tal:patient define="patient python:visit.getPatient(); 
+	                     patient_url python:patient.absolute_url()">
+    	<td>
+    		<a tal:attributes="href patient_url"
+    		   tal:content="python:patient.getLastName()">patientHermes0</a>
+    	</td>
+        <td>
+    		<a tal:attributes="href patient_url"    		
+	           tal:content="python:patient.getFirstName()">patientHermes0</a>
+    	</td>
+    </tal:patient>
+	<td style="text-align: center;"
+		tal:content="python:visit.getLocation()">Location</td> 
+	<td  tal:content="python:visit.getReason()">Reason</td>
+
+	<td style="text-align: center;"
+		tal:define="pw python:context.portal_workflow;">
+		<tal:estado tal:replace="python:visit.getReviewState()" />
+	</td> 
+</metal:trow>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<metadata>
+	<version>1000</version>
+	<dependencies>
+		<dependency>profile-Solgema.fullcalendar:default</dependency>
+		<dependency>profile-Products.DataGridField:default</dependency>
+		<dependency>profile-collective.quickupload:default</dependency>
+		<dependency>profile-Products.Clouseau:default</dependency>
+		<dependency>profile-wres.brfields:default</dependency>
+		<dependency>profile-wres.archetypes:default</dependency>
+		<dependency>profile-wres.theme:default</dependency>
+	</dependencies>
+</metadata>

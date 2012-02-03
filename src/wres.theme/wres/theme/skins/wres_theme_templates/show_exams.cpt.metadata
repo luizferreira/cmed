@@ -1,0 +1,7 @@
+[actions]
+action.success = traverse_to:string:save_exam
+action.success..save = traverse_to:string:save_exam
+action.failure = traverse_to:string:show_exams
+
+[validators]
+validators = save_exam_validator

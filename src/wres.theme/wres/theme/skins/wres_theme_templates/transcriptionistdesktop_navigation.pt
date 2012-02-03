@@ -1,0 +1,32 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="cmfuemr">
+<body>
+<div metal:define-macro="portlet"
+       i18n:domain="cmfuemr"
+       tal:omit-tag="">
+    <div class="portlet" id="portlet-navigation-tree">
+        <h5 i18n:translate="cmfuemr_heading_shortcut">Shortcut</h5>
+        <div class="portletBody">
+            <div class="portletContent odd"
+                 tal:define="current python:request.get('PATH_INFO').split('/').pop()">
+                <div>
+                    <span>
+                        <a href=""
+                           accesskey="n"
+                           style="padding-left: 0.5em;display:block"
+                           title=""
+                           tal:attributes="href string:${portal_url}/transcriptionist_folder/${user}/transcriptionist_desktop_view">
+                            <img src="" alt="" title="Desktop" longdesc="" height="16" width="16" tal:attributes="src string:${here/portal_url}/book_icon.gif"
+							i18n:attributes="alt title">
+                            &nbsp;
+                            <span class="" i18n:translate="cmfuemr_description_desktop">Desktop</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

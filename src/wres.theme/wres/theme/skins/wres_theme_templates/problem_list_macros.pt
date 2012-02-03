@@ -1,0 +1,116 @@
+<metal:problem_list_table define-macro="problem_list_table"
+    tal:define="there_are_problems data/problems | nothing"
+        i18n:domain="cmfuemr">  
+        <table id="data_table" class="listing width-100"
+            tal:attributes="id string:${data/title}_table">
+            <!--caption class="left_align" tal:content="data/title">current</caption-->
+            <thead>
+                <th>#</th>
+                <th>Diagnóstico</th>
+                <th i18n:translate="cmfuemr_text_code">Code</th>
+                <th i18n:translate="">Reportado</th>
+                <th i18n:translate="" tal:condition="python: not active">Resolvido</th>
+                <th i18n:translate="cmfuemr_text_actions" tal:condition="python: not view and active">Actions</th>
+            </thead>
+            <tbody>
+                <tr class="odd"
+                    tal:repeat="problem data/problems"
+                    tal:attributes="class python:test(repeat['problem'].number()%2 == 0, 'even', 'odd')">
+                    <tal>
+                        <td tal:content="python:str(repeat['problem'].number()).zfill(2)">01</td>
+                        <td i18n:translate="" tal:content="problem/data/problem" >Cefaleia</td>
+                        <td tal:content="problem/data/code|nothing">A128.0</td>
+                        <td i18n:translate="" tal:content="problem/data/started|nothing">nothing</td>
+                        <td i18n:translate="" tal:condition="python: not active" tal:content="problem/data/end_date|nothing">nothing</td>
+                        <td tal:condition="python: active and not view" class="width-16">
+                        <form tal:attributes="action template/id">
+                            <input type="hidden" name="form.submitted" value="1" />
+                            <input type="hidden" name="id" tal:attributes="value problem/data/id|problem/id|nothing" />
+                            <input type="submit" class="context" value="Edit" name="form.button.edit" i18n:attributes="value"/>
+                            <input type="submit" class="context" value="Resolver" name="form.button.resolve" i18n:attributes="value"/>
+                        </form>
+                        </td>
+                        <!--<td tal:condition="python: not active and not view" 
+                            tal:define="renewed python:problem['data'].get('state') == 'renewed'">
+                            <tal:renewed condition="renewed">
+                                Reativado
+                            </tal:renewed>
+                            <tal:not_renewed condition="not:renewed">
+                                <form tal:attributes="action template/id">
+                                    <input type="hidden" name="form.submitted" value="1" />
+                                    <input type="hidden" name="id" tal:attributes="value problem/data/id|problem/id|nothing" />
+                                    <input type="submit" class="context" value="Ativar" name="form.button.renew" i18n:attributes="value"/>
+                                </form>
+                            </tal:not_renewed>
+                        </td>-->
+                    </tal>
+                </tr>
+            </tbody>
+        </table>
+    <div tal:condition="not:there_are_problems">
+        <!--p>There is no <tal:title content="data/title">active</tal:title> problem</p-->
+    </div>
+</metal:problem_list_table>
+
+<metal:add_new define-macro="add_new"
+    tal:define="state options/state | request/state;
+                portal_status_msg state/kwargs/portal_status_message | request/portal_status_message | nothing;
+                errors state/getErrors;
+                error_message errors/error_message | nothing"     
+    i18n:domain="cmfuemr">
+
+    <!-- portal status message -->
+    <dl class="portalMessage info"
+        tal:condition="portal_status_msg"> 
+        <dt> Info </dt>
+        <dd tal:content="portal_status_msg"> Prescrição adicionada com sucesso. </dd>
+    </dl>
+    <dl class="portalMessage error"
+        tal:condition="error_message"> 
+        <dt> Erro </dt>
+        <dd tal:content="error_message"> Ocorreu algum erro. </dd>
+    </dl>   
+
+    <fieldset class="cmed">
+        <legend> Adicionar Diagnóstico </legend>        
+        <form tal:attributes="action template/id">
+            <input type="hidden" name="form.submitted" value="1" />
+            <table class="listing width-100">
+                <th>Diagnóstico</th>
+                <th>Código</th>
+                <th>Data</th>
+                <th>Estado</th>
+                <tr>
+                    <td>
+                        <input type="text" name="problem"
+                            tal:attributes="value request/problem | nothing" />
+                    </td>
+                    <td>
+                        <input type="text" name="code"
+                            tal:attributes="value request/code | nothing" />
+                    </td>
+                    <td>
+                        <input type="text" id="started" name="shown_started" size="7"
+                            maxlength="10" onFocus="javascript:vDateType='3'" 
+                            onKeyUp="DateFormat(this,this.value,event,false,'3')" 
+                            tal:attributes="value request/shown_started | python:context.getTodayDate().strftime('%d/%m/%Y')"
+                            onblur="date_higher_1900()"/>
+                        <input type="hidden" id="hidden_started" name="started"/>
+                        <span style="color: red" id="erro_date">Data muito antiga (<1900)</span>
+                    </td>
+                    <td>
+                        <select name="state">
+                        <option value="active">Ativo</option>
+                        <option value="inactive">Resolvido</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <metal:buttons define-slot="buttons">
+                <input id="add_new" type="submit" name="form.button.save" value="Adicionar Novo Diagnóstico" class="context"/>
+                <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
+            </metal:buttons>
+        </form>
+    </fieldset>
+    
+</metal:add_new>

@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cmfuemr">
+
+    <metal:block fill-slot="javascript_head_slot">
+        <tal:block define="macro here/archetypes_custom_js/macros/javascript_head | nothing"
+                   condition="macro">
+            <metal:block use-macro="macro" />
+        </tal:block>
+        <script type="text/javascript" charset="iso-8859-1"
+                tal:attributes="src string:${portal_url}/exhibit_prescriptions_js.js">
+        </script>
+    </metal:block>
+
+    <div metal:fill-slot="main"
+         tal:define="data context/getListData">
+        <h1 i18n:translate="heading_plan_list">Plan List</h1>
+
+        <div>
+            <tal:if_data condition="data">
+                <div>
+                    <table class="listing" width="100%">
+                        <thead>
+                            <th width="2%">#</th>
+                            <th width="44%" i18n:translate="listingheader_note">Note</th>
+                            <th width="44%" i18n:translate="listingheader_recommendation">Recommendation</th>
+                        </thead>
+                        <tbody>
+                            <tr tal:repeat="line data"
+                                tal:attributes="class python:test(repeat['line'].odd(), 'even', 'odd')">
+                                <td style="text-align: center;">
+                                    <tal:text content="repeat/line/number"/>
+                                </td>
+                                <td >
+                                    <tal:text content="line/note"/>
+                                </td>
+                                <td>
+                                    <tal:text content="line/recommendation"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            
+            </tal:if_data>
+
+            <tal:if_not_data condition="not:data">
+                <span i18n:translate="help_plan_list_empty">Plan List is empty</span>
+            </tal:if_not_data>
+            
+            <!--tal:for repeat="obj python:context.getAllPatientProgressNotes()">
+                <tal:view content="python:obj.doctype.getNon_prescription()"/>
+            </tal:for-->
+        </div>
+
+    </div>
+</html>

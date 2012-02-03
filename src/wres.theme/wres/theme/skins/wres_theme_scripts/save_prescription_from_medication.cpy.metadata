@@ -1,0 +1,3 @@
+[actions]#TODO Excluir este script
+action.success = redirect_to:string:show_medications
+action.failure = traverse_to:string:add_new_prescription

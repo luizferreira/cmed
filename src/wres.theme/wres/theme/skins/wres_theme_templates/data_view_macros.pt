@@ -1,0 +1,48 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="cmfuemr">
+<body>
+
+<!-- Patient portlet -->
+<div style="border:0.1em outset #329fd7; padding:10px; 
+    background:#EEEEEE; color:#205C90; font-weight:bold;" 
+    metal:define-macro="patient_view_portlet"  
+	tal:define="
+		title context/getFullName;
+        id context/getId;
+	    script context/patient_view_script;
+        patient context/getPatient;
+        bdate patient/getBirthDate | nothing;
+        photo patient/photo | nothing">
+
+    <center>
+        <!--
+        FOTO
+        -->
+        <tal tal:condition="photo">
+            <img width="40%" height="40%" tal:attributes="src python:photo.absolute_url();
+            alt photo/alt;
+            title photo/alt"/>
+        </tal>
+        <tal tal:condition="not:photo">
+            <img width="40%" height="40%" tal:attributes="src python:context.getDefaultPhoto()"/>
+        </tal>                    
+        <!--
+        NOME              
+        -->
+        <div align="center" style="padding:5px 0px 0px 0px">
+            <!--span style="font-size:12px; font-weight: bold;" >Nome Completo:</span-->
+            <span style="font-size:12px;" tal:content="patient/getFullName"> </span>
+            <!--
+            IDADE
+            -->
+            <br/>
+            <!--span style="font-size:12px; font-weight: bold;" >Idade:</span-->
+            <span style="font-size:12px;" tal:content="python:context.getPatientAge(bdate)"></span>
+            <span style="font-size:12px;" tal:condition="bdate"> anos</span>              
+        </div>
+</div>
+
+
+</body>
+</html>

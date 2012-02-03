@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cmfuemr">
+
+<head>
+    <title>Sinais Vitais e Medidas</title>
+
+    <metal:block fill-slot="style_slot">
+        <link rel="stylesheet" type="text/css" href="cmed.css" />
+    </metal:block>
+
+</head>
+
+<body>
+<div metal:fill-slot="main">
+
+    <fieldset class="cmed">
+        <legend i18n:translate="heading_vital_signs">Vital Signs</legend>
+        <metal:macro define-macro="show_vital_signs"
+                     tal:define="data context/getVitalSignsData">
+            <div tal:condition="not:data/vitals">
+                <span style="font-style:italic" 
+                   i18n:translate="cmfuemr_help_no_vital_signs">There are no vital signs.
+                </span>
+            </div>
+            <table id="vital_signs_table" class="listing width-100"
+                tal:condition="data/vitals">
+                <thead>
+                    <th>#</th>
+                    <th i18n:translate="listingheader_date">Date</th>
+                    <th i18n:translate="listingheader_blood_pressure">Blood Pressure</th>
+                    <th>Freq. Respiratória</th>
+                    <th i18n:translate="listingheader_temperature">Temperature</th>
+                    <th i18n:translate="listingheader_weight">Weight</th>
+                    <th i18n:translate="listingheader_height">Height</th>
+                    <th i18n:translate="listingheader_BMI">BMI</th>
+                    <!--<th i18n:translate="listingheader_waist">Waist</th>-->
+                </thead>
+                <tbody>
+                    <tr tal:repeat="vital data/vitals"
+                        tal:attributes="class vital/class">
+                        <td tal:content="vital/number">01</td>
+                        <td tal:content="vital/date">03/12/1980</td>
+                        <td tal:content="vital/blood_pressure" >Left arm: 1 - Right arm: 9</td>
+                        <td tal:content="vital/respiratory_rate">2</td>
+                        <td tal:content="vital/temperature" >3 F</td>
+                        <td tal:content="vital/weight" >4 Kg</td>
+                        <td tal:content="vital/height" >5 In</td>
+                        <td tal:content="vital/bmi">6</td>
+                        <!--<td tal:content="vital/waist" >8 cm</td>-->
+                    </tr>
+                </tbody>
+            </table>
+        </metal:macro>
+    </fieldset>
+</div>
+</body>
+</html>

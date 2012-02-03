@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone">
+  <head><title></title></head>
+  <body>
+
+    <!-- String Widgets used with Autocomplete -->
+    <metal:view_macro define-macro="view"
+            tal:define="kssClassesView context/@@kss_field_decorator_view;
+                        getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;">
+        <span metal:define-macro="string-field-view"
+            tal:define="kss_class python:getKssClasses(fieldName,
+                              templateId='widgets/string', macro='string-field-view');"
+            tal:attributes="class kss_class;
+                            id string:parent-fieldname-$fieldName">
+            <span metal:define-slot="inside"
+                  tal:replace="accessor">string</span>
+        </span>
+    </metal:view_macro>
+
+    <metal:define define-macro="edit" 
+                  tal:define="field_name fieldName;
+                              vt python:modules['Products.CMFCore.utils'].getToolByName(here, 'vocabulary_tool');
+                              vocab custom_vocab | python:vt.get_vocabulary(field.getName());
+                              vocab python:vt.clear_vocabulary(vocab);">
+                              
+      <metal:use use-macro="field_macro | context/widgets/field/macros/edit">
+                            
+        <metal:fill fill-slot="widget_body" tal:define="field_name fieldName;">
+            
+            <div id="" tal:attributes="id python:fieldName" class="autocomplete">
+                <input type="text"
+                    name=""
+                    class="blurrable firstToFocus"
+                    id=""
+                    value=""
+                    size="30"
+                    autocomplete="off"
+                    tal:condition="python:widget.getName() == 'StringWidget'"
+                    tal:attributes="name fieldName;
+                                    id fieldName;
+                                    value value;
+                                    size widget/size;
+                                    maxlength widget/maxlength;
+                                    onkeyup string:actb(this, event, ${vocab})"
+                    />
+                    
+                <textarea id=""
+                        name=""
+                        class="blurrable firstToFocus"
+                        rows=2
+                        value=""
+                        autocomplete="off"
+                        tal:content="value|nothing"
+                        tal:condition="python:widget.getName() == 'TextAreaWidget'"
+                        tal:attributes="name fieldName;
+                                        id fieldName;
+                                        rows widget/rows;
+                                        maxlength widget/maxlength;
+                                        onkeyup string:actb(this, event, ${vocab})">
+                </textarea>
+            </div>
+        </metal:fill>
+      </metal:use>
+    </metal:define>
+
+    <div metal:define-macro="search">
+      <div metal:use-macro="context/widgets/string/macros/edit">
+      </div>
+    </div>
+
+  </body>
+
+</html>

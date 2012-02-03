@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+
+<head>
+
+<title i18n:translate="cmfuemr_documents_view">Documents View</title>
+
+</head>
+
+<body>
+<div metal:fill-slot="main"
+     tal:define="documents context/documents_folder_view_script">
+	   
+	   <div metal:use-macro="here/documents_folder_view_macros/macros/body_macro">&nbsp;</div>
+       
+</div>
+</body>
+</html>
