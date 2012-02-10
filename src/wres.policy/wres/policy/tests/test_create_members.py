@@ -210,7 +210,6 @@ class TestSetup(unittest.TestCase):
 
     def test_edit_clinic(self):
         print "\n::::Teste editar clinica iniciou!" 
-        print "\n::::Teste editar clinica passou!" 
         # loga como admin
         self.login_as_admin()
         portal = self.portal

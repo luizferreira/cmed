@@ -1,4 +1,9 @@
-
+function show_note(){
+    $("table#note_table").fadeIn();
+    }
+function hide_note(){
+    $("table#note_table").fadeOut();
+    }
 function fill_hidden_end_date() {
 
 	shown_end = $("input#shown_reported");
@@ -45,16 +50,14 @@ function date_higher_1900() {
 	year = str_split[2];
     if(year < 1900){
         $("input#started").val("");
-        $("#erro_date").show();
+        document.getElementById('erro_date').style.display = "inline"
         }
-    else $("#erro_date").hide();
+    else document.getElementById('erro_date').style.display = "none"
     
 }
 
 
 $(document).ready(function(){
-    $("#erro_date").hide();
-
 	$("input#add_new").click(fill_hidden_start_date)
 
 	$("input#add_new").click(fill_hidden_end_date)

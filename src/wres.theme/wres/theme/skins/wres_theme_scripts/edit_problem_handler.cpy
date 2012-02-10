@@ -4,14 +4,13 @@ request = context.REQUEST
 id = request['id']
 whole_problem = context.getProblem(id)
 problem = whole_problem['data']
-vars = ['problem', 'code', 'started', 'id', 'submitted_on', 'submitted_by']
+vars = ['problem', 'code', 'started', 'id', 'submitted_by','state','note']
 problem = {}
 for var in vars:
     problem[var] = request[var]
 problem['end_date'] = DateTime()
-problem['state'] = request['state'][0] #TODO: Por algum motivo o form retorna uma lista com 2 states (debugar isso posteriormente)
-
-date_vars = ['started', 'submitted_on']
+date_vars = ['started']
+#TODO:Comments Matheus date_vars = ['started', 'submitted_on']
 for var in date_vars:
     problem[var] = DateTime(problem[var])
 whole_problem['data'] = problem

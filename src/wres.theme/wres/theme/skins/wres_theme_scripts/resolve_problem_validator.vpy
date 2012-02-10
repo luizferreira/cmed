@@ -1,7 +1,7 @@
 from DateTime import DateTime
 ##from Products.zdb import set_trace; set_trace()
 request = context.REQUEST
-vars = ['note', 'end_date']
+vars = ['end_date']
 empties = [var for var in vars if not request.get(var, '')]
 if len(empties) > 0:
 ##    from Products.zdb import set_trace; set_trace()
@@ -13,11 +13,14 @@ def isValidDate(str_date):
         date = DateTime(str_date)
         return True
     except:
+        #TODO:Bug Local errado que aparece a mensagem de erro -> Matheus
+        message = 'Data inválida.'
+        state.setError('error_message', message, new_status='failure')
         return False
 wrong_dates = [' '.join(var.split('_')) for var in date_vars \
                if not isValidDate(request.get(var))]
 ##from Products.zdb import set_trace; set_trace()
 if len(wrong_dates) > 0:
-    message = 'Data inválida: %s' % ', '.join(wrong_dates)
+    message = 'Data inválida.'
     state.setError('error_message', message, new_status='failure')
 return state

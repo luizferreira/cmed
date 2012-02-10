@@ -206,6 +206,7 @@ wres/policy/profiles/default/temp_rolemap.xml
 wres/policy/profiles/default/toolset.xml
 wres/policy/profiles/default/wres.policy_various.txt
 wres/policy/tests/__init__.py
+wres/policy/tests/test_create_chartdata.py
 wres/policy/tests/test_create_members.py
 wres/policy/tests/test_test.py
 wres/policy/tests/testes_selenium/admin_clinica

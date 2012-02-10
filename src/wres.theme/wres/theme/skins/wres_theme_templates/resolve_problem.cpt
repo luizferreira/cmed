@@ -19,9 +19,11 @@
 				tal:define="state options/state | request/state;
 							errors state/getErrors;
 							error_message errors/error_message | nothing">
-				<div class="portalMessage"
-					tal:condition="error_message"
-					tal:content="error_message" />
+            <dl class="portalMessage error"
+                tal:condition="error_message"> 
+                <dt> Erro </dt>
+                <dd tal:content="error_message"> Ocorreu algum erro. </dd>
+            </dl>   
 				<form tal:attributes="action template/id">
 					<input type="hidden" name="form.submitted" value="1" />
 					<table>
@@ -37,11 +39,9 @@
 						<tr>
 							<td>Fim (dd/mm/aaaa): </td>
 							<td>
-								<input type="text" id="end_date" name="shown_end_date"
+								<input type="text" id="end_date" name="end_date"
 									tal:attributes="value template_data/shown_end_date | nothing"
 													/>
-								<input type="hidden" id="hidden_end_date" name="end_date"
-									tal:attributes="value template_data/end_date | nothing" />
 							</td>
 						</tr>
 						<tr>

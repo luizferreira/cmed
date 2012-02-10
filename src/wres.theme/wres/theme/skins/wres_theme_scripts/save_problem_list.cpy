@@ -1,7 +1,7 @@
 from DateTime import DateTime
 
 request = context.REQUEST
-vars = ['problem', 'code', 'started', 'state']
+vars = ['problem', 'code', 'started', 'state','note']
 problem = {}
 for var in vars:
     problem[var] = request[var]

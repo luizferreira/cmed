@@ -12,8 +12,11 @@ def isValidDate(str_date):
         date = DateTime(str_date)
         return True
     except:
+        message = 'Data inválida.'
+        state.setError('error_message', message, new_status='failure')
         return False
-wrong_dates = [var for var in date_vars if not isValidDate(request.get(var))]
+wrong_dates = [' '.join(var.split('_')) for var in date_vars \
+               if not isValidDate(request.get(var))]
 ##from Products.zdb import set_trace; set_trace()
 if len(wrong_dates) > 0:
     message = 'Data inválida.'

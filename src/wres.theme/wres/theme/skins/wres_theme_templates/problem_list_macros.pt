@@ -5,11 +5,12 @@
             tal:attributes="id string:${data/title}_table">
             <!--caption class="left_align" tal:content="data/title">current</caption-->
             <thead>
-                <th>#</th>
-                <th>Diagnóstico</th>
-                <th i18n:translate="cmfuemr_text_code">Code</th>
-                <th i18n:translate="">Reportado</th>
-                <th i18n:translate="" tal:condition="python: not active">Resolvido</th>
+                <th width="15px">#</th>
+                <th width="300px">Diagnóstico</th>
+                <th width="100px" i18n:translate="cmfuemr_text_code">Code</th>
+                <th width="100px" i18n:translate="">Reportado</th>
+                <th width="100px" i18n:translate="" tal:condition="python: not active">Resolvido</th>
+                <th width="400px" i18n:translate="" tal:condition="python: not active">Nota:</th>
                 <th i18n:translate="cmfuemr_text_actions" tal:condition="python: not view and active">Actions</th>
             </thead>
             <tbody>
@@ -30,6 +31,7 @@
                             <input type="submit" class="context" value="Resolver" name="form.button.resolve" i18n:attributes="value"/>
                         </form>
                         </td>
+                        <td tal:condition="python: not active" tal:content="problem/data/note|nothing"></td>
                         <!--<td tal:condition="python: not active and not view" 
                             tal:define="renewed python:problem['data'].get('state') == 'renewed'">
                             <tal:renewed condition="renewed">
@@ -96,20 +98,29 @@
                             tal:attributes="value request/shown_started | python:context.getTodayDate().strftime('%d/%m/%Y')"
                             onblur="date_higher_1900()"/>
                         <input type="hidden" id="hidden_started" name="started"/>
-                        <span style="color: red" id="erro_date">Data muito antiga (<1900)</span>
+                        <span style="color: red;display: none" id="erro_date">Data muito antiga (<1900)</span>
                     </td>
                     <td>
                         <select name="state">
-                        <option value="active">Ativo</option>
-                        <option value="inactive">Resolvido</option>
+                        <option onclick="hide_note()" value="active">Ativo</option>
+                        <option onclick="show_note()" value="inactive">Resolvido</option>
                         </select>
                     </td>
                 </tr>
+            
             </table>
-            <metal:buttons define-slot="buttons">
-                <input id="add_new" type="submit" name="form.button.save" value="Adicionar Novo Diagnóstico" class="context"/>
-                <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
-            </metal:buttons>
+            <table id="note_table" style="float:right;display:none">
+                <tr>
+                    <td><label>Nota:&nbsp;&nbsp;</label></td>
+                    <td><textarea style="width:200px" name="note" ></textarea></td>
+                </tr>
+            </table>
+            <div>
+                <metal:buttons define-slot="buttons">
+                    <input id="add_new" type="submit" name="form.button.save" value="Adicionar Novo Diagnóstico" class="context"/>
+                    <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
+                </metal:buttons>
+            </div>
         </form>
     </fieldset>
     
