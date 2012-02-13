@@ -1,11 +1,12 @@
 
-#main_chart_print{
+.main_chart_print{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     margin-left: 2em;
     margin-right: 2em;
     padding: 0.5em;
 }
+
 #infos_title{
     font-weight: bold;
     font-size: 20px;
@@ -178,5 +179,99 @@ fieldset#fieldset_doc_view {
     border: 0.1em solid #329fd7 ;
     border-style: solid solid solid solid;
 }
+
+.size-title {
+    font-size: 20px;
+}
+
+.size-secondary {
+    font-size: 14px;
+}
+
+.size-small {
+    font-size: 12px;
+}
+
+.width-max {
+    width: 100%;
+}
+
+.width-90 {
+    width: 90%;   
+}
+
+.width-70 {
+    width: 70%;   
+}
+
+.width-50 {
+    width: 50%;   
+}
+
+.width-40 {
+    width: 40%;   
+}
+
+.width-30 {
+    width: 30%;   
+}
+
+.width-15 {
+    width: 15%;   
+}
+
+.width-10 {
+    width: 10%;   
+}
+
+.width-5 {
+    width: 5%;   
+}
+
+.center {
+    text-align: center;
+}
+
+.margin {
+    margin:0 auto;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.td_cell {
+    font-weight: bold;
+    text-align: left;
+}
+
+.theader {
+    border: 1px; 
+    border-color: black; 
+    border-style: solid; 
+    height: 100%; width:100%; 
+    background-color: grey;
+    border-collapse:collapse;
+}
+
+.th_bold {
+    border:1px solid black; 
+    text-align: center; 
+    background: #DDDDDD; 
+    font-weight:bold;
+    border-collapse:collapse;
+}
+
+.td_black {
+    border:1px solid black; 
+    text-align: center;
+}
+
+.td_empty {    
+    border:1px solid black;
+}
+
+
+
 
 

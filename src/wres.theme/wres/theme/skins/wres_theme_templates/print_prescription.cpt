@@ -14,6 +14,8 @@
     <metal:aux fill-slot="style_slot">
         <link rel="Stylesheet" type="text/css"
             tal:attributes="href string:${portal_url}/doc_view.css" />
+        <link rel="Stylesheet" type="text/css"
+            tal:attributes="href string:${portal_url}/print.css" media="print"/>
     </metal:aux>
     
     <metal:block fill-slot="javascript_head_slot">
@@ -25,15 +27,15 @@
                      doctor_id prescriptions/data/doctor;
                      doctor_name python:context.getDoctorNameById(doctor_id)">
         <tal:doctors define="doc_obj python:context.getDoctorById(doctor_id)">
-        <span  style="font-size:20px">
+        <span class="size-title">
             <span i18n:translate="heading_doctor">Doctor:</span> <tal:doc content="doctor_name"/></span>
             <span id="print_button" style="float:right">
-                <a title="" href="javascript:this.print();">Imprimir</a>
+                <a title="" href="javascript:print();">Imprimir</a>
             </span>
             <hr>
             <fieldset id="fieldset_doc_view">
-            <legend > Prescrição </legend>
-            <table style="width: 100%; font-size: 14px;">
+            <table class="size-secondary width-max">
+                <br/>
                 <tr>
 
                     <!--
@@ -42,60 +44,60 @@
                     ====================================
                     -->
                             <div tal:define="clinicData python:context.getClinic();">
-                            <div style="font-size: 18px; font-weight: bold; margin: 5px 0px 5px 0px; text-align: center;"
+                            <div class="clinic_title"
                                 tal:content="clinicData/getName | nothing" >CARDIOLOGY ASSOCIATES OF FLORIDA</div>
-                            <div style="text-align: center;font-size: 12px;"
+                            <div class="clinic_subtitle"
                                 tal:content="clinicData/getEndereco | nothing">7715 SW 71th STREET, SUITE 101- NEW YORK, FL 66286</div>
                             <!-- <div class="clinic_phone"
                                 tal:content="string:TELEPHONE ${clinic_data/phone|nothing} FAX ${clinic_data/fax|nothing}" i18n:translate="cmfuemr_tel_of_clinic">TELEPHONE (305) 661-3316 FAX (305) 662-5736</div> -->
-                            <div style="text-align: center;font-size: 11px;" tal:condition="clinicData/getPhone">
+                            <div class="clinic_phone" tal:condition="clinicData/getPhone">
                                 Telefone: <metal:macro use-macro="python:clinicData.widget('phone',mode='view')"> </metal:macro> - Fax: <metal:macro1 use-macro="python:clinicData.widget('fax',mode='view')"></metal:macro1>
                             </div>
                         </div>
 
                 </tr>
                 <tr>
-                    <td style="text-align: center">
-                        <div style="width:90%; margin:0 auto">
+                    <td class="center">
+                        <div class="width-90 margin">
                             <br />
                             <center>
-                            <table width="70%" tal:define="information context/getPatientData">
+                            <table class="width-70" tal:define="information context/getPatientData">
                                 <tr>
                                     <td>
                                         <table tal:define="info information/info">
                                             <tr>
-                                                <td width="10%" style="font-weight:bold"  align="left">
+                                                <td class="width-10 td_cell">
                                                     Médico:
                                                 </td>
-                                                <td width="50%"  align="left">
+                                                <td class="width-50">
                                                     <span tal:content="doctor_name | nothing">Doctor</span>
                                                 </td>
-                                                <td width="5%" style="font-weight:bold"  align="left">
+                                                <td class="width-5 td_cell">
                                                     CRM:
                                                     
                                                 </td>
-                                                <td width="10%">
+                                                <td class="width-10 td_cell">
                                                     <span tal:content="doc_obj/getSsn | nothing">Ssn</span>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <span style="font-weight:bold">
+                                                    <span class="bold">
                                                         Paciente:
                                                     </span>
                                                 </td>
-                                                <td style=" ">
+                                                <td>
                                                     <span>
                                                         <tal:value content="info/name"/>
                                                     </span>
                                                 </td>
                                                 <td >
-                                                    <span style="font-weight:bold">
+                                                    <span class="bold">
                                                         <!--Data:-->
                                                     </span>
                                                 </td>
                                                 <td  tal:define="today python:context.getTodayDate(request.get('date_str', ''))">
-                                                    <span style="margin-left:1%">
+                                                    <span>
                                                         <!--<tal:value content="info/date"/>-->
                                                     </span>
                                                 </td>
@@ -110,46 +112,46 @@
                 </tr>
                 <tr>
                     <td align="center">
-                        <div style="width:90%; font-size: 12px;">
-                            <table id="prescriptions" style="width:100%;">
-                                <thead width="100%" style="border: 1px; border-color: black; border-style: solid; height: 100%; width:100%; background-color: grey;">
-                                    <th style="width:30%; border:1px solid black; text-align: center; background: #DDDDDD; font-weight:bold;">
+                        <div class="width-90 size-small">
+                            <table id="prescriptions" class="width-max">
+                                <thead class="width-max theader">
+                                    <th class="width-30 th_bold">
                                         Medicamento
                                     </th>
-                                    <th style="width:15%; border:1px solid black; text-align: center; background: #DDDDDD; font-weight:bold">
+                                    <th class="width-15 th_bold">
                                         Concentração
                                     </th>
-                                    <th style="width:15%; border:1px solid black; text-align: center; background: #DDDDDD; font-weight:bold">
+                                    <th class="width-15 th_bold">
                                         Quantidade
                                     </th>
-                                    <th style="width:40%; border:1px solid black; text-align: center; background: #DDDDDD; font-weight:bold">
+                                    <th class="width-40 th_bold">
                                         Uso
                                     </th>
                                 </thead>
                                 <tbody tal:define="medications prescriptions/data/medications">
-                                    <tr style="width:100%;" tal:repeat="medication medications" 
+                                    <tr class="width-max" tal:repeat="medication medications" 
                                         tal:attributes="style python:test(repeat['medication'].number()%2 == 0, 'background-color: #EEEEEE', 'background-color:')">
-                                        <td style="width:30%; border:1px solid black; text-align: center;" >
+                                        <td class="width-30 td_black">
                                             <tal:content content="medication/data/medication | nothing"/>
                                         </td>
-                                        <td style="width:15%; border:1px solid black; text-align: center;">
+                                        <td class="width-15 td_black">
                                                 <tal:content content="medication/data/concentration | nothing"/>
                                         </td>
-                                        <td style="width:15%; border:1px solid black; text-align: center;">
+                                        <td class="width-15 td_black">
                                             <tal:content content="medication/data/quantity | nothing"/>
                                         </td>
-                                        <td style="width:40%; border:1px solid black; text-align: center;">
+                                        <td class="width-40 td_black">
                                             <tal:content content="medication/data/use | nothing"/>
                                         </td>
                                     </tr>
                                     <tal:empty-lines tal:condition="python:len(medications) < 5">
                                         <tr tal:repeat="i python:range(len(medications) + 1, 6)" tal:attributes="style python:test(i%2 == 0, 'background-color: #EEEEEE', 'background-color:')">
-                                            <td style="width:30%; border:1px solid black;">
+                                            <td class="width-30 td_empty">
                                                 &nbsp;
                                             </td>
-                                            <td style="width:15%; border:1px solid black;"/>
-                                            <td style="width:20%; border:1px solid black;"/>
-                                            <td style="width:35%; border:1px solid black;"/>
+                                            <td class="width-15 td_empty"/>
+                                            <td class="width-15 td_empty"/>
+                                            <td class="width-40 td_empty"/>
                                             </tr>
                                     </tal:empty-lines>
                                 </tbody>
@@ -160,7 +162,7 @@
                 <tr>
                     <td>
                         <br />
-                        <table style="width: 100%;">
+                        <table class="width-max">
                             <tr>
 
                                 <td colspan="2">
@@ -171,12 +173,12 @@
                                 </td>
                             </tr>
                             <tr>
-	                            <td colspan="2">
-	                                <center>
-											<label style="display:none" tal:content="prescriptions/data/date" id="pres_data">Data</label>
-	                                        <div id="data"></div>
-	                                </center>
-	                            </td>
+                                <td colspan="2">
+                                    <center>
+                                            <label style="display:none" tal:content="prescriptions/data/date" id="pres_data">Data</label>
+                                            <div id="data"></div>
+                                    </center>
+                                </td>
                             </tr>
                             <br/><br/>
                         </table>

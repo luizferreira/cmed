@@ -10,7 +10,7 @@
 
 <head>
 <metal:aux fill-slot="style_slot">
-    <link rel="Stylesheet" type="text/css"
+    <link rel="stylesheet" type="text/css"
         tal:attributes="href string:${portal_url}/doc_view.css" />
 </metal:aux>
 
@@ -25,7 +25,7 @@
 -->
 
 <body>
-<div metal:fill-slot="main" id="main_chart_print"
+<div metal:fill-slot="main"
     tal:define="patientData python:context.getPatient();                
                 clinicData python:context.getClinic();
                 phone_field python:clinicData.getField('phone')"    
@@ -38,23 +38,25 @@
 ====================================
 -->
      <div>
-               
-                
-				<div class="clinic_title"
-					tal:content="clinicData/getName | nothing" >CARDIOLOGY ASSOCIATES OF FLORIDA</div>
-				<div class="clinic_subtitle"
-					tal:content="clinicData/getEndereco | nothing">7715 SW 71th STREET, SUITE 101- NEW YORK, FL 66286</div>
-				<!-- <div class="clinic_phone"
-					tal:content="string:TELEPHONE ${clinic_data/phone|nothing} FAX ${clinic_data/fax|nothing}" i18n:translate="cmfuemr_tel_of_clinic">TELEPHONE (305) 661-3316 FAX (305) 662-5736</div> -->
-					 <div class="clinic_phone">
-                        Telefone: <metal:macro use-macro="python:clinicData.widget('phone',mode='view')"> </metal:macro> - Fax: <metal:macro1 use-macro="python:clinicData.widget('fax',mode='view')"></metal:macro1>
-                     </div>
-		</div>
+            <span id="print_button" style="float:right">
+                <a title="" href="javascript:print();">Imprimir</a>
+            </span>
+            <div class="clinic_title"
+                    tal:content="clinicData/getName | nothing" >CARDIOLOGY ASSOCIATES OF FLORIDA</div>
+            <div class="clinic_subtitle"
+                    tal:content="clinicData/getEndereco | nothing">7715 SW 71th STREET, SUITE 101- NEW YORK, FL 66286</div>
+            <!-- <div class="clinic_phone"
+                    tal:content="string:TELEPHONE ${clinic_data/phone|nothing} FAX ${clinic_data/fax|nothing}" i18n:translate="cmfuemr_tel_of_clinic">TELEPHONE (305) 661-3316 FAX (305) 662-5736</div> -->
+            <div class="clinic_phone">
+                Telefone: <metal:macro use-macro="python:clinicData.widget('phone',mode='view')"> </metal:macro> - Fax: <metal:macro1 use-macro="python:clinicData.widget('fax',mode='view')"></metal:macro1>
+            </div>
+    </div>
 <!--
 ====================================
     Patient Data Header
 ====================================
 -->
+    <br/>
     <div class="print_body">
         <table class="patient_infos">
             <tr>

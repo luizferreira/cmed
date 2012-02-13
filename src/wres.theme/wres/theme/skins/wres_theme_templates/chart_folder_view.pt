@@ -138,14 +138,14 @@
                             </tal:else>
                     </td>
                 </tr>
-                <tr>     
+                <!--<tr>     
                     <td class="center width-100 spaced" colspan="2">
                         <h3 class="tabletitle" i18n:translate="heading_vital_signs">Vital Signs</h3>
                         <div>
                             <metal:x use-macro="here/show_vital_signs/macros/show_vital_signs" />
                         </div>
                     </td>
-                </tr>
+                </tr>-->
                 <tr>
                     <td class="center width-100 spaced" tal:define="data template_data/documents_list" colspan="2">
                         <h3 class="tabletitle" i18n:translate="heading_documents">Documents</h3>
