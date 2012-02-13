@@ -304,7 +304,7 @@ wres/theme/skins/wres_theme_js/generic_selection_edit.js
 wres/theme/skins/wres_theme_js/patient_cphone_edit.js
 wres/theme/skins/wres_theme_js/patient_view.js
 wres/theme/skins/wres_theme_js/print_prescription.js
-wres/theme/skins/wres_theme_js/sec_desk_js.js
+wres/theme/skins/wres_theme_js/sec_desk.js
 wres/theme/skins/wres_theme_js/show_prescriptions.js
 wres/theme/skins/wres_theme_js/show_problems.js
 wres/theme/skins/wres_theme_js/transcriptionist.js
@@ -457,7 +457,7 @@ wres/theme/skins/wres_theme_styles/patient_livesearch.css
 wres/theme/skins/wres_theme_styles/patient_view.css
 wres/theme/skins/wres_theme_styles/popup_quick_register.css
 wres/theme/skins/wres_theme_styles/prescriptions.css
-wres/theme/skins/wres_theme_styles/sec_desk_css.css
+wres/theme/skins/wres_theme_styles/sec_desk.css
 wres/theme/skins/wres_theme_styles/secretary_view.css
 wres/theme/skins/wres_theme_templates/CONTENT.txt
 wres/theme/skins/wres_theme_templates/SFAjax_base_edit.cpt
