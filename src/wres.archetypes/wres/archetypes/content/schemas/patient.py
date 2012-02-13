@@ -130,8 +130,8 @@ MAIN = Schema((
         ),
     ),
     
+    # conforme decidido, a data de nascimento deixa de ser obrigaoria
 	DateTimeField('birthDate',
-		required=1,
 		widget=CalendarWidget(
 	       label=_('Birth Date'),
            format='%d/%m/%Y',

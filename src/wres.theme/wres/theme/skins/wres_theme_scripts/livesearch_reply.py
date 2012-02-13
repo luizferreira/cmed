@@ -143,16 +143,26 @@ else:
         klass = 'contenttype-%s' % ploneUtils.normalizeString(result.portal_type)
         
         # tratamento especial para o tipo patient
-        if building_search:
+        # o primeiro if se refere ao Procurar do adicionar consulta
+        # o elif se refere a pesquisa da pasta Patients
+        if building_search and result.portal_type == 'Patient':
             patient = result.getObject()
-            dt = patient.getBirthDate()
+            # conforme decidido, data de nascimento deixa de ser obrigatoria.
+            # dessa forma, o search passa a mostrar o telefone de contato no lugar.
+            # dt = patient.getBirthDate()
+            cf = patient.getContactPhone()
+            formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])
             ppath = patient.absolute_url_path()
-            write('''<a title="%s" class="%s" onClick="selectPatient('%s', '%s')">%s (%s)</a>''' % (full_title, klass, display_title, ppath, display_title, dt.strftime("%d/%m/%Y")))
+            write('''<a title="%s" class="%s" onClick="selectPatient('%s', '%s')">%s (%s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone))
         elif result.portal_type == 'Patient':
             patient = result.getObject()
-            dt = patient.getBirthDate()
+            # conforme decidido, data de nascimento deixa de ser obrigatoria.
+            # dessa forma, o search passa a mostrar o telefone de contato no lugar.            
+            # dt = patient.getBirthDate()
+            cf = patient.getContactPhone()
+            formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])
             pchart_url = patient.absolute_url()+'/chartFolder'
-            write('''%s (%s)''' % (display_title, dt.strftime("%d/%m/%Y") ) )
+            write('''%s (%s)''' % (display_title, formatted_phone ) )
             write('''(<a href="%s" title="%s" class="%s">%s </a>''' % (itemUrl, full_title, klass, "Pessoal"))
             write(''' | <a href="%s" title="%s">%s</a>)''' % (pchart_url, "", "Prontuário"))
 
