@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone">
+
+<head>
+
+<title i18n:translate="cmfuemr_patient_search">Patient search</title>
+
+</head>
+
+<body tal:define="lista context/quemSou"> 
+
+    <div>
+        <h3>[[Quem Sou],[Meus Papeis]]:</h3>
+        <div tal:content="python:lista[0]"></div>
+    </div>
+    <div>
+        <h3>Lista de Doutores:</h3>
+        <div tal:repeat="item python:lista[1]">
+            <div tal:content="item">
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3>Lista de Secretarias:</h3>
+        <div tal:repeat="item python:lista[2]">
+            <div tal:content="item">
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3>Lista de Administradores:</h3>
+        <div tal:repeat="item python:lista[3]">
+            <div tal:content="item">
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3>Lista de Pacientes:</h3>
+        <div tal:repeat="item python:lista[4]">
+            <div tal:content="item">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
