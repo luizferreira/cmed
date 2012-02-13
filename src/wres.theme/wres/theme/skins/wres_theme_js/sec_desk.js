@@ -238,4 +238,3 @@ function timeClick(){
 	     }
 	);
 }
-	

@@ -2,12 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
      lang="en" metal:use-macro="context/main_template/macros/master" 
 	 i18n:domain="cmfuemr">
-	 
-<!--        ====== IMPORTANTE ======
-    Todo o CSS deste template deve ser inline
-    a funcionalidade de imprimir para arquivo
-    PDF só funciona deste jeito
--->
 
 <!--TODO Remover comentarios -->
 <head>

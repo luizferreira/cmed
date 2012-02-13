@@ -12,9 +12,9 @@
 		<link rel="stylesheet" type="text/css" href="cmed.css" />
 	</metal:block>
 
-	<metal:block fill-slot="javascript_head_slot">
-		<!--script type="text/javascript" src="sec_desk_js.js"></script-->
-	</metal:block>
+<!--	<metal:block fill-slot="javascript_head_slot">
+		script type="text/javascript" src="sec_desk_js.js"></script>
+	</metal:block>-->
       
 </head>
 

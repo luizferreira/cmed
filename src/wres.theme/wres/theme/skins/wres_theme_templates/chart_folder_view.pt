@@ -28,9 +28,9 @@
                                 <tr class="odd"
                                     tal:attributes="class python:test(repeat['item'].number()%2 == 0, 'even', 'odd')">
                                     <td tal:content="repeat/item/number">01</td>
-                                    <td i18n:translate="" tal:content="item/exam">Exam</td>
-                                    <td i18n:translate="" tal:content="item/value">Value</td>
-                                    <td i18n:translate="" tal:content="item/date">Date</td>
+                                    <td tal:content="item/exam">Exam</td>
+                                    <td tal:content="item/value">Value</td>
+                                    <td tal:content="item/date">Date</td>
                                 </tr>
                             </tal:while>
                             </tbody>

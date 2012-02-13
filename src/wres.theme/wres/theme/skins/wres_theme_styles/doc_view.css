@@ -35,8 +35,7 @@
 .item_title{
     font-size: 12px;
     font-weight: bold;
-    padding-right: 10px;
-    text-align: right;
+    text-align: center;
 }
 .item_content{
     font-size: 13px;
