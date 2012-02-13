@@ -18,9 +18,8 @@
     text-align: center;
 }
 .print_body{
-    margin-right: 0.5em;
+    margin-right: 0.0em;
     border: 0px;
-    padding: 0px;
     width: 100%;
 }
 
@@ -240,6 +239,10 @@ fieldset#fieldset_doc_view {
     font-weight: bold;
 }
 
+.table_collapse {
+    border-collapse: collapse;
+}
+
 .td_cell {
     font-weight: bold;
     text-align: left;
@@ -251,7 +254,6 @@ fieldset#fieldset_doc_view {
     border-style: solid; 
     height: 100%; width:100%; 
     background-color: grey;
-    border-collapse:collapse;
 }
 
 .th_bold {
@@ -259,7 +261,6 @@ fieldset#fieldset_doc_view {
     text-align: center; 
     background: #DDDDDD; 
     font-weight:bold;
-    border-collapse:collapse;
 }
 
 .td_black {

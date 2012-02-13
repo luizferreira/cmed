@@ -9,13 +9,13 @@
 <!-- here/document_actions/macros/document_actions -->
 
 <head>
-<metal:aux fill-slot="style_slot">
-    <link rel="stylesheet" type="text/css"
-        tal:attributes="href string:${portal_url}/doc_view.css" />
-</metal:aux>
-
+    <metal:aux fill-slot="style_slot">
+        <link rel="stylesheet" type="text/css"
+            tal:attributes="href string:${portal_url}/doc_view.css" />
+        <link rel="stylesheet" type="text/css"
+            tal:attributes="href string:${portal_url}/cmed_print.css" media="print"/>
+    </metal:aux>
     <title>Primeira Visita</title>
-
 </head>
 
 <!--
@@ -30,17 +30,17 @@
                 clinicData python:context.getClinic();
                 phone_field python:clinicData.getField('phone')"    
                 >
-    <metal:body_macro metal:define-macro="body">
-<!-- Cabeçalho -->
+<metal:body_macro metal:define-macro="body">
 <!--
 ====================================
     Clinic Header
 ====================================
 -->
+    <span id="print_button" style="float:right">
+        <a title="" href="javascript:print();" class="visualNoPrint">Imprimir</a>
+    </span>
+    <br/>
      <div>
-            <span id="print_button" style="float:right">
-                <a title="" href="javascript:print();">Imprimir</a>
-            </span>
             <div class="clinic_title"
                     tal:content="clinicData/getName | nothing" >CARDIOLOGY ASSOCIATES OF FLORIDA</div>
             <div class="clinic_subtitle"

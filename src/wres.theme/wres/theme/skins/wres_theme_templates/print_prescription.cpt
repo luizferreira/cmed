@@ -14,14 +14,15 @@
     <metal:aux fill-slot="style_slot">
         <link rel="Stylesheet" type="text/css"
             tal:attributes="href string:${portal_url}/doc_view.css" />
-        <link rel="Stylesheet" type="text/css"
-            tal:attributes="href string:${portal_url}/print.css" media="print"/>
+        <link rel="stylesheet" type="text/css"
+        tal:attributes="href string:${portal_url}/cmed_print.css" media="print" />
     </metal:aux>
     
     <metal:block fill-slot="javascript_head_slot">
             <script type="text/javascript" src="print_prescription.js"></script>
     </metal:block>
 </head>
+<body>
     <metal:main fill-slot="main">
     <tal:def define="prescriptions context/getPrescriptionData;
                      doctor_id prescriptions/data/doctor;
@@ -30,7 +31,7 @@
         <span class="size-title">
             <span i18n:translate="heading_doctor">Doctor:</span> <tal:doc content="doctor_name"/></span>
             <span id="print_button" style="float:right">
-                <a title="" href="javascript:print();">Imprimir</a>
+                <a title="" href="javascript:print();" class="visualNoPrint">Imprimir</a>
             </span>
             <hr>
             <fieldset id="fieldset_doc_view">
@@ -113,7 +114,7 @@
                 <tr>
                     <td align="center">
                         <div class="width-90 size-small">
-                            <table id="prescriptions" class="width-max">
+                            <table id="prescriptions" class="width-max table_collapse">
                                 <thead class="width-max theader">
                                     <th class="width-30 th_bold">
                                         Medicamento
@@ -189,5 +190,6 @@
         </tal:doctors>
     </tal:def>
     </metal:main>
+</body>
 </html>
 </metal:html>
