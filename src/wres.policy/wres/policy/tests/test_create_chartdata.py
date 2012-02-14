@@ -8,7 +8,7 @@ from plone.testing import z2
 from plone.app.testing import TEST_USER_ID, TEST_USER_NAME, TEST_USER_PASSWORD, SITE_OWNER_NAME, SITE_OWNER_PASSWORD
 from plone.app.testing import setRoles
 from wres.policy.testing import WRES_POLICY_FUNCTIONAL_TESTING
-
+from wres.policy.test_browser_utils import *
 
 from Testing.ZopeTestCase.utils import  startZServer
 
@@ -37,40 +37,16 @@ class TestSetup(unittest.TestCase):
         self.browser = Browser(self.app)
         
         #Cria P pacientes e D doutores para testes create_patients_doctors(P,D)
-        self.create_patients_doctors(2,2)
-        
-        #Ignore erros
-        #self.browser.handleErrors = False # Don't get HTTP 500 pages
-        #self.portal.error_log._ignored_exceptions = ()
-
-        #def raising(self, info):
-            #import traceback
-            #traceback.print_tb(info[2])
-            #print info[1]
-
-        #from Products.SiteErrorLog.SiteErrorLog import SiteErrorLog
-        #SiteErrorLog.raising = raising
-    
+        create_members_by_debug_init(self,pats=5,docs=5)
+       
     def create_patients_doctors(self,P,D):
-        self.login_as_admin()
+        login_as_admin(self)
         for i in range(P):
             self.create_patient()
         for i in range(D):
             self.create_doctor()
         z2.logout()
 
-    def login_as_admin(self):
-        # Go admin
-        portal = self.portal
-        browser = self.browser
-        # setRoles(portal, TEST_USER_ID, ('Manager', 'Doctor'))
-        # browser = self.browser
-        browser.open(portal.absolute_url() + "/login_form")
-        browser.getControl(name='__ac_name').value = "admin"
-        browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
-        browser.getControl(name='submit').click()
-        browser.open(portal.absolute_url() + '/view')
-    
     def create_doctor(self):
         # vai pra pagina inicial e depois entra na pasta Patients
         portal = self.portal
@@ -128,14 +104,6 @@ class TestSetup(unittest.TestCase):
         browser = self.browser
         ref = portal.Doctors.dteste.UID()
         return ref
-        
-        #Pega referencia de forma randômica 
-        #pc = getToolByName(portal,"portal_catalog")
-        #brains = pc.searchResults({'meta_type':'Doctor'})
-        #n_doctors = len(brains)
-        #import ipdb;ipdb.set_trace()
-        #rand_index = random.randrange(0,n_doctors)
-        #ref = brains[rand_index].getObject().UID()
     
     def create_document(self,PATIENT_ID,PATIENT_URL):
         #TODO: (matheus) 
@@ -202,7 +170,7 @@ class TestSetup(unittest.TestCase):
         return impresso_id
 
     def edit_impresso(self,PATIENT_ID,PATIENT_URL,impresso_id):
-        #Edicao do documento via python, não deveria ser assim (integration test), mas é feito para testar
+        #TODO:Edicao do documento via python, não deveria ser assim (integration test), mas é feito para testar
         #possiveis problemas de permissão
         portal = self.portal
         browser = self.browser
@@ -215,7 +183,7 @@ class TestSetup(unittest.TestCase):
         
     
     def edit_document(self,PATIENT_ID,PATIENT_URL,document_id):
-        #Edicao do documento via python, não deveria ser assim (integration test), mas é feito para testar
+        #TODO:Edicao do documento via python, não deveria ser assim (integration test), mas é feito para testar
         #possiveis problemas de permissão
         portal = self.portal
         browser = self.browser
@@ -433,12 +401,13 @@ class TestSetup(unittest.TestCase):
         print "\n::::Teste criar exames iniciou!" 
         portal = self.portal
         browser = self.browser
-        self.login_as_admin()
+        login_as_admin(self)
         
         PATIENT_ID = "pteste"
         PATIENT_URL = portal.absolute_url() + "/Patients/" + PATIENT_ID
         
         #As Manager----------------------------------
+        print "As Manager"
         #Cria 3 exames
         self.create_exam(PATIENT_ID, PATIENT_URL)
         self.failUnless("Exame adicionado." in browser.contents)
@@ -451,7 +420,9 @@ class TestSetup(unittest.TestCase):
         self.failUnless("Fezes" in browser.contents[browser.contents.find("<legend>Exames"):])
         
         #As Doctor----------------------------------
-        setRoles(portal, TEST_USER_ID, DOCTOR_ROLES)
+        print "As Doctor"
+        logout(self)
+        login_as_doctor(self)
         #Cria 3 alergias
         self.create_exam(PATIENT_ID, PATIENT_URL)
         self.failUnless("Exame adicionado." in browser.contents)
@@ -471,12 +442,13 @@ class TestSetup(unittest.TestCase):
         print "\n::::Teste criar alergias iniciou!" 
         portal = self.portal
         browser = self.browser
-        self.login_as_admin()
+        login_as_admin(self)
         
         PATIENT_ID = "pteste"
         PATIENT_URL = portal.absolute_url() + "/Patients/" + PATIENT_ID
         
         #As Manager----------------------------------
+        print "As Manager"
         #Cria 3 alergias
         self.create_allergy(PATIENT_ID, PATIENT_URL)
         self.failUnless("Alergia adicionada." in browser.contents)
@@ -489,7 +461,9 @@ class TestSetup(unittest.TestCase):
         self.failUnless("Alergia a flores" in browser.contents[browser.contents.find("<legend>Alergias</legend>"):])
         
         #As Doctor----------------------------------
-        setRoles(portal, TEST_USER_ID, DOCTOR_ROLES)
+        print "As Doctor"
+        logout(self)
+        login_as_doctor(self)
         #Cria 3 alergias
         self.create_allergy(PATIENT_ID, PATIENT_URL)
         self.failUnless("Alergia adicionada." in browser.contents)
@@ -509,12 +483,13 @@ class TestSetup(unittest.TestCase):
         print "\n::::Teste criar, editar, resolver problemas iniciou!" 
         portal = self.portal
         browser = self.browser
-        self.login_as_admin()
+        login_as_admin(self)
         
         PATIENT_ID = "pteste"
         PATIENT_URL = portal.absolute_url() + "/Patients/" + PATIENT_ID
         
         #As Manager----------------------------------
+        print "As Manager"
         #Cria 3 problemas(um já resolvido), depois edita um mudando o status para resolvido, depois resolve outro diretamente.
         #Create problems
         self.create_problems(PATIENT_ID, PATIENT_URL)
@@ -538,7 +513,9 @@ class TestSetup(unittest.TestCase):
         self.failUnless("Dor de cabeça" in browser.contents[browser.contents.find("Resolvidos"):])
         
         #As Doctor----------------------------------
-        setRoles(portal, TEST_USER_ID, DOCTOR_ROLES)
+        print "As Doctor"
+        logout(self)
+        login_as_doctor(self)
         #Cria 3 problemas(um já resolvido), depois edita um mudando o status para resolvido, depois resolve outro diretamente.
         #Create problems
         self.create_problems(PATIENT_ID, PATIENT_URL)
@@ -569,12 +546,13 @@ class TestSetup(unittest.TestCase):
         print "\n::::Teste criar, editar, inativar medicamentos e apresentar prescrições iniciou!" 
         portal = self.portal
         browser = self.browser
-        self.login_as_admin()
+        login_as_admin(self)
         
         PATIENT_ID = "pteste"
         PATIENT_URL = portal.absolute_url() + "/Patients/" + PATIENT_ID
         
         #As Manager----------------------------------
+        print "As Manager"
         #Create medications
         self.create_medications(PATIENT_ID, PATIENT_URL)
         self.failUnless("Medicamento adicionado" in browser.contents)
@@ -607,7 +585,9 @@ class TestSetup(unittest.TestCase):
         PATIENT_URL = portal.absolute_url() + "/Patients/" + PATIENT_ID
         
         #As Doctor----------------------------------
-        setRoles(portal, TEST_USER_ID, DOCTOR_ROLES)
+        print "As Doctor"
+        logout(self)
+        login_as_doctor(self)
         #Create medications
         self.create_medications(PATIENT_ID, PATIENT_URL)
         self.failUnless("Medicamento adicionado" in browser.contents)
@@ -645,12 +625,13 @@ class TestSetup(unittest.TestCase):
         print "\n::::Teste criar e editar documento iniciou!" 
         portal = self.portal
         browser = self.browser
-        self.login_as_admin()
+        login_as_admin(self)
         
         PATIENT_ID = "pteste"
         PATIENT_URL = portal.absolute_url() + "/Patients/" + PATIENT_ID
         
         #As Manager----------------------------------
+        print "As Manager"
         #Create document
         document_id = self.create_document(PATIENT_ID, PATIENT_URL)
         self.failUnless("As alterações foram salvas." in browser.contents)
@@ -659,7 +640,9 @@ class TestSetup(unittest.TestCase):
         self.edit_document(PATIENT_ID,PATIENT_URL,document_id)
         
         #As Doctor----------------------------------
-        setRoles(portal, TEST_USER_ID, DOCTOR_ROLES)
+        print "As Doctor"
+        logout(self)
+        login_as_doctor(self)
         #Create document
         document_id = self.create_document(PATIENT_ID, PATIENT_URL)
         self.failUnless("As alterações foram salvas." in browser.contents)
@@ -674,12 +657,13 @@ class TestSetup(unittest.TestCase):
         print "\n::::Teste criar e editar impresso iniciou!" 
         portal = self.portal
         browser = self.browser
-        self.login_as_admin()
+        login_as_admin(self)
         
         PATIENT_ID = "pteste"
         PATIENT_URL = portal.absolute_url() + "/Patients/" + PATIENT_ID
         
         #As Manager----------------------------------
+        print "As Manager"
         #Create document
         impresso_id = self.create_impresso(PATIENT_ID, PATIENT_URL)
         self.failUnless("As alterações foram salvas." in browser.contents)
@@ -688,7 +672,9 @@ class TestSetup(unittest.TestCase):
         self.edit_impresso(PATIENT_ID,PATIENT_URL,impresso_id)
         
         #As Doctor----------------------------------
-        setRoles(portal, TEST_USER_ID, DOCTOR_ROLES)
+        print "As Doctor"
+        logout(self)
+        login_as_doctor(self)
         #Create document
         impresso_id = self.create_impresso(PATIENT_ID, PATIENT_URL)
         self.failUnless("As alterações foram salvas." in browser.contents)
