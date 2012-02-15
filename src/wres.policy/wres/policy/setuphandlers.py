@@ -167,14 +167,22 @@ def createVisitFolder(portal):
     visit_folder.setImmediatelyAddableTypes([])
     visit_folder.setConstrainTypesMode(1)
     visit_folder.reindexObject()
-    
-    link_agenda = getOrCreateType(portal, portal, 'Agenda', 'Link')
-    link_agenda.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE], acquire = False)
-    link_agenda.manage_permission('Modify portal content', [], acquire = False)
-    link_agenda.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE], acquire = False)
-    link_agenda.setTitle('Agenda')
-    link_agenda.setRemoteUrl(portal.absolute_url() + '/Appointments')
-    link_agenda.reindexObject()    
+
+    link_cal = getOrCreateType(portal, portal, 'Calendario', 'Link')
+    link_cal.manage_permission('View', [DOCTOR_ROLE], acquire = False)
+    link_cal.manage_permission('Modify portal content', [], acquire = False)
+    link_cal.manage_permission('Access contents information', [DOCTOR_ROLE], acquire = False)
+    link_cal.setTitle('Calendário')
+    link_cal.setRemoteUrl(portal.absolute_url() + '/go2mycalendar')
+    link_cal.reindexObject()    
+
+    # link_agenda = getOrCreateType(portal, portal, 'Agenda', 'Link')
+    # link_agenda.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE], acquire = False)
+    # link_agenda.manage_permission('Modify portal content', [], acquire = False)
+    # link_agenda.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE], acquire = False)
+    # link_agenda.setTitle('Agenda')
+    # link_agenda.setRemoteUrl(portal.absolute_url() + '/Appointments')
+    # link_agenda.reindexObject()    
     
     print '*** Criando pasta de visitas...... OK'  
 

@@ -76,7 +76,8 @@ class Doctor(wresuser.WRESUser):
         return '%s %s' %(self.getFirstName(), self.getLastName())
     
     def get_home_url(self):
-        return self.getAppointmentsURL()
+        portal = getSite()
+        return portal.absolute_url_path() + '/Appointments/sec_desk'
 
     def getAppointmentsURL(self):
         portal = getSite()
