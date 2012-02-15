@@ -12,6 +12,7 @@ from zope.i18nmessageid import MessageFactory, Message
 from wres.brfields.content.BrFieldsAndWidgets import *
 from wres.brfields.validators import *
 
+from wres.archetypes.validators import *
 from wres.archetypes.widgets.BuildingBlocksWidget import BuildingBlocksWidget
 
 _ = MessageFactory("cmfuemr")
@@ -58,6 +59,7 @@ MAIN = Schema((
             required = 1,
             relationship='patient',
             allowed_types=('Patient',),
+            validators = ('isValidReference',),
 #            default_method='default_patient',
 #            vocabulary='default_patient_vocabulary',
             widget=BuildingBlocksWidget(label='Paciente',
