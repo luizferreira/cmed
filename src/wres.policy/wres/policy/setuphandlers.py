@@ -543,7 +543,7 @@ def loadCIDVocabulary(site, context):
 # Luiz
 #===========================================================================
 def loadDocumentTypesVocabulary(portal):
-    vt = getToolByName(portal, 'new_vocab_tool')
+    vt = getToolByName(portal, 'vocabulary_tool')
     document_types = []
     document_types.append('Primeira Consulta')
     document_types.append('Retorno')
@@ -552,7 +552,7 @@ def loadDocumentTypesVocabulary(portal):
 
 def loadDEFVocabulary(portal,context):
 	#Dicionario de especialidades farmaceuticas
-	vt = getToolByName(portal, 'new_vocab_tool')
+	vt = getToolByName(portal, 'vocabulary_tool')
 	print "Carregando DEF do arquivo DEF.txt..."
 	path = getInstancePath()
 	DEF = context.readDataFile("../../DEF.txt")
