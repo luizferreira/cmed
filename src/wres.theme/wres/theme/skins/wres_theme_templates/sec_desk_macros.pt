@@ -52,9 +52,10 @@
                         <!-- tr tal:attributes="class python:test(repeat['visit'].odd(), 'odd', 'even');">  -->
                     <tr tal:define="doctor python:visit['getDoctor'];
                                     doctor_id doctor/getId;
+                                    even_odd python:test(repeat['visit'].odd(), 'odd', 'even');
                                     row_number repeat/visit/number;
                                     color python:context.getRowColor(visit);"
-                            tal:attributes="class color; 
+                            tal:attributes="class string:$doctor_id $even_odd $color; 
                                             id string:row_$row_number">
                             <metal:trow define-slot="trow">
                             <tal:block_aux tal:define="visit_id python:visit['absolute_url'].split('/')[-1];

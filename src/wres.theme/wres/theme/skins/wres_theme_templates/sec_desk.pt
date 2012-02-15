@@ -12,9 +12,9 @@
 		<link rel="stylesheet" type="text/css" href="sec_desk.css" />
 	</metal:block>
 
-	<metal:block fill-slot="javascript_head_slot">
+	<!--metal:block fill-slot="javascript_head_slot">
 		<script type="text/javascript" src="sec_desk.js"></script>
-	</metal:block>
+	</metal:block-->
       
 </head>
 
