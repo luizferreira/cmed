@@ -13,7 +13,7 @@
     </metal:block>
 
     <metal:block fill-slot="javascript_head_slot">
-            <script type="text/javascript" src="show_problems.js"></script>
+            <script type="text/javascript" src="show_exams.js"></script>
     </metal:block> 
 </head>
       	
@@ -41,24 +41,26 @@
         <legend>Exame </legend>        
         <form tal:attributes="action template/id">
             <input type="hidden" name="form.submitted" value="1" />
-            <table class="listing width-100">
+            <table class="listing width-100 nosort" id="table_form">
                 <thead>
+                <th width="20px"></th>
                     <th>Exame</th>
                     <th>Valor</th>
                     <th>Data</th>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr id="linha0">
+                    <td></td>
                         <td>
-                            <input type="text" name="exam"
+                            <input id="exam_form0" type="text" name="exam_form0" onFocus="add_form_row()"
                                 tal:attributes="value data/exam | nothing" />
                         </td>
                         <td>
-                            <input type="text" name="value"
+                            <input id="value_form0" type="text" name="value_form0"
                                 tal:attributes="value data/value | nothing" />
                         </td>
                         <td>
-                            <input type="text" name="date" size="7"
+                            <input id="date_form0" type="text" name="date_form0" size="7"
                                 tal:attributes="value data/date | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
                         </td>
                     </tr>
