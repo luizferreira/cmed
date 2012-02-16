@@ -88,13 +88,13 @@
                         <input type="text" name="problem" id="problem" autocomplete="off"
                             tal:attributes="value request/problem | nothing;
                                             onkeyup string:actb(this, event, ${vocab_desc});
-                                            onfocusout string:get_correspondent(this, ${vocab_desc}, ${vocab_code})"/>
+                                            onchange string:get_correspondent(this, ${vocab_desc}, ${vocab_code})"/>
                     </td>
                     <td>
                         <input type="text" name="code" id="code" autocomplete="off"
                             tal:attributes="value request/code | nothing;
                                             onkeyup string:actb(this, event, ${vocab_code});
-                                            onfocusout string:get_correspondent(this, ${vocab_code}, ${vocab_desc})" />
+                                            onchange string:get_correspondent(this, ${vocab_code}, ${vocab_desc})" />
                     </td>
                     <td>
                         <input type="text" id="started" name="shown_started" size="7"

@@ -73,13 +73,13 @@ function get_correspondent(campo, lista1, lista2) {
         i++;
     }
     if (campo.id == 'problem') {
-        var campo2 = document.getElementById('code');
+        var campo2 = $("input#code");
     }
     else {
-        var campo2 = document.getElementById('problem');
+        var campo2 = $("input#problem");
     }
     if (index != undefined) {
-        campo2.value = lista2[index];
+        campo2.val(lista2[index]);
     }
 }
 
