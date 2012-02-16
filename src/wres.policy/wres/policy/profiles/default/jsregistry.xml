@@ -9,4 +9,7 @@
  <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""
     id="buildingblockwidget.js" inline="False"/>
+ <javascript authenticated="False" cacheable="True" compression="safe"
+    conditionalcomment="" cookable="True" enabled="True" expression=""
+    id="autocomplete.js" inline="False"/>
 </object>

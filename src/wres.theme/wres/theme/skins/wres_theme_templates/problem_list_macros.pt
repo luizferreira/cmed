@@ -58,7 +58,7 @@
     tal:define="state options/state | request/state;
                 portal_status_msg state/kwargs/portal_status_message | request/portal_status_message | nothing;
                 errors state/getErrors;
-                error_message errors/error_message | nothing"     
+                error_message errors/error_message | nothing"   
     i18n:domain="cmfuemr">
 
     <!-- portal status message -->
@@ -77,19 +77,24 @@
         <legend> Adicionar Diagnóstico </legend>        
         <form tal:attributes="action template/id">
             <input type="hidden" name="form.submitted" value="1" />
-            <table class="listing width-100">
+            <table class="listing width-100" tal:define="vocab_desc context/getCID_desc;
+                                                         vocab_code context/getCID_code">
                 <th>Diagnóstico</th>
                 <th>Código</th>
                 <th>Data</th>
                 <th>Estado</th>
                 <tr>
                     <td>
-                        <input type="text" name="problem"
-                            tal:attributes="value request/problem | nothing" />
+                        <input type="text" name="problem" id="problem" autocomplete="off"
+                            tal:attributes="value request/problem | nothing;
+                                            onkeyup string:actb(this, event, ${vocab_desc});
+                                            onfocusout string:get_correspondent(this, ${vocab_desc}, ${vocab_code})"/>
                     </td>
                     <td>
-                        <input type="text" name="code"
-                            tal:attributes="value request/code | nothing" />
+                        <input type="text" name="code" id="code" autocomplete="off"
+                            tal:attributes="value request/code | nothing;
+                                            onkeyup string:actb(this, event, ${vocab_code});
+                                            onfocusout string:get_correspondent(this, ${vocab_code}, ${vocab_desc})" />
                     </td>
                     <td>
                         <input type="text" id="started" name="shown_started" size="7"

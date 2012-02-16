@@ -530,13 +530,14 @@ def changePortalLanguage(portal):
 # Carrega o CID no Vocabulario do portal
 # Peter
 #===========================================================================
-def loadCIDVocabulary(site, context):
+def loadCIDVocabulary(portal, context):
     print "Carregando CID do arquivo CID.txt ..."
-    path = getInstancePath()
-    CID = context.readDataFile('../../CID10.txt')
+    vt = getToolByName(portal, 'vocabulary_tool')
+    CID_desc = context.readDataFile('../../CID_desc.txt')
+    CID_code = context.readDataFile('../../CID_code.txt')
     print "Inserindo CID no Portal ..."
-    site.manage_addProperty('CID', [], 'lines')
-    site.manage_changeProperties(**{'CID': CID})
+    vt.add_vocab('CID_desc', CID_desc)
+    vt.add_vocab('CID_code', CID_code)
 
 #===========================================================================
 # Carrega o vocabulario de tipos de documentos.
@@ -551,13 +552,12 @@ def loadDocumentTypesVocabulary(portal):
 
 
 def loadDEFVocabulary(portal,context):
-	#Dicionario de especialidades farmaceuticas
-	vt = getToolByName(portal, 'vocabulary_tool')
-	print "Carregando DEF do arquivo DEF.txt..."
-	path = getInstancePath()
-	DEF = context.readDataFile("../../DEF.txt")
-	print "Inserindo DEF no Portal ..."
-	vt.add_vocab('DEF', DEF)
+    #Dicionario de especialidades farmaceuticas
+    vt = getToolByName(portal, 'vocabulary_tool')
+    print "Carregando DEF do arquivo DEF.txt..."
+    DEF = context.readDataFile("../../DEF.txt")
+    print "Inserindo DEF no Portal ..."
+    vt.add_vocab('DEF', DEF)
 	
 def setupVarious(context):
     """ Funcao generica executada na instalacao do wres policy """

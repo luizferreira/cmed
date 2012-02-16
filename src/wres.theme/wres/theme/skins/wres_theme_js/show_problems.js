@@ -1,9 +1,11 @@
 function show_note(){
     $("table#note_table").fadeIn();
     }
+    
 function hide_note(){
     $("table#note_table").fadeOut();
     }
+    
 function fill_hidden_end_date() {
 
 	shown_end = $("input#shown_reported");
@@ -56,14 +58,39 @@ function date_higher_1900() {
     
 }
 
+/*=======================================================
+recebe valor, lista1 e lista2 - localiza valor na lista 1 
+e pega o valor correspondente (de mesmo indice) da lista 2
+========================================================*/
+function get_correspondent(campo, lista1, lista2) {
+    var index;
+    var i = 0;
+    while (i < lista1.length) {
+        if (lista1[i] == campo.value) {
+            index = i;
+            break;
+        }
+        i++;
+    }
+    if (campo.id == 'problem') {
+        var campo2 = document.getElementById('code');
+    }
+    else {
+        var campo2 = document.getElementById('problem');
+    }
+    if (index != undefined) {
+        campo2.value = lista2[index];
+    }
+}
+
 
 $(document).ready(function(){
 	$("input#add_new").click(fill_hidden_start_date)
 
 	$("input#add_new").click(fill_hidden_end_date)
 
-//	$("input#add_prescription").click(fill_hidden_end_date)
-
-//	$("input#add_prescription").click(fill_hidden_end_date)
+//  	$("input#problem").blur(function(){get_correspondent($this)})
+// 
+// 	$("input#code").blur(get_correspondent)
 
 });
