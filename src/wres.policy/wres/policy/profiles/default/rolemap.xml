@@ -1,148 +1,150 @@
 <?xml version="1.0"?>
 <rolemap>
   <roles>
-    <role name="Anonymous"/>
-    <role name="Authenticated"/>
     <role name="Doctor"/>
     <role name="FrontDeskTwo"/>
-    <role name="Manager"/>
-    <role name="Member"/>
-    <role name="Owner"/>
     <role name="Patient"/>
-    <role name="Reviewer"/>
     <role name="Secretary"/>
     <role name="Transcriptionist"/>
     <role name="UemrAdmin"/>
   </roles>
+
   <permissions>
-    <permission name="Access contents information"
-                acquire="True">
-      <role name="Anonymous"/>
-      <role name="Manager"/>
-      <role name="Member"/>
-      <role name="UemrAdmin"/>
-    </permission>
-    <permission name="Access inactive portal content"
-                acquire="True">
-      <role name="Owner"/>
-    </permission>
-    <permission name="Access session data" acquire="True">
-      <role name="Anonymous"/>
-      <role name="Manager"/>
-      <role name="Member"/>
-      <role name="UemrAdmin"/>
-    </permission>
-    <permission name="Add Documents, Images, and Files"
-                acquire="True">
-      <role name="Manager"/>
-      <role name="Member"/>
-    </permission>
-    <permission name="Add portal content" acquire="True">
-      <role name="Manager"/>
-      <role name="Member"/>
-      <role name="Owner"/>
-    </permission>
-    <permission name="Add portal folders" acquire="True">
-      <role name="Manager"/>
-      <role name="Owner"/>
-    </permission>
-    <permission name="Add portal member" acquire="False">
-      <role name="Manager"/>
-      <role name="Member"/>
-      <role name="UemrAdmin"/>
-    </permission>
-    <permission name="Allow sendto" acquire="True">
-      <role name="Manager"/>
-    </permission>
-    <permission name="Change DTML Documents" acquire="True">
-      <role name="Manager"/>
-      <role name="Member"/>
-    </permission>
-    <permission name="Change portal topics" acquire="False">
-      <role name="Manager"/>
-      <role name="UemrAdmin"/>
-    </permission>    
-    <permission name="Copy or Move" acquire="False">
+
+    <permission name="Modify portal content" acquire="True">
       <role name="Manager"/>
       <role name="UemrAdmin"/>
       <role name="Doctor"/>
       <role name="Secretary"/>
-      <role name="Transcriptionist"/>      
+      <role name="Transcriptionist"/>
     </permission>
-    <permission name="Delete objects" acquire="True">
-      <role name="Manager"/>
-      <role name="UemrAdmin"/>
-    </permission>
-    <permission name="FTP access" acquire="True">
-      <role name="Manager"/>
-      <role name="Owner"/>
-    </permission>
-    <permission name="List folder contents" acquire="True">
-      <role name="Manager"/>
-      <role name="Member"/>
-      <role name="Owner"/>
-    </permission>
-    <permission name="List portal members" acquire="True">
-      <role name="Manager"/>
-      <role name="Member"/>
-      <role name="UemrAdmin"/>
-    </permission>
-    <permission name="List undoable changes" acquire="True">
-      <role name="Manager"/>
-    </permission>
-    <permission name="Manage portal" acquire="True">
-      <role name="Manager"/>
-      <role name="UemrAdmin"/>
-    </permission>
-    <permission name="Manage properties" acquire="True">
-      <role name="Manager"/>
-      <role name="Owner"/>
-    </permission>
-    <permission name="Manage users" acquire="True">
-      <role name="Manager"/>
-      <role name="Member"/>
-      <role name="UemrAdmin"/>
-    </permission>
-    <permission name="Modify portal content" acquire="True">
-      <role name="Manager"/>
-      <role name="Member"/>
-      <role name="UemrAdmin"/>
-    </permission>
+
     <permission name="Modify view template" acquire="False">
       <role name="Manager"/>
       <role name="UemrAdmin"/>
+    </permission>
+ 
+    <permission name="wres.archetypes: Add Admin" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add AdminFolder" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add ChartFolder" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add DocBoletim" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add DocPlastica" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add Template" acquire="False">
+      <role name="Manager"/>
+      <role name="UemrAdmin"/>
+      <role name="Doctor"/>
+      <role name="Secretary"/>
+      <role name="Transcriptionist"/>
+    </permission>
+    <permission name="wres.archetypes: Add Doctor" acquire="False">
+      <role name="Manager"/>
+      <role name="UemrAdmin"/>
+      <role name="Doctor"/>
+    </permission>
+    <permission name="wres.archetypes: Add DoctorFolder" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add DocumentFolder" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add ExamFolder" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add InitialVisit" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add GenericDocument" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+      <role name="UemrAdmin"/>
     </permission>    
-    <permission name="Query Vocabulary" acquire="True">
-      <role name="Anonymous"/>
+    
+    <permission name="wres.archetypes: Add Impresso" acquire="False">
+      <role name="Contributor"/>
       <role name="Manager"/>
-      <role name="Member"/>
       <role name="UemrAdmin"/>
-    </permission>
-    <permission name="Reply to item" acquire="True">
+    </permission>    
+
+    <permission name="wres.archetypes: Add Insurance" acquire="False">
+      <role name="Contributor"/>
       <role name="Manager"/>
     </permission>
-    <permission name="Review portal content" acquire="True">
+    <permission name="wres.archetypes: Add InsuranceFolder" acquire="False">
+      <role name="Contributor"/>
       <role name="Manager"/>
-      <role name="Reviewer"/>
     </permission>
-    <permission name="Search ZCatalog" acquire="True">
-      <role name="Anonymous"/>
+    <permission name="wres.archetypes: Add Patient" acquire="False">
+      <role name="Contributor"/>
       <role name="Manager"/>
-      <role name="Member"/>
-      <role name="UemrAdmin"/>
     </permission>
-    <permission name="Set own password" acquire="False">
-      <role name="Authenticated"/>
+    <permission name="wres.archetypes: Add PatientFolder" acquire="False">
+      <role name="Contributor"/>
       <role name="Manager"/>
-      <role name="Member"/>
-      <role name="UemrAdmin"/>
     </permission>
-    <permission name="Set own properties" acquire="False">
-      <role name="Authenticated"/>
+    <permission name="wres.archetypes: Add ProgressNotes" acquire="False">
+      <role name="Contributor"/>
       <role name="Manager"/>
-      <role name="Member"/>
-      <role name="UemrAdmin"/>
     </permission>
+    <permission name="wres.archetypes: Add ReferringProvider" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add ReferringProviderFolder" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add Secretary" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add SecretaryFolder" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add Transcriptionist" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add TranscriptionistFolder" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add Visit" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add VisitFolder" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add VisitTemp" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+    <permission name="wres.archetypes: Add WRESUser" acquire="False">
+      <role name="Contributor"/>
+      <role name="Manager"/>
+    </permission>
+
     <permission name="wres.policy: Add Content" acquire="True">
       <role name="Doctor"/>
       <role name="Manager"/>
@@ -161,9 +163,9 @@
     </permission>      
 
     <permission name="wres.policy: Edit Clinic" acquire="False">
-      <role name="Doctor"/>
       <role name="Manager"/>
       <role name="UemrAdmin"/>
+      <role name="Doctor"/>
       <role name="Secretary"/>
     </permission>
 
@@ -296,39 +298,6 @@
       <role name="Secretary"/>
       <role name="Transcriptionist"/>
     </permission>
-    <permission name="Undo changes" acquire="True">
-      <role name="Manager"/>
-      <role name="Owner"/>
-    </permission>
-    <!--permission name="Use Factories" acquire="False">
-      <role name="Authenticated"/>
-      <role name="Manager"/>
-    </permission-->
-    <permission name="Use external editor" acquire="False">
-      <role name="Authenticated"/>
-      <role name="Manager"/>
-    </permission>
-    <permission name="Use mailhost services" acquire="True">
-      <role name="Anonymous"/>
-      <role name="Manager"/>
-      <role name="Member"/>
-      <role name="UemrAdmin"/>
-    </permission>
-    <permission name="View" acquire="True">
-      <role name="Manager"/>
-      <role name="Owner"/>
-    </permission>
-    <permission name="View Groups" acquire="True">
-      <role name="Manager"/>
-      <role name="Owner"/>
-    </permission>
-    <permission name="View management screens"
-                acquire="True">
-      <role name="Manager"/>
-      <role name="Owner"/>
-    </permission>
-    <permission name="WebDAV access" acquire="False">
-      <role name="Manager"/>
-    </permission>
+
   </permissions>
 </rolemap>

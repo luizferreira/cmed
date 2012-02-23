@@ -100,6 +100,7 @@ def createTemplateFolder(portal):
     template_folder.manage_permission('ATContentTypes: Add News Item', [], acquire = False)
     template_folder.manage_permission('ATContentTypes: Add Folder', [], acquire = False)
     template_folder.manage_permission('ATContentTypes: Add Document', [], acquire = False)
+    template_folder.manage_permission('ATContentTypes: Add File', [], acquire = False)
     template_folder.setTitle('Modelos')
     template_folder.reindexObject()
     print '*** Criando pasta de templates...... OK'    

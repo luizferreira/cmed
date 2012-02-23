@@ -79,7 +79,7 @@ def getSignedDocumentsList():
 pm = getToolByName(context, 'portal_membership')
 member= pm.getAuthenticatedMember()
 roles_of_member = member.getRoles()
-allowed_roles = ['Doctor', 'Manager', 'Transcriptionist', 'UEMRAdmin']
+allowed_roles = ['Doctor', 'Manager', 'Transcriptionist', 'UemrAdmin']
 authorize = False
 for role in allowed_roles:
     if role in roles_of_member:
