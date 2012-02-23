@@ -10,6 +10,7 @@ from Products.CMFPlone.utils import _createObjectByType
 
 from ComputedAttribute import ComputedAttribute
 
+from wres.policy.utils.roles import MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, TRANSCRIPTIONIST_ROLE
 # -*- Message Factory Imported Here -*-
 
 from wres.archetypes.interfaces import IChartFolder
@@ -67,6 +68,7 @@ class ChartFolder(folder.ATFolder):
         
     def manage_afterAdd(self, item=None, container=None):
         """ Essa funcao e' chamada logo apos a adicao (addChartFolder) de um archetype """ 
+        self.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
         self.create_hidden_object('documents', 'Consultas', 'DocumentFolder')
         self.documents.title = 'Consultas'
         self.documents.setLocallyAllowedTypes('GenericDocument')

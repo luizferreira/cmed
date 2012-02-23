@@ -6,7 +6,7 @@ from Products.ATContentTypes.content import schemata
 from wres.archetypes.config import PROJECTNAME
 from wres.archetypes.content import wresuser
 from wres.policy.utils.utils import set_schemata_properties, finalizeSchema
-from wres.policy.utils.permissions import EDIT_SECRETARY, VIEW_SECRETARY
+from wres.policy.utils.permissions import EDIT_SECRETARY, VIEW_SECRETARY, SIGN_PN
 
 
 from wres.brfields.content.BrFieldsAndWidgets import CPFField, CPFWidget
@@ -17,15 +17,27 @@ from zope.i18nmessageid import MessageFactory, Message
 _ = MessageFactory("cmfuemr")
 
 MAIN = Schema((
+
+        BooleanField('isTranscriptionist', 
+            read_permission=SIGN_PN,
+            write_permission=SIGN_PN,
+            widget = BooleanWidget(label=_(u'Transcritora?'),
+                                   description=_('Check if secretary will be able to transcript documents.'),
+            ),
+        ),
                                                                         
         StringField('firstName',
-            required=1,
+            required=1, 
+            read_permission=VIEW_SECRETARY, 
+            write_permission=EDIT_SECRETARY,
             widget=StringWidget(label=_('First Name'),
             ),
         ),
 
         StringField('lastName',
-            required=1,
+            required=1, 
+            read_permission=VIEW_SECRETARY, 
+            write_permission=EDIT_SECRETARY,
             index="ZCTextIndex",
             widget=StringWidget(label=_('Last Name'),
             ),
@@ -34,12 +46,16 @@ MAIN = Schema((
         CPFField('ssn',
                 required=0,
                 searchable=1,
+                read_permission=VIEW_SECRETARY, 
+                write_permission=EDIT_SECRETARY,
                 widget=CPFWidget(label=_('SSN'),
                 ),
         ),
         
         StringField('email',
             required=1,      
+            read_permission=VIEW_SECRETARY, 
+            write_permission=EDIT_SECRETARY,
             widget=StringWidget(label=_('Email'),
             ),
         ),                                                                        
@@ -50,5 +66,3 @@ set_schemata_properties(MAIN, schemata='Principal')
 baseSchema = finalizeSchema(wresuser.WRESUserSchema.copy())
 
 SecretarySchema = baseSchema + MAIN
-
-set_schemata_properties(SecretarySchema, read_permission=VIEW_SECRETARY, write_permission=EDIT_SECRETARY) 

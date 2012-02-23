@@ -8,7 +8,7 @@ class TestSetup(unittest.TestCase):
     
     def test_portal_title(self):
         portal = self.layer['portal']
-        self.assertEqual("Communi", portal.getProperty('title'))
+        self.assertEqual("CommuniMed", portal.getProperty('title'))
 
     
     # def test_portal_description(self):

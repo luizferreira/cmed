@@ -17,7 +17,7 @@ from wres.archetypes.content import wresuser
 
 from wres.archetypes.content.schemas.secretary import SecretarySchema
 
-from wres.policy.utils.roles import SECRETARY_GROUP
+from wres.policy.utils.roles import SECRETARY_GROUP, TRANSCRIPTIONIST_ROLE
 
 class Secretary(wresuser.WRESUser):
     """Secretary type for WRES website"""
@@ -34,5 +34,19 @@ class Secretary(wresuser.WRESUser):
     def get_home_url(self):
         portal = getSite()
         return portal.absolute_url_path() + '/Appointments/sec_desk'
+
+    def at_post_create_script(self):
+        wresuser.WRESUser.at_post_create_script(self)
+        self.at_post_edit_script()
+
+    def at_post_edit_script(self):
+        # self.getIsTranscriptionist
+        # import ipdb; ipdb.set_trace()
+        if self.getIsTranscriptionist():
+            self.acl_users.portal_role_manager.assignRoleToPrincipal(TRANSCRIPTIONIST_ROLE, self.getId())
+        else:
+            self.acl_users.portal_role_manager.removeRoleFromPrincipal(TRANSCRIPTIONIST_ROLE, self.getId())
+
+
 
 atapi.registerType(Secretary, PROJECTNAME)

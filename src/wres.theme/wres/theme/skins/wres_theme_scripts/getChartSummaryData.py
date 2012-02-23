@@ -76,6 +76,20 @@ def getSignedDocumentsList():
         retorno.append(item)
     return retorno
 
+pm = getToolByName(context, 'portal_membership')
+member= pm.getAuthenticatedMember()
+roles_of_member = member.getRoles()
+allowed_roles = ['Doctor', 'Manager', 'Transcriptionist', 'UEMRAdmin']
+authorize = False
+for role in allowed_roles:
+    if role in roles_of_member:
+        authorize = True
+        continue
+
+if not authorize:
+    from zope.security.interfaces import Unauthorized
+    raise Unauthorized
+
 result = {}
 result['vital_signs'] = getVitalSigns()
 result['problems_list'] = getProblemsList()
