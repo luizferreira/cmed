@@ -305,8 +305,9 @@ aos Archetypes implementados no produto wres.archetypes.-->
       <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.archetypes: Add Doctor" acquire="False">
-      <role name="Contributor"/>
       <role name="Manager"/>
+      <role name="UemrAdmin"/>
+      <role name="Doctor"/>
     </permission>
     <permission name="wres.archetypes: Add DoctorFolder" acquire="False">
       <role name="Contributor"/>
