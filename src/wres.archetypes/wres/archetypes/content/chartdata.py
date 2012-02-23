@@ -1,9 +1,10 @@
-from Globals import Persistent
+from Persistence import Persistent
 from BTrees.OOBTree import OOBTree
 from ZODB.PersistentList import PersistentList
 from DateTime import DateTime
 from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass
+
 
 #class MedicalHistories(Persistent):
     #__allow_access_to_unprotected_subobjects__ = 1
