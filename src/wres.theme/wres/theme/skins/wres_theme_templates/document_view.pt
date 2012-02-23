@@ -58,12 +58,12 @@
 -->
     <br/>
     <div class="print_body">
-        <table class="patient_infos">
+        <table class="patient_infos" tal:define="birth_date patientData/getBirthDate | nothing;">
             <tr>
                  <td class="item_title">Nome: </td>
                  <td> <span class="item_content" tal:content="patientData/getFullName"></span></td>
                  <td class="item_title">Data de Nascimento: </td>
-                 <td ><span class="item_content" tal:content="python:patientData.getBirthDate().strftime('%d/%m/%Y')"></span><br></td>
+                 <td ><span tal:condition="birth_date" class="item_content" tal:content="python:birth_date.strftime('%d/%m/%Y')"></span><br></td>
                  <td class="item_title">Número de Registro: </td>
                  <td><span class="item_content" tal:content="patientData/getChart"></span><br></td>
             </tr>
@@ -71,7 +71,7 @@
                  <td class="item_title">Data da Consulta: </td>
                  <td><span class="item_content" tal:content="python:context.dateOfVisit.strftime('%d/%m/%Y')"></span><br></td>
                  <td class="item_title">Idade: </td>
-                 <td><span class="item_content" tal:content="python:context.getPatientAge(patientData.getBirthDate())"></span><br></td>
+                 <td><span class="item_content" tal:content="python:context.getPatientAge(birth_date)"></span><br></td>
              </tr>
         </table>
     </div>
