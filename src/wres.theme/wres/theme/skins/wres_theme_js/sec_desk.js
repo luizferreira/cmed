@@ -95,6 +95,7 @@ $(document).ready(function(){
 });
 
 function patientClick(){
+
 	var data = {};
 	var url = document.getElementById("patient_url").value;
 	var extra = '/SFLight_patient_view';
