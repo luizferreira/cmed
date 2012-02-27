@@ -75,30 +75,11 @@
                                 <a id="patient_link"
                                     href="javascript: void(0)"
                                     disabled="true"
-                                    tal:content="python:patient.Title()" i18n:translate="" onclick="patientClick()" > Nome do Paciente </a>
+                                    tal:content="python:patient.Title()" i18n:translate="" onclick="loadPatientBalloon()" > Nome do Paciente </a>
                                 <input id="patient_url" style="display:none" tal:attributes="value python:patient.absolute_url()"/>
+                                <input id="AmIDoctor" style="display:none" tal:attributes="value python:context.TestRoles()"/>
                             </td>
-                            <!-- td>
-                                    <a class=patient_link 
-                                        tal:define="contact_phone python:visit.getContactPhone();
-                                                                patient_contact python:patient.getContactPhone();
-                                                                home_phone python:patient.getHomePhone()"
-                                        tal:attributes="href python:patient.absolute_url()">
-                                        <tal:contactPhone condition="python:contact_phone"
-                                                                                content="python:context.formatPhoneNumber(contact_phone)">
-                                                    contactPhoneNumber
-                                        </tal:contactPhone>
-                                        <tal:contactPhone condition="python:not contact_phone">
-                                                    <metal:field use-macro="python:patient.widget('contactPhone', mode='view')">
-                                    Telefone de Contato
-                            </metal:field>
-                                        </tal:contactPhone>					   
-                                        <tal:contactPhone condition="python:not patient_contact"
-                                                                                content="home_phone">
-                                                    homePhoneNumber
-                                        </tal:contactPhone>
-                                    </a>
-                            </td>  -->
+
                             <td class="desktop_visit_status"
                                 tal:content="python:visit['getReviewState']" i18n:translate="">Status
                             </td>

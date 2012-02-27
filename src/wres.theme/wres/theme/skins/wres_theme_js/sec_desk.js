@@ -13,8 +13,79 @@ function escondeMostraVisitas(){
 	}	
 }
 
+function loadPatientTip(){
+     var patient_url = $("#patient_url").val()
+     var AmIDoctor = $("#AmIDoctor").val()
+     if (AmIDoctor == 1){
+        $("#patient_link").qtip({ 
+            content: "<a href='"+patient_url+"'>Prontuário</a><br><a href='"+patient_url+"/chartFolder"+"'>Dados</a>",
+            position:{
+                corner: "rigthMiddle",
+                adjust:
+                    {
+                        x: 100,
+                        y: 0
+                    }
+    
+            },
+            style: { 
+                padding: 2,
+                background: '#DDDDDD',
+                color: 'black',
+                textAlign: 'center',
+                fontSize: 13,
+                border: {
+                    radius: 2
+                }
+            },
+            show: 'click',
+            hide: {
+                fixed: true,
+                when: {
+                    event: 'unfocus'
+                }
+            }
+    
+            })
+        }
+    else {
+        $("#patient_link").qtip({ 
+            content: "<a href='"+patient_url+"'>Prontuário</a>",
+            position:{
+                corner: "rigthMiddle",
+                adjust:
+                    {
+                        x: 100,
+                        y: 0
+                    }
+    
+            },
+            style: { 
+                padding: 2,
+                background: '#DDDDDD',
+                color: 'black',
+                textAlign: 'center',
+                fontSize: 13,
+                border: {
+                    radius: 2
+                }
+            },
+            show: 'click',
+            hide: {
+                fixed: true,
+                when: {
+                    event: 'unfocus'
+                }
+            }
+    
+            })
+        }
+        
+    }
+    
 $(document).ready(function(){
-	
+    loadPatientTip()
+	//$('#patient_link').balloon({contents:"<b>casa</b> azul",position:null});
 	var show_visits_reloaded = false;
 	/*var fez_requisicao = false;*/
 	

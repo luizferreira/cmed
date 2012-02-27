@@ -3,9 +3,6 @@
  <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""
     id="BrFieldsAndWidgets.js" inline="False"/>
- <javascript authenticated="True" cacheable="True" compression="safe"
-    conditionalcomment="" cookable="True" enabled="True" expression=""
-    id="sec_desk.js" inline="False"/>
  <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""
     id="buildingblockwidget.js" inline="False"/>

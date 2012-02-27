@@ -192,6 +192,7 @@ wres/archetypes/README.txt
 wres/archetypes/__init__.py
 wres/archetypes/config.py
 wres/archetypes/configure.zcml
+wres/archetypes/validators.py
 wres/archetypes/browser/__init__.py
 wres/archetypes/browser/configure.zcml
 wres/archetypes/content/__init__.py
@@ -291,7 +292,6 @@ wres/archetypes/portlets/configure.zcml
 wres/archetypes/profiles/default/factorytool.xml
 wres/archetypes/profiles/default/metadata.xml
 wres/archetypes/profiles/default/portlets.xml
-wres/archetypes/profiles/default/rolemap.xml
 wres/archetypes/profiles/default/types.xml
 wres/archetypes/profiles/default/workflows.xml
 wres/archetypes/profiles/default/types/Admin.xml

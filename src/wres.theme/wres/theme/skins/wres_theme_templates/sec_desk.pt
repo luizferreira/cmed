@@ -7,11 +7,15 @@
       
 <head>
 	<title>Área de Trabalho da Secretária</title>
-
+    
+    
 	<metal:block fill-slot="style_slot">
 		<link rel="stylesheet" type="text/css" href="sec_desk.css" />
 	</metal:block>
-
+    <metal:block fill-slot="javascript_head_slot">
+        <script type="text/javascript" src="jquery.qtip.min.js"></script> 
+        <script type="text/javascript" src="sec_desk.js"></script> 
+    </metal:block> 
 </head>
 
 <body>
@@ -43,7 +47,7 @@
 	            <metal:fill_slot fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromToday" />
 	        </div>
         
-        </div>		
+        </div>
 		
         <!-- Tomorrow's visits  -->
         

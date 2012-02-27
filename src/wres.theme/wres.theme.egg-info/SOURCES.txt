@@ -208,11 +208,11 @@ wres/theme/locales/pt-br/LC_MESSAGES/Solgema.fullcalendar.po
 wres/theme/locales/pt-br/LC_MESSAGES/cmfuemr.mo
 wres/theme/locales/pt-br/LC_MESSAGES/cmfuemr.po
 wres/theme/profiles/default/cssregistry.xml
-wres/theme/profiles/default/jsregistry.xml
 wres/theme/profiles/default/metadata.xml
 wres/theme/profiles/default/skins.xml
 wres/theme/profiles/default/viewlets.xml
 wres/theme/profiles/default/wres.theme_various.txt
+wres/theme/skins/hs_err_pid5022.log
 wres/theme/skins/sunburst_theme/sunburst_images/logo.png
 wres/theme/skins/sunburst_theme/sunburst_images/pb_close.png
 wres/theme/skins/sunburst_theme/sunburst_styles/IEFixes.css
@@ -301,10 +301,15 @@ wres/theme/skins/wres_theme_js/format_date.js
 wres/theme/skins/wres_theme_js/fullcalendar.min.js
 wres/theme/skins/wres_theme_js/generic_richtext_edit.js
 wres/theme/skins/wres_theme_js/generic_selection_edit.js
+wres/theme/skins/wres_theme_js/jquery.balloon.js
+wres/theme/skins/wres_theme_js/jquery.qtip.js
+wres/theme/skins/wres_theme_js/jquery.simpletip.min.js
+wres/theme/skins/wres_theme_js/jquery.tipsy.js
 wres/theme/skins/wres_theme_js/patient_cphone_edit.js
 wres/theme/skins/wres_theme_js/patient_view.js
 wres/theme/skins/wres_theme_js/print_prescription.js
 wres/theme/skins/wres_theme_js/sec_desk.js
+wres/theme/skins/wres_theme_js/show_exams.js
 wres/theme/skins/wres_theme_js/show_prescriptions.js
 wres/theme/skins/wres_theme_js/show_problems.js
 wres/theme/skins/wres_theme_js/transcriptionist.js
@@ -338,6 +343,8 @@ wres/theme/skins/wres_theme_scripts/generic_richtext_script.py
 wres/theme/skins/wres_theme_scripts/getAddNewPrescriptionData.py
 wres/theme/skins/wres_theme_scripts/getAllDocumentTypes.py
 wres/theme/skins/wres_theme_scripts/getAllergiesData.py
+wres/theme/skins/wres_theme_scripts/getCID_code.py
+wres/theme/skins/wres_theme_scripts/getCID_desc.py
 wres/theme/skins/wres_theme_scripts/getChartNavigationEntries.py
 wres/theme/skins/wres_theme_scripts/getChartSummaryData.py
 wres/theme/skins/wres_theme_scripts/getClinic.py
@@ -373,6 +380,7 @@ wres/theme/skins/wres_theme_scripts/getRecentlySeenPatients.py
 wres/theme/skins/wres_theme_scripts/getRelatedUserObject.py
 wres/theme/skins/wres_theme_scripts/getResolveProblemData.py
 wres/theme/skins/wres_theme_scripts/getRosPath.py
+wres/theme/skins/wres_theme_scripts/getRowColor.py
 wres/theme/skins/wres_theme_scripts/getSelectOptionsData.py
 wres/theme/skins/wres_theme_scripts/getShowEncountersData.py
 wres/theme/skins/wres_theme_scripts/getShowImmunizationsData.py
@@ -383,6 +391,7 @@ wres/theme/skins/wres_theme_scripts/getVitalSignsData.py
 wres/theme/skins/wres_theme_scripts/getWorkflowActionsDocuments.py
 wres/theme/skins/wres_theme_scripts/get_formatted_questionnaire_data.py
 wres/theme/skins/wres_theme_scripts/go2home.py
+wres/theme/skins/wres_theme_scripts/go2mycalendar.py
 wres/theme/skins/wres_theme_scripts/innefective_prescription.cpt
 wres/theme/skins/wres_theme_scripts/innefective_prescription.cpt.metadata
 wres/theme/skins/wres_theme_scripts/instantiateVisitObject.py
@@ -401,6 +410,7 @@ wres/theme/skins/wres_theme_scripts/patient_status_modify.cpy
 wres/theme/skins/wres_theme_scripts/patient_status_modify.cpy.metadata
 wres/theme/skins/wres_theme_scripts/patient_view_script.py
 wres/theme/skins/wres_theme_scripts/print_request.py
+wres/theme/skins/wres_theme_scripts/quemSou.py
 wres/theme/skins/wres_theme_scripts/renew_historical_prescription.cpy
 wres/theme/skins/wres_theme_scripts/renew_historical_prescription.cpy.metadata
 wres/theme/skins/wres_theme_scripts/renew_innefective_prescription.cpy
@@ -450,6 +460,7 @@ wres/theme/skins/wres_theme_styles/autocomplete.css.dtml
 wres/theme/skins/wres_theme_styles/base_properties.props
 wres/theme/skins/wres_theme_styles/clinic_view.css
 wres/theme/skins/wres_theme_styles/cmed.css
+wres/theme/skins/wres_theme_styles/cmed_print.css
 wres/theme/skins/wres_theme_styles/doc_view.css
 wres/theme/skins/wres_theme_styles/doctor_view.css
 wres/theme/skins/wres_theme_styles/generic_richtext_edit.css
@@ -464,6 +475,7 @@ wres/theme/skins/wres_theme_templates/SFAjax_base_edit.cpt
 wres/theme/skins/wres_theme_templates/SFAjax_base_edit.cpt.metadata
 wres/theme/skins/wres_theme_templates/SFLight_patient_view.pt
 wres/theme/skins/wres_theme_templates/SFLight_visittemp_view.pt
+wres/theme/skins/wres_theme_templates/TP.pt
 wres/theme/skins/wres_theme_templates/add_new_prescription.cpt
 wres/theme/skins/wres_theme_templates/add_new_prescription.cpt.metadata
 wres/theme/skins/wres_theme_templates/addable_support.pt

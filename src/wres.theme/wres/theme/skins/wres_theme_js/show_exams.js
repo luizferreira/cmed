@@ -150,7 +150,6 @@ function add_form_row(){
 
 
 $(document).ready(function(){
-    
 //  $("input#exam"+counter).focus(add_form_row)
 
 //	$("input#add_prescription").click(fill_hidden_end_date)
