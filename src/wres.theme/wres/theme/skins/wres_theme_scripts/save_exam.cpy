@@ -1,6 +1,5 @@
 from DateTime import DateTime
 
-
 request = context.REQUEST
 
 all_items = request.items()
@@ -22,9 +21,7 @@ def organize(exams,values,dates):
             if(tuple_value[0] == "value_form"+str(number)):
                 values.remove(tuple_value)
                 values.append(tuple_value)
-                
-
-                
+                               
 for tupla in all_items:
     if("exam_form" in tupla[0]):
         exams.append(tupla)
@@ -34,7 +31,6 @@ for tupla in all_items:
         dates.append(tupla)
 
 organize(exams,values,dates)
-
 
 pack = zip(exams,values,dates)
 exams_length = len(exams)
@@ -49,12 +45,11 @@ for tuple in pack:
     exam["date"] = tuple[2][1]
     all_exams_data.append(exam)
     
-
 #///////////////////////////////////////////////////////////////////////////////////////
 member = context.portal_membership.getAuthenticatedMember()
 exam['submitted_by'] = member.id
 for exam in all_exams_data:
-    context.saveLaboratory(**exam)
+    context.chart_data.save_entry(context, 'laboratory', **exam)
 state.set(portal_status_message='Exame adicionado.')
 return state
 

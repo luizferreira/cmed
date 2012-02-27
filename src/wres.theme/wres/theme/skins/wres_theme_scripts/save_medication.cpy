@@ -21,7 +21,7 @@ member = context.portal_membership.getAuthenticatedMember()
 medication['submitted_by'] = member.id
 medication['end_date'] = DateTime()
 medication['note'] = ''
-context.saveMedication(**medication)
+context.chart_data.save_entry(context, 'medications', **medication)
 
 state.set(portal_status_message='Medicamento adicionado.')
 return state

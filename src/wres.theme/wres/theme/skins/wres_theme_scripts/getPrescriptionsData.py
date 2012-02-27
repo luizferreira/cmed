@@ -1,6 +1,6 @@
-prescriptions = context.getPrescriptions()
+prescriptions = context.chart_data.get_entry('prescriptions')
+prescriptions = prescriptions.values()
 return prescriptions
-
 
 #TODO remover a parte comentada
 #from DateTime import DateTime

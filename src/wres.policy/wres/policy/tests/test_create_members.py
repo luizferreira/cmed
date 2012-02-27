@@ -242,7 +242,7 @@ class TestSetup(unittest.TestCase):
         
     def test_create_secretary(self):
         
-        print "\n::::Teste criar secreataria iniciou!" 
+        print "\n::::Teste criar secretaria iniciou!" 
 
         app = self.app
         portal = self.portal
@@ -274,7 +274,7 @@ class TestSetup(unittest.TestCase):
         self.assertEqual(portal.absolute_url() + "/Secretaries/vsecretaria2/", browser.url)
         self.assertEqual(True, "As alterações foram salvas." in browser.contents)         
         
-        print "\n::::Teste criar secreataria passou!" 
+        print "\n::::Teste criar secretaria passou!" 
     
     def create_members_by_debug_init(self,secs=1,pats=1,docs=1,admins=1,clins=1):
         browser = self.browser

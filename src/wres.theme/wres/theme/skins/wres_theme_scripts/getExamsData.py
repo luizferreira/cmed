@@ -1,8 +1,5 @@
-def getExamsData():
-    result = []
-    chart = context.chart_data
-    exams = dict(chart.laboratory)
-    for value in exams.values():
-        result.append(value['data'])
-    return result
-return getExamsData()
+result = []
+labs = context.chart_data.get_entry('laboratory')
+for lab in labs.values():
+    result.append(lab['data'])
+return result

@@ -11,8 +11,8 @@ def formatPrescription(**prescription):
 
 request = context.REQUEST
 current = request['current']
-result = {}
-prescriptions = context.getPrescriptions(current)
-prescriptions = [formatPrescription(**p) for p in prescriptions]
-result['prescriptions'] = prescriptions
-return result
+#result = {}
+#prescriptions = context.getPrescriptions(current)#TODO Excluir
+#prescriptions = [formatPrescription(**p) for p in prescriptions]
+#result['prescriptions'] = prescriptions
+#return result

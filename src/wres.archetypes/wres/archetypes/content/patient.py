@@ -88,15 +88,15 @@ class Patient(wresuser.WRESUser):
     
     chartFolder = ComputedAttribute(chartFolder, 1)
     
-    def getEncounters(self):
-        pc = self.portal_catalog
-        chart_folder = self.chartFolder
-        brains = pc.search({'meta_type': 'Encounter',
-                            'path': '/'.join(chart_folder.getPhysicalPath()),
-                            })
-        encounters = [b.getObject() for b in brains]
-        encounters = [e for e in encounters if e.getDate_of_visit() is not None]
-        return encounters
+    #def getEncounters(self):
+        #pc = self.portal_catalog
+        #chart_folder = self.chartFolder
+        #brains = pc.search({'meta_type': 'Encounter',
+                            #'path': '/'.join(chart_folder.getPhysicalPath()),
+                            #})
+        #encounters = [b.getObject() for b in brains]
+        #encounters = [e for e in encounters if e.getDate_of_visit() is not None]
+        #return encounters
 
 #    def getRetirementdate(self):
 #        field = self.getField('retirementdate')
@@ -217,47 +217,46 @@ class Patient(wresuser.WRESUser):
 #    def updateChartData(self):
 #        self.chart_data.update_chart()
 
-    def getFamilyHistory(self):
-        return dict(self.chart_data.family_history)
+    #def getFamilyHistory(self):
+        #return dict(self.chart_data.family_history)
 
-    def getPastMedicalHistory(self):
-        return dict(self.chart_data.past_medical_history)
+    #def getPastMedicalHistory(self):
+        #return dict(self.chart_data.past_medical_history)
 
-    def getAllergies(self):
-        return dict(self.chart_data.allergies)
+    #def getAllergies(self):
+        #return dict(self.chart_data.allergies)
         
-    def getLaboratory(self):
-        return [dict(value) for value in self.chart_data.laboratory.values()]
+    #def getLaboratory(self):
+        #return [dict(value) for value in self.chart_data.laboratory.values()]
 
-    def getNotSignedAllergies(self):
-        return dict(self.chart_data.not_signed_allergies)
+    #def getNotSignedAllergies(self):
+        #return dict(self.chart_data.not_signed_allergies)
 
-    def getMedications(self):
-        return dict(self.chart_data.medications)
+    #def getMedications(self):
+        #return dict(self.chart_data.medications)
 
-    def getTests(self):
-        return dict(self.chart_data.tests)
+    #def getTests(self):
+        #return dict(self.chart_data.tests)
 
-    def getImmunizations(self):
-        return dict(self.chart_data.immunizations)
+    #def getImmunizations(self):
+        #return dict(self.chart_data.immunizations)
 
-    def getReviewOfSystems(self):
-        return dict(self.chart_data.review_of_systems)
+    #def getReviewOfSystems(self):
+        #return dict(self.chart_data.review_of_systems)
 
-    def getSocialHistory(self):
-        return dict(self.chart_data.social_history)
+    #def getSocialHistory(self):
+        #return dict(self.chart_data.social_history)
 
-    def getFollowUpNotes(self):
-        return [value for value in self.chart_data.follow_up_notes.values()]
+    #def getFollowUpNotes(self):
+        #return [value for value in self.chart_data.follow_up_notes.values()]
 
-    def getVitalSigns(self):
-        return [dict(value) for value in self.chart_data.vital_signs.values()]
+    #def getVitalSigns(self):
+        #return [dict(value) for value in self.chart_data.vital_signs.values()]
 
     # metodo utilizado apenas no debug_patientchartdata
     def get_chart_data_map(self):
-        from wres.archetypes.content.chartdata import ChartData
         return ChartData.mapping
-
+        
 #    def saveMaintenance(self, **maintenance):
 #        maints = self.chart_data.maintenances
 #        new_maintenance = Maintenance(**maintenance)
@@ -286,10 +285,10 @@ class Patient(wresuser.WRESUser):
 #        return maint.toDict()
 
 #    security.declarePublic('getMaintenances')
-    def getMaintenances(self):
-        """ """
-        maints = self.chart_data.maintenances.values()
-        return [maint.toDict() for maint in maints]
+    #def getMaintenances(self):
+        #""" """
+        #maints = self.chart_data.maintenances.values()
+        #return [maint.toDict() for maint in maints]
 
 #    def saveNote(self, **note):
 #        notes = self.chart_data.notes
@@ -305,87 +304,87 @@ class Patient(wresuser.WRESUser):
 #                setattr(note, key, value)
 #        notes[note_id] = note
 
-    def saveAllergy(self, **allergy):
-        allergies = self.chart_data.allergies
-        entry = {'date': DateTime(), 'came_from': 'template'}
-        id = self.generateUniqueId('Allergy')
-        entry['id'] = id
-        allergy['id'] = id
-        entry['data'] = allergy
-        allergies[id] = entry
+    #def saveAllergy(self, **allergy):
+        #allergies = self.chart_data.allergies
+        #entry = {'date': DateTime(), 'came_from': 'template'}
+        #id = self.generateUniqueId('Allergy')
+        #entry['id'] = id
+        #allergy['id'] = id
+        #entry['data'] = allergy
+        #allergies[id] = entry
     
-    def saveLaboratory(self,**exam):
-		exams = self.chart_data.laboratory
-		entry = {'date':DateTime(),'came_from':'template'}
-		id = self.generateUniqueId('Exam')
-		entry['id'] = id
-		exam['id'] = id
-		entry['data'] = exam
-		exams[id] = entry
+    #def saveLaboratory(self,**exam):
+        #exams = self.chart_data.laboratory
+        #entry = {'date':DateTime(),'came_from':'template'}
+        #id = self.generateUniqueId('Exam')
+        #entry['id'] = id
+        #exam['id'] = id
+        #entry['data'] = exam
+        #exams[id] = entry
 
-    def getNotes(self):
-        notes = self.chart_data.notes.values()
-        return [note.toDict() for note in notes]
+    #def getNotes(self):
+        #notes = self.chart_data.notes.values()
+        #return [note.toDict() for note in notes]
 
-    def saveProblem(self, **problem):
-        problems = self.chart_data.problems
-        entry = {'date': DateTime(), 'came_from': 'template'}
-        id = self.generateUniqueId('Problem')
-        entry['id'] = id
-        problem['id'] = id
-        entry['data'] = problem
-        problems[id] = entry
+    #def saveProblem(self, **problem):
+        #problems = self.chart_data.problems
+        #entry = {'date': DateTime(), 'came_from': 'template'}
+        #id = self.generateUniqueId('Problem')
+        #entry['id'] = id
+        #problem['id'] = id
+        #entry['data'] = problem
+        #problems[id] = entry
 
-    def editProblem(self, id, **data):
-        problem_id = id
-        problems = self.chart_data.problems
-        problem = problems[problem_id]
-        for key, value in data.items():
-            problem[key] = value
-        problems[problem_id] = problem
+    #def editProblem(self, id, **data):
+        #problem_id = id
+        #problems = self.chart_data.problems
+        #problem = problems[problem_id]
+        #for key, value in data.items():
+            #problem[key] = value
+        #problems[problem_id] = problem
     
-    def getProblems(self):
-        problems = self.chart_data.problems.values()
-        return [problem for problem in problems]
+    #def getProblems(self):
+        #problems = self.chart_data.problems.values()
+        #return [problem for problem in problems]
 
-    def getProblem(self, id):
-        problems = self.chart_data.problems
-        problem = problems[id]
-        if 'state' not in problem.keys():
-            problem['state'] = 'active'
-        return problems[id]
+    #def getProblem(self, id):
+        #problems = self.chart_data.problems
+        #problem = problems[id]
+        #if 'state' not in problem.keys():
+            #problem['state'] = 'active'
+        #return problems[id]
         
-    def saveMedication(self, **medication):
-        medications = self.chart_data.medications
-        entry = {'date': DateTime(), 'came_from': 'template'}
-        id = self.generateUniqueId('Medication')
-        medication['id'] = id
-        entry['id'] = id
-        entry['data'] = medication
-        medications[id] = entry
+    #def saveMedication(self, **medication):
+        #medications = self.chart_data.medications
+        #entry = {'date': DateTime(), 'came_from': 'template'}
+        #id = self.generateUniqueId('Medication')
+        #medication['id'] = id
+        #entry['id'] = id
+        #entry['data'] = medication
+        #medications[id] = entry
         
-    def editMedication(self, id, **data):
-        medication_id = id
-        medications = self.chart_data.medications
-        medication = medications[medication_id]
-        for key, value in data.items():
-            medication[key] = value
-        medications[medication_id] = medication
+    #def editMedication(self, id, **data):
+        #medication_id = id
+        #medications = self.chart_data.medications
+        #medication = medications[medication_id]
+        #for key, value in data.items():
+            #medication[key] = value
+        #medications[medication_id] = medication
         
-    def getMedication(self, id):
-        medications = self.chart_data.medications
-        medication = medications[id]
-        return medication
+    #def getMedication(self, id):
+        #medications = self.chart_data.medications
+        #medication = medications[id]
+        #return medication
 
-    def savePrescription(self, **prescription):
-        prescriptions = self.chart_data.prescriptions
-        entry = {}
-        id = self.generateUniqueId('Prescription')
-        prescription['id'] = id
-        entry['id'] = id
-        entry['data'] = prescription
-        prescriptions[id] = entry
-        return id
+    #def savePrescription(self, **prescription):
+        #prescriptions = self.chart_data.prescriptions
+        #entry = {}
+        #id = self.generateUniqueId('Prescription')
+        #prescription['id'] = id
+        #entry['id'] = id
+        #entry['data'] = prescription
+        #prescriptions[id] = entry
+        #return id
 
     #def editPrescription(self, id, **data):
         #prescription_id = id
@@ -396,13 +395,13 @@ class Patient(wresuser.WRESUser):
                 #setattr(prescription, key, value)
         #prescriptions[prescription_id] = prescription
 
-    def getPrescriptions(self, ids=None):
-        prescriptions = self.chart_data.prescriptions.values()
-        return [prescription for prescription in prescriptions]
+    #def getPrescriptions(self, ids=None):
+        #prescriptions = self.chart_data.prescriptions.values()
+        #return [prescription for prescription in prescriptions]
 
-    def getPrescription(self, id):
-        prescriptions = self.chart_data.prescriptions
-        return prescriptions[id]
+    #def getPrescription(self, id):
+        #prescriptions = self.chart_data.prescriptions
+        #return prescriptions[id]
 
 #    def special_fields(self, key):
 #        dict = {'main_information': ['chart', 'confirmedChartNumber',

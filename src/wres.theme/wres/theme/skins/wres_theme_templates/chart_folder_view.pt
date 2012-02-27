@@ -45,7 +45,7 @@
                 <tr>                
                     <td class="center width-100 spaced" colspan=2>
                         <h3 class="tabletitle" i18n:translate="heading_medications">Medications</h3>
-                        <div tal:define="data template_data/medications_list/active">
+                        <div tal:define="data template_data/medications/active">
                             <h5 class="tablesubtitle" i18n:translate="">Medicamentos em uso</h5>
                             <tal:if condition="data">
                             <table id="current_medications_table" class="listing center width-100">
@@ -90,21 +90,21 @@
                     <td class="center width-50 spaced"
                         tal:define="view python:True">
                         <h3 class="tabletitle" i18n:translate="heading_problem_list">Problem List</h3>
-                        <div tal:define="active python:True; data template_data/problems_list/active">
+                        <div tal:define="active python:True;data template_data/problems/active">
                             <h5 class="tablesubtitle" i18n:translate="heading_active">Active</h5>
-                            <tal:if condition="data/problems">
+                            <tal:if condition="data">
                                 <metal:x use-macro="here/problem_list_macros/macros/problem_list_table" />
                             </tal:if>
-                            <tal:else condition="not:data/problems">
+                            <tal:else condition="not:data">
                                 <i i18n:translate="help_no_problems">There are no active problems</i>
                             </tal:else>
                         </div>
-                        <div tal:define="active python:False; data template_data/problems_list/inactive">
+                        <div tal:define="active python:False; data template_data/problems/inactive">
                             <h5 class="tablesubtitle" i18n:translate="heading_inactive">Inactive</h5>
-                            <tal:if condition="data/problems">
+                            <tal:if condition="data">
                                 <metal:x use-macro="here/problem_list_macros/macros/problem_list_table" />
                             </tal:if>
-                            <tal:else condition="not:data/problems">
+                            <tal:else condition="not:data">
                                 <i i18n:translate="help_no_Problems">There are no inactive Problems</i>
                             </tal:else>
                         </div>

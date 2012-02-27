@@ -1,8 +1,7 @@
 <metal:problem_list_table define-macro="problem_list_table"
-    tal:define="there_are_problems data/problems | nothing"
+    tal:define="there_are_problems data | nothing"
         i18n:domain="cmfuemr">  
-        <table id="data_table" class="listing width-100"
-            tal:attributes="id string:${data/title}_table">
+        <table id="data_table" class="listing width-100">
             <!--caption class="left_align" tal:content="data/title">current</caption-->
             <thead>
                 <th width="15px">#</th>
@@ -10,12 +9,12 @@
                 <th width="100px" i18n:translate="cmfuemr_text_code">Code</th>
                 <th width="100px" i18n:translate="">Reportado</th>
                 <th width="100px" i18n:translate="" tal:condition="python: not active">Resolvido</th>
-                <th width="400px" i18n:translate="" tal:condition="python: not active">Nota:</th>
+                <th width="400px" i18n:translate="" tal:condition="python: not active">Nota</th>
                 <th i18n:translate="cmfuemr_text_actions" tal:condition="python: not view and active">Actions</th>
             </thead>
             <tbody>
                 <tr class="odd"
-                    tal:repeat="problem data/problems"
+                    tal:repeat="problem data"
                     tal:attributes="class python:test(repeat['problem'].number()%2 == 0, 'even', 'odd')">
                     <tal>
                         <td tal:content="python:str(repeat['problem'].number()).zfill(2)">01</td>

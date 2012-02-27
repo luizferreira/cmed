@@ -1,7 +1,7 @@
 request = context.REQUEST
 result = {}
 id = request['id']
-problem = context.getProblem(id)
+problem = context.chart_data.get_entry_item(id, 'problems')
 result.update(problem['data'])
 result['note'] = request.get('note', '')
 if request.get('shown_end_date'):
@@ -12,5 +12,4 @@ else:
     result['shown_end_date'] = right_now.strftime('%d/%m/%Y')
     result['end_date'] = right_now.strftime('%Y/%m/%d')
 result['id'] = id
-#from Products.zdb import set_trace; set_trace()
 return result

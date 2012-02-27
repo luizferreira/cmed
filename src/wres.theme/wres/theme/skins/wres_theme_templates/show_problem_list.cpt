@@ -17,8 +17,8 @@
     <body>
         <div metal:fill-slot="main"
             tal:define="template_data context/getProblemListData;
-                        active template_data/active/problems;
-                        inactive template_data/inactive/problems">
+                        active template_data/active;
+                        inactive template_data/inactive">
             <h1 i18n:translate="heading_problem_list">Problem List</h1>
 
             <div id="tables">

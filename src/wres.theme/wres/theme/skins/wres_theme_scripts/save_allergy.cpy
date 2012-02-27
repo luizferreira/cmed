@@ -8,7 +8,7 @@ for var in vars:
 
 member = context.portal_membership.getAuthenticatedMember()
 allergy['submitted_by'] = member.id
-context.saveAllergy(**allergy)
+context.chart_data.save_entry(context, 'allergies', **allergy)
 state.set(portal_status_message='Alergia adicionada.')
 return state
 

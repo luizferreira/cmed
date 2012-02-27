@@ -51,11 +51,9 @@
 #addStatusInformation(not_signed_allergies, 'not_signed')
 #allergies = allergies + not_signed_allergies
 #allergies = filter_duplicated(allergies)
-def getAllergiesData():
-    result = []
-    chart = context.chart_data
-    allergies = dict(chart.allergies)
-    for value in allergies.values():
-        result.append(value['data'])
-    return result
-return getAllergiesData()
+allergies = context.chart_data.get_entry('allergies')
+allergies = allergies.values()
+results = []
+for allergy in allergies:
+    results.append(allergy['data'])
+return results

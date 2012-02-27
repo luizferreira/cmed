@@ -40,7 +40,7 @@ class ChartData(Persistent):
                'allergies': OOBTree,
                'not_signed_allergies': OOBTree,
                #'tests': OOBTree,
-               'immunizations': OOBTree,
+               #'immunizations': OOBTree,
                'medications': OOBTree,
                'review_of_systems': OOBTree,
                #'social_history': OOBTree,
@@ -51,7 +51,7 @@ class ChartData(Persistent):
                #'encounters': OOBTree,
                #'plans': OOBTree,
                #'follow_up_notes': OOBTree,
-               'vital_signs': OOBTree,
+               #'vital_signs': OOBTree,
                'laboratory': OOBTree,
                #'histories': MedicalHistories,
               }
@@ -67,19 +67,20 @@ class ChartData(Persistent):
             raise AttributeError
         return getattr(self, attr)
     #Roteamento dos documentos
-    def add_not_signed_allergies(self, date, came_from, allergies):
-        entry = {'date': date, 'came_from': came_from, 'data': allergies}
-        entry['id'] = '/'.join(entry['came_from'])
-        container = getattr(self, 'not_signed_allergies')
-        saved = container.get(entry['id'], [])
-        if saved != allergies:
-            container[entry['id']] = entry
+    #def add_not_signed_allergies(self, date, came_from, allergies):
+        #entry = {'date': date, 'came_from': came_from, 'data': allergies}
+        #entry['id'] = '/'.join(entry['came_from'])
+        #container = getattr(self, 'not_signed_allergies')
+        #saved = container.get(entry['id'], [])
+        #if saved != allergies:
+            #container[entry['id']] = entry
+            
     #Roteamento dos documentos
-    def del_not_signed_allergies(self, came_from):
-        key = '/'.join(came_from)
-        container = getattr(self, 'not_signed_allergies')
-        if container.has_key(key):
-            del container[key]
+    #def del_not_signed_allergies(self, came_from):
+        #key = '/'.join(came_from)
+        #container = getattr(self, 'not_signed_allergies')
+        #if container.has_key(key):
+            #del container[key]
 
     def clean_chart(self):
         mapping = self.mapping
@@ -91,21 +92,59 @@ class ChartData(Persistent):
         for key, value in mapping.items():
             if not hasattr(self, key):
                 setattr(self, key, value())
-    #Roteamento dos documentos
-    def add_entry_to(self, place_id, date, came_from, data):
-        self.__add_entry_to(place_id, date, came_from, data)
-    #Roteamento dos documentos
-    def add_entry_to_problems(self, id, date, came_from, data):
-        entry = {'date': date, 'came_from': came_from, 'data': data}
+                
+    #def saveMedication(self, **medication):
+        #medications = self.chart_data.medications
+        #entry = {'date': DateTime(), 'came_from': 'template'}
+        #id = self.generateUniqueId('Medication')
+        #medication['id'] = id
+        #entry['id'] = id
+        #entry['data'] = medication
+        #medications[id] = entry
+        
+    #Salva entrada no atributo mappings do chart_data    
+    def save_entry(self, context, mapping_name, **object):
+        mappings = getattr(self, mapping_name)
+        entry = {'date': DateTime(), 'came_from': 'template'}
+        id = context.generateUniqueId(mapping_name)
+        object['id'] = id
         entry['id'] = id
-        place = getattr(self, 'problems')
-        place[entry['id']] = entry
+        entry['data'] = object
+        mappings[id] = entry
+        return id
+        
+    #Edita um item do atributo mappings do chart_data    
+    def edit_entry(self, id, mapping_name, **data):
+        mappings = getattr(self, mapping_name)
+        object = mappings[id]
+        for key, value in data.items():
+            object[key] = value
+        mappings[id] = object
+    
+    #Pega um atributo completo do mappings em chart_data
+    def get_entry(self, mapping_name):
+        return dict(getattr(self, mapping_name))
+    
+    #Pega um item do atributo mappings do chart_data
+    def get_entry_item(self, id, mapping_name):
+        mappings = getattr(self, mapping_name)
+        return mappings[id]
+    
     #Roteamento dos documentos
-    def __add_entry_to(self, place_id, date, came_from, data):
-        entry = {'date': date, 'came_from': came_from, 'data': data}
-        entry['id'] = str(entry['date'].aCommon()) + str(DateTime())
-        place = getattr(self, place_id)
-        place[entry['id']] = entry
+    #def add_entry_to(self, place_id, date, came_from, data):
+        #self.__add_entry_to(place_id, date, came_from, data)
+    #Roteamento dos documentos
+    #def add_entry_to_problems(self, id, date, came_from, data):
+        #entry = {'date': date, 'came_from': came_from, 'data': data}
+        #entry['id'] = id
+        #place = getattr(self, 'problems')
+        #place[entry['id']] = entry
+    #Roteamento dos documentos
+    #def __add_entry_to(self, place_id, date, came_from, data):
+        #entry = {'date': date, 'came_from': came_from, 'data': data}
+        #entry['id'] = str(entry['date'].aCommon()) + str(DateTime())
+        #place = getattr(self, place_id)
+        #place[entry['id']] = entry
 
     #def distribute_questionnaire(self, quest=None):
         #if quest is None:

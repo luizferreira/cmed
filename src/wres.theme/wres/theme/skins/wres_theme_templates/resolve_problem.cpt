@@ -48,7 +48,7 @@
 							<td i18n:translate="listingheader_note">Note: </td>
 							<td>
 								<textarea name="note"
-									tal:content="template_data/note"></textarea>
+									tal:content="template_data/note|nothing"></textarea>
 							</td>
 						</tr>
 						<tr>

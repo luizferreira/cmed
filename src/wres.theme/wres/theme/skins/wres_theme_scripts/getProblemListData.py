@@ -1,34 +1,34 @@
-ENCOUNTERS = [encounter['date_of_visit'].strftime('%d/%m/%Y') for encounter in context.getEncounters()]
+#ENCOUNTERS = [encounter['date_of_visit'].strftime('%d/%m/%Y') for encounter in context.getEncounters()]
 
-def formatEncounterDate(date):
-    dd = date[0:2]
-    mm = date[3:5]
-    yyyy = date[6:10]
-    return {'dd': dd, 'mm': mm, 'yyyy': yyyy}
+#def formatEncounterDate(date):
+    #dd = date[0:2]
+    #mm = date[3:5]
+    #yyyy = date[6:10]
+    #return {'dd': dd, 'mm': mm, 'yyyy': yyyy}
 
-def date2value(date):
-    dic = formatEncounterDate(date)
-    return dic['dd'] + '/' + dic['mm'] + '/' + dic['yyyy']
+#def date2value(date):
+    #dic = formatEncounterDate(date)
+    #return dic['dd'] + '/' + dic['mm'] + '/' + dic['yyyy']
 
-def date2text(date):
-    dic = formatEncounterDate(date)
-    return dic['dd'] + '/' + dic['mm'] + '/' + dic['yyyy']
+#def date2text(date):
+    #dic = formatEncounterDate(date)
+    #return dic['dd'] + '/' + dic['mm'] + '/' + dic['yyyy']
 
-def createStructure():
-    opts = [{'value': date2value(date), 'text': date2text(date)} for date in ENCOUNTERS]
-    return {'reported_opts': opts}
+#def createStructure():
+    #opts = [{'value': date2value(date), 'text': date2text(date)} for date in ENCOUNTERS]
+    #return {'reported_opts': opts}
 
-def createGroup(group_name):
-    return {'title': group_name,
-            'problems': [],
-##            'encounters': ENCOUNTERS,
-            }
-def addGroup(structure, group):
-    title = group['title'].lower()
-    structure[title] = group
+#def createGroup(group_name):
+    #return {'title': group_name,
+            #'problems': [],
+###            'encounters': ENCOUNTERS,
+            #}
+#def addGroup(structure, group):
+    #title = group['title'].lower()
+    #structure[title] = group
 
-def isDateTime(obj):
-    return hasattr(obj, 'strftime')
+#def isDateTime(obj):
+    #return hasattr(obj, 'strftime')
 
 ##def getEncountersData(group, problem):
 ##    temp = {}
@@ -48,9 +48,14 @@ def addProblem(group, **problem):
 def divideProblems(problems):
     active = []
     inactive = []
+    problems = problems.values()
     for problem in problems:
-        if not same_type(problem, {}):
-            problem = problem.toDict()
+        date = problem['data']['started']
+        if hasattr(date, 'strftime'): #TODO Workaround - algumas datas sao str
+            problem['data']['started'] = date.strftime('%d/%m/%Y')
+        date = problem['data']['end_date']
+        if hasattr(date, 'strftime'): #TODO Workaround - algumas datas sao str
+            problem['data']['end_date'] = date.strftime('%d/%m/%Y')
         if problem.get('data').get('state') == 'active':
             active.append(problem)
         else:
@@ -68,23 +73,9 @@ def divideProblems(problems):
 #            'state': state,
 #            }
 
-problems = context.getProblems()
+problems = context.chart_data.get_entry('problems')
 active, inactive = divideProblems(problems)
 
-
-structure = createStructure()
-group = createGroup('Active')
-
-for problem in active:
-    addProblem(group, **problem)
-
-addGroup(structure, group)
-
-group = createGroup('Inactive')
-
-for problem in inactive:
-    addProblem(group, **problem)
-
-addGroup(structure, group)
+structure = {'active': active, 'inactive': inactive}
 
 return structure
