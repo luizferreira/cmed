@@ -37,7 +37,7 @@
 </div>
 
 <metal:def define-macro="visits_table" i18n:domain="cmfuemr">
-	<table class="seclisting width-100" tal:condition="doctor_visits">
+	<table class="seclisting width-100" id="visit_table" tal:condition="doctor_visits">
 		<thead>
 			<metal:thead define-slot="thead">
 				<th style="width:150px">Horário</th>
@@ -48,7 +48,7 @@
 			</metal:thead>
 		</thead>
 		<tbody>
-                    <tal:for repeat="visit doctor_visits">
+                <tal:for tal:repeat="visit doctor_visits">
                         <!-- tr tal:attributes="class python:test(repeat['visit'].odd(), 'odd', 'even');">  -->
                     <tr tal:define="doctor python:visit['getDoctor'];
                                     doctor_id doctor/getId;
@@ -72,11 +72,13 @@
                             </td>
                             <td>
                                     <!-- Link para o nome do paciente-->
-                                <a id="patient_link"
-                                    href="javascript: void(0)"
+                                <a  href="javascript: void(0)"
                                     disabled="true"
-                                    tal:content="python:patient.Title()" i18n:translate="" onclick="loadPatientBalloon()" > Nome do Paciente </a>
-                                <input id="patient_url" style="display:none" tal:attributes="value python:patient.absolute_url()"/>
+                                    tal:attributes="id python: 'patient_link' + str(repeat['visit'].index);
+                                    onmouseover string:loadPatientTip(${repeat/visit/index})"
+                                    tal:content="python:patient.Title()" i18n:translate="" > Nome do Paciente </a>
+                                <input style="display:none" tal:attributes="value python:patient.absolute_url();
+                                id python: 'patient_url' + str(repeat['visit'].index)"/>
                                 <input id="AmIDoctor" style="display:none" tal:attributes="value python:context.TestRoles()"/>
                             </td>
 

@@ -14,7 +14,6 @@
 	</metal:block>
     <metal:block fill-slot="javascript_head_slot">
         <script type="text/javascript" src="jquery.qtip.min.js"></script> 
-        <script type="text/javascript" src="sec_desk.js"></script> 
     </metal:block> 
 </head>
 

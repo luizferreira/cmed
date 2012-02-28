@@ -13,11 +13,12 @@ function escondeMostraVisitas(){
 	}	
 }
 
-function loadPatientTip(){
-     var patient_url = $("#patient_url").val()
+function loadPatientTip(index){
+
+     var patient_url = $("#patient_url"+index).val()
      var AmIDoctor = $("#AmIDoctor").val()
      if (AmIDoctor == 1){
-        $("#patient_link").qtip({ 
+        $("#patient_link"+index).qtip({ 
             content: "<a href='"+patient_url+"'>Prontuário</a><br><a href='"+patient_url+"/chartFolder"+"'>Dados</a>",
             position:{
                 corner: "rigthMiddle",
@@ -49,7 +50,7 @@ function loadPatientTip(){
             })
         }
     else {
-        $("#patient_link").qtip({ 
+        $("#patient_link"+index).qtip({ 
             content: "<a href='"+patient_url+"'>Prontuário</a>",
             position:{
                 corner: "rigthMiddle",
@@ -84,8 +85,6 @@ function loadPatientTip(){
     }
     
 $(document).ready(function(){
-    loadPatientTip()
-	//$('#patient_link').balloon({contents:"<b>casa</b> azul",position:null});
 	var show_visits_reloaded = false;
 	/*var fez_requisicao = false;*/
 	
