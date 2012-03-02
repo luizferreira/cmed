@@ -42,10 +42,13 @@ class Secretary(wresuser.WRESUser):
     def at_post_edit_script(self):
         # self.getIsTranscriptionist
         # import ipdb; ipdb.set_trace()
+
+        sec_id = self.getId()
+        acl = self.acl_users
         if self.getIsTranscriptionist():
-            self.acl_users.portal_role_manager.assignRoleToPrincipal(TRANSCRIPTIONIST_ROLE, self.getId())
-        else:
-            self.acl_users.portal_role_manager.removeRoleFromPrincipal(TRANSCRIPTIONIST_ROLE, self.getId())
+            acl.portal_role_manager.assignRoleToPrincipal(TRANSCRIPTIONIST_ROLE, sec_id)
+        elif acl.getUserById(sec_id).has_role(TRANSCRIPTIONIST_ROLE):
+            acl.portal_role_manager.removeRoleFromPrincipal(TRANSCRIPTIONIST_ROLE, sec_id)
 
 
 
