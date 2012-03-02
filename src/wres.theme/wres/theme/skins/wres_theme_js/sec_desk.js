@@ -19,7 +19,7 @@ function loadPatientTip(index){
      var AmIDoctor = $("#AmIDoctor").val()
      if (AmIDoctor == 1){
         $("#patient_link"+index).qtip({ 
-            content: "<a href='"+patient_url+"'>Prontuário</a><br><a href='"+patient_url+"/chartFolder"+"'>Dados</a>",
+            content: "<a href='"+patient_url+"'>Dados</a><br><a href='"+patient_url+"/chartFolder"+"'>Prontuário</a>",
             position:{
                 corner: "rigthMiddle",
                 adjust:
@@ -51,7 +51,7 @@ function loadPatientTip(index){
         }
     else {
         $("#patient_link"+index).qtip({ 
-            content: "<a href='"+patient_url+"'>Prontuário</a>",
+            content: "<a href='"+patient_url+"'>Dados</a>",
             position:{
                 corner: "rigthMiddle",
                 adjust:
