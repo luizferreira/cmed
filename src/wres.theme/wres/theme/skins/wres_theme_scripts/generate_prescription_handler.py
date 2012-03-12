@@ -15,5 +15,4 @@ prescription['doctor'] = member.id
 prescription['date'] = request['date']
 prescription['medications'] = medications
 id = context.chart_data.save_entry(context, 'prescriptions', **prescription)
-import ipdb; ipdb.set_trace()
 container.REQUEST.RESPONSE.redirect(context.absolute_url()+'/print_prescription?id='+id)

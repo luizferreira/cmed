@@ -230,13 +230,12 @@ class TestSetup(unittest.TestCase):
         self.assertEqual(True, "As alterações foram salvas." in browser.contents)          
 
         #As Secretary----------------------------------
-        print "As Secretary"
+        print "As Secretary - False Case"
         logout(self)
         login_as_secretary(self)
         self.create_doctor()
         # testa a url e a mensagem de status
-        self.assertEqual(portal.absolute_url() + "/Doctors/jdoutor2/", browser.url)
-        self.assertEqual(True, "As alterações foram salvas." in browser.contents)          
+        self.failUnless("Privilégios Insuficientes" in browser.contents)
         
         print "\n::::Teste criar doutor passou!" 
         

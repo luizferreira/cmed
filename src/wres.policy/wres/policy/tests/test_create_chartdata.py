@@ -218,19 +218,19 @@ class TestSetup(unittest.TestCase):
         
         #Pequeno parse para pegar o id de um medicamento, no caso o primeiro da lista
         try:
-            self.assertEqual(True,"id=medication." in browser.contents)
+            self.assertEqual(True,"id=medications." in browser.contents)
         except:
             print "Nao existe medicamento para editar"
-            return
+            self.assertEqual(True,"id=medications." in browser.contents)
             
         pag = browser.contents
-        inicio = pag.find("id=medication.")
-        inicio = inicio + len("id=medication.")
+        inicio = pag.find("id=medications.")
+        inicio = inicio + len("id=medications.")
         fim = inicio + pag[inicio:].find("'")
         med_id = pag[inicio:fim]
         
         #Entrar na pagina de edicao
-        browser.open(PATIENT_URL + "/chartFolder_hidden/edit_medication?id=medication." + med_id)
+        browser.open(PATIENT_URL + "/chartFolder_hidden/edit_medication?id=medications." + med_id)
         browser.getControl(name='medication').value = "Medicamento Editado"
         browser.getControl(name='concentration').value = "Concentracao Editado"
         browser.getControl(name='quantity').value = "Quantidade Editado"
@@ -245,20 +245,20 @@ class TestSetup(unittest.TestCase):
         browser.open(PATIENT_URL+"/chartFolder/show_medications")
         
         try:
-            self.assertEqual(True,"id=medication." in browser.contents)
+            self.assertEqual(True,"id=medications." in browser.contents)
         except:
             print "Nao existe medicamento para inativar"
-            self.assertEqual(True,"id=medication." in browser.contents)
+            self.assertEqual(True,"id=medications." in browser.contents)
         
         #Pequeno parse para pegar o id de um medicamento, no caso o primeiro da lista
         pag = browser.contents
-        inicio = pag.find("id=medication.")
-        inicio = inicio + len("id=medication.")
+        inicio = pag.find("id=medications.")
+        inicio = inicio + len("id=medications.")
         fim = inicio + pag[inicio:].find("'")
         med_id = pag[inicio:fim]
         
         #Entrar na pagina de Inativação
-        browser.open(PATIENT_URL + "/chartFolder_hidden/inactivate_medication?id=medication." + med_id)
+        browser.open(PATIENT_URL + "/chartFolder_hidden/inactivate_medication?id=medications." + med_id)
         browser.getControl(name='shown_end_date').value = "05/05/03"
         browser.getControl(name='note').value = "Nota do Medicamento inativado"
         browser.getControl(name='form.button.inactivate').click()
@@ -269,10 +269,10 @@ class TestSetup(unittest.TestCase):
         
         browser.open(PATIENT_URL+"/chartFolder/show_medications")
         try:
-            self.assertEqual(True,"id=medication." in browser.contents)
+            self.assertEqual(True,'name="form.button.generate"' in browser.contents)
         except:
             print "Nao existe medicamento para gerar prescricao"
-            self.assertEqual(True,"id=medication." in browser.contents)
+            self.assertEqual(True,'name="form.button.generate"' in browser.contents)
         
         browser.getControl(name='form.button.generate').click()
         browser.getControl(name='form.button.confirm').click()
@@ -290,11 +290,11 @@ class TestSetup(unittest.TestCase):
         
         #Pequeno parse para pegar o id de uma prescricao, no caso o primeiro da lista
         pag = browser.contents
-        inicio = pag.find("id=prescription.")
-        inicio = inicio + len("id=prescription.")
+        inicio = pag.find("id=prescriptions.")
+        inicio = inicio + len("id=prescriptions.")
         fim = inicio + pag[inicio:].find('"')
         pre_id = pag[inicio:fim]
-        browser.open(PATIENT_URL + "/chartFolder_hidden/print_prescription?id=prescription."+ pre_id)
+        browser.open(PATIENT_URL + "/chartFolder_hidden/print_prescription?id=prescriptions."+ pre_id)
     
     def create_problems(self,PATIENT_ID,PATIENT_URL,problem="Diarréia",code="J00-J99",status="active"):
         portal = self.portal
@@ -320,22 +320,21 @@ class TestSetup(unittest.TestCase):
         
         
         try:
-            self.assertEqual(True,'value="problem.' in browser.contents)
+            self.assertEqual(True,'value="problems.' in browser.contents)
         except:
             print "Nao existe problemas para editar"
-            self.assertEqual(True,'value="problem.' in browser.contents)
-            return
+            self.assertEqual(True,'value="problems.' in browser.contents)
         
         #Pequeno parse para pegar o id de um problema, no caso o primeiro da lista
         pag = browser.contents
-        inicio = pag.find('value="problem.')
-        inicio = inicio + len('value="problem.')
+        inicio = pag.find('value="problems.')
+        inicio = inicio + len('value="problems.')
         fim = inicio + pag[inicio:].find('"')
         pro_id = pag[inicio:fim]
         
         
         #Entrar na pagina de edicao
-        browser.open(PATIENT_URL + "/chartFolder_hidden/show_problem_list?form.submitted=1&id=problem." + pro_id + "&form.button.edit=Editar")
+        browser.open(PATIENT_URL + "/chartFolder_hidden/show_problem_list?form.submitted=1&id=problems." + pro_id + "&form.button.edit=Editar")
         #import ipdb;ipdb.set_trace()
         browser.getControl(name='problem').value = problem
         browser.getControl(name='code').value = code
@@ -350,21 +349,21 @@ class TestSetup(unittest.TestCase):
         browser.open(PATIENT_URL+"/chartFolder/show_problem_list")
         
         try:
-            self.assertEqual(True,'value="problem.' in browser.contents)
+            self.assertEqual(True,'value="problems.' in browser.contents)
         except:
             print "Nao existe problemas para resolver"
-            self.assertEqual(True,'value="problem.' in browser.contents)
+            self.assertEqual(True,'value="problems.' in browser.contents)
             return
         
         #Pequeno parse para pegar o id de um problema, no caso o primeiro da lista
         pag = browser.contents
-        inicio = pag.find('value="problem.')
-        inicio = inicio + len('value="problem.')
+        inicio = pag.find('value="problems.')
+        inicio = inicio + len('value="problems.')
         fim = inicio + pag[inicio:].find('"')
         pro_id = pag[inicio:fim]
         
         #Entrar na pagina de solução
-        browser.open(PATIENT_URL + "/chartFolder_hidden/show_problem_list?form.submitted=1&id=problem." + pro_id + "&form.button.resolve=Resolver")
+        browser.open(PATIENT_URL + "/chartFolder_hidden/show_problem_list?form.submitted=1&id=problems." + pro_id + "&form.button.resolve=Resolver")
         browser.getControl(name='end_date').value = date
         browser.getControl(name='note').value = note
         browser.getControl(name="form.button.resolve").click()
@@ -392,9 +391,9 @@ class TestSetup(unittest.TestCase):
         self.failUnless(self.verifyChartPatient(PATIENT_ID))
         browser.open(PATIENT_URL+"/chartFolder/show_exams")
         
-        browser.getControl(name='exam').value = exam
-        browser.getControl(name='value').value = value
-        browser.getControl(name='date').value = date
+        browser.getControl(name='exam_form0').value = exam
+        browser.getControl(name='value_form0').value = value
+        browser.getControl(name='date_form0').value = date
         browser.getControl(name="form.button.save").click()
     
     def test_create_exam(self):
@@ -489,7 +488,9 @@ class TestSetup(unittest.TestCase):
         PATIENT_URL = portal.absolute_url() + "/Patients/" + PATIENT_ID
         
         #As Manager----------------------------------
+        print "Demora um pouco"
         print "As Manager"
+        
         #Cria 3 problemas(um já resolvido), depois edita um mudando o status para resolvido, depois resolve outro diretamente.
         #Create problems
         self.create_problems(PATIENT_ID, PATIENT_URL)
@@ -500,7 +501,7 @@ class TestSetup(unittest.TestCase):
         
         #Testa se "Dor de braço" dentro do fildset "Resolvidos" por causa do status "inactive"
         self.create_problems(PATIENT_ID, PATIENT_URL,"Dor de braço","456 7897","inactive")
-        inicio = browser.contents.find('id="historical"')
+        inicio = browser.contents.find('<legend> Ativos </legend>')
         self.failUnless("Dor de braço" in browser.contents[inicio:])
         self.failUnless("Diagnóstico adicionado." in browser.contents)
         #Edit Problems
@@ -564,12 +565,12 @@ class TestSetup(unittest.TestCase):
         self.failUnless("Energil C" in browser.contents)
         #Generate Prescriptions
         self.generate_prescription(PATIENT_ID,PATIENT_URL)
-        self.failUnless('id="prescriptions"' in browser.contents)
+        self.failUnless('id="pres_data"' in browser.contents)
         self.failUnless("CRM:" in browser.contents)
         #Visualize Prescription
         self.visualize_prescription(PATIENT_ID,PATIENT_URL)
         self.failUnless("CRM:" in browser.contents)
-        self.failUnless('id="prescriptions"' in browser.contents)
+        self.failUnless('id="pres_data"' in browser.contents)
         #Edit Medications
         self.edit_medications(PATIENT_ID,PATIENT_URL)
         self.failUnless("Medicamento Editado" in browser.contents)
