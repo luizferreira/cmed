@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+    <metal:aux fill-slot="style_slot">
+        <link type="text/css" href="bottom.css" rel="stylesheet" />
+        <link type="text/css" href="thin_patient_portlet.css" rel="stylesheet" />
+    </metal:aux>
+	<metal:block fill-slot="javascript_head_slot">
+        <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+        <script type="text/javascript" src="jquery.pikachoose.js"></script>
+        <script language="javascript">
+			$(document).ready(function (){
+					$("#pictures").PikaChoose({carousel:true, carouselVertical:true,autoPlay:false});
+				});
+        </script>
+    </metal:block>
+    
+<head>
+
+<title i18n:translate="cmfuemr_patient_search">Patient search</title>
+
+
+</head>
+
+<body>
+
+<div metal:fill-slot="main" id="main_chart_print" 
+tal:define="urls context/uploaded" >
+<!--
+    <div tal:content="urls"></div>
+-->
+<table>
+    <tr>
+        <th width="350px" align="center">Outros Arquivos</th>
+        <th align="center">Imagens</th>
+    </tr>
+    <tr>
+        <td align="top" style="vertical-align:text-top;"> 
+            <div tal:repeat="file python:urls[1]">
+                <div>
+                    <img tal:attributes="src python:file[2]"/>
+                    <a tal:attributes="href python:file[0]" ><span tal:content="python:file[1]"></span></a>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="pikachoose">
+                <ul id="pictures">
+                    <li tal:repeat="url python:urls[0]"><a tal:attributes="href url"><img tal:attributes="src url"/></a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+</div>
+
+</body>
+</html>

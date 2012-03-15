@@ -207,6 +207,7 @@ wres/policy/profiles/default/toolset.xml
 wres/policy/profiles/default/wres.policy_various.txt
 wres/policy/tests/__init__.py
 wres/policy/tests/test_change_role.py
+wres/policy/tests/test_create_appointment.py
 wres/policy/tests/test_create_chartdata.py
 wres/policy/tests/test_create_members.py
 wres/policy/tests/test_test.py
