@@ -119,9 +119,9 @@ if not results:
     write('''</fieldset>''')
 
 else:
-    write('''<fieldset class="livesearchContainer cmedgray">''')
+    write('''<fieldset class="livesearchContainer cmedgray" style="width:650px">''')
     write('''<legend id="livesearchLegend">%s</legend>''' % "Resultados")
-    write('''<div class="LSIEFix">''')
+    write('''<div class="LSIEFix" style="width:600px">''')
     write('''<ul class="LSTable">''')
     for result in results[:limit]:
 
@@ -132,7 +132,7 @@ else:
         itemUrl = itemUrl + searchterm_query
 
         
-        write('''<li class="LSRow">''')
+        write('''<li class="LSRow" style="width:550px;">''')
         write(icon.html_tag() or '')
         full_title = safe_unicode(pretty_title_or_id(result))
         if len(full_title) > MAX_TITLE:
@@ -149,20 +149,26 @@ else:
             patient = result.getObject()
             # conforme decidido, data de nascimento deixa de ser obrigatoria.
             # dessa forma, o search passa a mostrar o telefone de contato no lugar.
-            # dt = patient.getBirthDate()
+            dt = patient.getBirthDate()
             cf = patient.getContactPhone()
             formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])
             ppath = patient.absolute_url_path()
-            write('''<a title="%s" class="%s" onClick="selectPatient('%s', '%s')">%s (%s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone))
+            if dt == None:
+                write('''<a title="%s" class="%s" onClick="selectPatient('%s', '%s')">%s (%s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone))
+            else:
+                write('''<a title="%s" class="%s" onClick="selectPatient('%s', '%s')">%s (%s * %s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone, dt.strftime("%d/%m/%Y")))
         elif result.portal_type == 'Patient':
             patient = result.getObject()
             # conforme decidido, data de nascimento deixa de ser obrigatoria.
             # dessa forma, o search passa a mostrar o telefone de contato no lugar.            
-            # dt = patient.getBirthDate()
+            dt = patient.getBirthDate()
             cf = patient.getContactPhone()
             formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])
             pchart_url = patient.absolute_url()+'/chartFolder'
-            write('''%s (%s)''' % (display_title, formatted_phone ) )
+            if dt == None:
+                write('''%s (%s)''' % (display_title, formatted_phone ) )
+            else:
+                write('''%s (%s * %s)''' % (display_title, formatted_phone, dt.strftime("%d/%m/%Y") ) )
             write('''(<a href="%s" title="%s" class="%s">%s </a>''' % (itemUrl, full_title, klass, "Pessoal"))
             write(''' | <a href="%s" title="%s">%s</a>)''' % (pchart_url, "", "Prontuário"))
 

@@ -5,7 +5,10 @@
 ##bind subpath=traverse_subpath
 ##parameters=opener, field
 def getRequiredFields(obj):
-    return obj.Schema().filterFields(required=1)
+    schema = obj.Schema()
+    fields = schema.filterFields(required=1)
+    fields.append( schema['birthDate'] )
+    return fields
 
 def filterDefaultValues(result, default_values):
     #Esta sendo utilizado somente em visit p/ o quick register de location
