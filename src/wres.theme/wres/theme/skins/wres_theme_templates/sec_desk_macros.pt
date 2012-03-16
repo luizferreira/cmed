@@ -40,11 +40,12 @@
 	<table class="seclisting width-100" id="visit_table" tal:condition="doctor_visits">
 		<thead>
 			<metal:thead define-slot="thead">
-				<th style="width:150px">Horário</th>
-				<th style="width:200px">Paciente</th>
+				<th style="width:150px;text-align: center;">Horário</th>
+				<th style="width:200px;text-align: center;">Paciente</th>
 				<!-- th>Telefone</th>  -->
-				<th style="width:150px">Status</th>
-				<th>Alterar</th>
+				<th style="width:150px;text-align: center;">Status</th>
+				<th style="width:300px;text-align: center;">Alterar</th>
+                <th style="text-align: center;">Nota</th>
 			</metal:thead>
 		</thead>
 		<tbody>
@@ -59,8 +60,9 @@
                                             id string:row_$row_number">
                             <metal:trow define-slot="trow">
                             <tal:block_aux tal:define="visit_id python:visit['absolute_url'].split('/')[-1];
-                                                       patient python:visit['getPatient'];">
-                            <td>
+                                                       patient python:visit['getPatient'];
+                                                       note python:visit['getNote'];">
+                            <td style="text-align: center;">
                                 <a tal:attributes="name visit_id" />
                                 <a class="visit_link" 
                                     href="javascript: void(0)"	
@@ -70,7 +72,7 @@
                                 <img tal:attributes="src string:${portal_url}/popup_icon.gif;" />
                                 <input id="visit_url" style="display:none" tal:attributes="value visit/absolute_url"/>
                             </td>
-                            <td>
+                            <td style="text-align: center;">
                                     <!-- Link para o nome do paciente-->
                                 <a  href="javascript: void(0)"
                                     disabled="true"
@@ -83,7 +85,8 @@
                             </td>
 
                             <td class="desktop_visit_status"
-                                tal:content="python:visit['getReviewState']" i18n:translate="">Status
+                                tal:content="python:visit['getReviewState']" i18n:translate=""
+                                style="text-align: center;">Status
                             </td>
                             
                             <!-- Conteudo da celula CHANGE  -->
@@ -91,6 +94,11 @@
                                 <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
                                 <div tal:define="repeat_number repeat/visit/number" tal:attributes="id string:change_cell_div_${repeat_number}">
                                         <metal:change use-macro="here/sec_desk_macros/macros/change_cell" />
+                                </div>
+                            </td>
+                            <td style="text-align: center;">
+                                <div tal:content="visit/getNote">
+                                       
                                 </div>
                             </td>
                             </tal:block_aux>

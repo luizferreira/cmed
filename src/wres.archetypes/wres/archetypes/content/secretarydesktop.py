@@ -35,6 +35,7 @@ class SecretaryDesktopData():
             visit_dic['getPatient'] = visit.getPatient()
             visit_dic['getReviewState'] = visit.getReviewState()
             visit_dic['getWorkflowActions'] = visit.getWorkflowActions()
+            visit_dic['getNote'] = visit.getNote()
             visit_dic['start'] = visit.start()
             visits_list.append(visit_dic)
         return visits_list
@@ -94,7 +95,10 @@ class VisitWrapper():
         return self.brain.getURL()
     
     def getContactPhone(self):
-        return self.brain_obj.getContactPhone()       
+        return self.brain_obj.getContactPhone()   
+    
+    def getNote(self):
+        return self.brain_obj.getNote()
 
     def getDoctor(self):
         return self.brain_obj.getDoctor()         
