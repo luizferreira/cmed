@@ -147,8 +147,6 @@ else:
         # o elif se refere a pesquisa da pasta Patients
         if building_search and result.portal_type == 'Patient':
             patient = result.getObject()
-            # conforme decidido, data de nascimento deixa de ser obrigatoria.
-            # dessa forma, o search passa a mostrar o telefone de contato no lugar.
             dt = patient.getBirthDate()
             cf = patient.getContactPhone()
             formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])
@@ -159,8 +157,6 @@ else:
                 write('''<a title="%s" class="%s" onClick="selectPatient('%s', '%s')">%s (%s * %s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone, dt.strftime("%d/%m/%Y")))
         elif result.portal_type == 'Patient':
             patient = result.getObject()
-            # conforme decidido, data de nascimento deixa de ser obrigatoria.
-            # dessa forma, o search passa a mostrar o telefone de contato no lugar.            
             dt = patient.getBirthDate()
             cf = patient.getContactPhone()
             formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])

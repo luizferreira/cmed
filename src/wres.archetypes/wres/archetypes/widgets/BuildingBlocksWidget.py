@@ -168,7 +168,7 @@ class BuildingBlocksWidget(ReferenceWidget):
         not_load_top = "ajax_load=1&ajax_include_head=1"
         url = '%s/%s?%s&opener_type=%s&%s' % (base, template_id, qs, opener_type, not_load_top)
         target = '_blank'
-        parameters = 'width=550,height=525,scrollbars=yes,resizable=yes'
+        parameters = 'width=800,height=525,scrollbars=yes,resizable=yes'
         return "window.open('%s','%s','%s')" % (url, target, parameters)
 
 registerWidget(BuildingBlocksWidget,

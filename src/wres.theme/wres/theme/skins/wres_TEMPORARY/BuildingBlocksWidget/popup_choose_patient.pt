@@ -36,13 +36,11 @@
 	 tal:define="title string:Buscar Paciente;
 	 			 portal context/@@plone_portal_state/portal;"> 
      
-    <center>
 
     <h1 style="color:#000066">
         <a i18n:translate="" tal:content="string:${title}">Title</a>
     </h1>     
      
-      
 
     <!--label i18n:translate="">
       Procurar
@@ -71,9 +69,8 @@
       </form>
     </div>
 
-    </center>
     <br />
-    <div align="center">
+    <div>
         <a href="#" onclick="javascript:window.close();">Fechar Janela</a>
     </div>    
 	
