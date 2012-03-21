@@ -212,7 +212,6 @@ wres/theme/profiles/default/metadata.xml
 wres/theme/profiles/default/skins.xml
 wres/theme/profiles/default/viewlets.xml
 wres/theme/profiles/default/wres.theme_various.txt
-wres/theme/skins/hs_err_pid5022.log
 wres/theme/skins/sunburst_theme/sunburst_images/logo.png
 wres/theme/skins/sunburst_theme/sunburst_images/pb_close.png
 wres/theme/skins/sunburst_theme/sunburst_styles/IEFixes.css
@@ -323,7 +322,6 @@ wres/theme/skins/wres_theme_js/generic_selection_edit.js
 wres/theme/skins/wres_theme_js/jquery-1.7.1.min.js
 wres/theme/skins/wres_theme_js/jquery.pikachoose.js
 wres/theme/skins/wres_theme_js/jquery.qtip.min.js
-wres/theme/skins/wres_theme_js/jquery.simpletip.min.js
 wres/theme/skins/wres_theme_js/patient_cphone_edit.js
 wres/theme/skins/wres_theme_js/patient_view.js
 wres/theme/skins/wres_theme_js/print_prescription.js
@@ -477,7 +475,6 @@ wres/theme/skins/wres_theme_scripts/verifyRole.py
 wres/theme/skins/wres_theme_styles/CONTENT.txt
 wres/theme/skins/wres_theme_styles/allergy_portlet.css
 wres/theme/skins/wres_theme_styles/autocomplete.css.dtml
-wres/theme/skins/wres_theme_styles/base.css
 wres/theme/skins/wres_theme_styles/base_properties.props
 wres/theme/skins/wres_theme_styles/bottom.css
 wres/theme/skins/wres_theme_styles/clinic_view.css
