@@ -40,11 +40,13 @@
 	<table class="seclisting width-100" id="visit_table" tal:condition="doctor_visits">
 		<thead>
 			<metal:thead define-slot="thead">
-				<th style="width:150px;text-align: center;">Horário</th>
+				<th style="width:80px;text-align: center;">Horário</th>
 				<th style="width:200px;text-align: center;">Paciente</th>
 				<!-- th>Telefone</th>  -->
-				<th style="width:150px;text-align: center;">Status</th>
-				<th style="width:300px;text-align: center;">Alterar</th>
+				<th style="width:80px;text-align: center;">Status</th>
+				<th style="width:270px;text-align: center;">Alterar</th>
+                <th style="width:90px;text-align: center;">Tipo</th>
+                <th style="width:180px;text-align: center;">Razão</th>
                 <th style="text-align: center;">Nota</th>
 			</metal:thead>
 		</thead>
@@ -96,6 +98,19 @@
                                         <metal:change use-macro="here/sec_desk_macros/macros/change_cell" />
                                 </div>
                             </td>
+                            
+                            <td style="text-align: center;">
+                                <div tal:content="visit/getVisit_type | nothing">
+                                       
+                                </div>
+                            </td>      
+
+                            <td style="text-align: center;">
+                                <div tal:content="visit/getVisit_reason | nothing">
+                                       
+                                </div>
+                            </td>                            
+
                             <td style="text-align: center;">
                                 <div tal:content="visit/getNote">
                                        

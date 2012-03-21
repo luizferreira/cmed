@@ -106,6 +106,35 @@ MAIN = Schema((
                                      i18n_domain='cmfuemr',
             ),
         ),        
+
+        # StringField('visit_type',
+        #     required=True,
+        #     vocabulary = "getTypesOfVisit",
+        #     widget = SelectionWidget(
+        #             label = 'Tipo de Consulta',
+        #             macro_edit='generic_selection_edit_macro',
+        #             helper_js=('generic_selection_edit.js', ),             
+        #     ),
+        # ),
+
+        StringField('visit_type',
+            required=True,
+            default="1a Consulta",
+            vocabulary = "getTypesOfVisit",
+            widget = SelectionWidget(
+                    label = 'Tipo de Consulta',
+            ),
+        ),
+
+        StringField('visit_reason',
+            required=False,
+            vocabulary = "getVisitReason",
+            widget = SelectionWidget(
+                    label = 'Razão da Consulta',
+                    macro_edit='generic_selection_edit_macro',
+                    helper_js=('generic_selection_edit.js', ),             
+            ),
+        ),        
         
         StringField('note',
             widget=TextAreaWidget(label=_('Note'),

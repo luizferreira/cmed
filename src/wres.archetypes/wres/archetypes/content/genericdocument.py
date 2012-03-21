@@ -47,7 +47,7 @@ class GenericDocument(MedicalDocument):
         if document_type not in dl:
             portal = getSite()
             vt = getToolByName(portal, 'vocabulary_tool')        
-            vt.add2vocabulary('document_types', document_type)
+            vt.add2vocabulary('document_types', document_type, 1)
         # self.setTitle(dl.getValue(self.getDocument_type()))
         
     def generic_document_edit_title(self):
@@ -59,7 +59,7 @@ class GenericDocument(MedicalDocument):
         dl.add('', 'Selecione')
         portal = getSite()
         vt = getToolByName(portal, 'vocabulary_tool')
-        vocab_list = vt.get_vocabulary('document_types')
+        vocab_list = vt.get_vocabulary('document_types', 2)
         for vocab in vocab_list:
             # dl_entry = (vocab, vocab)
             dl.add(vocab, vocab)

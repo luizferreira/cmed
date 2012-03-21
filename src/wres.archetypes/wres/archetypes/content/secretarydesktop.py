@@ -37,6 +37,8 @@ class SecretaryDesktopData():
             visit_dic['getWorkflowActions'] = visit.getWorkflowActions()
             visit_dic['getNote'] = visit.getNote()
             visit_dic['start'] = visit.start()
+            visit_dic['getVisit_type'] = visit.getVisit_type()
+            visit_dic['getVisit_reason'] = visit.getVisit_reason()
             visits_list.append(visit_dic)
         return visits_list
 
@@ -116,6 +118,12 @@ class VisitWrapper():
         self.estado = getattr(self.wf.states, self.review_state)
         self.state_id = self.estado.id        
         return self.estado.title_or_id()
+
+    def getVisit_type(self):
+        return self.brain_obj.getVisit_type()   
+
+    def getVisit_reason(self):
+        return self.brain_obj.getVisit_reason()           
     
     def getWorkflowActions(self):
         if self.wf == None:

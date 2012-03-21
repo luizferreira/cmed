@@ -10,6 +10,20 @@
                                     selection python:selectionview.getSelected(vocab, value);
                                     format python:widget.format">
 
+                <strong tal:condition="python:field.required"> 
+                  <tal:print content="python:field.widget.label" />
+                  <span class="required" title="Obrigatório" style="color: #f00;">
+                    ■
+                  </span>  
+                </strong>
+
+                <strong tal:condition="python:not field.required"> 
+                  <tal:print content="python:field.widget.label" />  
+                </strong> 
+
+                <br />                
+
+
                 <span tal:condition="python:(vlen &lt; 4 and format == 'flex') or (format == 'radio')"
                       tal:attributes="id fieldName;">
                     
@@ -53,6 +67,10 @@
                 </tal:longVocab>
 
                 <input id="other_document_type" type="text" style="display:none" />
+
+                <span id="js_data" style="display:none">
+                  <fieldname tal:content="fieldName"> </fieldname>
+                </span>
 
             </metal:fill>
 

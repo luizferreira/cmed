@@ -2,6 +2,7 @@
 """Definition of the VisitTemp content type
 """
 
+from Products.Archetypes.atapi import *
 from zope.app.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 
@@ -61,11 +62,48 @@ class VisitTemp(event.ATEvent):
     def getTagDefault(self):
         return 'tag'
 
+    def getTypesOfVisit(self):
+        dl = DisplayList()
+        # dl.add('', 'Selecione')
+        portal = getSite()
+        vt = getToolByName(portal, 'vocabulary_tool')
+        vocab_list = vt.get_vocabulary('visit_types', 2)
+        for vocab in vocab_list:
+            # dl_entry = (vocab, vocab)
+            dl.add(vocab, vocab)
+        # dl.add('outro', 'Outro')
+        return dl
+
+    def getVisitReason(self):
+        dl = DisplayList()
+        dl.add('', 'Selecione')
+        portal = getSite()
+        vt = getToolByName(portal, 'vocabulary_tool')
+        vocab_list = vt.get_vocabulary('visit_reason', 1)
+        for vocab in vocab_list:
+            # dl_entry = (vocab, vocab)
+            dl.add(vocab, vocab)
+        dl.add('outro', 'Outro')
+        return dl        
+
     def at_post_create_script(self):
         """ Esse método é chamado no momento da criação de um objeto da classe.
         Ele preenche o campo subject (tags) com um id de um médico.
         """
         self.setTitle(self.getPatient().Title())
+        visit_type = self.getVisit_type()
+        dl = self.getTypesOfVisit()
+        if visit_type not in dl:
+            portal = getSite()
+            vt = getToolByName(portal, 'vocabulary_tool')        
+            vt.add2vocabulary('visit_types', visit_type, 1)     
+
+        visit_reason = self.getVisit_reason()
+        dl = self.getVisitReason()
+        if visit_reason not in dl:
+            portal = getSite()
+            vt = getToolByName(portal, 'vocabulary_tool')        
+            vt.add2vocabulary('visit_reason', visit_reason, 1)                
         # doctor = self.getDoctor()
         # doctor_id = doctor.getId()
         # self.setSubject((doctor_id, ))

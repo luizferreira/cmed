@@ -547,9 +547,25 @@ def loadCIDVocabulary(portal, context):
 def loadDocumentTypesVocabulary(portal):
     vt = getToolByName(portal, 'vocabulary_tool')
     document_types = []
-    document_types.append('Primeira Consulta')
-    document_types.append('Retorno')
+    document_types.append('primeira consulta')
+    document_types.append('retorno')
     vt.add_vocab('document_types', document_types)
+
+#===========================================================================
+# Carrega o vocabulario de tipos e da razão das visitas.
+# Luiz
+#===========================================================================
+def loadVisitVocabularies(portal):
+    vt = getToolByName(portal, 'vocabulary_tool')
+    visit_types = []
+    visit_types.append('1a consulta')
+    visit_types.append('retorno')
+    vt.add_vocab('visit_types', visit_types)   
+
+    visit_reason = []
+    visit_reason.append('atestado')
+    visit_reason.append('retorno')
+    vt.add_vocab('visit_reason', visit_reason)       
 
 
 def loadDEFVocabulary(portal,context):
@@ -580,6 +596,7 @@ def setupVarious(context):
     if context.readDataFile('wres.policy_various.txt') is not None:
         print '********************************ACHEI O TXT***********************************'   
         loadDocumentTypesVocabulary(portal)
+        loadVisitVocabularies(portal)
         loadCIDVocabulary(portal, context)
         loadDEFVocabulary(portal,context)        
 
