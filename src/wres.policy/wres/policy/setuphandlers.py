@@ -571,7 +571,7 @@ def loadVisitVocabularies(portal):
 def loadDEFVocabulary(portal,context):
     #Dicionario de especialidades farmaceuticas
     vt = getToolByName(portal, 'vocabulary_tool')
-    print "Carregando DEF do arquivo DEF.txt..."
+    print "Carregando DEF do arquivo DEF.txt ..."
     DEF = context.readDataFile("../../DEF.txt")
     print "Inserindo DEF no Portal ..."
     vt.add_vocab('DEF', DEF)
@@ -629,18 +629,14 @@ def setupVarious(context):
         # createReferringProviderFolder(portal)
         # createTranscriptionistFolder(portal)
         
-        createScheduleCatalog(portal)
+        #createScheduleCatalog(portal)
         
-        addOtherIndex(portal)
+        #addOtherIndex(portal)
         
         changePortalLanguage(portal)
         changePortalObjectsConfiguration(portal)
 
         createGroups(portal)
-        
-        # loadDocumentTypesVocabulary(portal)
-        # loadCIDVocabulary(portal, context)
-        # loadDEFVocabulary(portal,context)
 
     
    
