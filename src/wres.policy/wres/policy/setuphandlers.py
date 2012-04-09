@@ -548,6 +548,7 @@ def loadDocumentTypesVocabulary(portal):
     vt = getToolByName(portal, 'vocabulary_tool')
     document_types = []
     document_types.append('primeira consulta')
+    document_types.append('consulta')
     document_types.append('retorno')
     vt.add_vocab('document_types', document_types)
 
@@ -559,12 +560,13 @@ def loadVisitVocabularies(portal):
     vt = getToolByName(portal, 'vocabulary_tool')
     visit_types = []
     visit_types.append('1a consulta')
+    visit_types.append('consulta')
     visit_types.append('retorno')
     vt.add_vocab('visit_types', visit_types)   
 
     visit_reason = []
-    visit_reason.append('atestado')
-    visit_reason.append('retorno')
+    visit_reason.append('acompanhamento')
+    visit_reason.append('check up')
     vt.add_vocab('visit_reason', visit_reason)       
 
 

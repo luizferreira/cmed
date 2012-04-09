@@ -17,41 +17,41 @@ from wres.archetypes.widgets.BuildingBlocksWidget import BuildingBlocksWidget
 
 _ = MessageFactory("cmfuemr")
 
-SEX = DisplayList((
-    ('sdfdsafsdafe', 'pteste'),
-    ('dasfesaefwf', 'pteste2'),
-))
+#SEX = DisplayList((
+    #('sdfdsafsdafe', 'pteste'),
+    #('dasfesaefwf', 'pteste2'),
+#))
 
-VISIT_REASON = DisplayList((
-        ('office_visit',_('Office Visit')),
-        ('follow_up', _('Follow Up')),
-        ('work_up', _('Work Up')),
-        ('pre_op', _('Pre Op')),
-        ('six_months', _('6 months')),
-        ('new_patient', _('New Patient')),
-        ('np_cons', _('NP/Cons.')),
-        ('consultation', _('Consultation')),
-        ('stress_test', _('Stress Test')),
-        ('plain', _('Plain')),
-        ('thallium', _('Thallium')),
-        ('adeno', _('Adeno')),
-        ('walking-adeno', _('Walking-Adeno')),
-        ('echo', _('Echo')),
-        ('cdx', _('CDX')),
-        ('pvs_left_leg', _('PVS Left Leg')),
-        ('pvs_right_leg', _('PVS Right Leg')),
-        ('pvs_both_legs', _('PVS Both Legs')),
-        ('ultrasound_abdominal', _('Ultrasound Abdominal')),
-        ('ultrasound_thyroid', _('Ultrasound Thyroid')),
-        ('ultrasound_gb', _('Ultrasound GB')),
-        ('ultrasound_kidney', _('Ultrasound Kidney')),
-        ('holter', _('Holter')),
-        ('event_monitor', _('Event Monitor')),
-        ('bp_monitor', _('BP Monitor')),
-        ('stress_echo', _('Stress Echo')),
-        ('us_of_liver', _("US of Liver")),
-        ('others', _('Other')),
-    ))
+#VISIT_REASON = DisplayList((
+        #('office_visit',_('Office Visit')),
+        #('follow_up', _('Follow Up')),
+        #('work_up', _('Work Up')),
+        #('pre_op', _('Pre Op')),
+        #('six_months', _('6 months')),
+        #('new_patient', _('New Patient')),
+        #('np_cons', _('NP/Cons.')),
+        #('consultation', _('Consultation')),
+        #('stress_test', _('Stress Test')),
+        #('plain', _('Plain')),
+        #('thallium', _('Thallium')),
+        #('adeno', _('Adeno')),
+        #('walking-adeno', _('Walking-Adeno')),
+        #('echo', _('Echo')),
+        #('cdx', _('CDX')),
+        #('pvs_left_leg', _('PVS Left Leg')),
+        #('pvs_right_leg', _('PVS Right Leg')),
+        #('pvs_both_legs', _('PVS Both Legs')),
+        #('ultrasound_abdominal', _('Ultrasound Abdominal')),
+        #('ultrasound_thyroid', _('Ultrasound Thyroid')),
+        #('ultrasound_gb', _('Ultrasound GB')),
+        #('ultrasound_kidney', _('Ultrasound Kidney')),
+        #('holter', _('Holter')),
+        #('event_monitor', _('Event Monitor')),
+        #('bp_monitor', _('BP Monitor')),
+        #('stress_echo', _('Stress Echo')),
+        #('us_of_liver', _("US of Liver")),
+        #('others', _('Other')),
+    #))
 
 MAIN = Schema((
 
