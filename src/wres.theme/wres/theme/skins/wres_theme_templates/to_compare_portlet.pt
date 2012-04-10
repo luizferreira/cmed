@@ -1,0 +1,27 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="cmfuemr">
+      <link type="text/css" href="compare.css" rel="stylesheet" />
+<body>
+
+<!-- Patient portlet macro -->
+<dl metal:define-macro="to_compare_macro" class="portlet comparePortlet"  >
+
+
+<dt class="portletHeader">
+    <span class="portletTopLeft"></span>
+    <span>Ir para modo comparação</span>
+    <span class="portletTopRight"></span>
+</dt>
+<center>
+
+    <table>
+        <td>
+            <div class="compare-button"><a href="compare"> Modo Comparação</a></div>
+        </td>
+    </table> 
+</center>
+
+</dl>
+</body>
+</html>

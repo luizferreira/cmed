@@ -1,0 +1,81 @@
+<html>
+
+        <link type="text/css" href="bottom.css" rel="stylesheet" />
+        <link type="text/css" href="thin_patient_portlet.css" rel="stylesheet" />
+        <link type="text/css" href="compare.css" rel="stylesheet" />
+<title></title>
+<head>
+    <title i18n:translate="cmfuemr_patient_search">Patient search</title>
+</head>
+<body>
+    <div id="main_chart_print" 
+tal:define="ImagesAndFiles context/uploaded;
+            images python:ImagesAndFiles[0];
+            files  python:ImagesAndFiles[1];">
+        <table id="table">
+            <tr>
+                <th colspan="2" align="center"><font color="#205C90" >Modo de Comparação</font></th>
+            </tr>
+            <tr>
+                <td>
+                    <div id="gallery1" class="pikachoose">
+                        <ul id="pictures">
+                            <li tal:repeat="image python:images"><span class="image_date" tal:content="python:image[1]"></span><a tal:attributes="href python:image[0]"><img tal:attributes="src python:image[0]"/></a></li>
+                            
+                        </ul>
+                    </div>
+                </td>
+                <td>
+                    <div id="gallery2" class="pikachoose">
+                        <ul id="pictures2">
+                            <li tal:repeat="image python:images"><span class="image_date" tal:content="python:image[1]"></span><a tal:attributes="href python:image[0]"><img tal:attributes="src python:image[0]"/></a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
+<!--
+        TODO: A div abaixo junto com o código do compare.js e jquery.beforeafter-1.4.js auxilia a criação de uma futura feature, responsavel pela comparação fullscreen das imagens selecionadas.
+-->
+<!--
+        <div id="container" >
+            <div id="divBefore"></div>
+            <div id="divAfter"></div>
+        </div>
+-->
+    </div>
+</body>
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="jquery.pikachoose.js"></script>
+
+<!--
+    <script type="text/javascript" src="compare.js"></script>
+    <script type="text/javascript" src="jquery.beforeafter-1.4.js"></script>
+-->
+        
+    <script language="javascript">          
+    $(document).ready(function (){
+					$("#pictures").PikaChoose({carousel:true, carouselVertical:true,autoPlay:false});
+                    $("#pictures2").PikaChoose({carousel:true, carouselVertical:true,autoPlay:false});
+                
+                //Add class to big images
+                $("#gallery1").find("img").first().attr("class","changed1");
+                $("#gallery2").find("img").first().attr("class","changed2");
+                });
+    //Add class to chosen image
+     $(window).load(function() {
+        
+               $("#gallery1").find(".clip").click(function(){
+                    $(".changed1").attr("class","");
+                    var imageTag = $("#gallery1").find("img").first();
+                    imageTag.attr("class","changed1");
+                    });
+                    
+                $("#gallery2").find(".clip").click(function(){
+                    $(".changed2").attr("class","");
+                    var imageTag = $("#gallery2").find("img").first();
+                    imageTag.attr("class","changed2");
+                    }); 
+            });
+    </script>
+</html>

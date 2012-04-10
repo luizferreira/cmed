@@ -1,0 +1,59 @@
+span.image_date{
+    font-size: 10px;
+}
+#table{
+ margin-left: auto;
+ margin-right: auto;
+}
+
+//Popup
+.load { position: absolute; top: 50%; left: 50%; width: 88px; height: 78px; margin: -39px 0 0 -44px; z-index: 99999;}
+.bg_modal { position: absolute; top: 0; left: 0; z-index: 99998; }
+.view_modal { position: absolute; left: 50%; top: 50%; text-align: left; z-index: 99998; }
+.modal { visibility: hidden; cursor:pointer; }
+
+div.pika-textnav {
+    visibility: hidden;
+}
+div.caption {
+    visibility: hidden;
+}
+
+img.changed1{
+    
+}
+img.changed2{
+        
+}
+.portletCompare{
+font-size: 80%;
+}
+.compare-button{
+    display:block; /* or inline-block */
+    width: 105px; padding: 7px; text-align:center;    
+    background:#205C90; border-bottom:1px solid #ddd;color:#fff;
+    float: right;
+    cursor: pointer !important;
+    margin-top: 10px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+}
+
+div.pika-stage {
+    height: 300px;
+    padding: 5px 0px 5px 0px
+}
+
+dl.portlet a:hover {
+    color: #FFFFFF !important;
+    border-bottom: 0.0em;
+}
+dl.portlet a:visited { 
+    color: #FFFFFF;
+    border-bottom: 0.0em;
+}
+dl.portlet a:link { 
+    color: #FFFFFF;
+    border-bottom: 0.0em;
+}

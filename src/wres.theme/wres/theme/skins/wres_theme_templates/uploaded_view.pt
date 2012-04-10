@@ -52,7 +52,7 @@ tal:define="urls context/uploaded" >
         <td>
             <div class="pikachoose">
                 <ul id="pictures">
-                    <li tal:repeat="url python:urls[0]"><a tal:attributes="href url"><img tal:attributes="src url"/></a></li>
+                    <li tal:repeat="url python:urls[0]"><a tal:attributes="href python:url[0]"><img tal:attributes="src python:url[0]"/></a></li>
                 </ul>
             </div>
         </td>

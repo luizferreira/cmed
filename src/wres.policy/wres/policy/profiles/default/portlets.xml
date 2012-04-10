@@ -27,6 +27,13 @@
     manager="plone.rightcolumn" type="collective.quickupload.QuickUploadPortlet" visible="True">
         <property name="header">Envio Rápido de Arquivos</property>
     </assignment>  
+    
+    <assignment name="to_compare" category="content_type" key="UploadChartFolder"
+    manager="plone.rightcolumn" type="portlets.Classic" visible="True">
+        <property name="header">Ir para o modo Comparação de Imagens</property>
+        <property name="macro">to_compare_macro</property>
+        <property name="template">to_compare_portlet</property>
+    </assignment>  
 
     <!-- inicio - associando o patient portlet ao prontuario -->
 

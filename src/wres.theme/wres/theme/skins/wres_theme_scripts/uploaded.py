@@ -1,5 +1,6 @@
 ##bind context=context
 from Products.CMFCore.utils import getToolByName
+from DateTime import DateTime
 
 pc = getToolByName(context, 'portal_catalog')
 imagens = []
@@ -30,7 +31,8 @@ def getFilesAndImages():
         if not checkOwner(path):
             continue
         URL = "http://localhost:8080" + getUrl(path)
-        imagens.append(URL)
+        date = DateTime(image.Date()).strftime("%y/%m/%d")
+        imagens.append((URL,date,image.getWidth(),image.getHeight()))
     
     #Get Other Files
     brains = pc.search({'portal_type': 'File'})
