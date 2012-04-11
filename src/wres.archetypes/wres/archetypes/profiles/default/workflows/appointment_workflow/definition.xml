@@ -107,7 +107,7 @@
    <guard-expression>python: not(here.portal_factory.isTemporary(here))</guard-expression>
   </guard>
  </transition>
- <transition transition_id="unconfirm" title="Desmarcar" new_state="unscheduled" trigger="USER" before_script="" after_script="">
+ <transition transition_id="unconfirm" title="Desmarcar" new_state="unscheduled" trigger="USER" before_script="" after_script="remove_visit_from_calendar">
   <action url="" category="workflow" icon="">Desmarcar</action>
   <guard>
    <guard-role>Manager</guard-role>
@@ -176,5 +176,6 @@
   <guard>
   </guard>
  </variable>
- <script script_id="set_last_visit_date" type="Script (Python)" filename="workflows/appointment_workflow/scripts/set_last_visit_date.py" module="" function=""/>
+  <script script_id="set_last_visit_date" type="Script (Python)" filename="workflows/appointment_workflow/scripts/set_last_visit_date.py" module="" function=""/>
+  <script script_id="remove_visit_from_calendar" type="Script (Python)" filename="workflows/appointment_workflow/scripts/remove_visit_from_calendar.py" module="" function=""/>
 </dc-workflow>

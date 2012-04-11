@@ -91,6 +91,7 @@ class VisitTemp(event.ATEvent):
         Ele preenche o campo subject (tags) com um id de um médico.
         """
         self.setTitle(self.getPatient().Title())
+        self.setSubject('CalendarShow')
         visit_type = self.getVisit_type()
         dl = self.getTypesOfVisit()
         if visit_type not in dl:

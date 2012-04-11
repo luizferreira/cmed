@@ -50,7 +50,6 @@ class Doctor(wresuser.WRESUser):
         doctor_visits.manage_permission('Add portal content', ['Secretary', 'Manager', 'Owner'])
         doctor_visits.setConstrainTypesMode(1)
         portal.plone_utils.changeOwnershipOf(doctor_visits, user_id)
-        
         collection = _createObjectByType('Topic', doctor_visits, 'Agenda')
         collection.setTitle('Calendário do(a) Dr(a) ' + self.Title())
         collection.setLayout('solgemafullcalendar_view')
@@ -59,7 +58,9 @@ class Doctor(wresuser.WRESUser):
         # criteria2 = collection.addCriterion('Subject', 'ATSimpleStringCriterion')
         # criteria2.setValue(user_id)
         criteria2 = collection.addCriterion('path', 'ATRelativePathCriterion')
-        criteria2.relativePath = '..'       
+        criteria2.relativePath = '..'
+        criteria3 = collection.addCriterion('Subject', 'ATSelectionCriterion')       
+        criteria3.setValue('CalendarShow')
         doctor_visits.setLayout('Agenda')
         self.setSignPassword('senha1') #TODO gerar uma assinatura padrao randomica        
 

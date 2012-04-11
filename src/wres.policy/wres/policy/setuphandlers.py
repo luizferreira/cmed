@@ -479,6 +479,8 @@ def createScheduleCatalog(site):
 #===========================================================================
 def addOtherIndex(site):
     
+    # TODO: Verificar a real necessidade dessas metadados, já que a quantidade
+    # de metadados em um catalog impacta a velocidade do msm. (Luiz)
     ids = ['getPatientInfo', 'getReason', 'appointmentOrActivity',
            'getTypeOfLocationValue', 'UID']
     create_metadatas(site, ids)
