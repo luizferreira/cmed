@@ -7,10 +7,12 @@ wait_time = 3000
 today = datetime.date.today()
 
 #URLS default
-instance_URL = "http://localhost:8080/Plone1/"
-my_Calendar = "http://localhost:8080/Plone1/go2mycalendar"
-login_URL = "http://localhost:8080/Plone1/login_form"
-doctor_desk = "http://localhost:8080/Plone1/Appointments/sec_desk"
+port = '8080'
+instance_name = 'wres'
+instance_URL = "http://localhost:" + port + "/" + instance_name + "/"
+my_Calendar = instance_URL + "go2mycalendar"
+login_URL = instance_URL + "login_form"
+doctor_desk = instance_URL + "Appointments/sec_desk"
 
 def get_month_name(month):
     months = ["janeiro","fevereiro",u"mar\xe7o","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"]
