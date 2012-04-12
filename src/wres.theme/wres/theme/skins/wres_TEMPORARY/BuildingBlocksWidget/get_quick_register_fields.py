@@ -7,7 +7,6 @@
 def getRequiredFields(obj):
     schema = obj.Schema()
     fields = schema.filterFields(required=1)
-    fields.append( schema['birthDate'] )
     return fields
 
 def filterDefaultValues(result, default_values):

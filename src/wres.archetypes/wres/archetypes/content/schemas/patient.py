@@ -105,7 +105,7 @@ PATIENT_TYPE = DisplayList((
 MAIN = Schema((
 
     StringField('type_of_patient',
-        required=1,
+        required=0,
         vocabulary=PATIENT_TYPE,
         default='new',
         widget=SelectionWidget(

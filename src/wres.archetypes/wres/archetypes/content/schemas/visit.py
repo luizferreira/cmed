@@ -66,7 +66,7 @@ MAIN = Schema((
 #                                        label_msgid='cmfuemr_label_patient',
 #                                        i18n_domain='cmfuemr',
                                         blocks=({'id':'popup_search', 'value':_('Search'), 'search_template': 'popup_choose_patient'},
-                                                {'id':'popup_quick_register', 'value':_('Quick Register'), 'extra_fields':('contactPhone', 'ext', 'middleName',), 'location':'/Patients'}),
+                                                {'id':'popup_quick_register', 'value':_('Quick Register'), 'extra_fields':('birthDate', 'homePhone', 'mobile'), 'location':'/Patients'}),
                                         helper_js=('buildingblockwidget.js',),
                                         ),
         ),        

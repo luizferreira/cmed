@@ -147,7 +147,7 @@ class BuildingBlocksWidget(ReferenceWidget):
         url = '%s/popup_quick_register_script?%s&opener_type=%s' % (base, qs,
                                                                     opener_type)
         target = '_blank'
-        parameters = 'width=355,height=520,scrollbars=yes,resizable=yes'
+        parameters = 'width=355,height=600,scrollbars=yes,resizable=yes'
         return "window.open('%s', '%s', '%s')" % (url, target, parameters)
 
     def _popup_search_querystring(self, instance, field, block, template):
