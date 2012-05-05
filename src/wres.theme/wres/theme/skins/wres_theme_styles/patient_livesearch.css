@@ -1,7 +1,9 @@
 
 #content ul {
+        position:relative;
+        left:-20px;
 	list-style: none outside none; 
-	text-align:left
+	text-align: center;
 }
 
 div#LSResult {
@@ -10,3 +12,4 @@ div#LSResult {
 	margin-left:auto;
 	margin-right:auto;	
 }
+

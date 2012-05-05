@@ -28,7 +28,7 @@
     <center>
 
     <h1>
-        <a style="color:#000066" tal:content="string:${title}">Title</a>
+        <a tal:content="string:${title}">Title</a>
     </h1>        
 
     <!--label i18n:translate="">

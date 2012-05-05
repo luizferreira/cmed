@@ -48,7 +48,7 @@
 
     <br />
         
-    <div i18n:translate="">
+    <div i18n:translate="" id="search_patient">
       <form id="portletx_form" name="portletxform" method="post">
         <div class="LSBox">
           <input id="searchGadget" class="inputLabel" style="width:250px; height:25px; text-align:center"
@@ -60,7 +60,7 @@
             <label style="cursor: pointer" for="searchbox_currentfolder_only">apenas nesta seção</label>
             </div> 
             
-            <div class="LSResult teste" id="LSResult" style="background:#E8E8E8;">
+            <div class="LSResult teste" id="LSResult">
                 <div class="LSShadow" id="LSShadow" style="width:400px"></div>
             </div>      
             

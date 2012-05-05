@@ -108,9 +108,9 @@ def write(s):
     output.append(safe_unicode(s))
 
 if not results:
-    write('''<fieldset class="livesearchContainer cmedgray">''')
+    write('''<fieldset class="livesearchContainer cmedgray" style="width:650px">''')
     write('''<legend id="livesearchLegend">%s</legend>''' % "Resultados")
-    write('''<div class="LSIEFix">''')
+    write('''<div class="LSIEFix" style="width:600px">''')
     write('''<div id="LSNothingFound">%s</div>''' % ts.translate(label_no_results_found, context=REQUEST))
     write('''<div class="LSRow">''')
 #    write('<a href="search_form" style="font-weight:normal">%s</a>' % ts.translate(label_advanced_search, context=REQUEST))

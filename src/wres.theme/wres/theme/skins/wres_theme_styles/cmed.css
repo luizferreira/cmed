@@ -7,11 +7,21 @@
 }
 
 #content fieldset.cmedgray {
+    position: relative;
+    left: -100px;
     border: 0.1em solid #CCCCCC ;
  /*   border: 1px solid green; */
     border-style: solid solid solid solid;
-    background:#EEEEEE;
+    background: #EEEEEE;
 }
+
+#search_patient fieldset.cmedgray {
+    border: 0.1em solid #CCCCCC ;
+ /*   border: 1px solid green; */
+    border-style: solid solid solid solid;
+    background: #EEEEEE;
+}
+
 
 /*#content legend 
 {
