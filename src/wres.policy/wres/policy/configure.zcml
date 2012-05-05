@@ -10,6 +10,7 @@
     <five:registerPackage package="." initialize=".initialize" />
 
     <include file="permissions.zcml" />
+    <include file="patch.zcml" />
 
     
     <genericsetup:registerProfile

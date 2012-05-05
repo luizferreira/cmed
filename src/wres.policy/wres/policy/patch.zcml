@@ -1,0 +1,29 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:monkey="http://namespaces.plone.org/monkey"
+    i18n_domain="collective.monkeypatcher">
+
+    <include package="collective.monkeypatcher" />
+
+    <monkey:patch
+        description="Patch para configurar date/time do Solgema.fullcalendar"
+        class="Solgema.fullcalendar.browser.solgemafullcalendar_views.SolgemaFullcalendarJS"
+        original="getCustomTitleFormat"
+        replacement=".patchedMethods.patchedGetCustomTitleFormat"
+    />
+    
+    <monkey:patch
+        description="Patch para configurar date/time do Solgema.fullcalendar"
+        class="Solgema.fullcalendar.browser.solgemafullcalendar_views.SolgemaFullcalendarJS"
+        original="columnFormat"
+        replacement=".patchedMethods.patchedColumnFormat"
+    />
+    
+    <monkey:patch
+        description="Patch para configurar date/time do Solgema.fullcalendar"
+        class="Solgema.fullcalendar.browser.solgemafullcalendar_views.SolgemaFullcalendarJS"
+        original="getHourFormat"
+        replacement=".patchedMethods.patchedGetHourFormat"
+    />
+
+</configure>
