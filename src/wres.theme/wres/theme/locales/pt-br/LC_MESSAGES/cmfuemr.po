@@ -12232,3 +12232,6 @@ msgstr "Revisar"
 # Schema da secretaria (schemas/secretary.py)
 msgid "Check if secretary will be able to transcript documents."
 msgstr "Marque caso esta secretaria transcreverá documentos nos prontuários."
+
+msgid "label_no_reference"
+msgstr "Não especificado"

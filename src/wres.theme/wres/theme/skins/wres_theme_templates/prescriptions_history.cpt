@@ -20,36 +20,41 @@
     <fieldset class="cmed">
     <legend> Prescrições </legend>    
     
-    <table class="listing width-100">
-        <thead>
-            <th>#</th>
-            <th>Documento</th>
-            <th>Data</th>
-            <th>Médico</th>
-            <th tal:condition="context/TestRoles">Ação</th>
-        </thead>
-        <tbody>
-            <tal:loop tal:repeat="prescription template_data">
-                <tal tal:define="id prescription/data/id;
-                                 doctor prescription/data/doctor;
-                                 doctor_name python:context.getDoctorNameById(doctor);
-                                 doc_obj python:context.getDoctorById(doctor);">
-                    <tr tal:attributes="class python:test(repeat['prescription'].even(), 'even', 'odd')">
-                        <td class="width-1" tal:content="repeat/prescription/number">1</td>
-                        <td>
-                            <a tal:condition="context/TestRoles" tal:attributes="href python:context.absolute_url()+'/print_prescription?id='+id">Prescrição</a>
-                            <span tal:condition="not: context/TestRoles">Prescrição</span>
-                        </td>  
-                        <td tal:content="prescription/data/date">12/11/1986</td>
-                        <td tal:content="doctor_name">Peter Thorun</td>
-                        <td tal:condition="context/TestRoles">
-                            <input type="button" value="Visualizar" tal:attributes="onclick string:javascript:window.location = 'print_prescription?id=${id}'">
-                        </td>
-                    </tr>  
-                </tal>
-            </tal:loop>
-        </tbody>
-    </table>
+    <div tal:condition="template_data">
+        <table class="listing width-100">
+            <thead>
+                <th>#</th>
+                <th>Documento</th>
+                <th>Data</th>
+                <th>Médico</th>
+                <th tal:condition="context/TestRoles">Ação</th>
+            </thead>
+            <tbody>
+                <tal:loop tal:repeat="prescription template_data">
+                    <tal tal:define="id prescription/data/id;
+                                    doctor prescription/data/doctor;
+                                    doctor_name python:context.getDoctorNameById(doctor);
+                                    doc_obj python:context.getDoctorById(doctor);">
+                        <tr tal:attributes="class python:test(repeat['prescription'].even(), 'even', 'odd')">
+                            <td class="width-1" tal:content="repeat/prescription/number">1</td>
+                            <td>
+                                <a tal:condition="context/TestRoles" tal:attributes="href python:context.absolute_url()+'/print_prescription?id='+id">Prescrição</a>
+                                <span tal:condition="not: context/TestRoles">Prescrição</span>
+                            </td>  
+                            <td tal:content="prescription/data/date">12/11/1986</td>
+                            <td tal:content="doctor_name">Peter Thorun</td>
+                            <td tal:condition="context/TestRoles">
+                                <input type="button" value="Visualizar" tal:attributes="onclick string:javascript:window.location = 'print_prescription?id=${id}'">
+                            </td>
+                        </tr>  
+                    </tal>
+                </tal:loop>
+            </tbody>
+        </table>
+    </div>
+    <div tal:condition="not:template_data">
+        <i>Não há prescrições no histórico</i>
+    </div>
 </metal:main>
 
 </html>

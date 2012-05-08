@@ -93,25 +93,27 @@ STATUS = DisplayList((
     ('retired', _('Retired')),
     ('unknown', _('Unknown')),
     ))
-PATIENT_TYPE = DisplayList((
-    ('estabilished', _('Established')),
-    ('new', _('New'))
-    ))
+    
+#PATIENT_TYPE = DisplayList((
+    #('estabilished', _('Established')),
+    #('new', _('New'))
+    #))
 
 #===============================================================================
 # Definição dos schemas de do tipo Patient
 #===============================================================================
 
 MAIN = Schema((
-
-    StringField('type_of_patient',
-        required=0,
-        vocabulary=PATIENT_TYPE,
-        default='new',
-        widget=SelectionWidget(
-	        label=_('Type of patient'),
-        ),
-    ),
+    
+    #Campo irrelevante
+    #StringField('type_of_patient',
+        #required=0,
+        #vocabulary=PATIENT_TYPE,
+        #default='new',
+        #widget=SelectionWidget(
+	        #label=_('Type of patient'),
+        #),
+    #),
 
     StringField('firstName',
         required=1,
@@ -131,13 +133,13 @@ MAIN = Schema((
     ),
     
     # conforme decidido, a data de nascimento deixa de ser obrigaoria
-	DateTimeField('birthDate',
-		widget=CalendarWidget(
-	       label=_('Birth Date'),
-           format='%d/%m/%Y',
-           starting_year=1901,
-           future_years=0,
-           show_hm=0,
+    DateTimeField('birthDate',
+        widget=CalendarWidget(
+                label=_('Birth Date'),
+                format='%d/%m/%Y',
+                starting_year=1901,
+                future_years=0,
+                show_hm=0,
        )
    ),    
     
@@ -193,26 +195,6 @@ MAIN = Schema((
         ),
     ),
     
-    CPFField('socialSecurity',
-        index="FieldIndex:schema",
-        searchable=1,
-        widget=CPFWidget(
-	        label=_('SSN'),
-        ),
-     ),
-    
-    StringField('identidade',
-        widget=StringWidget(
-	        label='Identidade',
-        ),
-    ),
-    
-    StringField('orgaoEmissor',
-        vocabulary=ORGAOEMISSOR,
-        widget=SelectionWidget(
-	        label='Órgão Emissor',
-        ),
-    ),
 
 
 #===============================================================================
@@ -299,12 +281,6 @@ MAIN = Schema((
         ),
     ),
     
-    CEPField('zipcode',
-        searchable=1,
-        widget=CEPWidget(
-            label=_('ZipCode'),
-        ),
-    ),
 
 #    IntegerField('ext',
 #        widget=IntegerWidget(
@@ -324,17 +300,57 @@ MAIN = Schema((
         ),
     ),
 
-    BooleanField('confirmedChartNumber',
-        default=False,
-        widget=BooleanWidget(
-	        label=_('Chart Number Confirmed'),
+    #BooleanField('confirmedChartNumber',
+        #default=False,
+        #widget=BooleanWidget(
+	        #label=_('Chart Number Confirmed'),
+        #),
+    #),
+    
+    ReferenceField('doctor',
+        relationship='doctor',
+        allowed_types=('Doctor',),
+        vocabulary_custom_label='b.Title',
+        widget=ReferenceWidget(
+            macro = 'reference_formatted',
+            label=_('Provider'),
+            startup_directory = 'Doctors',   
+            restrict_browsing_to_startup_directory = True,         
         ),
-    ),    
+    ),
 
 ))
 set_schemata_properties(MAIN, schemata='Principal')
 
 COMPLEMENTAR = Schema((
+
+    CPFField('socialSecurity',
+        index="FieldIndex:schema",
+        searchable=1,
+        widget=CPFWidget(
+                label=_('SSN'),
+        ),
+     ),
+    
+    StringField('identidade',
+        widget=StringWidget(
+                label='Identidade',
+        ),
+    ),
+    
+    StringField('orgaoEmissor',
+        vocabulary=ORGAOEMISSOR,
+        widget=SelectionWidget(
+                label='Órgão Emissor',
+        ),
+    ),
+    
+    CEPField('zipcode',
+        searchable=1,
+        widget=CEPWidget(
+            label=_('ZipCode'),
+        ),
+    ),
 
     StringField('pis_pasep',
         widget = StringWidget(
@@ -356,100 +372,100 @@ COMPLEMENTAR = Schema((
 ))
 set_schemata_properties(COMPLEMENTAR, schemata='Complementar')
 
-GUARANTOR = Schema((
-    BooleanField('isGuarantor',
-         index='FieldIndex',
-         default=1,
-         widget=BooleanWidget(
-	        label=_('Guarantor'),
-            description='Check the box if the\
-            patient is a guarantor',
-            description_msgid='cmfuemr_help_guarantor',
-            i18n_domain='cmfuemr',
-         ),
-    ),
+#GUARANTOR = Schema((
+    #BooleanField('isGuarantor',
+         #index='FieldIndex',
+         #default=1,
+         #widget=BooleanWidget(
+	        #label=_('Guarantor'),
+            #description='Check the box if the\
+            #patient is a guarantor',
+            #description_msgid='cmfuemr_help_guarantor',
+            #i18n_domain='cmfuemr',
+         #),
+    #),
 
-    StringField('guarantor_name',
-        widget = StringWidget(
-	        label=_('Name'),
-        ),
-    ),
+    #StringField('guarantor_name',
+        #widget = StringWidget(
+	        #label=_('Name'),
+        #),
+    #),
 
-    StringField('guarantor_relationship',
-        widget = StringWidget(
-	        label=_('Relationship'),
-        ),
-    ),
+    #StringField('guarantor_relationship',
+        #widget = StringWidget(
+	        #label=_('Relationship'),
+        #),
+    #),
                 
-   StringField('guarantor_identidade',
-        widget=StringWidget(
-	        label='Identidade',
-        ),
-    ),
+   #StringField('guarantor_identidade',
+        #widget=StringWidget(
+	        #label='Identidade',
+        #),
+    #),
     
-    StringField('guarantor_orgaoEmissor',
-        vocabulary=ORGAOEMISSOR,
-        widget=SelectionWidget(
-	        label='Orgão Emissor',
-        ),
-    ),
+    #StringField('guarantor_orgaoEmissor',
+        #vocabulary=ORGAOEMISSOR,
+        #widget=SelectionWidget(
+	        #label='Orgão Emissor',
+        #),
+    #),
     
-#===============================================================================
-# O campo guarantor_contact_phone precisa de validador         
-#===============================================================================
+##===============================================================================
+## O campo guarantor_contact_phone precisa de validador         
+##===============================================================================
     
-   StringField('guarantor_contact_phone',
-#      validators='isBrTelefone',
-       widget=StringWidget(
-	       label=_('Contact Phone'),
-           description='You must enter only numbers',
-           description_msgid='cmfuemr_help_contact_phone',
-           i18n_domain='cmfuemr',
-       ),
-   ),
+   #StringField('guarantor_contact_phone',
+##      validators='isBrTelefone',
+       #widget=StringWidget(
+	       #label=_('Contact Phone'),
+           #description='You must enter only numbers',
+           #description_msgid='cmfuemr_help_contact_phone',
+           #i18n_domain='cmfuemr',
+       #),
+   #),
 
-    StringField('guarantor_extension',
-        widget=StringWidget(
-            label=_('Extension'),
-        ),
-    ),
+    #StringField('guarantor_extension',
+        #widget=StringWidget(
+            #label=_('Extension'),
+        #),
+    #),
 
-    StringField('guarantor_address1',
-        widget=StringWidget(
-	        label='Endereço',
-        ),
-    ),
+    #StringField('guarantor_address1',
+        #widget=StringWidget(
+	        #label='Endereço',
+        #),
+    #),
 
-    StringField('guarantor_address2',
-        widget=StringWidget(
-	        label='Bairro',
-        ),
-    ),
+    #StringField('guarantor_address2',
+        #widget=StringWidget(
+	        #label='Bairro',
+        #),
+    #),
 
-    StringField('guarantor_city',
-        widget=StringWidget(
-	        label=_('City'),
-        ),
-    ),
+    #StringField('guarantor_city',
+        #widget=StringWidget(
+	        #label=_('City'),
+        #),
+    #),
 
-    StringField('guarantor_state',
-        widget=StringWidget(
-	        label=_('State'),
-        ),
-    ),
+    #StringField('guarantor_state',
+        #widget=StringWidget(
+	        #label=_('State'),
+        #),
+    #),
     
-#===============================================================================
-# O campo guarantor_zipcode precisa de validador        
-#===============================================================================
+##===============================================================================
+## O campo guarantor_zipcode precisa de validador        
+##===============================================================================
     
-    StringField('guarantor_zipcode',
-#       validators='isCEP',
-        widget=StringWidget(
-	        label=_('ZipCode'),
-        ),
-    ),
-))
-set_schemata_properties(GUARANTOR, schemata='Titular')
+    #StringField('guarantor_zipcode',
+##       validators='isCEP',
+        #widget=StringWidget(
+	        #label=_('ZipCode'),
+        #),
+    #),
+#))
+#set_schemata_properties(GUARANTOR, schemata='Titular')
 
 CONVENIOS = Schema((
 
@@ -645,90 +661,94 @@ EMPLOYMENT = Schema((
 #set_schemata_properties(EMPLOYMENT, schemata='Employment Information')
 set_schemata_properties(EMPLOYMENT, schemata='Complementar')
 
-EMERGENCY = Schema((
-    StringField('emergency_contact_name',
-        widget = StringWidget(
-	        label=_('Name'),
-        ),
-     ),
 
-    StringField('emergency_relationship',
-        widget = StringWidget(
-	        label=_('Relationship'),
-        ),
-     ),
+#===============================================================================
+# Campos não relevantes
+#===============================================================================
+#EMERGENCY = Schema((
+    #StringField('emergency_contact_name',
+        #widget = StringWidget(
+	        #label=_('Name'),
+        #),
+     #),
+
+    #StringField('emergency_relationship',
+        #widget = StringWidget(
+	        #label=_('Relationship'),
+        #),
+     #),
                 
 #===============================================================================
 # Os campos emergency_work_phone, emergency_home_phone e emergency_other_phone
 # precisam de validadores                
 #===============================================================================
                 
-   StringField('emergency_work_phone',
-#      validators='isBrTelefone',
-       widget=StringWidget(
-	       label=_('Work Phone'),
-	       description='You must enter only numbers',
-	       description_msgid='cmfuemr_help_work_phone',
-	       i18n_domain='cmfuemr',
-       ),
-   ),
+   #StringField('emergency_work_phone',
+##      validators='isBrTelefone',
+       #widget=StringWidget(
+	       #label=_('Work Phone'),
+	       #description='You must enter only numbers',
+	       #description_msgid='cmfuemr_help_work_phone',
+	       #i18n_domain='cmfuemr',
+       #),
+   #),
 
-   StringField('emergency_home_phone',
-#      validators='isBrTelefone',
-       widget=StringWidget(
-	       label=_('Home Phone'),
-           description='You must enter only numbers',
-           description_msgid='cmfuemr_help_home_phone',
-           i18n_domain='cmfuemr',
-       ),
-   ),
+   #StringField('emergency_home_phone',
+##      validators='isBrTelefone',
+       #widget=StringWidget(
+	       #label=_('Home Phone'),
+           #description='You must enter only numbers',
+           #description_msgid='cmfuemr_help_home_phone',
+           #i18n_domain='cmfuemr',
+       #),
+   #),
 
-   StringField('emergency_other_phone',
-#      validators='isBrTelefone',
-       widget=StringWidget(
-	       label=_('Other Phone'),
-           description='pager, cellular, etc. if applicable',
-           description_msgid='cmfuemr_help_other_phone',
-           i18n_domain='cmfuemr',
-       ),
-   ),
+   #StringField('emergency_other_phone',
+##      validators='isBrTelefone',
+       #widget=StringWidget(
+	       #label=_('Other Phone'),
+           #description='pager, cellular, etc. if applicable',
+           #description_msgid='cmfuemr_help_other_phone',
+           #i18n_domain='cmfuemr',
+       #),
+   #),
 
-    StringField('emergency_address1',
-        widget=StringWidget(
-	        label='Endereço',
-        ),
-    ),
+    #StringField('emergency_address1',
+        #widget=StringWidget(
+	        #label='Endereço',
+        #),
+    #),
 
-    StringField('emergency_address2',
-        widget=StringWidget(
-	        label='Bairro',
-        ),
-    ),
+    #StringField('emergency_address2',
+        #widget=StringWidget(
+	        #label='Bairro',
+        #),
+    #),
 
-    StringField('emergency_city',
-        widget=StringWidget(
-	        label=_('City'),
-        ),
-    ),
+    #StringField('emergency_city',
+        #widget=StringWidget(
+	        #label=_('City'),
+        #),
+    #),
 
-    StringField('emergency_state',
-        widget=StringWidget(
-	        label=_('State'),
-        ),
-    ),
+    #StringField('emergency_state',
+        #widget=StringWidget(
+	        #label=_('State'),
+        #),
+    #),
     
-#===============================================================================
-# O campo emergency_zipcode precisa de validador        
-#===============================================================================
+##===============================================================================
+## O campo emergency_zipcode precisa de validador        
+##===============================================================================
     
-    StringField('emergency_zipcode',
-        widget=StringWidget(
-	        label=_('ZipCode'),
-        ),
-    ),
-))
-set_schemata_properties(EMERGENCY, schemata='Contato de Emergencia')
+    #StringField('emergency_zipcode',
+        #widget=StringWidget(
+	        #label=_('ZipCode'),
+        #),
+    #),
+#))
+#set_schemata_properties(EMERGENCY, schemata='Contato de Emergencia')
 
 baseSchema = finalizeSchema(wresuser.WRESUserSchema.copy())
 
-PatientSchema = baseSchema + MAIN + COMPLEMENTAR + GUARANTOR + CONVENIOS + DEMOGRAPHIC + EMPLOYMENT + EMERGENCY
+PatientSchema = baseSchema + MAIN + COMPLEMENTAR + CONVENIOS + DEMOGRAPHIC + EMPLOYMENT #+ EMERGENCY + GUARANTOR

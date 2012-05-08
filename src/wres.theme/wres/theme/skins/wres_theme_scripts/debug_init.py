@@ -84,7 +84,17 @@ def set_patient_information(p):
     p.setLastName(patient_lname)
     p.setEmail(email)
     p.setBirthDate(random_birthdate())
-    p.setContactPhone(phone)    
+    p.setContactPhone(phone)
+    #Preenchimento do Chart
+    allergy = {'date': '07/05/2012', 'reaction': 'Edema/co\xc3\xa7eira', 'allergy': 'Camar\xc3\xa3o', 'submitted_by': 'admin'}
+    medication = {'status': 'active', 'submitted_by': 'admin', 'use': '1 cp quando houver do de cabe\xc3\xa7a', 'medication': 'Tylenol dc', 'end_date': DateTime('2012/05/07 17:06:14.061165 GMT-3'), 'note': '', 'start': '07/05/2012', 'concentration': '80mg', 'quantity': '12'}
+    problem = {'submitted_by': 'admin', 'code': 'G43.0', 'end_date': DateTime('2012/05/07 17:09:25.103551 GMT-3'), 'started': DateTime('2012/05/07 00:00:00 GMT-3'), 'note': '', 'submitted_on': DateTime('2012/05/07 17:09:25.103459 GMT-3'), 'state': 'active', 'problem': 'Enxaqueca sem aura [enxaqueca comum]'}
+    exam = {'date': '07/05/2012', 'exam': 'Glicose', 'value': '93 mg/dl'}
+    p.chart_data.save_entry(context, 'allergies', **allergy)
+    p.chart_data.save_entry(context, 'medications', **medication)
+    p.chart_data.save_entry(context, 'problems', **problem)
+    p.chart_data.save_entry(context, 'laboratory', **exam)
+
 
     if int(full_info):
         p.setType_of_patient('new')
@@ -249,7 +259,23 @@ def set_clinic(portal, pr):
     print "I will initialize clinic..."
     set_clinic_information(clinic)
     print "> Clinic initialized..."
-    return printed          
+    return printed
+    
+def create_other(portal):
+    templates = getattr(portal, "Templates")
+    context.plone_log("Creating templates")
+    print "Creating templates"
+    new_id = "consulta-"+str(random.randint(0, 9999))
+    consulta = create_new_object(portal, templates.Consultas, new_id, "Template")
+    consulta.setTemplate_body("<br><b>Meu Modelo de Primeira Consulta.</b><br><br> Queixa Principal: <br><br> História da Moléstia Atual:")
+    consulta.setTitle("Primeira Consulta")
+    consulta.reindexObject()
+    new_id = "impresso-"+str(random.randint(0, 9999))
+    impresso = create_new_object(portal, templates.Impressos, new_id, "Template")
+    impresso.setTemplate_body("<br><b>Meu Modelo de Licença Médica.</b><br><br>Atesto para os devidos fins que: <b>José Carlos de Oliveira</b> \
+    se encontrou enfermo entre 07/05/2012 e 12/05/2012 e incapaz de exercer suas atribuições normalmente. CID A09.")
+    impresso.setTitle("Licença Médica")
+    return printed
 
 def init():
 
@@ -311,6 +337,8 @@ Example of usage:
         print set_clinic(portal, pr)
     else:
         print 'I will not set clinic information.\n'
+        
+    create_other(portal)
 
     context.plone_log("---------------------------------------------\n")
 

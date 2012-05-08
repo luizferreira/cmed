@@ -24,20 +24,20 @@
 
 <div metal:fill-slot="main" id="main_chart_print"   
 	tal:define="
-		title context/getFullName;
-        id context/getId;
-	    script context/patient_view_script;
-        patient context/getPatient;
-        photo patient/photo | nothing">
+            title context/getFullName;
+            id context/getId;
+            script context/patient_view_script;
+            patient context/getPatient;
+            photo patient/photo | nothing">
         
     <center>
     	<div id="day_buttons_div">
-            <a>	<span class="botao" id="principal_button">Principal</span> </a> -
-            <a> <span class="botao" id="complementar_button">Complementar</span> </a> -
-            <a>	<span class="botao" id="titular_button">Titular</span> </a> - 
-            <a>	<span class="botao" id="plano_button">Plano</span> </a> - 
-            <a> <span class="botao" id="demografico_button">Demográfico</span> </a> -
-            <a> <span class="botao" id="contato_button">Contato de Emergência</span> </a> 
+            <a>	<span class="botao" id="principal_button">&nbsp;Principal&nbsp;</span> </a> -
+            <a> <span class="botao" id="complementar_button">&nbsp;Complementar&nbsp;</span> </a> -
+            <!--<a> <span class="botao" id="titular_button">Titular</span> </a> - -->
+            <a>	<span class="botao" id="plano_button">&nbsp;Plano&nbsp;</span> </a> - 
+            <a> <span class="botao" id="demografico_button">&nbsp;Demográfico&nbsp;</span> </a>
+           <!-- <a> <span class="botao" id="contato_button">Contato de Emergência</span> </a> -->
 		</div> 
 <!--
     FieldSet Basico
