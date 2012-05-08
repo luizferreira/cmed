@@ -191,6 +191,8 @@ wres/policy/DEF.txt
 wres/policy/VocabularyTool.py
 wres/policy/__init__.py
 wres/policy/configure.zcml
+wres/policy/patch.zcml
+wres/policy/patchedMethods.py
 wres/policy/permissions.zcml
 wres/policy/setuphandlers.py
 wres/policy/test_browser_utils.py
@@ -198,6 +200,7 @@ wres/policy/testing.py
 wres/policy/tests.py.old
 wres/policy/tool.gif
 wres/policy/profiles/default/actions.xml
+wres/policy/profiles/default/catalog.xml
 wres/policy/profiles/default/jsregistry.xml
 wres/policy/profiles/default/metadata.xml
 wres/policy/profiles/default/portlets.xml

@@ -331,6 +331,7 @@ wres/archetypes/profiles/default/types/WRESUser.xml
 wres/archetypes/profiles/default/workflows/CMFUEMR_workflow/definition.xml
 wres/archetypes/profiles/default/workflows/appointment_workflow/definition.xml
 wres/archetypes/profiles/default/workflows/appointment_workflow/scripts/create_encounter.py
+wres/archetypes/profiles/default/workflows/appointment_workflow/scripts/remove_visit_from_calendar.py
 wres/archetypes/profiles/default/workflows/appointment_workflow/scripts/set_last_visit_date.py
 wres/archetypes/profiles/default/workflows/folder_workflow/definition.xml
 wres/archetypes/profiles/default/workflows/patient_workflow/definition.xml

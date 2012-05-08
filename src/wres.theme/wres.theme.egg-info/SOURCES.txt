@@ -284,10 +284,13 @@ wres/theme/skins/wres_theme_images/clinic-icon.png
 wres/theme/skins/wres_theme_images/doctor-folder-icon.png
 wres/theme/skins/wres_theme_images/exams_icon.png
 wres/theme/skins/wres_theme_images/fastf.png
+wres/theme/skins/wres_theme_images/handle.gif
 wres/theme/skins/wres_theme_images/insurance-folder-icon.png
+wres/theme/skins/wres_theme_images/load.gif
 wres/theme/skins/wres_theme_images/loader.gif
 wres/theme/skins/wres_theme_images/loaderWhite.gif
 wres/theme/skins/wres_theme_images/loading.gif
+wres/theme/skins/wres_theme_images/lt-small.png
 wres/theme/skins/wres_theme_images/next-horizontal.png
 wres/theme/skins/wres_theme_images/next-vertical.png
 wres/theme/skins/wres_theme_images/next.png
@@ -305,6 +308,7 @@ wres/theme/skins/wres_theme_images/prevPageArrow.gif
 wres/theme/skins/wres_theme_images/prevPageArrowWhite.gif
 wres/theme/skins/wres_theme_images/referring-provider-folder-icon.png
 wres/theme/skins/wres_theme_images/rewind.png
+wres/theme/skins/wres_theme_images/rt-small.png
 wres/theme/skins/wres_theme_images/secretary-folder-icon.png
 wres/theme/skins/wres_theme_images/transcriptionist-folder-icon.png
 wres/theme/skins/wres_theme_images/uemr_logo.jpg
@@ -314,12 +318,14 @@ wres/theme/skins/wres_theme_images/vital_icon.png
 wres/theme/skins/wres_theme_js/CONTENT.txt
 wres/theme/skins/wres_theme_js/autocomplete.js
 wres/theme/skins/wres_theme_js/calendar.js
+wres/theme/skins/wres_theme_js/compare.js
 wres/theme/skins/wres_theme_js/doctorcrm.js
 wres/theme/skins/wres_theme_js/format_date.js
 wres/theme/skins/wres_theme_js/fullcalendar.min.js
 wres/theme/skins/wres_theme_js/generic_richtext_edit.js
 wres/theme/skins/wres_theme_js/generic_selection_edit.js
 wres/theme/skins/wres_theme_js/jquery-1.7.1.min.js
+wres/theme/skins/wres_theme_js/jquery.beforeafter-1.4.js
 wres/theme/skins/wres_theme_js/jquery.pikachoose.js
 wres/theme/skins/wres_theme_js/jquery.qtip.min.js
 wres/theme/skins/wres_theme_js/patient_cphone_edit.js
@@ -476,10 +482,12 @@ wres/theme/skins/wres_theme_styles/CONTENT.txt
 wres/theme/skins/wres_theme_styles/allergy_portlet.css
 wres/theme/skins/wres_theme_styles/autocomplete.css.dtml
 wres/theme/skins/wres_theme_styles/base_properties.props
+wres/theme/skins/wres_theme_styles/basic.css
 wres/theme/skins/wres_theme_styles/bottom.css
 wres/theme/skins/wres_theme_styles/clinic_view.css
 wres/theme/skins/wres_theme_styles/cmed.css
 wres/theme/skins/wres_theme_styles/cmed_print.css
+wres/theme/skins/wres_theme_styles/compare.css
 wres/theme/skins/wres_theme_styles/css3.css
 wres/theme/skins/wres_theme_styles/doc_view.css
 wres/theme/skins/wres_theme_styles/doctor_view.css
@@ -510,6 +518,7 @@ wres/theme/skins/wres_theme_templates/change_sign_password.cpt.metadata
 wres/theme/skins/wres_theme_templates/chart_folder_view.pt
 wres/theme/skins/wres_theme_templates/chart_navigation.pt
 wres/theme/skins/wres_theme_templates/clinic_view.pt
+wres/theme/skins/wres_theme_templates/compare.pt
 wres/theme/skins/wres_theme_templates/content_status_history.cpt
 wres/theme/skins/wres_theme_templates/data_view_macros.pt
 wres/theme/skins/wres_theme_templates/debug_patientchartdata.pt
@@ -592,6 +601,7 @@ wres/theme/skins/wres_theme_templates/sign_document.cpt.metadata
 wres/theme/skins/wres_theme_templates/template_folder_view.pt
 wres/theme/skins/wres_theme_templates/template_folder_view_macros.pt
 wres/theme/skins/wres_theme_templates/testCPT.cpt.metadata
+wres/theme/skins/wres_theme_templates/to_compare_portlet.pt
 wres/theme/skins/wres_theme_templates/transcriptionist_desktop_macros.pt
 wres/theme/skins/wres_theme_templates/transcriptionist_desktop_view.cpt
 wres/theme/skins/wres_theme_templates/transcriptionist_folder_view.pt
