@@ -565,6 +565,7 @@ wres/theme/skins/wres_theme_templates/prescriptions_macros.pt
 wres/theme/skins/wres_theme_templates/print_prescription.cpt
 wres/theme/skins/wres_theme_templates/print_prescription.cpt.metadata
 wres/theme/skins/wres_theme_templates/problem_list_macros.pt
+wres/theme/skins/wres_theme_templates/reference_formatted.pt
 wres/theme/skins/wres_theme_templates/referencebrowser.pt
 wres/theme/skins/wres_theme_templates/referring_provider_folder_view.pt
 wres/theme/skins/wres_theme_templates/resolve_problem.cpt

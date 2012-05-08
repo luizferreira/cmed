@@ -10,6 +10,7 @@
     <metal:aux fill-slot="style_slot">
         <link type="text/css" href="bottom.css" rel="stylesheet" />
         <link type="text/css" href="thin_patient_portlet.css" rel="stylesheet" />
+        <link type="text/css" href="compare.css" rel="stylesheet" />
     </metal:aux>
 	<metal:block fill-slot="javascript_head_slot">
         <script type="text/javascript" src="jquery-1.7.1.min.js"></script>

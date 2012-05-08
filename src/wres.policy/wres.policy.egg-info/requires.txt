@@ -11,6 +11,7 @@ Products.Clouseau == 1.0
 wres.brfields
 wres.archetypes
 wres.theme
+collective.js.jquery == 1.3.2.1
 
 [test]
 plone.app.testing
