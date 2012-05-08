@@ -9,12 +9,13 @@ products/
 zope-versions.cfg
 zopeapp-versions.cfg
 ztk-versions.cfg
+PKG-INFO
 
 *.py[co]
 
 # Packages
 *.egg
-*.egg-info
+*.egg-info/PKG-INFO
 dist
 build
 eggs
