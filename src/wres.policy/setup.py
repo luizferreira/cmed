@@ -37,7 +37,6 @@ setup(name='wres.policy',
           'wres.brfields',
           'wres.archetypes',
           'wres.theme',
-          'collective.js.jquery == 1.3.2.1'
           # 'PIL==1.1.6',
           # Pillow e lxml sao p413
           # -*- Extra requirements: -*-
