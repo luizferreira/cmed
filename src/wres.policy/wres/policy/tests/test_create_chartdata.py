@@ -488,16 +488,16 @@ class TestSetup(unittest.TestCase):
         PATIENT_URL = portal.absolute_url() + "/Patients/" + PATIENT_ID
         
         #As Manager----------------------------------
-        print "Demora um pouco"
         print "As Manager"
+        print "Demora um bocado..."
         
         #Cria 3 problemas(um já resolvido), depois edita um mudando o status para resolvido, depois resolve outro diretamente.
         #Create problems
         self.create_problems(PATIENT_ID, PATIENT_URL)
         self.failUnless("Diagnóstico adicionado." in browser.contents)
-        self.create_problems(PATIENT_ID, PATIENT_URL,"Dor de cabeça")
+        self.create_problems(PATIENT_ID, PATIENT_URL,"Dor de cabeca")
         self.failUnless("Diagnóstico adicionado." in browser.contents)
-        self.failUnless("Dor de cabeça" in browser.contents)
+        self.failUnless("Dor de cabeca" in browser.contents)
         
         #Testa se "Dor de braço" dentro do fildset "Resolvidos" por causa do status "inactive"
         self.create_problems(PATIENT_ID, PATIENT_URL,"Dor de braço","456 7897","inactive")
@@ -511,19 +511,20 @@ class TestSetup(unittest.TestCase):
         #Resolve problem
             #Resolve dor de cabeça
         self.resolve_problems(PATIENT_ID,PATIENT_URL)
-        self.failUnless("Dor de cabeça" in browser.contents[browser.contents.find("Resolvidos"):])
+        self.failUnless("Dor de cabeca" in browser.contents[browser.contents.find("Resolvidos"):])
         
         #As Doctor----------------------------------
         print "As Doctor"
+        print "Demora um bocado tambem..."
         logout(self)
         login_as_doctor(self)
         #Cria 3 problemas(um já resolvido), depois edita um mudando o status para resolvido, depois resolve outro diretamente.
         #Create problems
         self.create_problems(PATIENT_ID, PATIENT_URL)
         self.failUnless("Diagnóstico adicionado." in browser.contents)
-        self.create_problems(PATIENT_ID, PATIENT_URL,"Dor de cabeça")
+        self.create_problems(PATIENT_ID, PATIENT_URL,"Dor de cabeca")
         self.failUnless("Diagnóstico adicionado." in browser.contents)
-        self.failUnless("Dor de cabeça" in browser.contents)
+        self.failUnless("Dor de cabeca" in browser.contents)
         
         #Testa se "Dor de braço" dentro do fildset "Resolvidos" por causa do status "inactive"
         self.create_problems(PATIENT_ID, PATIENT_URL,"Dor de braço","456 7897","inactive")
@@ -537,7 +538,7 @@ class TestSetup(unittest.TestCase):
         #Resolve problem
             #Resolve dor de cabeça
         self.resolve_problems(PATIENT_ID,PATIENT_URL)
-        self.failUnless("Dor de cabeça" in browser.contents[browser.contents.find("Resolvidos"):])
+        self.failUnless("Dor de cabeca" in browser.contents[browser.contents.find("Resolvidos"):])
         
         print "\n::::Teste criar, editar, resolver problemas passou!" 
         
