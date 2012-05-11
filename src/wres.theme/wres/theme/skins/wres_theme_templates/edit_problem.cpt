@@ -18,7 +18,6 @@
         <div metal:fill-slot="main"
             tal:define="template_data context/getEditProblemData">
             <h1 i18n:translate="heading_problem_list">Problem List</h1>
-            <br />
             <div id="edit"
                 tal:define="data template_data">
                 <metal:edit use-macro="here/problem_list_macros/macros/add_new">
@@ -27,13 +26,6 @@
                         <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
                         <input type="submit" name="form.button.cancel" value="cancel" class="context" i18n:attributes="value"/>
                         <input type="hidden" name="id" tal:attributes="value request/id | nothing" />
-<!--
-TODO:Comments Matheus                        <input type="hidden" name="status" tal:attributes="value request/state | nothing" />
--->
-<!--
-                        <input type="hidden" name="submitted_on" tal:attributes="value request/submitted_on | nothing" />
--->
-                        <input type="hidden" name="submitted_by" tal:attributes="value request/submitted_by | nothing" />
                     </metal:buttons>
                 </metal:edit>
             </div>

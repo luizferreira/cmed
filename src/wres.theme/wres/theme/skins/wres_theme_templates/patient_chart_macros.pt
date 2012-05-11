@@ -5,7 +5,8 @@
 
 <!-- Allergies -->
 <div metal:define-macro="allergies">
-    <div tal:define="allergies context/getAllergiesData;
+    <div tal:define="all_data context/getAllergiesData;
+                     active all_data/active;
                      patient context/getPatient;
                      portal_url context/getPortalURL">
         <div class="allergy_portlet_div"
@@ -17,7 +18,7 @@
                 <link rel="stylesheet" type="text/css" media="screen"
                         tal:attributes="href string:$portal_url/allergy_portlet.css;"/>
                 <table class="allergy_portlet">
-                    <tr tal:repeat="allergy allergies">
+                    <tr tal:repeat="allergy active">
                         <td>
                             <tal:t content="allergy/allergy"/>
                             -
@@ -25,7 +26,7 @@
                         </td>
                     </tr>
                 </table>
-                <div tal:condition="not:allergies">
+                <div tal:condition="not:active">
                 <span i18n:translate="cmfuemr_text_no_allergies" style="color:green; font-style:italic;">There are no allergies.</span>
                 </div>
             </div>

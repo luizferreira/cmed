@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       lang="en"
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="cmfuemr">
@@ -26,7 +26,7 @@
 
                 <fieldset>
                     <legend i18n:translate="legend_reason">Reason</legend>
-                    <!-- Type of inactivity -->
+                    <!-- Type of inactivity TODO EXCLUIR--> # TODO
                     <div class="field">
                         <div>
                             <label i18n:translate="label_type">Type</label>
@@ -63,4 +63,4 @@
             </form>
         </div>
     </body>
-</html>
+</html>-->

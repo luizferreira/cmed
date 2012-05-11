@@ -40,7 +40,7 @@
 				<tbody>
 					<tal:loop tal:repeat="allergy allergies">
 						<tr tal:attributes="class python:test(repeat['allergy'].even(), 'even', 'odd')">
-							<td tal:content="repeat/allergy/number">1</td>
+<!-- TODO REMOVER							<td tal:content="repeat/allergy/number">1</td>
 							<td>
 			                    <tal:t content="allergy/allergy" i18n:translate="">Penicillin</tal:t>
 			                    <tal:t condition="allergy/not_signed">*</tal:t>
@@ -75,7 +75,7 @@
 	                    tal:attributes="class python:test(repeat['immunization'].even(), 'even', 'odd')">
 	                    <td tal:content="repeat/immunization/number"></td>
 	                    <td tal:content="immunization/year"></td>
-	                    <td tal:content="immunization/id"></td>
+	                    <td tal:content="immunization/id"></td>-->
 	                </tr>
 	            </tbody>
 	        </table>

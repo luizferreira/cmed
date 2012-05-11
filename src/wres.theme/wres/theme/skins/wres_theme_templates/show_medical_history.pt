@@ -1,11 +1,11 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
+<!--<html xmlns="http://www.w3.org/1999/xhtml"
       xml:lang="en"
       lang="en"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="cmfuemr">
+      i18n:domain="cmfuemr">TODO REMOVER-->
 
 <metal:main fill-slot="main">
 	<!--tal:define="template_data context/get_formatted_questionnaire_data;

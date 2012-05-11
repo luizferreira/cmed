@@ -15,7 +15,6 @@
         <div metal:fill-slot="main"
             tal:define="data context/getEditMedicationData">
             <h1>Editar Medicamento</h1>
-            <br />
             <div id="edit">
                 <metal:edit use-macro="here/medications_macros/macros/add_new">
                     <metal:buttons fill-slot="buttons">
@@ -23,9 +22,6 @@
                         <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
                         <input type="submit" name="form.button.cancel" value="cancel" class="context" i18n:attributes="value"/>
                         <input type="hidden" name="id" tal:attributes="value request/id | nothing" />
-                        <input type="hidden" name="state" tal:attributes="value request/state | nothing" />
-                        <input type="hidden" name="submitted_on" tal:attributes="value request/submitted_on | nothing" />
-                        <input type="hidden" name="submitted_by" tal:attributes="value request/submitted_by | nothing" />
                     </metal:buttons>
                 </metal:edit>
             </div>

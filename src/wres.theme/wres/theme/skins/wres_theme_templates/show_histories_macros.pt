@@ -2,7 +2,7 @@
 	i18n:domain="cmfuemr">
 	<table id="surgical_history" class="listing"
 		tal:attributes="id string:${history_data/id}_table">
-		<thead>
+		<!-- TODO REMOVER<thead>
 			<th></th>
 			<th i18n:translate="cmfuemr_listingheader_date">Date</th>
 			<th i18n:translate="cmfuemr_listingheader_source">Source</th>
@@ -13,7 +13,7 @@
 				tal:repeat="history history_data/histories"
 				tal:attributes="class history/class">
 				<td tal:content="history/number">01</td>
-				<td tal:content="history/date">10/29/2006</td>
+				<td tal:content="history/date">10/29/2006</td>-->
 				<td><a href=""
 						tal:attributes="href history/came_from/href"
 						tal:content="history/came_from/content" i18n:translate="">Progress Note</a></td>

@@ -1,6 +1,6 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
      lang="en" metal:use-macro="here/main_template/macros/master" 
-	 i18n:domain="cmfuemr">
+	 i18n:domain="cmfuemr"># TODO EXCLUIR
 	 
 	<metal:block fill-slot="style_slot">
 		<link rel="stylesheet" type="text/css" href="cmed.css" />
@@ -24,4 +24,4 @@
 			</metal:buttons>
 		</metal:add_prescription>
 	</div>
-</html>
+</html>-->
