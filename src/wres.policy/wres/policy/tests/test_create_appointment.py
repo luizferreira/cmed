@@ -83,7 +83,7 @@ def create_appointment_as_doctor(browser,
     wait(browser)
     
     #Back to Main window
-    print "Cansei de testar... dormindo (Cabirra tensa.. se voce estiver animado pode tentar arruma-la)"
+    print "Cansei de testar... dormindo (Gambirra tensa.. se voce estiver animado pode tentar arruma-la)"
     sleep(1)
     print "Acordei"
     browser.switch_to_window(browser.window_handles[0])
@@ -146,8 +146,7 @@ def click_option_by_text(browser,field_name,text):
 def test_create_appointment(browser):
     create_appointment_as_doctor(browser,start_min="15")
     browser.get(doctor_desk)
-    if not "Nota da consulta - criada por teste no selenium" in browser.page_source:
-        raise NameError("FALHA: Ao criar consulta")
+    assert("Nota da consulta - criada por teste no selenium" in browser.page_source)
 
 #Main commands
 print "\nTeste criar consulta, SELENIUM, comecou"

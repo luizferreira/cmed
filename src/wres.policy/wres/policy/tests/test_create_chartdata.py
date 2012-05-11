@@ -527,9 +527,9 @@ class TestSetup(unittest.TestCase):
         self.failUnless("Dor de cabeca" in browser.contents)
         
         #Testa se "Dor de braço" dentro do fildset "Resolvidos" por causa do status "inactive"
-        self.create_problems(PATIENT_ID, PATIENT_URL,"Dor de braço","456 7897","inactive")
+        self.create_problems(PATIENT_ID, PATIENT_URL,"Dor de braco","456 7897","inactive")
         inicio = browser.contents.find('id="historical"')
-        self.failUnless("Dor de braço" in browser.contents[inicio:])
+        self.failUnless("Dor de braco" in browser.contents[inicio:])
         self.failUnless("Diagnóstico adicionado." in browser.contents)
         #Edit Problems
             #Edita a diarreia
