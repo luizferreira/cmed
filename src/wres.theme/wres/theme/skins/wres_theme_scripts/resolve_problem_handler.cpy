@@ -6,7 +6,7 @@ problem = context.chart_data.get_entry_item(id, 'problems')
 member = context.portal_membership.getAuthenticatedMember()
 problem['data']['inactivated_by'] = member.id
 problem['data']['note'] = request['note']
-problem['data']['end_date'] = request['end_date']
+problem['data']['end_date'] = DateTime().strftime('%d/%m/%Y')
 problem['data']['state'] = 'inactive'
 if 'id' in problem:
     del problem['id']
