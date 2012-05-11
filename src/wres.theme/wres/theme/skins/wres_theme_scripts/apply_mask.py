@@ -1,5 +1,5 @@
 ##parameters=value, mask
-
+#chamado por getPatientData e print_prescription
 def getFormatEntities(mask):
     """
     '(dd)dd-dd' -> ['(', '', '', ')', '', '', '-', '', '', ]

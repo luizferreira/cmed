@@ -21,7 +21,6 @@ for schemata in schematas:
                     continue
             if brake:
                 continue
-        #ipdb.set_trace()
         #Olhar se widget do tipo DataGrid com 2 colunas(dir,esq) está vazio, se sim, é ignorado.
         if field.widget.getName() == "DataGridWidget" and 'dir' in field.columns and 'esq' in field.columns:
             brake = True
@@ -38,7 +37,6 @@ for schemata in schematas:
             if brake:
                 continue        
         #Ignorar Medico e Data, pegos pelo template document_view, no cabeçalho e rodapé
-        #ipdb.set_trace()
         field_name = field.getName()
         if field_name == 'doctor' or field_name == 'dateOfVisit' or field_name == 'date'  :
             continue
@@ -49,6 +47,4 @@ for schemata in schematas:
         list_data.append(tupla_name_label)
     if len(list_data) > 1:
         list_schemas.append(list_data)
-
-#ipdb.set_trace()
 return list_schemas
