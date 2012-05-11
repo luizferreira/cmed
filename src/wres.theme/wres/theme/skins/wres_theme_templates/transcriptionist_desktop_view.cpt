@@ -7,7 +7,7 @@
         <style type="text/css" media="all" tal:content="string:@import url(${portal_url}/visual.css);"></style>
     </metal:block>
     <body>
-    <div metal:fill-slot="main"
+    <<!--div metal:fill-slot="main"
 		tal:define="current_key request/key | string:recently_seen">
         <br />
         <div class="center pagetitle" i18n:translate="description_transcriptionist_desktop">Transcriptionist Desktop</div>
@@ -70,7 +70,7 @@
             <span id="inbox_div"  style="display: none"
             	tal:define="mid context/transcriptionist_desktop_aux/getDocumentsData; 
                             docs mid/inbox;
-                            type string:inbox"
+                            type string:inbox"- #TODO EXCLUIR->
                   tal:attributes="style python:current_key == 'inbox' or 'display: none'">
                 <h1 i18n:translate="heading_inbox">Inbox</h1><br />
                 <metal:table use-macro="context/transcriptionist_desktop_aux/transcriptionist_desktop_macros/macros/doctable"/>

@@ -16,7 +16,7 @@
 
 <body>
 
-  <div metal:fill-slot="main"
+  <!--<div metal:fill-slot="main"
        tal:define="capitalized_type_name string:Transcriptionist;
                    short_type_name string:transcriptionist;
                    actual_type_name string:Transcriptionist;
@@ -72,7 +72,7 @@
 				<input type="text" size="25" name="searchableText" tal:attributes="value searchableText" />
 				<input class="searchButton" type="submit" name="searchButton" value="Search"/>
 			</form>
-		</div>
+		</div>#TODO EXCLUIR
 
 		<!-- Resultados da consulta -->
 		<fieldset>
@@ -102,7 +102,7 @@
                                             id
                                         </a>
 									</td>
-									<td>
+									--><td>
                                         <a tal:attributes="href string:${objeto/absolute_url}/base_view"
                                            tal:content="name" >
                                             id

@@ -27,12 +27,12 @@
                         <tal:task_id replace="python:task.get('title', '')">task1</tal:task_id>
                     </a>
                     <!-- details -->
-                    <div class="portletDetails">
+                  <!--  <div class="portletDetails">
                       <tal:date replace="python:here.toPortalTime(task.get('date', ''))">01/22/2005</tal:date>
                     </div>
                 </div>
             </tal:block>
-          </div>
+          </div> #TODO EXCLUIR
         </div>
     </div>
 
@@ -40,4 +40,4 @@
 
 </body>
 
-</html>
+</html>-->

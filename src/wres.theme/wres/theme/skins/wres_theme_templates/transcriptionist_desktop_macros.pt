@@ -5,7 +5,7 @@
 		<!-- as variveis devem ser definidas globalmente -->
 		<tal:args define="global documents python:[];
 						  global id_num python:0;
-						  global div_id string:" />
+	<!--					  global div_id string:" />
 	</metal:documents>
 
 	<tal:not_docs condition="not:documents">
@@ -49,7 +49,7 @@
 	                        <a href="#" tal:attributes="href link" i18n:translate="label_view">
 	                            View
 	                        </a>
-	                    </td>
+	                    </td>#TODO EXCLUIR-->
 						</tal:def_patient>
 						</metal:trow>
 					</tr>
