@@ -19,19 +19,16 @@
 
                 <tbody>
 
-					<tal:def define="patient context/getPatient;
-							         doctor context/getDoctor"> 
+                            <tal:def define="patient context/getPatient;
+                                                        doctor context/getDoctor"> 
 					
 	                    <tr>
 	                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Paciente</th>
 	                        <td>
-                        		<a href="" tal:attributes="href patient/absolute_url_path"> 
-                        			<tal:print content="patient/Title" />
-                        		</a>
-	                            <!-- metal:field use-macro="python:context.widget('patient', mode='view')">
-	                            Categories
-	                            </metal:field> -->
+                                    <a href="" tal:attributes="href patient/absolute_url_path"> 
+                                            <tal:print content="patient/Title" />
+                                    </a>
 	                        </td>
 	                    </tr>
 	                    
@@ -112,36 +109,10 @@
 	                                </abbr>
 	                            </tal:sameday>
 	                        </td>
-	                    </tr>
-	                    
-	                    <!-- tr tal:condition="context/location">
-	                        <th i18n:translate="event_where">Where</th>
-	                        <td class="location">
-	
-	                            <metal:field use-macro="python:context.widget('location', mode='view')">
-	                            Location
-	                            </metal:field>
-	                        </td>
-	                    </tr -->
-	                    <!-- tr tal:define="contact_email context/contact_email;
-	                                    contact_name python:context.contact_name() or None;"
-	                        tal:condition="python:contact_name or contact_email">
-	                        <th i18n:translate="contact_name">Contact Name</th>
-	                        <td>
-	                            <a id="parent-fieldname-contactEmail"
-	                               tal:condition="contact_email"
-	                               tal:replace="structure python: context.spamProtect(mailaddress=contact_email, mailname=contact_name, cssclass='email fn')"
-	                               />
-	                            <span class="fn"
-	                                  tal:condition="not: contact_email"
-	                                  tal:content="contact_name" />
-	                        </td>
-	                    </tr>  -->
-	                    
+	                    </tr>   
 	                    <tr>
 	                        <th i18n:translate="">Contato</th>
 	                        <td>
-	                        	<!-- tal:print content="patient/getContactPhone" />  -->
 	                            <metal:field use-macro="python:patient.widget('contactPhone', mode='view')">
 	                            Contato
 	                            </metal:field> 
@@ -151,47 +122,12 @@
 	                    <tr>
 	                        <th i18n:translate="">E-mail</th>
 	                        <td>
-	                        	<!-- tal:print content="patient/getContactPhone" />  -->
 	                            <metal:field use-macro="python:patient.widget('email', mode='view')">
 	                            Contato
 	                            </metal:field> 
 	                        </td>
 	                    </tr>		                    	                    
-	                    
-	                    <!-- tr tal:condition="context/contact_phone">
-	                        <th i18n:translate="contact_phone">Contact Phone</th>
-	                        <td class="tel">
-	                            <metal:field use-macro="python:context.widget('contactPhone', mode='view')">
-	                            Phone number
-	                            </metal:field>
-	                        </td>
-	                    </tr>  -->
-                    </tal:def>
-                    <!-- tr tal:condition="context/getAttendees|nothing">
-                        <th i18n:translate="contact_attendees">Attendees</th>
-                        <td class="attendees">
-                            <metal:field use-macro="python:context.widget('attendees', mode='view')">
-                            Attendees
-                            </metal:field>
-                        </td>
-                    </tr>  -->
-                    <!-- tr>
-                        <th i18n:translate="heading_add_to_calendar">Exportar para outro calendário</th>
-                        <td tal:define="here_url context/@@plone_context_state/object_url;">
-                            <a href="#"
-                               tal:attributes="href string:$here_url/vcs_view"
-                               title="Baixar essa consulta em formato vCal"
-                               i18n:attributes="title title_add_to_vcal;">
-                                <img tal:replace="structure context/icon_export_vcal.png" src="" alt="" />
-                                <span i18n:translate="label_add_to_vcal">vCal</span></a><br />
-                            <a href="#"
-                               tal:attributes="href string:$here_url/ics_view"
-                               title="Baixar essa consulta em formato iCal"
-                               i18n:attributes="title title_add_to_ical;">
-                                <img tal:replace="structure context/icon_export_ical.png" src="" alt="" />
-                                <span i18n:translate="label_add_to_ical">iCal</span></a>
-                        </td>
-                    </tr> -->
+                    </tal:def>                
                 </tbody>
             </table>
         </div>
@@ -210,6 +146,6 @@
                More information about this event&hellip;</a>
         </p>
 
-        <span class="visualClear"><!-- --></span>
+        <span class="visualClear"></span>
 
 </div>

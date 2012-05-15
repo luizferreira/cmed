@@ -73,7 +73,6 @@
                 <br />
                 <tal:showDxs repeat="item python:dx.get('obj', '')">
                     <span tal:content="repeat/item/number">1</span>.
-                    <!--<span tal:content="python:item.getId()">Problem</span>-->
                     <span tal:content="python:item">Problem</span>
                     <br />
                 </tal:showDxs>
@@ -85,17 +84,6 @@
         </div>
     </div>
 </div>
-
-<!-- Referred By -->
-<!--
-<div metal:define-macro="referred_by" tal:define="referred python:context.getReferredBy()">
-	<strong>Referred by: </strong>
-	<a href="" tal:condition="referred" tal:attributes="href string:${portal_url}/doctor_folder/${referred/getId}">
-		<span tal:content="referred/getId">Doctor</span>
-	</a>
-	<span tal:condition="not:referred">no reference</span>
-</div>
--->
 <div metal:define-macro="referred_by" 
      tal:define="referred python:context.chartFolder.aq_parent.getReferredBy()">
     <div class="portlet">
@@ -118,7 +106,6 @@
         <h5 i18n:translate="cmfuemr_box_insurances">Insurances</h5>
         <div class="portletBody">
             <tal:insurances repeat="insurance insurances">
-                <!--<strong>Insurance <span tal:content="repeat/insurance/number">1</span>:</strong>-->
                 <span tal:content="python:'- %s' % insurance.Title()">insurance</span>
             </tal:insurances>
 

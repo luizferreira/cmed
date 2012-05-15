@@ -24,7 +24,6 @@ for schemata in schematas:
         #Olhar se widget do tipo DataGrid com 2 colunas(dir,esq) está vazio, se sim, é ignorado.
         if field.widget.getName() == "DataGridWidget" and 'dir' in field.columns and 'esq' in field.columns:
             brake = True
-            #ipdb.set_trace()
             for i in range(len(field.getAccessor(context)())):
                 for y in value[i]['esq']:
                     if y is not '':

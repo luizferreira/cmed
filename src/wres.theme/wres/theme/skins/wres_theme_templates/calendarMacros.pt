@@ -7,15 +7,15 @@
 		  tal:define="events python: here.calendar_aux.myGetEventsBefore(start_date, allEvents, doctor_id);"
 		  tal:attributes="class python: test(events, 'event', 'noevent');
 						  id string:cal0">
-		<td>
-		   <!-- iterate through the events -->
-		   <metal:block tal:repeat="event events"> 
-				<span tal:define="hour_day python:0">
-						<!-- print the event -->
-						<metal:print_event use-macro="here/calendar_aux/calendarMacros/macros/print_event" />
-				 </span>
-		   </metal:block>&nbsp;
-		</td>
+            <td>
+                <!-- iterate through the events -->
+                <metal:block tal:repeat="event events"> 
+                    <span tal:define="hour_day python:0">
+                        <!-- print the event -->
+                        <metal:print_event use-macro="here/calendar_aux/calendarMacros/macros/print_event" />
+                    </span>
+                </metal:block>&nbsp;
+            </td>
 	  </tr>
 	</table>
 </metal:events_running>
@@ -27,10 +27,6 @@
   <tr> 
 	<th>
 	  <div class="calTabs">
-		<!--<a class="plain" href="#" TAL:attributes="href urls_template/month"
-		  i18n:translate="calendar_month">month</a> 
-		<a class="plain" href="#" TAL:ATTRIBUTES="href urls_template/week"
-		  i18n:translate="calendar_week">week by day</a> -->
 		<a class="plain" href="#"
 			tal:attributes="href urls_template/week2;
 							class python:test(template.id == 'calendarWeek2', 'selected', 'plain')"
@@ -52,41 +48,41 @@
 	i18n:domain="cmfuemr">
 	
 	<div class="eventlisting">
-		<a href="#" ONMOUSEOVER="" ONMOUSEOUT=""
-		   tal:attributes="href event/url;
-						   class python:here.calendar_aux.visitStateClass(event['review_state']);
-                           id python:event['eventstart'].AMPMMinutes()">
-						   
-			<img src="#" height="16" width="16" alt="" i18n:attributes="alt"
-				  />   <span tal:replace="structure python:path('here/%s' % event['getIcon'])"/>
-				 				
-				<span tal:content="python:event['eventstart'].AMPMMinutes()">
-					04:00 pm
-				</span>
-				-
-				<span tal:content="python:event['eventend'].AMPMMinutes()" >
-					04:15 pm
-				</span>
-				-
-				<span i18n:translate="text_patient">Patient</span>:
-				<span tal:content="python:event['visit'].getPatient().Title()" >
-					lastName, firstName
-				</span>
-				-
-				<span i18n:translate="text_doctor">Doctor</span>:
-				<span tal:content="event/getDoctorTitle" >
-					lastName, firstName
-				</span>
-				-
-				<span i18n:translate="text_reason">Reason</span>:
-				<span i18n:translate="" tal:content="event/getReason" >
-					Visit Reason 
-				</span>
-				-
-				<span i18n:translate="text_state">State</span>:
-				<span i18n:translate="" tal:content="event/review_state" >
-					Scheduled
-				</span>
+            <a href="#" ONMOUSEOVER="" ONMOUSEOUT=""
+                tal:attributes="href event/url;
+                                                class python:here.calendar_aux.visitStateClass(event['review_state']);
+                        id python:event['eventstart'].AMPMMinutes()">
+                                                
+                <img src="#" height="16" width="16" alt="" i18n:attributes="alt"/>   
+                        <span tal:replace="structure python:path('here/%s' % event['getIcon'])"/>
+                                                        
+                        <span tal:content="python:event['eventstart'].AMPMMinutes()">
+                                04:00 pm
+                        </span>
+                        -
+                        <span tal:content="python:event['eventend'].AMPMMinutes()" >
+                                04:15 pm
+                        </span>
+                        -
+                        <span i18n:translate="text_patient">Patient</span>:
+                        <span tal:content="python:event['visit'].getPatient().Title()" >
+                                lastName, firstName
+                        </span>
+                        -
+                        <span i18n:translate="text_doctor">Doctor</span>:
+                        <span tal:content="event/getDoctorTitle" >
+                                lastName, firstName
+                        </span>
+                        -
+                        <span i18n:translate="text_reason">Reason</span>:
+                        <span i18n:translate="" tal:content="event/getReason" >
+                                Visit Reason 
+                        </span>
+                        -
+                        <span i18n:translate="text_state">State</span>:
+                        <span i18n:translate="" tal:content="event/review_state" >
+                                Scheduled
+                        </span>
 		</a>
 	</div>
 </metal:print_event>
@@ -128,10 +124,10 @@
 			<tal:value content="info_patient_phone">8888-8888</tal:value>
 		</div>
 		<div tal:condition="info_chart_number">
-			<a tal:attributes="href python:resultEvent.getPatient().absolute_url()+'/chartFolder'">
-				<strong i18n:translate="label_chart_name">Chart Number </strong>:
-				<tal:value content="info_chart_number">25</tal:value>
-			</a>
+                    <a tal:attributes="href python:resultEvent.getPatient().absolute_url()+'/chartFolder'">
+                            <strong i18n:translate="label_chart_name">Chart Number </strong>:
+                            <tal:value content="info_chart_number">25</tal:value>
+                    </a>
 		</div>
 		<div tal:condition="info_reason">
 			<strong i18n:translate="description_visit_reason">Visit Reason </strong>:
@@ -182,35 +178,35 @@
 			  <div class="inforow"><strong i18n:translate="listingheader_type">Type</strong>:
 							<span i18n:translate="" tal:content="portaltype" tal:omit-tag="">Type</span>
 			  </div>
-						<div class="inforow">
-						   <strong i18n:translate="calendar_start">Start</strong>:
-						   <span tal:content="python:event['eventstart'].AMPMMinutes()" >Time</span>&nbsp;&nbsp;-
-						   <span i18n:translate="" tal:content="python:event['eventstart'].strftime('%b').capitalize()"
-							 tal:omit-tag="">Sep</span>
-						   <span tal:content="python:event['eventstart'].strftime('%d')" tal:omit-tag="">17</span>
-						   <span tal:content="python:event['eventstart'].strftime('%Y')" tal:omit-tag="">2003</span>
-						</div>
-						  <div class="inforow">
-						   <strong i18n:translate="duration">Duration</strong>:
-						   <span tal:content="python:resultEvent.getDuration()">00:30</span><span i18n:translate="text_min">&nbsp;min&nbsp;</span>
-						  </div>
-						  <br />
+                            <div class="inforow">
+                                <strong i18n:translate="calendar_start">Start</strong>:
+                                <span tal:content="python:event['eventstart'].AMPMMinutes()" >Time</span>&nbsp;&nbsp;-
+                                <span i18n:translate="" tal:content="python:event['eventstart'].strftime('%b').capitalize()"
+                                        tal:omit-tag="">Sep</span>
+                                <span tal:content="python:event['eventstart'].strftime('%d')" tal:omit-tag="">17</span>
+                                <span tal:content="python:event['eventstart'].strftime('%Y')" tal:omit-tag="">2003</span>
+                            </div>
+                                <div class="inforow">
+                                <strong i18n:translate="duration">Duration</strong>:
+                                <span tal:content="python:resultEvent.getDuration()">00:30</span><span i18n:translate="text_min">&nbsp;min&nbsp;</span>
+                                </div>
+                                <br />
 			  <div class="inforow"><strong i18n:translate="link_created_by">Created by</strong>: <span tal:replace="event/Creator">Creator</span></div>
 			  <div class="inforow"><strong i18n:translate="calendar_created_on">Created on</strong>:
-							<span tal:define="ecreated python:DateTime(str(event.created))">
-							  <span i18n:translate="" tal:content="python:ecreated.strftime('%b').capitalize()"
-								tal:omit-tag="">Sep</span>
-							  <span tal:content="python:ecreated.strftime('%d')" tal:omit-tag="">17</span>
-							  <span tal:content="python:ecreated.strftime('%Y')" tal:omit-tag="">2003</span>
-							</span>
+                                <span tal:define="ecreated python:DateTime(str(event.created))">
+                                    <span i18n:translate="" tal:content="python:ecreated.strftime('%b').capitalize()"
+                                        tal:omit-tag="">Sep</span>
+                                    <span tal:content="python:ecreated.strftime('%d')" tal:omit-tag="">17</span>
+                                    <span tal:content="python:ecreated.strftime('%Y')" tal:omit-tag="">2003</span>
+                                </span>
 			  </div>
 			  <div class="inforow"><strong i18n:translate="listingheader_modified">Modified</strong>:
-							<span tal:define="emod python:DateTime(str(event.modified))">
-							  <span i18n:translate="" tal:content="python:emod.strftime('%b').capitalize()"
-								tal:omit-tag="">Sep</span>
-							  <span tal:content="python:emod.strftime('%d')" tal:omit-tag="">17</span>
-							  <span tal:content="python:emod.strftime('%Y')" tal:omit-tag="">2003</span>
-							</span>
+                                <span tal:define="emod python:DateTime(str(event.modified))">
+                                    <span i18n:translate="" tal:content="python:emod.strftime('%b').capitalize()"
+                                        tal:omit-tag="">Sep</span>
+                                    <span tal:content="python:emod.strftime('%d')" tal:omit-tag="">17</span>
+                                    <span tal:content="python:emod.strftime('%Y')" tal:omit-tag="">2003</span>
+                                </span>
 			  </div>
   			  <div class="inforow"><strong i18n:translate="listingheader_status">State</strong>:
 							<span i18n:translate="" tal:content="event/review_state" tal:omit-tag="">review_state</span>
@@ -245,8 +241,7 @@
 				
 				<!-- "Jump to" button -->
 				<input class="standalone add" type="button" name="jump_button" id="jump_button" value="Enter" i18n:attributes="value"
-					   tal:attributes="onclick string: setJumpDate('${input_id}_month', '${input_id}_day', '${input_id}_year', '${action}', this.form);;"
-					   />
+					   tal:attributes="onclick string: setJumpDate('${input_id}_month', '${input_id}_day', '${input_id}_year', '${action}', this.form);;"/>
 		</div>
 	</form>	
 </metal:date_choose>

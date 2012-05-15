@@ -6,7 +6,6 @@
     <head>
         <metal:block fill-slot="style_slot">
             <link rel="stylesheet" type="text/css" href="cmed.css" />
-            <!--link rel="stylesheet" type="text/css" href="prescriptions.css" /-->
         </metal:block>
 
         <metal:block fill-slot="javascript_head_slot">
