@@ -11,18 +11,18 @@ def getPatientId(context):
         return context.getId()
     else:
         return getPatientId(context.aq_inner.aq_parent)
-def getUrl(path):
-    url = ""
-    for node in path:
-        url = url + node + "/"
-    return url[:-1] #Remove last slash
+##def getUrl(path):
+    ##url = ""
+    ##for node in path:
+        #url = url + node + "/"
+    #return url[:-1] #Remove last slash
 def checkOwner(tuple):
     if getPatientId(context) in tuple:
         return True
     return False
     
 
-def getFilesAndImages():
+def getFilesAndImages(context):
     #Get Imagens
     brains = pc.search({'portal_type': 'Image'})
     for brain in brains:
@@ -30,7 +30,7 @@ def getFilesAndImages():
         path = image.getPhysicalPath()
         if not checkOwner(path):
             continue
-        URL = "http://localhost:8080" + getUrl(path)
+        URL = image.absolute_url()
         date = DateTime(image.Date()).strftime("%y/%m/%d")
         imagens.append((URL,date,image.getWidth(),image.getHeight()))
     
@@ -43,9 +43,9 @@ def getFilesAndImages():
             continue
         name = other.getFilename()
         icon = other.getIcon()
-        URL = "http://localhost:8080" + getUrl(path)
+        URL = other.absolute_url
         file = (URL,name,icon)
         other_files.append(file)
     
     return [imagens,other_files]
-return getFilesAndImages()
+return getFilesAndImages(context)
