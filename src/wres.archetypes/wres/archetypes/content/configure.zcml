@@ -66,12 +66,6 @@
         interface="..interfaces.IVisitTemp"
         />
   </class>
-  <class class=".visit.Visit">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.IVisit"
-        />
-  </class>
   <class class=".insurancefolder.InsuranceFolder">
     <require
         permission="zope2.View"
@@ -84,34 +78,10 @@
         interface="..interfaces.IInsurance"
         />
   </class>
-  <class class=".initialvisit.InitialVisit">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.IInitialVisit"
-        />
-  </class>
   <class class=".visitfolder.VisitFolder">
     <require
         permission="zope2.View"
         interface="..interfaces.IVisitFolder"
-        />
-  </class>
-  <class class=".progressnotes.ProgressNotes">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.IProgressNotes"
-        />
-  </class>
-  <class class=".referringproviderfolder.ReferringProviderFolder">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.IReferringProviderFolder"
-        />
-  </class>
-  <class class=".referringprovider.ReferringProvider">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.IReferringProvider"
         />
   </class>
   <class class=".adminfolder.AdminFolder">
@@ -124,24 +94,6 @@
     <require
         permission="zope2.View"
         interface="..interfaces.IAdmin"
-        />
-  </class>
-  <class class=".docplastica.DocPlastica">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.IDocPlastica"
-        />
-  </class>
-  <class class=".docboletim.DocBoletim">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.IDocBoletim"
-        />
-  </class>
-  <class class=".examfolder.ExamFolder">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.IExamFolder"
         />
   </class>
   <class class=".documentfolder.DocumentFolder">
@@ -160,18 +112,6 @@
     <require
         permission="zope2.View"
         interface="..interfaces.IWRESUser"
-        />
-  </class>
-  <class class=".transcriptionistfolder.TranscriptionistFolder">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.ITranscriptionistFolder"
-        />
-  </class>
-  <class class=".transcriptionist.Transcriptionist">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.ITranscriptionist"
         />
   </class>
   <class class=".secretaryfolder.SecretaryFolder">

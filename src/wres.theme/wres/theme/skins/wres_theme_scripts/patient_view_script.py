@@ -27,9 +27,6 @@ for schemata in schematas:
         fields_non_empty = []
         for f in fields:                
             value = f.getAccessor(context)()
-            #if value:
-                #tupla = (f, value)
-                #fields_non_empty.append(tupla)
             tupla = (f, value)
             fields_non_empty.append(tupla)
         if len(fields_non_empty) is not 0:

@@ -37,6 +37,8 @@ class Doctor(wresuser.WRESUser):
     
     security.declarePublic('add_visits_folder')
     def add_visits_folder(self):
+        ''' adiciona a pasta onde serao colocadas as consultas do medico e tambem a colecao onde sera
+        colocado o calendario '''
         user_id = self.getId()
         
         portal = getSite()
@@ -47,12 +49,15 @@ class Doctor(wresuser.WRESUser):
         # adicionar visitas no seu calendário.
         doctor_visits = _createObjectByType('VisitFolder', portal.Appointments, user_id)
         doctor_visits.setTitle('Dr(a) ' + self.getFullName())
+        # apenas o medico correspondente (Owner) pode adicionar consulta em sua pasta de consultas.
         doctor_visits.manage_permission('Add portal content', ['Secretary', 'Manager', 'Owner'])
         doctor_visits.setConstrainTypesMode(1)
         portal.plone_utils.changeOwnershipOf(doctor_visits, user_id)
         collection = _createObjectByType('Topic', doctor_visits, 'Agenda')
         collection.setTitle('Calendário do(a) Dr(a) ' + self.Title())
         collection.setLayout('solgemafullcalendar_view')
+        # medicos e secretarias nao veem 'Edicao' e 'Criterio' na colecao.
+        collection.manage_permission('Change portal topics', ['Manager'], False)
         criteria = collection.addCriterion('Type','ATPortalTypeCriterion')
         criteria.setValue('VisitTemp')
         # criteria2 = collection.addCriterion('Subject', 'ATSimpleStringCriterion')
@@ -62,11 +67,11 @@ class Doctor(wresuser.WRESUser):
         criteria3 = collection.addCriterion('Subject', 'ATSelectionCriterion')       
         criteria3.setValue('CalendarShow')
         doctor_visits.setLayout('Agenda')
-        self.setSignPassword('senha1') #TODO gerar uma assinatura padrao randomica        
 
     def at_post_create_script(self):
         wresuser.WRESUser.at_post_create_script(self)
         self.add_visits_folder()
+        self.setSignPassword('senha1') #TODO gerar uma assinatura padrao randomica        
 
     def getGroup(self):
         return DOCTOR_GROUP

@@ -8,9 +8,7 @@
       i18n:domain="cmfuemr">
 
 <head>
-
 	<title i18n:translate="cmfuemr_description_admin_search">Admin search</title>
-
 </head>
 
 <body>
@@ -38,7 +36,6 @@
             <tal:block condition="batch">
                 <table class="listing" id="sortable">
                     <thead>
-                        <!--th>No</th-->
                         <th i18n:translate="cmfuemr_listingheader_id">Id</th>
                         <th i18n:translate="cmfuemr_listingheader_name">Name</th>
                         <th i18n:translate="cmfuemr_listingheader_ssn">SSN</th>
@@ -48,7 +45,6 @@
                     <tbody>
                         <metal:block tal:repeat="item batch">
                             <tr tal:define="oddrow repeat/item/odd" tal:attributes="class python:test(oddrow, 'odd', 'even')">
-                                <!--td tal:content="python:start + repeat['item'].number()"></td-->
                                 <metal:block tal:define="objeto item/getObject;
                                                          name string: ${objeto/getFirstName} ${objeto/getMiddleInitial} ${objeto/getLastName};
                                                          ssn string:${objeto/getSsn}">

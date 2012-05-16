@@ -31,13 +31,11 @@
         NOME              
         -->
         <div align="center" style="padding:5px 0px 0px 0px">
-            <!--span style="font-size:12px; font-weight: bold;" >Nome Completo:</span-->
             <span style="font-size:12px;" tal:content="patient/getFullName"> </span>
             <!--
             IDADE
             -->
             <br/>
-            <!--span style="font-size:12px; font-weight: bold;" >Idade:</span-->
             <span style="font-size:12px;" tal:content="python:context.getPatientAge(bdate)"></span>
             <span style="font-size:12px;" tal:condition="bdate"> anos</span>              
         </div>

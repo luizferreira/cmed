@@ -215,56 +215,7 @@
                 </div>
 
               </div>
-
-              <!--<div class="field" tal:define="error errors/effective_date | nothing;">
-                <label i18n:translate="label_effective_date">Publishing Date</label>
-                <div class="formHelp"
-                     i18n:translate="help_effective_date">
-                  The date when the item will be published. If no date is selected the
-                  item will be published immediately.
-                </div>
-
-                <div tal:content="error">Validation error output</div>
-
-                <div tal:define="inputname  string:effective_date;
-                                 formname   string:edit_form;
-                                 effective python:test(request.get('paths'), None, context.EffectiveDate()) ;
-                                 inputvalue python:test(effective and effective!='None', effective, request.get('effective_date', ''));"
-                     tal:attributes="class python:test(error, 'field error', 'field')">
-
-                  <div metal:use-macro="context/calendar_macros/macros/calendarDatePickerBox">
-                    calendar pop-up
-                  </div>
-
-                </div>
-              </div>
-
-              <div class="field"
-                   tal:define="error errors/expiration_date | nothing;">
-                <label i18n:translate="label_expiration_date">Expiration Date</label>
-                <div class="formHelp"
-                     i18n:translate="help_expiration_date">
-                  The date when the item expires. This will automatically
-                  make the item invisible for others at the given date.
-                  If no date is chosen, it will never expire.
-                </div>
-
-                <div tal:content="error">Validation error output</div>
-
-                <div class="field">
-                  <div tal:define="inputname  string:expiration_date;
-                                   formname   string:edit_form;
-                                   expiration context/ExpirationDate;
-                                   inputvalue python:test(expiration and expiration!='None', expiration, request.get('expiration_date', ''));"
-                       tal:attributes="class python:test(error, 'field error', 'field')">
-
-                    <div metal:use-macro="context/calendar_macros/macros/calendarDatePickerBox">
-                      calendar pop-up
-                    </div>
-                  </div>
-                </div>
-              </div>-->
-
+             
               <div class="field">
                 <label for="comment"
                        i18n:translate="label_comments">Comments</label>

@@ -22,7 +22,8 @@
     <div>
         <h1>
           <a i18n:translate="" tal:content="string:${title}">Title</a>
-        </h1><br />
+
+        </h1>
         <!-- 
         <div class="field">
             <br />
@@ -41,9 +42,10 @@
         </div>  -->
 
         <!-- Resultados da consulta -->
-        <!-- fieldset>
-        <legend i18n:translate="cmfuemr_legend_results">Results</legend> -->
+        <fieldset>
+<!--         <legend i18n:translate="cmfuemr_legend_results">Results</legend> -->
 
+        <br/>
         <div>
             <div tal:define="insurances_header python:['Operadora', 'Telefone', 'WebSite'];
                               insurances_body python:context.searchInsurancesInformation(request.form.get('query', ''), request.form.get('searchField', ''))"
@@ -62,8 +64,7 @@
                     <tbody>
                         <tal:block repeat="ib_line insurances_body">
                             <tr tal:define="oddrow repeat/ib_line/even"
-                                tal:attributes="class python:test(oddrow, 'even', 'odd')">
-                                <!--<td><input type="checkbox" name="check_insurances" tal:attributes="value python:ib_line[0]" /></td>-->
+                                tal:attributes="class python:test(oddrow, 'even', 'odd')">                              
                                 <td tal:repeat="ib python:ib_line[1]">
                                     <tal:insurance tal:define="num repeat/ib/number">
                                         <a tal:condition="python:num == 1 "

@@ -9,7 +9,7 @@ from wres.policy.utils.utils import set_schemata_properties, finalizeSchema
 from wres.policy.utils.permissions import EDIT_SECRETARY, VIEW_SECRETARY, SIGN_PN
 
 
-from wres.brfields.content.BrFieldsAndWidgets import CPFField, CPFWidget
+from wres.brfields.content.BrFieldsAndWidgets import*
 from wres.brfields.validators import *
 
 from zope.i18nmessageid import MessageFactory, Message
@@ -28,17 +28,12 @@ MAIN = Schema((
                                                                         
         StringField('firstName',
             required=1, 
-            read_permission=VIEW_SECRETARY, 
-            write_permission=EDIT_SECRETARY,
             widget=StringWidget(label=_('First Name'),
             ),
         ),
 
         StringField('lastName',
             required=1, 
-            read_permission=VIEW_SECRETARY, 
-            write_permission=EDIT_SECRETARY,
-            index="ZCTextIndex",
             widget=StringWidget(label=_('Last Name'),
             ),
         ),
@@ -46,19 +41,50 @@ MAIN = Schema((
         CPFField('ssn',
                 required=0,
                 searchable=1,
-                read_permission=VIEW_SECRETARY, 
-                write_permission=EDIT_SECRETARY,
                 widget=CPFWidget(label=_('SSN'),
                 ),
         ),
         
         StringField('email',
             required=1,      
-            read_permission=VIEW_SECRETARY, 
-            write_permission=EDIT_SECRETARY,
             widget=StringWidget(label=_('Email'),
             ),
-        ),                                                                        
+        ),         
+
+        StringField('address1',
+            widget=StringWidget(
+                label=_('Address 1'),
+            ),
+        ),
+
+        StringField('city',
+            widget=StringWidget(
+                label=_('City'),
+            ),
+        ),
+
+        StringField('state',
+            widget=StringWidget(
+                label=_('State'),
+            ),
+        ),   
+
+        BrPhoneField('phone',
+            widget=BrPhoneWidget(label=_('Phone'),
+                                 description='You must enter only numbers',
+                                 description_msgid='cmfuemr_help_you_must_enter_only_numbers',
+                                 i18n_domain='cmfuemr',
+                             ),
+            searchable=1,
+            ),      
+
+        BrPhoneField('cel',
+            widget=BrPhoneWidget(label=_('Cel'),
+                                     description='You must enter only numbers',
+                                     description_msgid='cmfuemr_help_you_must_enter_only_numbers',
+                                     i18n_domain='cmfuemr',
+            ),
+        ),                                                     
                                                                         
 ))
 set_schemata_properties(MAIN, schemata='Principal')

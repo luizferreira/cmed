@@ -45,12 +45,6 @@ for schemata in schematas:
             if len(datagrid_fields) is not 0:
                 for j in range(len(datagrid_fields)):
                     groups.append([datagrid_fields[j]])
-            lista[i].append(groups)
-            
-            
-            i+=1
-            
-
-                       
-                      
+            lista[i].append(groups)                        
+            i+=1                                                       
 return lista

@@ -3,7 +3,7 @@
 
 #REQUEST = context.REQUEST
 #NUM_RESULTS = 5
-
+#TODO Atualmente não utilizado - Deixar o destino deste script para ser decidido no futuro.
 #def getFakeData1():
     #data = {'id': 'fake1',
             #'status': 'pending',
@@ -112,4 +112,5 @@
 #addTableData(result, 'done')
 #fixOtherCurrent(result)
 
-#return result #TODO Excluir
+#return result 
+#TODO Atualmente não utilizado - Deixar o destino deste script para ser decidido no futuro.
