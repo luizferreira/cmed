@@ -349,13 +349,39 @@
  <object name="portal_tabs" meta_type="CMF Action Category">
   <property name="title"></property>
   <object name="index_html" meta_type="CMF Action" i18n:domain="plone">
-   <property name="title" i18n:translate="">Home</property>
+   <property name="title" i18n:translate="">Inicio</property>
    <property name="description" i18n:translate=""></property>
    <property
       name="url_expr">string:${globals_view/navigationRootUrl}</property>
    <property name="link_target"></property>
    <property name="icon_expr"></property>
-   <property name="available_expr"></property>
+   <property name="available_expr">python:portal.portal_membership.getAuthenticatedMember().has_role('Manager')</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+  <object name="agenda" meta_type="CMF Action" i18n:domain="plone">
+   <property name="title" i18n:translate="">Agenda</property>
+   <property name="description" i18n:translate=""></property>
+   <property
+      name="url_expr">string:${globals_view/navigationRootUrl}/Appointments</property>
+   <property name="link_target"></property>
+   <property name="icon_expr"></property>
+   <property name="available_expr">python:portal.portal_membership.getAuthenticatedMember().has_role('Doctor') or portal.portal_membership.getAuthenticatedMember().has_role('Secretary')</property>
+   <property name="permissions">
+    <element value="View"/>
+   </property>
+   <property name="visible">True</property>
+  </object>
+  <object name="calendar" meta_type="CMF Action" i18n:domain="plone">
+   <property name="title" i18n:translate="">Calendar</property>
+   <property name="description" i18n:translate=""></property>
+   <property
+      name="url_expr">python:portal.absolute_url()+'/Appointments/'+portal.portal_membership.getAuthenticatedMember().getUserName()</property>
+   <property name="link_target"></property>
+   <property name="icon_expr"></property>
+   <property name="available_expr">python:portal.portal_membership.getAuthenticatedMember().has_role('Doctor') or portal.portal_membership.getAuthenticatedMember().has_role('Secretary')</property>
    <property name="permissions">
     <element value="View"/>
    </property>
