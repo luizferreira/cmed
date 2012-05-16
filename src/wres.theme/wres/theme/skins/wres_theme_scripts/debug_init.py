@@ -1,6 +1,5 @@
-##coding=utf-8
-
 ##parameters=pat=2,doc=2,sec=1,cli=True,adm=0,full=0
+#coding=utf-8
 
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
