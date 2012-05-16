@@ -67,7 +67,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
 
     <metal:baseslot define-slot="base">
-      <base tal:attributes="href here/renderBase" /><!--[if lt IE 7]></base><![endif]-->
+      <base tal:attributes="href here/renderBase" />
     </metal:baseslot>
 
     <div tal:replace="structure provider:plone.htmlhead" />
@@ -263,10 +263,12 @@
          <!-- trecho editado pelo CommuniMed -->
          <!-- trecho editado pelo CommuniMed -->
          <!-- trecho editado pelo CommuniMed -->
+         
         <div id="invisivel" style="display:none"> 
             <div id="startdate"> <tal:print replace="request/startDate"> 1 </tal:print> </div>
             <div id="enddate"> <tal:print replace="request/endDate | nothing"> 2 </tal:print> </div>
         </div>
+        
          <!-- trecho editado pelo CommuniMed -->
          <!-- trecho editado pelo CommuniMed -->
          <!-- trecho editado pelo CommuniMed -->

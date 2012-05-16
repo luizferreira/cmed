@@ -3,13 +3,15 @@ from DateTime import DateTime
 request = context.REQUEST
 id = request['id']
 whole_problem = context.chart_data.get_entry_item(id, 'problems')
+vars = ['problem', 'code', 'started', 'id']
 problem = whole_problem['data']
-vars = ['problem', 'code', 'started', 'id', 'submitted_by','state','note']
-problem = {}
 for var in vars:
     problem[var] = request[var]
-problem['end_date'] = DateTime()
-#TODO:Comments Matheus date_vars = ['started', 'submitted_on']
+    
+member = context.portal_membership.getAuthenticatedMember()
+problem['edited_by'] = member.id
+problem['edited_on'] = DateTime()
+
 whole_problem['data'] = problem
 if 'id' in whole_problem.keys():
     del whole_problem['id']

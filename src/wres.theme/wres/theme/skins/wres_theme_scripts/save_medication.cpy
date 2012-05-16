@@ -19,7 +19,7 @@ for var in vars:
 
 member = context.portal_membership.getAuthenticatedMember()
 medication['submitted_by'] = member.id
-medication['end_date'] = DateTime()
+medication['submitted_on'] = DateTime()
 medication['note'] = ''
 context.chart_data.save_entry(context, 'medications', **medication)
 

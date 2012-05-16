@@ -1,8 +1,0 @@
-[validators]
-validators..save = show_prescriptions_validator
-
-[actions]
-action.failure = traverse_to:string:edit_prescription
-action.success = traverse_to:string:show_prescription_handler
-action.success..save =  traverse_to:string:edit_prescription_handler
-action.success..cancel =  redirect_to:string:show_prescriptions

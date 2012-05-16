@@ -1,8 +1,7 @@
 <html>
-
-        <link type="text/css" href="bottom.css" rel="stylesheet" />
-        <link type="text/css" href="thin_patient_portlet.css" rel="stylesheet" />
-        <link type="text/css" href="compare.css" rel="stylesheet" />
+    <link type="text/css" href="bottom.css" rel="stylesheet" />
+    <link type="text/css" href="thin_patient_portlet.css" rel="stylesheet" />
+    <link type="text/css" href="compare.css" rel="stylesheet" />
 <title></title>
 <head>
     <title i18n:translate="cmfuemr_patient_search">Patient search</title>
@@ -34,24 +33,10 @@ tal:define="ImagesAndFiles context/uploaded;
                 </td>
             </tr>
         </table>
-<!--
-        TODO: A div abaixo junto com o código do compare.js e jquery.beforeafter-1.4.js auxilia a criação de uma futura feature, responsavel pela comparação fullscreen das imagens selecionadas.
--->
-<!--
-        <div id="container" >
-            <div id="divBefore"></div>
-            <div id="divAfter"></div>
-        </div>
--->
     </div>
 </body>
     <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="jquery.pikachoose.js"></script>
-
-<!--
-    <script type="text/javascript" src="compare.js"></script>
-    <script type="text/javascript" src="jquery.beforeafter-1.4.js"></script>
--->
         
     <script language="javascript">          
     $(document).ready(function (){

@@ -94,8 +94,6 @@
                                 <td class="width-15" tal:content="medication/quantity">60 comprimidos</td>
                                 <td tal:content="medication/use">2x ao dia</td>
                                 <td class="width-16" i18n:translate="" tal:condition="context/TestRoles">
-                                    <!--<input type="hidden" name="id" tal:attributes="value medication/id | nothing" />-->
-                                    <!--<input type="submit" class="context" value="Editar" name="form.button.edit" i18n:attributes="value"/>-->
                                     <input type="button" class="context" value="Editar" name="form.button.edit"
                                         tal:attributes="onclick string:javascript:window.location = 'edit_medication?id=${medication/id}'"/>
                                     <input type="button" class="context" value="Inativar" name="form.button.history"
@@ -135,7 +133,7 @@
                                  <td tal:content="medication/quantity">60 comprimidos</td>
                                 <td tal:content="medication/use">2x ao dia</td>
                                 <td tal:content="medication/note"></td>
-                                <td tal:content="python:medication['end_date'].strftime('%d/%m/%Y')"></td>
+                                <td tal:content="medication/end_date"></td>
                             </tr>
                         </tal:loop>
                     </tbody>

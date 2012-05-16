@@ -1,3 +1,0 @@
-[actions]#TODO Excluir este script
-action.success..save =  traverse_to:string:make_prescriptions_innefective
-action.success..cancel =  redirect_to:string:show_prescriptions

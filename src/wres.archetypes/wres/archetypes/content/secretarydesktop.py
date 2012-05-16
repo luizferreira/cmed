@@ -1,6 +1,8 @@
 from zope.app.component.hooks import getSite
 from DateTime import DateTime
 
+#TODO Verificar quais metodos estao sendo usados e limpar os demais
+
 def event_between(eventstart, start, end):
     return eventstart.greaterThanEqualTo(start) and \
            eventstart.lessThanEqualTo(end)
@@ -61,9 +63,6 @@ class SecretaryDesktopData():
         if self.doctor_id:
             query['getProviderId'] = self.doctor_id
         return self.portal.portal_catalog.search(query, sort_index='start')
-        
-    def getTodayVisits(self):
-        return 'Funcionou Mano!'
     
     def returnNone(self):
         return None
