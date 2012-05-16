@@ -11,55 +11,67 @@
                             tal:attributes="src string:${portal_url}/uemr_widgets/js/birthdate_format.js"></script>
                     <script type="text/javascript" src="show_problems.js"></script>
             </metal:javascript_slot>
+            
+            <metal:block fill-slot="style_slot">
+                <link rel="stylesheet" type="text/css" href="cmed.css" />
+            </metal:block>
     </head>
     <body>
-            <div metal:fill-slot="main"
-                    tal:define="template_data context/getEditMedicationData">
-                    <h1>Inativar Medicamento</h1>
-                    <div tal:define="state options/state | request/state;
-                                        errors state/getErrors;
-                                        error_message errors/error_message | nothing">
-                            <div class="portalMessage"
-                                    tal:condition="error_message"
-                                    tal:content="error_message" />
-                            <form tal:attributes="action template/id">
-                                    <input type="hidden" name="form.submitted" value="1" />
-                                    <table>
-                                        <tr>
-                                            <td>Medicamento: </td>
-                                                <td>
-                                                    <input type="hidden" name="id"
-                                                            tal:attributes="value template_data/id | nothing" />
-                                                    <input type="text" class="disabled" disabled=""
-                                                            tal:attributes="value template_data/medication | nothing" />
-                                                </td>
-                                        </tr>
-                                        <tr>
-                                                <td>Inativado em: </td>
-                                                <td>
-                                                    <input type="text" id="end_date" name="shown_end_date"
-                                                            tal:attributes="value python:context.getTodayDate().strftime('%d/%m/%Y')"
-                                                                                            />
-                                                    <input type="hidden" id="hidden_end_date" name="end_date"
-                                                            tal:attributes="value template_data/end_date | nothing" />
-                                                </td>
-                                        </tr>
-                                        <tr>
-                                                <td>Observação: </td>
-                                                <td>
-                                                    <textarea name="note"
-                                                                tal:content="template_data/note | nothing"></textarea>
-                                                </td>
-                                        </tr>
-                                        <tr>
-                                                <td>
-                                                    <input type="submit" name="form.button.inactivate" value="Inativar" class="context" i18n:attributes="value"/>
-                                                    <input type="submit" name="form.button.cancel" value="cancel" class="context" i18n:attributes="value"/>
-                                                </td>
-                                        </tr>
-                                    </table>
-                            </form>
-                    </div>
-            </div>
+        <div metal:fill-slot="main"
+             tal:define="template_data context/getEditMedicationData;
+                         state options/state | request/state;
+                         errors state/getErrors;
+                         error_message errors/error_message | nothing">
+                         
+            <h1>Inativar Medicamento</h1>
+            
+            <!-- portal status message -->
+            <dl class="portalMessage error"
+                tal:condition="error_message"> 
+                <dt> Erro </dt>
+                <dd tal:content="error_message"> Ocorreu algum erro. </dd>
+            </dl>
+            <fieldset class="cmed">
+                <legend>Medication</legend>
+                <form tal:attributes="action template/id">
+                    <input type="hidden" name="form.submitted" value="1" />
+                    <table class="listing width-100">
+                        <thead>
+                            <th>Medicamento</th>
+                            <th>Concentração</th>
+                            <th>Quantidade</th>
+                            <th>Uso</th>
+                            <th>Observação</th>
+                        </thead>
+                        <tr>
+                            <td>
+                                <input type="hidden" name="id"
+                                        tal:attributes="value template_data/id | nothing" />
+                                <input type="text" class="disabled" disabled
+                                        tal:attributes="value template_data/medication | nothing" />
+                            </td>
+                            <td class="width-10">
+                                <input type="text" class="disabled" disabled size="10"
+                                        tal:attributes="value template_data/concentration | nothing" />
+                            </td>
+                            <td class="width-10">
+                                <input type="text" class="disabled" disabled size="10"
+                                        tal:attributes="value template_data/quantity | nothing" />
+                            </td>
+                            <td class="width-30">
+                                <input type="text" class="disabled" disabled size="35"
+                                        tal:attributes="value template_data/use | nothing" />
+                            </td>
+                            <td class="width-30">
+                                <input type="text" name="note" size="35"
+                                            tal:attributes="value template_data/note | nothing" />
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="submit" name="form.button.inactivate" value="Inativar" class="context" i18n:attributes="value"/>
+                    <input type="submit" name="form.button.cancel" value="cancel" class="context" i18n:attributes="value"/>
+                </form>
+            </fieldset>
+        </div>
     </body>
 </html>

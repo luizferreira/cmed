@@ -10,20 +10,6 @@
           tal:define="charset site_properties/default_charset|string:utf-8"
           tal:attributes="content string:text/html;;charset=${charset}" />
 
-
-	<!-- metal:title_slot define-slot="title_slot">
-	    <title tal:define="portal_title portal_properties/title;
-	                       page_title object_title">
-	        <tal:pagetitle replace="page_title">
-	            Inserts page title
-	        </tal:pagetitle>
-	        &mdash;
-	        <tal:portaltitle replace="portal_title">
-	            Inserts portal title
-	        </tal:portaltitle>
-	    </title>
-	</metal:title_slot> -->
-
     <metal:baseslot define-slot="base" />
 
     <meta name="generator" content="Plone - http://plone.org" />

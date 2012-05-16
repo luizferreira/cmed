@@ -113,7 +113,6 @@ if not results:
     write('''<div class="LSIEFix" style="width:600px">''')
     write('''<div id="LSNothingFound">%s</div>''' % ts.translate(label_no_results_found, context=REQUEST))
     write('''<div class="LSRow">''')
-#    write('<a href="search_form" style="font-weight:normal">%s</a>' % ts.translate(label_advanced_search, context=REQUEST))
     write('''</div>''')
     write('''</div>''')
     write('''</fieldset>''')
@@ -179,9 +178,6 @@ else:
         write('''</li>''')
         full_title, display_title, display_description = None, None, None
 
- #   write('''<li class="LSRow">''')
- #   write( '<a href="search_form" style="font-weight:normal">%s</a>' % ts.translate(label_advanced_search, context=REQUEST))
- #   write('''</li>''')
     write('''<br />''')
 
     if len(results)>limit:

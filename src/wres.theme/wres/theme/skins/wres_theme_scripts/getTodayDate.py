@@ -9,8 +9,6 @@
 ##
 
 from DateTime import DateTime
-
-# get date: today if passed date is invalid
 try:
     return DateTime(str(date_str))
 except:

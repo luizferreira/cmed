@@ -13,10 +13,28 @@
     </head>
     <body>
         <div metal:fill-slot="main"
-            tal:define="data context/getEditMedicationData">
-            <h1>Editar Medicamento</h1>
-            <div id="edit">
-                <metal:edit use-macro="here/medications_macros/macros/add_new">
+            tal:define="data context/getEditAllergyData;
+                        state options/state | request/state;
+                        portal_status_msg state/kwargs/portal_status_message | request/portal_status_message | nothing;
+                        errors state/getErrors;
+                        error_message errors/error_message | nothing;">
+
+        <h1>Editar Alergia</h1>
+        
+        <!-- portal status message -->
+        <dl class="portalMessage info"
+            tal:condition="portal_status_msg"> 
+            <dt> Info </dt>
+            <dd tal:content="portal_status_msg"> Medicamento adicionado com sucesso. </dd>
+        </dl>
+        <dl class="portalMessage error"
+            tal:condition="error_message"> 
+            <dt> Erro </dt>
+            <dd tal:content="error_message"> Ocorreu algum erro. </dd>
+        </dl> 
+        
+        <div id="edit">
+                <metal:edit use-macro="here/show_allergies/macros/add_new">
                     <metal:buttons fill-slot="buttons">
                         <input id="add_new" type="submit" name="form.button.save" value="Salvar" class="context" i18n:attributes="value"/>
                         <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />

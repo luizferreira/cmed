@@ -45,9 +45,10 @@ for tuple in pack:
     exam["date"] = tuple[2][1]
     all_exams_data.append(exam)
     
-#///////////////////////////////////////////////////////////////////////////////////////
 member = context.portal_membership.getAuthenticatedMember()
 exam['submitted_by'] = member.id
+exam['submitted_on'] = DateTime()
+
 for exam in all_exams_data:
     context.chart_data.save_entry(context, 'laboratory', **exam)
 state.set(portal_status_message='Exame adicionado.')

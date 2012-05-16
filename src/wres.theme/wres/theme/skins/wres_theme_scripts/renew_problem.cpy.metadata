@@ -1,2 +1,0 @@
-[actions]
-action.success = redirect_to:string:show_problem_list

@@ -79,7 +79,5 @@ if came_from and js_enabled:
 else:
     REQUEST.RESPONSE.redirect(dest)
 
-#from Products.zdb import set_trace; set_trace()
-#REQUEST.RESPONSE.redirect(dest)
 state.set(came_from=came_from)
 return state

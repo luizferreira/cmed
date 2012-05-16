@@ -5,7 +5,6 @@
     <role name="FrontDeskTwo"/>
     <role name="Patient"/>
     <role name="Secretary"/>
-    <role name="Transcriptionist"/>
     <role name="UemrAdmin"/>
   </roles>
 
@@ -18,13 +17,11 @@
       <role name="Manager"/>
       <role name="Member"/>
     </permission>
-
     <permission name="Modify portal content" acquire="True">
       <role name="Manager"/>
       <role name="UemrAdmin"/>
       <role name="Doctor"/>
       <role name="Secretary"/>
-      <role name="Transcriptionist"/>
     </permission>
 
     <!-- /PERMISSOES DE TERCEIROS -->
@@ -34,8 +31,7 @@
     <permission name="Modify view template" acquire="False">
       <role name="Manager"/>
       <role name="UemrAdmin"/>
-    </permission>
- 
+    </permission> 
     <permission name="wres.archetypes: Add Admin" acquire="False">
       <role name="Contributor"/>
       <role name="Manager"/>
@@ -48,20 +44,11 @@
       <role name="Contributor"/>
       <role name="Manager"/>
     </permission>
-    <permission name="wres.archetypes: Add DocBoletim" acquire="False">
-      <role name="Contributor"/>
-      <role name="Manager"/>
-    </permission>
-    <permission name="wres.archetypes: Add DocPlastica" acquire="False">
-      <role name="Contributor"/>
-      <role name="Manager"/>
-    </permission>
     <permission name="wres.archetypes: Add Template" acquire="False">
       <role name="Manager"/>
       <role name="UemrAdmin"/>
       <role name="Doctor"/>
       <role name="Secretary"/>
-      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.archetypes: Add Doctor" acquire="False">
       <role name="Manager"/>
@@ -76,26 +63,16 @@
       <role name="Contributor"/>
       <role name="Manager"/>
     </permission>
-    <permission name="wres.archetypes: Add ExamFolder" acquire="False">
-      <role name="Contributor"/>
-      <role name="Manager"/>
-    </permission>
-    <permission name="wres.archetypes: Add InitialVisit" acquire="False">
-      <role name="Contributor"/>
-      <role name="Manager"/>
-    </permission>
     <permission name="wres.archetypes: Add GenericDocument" acquire="False">
       <role name="Contributor"/>
       <role name="Manager"/>
       <role name="UemrAdmin"/>
-    </permission>    
-    
+    </permission>      
     <permission name="wres.archetypes: Add Impresso" acquire="False">
       <role name="Contributor"/>
       <role name="Manager"/>
       <role name="UemrAdmin"/>
     </permission>    
-
     <permission name="wres.archetypes: Add Insurance" acquire="False">
       <role name="Contributor"/>
       <role name="Manager"/>
@@ -112,35 +89,11 @@
       <role name="Contributor"/>
       <role name="Manager"/>
     </permission>
-    <permission name="wres.archetypes: Add ProgressNotes" acquire="False">
-      <role name="Contributor"/>
-      <role name="Manager"/>
-    </permission>
-    <permission name="wres.archetypes: Add ReferringProvider" acquire="False">
-      <role name="Contributor"/>
-      <role name="Manager"/>
-    </permission>
-    <permission name="wres.archetypes: Add ReferringProviderFolder" acquire="False">
-      <role name="Contributor"/>
-      <role name="Manager"/>
-    </permission>
     <permission name="wres.archetypes: Add Secretary" acquire="False">
       <role name="Contributor"/>
       <role name="Manager"/>
     </permission>
     <permission name="wres.archetypes: Add SecretaryFolder" acquire="False">
-      <role name="Contributor"/>
-      <role name="Manager"/>
-    </permission>
-    <permission name="wres.archetypes: Add Transcriptionist" acquire="False">
-      <role name="Contributor"/>
-      <role name="Manager"/>
-    </permission>
-    <permission name="wres.archetypes: Add TranscriptionistFolder" acquire="False">
-      <role name="Contributor"/>
-      <role name="Manager"/>
-    </permission>
-    <permission name="wres.archetypes: Add Visit" acquire="False">
       <role name="Contributor"/>
       <role name="Manager"/>
     </permission>
@@ -156,12 +109,10 @@
       <role name="Contributor"/>
       <role name="Manager"/>
     </permission>
-
     <permission name="wres.policy: Add Content" acquire="True">
       <role name="Doctor"/>
       <role name="Manager"/>
       <role name="Secretary"/>
-      <role name="Transcriptionist"/>
       <role name="UemrAdmin"/>
     </permission>
     <permission name="wres.policy: Create User" acquire="True">
@@ -173,19 +124,16 @@
       <role name="UemrAdmin"/>
       <role name="Owner" />
     </permission>      
-
     <permission name="wres.policy: Edit Clinic" acquire="False">
       <role name="Manager"/>
       <role name="UemrAdmin"/>
       <role name="Doctor"/>
       <role name="Secretary"/>
     </permission>
-
     <permission name="wres.policy: Edit Doc" acquire="True">
       <role name="Doctor"/>
       <role name="Manager"/>
       <role name="Secretary"/>
-      <role name="Transcriptionist"/>
       <role name="UemrAdmin"/>
     </permission>
     <permission name="wres.policy: Edit Doctor" acquire="True">
@@ -206,7 +154,6 @@
       <role name="FrontDeskTwo"/>
       <role name="Manager"/>
       <role name="Secretary"/>
-      <role name="Transcriptionist"/>
       <role name="UemrAdmin"/>
       <role name="Patient"/>
     </permission>
@@ -227,7 +174,6 @@
       <role name="FrontDeskTwo"/>
       <role name="Manager"/>
       <role name="Secretary"/>
-      <role name="Transcriptionist"/>
       <role name="UemrAdmin"/>
       <role name="Patient"/>
     </permission>
@@ -235,16 +181,14 @@
       <role name="Doctor"/>
       <role name="FrontDeskTwo"/>
       <role name="Manager"/>
-      <role name="Secretary"/>
-      <role name="Transcriptionist"/>
+      <role name="Secretary"/>      
       <role name="UemrAdmin"/>
     </permission>
     <permission name="wres.policy: List Visit" acquire="True">
       <role name="Doctor"/>
       <role name="FrontDeskTwo"/>
       <role name="Manager"/>
-      <role name="Secretary"/>
-      <role name="Transcriptionist"/>
+      <role name="Secretary"/>      
       <role name="UemrAdmin"/>
     </permission>
     <permission name="wres.policy: Set Schedule" acquire="True">
@@ -254,27 +198,19 @@
       <role name="Secretary"/>
       <role name="UemrAdmin"/>
     </permission>
-    <permission name="wres.policy: Sign Progress Notes"
-                acquire="True">
-      <role name="Doctor"/>
-      <role name="Manager"/>
-      <role name="UemrAdmin"/>
-    </permission>
     <permission name="wres.policy: View Doctor" acquire="True">
       <role name="Manager"/>
       <role name="UemrAdmin"/>
       <role name="Doctor"/>
       <role name="FrontDeskTwo"/>
-      <role name="Secretary"/>
-      <role name="Transcriptionist"/>
+      <role name="Secretary"/>     
       <role name="Patient"/>
     </permission>
     <permission name="wres.policy: View Insurance" acquire="True">
       <role name="Doctor"/>
       <role name="FrontDeskTwo"/>
       <role name="Manager"/>
-      <role name="Secretary"/>
-      <role name="Transcriptionist"/>
+      <role name="Secretary"/>      
       <role name="UemrAdmin"/>
     </permission>
     <permission name="wres.policy: View Patient" acquire="True">
@@ -282,16 +218,14 @@
       <role name="UemrAdmin"/>
       <role name="Doctor"/>
       <role name="FrontDeskTwo"/>
-      <role name="Secretary"/>
-      <role name="Transcriptionist"/>
+      <role name="Secretary"/>      
       <role name="Patient"/>
     </permission>
     <permission name="wres.policy: View Schedule" acquire="True">
       <role name="Doctor"/>
       <role name="FrontDeskTwo"/>
       <role name="Manager"/>
-      <role name="Secretary"/>
-      <role name="Transcriptionist"/>
+      <role name="Secretary"/>      
       <role name="UemrAdmin"/>
     </permission>
     <permission name="wres.policy: View Secretary" acquire="True">
@@ -299,16 +233,14 @@
       <role name="UemrAdmin"/>
       <role name="Doctor"/>
       <role name="FrontDeskTwo"/>
-      <role name="Secretary"/>
-      <role name="Transcriptionist"/>
+      <role name="Secretary"/>      
       <role name="Patient"/>
     </permission>
     <permission name="wres.policy: View Visit" acquire="True">
       <role name="Doctor"/>
       <role name="Manager"/>
       <role name="Owner"/>
-      <role name="Secretary"/>
-      <role name="Transcriptionist"/>
+      <role name="Secretary"/>      
     </permission>
 
     <!-- /PERMISSOES DO COMMUNIMED -->

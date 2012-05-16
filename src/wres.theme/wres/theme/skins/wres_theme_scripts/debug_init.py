@@ -1,4 +1,5 @@
 ##parameters=pat=2,doc=2,sec=1,cli=True,adm=0,full=0
+#coding=utf-8
 
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
@@ -138,7 +139,7 @@ def set_patient_information(p):
     p.setBirthDate(random_birthdate())
     p.setContactPhone(phone)
     #Preenchimento do Chart
-    allergy = {'date': '07/05/2012', 'reaction': 'Edema/co\xc3\xa7eira', 'allergy': 'Camar\xc3\xa3o', 'submitted_by': 'admin'}
+    allergy = {'date': '07/05/2012', 'reaction': 'Edema/coceira', 'allergy': 'Camar\xc3\xa3o', 'submitted_by': 'admin'}
     medication = {'status': 'active', 'submitted_by': 'admin', 'use': '1 cp quando houver do de cabe\xc3\xa7a', 'medication': 'Tylenol dc', 'end_date': DateTime('2012/05/07 17:06:14.061165 GMT-3'), 'note': '', 'start': '07/05/2012', 'concentration': '80mg', 'quantity': '12'}
     problem = {'submitted_by': 'admin', 'code': 'G43.0', 'end_date': DateTime('2012/05/07 17:09:25.103551 GMT-3'), 'started': DateTime('2012/05/07 00:00:00 GMT-3'), 'note': '', 'submitted_on': DateTime('2012/05/07 17:09:25.103459 GMT-3'), 'state': 'active', 'problem': 'Enxaqueca sem aura [enxaqueca comum]'}
     exam = {'date': '07/05/2012', 'exam': 'Glicose', 'value': '93 mg/dl'}
