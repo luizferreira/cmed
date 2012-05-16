@@ -1,6 +1,3 @@
-[validators]
-validators..resolve = resolve_problem_validator
-
 [actions]
 action.success = redirect_to:string:show_problem_list
 action.success..resolve = traverse_to:string:resolve_problem_handler

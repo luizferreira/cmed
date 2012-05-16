@@ -10,13 +10,9 @@
 
 def insuranceFields(insurance):
     fields = []
-    #fields.append(insurance.getId())
     fields.append(insurance.getName())
     fields.append(insurance.getPhoneNumber())
-#   fields.append(insurance.getTipo())
     fields.append(insurance.getWebPage())
-#   fields.append(insurance.getFaxNumber())
-#   fields.append(insurance.getEmail())
     return (insurance.getId(), fields)
 
 pc = getattr(context, 'portal_catalog')

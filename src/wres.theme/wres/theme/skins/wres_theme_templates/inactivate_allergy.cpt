@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"
+	metal:use-macro="here/main_template/macros/master"
+	i18n:domain="cmfuemr">
+	
+    <head>
+            <metal:javascript_slot fill-slot="javascript_head_slot">
+                    <script type="text/javascript" src="js/general_format.js"
+                            tal:attributes="src string:${portal_url}/uemr_widgets/js/general_format.js"></script>
+                    <script type="text/javascript" src="js/birthdate_format.js"
+                            tal:attributes="src string:${portal_url}/uemr_widgets/js/birthdate_format.js"></script>
+                    <script type="text/javascript" src="show_problems.js"></script>
+            </metal:javascript_slot>
+            
+            <metal:block fill-slot="style_slot">
+                <link rel="stylesheet" type="text/css" href="cmed.css" />
+            </metal:block>
+    </head>
+    <body>
+        <div metal:fill-slot="main"
+            tal:define="template_data context/getEditAllergyData;
+                        state options/state | request/state;
+                        errors state/getErrors;
+                        error_message errors/error_message | nothing">
+            
+            <h1>Inativar Alergia</h1>
+            
+            <!-- portal status message -->
+            <dl class="portalMessage error"
+                tal:condition="error_message"> 
+                <dt> Erro </dt>
+                <dd tal:content="error_message"> Ocorreu algum erro. </dd>
+            </dl>
+            
+            <fieldset class="cmed">
+            <legend>Alergia</legend>
+                    <form tal:attributes="action template/id">
+                        <input type="hidden" name="form.submitted" value="1" />
+                        <table class="listing width-100">
+                            <thead>
+                                <th>Alergia</th>
+                                <th>Reação</th>
+                                <th>Data</th>
+                                <th>Observação</th>
+                            </thead>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="id"
+                                            tal:attributes="value template_data/id | nothing" />
+                                    <input type="text" disabled
+                                            tal:attributes="value template_data/allergy | nothing" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled
+                                            tal:attributes="value template_data/reaction | nothing" />
+                                </td>
+                                <td>
+                                    <input type="text" disabled
+                                             tal:attributes="value template_data/date | nothing" />
+                                </td>
+                                <td class="width-50">
+                                    <input type="ẗext" name="note" size="65"
+                                            tal:attributes="value template_data/note | nothing" />
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="submit" name="form.button.inactivate" value="Inativar" class="context" i18n:attributes="value"/>
+                        <input type="submit" name="form.button.cancel" value="cancel" class="context" i18n:attributes="value"/>
+                    </form>
+            </fieldset>
+        </div>
+    </body>
+</html>

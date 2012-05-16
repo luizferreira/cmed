@@ -19,7 +19,6 @@
                             <th style="width:120px">Data</th>
                             <th>Nota</th>
                             <th style="width:15px">Ações</th>
-                            <!--th>Estado</th-->
                         </tr>
                     </thead>
                     <tbody>
@@ -51,28 +50,12 @@
                                 </td>
 
                                 <td>
-
-                                    <!-- <span size="2">
-                                        <a tal:attributes="id string:document_link_${repeat/document/index};
-                                                            href document/absolute_url" i18n:translate="">
-                                            Visualizar
-                                        </a>
-                                    </span> -->
                                     <span>
                                         <a tal:attributes="href python: '%s/edit' % document.absolute_url()">
                                             Editar
                                         </a>
                                     </span>
                                 </td>
-
-
-                                <!--td width="10%">
-                                    <tal:workflow  define="state python:document.portal_workflow.getInfoFor(document,'review_state')">
-                                        <span i18n:translate="" tal:content="state | nothing">
-                                        Estado do documento
-                                        </span>
-                                    </tal:workflow>
-                                </td-->
                             </tr>
                         </tal:block>
                     </tbody>

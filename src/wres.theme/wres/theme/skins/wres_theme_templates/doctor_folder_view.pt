@@ -16,40 +16,46 @@
 <body>
 
  <div metal:fill-slot="main"
-        tal:define="title string:Buscar Médico;
-            searchableText request/searchableText | string:;
+        tal:define="title string:Médicos;
+            meta_type string:Doctor;
+            results python:context.portal_catalog.searchResults({'meta_type': meta_type});
+            start python:int(path('request/start | nothing') or 0);
+            batch python:modules['ZTUtils'].Batch(results, size=50, start=start);">
+            <!-- searchableText request/searchableText | string:;
             searchableTextt python:searchableText;
             meta_type string:Doctor;
             results python:context.portal_catalog.searchResults({'meta_type': meta_type, 'getParsedLastName': searchableTextt});
             start python:int(path('request/start | nothing') or 0);
-            batch python:modules['ZTUtils'].Batch(results, size=10, start=start);
+            batch python:modules['ZTUtils'].Batch(results, size=25, start=start);
             previous python:batch.previous;
-            next python:batch.next;">
+            next python:batch.next;"> -->
         <h1>
             <a i18n:translate="" tal:content="string:${title}">Title</a>
-		</h1>
-		<div tal:define="letters string:ABCDEFGHIJKLMNOPQRSTUVWXYZ">
-			<tal:block repeat="letter letters">
-				<a tal:attributes="href string:${template/id}?searchableText=$letter*"
+        </h1>
+        <!--
+        <div tal:define="letters string:ABCDEFGHIJKLMNOPQRSTUVWXYZ">
+            <tal:block repeat="letter letters">
+                <a tal:attributes="href string:${template/id}?searchableText=$letter*"
                     tal:content="letter">Letter</a>
-			</tal:block>
-		</div>
-		<br />
-        
-		<div class="field">
-			<form action="" name="searchForm" tal:attributes="action string:${template/id}">
-				<label i18n:translate="cmfuemr_seach_text">Search text</label>
+            </tal:block>
+        </div>
+        <br />
+         -->
+        <!-- <div class="field">
+            <form action="" name="searchForm" tal:attributes="action string:${template/id}">
+                <label i18n:translate="cmfuemr_seach_text">Search text</label>
                 <br/>
-				<input type="text" size="25" name="searchableText" tal:attributes="value searchableText" />
-				<input class="searchButton" type="submit" name="searchButton" value="Search" i18n:attributes="value"/>
-			</form>
-		</div>
-
-		<!-- Resultados da consulta -->
-		<fieldset>
-		<legend i18n:translate="cmfuemr_results">Results</legend>
-            
+                <input type="text" size="25" name="searchableText" tal:attributes="value searchableText" />
+                <input class="searchButton" type="submit" name="searchButton" value="Search" i18n:attributes="value"/>
+            </form>
+        </div>
+ -->
+        <!-- Resultados da consulta -->
+        <fieldset>
+<!--        <legend i18n:translate="cmfuemr_results">Results</legend> 
+ -->            
         <!-- There are results -->
+        <br/>
         <tal:block condition="batch">
             <table class="listing" id="sortable">
                 <thead>
@@ -62,7 +68,6 @@
                 <tbody>
                     <metal:block tal:repeat="item batch">
                         <tr tal:define="oddrow repeat/item/odd" tal:attributes="class python:test(oddrow, 'odd', 'even')">
-                            <!--td tal:content="python:start + repeat['item'].number()"></td-->
                             <metal:block tal:define="objeto item/getObject;
                                 name string:${objeto/getFirstName} ${objeto/getLastName} ;
                                 ssn string:${objeto/getSsn};
@@ -85,12 +90,6 @@
                                        tal:attributes="href string:$doctor_url" i18n:translate="">
                                        Pessoal
                                     </a> - 
-                                   <!--
-                                    <a href="#"
-                                       tal:attributes="href string:$doctor_url/pin_provider_edit_template" i18n:translate="cmfuemr_pins">
-                                        Pins
-                                    </a>  -->
-                                    
                                     <a href="#"
                                        tal:attributes="href string:$url_agenda">
                                        Calendário
@@ -102,40 +101,9 @@
                 </tbody>
             </table>
 
-            <div class="formHelp" i18n:translate="">
-                Showing of <span i18n:name="conta_inicio" tal:content="python:start + 1">11</span> to
-                <span i18n:name="conta_fim" tal:content="python:start + len(batch)"></span> of
-                <span i18n:name="conta_total" tal:content="python:len(results)">55</span>
-                <span i18n:translate="" tal:content="string:${meta_type}" i18n:name="tipo">type</span>
-            </div>
-
         </tal:block>
 
-			<!-- There are no results -->
-			<tal:block tal:condition="not:batch">
-				<br /><div i18n:translate="cmfuemr_there_are_no_results">
-					There are no results
-				</div><br />
-			</tal:block>
-
-			<table width="100%">
-				<tr>
-					<td width="50%" align="left">
-						<a tal:condition="previous"
-						   tal:attributes="href string:${request/URL0}?start:int=${previous/first}&searchableText=$searchableText&meta_type=$meta_type"
-						   href="previous_url" i18n:translate="cmfuemr_previous">previous</a>
-					</td>
-
-					<td width="50%" align="right">
-						<a tal:condition="next"
-						   tal:attributes="href string:${request/URL0}?start:int=${next/first}&searchableText=$searchableText&meta_type=$meta_type"
-						   href="next_url" i18n:translate="cmfuemr_next">next</a>
-					</td>
-
-				</tr>
-			</table>
-
-		</fieldset>
-	</div>
+        </fieldset>
+    </div>
 </body>
 </html>

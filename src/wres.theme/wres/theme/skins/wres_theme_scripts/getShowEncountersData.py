@@ -1,4 +1,5 @@
-#def proccess_encounters(encounters):#TODO EXCLUIR
+#TODO Atualmente não utilizado - Deixar o destino deste script para ser decidido no futuro.
+#def proccess_encounters(encounters):
     #result = []
     #for index, encounter in enumerate(encounters):
         #add_encounter(result, index, encounter)

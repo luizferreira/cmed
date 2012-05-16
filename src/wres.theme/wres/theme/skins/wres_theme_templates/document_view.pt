@@ -6,7 +6,6 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="plone">
-<!-- here/document_actions/macros/document_actions -->
 
 <head>
     <metal:aux fill-slot="style_slot">
@@ -17,12 +16,6 @@
     </metal:aux>
     <title>Primeira Visita</title>
 </head>
-
-<!--
-<span class="doctor" tal:content="python:context.getDoctor().getFullName()" i18n:translate="">
-    Nome do Doutor
-    </span><br>
--->
 
 <body>
 <div metal:fill-slot="main"
@@ -44,9 +37,7 @@
             <div class="clinic_title"
                     tal:content="clinicData/getName | nothing" >CARDIOLOGY ASSOCIATES OF FLORIDA</div>
             <div class="clinic_subtitle"
-                    tal:content="clinicData/getEndereco | nothing">7715 SW 71th STREET, SUITE 101- NEW YORK, FL 66286</div>
-            <!-- <div class="clinic_phone"
-                    tal:content="string:TELEPHONE ${clinic_data/phone|nothing} FAX ${clinic_data/fax|nothing}" i18n:translate="cmfuemr_tel_of_clinic">TELEPHONE (305) 661-3316 FAX (305) 662-5736</div> -->
+                    tal:content="clinicData/getEndereco | nothing">7715 SW 71th STREET, SUITE 101- NEW YORK, FL 66286</div>        
             <div class="clinic_phone">
                 Telefone: <metal:macro use-macro="python:clinicData.widget('phone',mode='view')"> </metal:macro> - Fax: <metal:macro1 use-macro="python:clinicData.widget('fax',mode='view')"></metal:macro1>
             </div>
@@ -84,9 +75,6 @@ Body
 <tal:for repeat="schemata data">
     <tal:fieldset_name define="fieldset_name python:schemata[0]">
         <fieldset id="fieldset_doc_view">
-           <!-- <legend> LEGEND FICA CORTADA NA HORA DE PRINTAR NO FIREFOX
-                <tal:print_legend content="fieldset_name" /> 
-            </legend>-->
             
             <tal:for2 repeat="field_data schemata">
                 <tal:if condition="not:repeat/field_data/start">        
