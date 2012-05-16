@@ -10,42 +10,26 @@ def getPatientId(context):
     if context.meta_type == 'Patient':
         return context.getId()
     else:
-        return getPatientId(context.aq_inner.aq_parent)
-##def getUrl(path):
-    ##url = ""
-    ##for node in path:
-        #url = url + node + "/"
-    #return url[:-1] #Remove last slash
-def checkOwner(tuple):
-    if getPatientId(context) in tuple:
-        return True
-    return False
-    
+        return getPatientId(context.aq_inner.aq_parent) 
 
 def getFilesAndImages(context):
     #Get Imagens
-    brains = pc.search({'portal_type': 'Image'})
+    portal = context.getPortal()
+    patientPath = '/wres/Patients/' + getPatientId(context) + '/'
+    brains = pc.search({'portal_type': 'Image','path': patientPath})
     for brain in brains:
-        image = brain.getObject()
-        path = image.getPhysicalPath()
-        if not checkOwner(path):
-            continue
-        URL = image.absolute_url()
-        date = DateTime(image.Date()).strftime("%y/%m/%d")
-        imagens.append((URL,date,image.getWidth(),image.getHeight()))
-    
+        imagePath = portal.absolute_url() + brain.getPath().replace("/"+portal.getId(),"")
+        date = brain.created.strftime("%y/%m/%d")
+        imagens.append((imagePath,date))
+
     #Get Other Files
-    brains = pc.search({'portal_type': 'File'})
+    brains = pc.search({'portal_type': 'File','path': patientPath})
     for brain in brains:
-        other = brain.getObject()
-        path = other.getPhysicalPath()
-        if not checkOwner(path):
-            continue
-        name = other.getFilename()
-        icon = other.getIcon()
-        URL = other.absolute_url
-        file = (URL,name,icon)
+        filePath = portal.absolute_url() + brain.getPath().replace("/"+portal.getId(),"")
+        name = brain.id
+        icon = brain.getIcon
+        file = (filePath,name,icon)
         other_files.append(file)
-    
     return [imagens,other_files]
+    
 return getFilesAndImages(context)
