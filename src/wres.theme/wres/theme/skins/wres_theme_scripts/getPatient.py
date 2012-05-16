@@ -11,7 +11,6 @@ def getPatient(obj):
         return obj
     else:
         return getPatient(obj.aq_inner.aq_parent)
-
 if obj is None:
     obj = context
 return getPatient(obj)

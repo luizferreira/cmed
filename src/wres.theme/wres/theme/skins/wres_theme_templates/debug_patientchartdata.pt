@@ -26,11 +26,6 @@
     tal:define="data context/debug_patientchartdata_script;
                 resumo data/resumo;
                 dics data/dics">
-
-
-    <!--div id="teste">
-        <tal:print content="context/debug_patientchartdata_script" />
-    </div-->
     
     <div id="resumo">
         <fieldset class="cmed">
@@ -60,12 +55,7 @@
                     <fieldset class="cmed" tal:attributes="id item">
                         <legend> <tal:print content="item" /> </legend>
                         <tal:def define="content python:dics[item]">
-                            <!--tal:if condition="content">
-                                <tal:print content="python: dics[item]" />
-                            </tal:if>
-                            <tal:ifnot condition="not:content">
-                                None
-                            </tal:ifnot-->
+
                             <strong style="color:#4444FF"> NÃO FORMATADO </strong>
                             <br />
                             <span style="color:red"><tal:print condition="python: content==None" content="string: O atributo não possui interface de acesso." /></span>
@@ -74,23 +64,10 @@
                             <br />
                             <br />
                             <strong style="color:#4444FF"> FORMATADO </strong>
-                            <!--metal: use-macro="context/debug_patientchartdata_macros/macros/tmacro" /--> 
-                            <!--tal:print content="context/debug_patientchartdata_macros/macros" /-->                           
-                            <!--tal:print content="content" /-->
+
                         </tal:def>
                     </fieldset>
                 </tal:for>
-
-                <!--div id="questionnaire">
-                    <fieldset class="cmed">
-                        <legend> Questionnaire </legend>
-                        <tal:print content="dics/questionnaire" />
-                        <tal:for repeat="item dics">
-                            <tal:print content="item" />                            
-                        </tal:for>
-                    </fieldset>
-                </div-->
-            
 
         </fieldset>
     </div>

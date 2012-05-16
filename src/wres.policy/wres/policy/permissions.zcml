@@ -117,16 +117,6 @@
     id="wres.archetypes.AddWRESUser"
     title="wres.archetypes: Add WRESUser"
   />                                                         
-    
-  <permission
-    id="wres.archetypes.AddTranscriptionistFolder"
-    title="wres.archetypes: Add TranscriptionistFolder"
-  />
-      
-  <permission
-    id="wres.archetypes.AddTranscriptionist"
-    title="wres.archetypes: Add Transcriptionist"
-  />
       
   <permission
     id="wres.archetypes.AddSecretaryFolder"

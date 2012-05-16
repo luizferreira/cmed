@@ -151,14 +151,14 @@ class VisitTemp(event.ATEvent):
             info['absolute_url_path'] = patient.absolute_url_path()
             info['getContactPhone'] = patient.getContactPhone()
             info['getHomePhone'] = patient.getHomePhone()
-            info['getConfirmedChartNumber'] = patient.getConfirmedChartNumber()
+            # info['getConfirmedChartNumber'] = patient.getConfirmedChartNumber()
             info['Title'] = patient.Title()
         except:
             info['absolute_url'] = ''
             info['absolute_url_path'] = ''
             info['getContactPhone'] = ''
             info['getHomePhone'] = ''
-            info['getConfirmedChartNumber'] = ''
+            # info['getConfirmedChartNumber'] = ''
             info['Title'] = ''
         return info        
         

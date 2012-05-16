@@ -3,7 +3,6 @@
      lang="en" metal:use-macro="context/main_template/macros/master" 
 	 i18n:domain="cmfuemr">
 
-<!--TODO Remover comentarios -->
 <head>
     <metal:aux fill-slot="style_slot">
         <link rel="Stylesheet" type="text/css"
@@ -43,8 +42,6 @@
                                 tal:content="clinicData/getName | nothing" >CARDIOLOGY ASSOCIATES OF FLORIDA</div>
                             <div class="clinic_subtitle"
                                 tal:content="clinicData/getEndereco | nothing">7715 SW 71th STREET, SUITE 101- NEW YORK, FL 66286</div>
-                            <!-- <div class="clinic_phone"
-                                tal:content="string:TELEPHONE ${clinic_data/phone|nothing} FAX ${clinic_data/fax|nothing}" i18n:translate="cmfuemr_tel_of_clinic">TELEPHONE (305) 661-3316 FAX (305) 662-5736</div> -->
                             <div class="clinic_phone" tal:condition="clinicData/getPhone">
                                 Telefone: <metal:macro use-macro="python:clinicData.widget('phone',mode='view')"> </metal:macro> - Fax: <metal:macro1 use-macro="python:clinicData.widget('fax',mode='view')"></metal:macro1>
                             </div>
@@ -88,13 +85,9 @@
                                                 </td>
                                                 <td >
                                                     <span class="bold">
-                                                        <!--Data:-->
                                                     </span>
                                                 </td>
                                                 <td  tal:define="today python:context.getTodayDate(request.get('date_str', ''))">
-                                                    <span>
-                                                        <!--<tal:value content="info/date"/>-->
-                                                    </span>
                                                 </td>
                                             </tr>
                                         </table>

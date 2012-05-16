@@ -29,7 +29,6 @@
                      today python:context.calendar_aux.getTodayDate(request.get('date_str', ''));
                      global today_str python:request.get('date_str', '%s/%s/%s' %(today.year(), today.month(), today.day()));
                      datum python:modules['wres.theme.secretary_desktop'].SecretaryDesktopData(context, doctor, date);">
-    <!--<a href="" onClick="window.open('quick_view', '_blank', 'width=450,height=450,scrollbars=yes,resizable=yes');event.preventDefault()">teste<a>-->
         <h5 align="center" i18n:translate="cmfuemr_doctor_desktop">Doctor Desktop</h5>
         <br />
 
@@ -40,7 +39,6 @@
             <span metal:use-macro="container/portal_skins/wres_theme_auxiliary/calendar_aux/calendarMacros/macros/date_choose" />
         </metal:calendar>
 
-        <!-- <p tal:content="datum/getVisitsFromToday"> </p> Bax migrando -->
         <!-- Today's visits -->
         <div metal:use-macro="here/doctor_desktop_macros/macros/show_visits">
             <metal:define_visits fill-slot="doctor_visits"
@@ -68,8 +66,6 @@
         <div metal:use-macro="here/secretary_desktop_macros/macros/show_activities">
             <metal:define_visits fill-slot="doctor_visits"
                tal:define="global doctor_visits datum/getActivitiesFromTomorrow" />
-            <!--<metal:define_visits fill-slot="doctor_visits"
-               tal:define="global doctor_visits python:context.getVisitsFromDate(doctor, date, days+1, remove_dummy_patient=False, only_dummy_patient=True)" />-->
             <metal:no_activities fill-slot='no_activities' i18n:translate="cmfuemr_no_activities_tomorrow">
             No activities tomorrow
             </metal:no_activities>

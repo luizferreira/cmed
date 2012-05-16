@@ -2,7 +2,6 @@
     tal:define="there_are_problems data | nothing"
         i18n:domain="cmfuemr">  
         <table id="data_table" class="listing width-100">
-            <!--caption class="left_align" tal:content="data/title">current</caption-->
             <thead>
                 <th width="15px">#</th>
                 <th width="300px">Diagnóstico</th>
@@ -31,25 +30,11 @@
                         </form>
                         </td>
                         <td tal:condition="python: not active" tal:content="problem/data/note|nothing"></td>
-                        <!--<td tal:condition="python: not active and not view" 
-                            tal:define="renewed python:problem['data'].get('state') == 'renewed'">
-                            <tal:renewed condition="renewed">
-                                Reativado
-                            </tal:renewed>
-                            <tal:not_renewed condition="not:renewed">
-                                <form tal:attributes="action template/id">
-                                    <input type="hidden" name="form.submitted" value="1" />
-                                    <input type="hidden" name="id" tal:attributes="value problem/data/id|problem/id|nothing" />
-                                    <input type="submit" class="context" value="Ativar" name="form.button.renew" i18n:attributes="value"/>
-                                </form>
-                            </tal:not_renewed>
-                        </td>-->
                     </tal>
                 </tr>
             </tbody>
         </table>
     <div tal:condition="not:there_are_problems">
-        <!--p>There is no <tal:title content="data/title">active</tal:title> problem</p-->
     </div>
 </metal:problem_list_table>
 

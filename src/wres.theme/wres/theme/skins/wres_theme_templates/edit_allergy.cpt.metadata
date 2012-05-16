@@ -1,0 +1,8 @@
+[actions]
+action.success = traverse_to:string:edit_allergy_handler
+action.success..save = traverse_to:string:edit_allergy_handler
+action.success..cancel = redirect_to:string:show_allergies
+action.failure = traverse_to:string:edit_allergy
+
+[validators]
+validators = save_allergy_validator

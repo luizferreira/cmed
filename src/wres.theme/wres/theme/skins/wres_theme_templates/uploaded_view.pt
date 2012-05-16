@@ -33,9 +33,7 @@
 
 <div metal:fill-slot="main" id="main_chart_print" 
 tal:define="urls context/uploaded" >
-<!--
-    <div tal:content="urls"></div>
--->
+
 <table>
     <tr>
         <th width="350px" align="center">Outros Arquivos</th>
