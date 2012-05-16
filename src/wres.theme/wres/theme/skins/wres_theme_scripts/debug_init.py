@@ -1,4 +1,5 @@
 ##parameters=pat=2,doc=2,sec=1,cli=True,adm=0,full=0
+#coding=utf-8
 
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
@@ -43,6 +44,58 @@ phone = '3134442255'
 cphone = '3188992255'
 full_info = full
 
+document_template = "<p>\
+<b>QD (Queixa  e Duração)</b> <br />\
+<i>Queixa e duração da moléstia atual, outras doenças já diagnosticadas que podem ajudar no entendimento da queixa.</i><br />\
+<br />\
+<b>HMA (História da Moléstia Atual) </b><br />\
+<i>usar, sempre que possível, a técnica hipotético-dedutiva;</i><br />\
+<i>usar todos os dados de interesse, sejam eles antecedentes pessoais ou familiares, dados sociais, ou outros;</i><br />\
+<i>observar coordenação cronológica;</i><br />\
+<i>deixar clara a importância dos sintomas e relação causa-efeito;</i><br />\
+<i>usar letra legível com boa apresentação (É UM DOCUMENTO);</i><br />\
+<i>evitar usar repetidamente 'o paciente refere'</i><br />\
+<i>não assumir a postura de escriba;</i><br />\
+<i>não descrever roteiros médicos: “passou no hospital X, depois no hospital Y”</i><br />.<br />\
+<br />\
+<b> AP (Antecedentes Pessoais)</b><br />\
+<i>trauma ou cirurgias (datas); outras doenças, medicamentos, internações;</i><br />\
+<i>alergia ou intolerância medicamentosa; imunização: tétano, hepatite, rubéola, etc;</i><br />\
+<i>História Obstétrica (Gestações, Partos e Abortos).</i><br />\
+<br />\
+<b> Hábitos</b><br />\
+<i>Tabagismo, Etilismo (Quanto?); atividade física e freqüência/ Alimentação (último colesterol)</i><br />\
+<i>Pesquisa de risco de HIV/ uso de drogas/ transfusões</i><br />\
+<br />\
+<b> AF (Antecedentes Familiares)</b><br />\
+<i>Avaliação do potencial mórbido para doenças prevalentes como: Doenças cardiovasculares, Hipertensão Arterial (HAS), Diabetes (DM) e Tuberculose (Tb).</i><br />\
+<i>Avaliação de possível participação familiar na gênese do quadro atual.</i><br />\
+<br />\
+<b> HS (História Social)</b><br />\
+<i>Situação no trabalho, família, lazer, etc.</i><br />\
+<br />\
+<b> ISDA (Interrogatório Sobre Diversos Aparelhos)</b><br />\
+<i>Geral: febre, alterações de peso, alteração no dinamismo</i><br />\
+<i>Cabeça: Cefaléia, tontura</i><br />\
+<i>Olhos: acuidade visual, dor, campo visual</i><br />\
+<i>Ouvido: acuidade auditiva, zumbido, vertigem</i><br />\
+<i>Nariz/ garganta/ boca: epistaxe, IVAS freqüentes, obstrução, dor de garganta freqüente, sinusite.</i><br />\
+<i>Tórax: tosse, expectoração, dor, dispnéia, hemoptise, edemas, palpapitação.</i><br />\
+<i>Gastrointestinal: disfagia, azia, pirose, hábito intestinal, sangramento, puxo, tenesmo, dia gástrico.</i><br />\
+<i>Gênito-urinário: disúria, poliúria, nictúria, nódulos de mama, Papanicolaou, mamografia</i><br />\
+<i>Pele e fâneros: manchas, alopecia</i><br />\
+<i>Queixas espontâneas: “O(A) Sr.(a) tem alguma outra queixa?”</i><br />\
+<br />\
+<b>Exame Físico:</b><br />\
+<i>Geral: B(M,R)EG, estado nutricional (caquético, emagrecido, obeso), (des)corado, (desi)hidratado, (a)cianótico, (an)ictérico, (a)febril, (taqui/dis)eupnéico.</i><br />\
+<i>Parâmetros vitais, PA (Pressão arterial), FC (Freqüência cardíaca), FR (Freqüência respiratória), T (Temperatura), Peso e Altura, IMC (m(kg) /h2(m)).</i><br />\
+<i>Especial: Cabeça e Pescoço, Tórax, Abdômen, Membros</i><br />\
+<br />\
+<b> HD(Hipótese Diagnóstica): </b><br /> <i>O diagnóstico que o médico der. E lembre-se de colocar os outros diagnósticos já feitos que ainda são atuais, principalmente se for crônico, como HAS, DM.</i><br />\
+<br />\
+<b> CD (Conduta e Discussão): </b><br /> <i>Medicamentos prescritos, recomendações, encaminhamentos, visita domiciliar  e/ou data do retorno (observações para o retorno se necessário).</i><br />\
+</p>"
+
 ######## PARAMETROS #########
 
 def create_uemr_user(related_object, user_id, email='', fullname=''):
@@ -86,7 +139,7 @@ def set_patient_information(p):
     p.setBirthDate(random_birthdate())
     p.setContactPhone(phone)
     #Preenchimento do Chart
-    allergy = {'date': '07/05/2012', 'reaction': 'Edema/co\xc3\xa7eira', 'allergy': 'Camar\xc3\xa3o', 'submitted_by': 'admin'}
+    allergy = {'date': '07/05/2012', 'reaction': 'Edema/coceira', 'allergy': 'Camar\xc3\xa3o', 'submitted_by': 'admin'}
     medication = {'status': 'active', 'submitted_by': 'admin', 'use': '1 cp quando houver do de cabe\xc3\xa7a', 'medication': 'Tylenol dc', 'end_date': DateTime('2012/05/07 17:06:14.061165 GMT-3'), 'note': '', 'start': '07/05/2012', 'concentration': '80mg', 'quantity': '12'}
     problem = {'submitted_by': 'admin', 'code': 'G43.0', 'end_date': DateTime('2012/05/07 17:09:25.103551 GMT-3'), 'started': DateTime('2012/05/07 00:00:00 GMT-3'), 'note': '', 'submitted_on': DateTime('2012/05/07 17:09:25.103459 GMT-3'), 'state': 'active', 'problem': 'Enxaqueca sem aura [enxaqueca comum]'}
     exam = {'date': '07/05/2012', 'exam': 'Glicose', 'value': '93 mg/dl'}
@@ -267,13 +320,13 @@ def create_other(portal):
     print "Creating templates"
     new_id = "consulta-"+str(random.randint(0, 9999))
     consulta = create_new_object(portal, templates.Consultas, new_id, "Template")
-    consulta.setTemplate_body("<br><b>Meu Modelo de Primeira Consulta.</b><br><br> Queixa Principal: <br><br> História da Moléstia Atual:")
+    consulta.setTemplate_body(document_template)
     consulta.setTitle("Primeira Consulta")
     consulta.reindexObject()
     new_id = "impresso-"+str(random.randint(0, 9999))
     impresso = create_new_object(portal, templates.Impressos, new_id, "Template")
-    impresso.setTemplate_body("<br><b>Meu Modelo de Licença Médica.</b><br><br>Atesto para os devidos fins que: <b>José Carlos de Oliveira</b> \
-    se encontrou enfermo entre 07/05/2012 e 12/05/2012 e incapaz de exercer suas atribuições normalmente. CID A09.")
+    impresso.setTemplate_body("<p>Atesto para os devidos fins que: <b>José Carlos de Oliveira</b> \
+    se encontrou enfermo entre 07/05/2012 e 12/05/2012 e incapaz de exercer suas atribuições normalmente. CID A09.</p>")
     impresso.setTitle("Licença Médica")
     return printed
 
