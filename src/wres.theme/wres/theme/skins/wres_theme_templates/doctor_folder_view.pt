@@ -91,11 +91,11 @@
                                        tal:attributes="href string:$doctor_url" i18n:translate="">
                                        Pessoal
                                     </a> - 
-                                   <!--
-                                    <a href="#"
+                                   
+                                    <!-- <a href="#"
                                        tal:attributes="href string:$doctor_url/pin_provider_edit_template" i18n:translate="cmfuemr_pins">
                                         Pins
-                                    </a>  -->
+                                    </a> -->
                                     
                                     <a href="#"
                                        tal:attributes="href string:$url_agenda">
