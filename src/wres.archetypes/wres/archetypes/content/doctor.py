@@ -60,13 +60,15 @@ class Doctor(wresuser.WRESUser):
         collection.manage_permission('Change portal topics', ['Manager'], False)
         criteria = collection.addCriterion('Type','ATPortalTypeCriterion')
         criteria.setValue('VisitTemp')
+        # (Maio/2012) TODO: Limpar
         # criteria2 = collection.addCriterion('Subject', 'ATSimpleStringCriterion')
         # criteria2.setValue(user_id)
         criteria2 = collection.addCriterion('path', 'ATRelativePathCriterion')
         criteria2.relativePath = '..'
         criteria3 = collection.addCriterion('Subject', 'ATSelectionCriterion')       
         criteria3.setValue('CalendarShow')
-        doctor_visits.setLayout('Agenda')
+        # (Maio/2012) TODO: Limpar
+        # doctor_visits.setLayout('Agenda')
 
     def at_post_create_script(self):
         wresuser.WRESUser.at_post_create_script(self)
