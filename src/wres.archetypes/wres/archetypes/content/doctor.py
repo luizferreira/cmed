@@ -58,6 +58,9 @@ class Doctor(wresuser.WRESUser):
         collection.setLayout('solgemafullcalendar_view')
         # medicos e secretarias nao veem 'Edicao' e 'Criterio' na colecao.
         collection.manage_permission('Change portal topics', ['Manager'], False)
+        # ninguem pode copiar, colar, recortar ou deletar um calendario.
+        collection.manage_permission('Copy or Move', roles=[], acquire=False)
+        collection.manage_permission('Delete objects', roles=[], acquire=False)
         criteria = collection.addCriterion('Type','ATPortalTypeCriterion')
         criteria.setValue('VisitTemp')
         # (Maio/2012) TODO: Limpar
