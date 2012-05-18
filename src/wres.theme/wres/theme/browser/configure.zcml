@@ -14,6 +14,16 @@
       type="zope.publisher.interfaces.browser.IBrowserSkinType"
       name="WRES Theme"
       />
+
+  <!-- cadastrando a nova viewlet para o footer -->
+  <browser:viewlet
+      name="plone.footer"
+      manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+      template="templates/footer.pt"
+      for="*"
+      layer=".interfaces.IThemeSpecific"
+      permission="zope2.View"
+  />  
   
   <!-- Viewlets registration -->
   <!-- EXAMPLE (UNCOMMENT TO MAKE AVAILABLE):
@@ -27,6 +37,17 @@
   -->
 
   <!-- Zope 3 browser resources -->
+
+  <!-- Resource directory for templates
+    See wres/theme/browser/templates/README.txt
+    for more information about registering images as Zope 3 browser
+    resources.
+  -->
+  <browser:resourceDirectory
+      name="wres.theme.templates"
+      directory="templates"
+      layer=".interfaces.IThemeSpecific"
+  />
 
   <!-- Resource directory for images
     See wres/theme/browser/images/README.txt
