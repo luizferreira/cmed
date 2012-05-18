@@ -355,7 +355,7 @@
       name="url_expr">string:${globals_view/navigationRootUrl}</property>
    <property name="link_target"></property>
    <property name="icon_expr"></property>
-   <property name="available_expr">python:portal.portal_membership.getAuthenticatedMember().has_role('Manager')</property>
+   <property name="available_expr">python:portal.portal_membership.getAuthenticatedMember().has_role('Manager') or portal.portal_membership.getAuthenticatedMember().has_role('Anonymous')</property>
    <property name="permissions">
     <element value="View"/>
    </property>
@@ -378,10 +378,10 @@
    <property name="title" i18n:translate="">Calendar</property>
    <property name="description" i18n:translate=""></property>
    <property
-      name="url_expr">python:portal.absolute_url()+'/Appointments/'+portal.portal_membership.getAuthenticatedMember().getUserName()</property>
+      name="url_expr">python:portal.absolute_url()+'/Appointments/'+portal.portal_membership.getAuthenticatedMember().getUserName()+'/Agenda'</property>
    <property name="link_target"></property>
    <property name="icon_expr"></property>
-   <property name="available_expr">python:portal.portal_membership.getAuthenticatedMember().has_role('Doctor') or portal.portal_membership.getAuthenticatedMember().has_role('Secretary')</property>
+   <property name="available_expr">python:portal.portal_membership.getAuthenticatedMember().has_role('Doctor')</property>
    <property name="permissions">
     <element value="View"/>
    </property>

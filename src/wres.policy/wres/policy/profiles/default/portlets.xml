@@ -7,15 +7,11 @@
 	<assignment remove="True" name="navigation" category="context" key="/"
 	manager="plone.leftcolumn" type="portlets.Navigation" />
 	
-	<assignment name="agenda_navigation" category="group" key="Secretary"
-	manager="plone.leftcolumn" type="portlets.Navigation" visible="True">
-		<property name="topLevel">0</property>
-		<property name="currentFolderOnly">False</property>
-		<property name="name">Calendários</property>
-		<property name="includeTop">False</property>
-		<property name="bottomLevel">1</property>
-		<property name="root">/Appointments</property>
-	</assignment>    	
+    <assignment name="agenda_navigation" category="group" key="Secretary" 
+    manager="plone.leftcolumn" type="portlets.Classic">
+        <property name="macro">portlet</property>
+        <property name="template">agenda_navigation_portlet</property>
+    </assignment>
 
     <assignment name="patient_portlet" category="content_type" key="Patient" 
     manager="plone.leftcolumn" type="portlets.Classic">
@@ -137,7 +133,7 @@
         <property name="template">patient_chart_macros</property>
     </assignment>     
 
-    <assignment name="allergies" category="content_type" key="InitialVisit" 
+<!--     <assignment name="allergies" category="content_type" key="InitialVisit" 
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">allergies</property>
         <property name="template">patient_chart_macros</property>
@@ -159,7 +155,7 @@
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">allergies</property>
         <property name="template">patient_chart_macros</property>
-    </assignment>      
+    </assignment>  -->     
 
     <!-- fim - associando o allergies portlet ao prontuario -->
     

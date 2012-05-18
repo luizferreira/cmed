@@ -1,0 +1,42 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="cmfuemr">
+<body>
+<div metal:define-macro="portlet">
+
+    <dl class="portlet portletNavigationTree">
+        
+        <dt class="portletHeader">
+            <span class="portletTopLeft"></span>
+            <a href="#"
+               class="tile"
+               tal:attributes="href string:${root/absolute_url}/sitemap;"
+               i18n:translate="">Calendário</a>
+            <span class="portletTopRight"></span>
+        </dt>
+
+        <div class="portletBody" id="body_chartnavigation_portlet"
+            tal:define="
+                meta_type string:Doctor;
+                brains python:context.portal_catalog.searchResults({'meta_type': meta_type})">
+
+            <dd class="portletItem lastItem">
+                <ul class="navTree navTreeLevel0">
+                    <li tal:repeat="brain brains"
+                        class="navTreeItem visualNoMarker navTreeFolderish section-dteste">
+                        <a  href="" tal:attributes="href 
+                            string:${context/portal_url}/Appointments/${brain/id}/Agenda"
+                            class="state-missing-value navTreeFolderish contenttype-visitfolder">
+                            <img width="16" height="16" src="" tal:attributes="src string:${context/portal_url}/doctor-folder-icon.png">
+                            <span> Dr(a) <tal:print content="brain/Title" /> </span>
+                        </a>
+                    </li>
+                </ul>
+            
+            </dd>          
+        </div>
+    </dl>
+</div>
+
+</body>
+</html>

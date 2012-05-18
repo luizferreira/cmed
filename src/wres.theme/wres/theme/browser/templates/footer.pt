@@ -1,0 +1,31 @@
+<div metal:define-macro="portal_footer"
+     i18n:domain="plone"
+     class="row">
+    <div class="cell width-full position-0">
+
+        <div id="portal-footer">
+            <p>
+                <span>
+                O
+                <span>
+                    <a href="http://www.communimed.com.br">CommuniMed<sup>&reg;</sup> - Sistema de Prontuário Eletrônico de Código Aberto</a>
+                </span>
+                tem
+                <acronym title="Copyright">&copy;</acronym>
+                2011-2012
+                pela
+                <span>
+                    <a href="http://www.communi.com.br">Communi</a></span>
+                e amigos.
+                </span>
+
+                <span>
+                Distribuído sob a licença
+                    <span>
+                        <a href="http://creativecommons.org/licenses/GPL/2.0/">Licença GNU GPL</a></span>.
+                </span>
+            </p>
+        </div>
+
+    </div>
+</div>

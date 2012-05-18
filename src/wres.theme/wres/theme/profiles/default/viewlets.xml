@@ -15,7 +15,7 @@
        The 'based-on' attribute lets you inherit the viewlets ordering from an
        existing skin.
        -->
-  <order manager="plone.portalfooter" skinname="WRES Theme"
+  <hidden manager="plone.portalfooter" skinname="WRES Theme"
          based-on="Plone Default">
     <!-- The definition of a viewlet accepts these parameters:
          - name: quite self explanatory, the name of the viewlet.
@@ -32,12 +32,19 @@
     <viewlet name="wres.someviewlet"
              insert-before="*" />
 -->
-  </order>
+  </hidden>
 
   <hidden manager="plone.portalheader" skinname="WRES Theme">
 <!-- EXAMPLE (UNCOMMENT TO MAKE AVAILABLE):
     <viewlet name="plone.global_sections" />
 -->
   </hidden>
+
+    <!-- O trecho abaixo cadastra a viewlet que substuira o portal_footer -->
+    <order manager="plone.portalfooter" skinname="WRES Theme"
+           based-on="Plone Default">
+        <viewlet name="plone.footer"
+                 insert-before="*" />
+    </order>  
 
 </object>
