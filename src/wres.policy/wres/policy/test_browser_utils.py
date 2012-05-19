@@ -67,8 +67,6 @@ def create_members_by_debug_init(self,secs=1,pats=1,docs=1,admins=1,clins=1):
     browser = self.browser
     portal = self.portal
     login_as_admin(self)
-    print "\nRunning debug_init for tests"
-    #print "Criando " + str(secs) + " Secretarias, " + str(pats) + " Pacientes, " + str(docs) + " Doutores, " + str(admins) + " Administradores e " + str(clins) + " Clinicas."
-    #browser.open(portal.absolute_url() + "/debug_init?pat="+str(pats)+"&doc="+str(docs)+"&sec="+str(secs)+"&adm="+str(admins)+"&cli="+str(clins)+"&full=1")
     browser.open(portal.absolute_url() + "/debug_init")
+    print "\nRunning debug_init for tests"
     logout(self)

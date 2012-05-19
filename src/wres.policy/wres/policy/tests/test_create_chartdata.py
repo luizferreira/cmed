@@ -259,7 +259,6 @@ class TestSetup(unittest.TestCase):
         
         #Entrar na pagina de Inativação
         browser.open(PATIENT_URL + "/chartFolder_hidden/inactivate_medication?id=medications." + med_id)
-        browser.getControl(name='shown_end_date').value = "05/05/03"
         browser.getControl(name='note').value = "Nota do Medicamento inativado"
         browser.getControl(name='form.button.inactivate').click()
     
@@ -335,7 +334,6 @@ class TestSetup(unittest.TestCase):
         
         #Entrar na pagina de edicao
         browser.open(PATIENT_URL + "/chartFolder_hidden/show_problem_list?form.submitted=1&id=problems." + pro_id + "&form.button.edit=Editar")
-        #import ipdb;ipdb.set_trace()
         browser.getControl(name='problem').value = problem
         browser.getControl(name='code').value = code
         browser.getControl(name='started').value = DateTime().Date()
@@ -356,6 +354,7 @@ class TestSetup(unittest.TestCase):
             return
         
         #Pequeno parse para pegar o id de um problema, no caso o primeiro da lista
+        #TODO: fazer esse parser funcionar direito para não só pegar o primeiro da lista
         pag = browser.contents
         inicio = pag.find('value="problems.')
         inicio = inicio + len('value="problems.')
@@ -368,6 +367,60 @@ class TestSetup(unittest.TestCase):
         browser.getControl(name='note').value = note
         browser.getControl(name="form.button.resolve").click()
     
+    def edit_allergy(self,PATIENT_ID,PATIENT_URL,old_allergy="Alergia a cigarro",new_allergy="Alergia a fumaca de cigarro"):
+        portal = self.portal
+        browser = self.browser
+        
+        browser.open(PATIENT_URL+"/chartFolder/show_allergies")
+        
+        try:
+            self.assertEqual(True,'<legend>Alergias Registradas</legend>' in browser.contents)
+        except:
+            print "Nao existe alergias para editar"
+            self.assertEqual(True,'<legend>Alergias Registradas</legend>' in browser.contents)
+        
+        #Pequeno parse para pegar o id de uma alergia, no caso o primeiro da lista 
+        #TODO: fazer esse parser funcionar direito para não só pegar o primeiro da lista
+        pag = browser.contents
+        inicio = pag.find('id=allergies.')
+        inicio = inicio + len('id=allergies.')
+        fim = inicio + pag[inicio:].find("'")
+        allergy_id = pag[inicio:fim]
+        
+        
+        #Entrar na pagina de edicao
+        browser.open(PATIENT_URL + "/chartFolder_hidden/edit_allergy?id=allergies." + allergy_id)
+        browser.getControl(name='allergy').value = new_allergy
+        browser.getControl(name='reaction').value = "Inflacao da cabeca"
+        browser.getControl(name='date').value = DateTime().Date()
+        browser.getControl(name="form.button.save").click()
+        
+    def inactivate_allergy(self,PATIENT_ID,PATIENT_URL,allergy="Alergia a fumaca de cigarro"):
+        portal = self.portal
+        browser = self.browser
+        
+        browser.open(PATIENT_URL+"/chartFolder/show_allergies")
+        
+        try:
+            self.assertEqual(True,'<legend>Alergias Registradas</legend>' in browser.contents)
+        except:
+            print "Nao existe alergias para editar"
+            self.assertEqual(True,'<legend>Alergias Registradas</legend>' in browser.contents)
+        
+        #Pequeno parse para pegar o id de uma alergia, no caso o primeiro da lista 
+        #TODO: fazer esse parser funcionar direito para não só pegar o primeiro da lista
+        pag = browser.contents
+        inicio = pag.find('id=allergies.')
+        inicio = inicio + len('id=allergies.')
+        fim = inicio + pag[inicio:].find("'")
+        allergy_id = pag[inicio:fim]
+        
+        
+        #Entrar na pagina de edicao
+        browser.open(PATIENT_URL + "/chartFolder_hidden/inactivate_allergy?id=allergies." + allergy_id)
+        browser.getControl(name='note').value = "Curou a alergia"
+        browser.getControl(name="form.button.inactivate").click()
+    
     def create_allergy(self,PATIENT_ID,PATIENT_URL,allergy="Alergia a cigarro",reaction="Taquicardia",date=DateTime().Date()):
         portal = self.portal
         browser = self.browser
@@ -376,8 +429,6 @@ class TestSetup(unittest.TestCase):
         self.failUnless(self.verifyChartPatient(PATIENT_ID))
         browser.open(PATIENT_URL+"/chartFolder/show_allergies")
         
-        
-        #import ipdb;ipdb.set_trace()
         browser.getControl(name='allergy').value = allergy
         browser.getControl(name='reaction').value = reaction
         browser.getControl(name='date').value = date
@@ -422,7 +473,7 @@ class TestSetup(unittest.TestCase):
         print "As Doctor"
         logout(self)
         login_as_doctor(self)
-        #Cria 3 alergias
+        #Cria 3 exames
         self.create_exam(PATIENT_ID, PATIENT_URL)
         self.failUnless("Exame adicionado." in browser.contents)
         self.failUnless("Hemoglobina" in browser.contents[browser.contents.find("<legend>Exames"):])
@@ -434,11 +485,11 @@ class TestSetup(unittest.TestCase):
         self.failUnless("Fezes" in browser.contents[browser.contents.find("<legend>Exames"):])
         
         
-        print "\n::::Teste criar exames passou!" 
+        print "::::Teste criar exames passou!\n" 
        
     
-    def test_create_allergy(self):
-        print "\n::::Teste criar alergias iniciou!" 
+    def test_create_edit_inactivate_allergy(self):
+        print "::::Teste criar alergias iniciou!\n" 
         portal = self.portal
         browser = self.browser
         login_as_admin(self)
@@ -451,13 +502,21 @@ class TestSetup(unittest.TestCase):
         #Cria 3 alergias
         self.create_allergy(PATIENT_ID, PATIENT_URL)
         self.failUnless("Alergia adicionada." in browser.contents)
-        self.failUnless("Alergia a cigarro" in browser.contents[browser.contents.find("<legend>Alergias</legend>"):])
+        self.failUnless("Alergia a cigarro" in browser.contents[browser.contents.find("<legend>Alergias Registradas</legend>"):])
         self.create_allergy(PATIENT_ID, PATIENT_URL,"Alergia a poeira")
         self.failUnless("Alergia adicionada." in browser.contents)
-        self.failUnless("Alergia a poeira" in browser.contents[browser.contents.find("<legend>Alergias</legend>"):])
+        self.failUnless("Alergia a poeira" in browser.contents[browser.contents.find("<legend>Alergias Registradas</legend>"):])
         self.create_allergy(PATIENT_ID, PATIENT_URL,"Alergia a flores")
         self.failUnless("Alergia adicionada." in browser.contents)
-        self.failUnless("Alergia a flores" in browser.contents[browser.contents.find("<legend>Alergias</legend>"):])
+        self.failUnless("Alergia a flores" in browser.contents[browser.contents.find("<legend>Alergias Registradas</legend>"):])
+        
+        #Edit Alergia
+        self.edit_allergy(PATIENT_ID,PATIENT_URL,old_allergy="Alergia a cigarro",new_allergy="Alergia a fumaca de cigarro")
+        self.failUnless("Alergia a fumaca de cigarro" in browser.contents[browser.contents.find("<legend>Alergias Registradas</legend>"):])
+        
+        #Inativa alergia
+        self.inactivate_allergy(PATIENT_ID,PATIENT_URL,allergy="Alergia a fumaca de cigarro")
+        self.failUnless("Curou a alergia" in browser.contents)
         
         #As Doctor----------------------------------
         print "As Doctor"
@@ -466,20 +525,29 @@ class TestSetup(unittest.TestCase):
         #Cria 3 alergias
         self.create_allergy(PATIENT_ID, PATIENT_URL)
         self.failUnless("Alergia adicionada." in browser.contents)
-        self.failUnless("Alergia a cigarro" in browser.contents[browser.contents.find("<legend>Alergias</legend>"):])
+        self.failUnless("Alergia a cigarro" in browser.contents[browser.contents.find("<legend>Alergias Registradas</legend>"):])
         self.create_allergy(PATIENT_ID, PATIENT_URL,"Alergia a poeira")
         self.failUnless("Alergia adicionada." in browser.contents)
-        self.failUnless("Alergia a poeira" in browser.contents[browser.contents.find("<legend>Alergias</legend>"):])
+        self.failUnless("Alergia a poeira" in browser.contents[browser.contents.find("<legend>Alergias Registradas</legend>"):])
         self.create_allergy(PATIENT_ID, PATIENT_URL,"Alergia a flores")
         self.failUnless("Alergia adicionada." in browser.contents)
-        self.failUnless("Alergia a flores" in browser.contents[browser.contents.find("<legend>Alergias</legend>"):])
+        self.failUnless("Alergia a flores" in browser.contents[browser.contents.find("<legend>Alergias Registradas</legend>"):])
         
-        print "\n::::Teste criar alergias passou!" 
+        #Edita alergia
+        self.edit_allergy(PATIENT_ID,PATIENT_URL,old_allergy="Alergia a cigarro",new_allergy="Alergia a fumaca de cigarro")
+        self.failUnless("Alergia a fumaca de cigarro" in browser.contents[browser.contents.find("<legend>Alergias Registradas</legend>"):])
+        
+        #Inativa alergia
+        self.inactivate_allergy(PATIENT_ID,PATIENT_URL,allergy="Alergia a fumaca de cigarro")
+        self.failUnless("Curou a alergia" in browser.contents)
+        
+        
+        print "::::Teste criar alergias passou!\n" 
         
         
     
     def test_create_edit_resolve_problems(self):
-        print "\n::::Teste criar, editar, resolver problemas iniciou!" 
+        print "::::Teste criar, editar, resolver problemas iniciou!\n" 
         portal = self.portal
         browser = self.browser
         login_as_admin(self)
@@ -540,12 +608,12 @@ class TestSetup(unittest.TestCase):
         self.resolve_problems(PATIENT_ID,PATIENT_URL)
         self.failUnless("Dor de cabeca" in browser.contents[browser.contents.find("Resolvidos"):])
         
-        print "\n::::Teste criar, editar, resolver problemas passou!" 
+        print "::::Teste criar, editar, resolver problemas passou!\n" 
         
         
         
-    def test_create_edit_inativate_medications_and_show_prescriptions(self):
-        print "\n::::Teste criar, editar, inativar medicamentos e apresentar prescrições iniciou!" 
+    def test_create_edit_inactivate_medications_and_show_prescriptions(self):
+        print "::::Teste criar, editar, inativar medicamentos e apresentar prescrições iniciou!\n" 
         portal = self.portal
         browser = self.browser
         login_as_admin(self)
@@ -618,13 +686,13 @@ class TestSetup(unittest.TestCase):
         self.failUnless("Medicamento enviado para o histórico." in browser.contents)
         self.failUnless("Nota do Medicamento inativado" in browser.contents)
 
-        print "\n::::Teste criar, editar, inativar medicamentos e apresentar prescrições passou!" 
+        print "::::Teste criar, editar, inativar medicamentos e apresentar prescrições passou!\n" 
         
         
         
         
     def test_create_edit_document(self):
-        print "\n::::Teste criar e editar documento iniciou!" 
+        print "::::Teste criar e editar documento iniciou!\n" 
         portal = self.portal
         browser = self.browser
         login_as_admin(self)
@@ -652,11 +720,11 @@ class TestSetup(unittest.TestCase):
         #Edit document
         self.edit_document(PATIENT_ID,PATIENT_URL,document_id)
         
-        print "\n::::Teste criar e editar documento passou!" 
+        print "::::Teste criar e editar documento passou!\n" 
         
         
     def test_create_edit_impresso(self):
-        print "\n::::Teste criar e editar impresso iniciou!" 
+        print "::::Teste criar e editar impresso iniciou!\n" 
         portal = self.portal
         browser = self.browser
         login_as_admin(self)
@@ -684,5 +752,5 @@ class TestSetup(unittest.TestCase):
         #Edit document
         self.edit_impresso(PATIENT_ID,PATIENT_URL,impresso_id)
         
-        print "\n::::Teste criar e editar impresso passou!"
+        print "::::Teste criar e editar impresso passou!\n"
      

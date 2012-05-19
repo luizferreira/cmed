@@ -53,17 +53,17 @@ class TestSetup(unittest.TestCase):
         create_members_by_debug_init(self)
         
         login_as_admin(self)
-        browser.open(portal.absolute_url() + "/TP")
+        browser.open(portal.absolute_url() + "/check_actual_roles")
         self.failUnless("['admin'," in browser.contents)
         logout(self)
         
         login_as_secretary(self)
-        browser.open(portal.absolute_url() + "/TP")
+        browser.open(portal.absolute_url() + "/check_actual_roles")
         self.failUnless("[u'steste'," in browser.contents)
         logout(self)
         
         login_as_doctor(self)
-        browser.open(portal.absolute_url() + "/TP")
+        browser.open(portal.absolute_url() + "/check_actual_roles")
         self.failUnless("[u'dteste'," in browser.contents)
         logout(self)
         print "\nTeste logar com diversos passou"
