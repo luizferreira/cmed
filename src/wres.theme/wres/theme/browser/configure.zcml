@@ -24,6 +24,17 @@
       layer=".interfaces.IThemeSpecific"
       permission="zope2.View"
   />  
+
+  <!-- cadastrando a nova viewlet para o personal_bar -->
+  <browser:viewlet
+      name="plone.personal_bar"
+      manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+      class="plone.app.layout.viewlets.common.PersonalBarViewlet"
+      template="templates/personal_bar.pt"
+      for="*"
+      layer=".interfaces.IThemeSpecific"
+      permission="zope2.View"
+  />    
   
   <!-- Viewlets registration -->
   <!-- EXAMPLE (UNCOMMENT TO MAKE AVAILABLE):

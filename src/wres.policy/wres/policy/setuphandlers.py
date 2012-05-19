@@ -580,6 +580,15 @@ def loadDEFVocabulary(portal,context):
     print "Inserindo DEF no Portal ..."
     vt.add_vocab('DEF', DEF)
 	
+def mailHostConfiguration(portal):
+    '''Configura servidor de email (mesmos campos de Configuracao do Site -> E-mail)'''
+    mail_host = portal.MailHost
+    mail_host.smtp_host = 'localhost'
+    mail_host.smtp_port = 25
+    portal.email_from_name = 'Equipe de Desenvolvimento/Suporte'
+    portal.email_from_address = 'desenvolvimento@communi.com.br'
+
+
 def setupVarious(context):
     """ Funcao generica executada na instalacao do wres policy """
 
@@ -639,6 +648,7 @@ def setupVarious(context):
         
         changePortalLanguage(portal)
         changePortalObjectsConfiguration(portal)
+        mailHostConfiguration(portal)
 
         createGroups(portal)
 

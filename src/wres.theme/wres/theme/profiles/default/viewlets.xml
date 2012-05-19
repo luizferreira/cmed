@@ -47,4 +47,11 @@
                  insert-before="*" />
     </order>  
 
+    <!-- O trecho abaixo cadastra a viewlet que substuira o personal_bar -->
+    <order manager="plone.portalheader" skinname="WRES Theme"
+           based-on="Plone Default">
+        <viewlet name="plone.personal_bar"
+                 insert-before="*" />
+    </order>      
+
 </object>
