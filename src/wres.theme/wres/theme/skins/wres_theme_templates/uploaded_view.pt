@@ -8,17 +8,23 @@
       i18n:domain="plone">
 
     <metal:aux fill-slot="style_slot">
-        <link type="text/css" href="bottom.css" rel="stylesheet" />
-        <link type="text/css" href="thin_patient_portlet.css" rel="stylesheet" />
-        <link type="text/css" href="compare.css" rel="stylesheet" />
+        <link type="text/css" href="galleryStyles.css" rel="stylesheet" />
+        <link type="text/css" href="upload_view_style.css" rel="stylesheet" />
     </metal:aux>
 	<metal:block fill-slot="javascript_head_slot">
         <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
-        <script type="text/javascript" src="jquery.pikachoose.js"></script>
+        <script type="text/javascript" src="jquery.pikachoose.mod.js"></script>
         <script language="javascript">
+            function changeName(){
+                    imagem = $(".pikachoose")[0].getElementsByTagName("a")[0];
+                    link_tokens = imagem.getAttribute("href").split("/")
+                    image_name = link_tokens[link_tokens.length-1].split(".")[0]
+                    $("#selection").text(image_name)
+                }
 			$(document).ready(function (){
-					$("#pictures").PikaChoose({carousel:true, carouselVertical:true,autoPlay:false});
-				});
+                    changeName()
+					$("#pictures").PikaChoose({autoPlay:false})
+                });
         </script>
     </metal:block>
     
@@ -32,7 +38,7 @@
 <body>
 
 <div metal:fill-slot="main" id="main_chart_print" 
-tal:define="urls context/uploaded" >
+tal:define="urls context/getUploadData" >
 
 <table>
     <tr>
@@ -49,6 +55,7 @@ tal:define="urls context/uploaded" >
             </div>
         </td>
         <td>
+            <span class="mensageOnImage" id="image_name">Nome: <span id="selection"></span></span>
             <div class="pikachoose">
                 <ul id="pictures">
                     <li tal:repeat="url python:urls[0]"><a tal:attributes="href python:url[0]"><img tal:attributes="src python:url[0]"/></a></li>

@@ -1,6 +1,5 @@
 <html>
-    <link type="text/css" href="bottom.css" rel="stylesheet" />
-    <link type="text/css" href="thin_patient_portlet.css" rel="stylesheet" />
+    <link type="text/css" href="galleryStyles.css" rel="stylesheet" />
     <link type="text/css" href="compare.css" rel="stylesheet" />
 <title></title>
 <head>
@@ -8,24 +7,34 @@
 </head>
 <body>
     <div id="main_chart_print" 
-tal:define="ImagesAndFiles context/uploaded;
+tal:define="ImagesAndFiles context/getUploadData;
             images python:ImagesAndFiles[0];
             files  python:ImagesAndFiles[1];">
         <table id="table">
             <tr>
-                <th colspan="2" align="center"><font color="#205C90" >Modo de Comparação</font></th>
+                <th colspan="2" align="center" width="100px">
+                    <a tal:attributes="href python: context.aq_inner.absolute_url()" class="back-button">Voltar</a>
+                    <font color="#205C90">Modo de Comparação</font>
+
+                </th>
             </tr>
             <tr>
                 <td>
                     <div id="gallery1" class="pikachoose">
+                        <span class="mensageOnImage" id="selection"></span>
                         <ul id="pictures">
-                            <li tal:repeat="image python:images"><span class="image_date" tal:content="python:image[1]"></span><a tal:attributes="href python:image[0]"><img tal:attributes="src python:image[0]"/></a></li>
+                            <li tal:repeat="image python:images">
+                                <span class="image_date" tal:content="python:image[1]"></span>
+                                <a tal:attributes="href python:image[0]">
+                                <img tal:attributes="src python:image[0]"/>
+                                </a></li>
                             
                         </ul>
                     </div>
                 </td>
                 <td>
                     <div id="gallery2" class="pikachoose">
+                        <span class="mensageOnImage" id="selection2"></span>
                         <ul id="pictures2">
                             <li tal:repeat="image python:images"><span class="image_date" tal:content="python:image[1]"></span><a tal:attributes="href python:image[0]"><img tal:attributes="src python:image[0]"/></a></li>
                         </ul>
@@ -36,12 +45,23 @@ tal:define="ImagesAndFiles context/uploaded;
     </div>
 </body>
     <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="jquery.pikachoose.js"></script>
+    <script type="text/javascript" src="jquery.pikachoose.mod.js"></script>
         
-    <script language="javascript">          
+    <script language="javascript"> 
+    function changeName(){
+                    imagem = $("#gallery1")[0].getElementsByTagName("a")[0];
+                    link_tokens = imagem.getAttribute("href").split("/")
+                    image_name = link_tokens[link_tokens.length-1].split(".")[0]
+                    $("#selection").text(image_name)
+                    
+                    imagem2 = $("#gallery2")[0].getElementsByTagName("a")[0];
+                    link_tokens2 = imagem2.getAttribute("href").split("/")
+                    image_name2 = link_tokens2[link_tokens2.length-1].split(".")[0]
+                    $("#selection2").text(image_name2)
+                }         
     $(document).ready(function (){
-					$("#pictures").PikaChoose({carousel:true, carouselVertical:true,autoPlay:false});
-                    $("#pictures2").PikaChoose({carousel:true, carouselVertical:true,autoPlay:false});
+					$("#pictures").PikaChoose({carouselVertical:true,autoPlay:false});
+                    $("#pictures2").PikaChoose({carouselVertical:true,autoPlay:false});
                 
                 //Add class to big images
                 $("#gallery1").find("img").first().attr("class","changed1");
