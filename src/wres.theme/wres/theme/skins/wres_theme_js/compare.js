@@ -1,56 +1,49 @@
 $(document).ready(function (){
-					$("#pictures").PikaChoose({carousel:true, carouselVertical:true,autoPlay:false});
-                    $("#pictures2").PikaChoose({carousel:true, carouselVertical:true,autoPlay:false});
-                    $(function(){
-                        $('#container').beforeAfter();
-                    });
+					$("#pictures").PikaChoose({carouselVertical:true,autoPlay:false});
+                    $("#pictures2").PikaChoose({carouselVertical:true,autoPlay:false});
+                
+                //Add class to big images
+                $("#gallery1").find("img").first().attr("class","changed1");
+                $("#gallery2").find("img").first().attr("class","changed2");
                 });
-            
-            var imageTag = $("#gallery1").find("img").first().clone();
-            var imageTag2 = $("#gallery2").find("img").first().clone();
-            var image = new Image();
-            var image2 = new Image();
-            
-                    image.src = imageTag.attr("src");
-                    imageTag.attr("width",image.width)
-                    imageTag.attr("height",image.height)
-                    imageTag.attr("style","")
-                    imageTag.attr("id","before")
-                    imageTag.attr("alt","before")
-                    $("#divBefore").append(imageTag);
-                    
-                    image2.src = imageTag2.attr("src");
-                    imageTag2.attr("width",image.width)
-                    imageTag2.attr("height",image.height)
-                    imageTag2.attr("style","")
-                    imageTag2.attr("id","after")
-                    imageTag.attr("alt","after")
-                    $("#divAfter").append(imageTag2);
-            
-            $(window).load(function() {
+    //Add class to chosen image
+     $(window).load(function() {
         
-                $("#gallery1").find(".clip").click(function(){
-                    $("#before").remove()
-                    var imageTag = $("#gallery1").find("img").first().clone();
-                    image.src = imageTag.attr("src");
-                    imageTag.attr("width",image.width)
-                    imageTag.attr("height",image.height)
-                    imageTag.attr("style","")
-                    imageTag.attr("id","before")
-                    $("#divBefore").append(imageTag);
-                    $('#container').beforeAfter();
+               $("#gallery1").find(".clip").click(function(){
+                    $(".changed1").attr("class","");
+                    var imageTag = $("#gallery1").find("img").first();
+                    imageTag.attr("class","changed1");
                     });
                     
                 $("#gallery2").find(".clip").click(function(){
-                    $("#after").remove()
-                    var imageTag = $("#gallery2").find("img").first().clone();
-                    image.src = imageTag.attr("src");
-                    imageTag.attr("width",image.width)
-                    imageTag.attr("height",image.height)
-                    imageTag.attr("style","")
-                    imageTag.attr("id","after")
-                    $("#divAfter").append(imageTag);
-                    $('#container').beforeAfter();
+                    $(".changed2").attr("class","");
+                    var imageTag = $("#gallery2").find("img").first();
+                    imageTag.attr("class","changed2");
                     }); 
             });
+
+function changeName(){
+                    images = $("#gallery1")[0].getElementsByTagName("a");
+                    imagem = images[0]
+                     if(images.length == 0){
+                            $("#selection").text("Não há imagens")
+                            $("#selection2").text("Não há imagens")
+                        }
+                    else if(imagem.hasAttribute("class")){
+                        $("#selection").text("Não há imagens")
+                        $("#selection2").text("Não há imagens")
+                        }
+                    else{                    
+                         link_tokens = imagem.getAttribute("href").split("/")
+                         image_name = link_tokens[link_tokens.length-1].split(".")[0]
+                         $("#selection").text(image_name)
+                    
+                         imagem2 = $("#gallery2")[0].getElementsByTagName("a")[0];
+                         link_tokens2 = imagem2.getAttribute("href").split("/")
+                         image_name2 = link_tokens2[link_tokens2.length-1].split(".")[0]
+                         $("#selection2").text(image_name2)
+                         }
+                    
+                    
+                }  
              

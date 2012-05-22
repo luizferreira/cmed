@@ -14,18 +14,7 @@
 	<metal:block fill-slot="javascript_head_slot">
         <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
         <script type="text/javascript" src="jquery.pikachoose.mod.js"></script>
-        <script language="javascript">
-            function changeName(){
-                    imagem = $(".pikachoose")[0].getElementsByTagName("a")[0];
-                    link_tokens = imagem.getAttribute("href").split("/")
-                    image_name = link_tokens[link_tokens.length-1].split(".")[0]
-                    $("#selection").text(image_name)
-                }
-			$(document).ready(function (){
-                    changeName()
-					$("#pictures").PikaChoose({autoPlay:false})
-                });
-        </script>
+        <script type="text/javascript" src="upload_view.js"></script>
     </metal:block>
     
 <head>
