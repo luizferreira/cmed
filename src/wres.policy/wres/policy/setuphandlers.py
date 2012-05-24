@@ -554,6 +554,16 @@ def loadDocumentTypesVocabulary(portal):
     document_types.append('retorno')
     vt.add_vocab('document_types', document_types)
 
+def loadImpressoTypesVocaburay(portal):
+    ''' Carrega o vocabulario de tipo de impressos '''
+    vt = getToolByName(portal, 'vocabulary_tool')
+    types = []
+    types.append('atestado')
+    types.append('laudo')
+    types.append('licença')
+    types.append('pedido de exame')
+    vt.add_vocab('impresso_types', types)
+
 #===========================================================================
 # Carrega o vocabulario de tipos e da razão das visitas.
 # Luiz
@@ -609,6 +619,7 @@ def setupVarious(context):
     if context.readDataFile('wres.policy_various.txt') is not None:
         print '********************************ACHEI O TXT***********************************'   
         loadDocumentTypesVocabulary(portal)
+        loadImpressoTypesVocaburay(portal)
         loadVisitVocabularies(portal)
         loadCIDVocabulary(portal, context)
         loadDEFVocabulary(portal,context)        

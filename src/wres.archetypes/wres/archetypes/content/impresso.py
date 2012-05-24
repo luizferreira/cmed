@@ -8,6 +8,8 @@ from zope.interface import implements
 from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content import folder
 from Products.ATContentTypes.content import schemata
+from zope.app.component.hooks import getSite
+from Products.CMFCore.utils import getToolByName
 
 from wres.archetypes.interfaces import IImpresso
 from wres.archetypes.config import PROJECTNAME
@@ -15,23 +17,14 @@ from wres.archetypes.content.medicaldocument import MedicalDocument
 from wres.archetypes.content.schemas.genericdocument import GenericDocumentSchema
 from wres.policy.utils.utils import set_schemata_properties
 
-TYPE_OF_DOCUMENT = DisplayList((
-    ('', 'Selecione'),
-    ('atestado', 'Atestado'),
-    ('laudo', 'Laudo'),
-    ('licenca', 'Licença'),
-))
-
 MAIN = Schema((
     StringField('document_type',
         required=True,
-        # default = 'Documento sem tipo',
-        vocabulary = TYPE_OF_DOCUMENT,
+        vocabulary = "getTypesOfImpresso",
         widget = SelectionWidget(
-                label = 'Tipo do Documento'
-                # macro_edit='generic_richtext_edit_macro',
-                # helper_js=('generic_richtext_edit.js', ),             
-                # helper_css=('generic_richtext_edit.css', 'cmed.css'),
+                label = 'Tipo do Documento',
+                macro_edit='generic_selection_edit_macro',
+                helper_js=('generic_selection_edit.js', ),            
         ),
     ),
 ))
@@ -48,10 +41,35 @@ class Impresso(MedicalDocument):
     schema = ImpressoSchema
 
     def at_post_create_script(self):
-        self.setTitle(TYPE_OF_DOCUMENT.getValue(self.getDocument_type()))
+        '''
+        Configura o titulo do impresso e verifica se o usuario entrou com 
+        um valor no campo de tipo de impresso que ainda nao esta presente
+        no vocabulario 'impresso_types'. Caso nao esteja presente, adiciona.
+        '''
+        document_type = self.getDocument_type()
+        self.setTitle(document_type)
+        dl = self.getTypesOfImpresso()
+        if document_type not in dl:
+            portal = getSite()
+            vt = getToolByName(portal, 'vocabulary_tool')        
+            vt.add2vocabulary('impresso_types', document_type, 1)
         
     def generic_document_edit_title(self):
-        # return self.Title() + ' - ' + self.getDate().strftime('%d/%m/%y %H:%M')
         return self.getDate().strftime('%d/%m/%y') + ' - ' + self.Title()
+
+    def getTypesOfImpresso(self):
+        ''' 
+        Monta a displaylist do selectionWidget a partir do vocabulario
+        impresso_types dentro da ferramenta vocabulary_tool 
+        '''
+        dl = DisplayList()
+        dl.add('', 'Selecione')
+        portal = getSite()
+        vt = getToolByName(portal, 'vocabulary_tool')
+        vocab_list = vt.get_vocabulary('impresso_types', 2)
+        for vocab in vocab_list:
+            dl.add(vocab, vocab)
+        dl.add('outro', 'Outro')
+        return dl
 
 registerType(Impresso, PROJECTNAME)
