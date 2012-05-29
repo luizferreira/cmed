@@ -1,0 +1,8 @@
+[actions]
+action.success = traverse_to:string:edit_exam_handler
+action.success..save = traverse_to:string:edit_exam_handler
+action.success..cancel = redirect_to:string:show_exams
+action.failure = traverse_to:string:edit_exam
+
+[validators]
+validators = save_exam_validator

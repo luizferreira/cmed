@@ -139,7 +139,7 @@ class VisitTemp(event.ATEvent):
     def popup_search_script(self, arg=None):
         portal = getSite()
         portal_skins = getToolByName(portal, 'portal_skins')
-        script = portal_skins.BuildingBlocksWidget.popup_search_script
+        script = portal_skins.wres_theme_widget.popup_search_script
         return script
     
     # utilizado pelo PatientWrapper em secretarydesktop    

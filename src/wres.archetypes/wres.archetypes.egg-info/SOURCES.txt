@@ -192,7 +192,6 @@ wres/archetypes/README.txt
 wres/archetypes/__init__.py
 wres/archetypes/config.py
 wres/archetypes/configure.zcml
-wres/archetypes/configure.zcml~
 wres/archetypes/validators.py
 wres/archetypes/browser/__init__.py
 wres/archetypes/browser/configure.zcml
@@ -203,7 +202,6 @@ wres/archetypes/content/chartdata.py
 wres/archetypes/content/chartfolder.py
 wres/archetypes/content/clinic.py
 wres/archetypes/content/configure.zcml
-wres/archetypes/content/configure.zcml~
 wres/archetypes/content/doctor.py
 wres/archetypes/content/doctorfolder.py
 wres/archetypes/content/documentfolder.py
@@ -219,14 +217,13 @@ wres/archetypes/content/referringproviderfolder.py
 wres/archetypes/content/reviewofsystems.py
 wres/archetypes/content/secretary.py
 wres/archetypes/content/secretarydesktop.py
-wres/archetypes/content/secretarydesktop.py~
 wres/archetypes/content/secretaryfolder.py
 wres/archetypes/content/template.py
 wres/archetypes/content/templatefolder.py
 wres/archetypes/content/uploadchartfolder.py
-wres/archetypes/content/visit.py~
 wres/archetypes/content/visitfolder.py
 wres/archetypes/content/visittemp.py
+wres/archetypes/content/visittemp.py~
 wres/archetypes/content/wresuser.py
 wres/archetypes/content/fields/__init__.py
 wres/archetypes/content/fields/defaultreferencefield.py
@@ -242,10 +239,8 @@ wres/archetypes/content/schemas/patient.py
 wres/archetypes/content/schemas/progressnotes.py
 wres/archetypes/content/schemas/reviewofsystems.py
 wres/archetypes/content/schemas/secretary.py
-wres/archetypes/content/schemas/secretary.py~
 wres/archetypes/content/schemas/visit.py
 wres/archetypes/interfaces/__init__.py
-wres/archetypes/interfaces/__init__.py~
 wres/archetypes/interfaces/admin.py
 wres/archetypes/interfaces/adminfolder.py
 wres/archetypes/interfaces/chartfolder.py
@@ -273,11 +268,9 @@ wres/archetypes/interfaces/wresuser.py
 wres/archetypes/portlets/__init__.py
 wres/archetypes/portlets/configure.zcml
 wres/archetypes/profiles/default/factorytool.xml
-wres/archetypes/profiles/default/factorytool.xml~
 wres/archetypes/profiles/default/metadata.xml
 wres/archetypes/profiles/default/portlets.xml
 wres/archetypes/profiles/default/types.xml
-wres/archetypes/profiles/default/types.xml~
 wres/archetypes/profiles/default/workflows.xml
 wres/archetypes/profiles/default/types/Admin.xml
 wres/archetypes/profiles/default/types/AdminFolder.xml

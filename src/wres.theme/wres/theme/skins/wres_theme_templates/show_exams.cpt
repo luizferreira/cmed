@@ -36,41 +36,43 @@
         <dt> Erro </dt>
         <dd tal:content="error_message"> Ocorreu algum erro. </dd>
     </dl> 
-    
-    <fieldset class="cmed">
-        <legend>Exame </legend>        
-        <form tal:attributes="action template/id">
-            <input type="hidden" name="form.submitted" value="1" />
-            <table class="listing width-100 nosort" id="table_form">
-                <thead>
-                <th width="20px">#</th>
-                    <th>Exame</th>
-                    <th>Valor</th>
-                    <th>Data</th>
-                </thead>
-                <tbody>
-                    <tr id="linha0">
-                    <td></td>
-                        <td>
-                            <input id="exam_form0" type="text" name="exam_form0" onFocus="add_form_row()"
-                                tal:attributes="value data/exam | nothing" />
-                        </td>
-                        <td>
-                            <input id="value_form0" type="text" name="value_form0"
-                                tal:attributes="value data/value | nothing" />
-                        </td>
-                        <td>
-                            <input id="date_form0" type="text" name="date_form0" size="7"
-                                tal:attributes="value data/date | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <input id="add_new" type="submit" name="form.button.save" value="Adicionar Exame" class="context"/>
-            <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
-        </form>
-    </fieldset>
-    
+    <div metal:define-macro="add_new">
+        <fieldset class="cmed">
+            <legend>Exame </legend>        
+            <form tal:attributes="action template/id">
+                <input type="hidden" name="form.submitted" value="1" />
+                <table class="listing width-100 nosort" id="table_form">
+                    <thead>
+                    <th width="20px">#</th>
+                        <th>Exame</th>
+                        <th>Valor</th>
+                        <th>Data</th>
+                    </thead>
+                    <tbody>
+                        <tr id="linha0">
+                        <td></td>
+                            <td>
+                                <input id="exam_form0" type="text" name="exam_form0" onFocus="add_form_row()"
+                                    tal:attributes="value data/exam | nothing" />
+                            </td>
+                            <td>
+                                <input id="value_form0" type="text" name="value_form0"
+                                    tal:attributes="value data/value | nothing" />
+                            </td>
+                            <td>
+                                <input id="date_form0" type="text" name="date_form0" size="7"
+                                    tal:attributes="value data/date | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <metal:buttons define-slot="buttons">
+                    <input id="add_new" type="submit" name="form.button.save" value="Adicionar Exame" class="context"/>
+                    <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
+                </metal:buttons>
+            </form>
+        </fieldset>
+    </div>
     <div tal:define="exams context/getExamsData" tal:condition="exams">
         <fieldset class="cmed">
             <legend i18n:translate="cmfuemr_description_exams">Exames Registrados</legend>
@@ -80,6 +82,7 @@
                     <th>Exame</th>
                     <th>Valor</th>
                     <th id="#datecol">Data</th>
+                    <th>Ações</th>
                 </thead>
                 <tbody>
                     <tal:loop tal:repeat="exam exams">
@@ -88,6 +91,10 @@
                             <td tal:content="exam/exam">Blood</td>
                             <td tal:content="exam/value">Good</td>
                             <td tal:content="exam/date">01/05/2010</td>
+                            <td class="width-16" i18n:translate="" tal:condition="context/TestRoles">
+                                <input type="button" class="context" value="Editar" name="form.button.edit"
+                                    tal:attributes="onclick string:javascript:window.location = 'edit_exam?id=${exam/id}'"/>
+                            </td>
                         </tr>
                     </tal:loop>
                 </tbody>

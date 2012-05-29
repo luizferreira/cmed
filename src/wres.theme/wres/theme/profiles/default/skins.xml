@@ -24,7 +24,7 @@
     directory="wres.theme:skins/wres_TEMPORARY"/>       
  <object name="BuildingBlocksWidget"
     meta_type="Filesystem Directory View"
-    directory="wres.theme:skins/wres_TEMPORARY/BuildingBlocksWidget"/>            
+    directory="wres.theme:skins/wres_TEMPORARY/wres_theme_widget"/>            
  <object name="wres_theme_js"
     meta_type="Filesystem Directory View"
     directory="wres.theme:skins/wres_theme_js"/>     

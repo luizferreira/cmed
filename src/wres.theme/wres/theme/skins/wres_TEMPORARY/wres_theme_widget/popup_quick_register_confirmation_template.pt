@@ -1,0 +1,9 @@
+<tal:page define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+                  popup_macros python:path('here/%s_popup_macros/macros | nothing' % portal_type);">
+	<tal:if condition="popup_macros">
+		<metal:confirmation use-macro="popup_macros/confirmation" />
+	</tal:if>
+	<tal:else condition="not:popup_macros">
+		<metal:confirmation use-macro="here/popup_quick_register_macros/macros/confirmation" />
+	</tal:else>
+</tal:page>

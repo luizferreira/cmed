@@ -1,0 +1,39 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"
+      lang="en-US"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cmfuemr">
+    <head>
+        <metal:block fill-slot="style_slot">
+            <link rel="stylesheet" type="text/css" href="cmed.css" />
+        </metal:block>
+    </head>
+    <body>
+        <div metal:fill-slot="main"
+            tal:define="data context/getEditExamData;
+                        state options/state | request/state;
+                        portal_status_msg state/kwargs/portal_status_message | request/portal_status_message | nothing;
+                        errors state/getErrors;
+                        error_message errors/error_message | nothing;">
+
+        <h1>Editar Exams</h1>
+        
+        <dl class="portalMessage error"
+            tal:condition="error_message"> 
+            <dt> Erro </dt>
+            <dd tal:content="error_message"> Ocorreu algum erro. </dd>
+        </dl> 
+        
+        <div id="edit">
+                <metal:edit use-macro="here/show_exams/macros/add_new">
+                    <metal:buttons fill-slot="buttons">
+                        <input id="add_new" type="submit" name="form.button.save" value="Salvar" class="context" i18n:attributes="value"/>
+                        <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
+                        <input type="submit" name="form.button.cancel" value="cancel" class="context" i18n:attributes="value"/>
+                        <input type="hidden" name="id" tal:attributes="value request/id | nothing" />
+                    </metal:buttons>
+                </metal:edit>
+            </div>
+        </div>
+    </body>
+</html>
