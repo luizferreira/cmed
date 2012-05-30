@@ -223,8 +223,8 @@ class Patient(wresuser.WRESUser):
     #def getPastMedicalHistory(self):
         #return dict(self.chart_data.past_medical_history)
 
-    #def getAllergies(self):
-        #return dict(self.chart_data.allergies)
+    def getAllergies(self):
+        return dict(self.chart_data.allergies)
         
     #def getLaboratory(self):
         #return [dict(value) for value in self.chart_data.laboratory.values()]
@@ -257,6 +257,24 @@ class Patient(wresuser.WRESUser):
     def get_chart_data_map(self):
         return ChartData.mapping
         
+
+    def chart_data_summary(self):
+        ['review_of_systems', 'medications', 'prescriptions', 
+        'allergies', 'problems', 'not_signed_allergies', 'laboratory']
+        dic_chartdata = {}
+        dic_chartdata['allergies'] = dict(self.chart_data.allergies)
+        dic_chartdata['review_of_systems'] = dict(self.chart_data.review_of_systems)
+        dic_chartdata['medications'] = dict(self.chart_data.medications)
+        prescriptions = self.chart_data.prescriptions.values()
+        dic_chartdata['prescriptions'] = [prescription for prescription in prescriptions]
+        problems = self.chart_data.problems.values()
+        dic_chartdata['problems'] = [problem for problem in problems]
+        dic_chartdata['not_signed_allergies'] = dict(self.chart_data.not_signed_allergies)
+        dic_chartdata['laboratory'] = [dict(value) for value in self.chart_data.laboratory.values()]
+        # import ipdb; ipdb.set_trace()
+        return dic_chartdata
+
+
 #    def saveMaintenance(self, **maintenance):
 #        maints = self.chart_data.maintenances
 #        new_maintenance = Maintenance(**maintenance)
