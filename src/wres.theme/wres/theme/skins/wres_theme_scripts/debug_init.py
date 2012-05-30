@@ -1,4 +1,4 @@
-##parameters=pat=2,doc=2,sec=1,cli=True,adm=0,full=0
+##parameters=pat=2,doc=2,sec=1,cli=True,adm=0,full=1
 #coding=utf-8
 
 from DateTime import DateTime
@@ -148,9 +148,7 @@ def set_patient_information(p):
     p.chart_data.save_entry(context, 'problems', **problem)
     p.chart_data.save_entry(context, 'laboratory', **exam)
 
-
     if int(full_info):
-        p.setType_of_patient('new')
         p.setHomePhone(phone)
         p.setMobile(cphone)    
         p.setSocialSecurity('55351927403')
@@ -167,27 +165,15 @@ def set_patient_information(p):
         p.setState("Ativo")
         p.setFax("3137422322")
         p.setCTPS("0123456")
-        p.setGuarantor_identidade("MG11789456")
-        p.setGuarantor_relationship("Amante")
-        p.setGuarantor_name("Pedro Cardoso")
-        p.setGuarantor_contact_phone("3137421155")
-        p.setGuarantor_orgaoEmissor("marinha")
         p.setMatricula("2010497859")
         p.setDataDeValidade(DateTime(random.randrange(HOJE.year(),2100),random.randrange(1,13), random.randrange(1,28)))
         p.setConvenio("Vale")
-        p.setConfirmedChartNumber(False)
         p.setTipo("Privado")
-        p.setGuarantor_address1("Rua das Magnolias,456")
-        p.setGuarantor_address2("Bairro dos Cornelios")
-        p.setGuarantor_city("Tangamandápio")
-        p.setGuarantor_state("Acre")
-        p.setGuarantor_zipcode("31270213")
         p.setIndustry("Vale do rio doce")
         p.setWorkPhone("3137425689")
         p.setRetirementdate(DateTime(random.randrange(HOJE.year(),2100), random.randrange(1,13), random.randrange(1,28)))
         p.setTituloEleitor("1225282038")
         p.setOccupationTitle("Programador")
-        p.setGuarantor_extension("1597")
         p.setInsurance(UID)
         p.setDataDeValidade("12/11/2015")
         p.setTitular("Sim")
@@ -201,16 +187,6 @@ def set_patient_information(p):
         p.setMaritalStatus("Amante")
         p.setEducationCompleted("doutorado")
         p.setExtension("45612")
-        p.setEmergency_zipcode("31270215")
-        p.setEmergency_state("Sao Paulo")
-        p.setEmergency_city("Salvador")
-        p.setEmergency_address2("Bairro Sao Lucas")
-        p.setEmergency_address1("Rua dos viaviarios")
-        p.setEmergency_other_phone("3137421436")
-        p.setEmergency_home_phone("3137421346")
-        p.setEmergency_work_phone("3137421578")
-        p.setEmergency_relationship("Médico")
-        p.setEmergency_contact_name("Helio Heal")
 
     p.reindexObject()
 
@@ -219,6 +195,21 @@ def set_doctor_information(d):
     d.setSsn(12345678910)
     d.setFirstName(doctor_fname)
     d.setLastName(doctor_lname)
+    d.setStreet1(clinic_address)
+    d.setStreet2('Centro')
+    d.setCity('Belo Horizonte')
+    d.setState('Minas Gerais')
+    d.setZipcode('33600123')
+    d.setWebsite('www.communimed.com.br')
+    d.setPhone(phone)
+    d.setCel(cphone)
+    d.setFax(phone)
+    d.setEmail(email)
+    d.setInitial('DT')
+    d.setSignature('Assinatura do Doutor Teste')
+    d.setCredentials('Credenciais do Doutor Teste')
+    d.setSpecialty('Especialidades do Doutor Teste')
+    d.setSignPassword('senha1')
     d.reindexObject()
 
 def set_secretary_information(s):
@@ -226,6 +217,11 @@ def set_secretary_information(s):
     s.setLastName(secretary_lname)
     s.setSsn('12345678910')
     s.setEmail(email)
+    s.setAddress1(clinic_address)
+    s.setCity('Belo Horizonte')
+    s.setState('Minas Gerais')
+    s.setPhone(phone)
+    s.setCel(cphone)    
     s.reindexObject()    
 
 def set_admin_information(a):
@@ -345,12 +341,12 @@ Params:
 > cli = 1 | 0. Initialize clinic? (Default = 1 (True))
 > > 0: No. I don't wanna initialize clinic.
 > > 1: Yes. I wanna initialize clinic.
-> full = 1 | 0. Level of information for patients. (D = 0)
+> full = 1 | 0. Level of information for patients. (D = 1)
 > > 0: set only required fields.
 > > 1: set all fields.
 
 Example of usage:
-.../debug_init?pat=10&doc=1&sec=0&adm=2&cli=0&full=1
+.../debug_init?pat=10&doc=1&sec=0&adm=2&cli=0&full=0
 ==========================================================
     """
 
