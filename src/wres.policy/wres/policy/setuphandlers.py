@@ -43,18 +43,6 @@ def getOrCreateType(portal, atobj, newid, newtypeid):
         newobj = getattr(atobj,newid)
     return newobj
 
-def createLinkInicio(portal):
-    """ Cria o link inicio """
-    print '*** Criando o link inicio...'
-    inicio = getOrCreateType(portal, portal, 'inicio', 'Link')
-    inicio.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE, ANONYMOUS_ROLE], acquire = False)
-    inicio.manage_permission('Modify portal content', [], acquire = False)
-    inicio.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE], acquire = False)
-    inicio.setTitle('Inicio')
-    inicio.setRemoteUrl(portal.absolute_url() + '/go2home')
-    inicio.reindexObject()
-    print '*** Criando o link inicio...... OK'
-
 def createClinic(portal):
     """ Cria o objeto clinica """
     print '*** Criando objeto clinica...'
@@ -614,10 +602,8 @@ def setupVarious(context):
     except:
 
         deleteDefaultObjects(portal)
-
-        createLinkInicio(portal)
-        # o link inicio redireciona para a página inicial de cada usuário
-        portal.setDefaultPage('inicio') 
+        
+        #portal.setDefaultPage('Appointments')
         createVisitFolder(portal)
         createClinic(portal)
         createAdminFolder(portal)    
