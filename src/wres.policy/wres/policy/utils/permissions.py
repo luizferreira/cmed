@@ -34,8 +34,6 @@ LIST_ACCOUNT_ITEM = 'wres.policy: list Account_item'
 VIEW_ACCOUNT_ITEM = 'wres.policy: view Account_item'
 EDIT_ACCOUNT_ITEM = 'wres.policy: edit Account_item'
 
-EDIT_QUEST = 'wres.policy: edit Questionnarie'
-
-SIGN_PN = 'wres.policy: Sign Progress Notes'
+SET_CHART_ACCESS = 'wres.policy: Set Chart Access'
 
 CUSTOMIZE_UEMR = 'wres.policy: Customize UEMR'

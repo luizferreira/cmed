@@ -97,7 +97,7 @@ class WRESUser(folder.ATFolder):
         """ Standard method to return the user home url.
         If it is necessary to use a specific method, it can be defined in
         user specific class. """
-        return self.absolute_url_path()    
+        return self.absolute_url_path()
     
     def getGroup(self):
         """ returns the group the user belongs. Must be redefined in the

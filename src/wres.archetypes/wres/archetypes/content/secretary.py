@@ -40,9 +40,6 @@ class Secretary(wresuser.WRESUser):
         self.at_post_edit_script()
 
     def at_post_edit_script(self):
-        # self.getIsTranscriptionist
-        # import ipdb; ipdb.set_trace()
-
         sec_id = self.getId()
         acl = self.acl_users
         if self.getIsTranscriptionist():

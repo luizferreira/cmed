@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <rolemap>
   <roles>
+    <role name="UemrAdmin"/>
     <role name="Doctor"/>
-    <role name="FrontDeskTwo"/>
     <role name="Patient"/>
     <role name="Secretary"/>
-    <role name="UemrAdmin"/>
+    <role name="Transcriptionist"/>
   </roles>
 
   <permissions>
@@ -22,6 +22,7 @@
       <role name="UemrAdmin"/>
       <role name="Doctor"/>
       <role name="Secretary"/>
+      <role name="Transcriptionist"/>
     </permission>
 
     <!-- /PERMISSOES DE TERCEIROS -->
@@ -49,6 +50,7 @@
       <role name="UemrAdmin"/>
       <role name="Doctor"/>
       <role name="Secretary"/>
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.archetypes: Add Doctor" acquire="False">
       <role name="Manager"/>
@@ -110,10 +112,11 @@
       <role name="Manager"/>
     </permission>
     <permission name="wres.policy: Add Content" acquire="True">
-      <role name="Doctor"/>
       <role name="Manager"/>
-      <role name="Secretary"/>
       <role name="UemrAdmin"/>
+      <role name="Doctor"/>
+      <role name="Secretary"/>
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: Create User" acquire="True">
       <role name="Manager"/>
@@ -129,118 +132,127 @@
       <role name="UemrAdmin"/>
       <role name="Doctor"/>
       <role name="Secretary"/>
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: Edit Doc" acquire="True">
-      <role name="Doctor"/>
       <role name="Manager"/>
-      <role name="Secretary"/>
       <role name="UemrAdmin"/>
+      <role name="Doctor"/>
+      <role name="Secretary"/>
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: Edit Doctor" acquire="True">
-      <role name="Doctor"/>
       <role name="Manager"/>
       <role name="UemrAdmin"/>
+      <role name="Doctor"/>
       <role name="Secretary"/>
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: Edit Insurance" acquire="True">
-      <role name="Doctor"/>
-      <role name="FrontDeskTwo"/>
       <role name="Manager"/>
-      <role name="Secretary"/>
       <role name="UemrAdmin"/>
+      <role name="Doctor"/>
+      <role name="Secretary"/>
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: Edit Patient" acquire="True">
-      <role name="Doctor"/>
-      <role name="FrontDeskTwo"/>
       <role name="Manager"/>
-      <role name="Secretary"/>
       <role name="UemrAdmin"/>
+      <role name="Doctor"/>
       <role name="Patient"/>
+      <role name="Secretary"/>
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: Edit Secretary" acquire="True">
-      <role name="Doctor"/>
       <role name="Manager"/>
-      <role name="Secretary"/>
       <role name="UemrAdmin"/>
+      <role name="Doctor"/>
+      <role name="Secretary"/>
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: Edit Visit" acquire="True">
-      <role name="Doctor"/>
-      <role name="FrontDeskTwo"/>
       <role name="Manager"/>
+      <role name="Doctor"/>
       <role name="Secretary"/>
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: List Patient" acquire="True">
-      <role name="Doctor"/>
-      <role name="FrontDeskTwo"/>
       <role name="Manager"/>
-      <role name="Secretary"/>
       <role name="UemrAdmin"/>
+      <role name="Doctor"/>
       <role name="Patient"/>
+      <role name="Secretary"/>
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: List Secretary" acquire="True">
-      <role name="Doctor"/>
-      <role name="FrontDeskTwo"/>
       <role name="Manager"/>
-      <role name="Secretary"/>      
       <role name="UemrAdmin"/>
+      <role name="Doctor"/>
+      <role name="Secretary"/>    
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: List Visit" acquire="True">
-      <role name="Doctor"/>
-      <role name="FrontDeskTwo"/>
       <role name="Manager"/>
-      <role name="Secretary"/>      
       <role name="UemrAdmin"/>
+      <role name="Doctor"/>
+      <role name="Secretary"/> 
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: Set Schedule" acquire="True">
-      <role name="Doctor"/>
-      <role name="FrontDeskTwo"/>
       <role name="Manager"/>
-      <role name="Secretary"/>
       <role name="UemrAdmin"/>
+      <role name="Doctor"/>
+      <role name="Secretary"/>
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: View Doctor" acquire="True">
       <role name="Manager"/>
       <role name="UemrAdmin"/>
       <role name="Doctor"/>
-      <role name="FrontDeskTwo"/>
-      <role name="Secretary"/>     
       <role name="Patient"/>
+      <role name="Secretary"/> 
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: View Insurance" acquire="True">
-      <role name="Doctor"/>
-      <role name="FrontDeskTwo"/>
       <role name="Manager"/>
-      <role name="Secretary"/>      
       <role name="UemrAdmin"/>
+      <role name="Doctor"/>
+      <role name="Secretary"/> 
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: View Patient" acquire="True">
       <role name="Manager"/>
       <role name="UemrAdmin"/>
       <role name="Doctor"/>
-      <role name="FrontDeskTwo"/>
-      <role name="Secretary"/>      
       <role name="Patient"/>
+      <role name="Secretary"/>  
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: View Schedule" acquire="True">
-      <role name="Doctor"/>
-      <role name="FrontDeskTwo"/>
       <role name="Manager"/>
-      <role name="Secretary"/>      
       <role name="UemrAdmin"/>
+      <role name="Doctor"/>
+      <role name="Secretary"/>   
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: View Secretary" acquire="True">
       <role name="Manager"/>
       <role name="UemrAdmin"/>
       <role name="Doctor"/>
-      <role name="FrontDeskTwo"/>
-      <role name="Secretary"/>      
       <role name="Patient"/>
+      <role name="Secretary"/> 
+      <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: View Visit" acquire="True">
-      <role name="Doctor"/>
-      <role name="Manager"/>
       <role name="Owner"/>
-      <role name="Secretary"/>      
+      <role name="Manager"/>
+      <role name="Doctor"/>
+      <role name="Secretary"/>
+      <role name="Transcriptionist"/>
+    </permission>
+    <permission name="wres.policy: Set Chart Access" acquire="True">
+      <role name="Doctor"/>
+      <role name="Manager"/> 
     </permission>
 
     <!-- /PERMISSOES DO COMMUNIMED -->

@@ -603,7 +603,7 @@ def setupVarious(context):
 
         deleteDefaultObjects(portal)
         
-        #portal.setDefaultPage('Appointments')
+        portal.setDefaultPage('Appointments')
         createVisitFolder(portal)
         createClinic(portal)
         createAdminFolder(portal)    
