@@ -81,6 +81,7 @@
         <script type="text/javascript"
                 tal:attributes="src string:${portal_url}/iefixes.js">
         </script>
+          
     <tal:iefixend replace="structure string:&lt;![endif]--&gt;" />
 
     <link tal:replace="structure provider:plone.htmlhead.links" />
@@ -133,14 +134,24 @@
 
 <script type="text/javascript" tal:content="string:var hereurl = '${here/getURL|here/absolute_url}';"/>
 <script type="text/javascript">
+  
+function setDuration(){
+    end_hour = end_date.getHours();
+	end_minute = end_date.getMinutes();
+	delta = (end_hour - start_hour)*60 + (end_minute - start_minute);
+	var duration = jq("#duration");
+	duration.val(delta);
+    
+}
+
   jq(document).ready( function() {
 	
 	<!-- trecho editado pelo CommuniMed -->
 	<!-- trecho editado pelo CommuniMed -->
 	<!-- trecho editado pelo CommuniMed -->
-	var start = jq("#startdate").html();
+    
+    var start = jq("#startdate").html();
 	var end = jq("#enddate").html();
-
 	start_date = new Date(start);
 
 // caso o start_date seja invalido cria por outro metodo.
@@ -178,17 +189,13 @@
     minute = parseInt(str_split2[1]);
     end_date = new Date(year, month, day, hour, minute);
   }
-
-	end_hour = end_date.getHours();
-	end_minute = end_date.getMinutes();
-	delta = (end_hour - start_hour)*60 + (end_minute - start_minute);
-	var duration = jq("#duration");
-	duration.val(delta);
-
+    setDuration();
+	
 // debug
 /*  if(isNaN(start_date.getTime()) || isNaN(end_date.getTime())) {
     alert("Erro no calculo da duracao.");
   }*/
+    
 
 	<!-- Fim trecho editado pelo CommuniMed -->
 	<!-- Fim trecho editado pelo CommuniMed -->
@@ -220,6 +227,22 @@
     jq('select.formTabs').change(function(event){
       jq("iframe[name='SFEventEditIFRAME']", window.parent.document).height( jq("html").height()+30 );
     });
+  
+  //Ao editar uma consulta: Para enganar o validador caso o usuario coloque um start_date alem do antigo end_date,
+  //o ano do end_date é setado para 2017. O enddate real é calculado no visitemp.py
+  //TODO: Mudar isso em 2017
+    $("#edit_form_startDate_0_year," +
+      "#edit_form_startDate_0_month,"+
+      "#edit_form_startDate_0_day,"+
+      "#edit_form_startDate_0_hour,"+
+      "#edit_form_startDate_0_minute").change(function(){
+      
+      endyear = $("#edit_form_endDate_1_year")[0]
+      endyear.selectedIndex = 17;
+    });
+    
+    endDateWidget = $("#archetypes-fieldname-endDate")[0]
+    endDateWidget.style.display = "none"
   });
 </script>
 
@@ -231,8 +254,16 @@
                     class_expr string:${context/getSectionFromURL} template-${template_id};"
         tal:attributes="class python:class_expr.strip()+' ajax_edition';
                         dir python:test(isRTL, 'rtl', 'ltr')" style="background-color:transparent;">
+<!--
+        O codigo python abaixo calcula o startDate e o endDate a partir dos ja registrados no archetype.
+-->
+        <div style="display:none" tal:define='startDate python: context.startDate.Date().replace("/","-") + " " + str(context.startDate.hour()) + ":" + str(context.startDate.minute());
+                         endDate python: context.endDate.Date().replace("/","-") + " " + str(context.endDate.hour()) + ":" + str(context.endDate.minute())   '> 
+            <div id="startdate"> <tal:print replace='request/startDate | startDate'> 1 </tal:print> </div>
+            <div id="enddate"> <tal:print replace="request/endDate | endDate"> 2 </tal:print> </div>
+        </div>
             <div id="content">
-
+            
               <metal:block define-slot="content">
                 <div metal:define-macro="content"
                      tal:define="show_border context/@@plone/showEditableBorder"
@@ -264,10 +295,7 @@
          <!-- trecho editado pelo CommuniMed -->
          <!-- trecho editado pelo CommuniMed -->
          
-        <div id="invisivel" style="display:none"> 
-            <div id="startdate"> <tal:print replace="request/startDate"> 1 </tal:print> </div>
-            <div id="enddate"> <tal:print replace="request/endDate | nothing"> 2 </tal:print> </div>
-        </div>
+        
         
          <!-- trecho editado pelo CommuniMed -->
          <!-- trecho editado pelo CommuniMed -->

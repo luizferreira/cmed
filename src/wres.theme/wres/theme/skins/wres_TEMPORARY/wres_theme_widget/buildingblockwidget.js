@@ -48,7 +48,7 @@ function getXmlHttpRequest(){
         throw new Error ('Browser not supported.');
 }
 
-/* função faz uma requisição GET que não consegui entender ainda. */
+/* função faz uma requisição GET, usando json no patient.py do archetypes para pegar carregar informaçoes do mesmo. */
 function getAttributesFromRemoteObj(path, attrs, handler){
 //    alert("Funcao: " + "getAtributesFromRemoteObj\n" + "attrs: " + attrs + "\n" + "handler: " + handler + "\n\n\n" + "path: " + path);
 //	var url = 'getattributesfromremoteobj?path=' + path;
@@ -74,6 +74,10 @@ function getAttributesFromRemoteObj(path, attrs, handler){
 	xml_request.send(null);
 }
 
+function EditpopulateOpenerField(fieldname, title, path){
+	startPopulatingField(window, title, path);
+}
+
 function populateOpenerField(fieldname, title, path){
 //    alert("Funcao: " + "populateOpenerField\n" + "title: " + title + "\n" + "path: " + path);
 	if(fieldname == 'patient:list'){
@@ -85,6 +89,7 @@ function populateOpenerField(fieldname, title, path){
 		setTimeout("window.close()", 100);
 	}
 }
+
 
 function defaultStartPopulatingField(fieldname, title, path){
 //    alert("Funcao: " + "defaultStartPopulatingField\n" + "fieldname: " + fieldname + "\n" + "title: " + title + "\n" + "path: " + path);
@@ -131,6 +136,7 @@ function updateCPhone(cphone) {
 	phone = cphone.substring(2);
 	$("select#acontactPhone").val(area_code);
 	$('input[name="acontactPhone"]').val(phone);
+	$('#contactPhone').val(area_code+phone);
 }
 
 /* função que controla o processo de seleção do item (e.g paciente) */
@@ -206,7 +212,7 @@ function addOption(mdocument, id_selection, text, value){
 		var opt = mdocument.createElement('option');
 		opt.text = text;
 		opt.value = value;
-
+                $("#nomePacienteLabel").html(text)
 		var my_list = mdocument.getElementById(id_selection);
 		my_list.options.add(opt);
 	}
@@ -302,3 +308,12 @@ VocabularyController.prototype.changeList = function(evt){
 		opts[opts.length] = opt;
 	}
 }
+
+//TODO:Gambiarra para pegar o telefone
+$(document).ready(function(){
+if($("#acontactPhone")[0]){
+                if($("#hiddenPhone")[0]){
+                updateCPhone($("#hiddenPhone")[0].value)
+                }
+        }
+});

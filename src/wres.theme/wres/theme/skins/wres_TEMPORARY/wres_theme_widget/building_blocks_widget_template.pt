@@ -4,7 +4,12 @@
 	  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
 	  i18n:domain="cmfuemr">
 
-  <head><title></title></head>
+  <head>
+          <title></title>
+          <script>
+                  
+          </script>
+  </head>
 
   <body>
 
@@ -44,10 +49,26 @@
 						 fieldName python:fieldName+':list';
 						 uids python:same_type(value, []) and value or [value];
 						 vlen python:len(vocab);
-						 related_field python:None;">
+						 related_field python:None;
+                                                 ">
+<!--
+                MODO EDICAO
+-->
+                 <div tal:define="patient python:context.getPatient()" tal:condition="patient">
+                        
+                        <select tal:attributes="name fieldName; id fieldName;" style="display:none">
+				<option tal:attributes="value patient/UID;" tal:content="python: patient.getFirstName() + ' ' + patient.getLastName()" selected="selected"></option>
+			</select>
+                        <span style="font-size:14px; text-decoration:underline;" tal:content="python: patient.getFirstName() + ' ' + patient.getLastName()"></span>
+                        <input type="hidden" tal:attributes="value python:context.getContactPhone()" id="hiddenPhone"/>
+                        
+                </div>
+<!--
+                MODO ADICAO
+-->
 
-		  <div>
-			<select tal:attributes="name fieldName;
+		  <div tal:condition="python:not context.getPatient()">
+			<select style="display:none" tal:attributes="name fieldName;
 									id fieldName;">
 
 				<option value="no_patient" selected="selected">Procure ou Registre um Paciente&nbsp;&nbsp;</option>
@@ -60,6 +81,7 @@
 					  tal:content="python:here.translate(vocab.getMsgId(item), default=vocab.getValue(item))"></option>
 			 </tal:item>
 			</select>
+                        <span style="font-size:14px; text-decoration:underline;" id="nomePacienteLabel"></span>
 			<script tal:condition="related_field"
 				tal:content="structure python:here.create_js_vocabulary_controller(special, field, related_field)" >
 			</script>

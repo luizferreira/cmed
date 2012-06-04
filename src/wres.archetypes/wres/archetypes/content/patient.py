@@ -47,7 +47,7 @@ class Patient(wresuser.WRESUser):
     # retorna um objeto do tipo json (JavaScript Object Notation),
     # utilizado no tipo visita (BuildingBlocksWidget)
     def getInformation(self):
-        return json.dumps({'getLastVisitDate': self.getLastVisitDate(), 'getContactPhone': self.getContactPhone(), 'UID': self.UID()})
+        return json.dumps({'getLastDate': self.getLastVisitDate(), 'getContactPhone': self.getContactPhone(), 'UID': self.UID()})
         
     def getGroup(self):
         return PATIENT_GROUP

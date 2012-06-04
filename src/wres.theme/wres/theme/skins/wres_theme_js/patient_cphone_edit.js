@@ -59,7 +59,7 @@ function updateCPhoneQuickRegister(){
 $(document).ready(function(){
 
 	if($("input#cphone_number").val() != "") {
-		$("div#cphone_field").show();	
+                $("div#cphone_field").show();	
 	}
 
 	$("input#cphone_residencial").click(getResidencial)

@@ -76,7 +76,7 @@ def finalizeSchema(baseSchema, type='None', non_exclude_schematas=[], non_exclud
                     field.required = False
                     field.widget.label = u'Final da Consulta'
                     field.default_method = endDateDefaultMethod
-                    field.widget.visible = {'edit': 'invisible', 'view': 'visible'}
+                    field.widget.visible = {'edit': 'visible', 'view': 'visible'}
     else:
         if 'default' not in non_exclude_schematas:
 

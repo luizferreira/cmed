@@ -19,7 +19,7 @@ def getAttributeValue(obj, attr_name, **extras):
 class BuildingBlocksWidget(ReferenceWidget):
     _properties = ReferenceWidget._properties.copy()
     _properties.update({'macro':'building_blocks_widget_template',
-                        'helper_js': ('uemr_widgets/js/buildingblockswidget.js',),
+                        'helper_js': ('buildingblockswidget.js',),
                         'blocks': (),
                         'vocabulary_display_path_bound': 100,
                         'filter_vocabulary': (),

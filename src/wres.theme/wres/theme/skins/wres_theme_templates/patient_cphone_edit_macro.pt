@@ -2,7 +2,9 @@
 	i18n:domain="cmfuemr">
 
     <metal:use use-macro="field_macro | context/widgets/field/macros/edit">
-
+   <metal:block fill-slot="javascript_head_slot">
+                <script type="text/javascript" src="patient_cphone_edit.js"></script>
+        </metal:block> 
         <metal:fill fill-slot="widget_body"
                     tal:define="isSpecialPhone python:str(value).startswith('0');
                                 value python:value or '';

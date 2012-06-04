@@ -104,7 +104,8 @@ class VisitTemp(event.ATEvent):
         if visit_reason not in dl:
             portal = getSite()
             vt = getToolByName(portal, 'vocabulary_tool')        
-            vt.add2vocabulary('visit_reason', visit_reason, 1)                
+            vt.add2vocabulary('visit_reason', visit_reason, 1) 
+        
         # doctor = self.getDoctor()
         # doctor_id = doctor.getId()
         # self.setSubject((doctor_id, ))

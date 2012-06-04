@@ -1,2 +1,3 @@
 [actions]
 action.success = traverse_to:string:popup_quick_register_beforeHandler
+action.success..save = traverse_to:string:popup_quick_register_beforeHandler

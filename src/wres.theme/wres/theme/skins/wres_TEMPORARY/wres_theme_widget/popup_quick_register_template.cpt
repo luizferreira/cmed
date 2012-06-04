@@ -68,7 +68,7 @@
         </tal:fields>
 
 		<div align="right">
-			<br /><input class="button" id="registerButton" type="submit" name="name" value="Register" i18n:attributes="value"/>
+			<br /><input class="button" id="registerButton" type="submit" name="form.button.save" value="Register" i18n:attributes="value"/>
 		</div>
 
 	</form>
