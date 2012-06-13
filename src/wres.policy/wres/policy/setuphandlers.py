@@ -542,6 +542,19 @@ def loadCIDVocabulary(portal, context):
     vt.add_vocab('CID_desc', CID_desc)
     vt.add_vocab('CID_code', CID_code)
 
+
+#===========================================================================
+# Carrega o vocabulario de tipos insurance.
+# Matheus
+#===========================================================================
+def loadInsuranceVocabulary(portal):
+    vt = getToolByName(portal, 'vocabulary_tool')
+    insurance = []
+    insurance.append('unimed BH')
+    insurance.append('santa casa saude')
+    insurance.append('bradesco saude')
+    vt.add_vocab('insurance', insurance)
+
 #===========================================================================
 # Carrega o vocabulario de tipos de documentos.
 # Luiz
@@ -603,7 +616,7 @@ def setupVarious(context):
         loadVisitVocabularies(portal)
         loadCIDVocabulary(portal, context)
         loadDEFVocabulary(portal,context)        
-
+        loadInsuranceVocabulary(portal)
 
     if not portal.portal_types.getTypeInfo('VisitTemp'):
         print '********************************AINDA NÃO***********************************'

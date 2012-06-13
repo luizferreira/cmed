@@ -112,7 +112,17 @@ class VisitTemp(event.ATEvent):
         # self.reindexObject()
         self.at_post_edit_script()
 
+    def addInsurance(self):
+        new_insurance = self.getInsurance()
+        dl = self.getInsurancesNames()
+        if new_insurance not in dl:
+            portal = getSite()
+            vt = getToolByName(portal, 'vocabulary_tool')        
+            vt.add2vocabulary('insurance', new_insurance, 1)
+        # self.setTitle(dl.getValue(self.getDocument_type()))
+
     def at_post_edit_script(self):
+        
 #        if self.isAppointment():
 #            self.setDefaultPatientId()
 #            self.updateTypeOfPatient()
@@ -126,6 +136,7 @@ class VisitTemp(event.ATEvent):
 
         #esse trecho calcula o endDate com base no startDate e na duracao da consulta.
         self.endDate = addMinutes2Date(self.start(), self.getDuration())
+        self.addInsurance()
         self.reindexObject()
 
     def getStartDate(self):
@@ -163,6 +174,16 @@ class VisitTemp(event.ATEvent):
             info['Title'] = ''
         return info        
         
+    def getInsurancesNames(self):
+        dl = DisplayList()
+        dl.add('', 'Selecione')
+        portal = getSite()
+        vt = getToolByName(portal, 'vocabulary_tool')
+        vocab_list = vt.get_vocabulary('insurance', 2)
+        for vocab in vocab_list:
+            dl.add(vocab, vocab)
+        dl.add('outro', 'Outro')
+        return dl
     # -*- Your ATSchema to Python Property Bridges Here ... -*-
 
 atapi.registerType(VisitTemp, PROJECTNAME)

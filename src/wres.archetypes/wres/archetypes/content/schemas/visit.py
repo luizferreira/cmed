@@ -135,7 +135,16 @@ MAIN = Schema((
                     helper_js=('generic_selection_edit.js', ),             
             ),
         ),        
-        
+      
+        StringField('insurance',
+		required=False,
+        vocabulary = "getInsurancesNames",
+        widget = SelectionWidget(
+                label = 'Plano de Saúde',
+                macro_edit='insurance_selection_edit_macro',
+                helper_js=('insurance_selection_edit.js', ),             
+                ),
+        ),
         StringField('note',
             widget=TextAreaWidget(label=_('Note'),
             ),

@@ -31,7 +31,7 @@ tal:define="urls context/getUploadData" >
 
 <table>
     <tr>
-        <th width="350px" align="center">Outros Arquivos</th>
+        <th width="350px" align="center">Arquivos</th>
         <th align="center">Imagens</th>
     </tr>
     <tr>
