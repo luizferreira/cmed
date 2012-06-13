@@ -28,7 +28,6 @@
     <!-- /PERMISSOES DE TERCEIROS -->
 
     <!-- PERMISSOES DO COMMUNIMED -->
-
     <permission name="Modify view template" acquire="False">
       <role name="Manager"/>
       <role name="UemrAdmin"/>

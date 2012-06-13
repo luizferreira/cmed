@@ -69,18 +69,9 @@ def createTemplateFolder(portal):
     template_folder = getOrCreateType(portal, portal, 'Templates', 'Folder')
     consultas_folder = getOrCreateType(portal, template_folder, 'Consultas', 'TemplateFolder')
     impressos_folder = getOrCreateType(portal, template_folder, 'Impressos', 'TemplateFolder')
-   # atestados_folder = getOrCreateType(portal, template_folder, 'Atestados', 'TemplateFolder')
-   # laudos_folder = getOrCreateType(portal, template_folder, 'Laudos', 'TemplateFolder')
-   # licencas_folder = getOrCreateType(portal, template_folder, 'Licencas', 'TemplateFolder')
-   # licencas_folder.setTitle('Licenças')
-   # licencas_folder.reindexObject()
-   # outros_folder = getOrCreateType(portal, template_folder, 'Outros', 'TemplateFolder')
 
     template_folder.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE], acquire = False)
-    #template_folder.manage_permission('Edit', [MANAGER_ROLE, UEMRADMIN_ROLE], acquire = False)
     template_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE], acquire = False)
-    # adds
-    # template_folder.manage_permission('ATContentTypes: Add File', [], acquire = False)
     template_folder.manage_permission('Add portal topics', [], acquire = False)
     template_folder.manage_permission('ATContentTypes: Add Event', [], acquire = False)
     template_folder.manage_permission('ATContentTypes: Add Image', [], acquire = False)
@@ -155,25 +146,7 @@ def createVisitFolder(portal):
     visit_folder.setLocallyAllowedTypes([])
     visit_folder.setImmediatelyAddableTypes([])
     visit_folder.setConstrainTypesMode(1)
-    visit_folder.reindexObject()
-
-    # link_cal = getOrCreateType(portal, portal, 'Calendario', 'Link')
-    # link_cal.manage_permission('View', [DOCTOR_ROLE], acquire = False)
-    # link_cal.manage_permission('Modify portal content', [], acquire = False)
-    # link_cal.manage_permission('Access contents information', [DOCTOR_ROLE], acquire = False)
-    # link_cal.setTitle('Calendário')
-    # link_cal.setRemoteUrl(portal.absolute_url() + '/go2mycalendar')
-    # link_cal.reindexObject()    
-
-    # link_agenda = getOrCreateType(portal, portal, 'Agenda', 'Link')
-    # link_agenda.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE], acquire = False)
-    # link_agenda.manage_permission('Modify portal content', [], acquire = False)
-    # link_agenda.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE], acquire = False)
-    # link_agenda.setTitle('Agenda')
-    # link_agenda.setRemoteUrl(portal.absolute_url() + '/Appointments')
-    # link_agenda.reindexObject()    
-    
-    print '*** Criando pasta de visitas...... OK'  
+    visit_folder.reindexObject() 
 
 def createInsuranceFolder(portal):
     """ Cria a pasta de planos de saude """
@@ -205,11 +178,12 @@ def deleteDefaultObjects(portal):
     except AttributeError:
         print "No %s folder detected. Hmm... strange. Continuing..." % 'events'
 
-    try:  #delete front-page
-        portal.manage_delObjects('front-page')
-        print "Deleted Default front page"
-    except AttributeError:
-        print "No %s item detected. Hmm... strange. Continuing..." % 'front-page'
+    #front_page é usado para forçar o login de usuários anônimos.
+    front_page = getattr(portal, 'front-page')
+    front_page.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE]) 
+    front_page.setTitle('Bem-vindo ao Communimed')
+    front_page.setDescription('Você está logado como administrador.')
+    front_page.setText('Como administrador o usuário tem acesso a áreas e funções previamente restritas. Lembre-se: "Com grandes poderes vêm grandes responsabilidades".')
 
 def createGroups(portal):
     """ Funcao que cria os grupos e atribui papeis aos mesmos. As constantes aqui
@@ -220,9 +194,6 @@ def createGroups(portal):
 
     portal_groups = getToolByName(portal, 'portal_groups')
     acl_users = getToolByName(portal, 'acl_users')
-#    if not acl_users.searchGroups(id='Doctors'):
-#        portal_groups.addGroup('Doctors')
-#        portal_groups.setRolesForGroup('Commercials', ['Commercial'])
      
     if not acl_users.searchGroups(id=DOCTOR_GROUP):    
         portal_groups.addGroup(DOCTOR_GROUP, roles = [DOCTOR_ROLE, MEMBER_ROLE, CONTRIBUTOR_ROLE, REVIEWER_ROLE])
@@ -235,9 +206,6 @@ def createGroups(portal):
     
     if not acl_users.searchGroups(id=TRANSCRIPTIONIST_GROUP):
         portal_groups.addGroup(TRANSCRIPTIONIST_GROUP, roles = [TRANSCRIPTIONIST_ROLE, MEMBER_ROLE, CONTRIBUTOR_ROLE])
-
-    if not acl_users.searchGroups(id=FRONTDESKTWO_GROUP):
-        portal_groups.addGroup(FRONTDESKTWO_GROUP, roles = [FRONTDESKTWO_ROLE, MEMBER_ROLE, CONTRIBUTOR_ROLE])
     
     if not acl_users.searchGroups(id=UEMRADMIN_GROUP):
         portal_groups.addGroup(UEMRADMIN_GROUP, roles = [UEMRADMIN_ROLE, MEMBER_ROLE, OWNER_ROLE, MANAGER_ROLE])
@@ -603,7 +571,7 @@ def setupVarious(context):
 
         deleteDefaultObjects(portal)
         
-        portal.setDefaultPage('Appointments')
+        #portal.setDefaultPage('Appointments')
         createVisitFolder(portal)
         createClinic(portal)
         createAdminFolder(portal)    
