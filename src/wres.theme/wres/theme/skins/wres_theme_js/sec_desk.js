@@ -83,10 +83,71 @@ function loadPatientTip(index){
         }
         
     }
-    
+
+function setTodayTomorrowColor(today_selected){
+        if(today_selected){
+                //Unbind eventos antigos
+                $("#today_button").unbind("mouseout");
+                $("#today_button").unbind("mouseover");
+                $("#tomorrow_button").unbind("mouseout");
+                $("#tomorrow_button").unbind("mouseover");
+                
+                //Default color para Today selecionado
+                $("#today_button").css("background-color", "#205c90")
+                $("#today_button").css("color", "white")
+                $("#tomorrow_button").css("background-color", "white")
+                $("#tomorrow_button").css("color", "#205c90")
+                
+                $("#tomorrow_button").mouseover(function(){
+                        $(this).css("background-color", "#205c90");
+                        $(this).css("color", "white");
+                        })
+                $("#tomorrow_button").mouseout(function(){
+                        $(this).css("background-color", "white");
+                        $(this).css("color", "#205c90");
+                        })	
+                
+                $("#today_button").mouseover(function(){
+                        $(this).css("text-decoration", "underline");
+                        })
+                $("#today_button").mouseout(function(){
+                        $(this).css("text-decoration", "none");
+                        })
+                }
+        else{
+                //Unbind eventos antigos
+                $("#today_button").unbind("mouseout");
+                $("#today_button").unbind("mouseover");
+                $("#tomorrow_button").unbind("mouseout");
+                $("#tomorrow_button").unbind("mouseover");
+                
+                //Default color para Amanha selecionado
+                $("#tomorrow_button").css("background-color", "#205c90")
+                $("#tomorrow_button").css("color", "white")
+                $("#today_button").css("background-color", "white")
+                $("#today_button").css("color", "#205c90")
+                
+                $("#today_button").mouseover(function(){
+                        $(this).css("background-color", "#205c90");
+                        $(this).css("color", "white");
+                        })
+                $("#today_button").mouseout(function(){
+                        $(this).css("background-color", "white");
+                        $(this).css("color", "#205c90");
+                        })	
+                
+                $("#tomorrow_button").mouseover(function(){
+                        $(this).css("text-decoration", "underline");
+                        })
+                $("#tomorrow_button").mouseout(function(){
+                        $(this).css("text-decoration", "none");
+                        })
+                }
+        }
+
 $(document).ready(function(){
 	var show_visits_reloaded = false;
-	/*var fez_requisicao = false;*/
+        /*var fez_requisicao = false;*/
 	
 	$("#show_tomorrow_visits").hide();
 	
@@ -99,16 +160,12 @@ $(document).ready(function(){
 			$("option").each(escondeMostraVisitas)
 		}
 	})
-	
-	$("span.button").mouseover(function(){
-		$(this).css("background-color", "#205c90");
-		$(this).css("color", "white");
-	})
-	$("span.button").mouseout(function(){
-		$(this).css("background-color", "white");
-		$(this).css("color", "#205c90");
-	})	
-	$("#today_button").click(function(){
+	//Hoje por default selecionado
+        var today_selected = true;
+        setTodayTomorrowColor(today_selected)
+        $("#today_button").click(function(){
+                var today_selected = true;
+                setTodayTomorrowColor(today_selected)
 		$("#show_tomorrow_visits").hide("slow");
 		$("#show_today_visits").show("slow");
 		
@@ -120,6 +177,8 @@ $(document).ready(function(){
 		}		
 	})
 	$("#tomorrow_button").click(function(){
+                var today_selected = false;
+                setTodayTomorrowColor(today_selected)
 		$("#show_today_visits").hide("slow");
 		$("#show_tomorrow_visits").show("slow");
 		

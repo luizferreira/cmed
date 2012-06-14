@@ -36,16 +36,86 @@ function include_document_or_template() {
 	body_gdoc.fadeIn("slow");	
 }
 
+function setPreviousModelsColor(previous_selected){
+        if(previous_selected){
+                //Unbind eventos antigos
+                $("#previous_button").unbind("mouseout");
+                $("#previous_button").unbind("mouseover");
+                $("#templates_button").unbind("mouseout");
+                $("#templates_button").unbind("mouseover");
+                
+                //Default color para Today selecionado
+                $("#previous_button").css("background-color", "#205c90")
+                $("#previous_button").css("color", "white")
+                $("#templates_button").css("background-color", "white")
+                $("#templates_button").css("color", "#205c90")
+                
+                $("#templates_button").mouseover(function(){
+                        $(this).css("background-color", "#205c90");
+                        $(this).css("color", "white");
+                        })
+                $("#templates_button").mouseout(function(){
+                        $(this).css("background-color", "white");
+                        $(this).css("color", "#205c90");
+                        })	
+                
+                $("#previous_button").mouseover(function(){
+                        $(this).css("text-decoration", "underline");
+                        })
+                $("#previous_button").mouseout(function(){
+                        $(this).css("text-decoration", "none");
+                        })
+                }
+        else{
+                //Unbind eventos antigos
+                $("#previous_button").unbind("mouseout");
+                $("#previous_button").unbind("mouseover");
+                $("#templates_button").unbind("mouseout");
+                $("#templates_button").unbind("mouseover");
+                
+                //Default color para Amanha selecionado
+                $("#templates_button").css("background-color", "#205c90")
+                $("#templates_button").css("color", "white")
+                $("#previous_button").css("background-color", "white")
+                $("#previous_button").css("color", "#205c90")
+                
+                $("#previous_button").mouseover(function(){
+                        $(this).css("background-color", "#205c90");
+                        $(this).css("color", "white");
+                        })
+                $("#previous_button").mouseout(function(){
+                        $(this).css("background-color", "white");
+                        $(this).css("color", "#205c90");
+                        })	
+                
+                $("#templates_button").mouseover(function(){
+                        $(this).css("text-decoration", "underline");
+                        })
+                $("#templates_button").mouseout(function(){
+                        $(this).css("text-decoration", "none");
+                        })
+                }
+        }
+
+
 $(document).ready(function(){
 	
 	/*	As duas funcoes a seguir controlam as tabs 'ANTERIORES'
 		e 'MODELOS'.
 	*/
-	$("#previous_button").click(function(){
+	//Default colors to buttons
+        var previous_selected = true;
+        setPreviousModelsColor(previous_selected)
+        
+        $("#previous_button").click(function(){
+                previous_selected = true;
+                setPreviousModelsColor(previous_selected)
 		$("#templates").hide("slow");
 		$("#previous_docs").show("slow");
 	})
 	$("#templates_button").click(function(){
+                previous_selected = false;
+                setPreviousModelsColor(previous_selected)
 		$("#previous_docs").hide("slow");
 		$("#templates").show("slow");
 	})		
