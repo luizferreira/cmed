@@ -10,6 +10,7 @@ zope-versions.cfg
 zopeapp-versions.cfg
 ztk-versions.cfg
 PKG-INFO
+sub_tasks
 
 *.py[co]
 
