@@ -121,11 +121,19 @@ class WRESUser(folder.ATFolder):
         user_id = self.getId()
         
         pm = getToolByName(self, 'portal_membership')
+        uf = getToolByName(self, 'acl_users')
         member = pm.getMemberById(user_id)
         fullname = self.getFullName()
         email = self.getEmail()
         if member is None:
             create_uemr_user(self, user_id, email=email, fullname=fullname)
+        # when migrating (importing) the member will be already created.
+        else:
+            pm.createMemberArea(member_id=user_id)
+            uf.userSetGroups(user_id, [self.getGroup()])
+            member.setMemberProperties(dict(home_url=self.get_home_url(),
+                                related_object = '/'.join(self.getPhysicalPath())))
+
 #        else:
 #            update_member_data(member, self, fullname=fullname, email=email)
 

@@ -598,6 +598,15 @@ def mailHostConfiguration(portal):
     portal.email_from_name = 'Equipe de Desenvolvimento/Suporte'
     portal.email_from_address = 'desenvolvimento@communi.com.br'
 
+def addUpgradeExternalMethods(portal):
+    '''
+    add upgrade external methods in site root.
+    '''
+    from Products.ExternalMethod.ExternalMethod import manage_addExternalMethod
+    manage_addExternalMethod(portal, '0_upgrade', 'Upgrade (Export/Import) Cmed', 'wres.policy.upgrade', 'main')
+    manage_addExternalMethod(portal, 'z_export', 'Export Cmed', 'wres.policy.exporter', 'main')
+    manage_addExternalMethod(portal, 'z_import', 'Import Cmed', 'wres.policy.importer', 'main')
+
 
 def setupVarious(context):
     """ Funcao generica executada na instalacao do wres policy """
@@ -660,6 +669,7 @@ def setupVarious(context):
         changePortalLanguage(portal)
         changePortalObjectsConfiguration(portal)
         mailHostConfiguration(portal)
+        addUpgradeExternalMethods(portal)
 
         createGroups(portal)
 

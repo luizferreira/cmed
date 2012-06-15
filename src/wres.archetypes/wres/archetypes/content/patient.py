@@ -259,21 +259,33 @@ class Patient(wresuser.WRESUser):
         
 
     def chart_data_summary(self):
-        ['review_of_systems', 'medications', 'prescriptions', 
+        '''
+        method used in migration and in debug_patientchartdata.
+        just return the chart_data in format of dictionaries.
+        '''
+        keys = ['review_of_systems', 'medications', 'prescriptions', 
         'allergies', 'problems', 'not_signed_allergies', 'laboratory']
+
         dic_chartdata = {}
         dic_chartdata['allergies'] = dict(self.chart_data.allergies)
         dic_chartdata['review_of_systems'] = dict(self.chart_data.review_of_systems)
         dic_chartdata['medications'] = dict(self.chart_data.medications)
-        prescriptions = self.chart_data.prescriptions.values()
-        dic_chartdata['prescriptions'] = [prescription for prescription in prescriptions]
-        problems = self.chart_data.problems.values()
-        dic_chartdata['problems'] = [problem for problem in problems]
+        dic_chartdata['prescriptions'] = dict(self.chart_data.prescriptions)
+        dic_chartdata['problems'] = dict(self.chart_data.problems)
         dic_chartdata['not_signed_allergies'] = dict(self.chart_data.not_signed_allergies)
-        dic_chartdata['laboratory'] = [dict(value) for value in self.chart_data.laboratory.values()]
-        # import ipdb; ipdb.set_trace()
+        dic_chartdata['laboratory'] = dict(self.chart_data.laboratory)
         return dic_chartdata
 
+    def import_chartdata(self, chart_dic):
+        '''
+        used exclusively in migration. 
+        '''
+        from BTrees.OOBTree import OOBTree
+        keys = ['review_of_systems', 'medications', 'prescriptions', 
+        'allergies', 'problems', 'not_signed_allergies', 'laboratory']
+
+        for key in self.chart_data.mapping.keys():
+            setattr( self.chart_data, key, OOBTree(chart_dic[key]) )
 
 #    def saveMaintenance(self, **maintenance):
 #        maints = self.chart_data.maintenances
