@@ -42,7 +42,6 @@ class Doctor(wresuser.WRESUser):
         user_id = self.getId()
         
         portal = getSite()
-        
         # cria a pasta de visitas e coloca permissao 'Add portal content' (checada pelo solgema antes 
         # de adicionar uma visita no calendário) apenas para Secretary, Manager e Owner. Logo depois,
         # muda-se o owner da pasta doctor_visits para o médico reponsável para que o mesmo possa
@@ -73,10 +72,11 @@ class Doctor(wresuser.WRESUser):
         # (Maio/2012) TODO: Limpar
         # doctor_visits.setLayout('Agenda')
 
-    def at_post_create_script(self):
+    def at_post_create_script(self, migration=False):
         wresuser.WRESUser.at_post_create_script(self)
         self.add_visits_folder()
-        self.setSignPassword('senha1') #TODO gerar uma assinatura padrao randomica        
+        if not migration:
+            self.setSignPassword('senha1') #TODO gerar uma assinatura padrao randomica        
 
     def getGroup(self):
         return DOCTOR_GROUP
@@ -92,7 +92,7 @@ class Doctor(wresuser.WRESUser):
 
     def getAppointmentsURL(self):
         portal = getSite()
-        return portal.absolute_url_path() + '/Appointments/' + self.getId()
+        return portal.absolute_url_path() + '/Appointments/' + self.getId() + '/Agenda'
     
     def validateSignPassword(self, typed_pass):
         sign_password = self.getSignPassword()
