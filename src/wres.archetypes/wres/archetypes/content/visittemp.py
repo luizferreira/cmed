@@ -105,10 +105,6 @@ class VisitTemp(event.ATEvent):
             portal = getSite()
             vt = getToolByName(portal, 'vocabulary_tool')        
             vt.add2vocabulary('visit_reason', visit_reason, 1)                
-        # doctor = self.getDoctor()
-        # doctor_id = doctor.getId()
-        # self.setSubject((doctor_id, ))
-        # self.reindexObject()
         self.at_post_edit_script()
 
     def at_post_edit_script(self):
