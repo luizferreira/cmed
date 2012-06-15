@@ -223,8 +223,8 @@ class Patient(wresuser.WRESUser):
     #def getPastMedicalHistory(self):
         #return dict(self.chart_data.past_medical_history)
 
-    def getAllergies(self):
-        return dict(self.chart_data.allergies)
+    # def getAllergies(self):
+    #     return dict(self.chart_data.allergies)
         
     #def getLaboratory(self):
         #return [dict(value) for value in self.chart_data.laboratory.values()]
