@@ -50,7 +50,7 @@
             <tr>
                  <td class="item_title"><b>Nome: </b></td>
                  <td> <span class="item_content" tal:content="patientData/getFullName"></span></td>
-                 <td class="item_title"><b>Data de Aniverário: </b></td>
+                 <td class="item_title"><b>Data de Anivesário: </b></td>
                  <td ><span class="item_content" tal:content="python:patientData.getBirthDate().strftime('%d/%m/%Y')"></span><br></td>
                  <td class="item_title"><b>Número de Registro: </b></td>
                  <td><span class="item_content" tal:content="patientData/getChart"></span><br></td>

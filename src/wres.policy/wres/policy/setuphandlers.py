@@ -51,6 +51,9 @@ def createClinic(portal):
     clinic.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
     clinic.setTitle('Clínica')
     clinic.reindexObject()
+    """ Cria objetos dentro de clinica """
+    #TODO: Atualmente os relatorios sao um template acessado de dentro do obj clinica (18/06/2012). Discutir a necessidade deste ReportsFolder.
+    #createReportsFolder(portal, clinic) 
     print '*** Criando objeto clinica...... OK'
 
 def createAdminFolder(portal):
@@ -70,6 +73,7 @@ def createTemplateFolder(portal):
     consultas_folder = getOrCreateType(portal, template_folder, 'Consultas', 'TemplateFolder')
     impressos_folder = getOrCreateType(portal, template_folder, 'Impressos', 'TemplateFolder')
 
+    template_folder.manage_permission('Modify portal content', [MANAGER_ROLE], acquire = False)
     template_folder.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE], acquire = False)
     template_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE], acquire = False)
     template_folder.manage_permission('Add portal topics', [], acquire = False)
@@ -147,6 +151,7 @@ def createVisitFolder(portal):
     visit_folder.setImmediatelyAddableTypes([])
     visit_folder.setConstrainTypesMode(1)
     visit_folder.reindexObject() 
+    print '*** Criando pasta de visitas...... OK'
 
 def createInsuranceFolder(portal):
     """ Cria a pasta de planos de saude """
@@ -156,7 +161,23 @@ def createInsuranceFolder(portal):
     insurance_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
     insurance_folder.setTitle('Planos de Saúde')
     insurance_folder.reindexObject()
-    print '*** Criando pasta de planos de saude...... OK'                  
+    print '*** Criando pasta de planos de saude...... OK' 
+    
+def createReportsFolder(portal, clinic):
+    """ Cria a pasta de relatórios """
+    print '*** Criando pasta de relatórios...'
+    reports_folder = getOrCreateType(portal, clinic, 'Reports', 'Folder')
+    reports_folder.manage_permission('Modify portal content', [MANAGER_ROLE], acquire = False)
+    reports_folder.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
+    reports_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
+    reports_folder.manage_addProperty('layout','reports_folder_view','string')
+    reports_folder.setTitle('Relatórios')
+    reports_folder.setExcludeFromNav(True)
+    reports_folder.setLocallyAllowedTypes([])
+    reports_folder.setImmediatelyAddableTypes([])
+    reports_folder.setConstrainTypesMode(1)
+    reports_folder.reindexObject()
+    print '*** Criando pasta de relatórios...... OK'       
 
 def deleteDefaultObjects(portal):
     """ Deleta objetos de um plone site out-of-the-box """

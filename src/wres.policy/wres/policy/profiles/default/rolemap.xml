@@ -250,8 +250,9 @@
       <role name="Transcriptionist"/>
     </permission>
     <permission name="wres.policy: Set Chart Access" acquire="True">
+      <role name="Manager"/>
+      <role name="UemrAdmin"/>
       <role name="Doctor"/>
-      <role name="Manager"/> 
     </permission>
 
     <!-- /PERMISSOES DO COMMUNIMED -->
