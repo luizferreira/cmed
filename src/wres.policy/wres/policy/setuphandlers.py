@@ -187,15 +187,16 @@ def createVisitFolder(portal):
     
     print '*** Criando pasta de visitas...... OK'  
 
-def createInsuranceFolder(portal):
-    """ Cria a pasta de planos de saude """
-    print '*** Criando pasta de planos de saude...'
-    insurance_folder = getOrCreateType(portal, portal, 'Insurances', 'InsuranceFolder')
-    insurance_folder.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    insurance_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
-    insurance_folder.setTitle('Planos de Saúde')
-    insurance_folder.reindexObject()
-    print '*** Criando pasta de planos de saude...... OK'                  
+#TODO: Remover comentarios referente ao insurance folder posteriormente
+#def createInsuranceFolder(portal):
+    #""" Cria a pasta de planos de saude """
+    #print '*** Criando pasta de planos de saude...'
+    #insurance_folder = getOrCreateType(portal, portal, 'Insurances', 'InsuranceFolder')
+    #insurance_folder.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
+    #insurance_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
+    #insurance_folder.setTitle('Planos de Saúde')
+    #insurance_folder.reindexObject()
+    #print '*** Criando pasta de planos de saude...... OK'                  
 
 def deleteDefaultObjects(portal):
     """ Deleta objetos de um plone site out-of-the-box """
@@ -253,115 +254,116 @@ def createGroups(portal):
     
     if not acl_users.searchGroups(id=UEMRADMIN_GROUP):
         portal_groups.addGroup(UEMRADMIN_GROUP, roles = [UEMRADMIN_ROLE, MEMBER_ROLE, OWNER_ROLE, MANAGER_ROLE])
-        
-def createTop10DefaultInsurance(portal):
-    #-------Bradesco Saúde------------------------------------------
-    print '*** Criando Plano Bradesco...'
-    insurance = getOrCreateType(portal, portal.Insurances, 'Bradesco', 'Insurance')
-    insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
-    insurance.setTitle('Bradesco Saúde')
-    insurance.setName('Bradesco Saúde')
-    insurance.setPhoneNumber('0800 701 2700')
-    insurance.setWebPage('http://www.bradescosaude.com.br')
-    insurance.reindexObject()
-    print '*** Criando objeto Plano Bradesco...... OK'
+
+#TODO: Remover posteriormente estes comentarios        
+#def createTop10DefaultInsurance(portal):
+    ##-------Bradesco Saúde------------------------------------------
+    #print '*** Criando Plano Bradesco...'
+    #insurance = getOrCreateType(portal, portal.Insurances, 'Bradesco', 'Insurance')
+    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
+    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
+    #insurance.setTitle('Bradesco Saúde')
+    #insurance.setName('Bradesco Saúde')
+    #insurance.setPhoneNumber('0800 701 2700')
+    #insurance.setWebPage('http://www.bradescosaude.com.br')
+    #insurance.reindexObject()
+    #print '*** Criando objeto Plano Bradesco...... OK'
     
-    #-------Amil Assistencia ------------------------------------------
-    print '*** Criando Amil Assitência...'
-    insurance = getOrCreateType(portal, portal.Insurances, 'Amil', 'Insurance')
-    insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
-    insurance.setTitle('Amil Assitência')
-    insurance.setName('Amil Assitência')
-    insurance.setPhoneNumber('(31) 3316-1000')
-    insurance.setWebPage('http://www.amil.com.br/')
-    insurance.reindexObject()
-    print '*** Criando objeto Amil Assitência...... OK'
+    ##-------Amil Assistencia ------------------------------------------
+    #print '*** Criando Amil Assitência...'
+    #insurance = getOrCreateType(portal, portal.Insurances, 'Amil', 'Insurance')
+    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
+    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
+    #insurance.setTitle('Amil Assitência')
+    #insurance.setName('Amil Assitência')
+    #insurance.setPhoneNumber('(31) 3316-1000')
+    #insurance.setWebPage('http://www.amil.com.br/')
+    #insurance.reindexObject()
+    #print '*** Criando objeto Amil Assitência...... OK'
     
-     #-------Unimed BH------------------------------------------
-    print '*** Criando Unimed BH...'
-    insurance = getOrCreateType(portal, portal.Insurances, 'UnimedBH', 'Insurance')
-    insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
-    insurance.setTitle('Unimed BH')
-    insurance.setName('Unimed BH')
-    insurance.setPhoneNumber('0800 30 30 03')
-    insurance.setWebPage('http://www.unimedbh.com.br/')
-    insurance.reindexObject()
-    print '*** Criando objeto Unimed BH...... OK'
+     ##-------Unimed BH------------------------------------------
+    #print '*** Criando Unimed BH...'
+    #insurance = getOrCreateType(portal, portal.Insurances, 'UnimedBH', 'Insurance')
+    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
+    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
+    #insurance.setTitle('Unimed BH')
+    #insurance.setName('Unimed BH')
+    #insurance.setPhoneNumber('0800 30 30 03')
+    #insurance.setWebPage('http://www.unimedbh.com.br/')
+    #insurance.reindexObject()
+    #print '*** Criando objeto Unimed BH...... OK'
     
-     #-------Intermédica------------------------------------------
-    print '*** Criando Intermédica...'
-    insurance = getOrCreateType(portal, portal.Insurances, 'Intermedica', 'Insurance')
-    insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
-    insurance.setTitle('Intermédica')
-    insurance.setName('Intermédica')
-    insurance.setPhoneNumber('0800 770 084')
-    insurance.setWebPage('http://www.intermedica.com.br/')
-    insurance.reindexObject()
-    print '*** Criando objeto Intermédica...... OK'
+     ##-------Intermédica------------------------------------------
+    #print '*** Criando Intermédica...'
+    #insurance = getOrCreateType(portal, portal.Insurances, 'Intermedica', 'Insurance')
+    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
+    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
+    #insurance.setTitle('Intermédica')
+    #insurance.setName('Intermédica')
+    #insurance.setPhoneNumber('0800 770 084')
+    #insurance.setWebPage('http://www.intermedica.com.br/')
+    #insurance.reindexObject()
+    #print '*** Criando objeto Intermédica...... OK'
     
-     #-------Medial------------------------------------------
-    print '*** Criando Medial...'
-    insurance = getOrCreateType(portal, portal.Insurances, 'Medial', 'Insurance')
-    insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
-    insurance.setTitle('Medial')
-    insurance.setName('Medial')
-    insurance.setPhoneNumber('0800 724 1331')
-    insurance.setWebPage('http://www.medialsaude.com.br/')
-    insurance.reindexObject()
-    print '*** Criando objeto Medial...... OK'
+     ##-------Medial------------------------------------------
+    #print '*** Criando Medial...'
+    #insurance = getOrCreateType(portal, portal.Insurances, 'Medial', 'Insurance')
+    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
+    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
+    #insurance.setTitle('Medial')
+    #insurance.setName('Medial')
+    #insurance.setPhoneNumber('0800 724 1331')
+    #insurance.setWebPage('http://www.medialsaude.com.br/')
+    #insurance.reindexObject()
+    #print '*** Criando objeto Medial...... OK'
     
-    #-------Sul América Saúde------------------------------------------
-    print '*** Criando Sul América Saúde...'
-    insurance = getOrCreateType(portal, portal.Insurances, 'Sulamerica', 'Insurance')
-    insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
-    insurance.setTitle('Sul América Saúde')
-    insurance.setName('Sul América Saúde')
-    insurance.setPhoneNumber('0800 724 1331')
-    insurance.setWebPage('http://www.sulamericaweb.com.br/')
-    insurance.reindexObject()
-    print '*** Criando objeto Sul América Saúde...... OK'
+    ##-------Sul América Saúde------------------------------------------
+    #print '*** Criando Sul América Saúde...'
+    #insurance = getOrCreateType(portal, portal.Insurances, 'Sulamerica', 'Insurance')
+    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
+    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
+    #insurance.setTitle('Sul América Saúde')
+    #insurance.setName('Sul América Saúde')
+    #insurance.setPhoneNumber('0800 724 1331')
+    #insurance.setWebPage('http://www.sulamericaweb.com.br/')
+    #insurance.reindexObject()
+    #print '*** Criando objeto Sul América Saúde...... OK'
     
-    #-------Golden Cross Saúde------------------------------------------
-    print '*** Criando Golden Cross...'
-    insurance = getOrCreateType(portal, portal.Insurances, 'Goldencross', 'Insurance')
-    insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
-    insurance.setTitle('Golden Cross')
-    insurance.setName('Golden Cross')
-    insurance.setPhoneNumber('0800 728 2001')
-    insurance.setWebPage('http://www.goldencross.com.br/')
-    insurance.reindexObject()
-    print '*** Criando objeto Golden Cross...... OK'
+    ##-------Golden Cross Saúde------------------------------------------
+    #print '*** Criando Golden Cross...'
+    #insurance = getOrCreateType(portal, portal.Insurances, 'Goldencross', 'Insurance')
+    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
+    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
+    #insurance.setTitle('Golden Cross')
+    #insurance.setName('Golden Cross')
+    #insurance.setPhoneNumber('0800 728 2001')
+    #insurance.setWebPage('http://www.goldencross.com.br/')
+    #insurance.reindexObject()
+    #print '*** Criando objeto Golden Cross...... OK'
    
-   #-------SóSaúde------------------------------------------
-    print '*** Criando SóSaúde...'
-    insurance = getOrCreateType(portal, portal.Insurances, 'Sosaude', 'Insurance')
-    insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
-    insurance.setTitle('Só Saúde Assistência Medico Hospitalar')
-    insurance.setName('Só Saúde Assistência Medico Hospitalar')
-    insurance.setPhoneNumber('(31)3078-8000')
-    insurance.setWebPage('http://www.sosaude.com.br/')
-    insurance.reindexObject()
-    print '*** Criando objeto SóSaúde...... OK'
+   ##-------SóSaúde------------------------------------------
+    #print '*** Criando SóSaúde...'
+    #insurance = getOrCreateType(portal, portal.Insurances, 'Sosaude', 'Insurance')
+    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
+    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
+    #insurance.setTitle('Só Saúde Assistência Medico Hospitalar')
+    #insurance.setName('Só Saúde Assistência Medico Hospitalar')
+    #insurance.setPhoneNumber('(31)3078-8000')
+    #insurance.setWebPage('http://www.sosaude.com.br/')
+    #insurance.reindexObject()
+    #print '*** Criando objeto SóSaúde...... OK'
     
-    #-------Santa Casa Saúde------------------------------------------
-    print '*** Criando Santa Casa...'
-    insurance = getOrCreateType(portal, portal.Insurances, 'Santacasa', 'Insurance')
-    insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
-    insurance.setTitle('Santa Casa Saúde')
-    insurance.setName('Santa Casa Saúde')
-    insurance.setPhoneNumber('(31)3271-1601')
-    insurance.setWebPage('http://www.santacasaplanos.com.br/')
-    insurance.reindexObject()
-    print '*** Criando objeto Santa Casa...... OK'
+    ##-------Santa Casa Saúde------------------------------------------
+    #print '*** Criando Santa Casa...'
+    #insurance = getOrCreateType(portal, portal.Insurances, 'Santacasa', 'Insurance')
+    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
+    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)    
+    #insurance.setTitle('Santa Casa Saúde')
+    #insurance.setName('Santa Casa Saúde')
+    #insurance.setPhoneNumber('(31)3271-1601')
+    #insurance.setWebPage('http://www.santacasaplanos.com.br/')
+    #insurance.reindexObject()
+    #print '*** Criando objeto Santa Casa...... OK'
    
 #===============================================================================
 # Objeto Vazio        
@@ -550,7 +552,7 @@ def loadCIDVocabulary(portal, context):
 def loadInsuranceVocabulary(portal):
     vt = getToolByName(portal, 'vocabulary_tool')
     insurance = []
-    insurance.append('unimed BH')
+    insurance.append('unimed')
     insurance.append('santa casa saude')
     insurance.append('bradesco saude')
     vt.add_vocab('insurance', insurance)
@@ -636,10 +638,13 @@ def setupVarious(context):
         createAdminFolder(portal)    
         createTemplateFolder(portal)
         createDoctorFolder(portal)
-        createInsuranceFolder(portal)
+        #TODO:Remover posteriormente
+        #createInsuranceFolder(portal)
+        #createTop10DefaultInsurance(portal)
+        
         createPatientFolder(portal)
         createSecretaryFolder(portal)
-        createTop10DefaultInsurance(portal)
+        
         # conforme decidido na reuniao 21-10-2011 os medicos indicantes
         # serao removidos, fica aqui comentado caso decida-se voltar atras.
         # Os transcritores serao mantidos apenas na versao paga do CMed.

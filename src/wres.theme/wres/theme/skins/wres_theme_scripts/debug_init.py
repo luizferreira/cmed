@@ -11,11 +11,6 @@ import random
 #Get Data
 HOJE = DateTime()
 
-#Get Insurance UID
-catalog = getToolByName(context,"portal_catalog")
-brains = catalog.searchResults({'id':'Bradesco'})
-UID = brains[0].getObject().UID()
-
 ######## PARAMETROS #########
 
 patient_num = pat
@@ -188,7 +183,6 @@ def set_patient_information(p):
         p.setTituloEleitor("1225282038")
         p.setOccupationTitle("Programador")
         p.setGuarantor_extension("1597")
-        p.setInsurance(UID)
         p.setDataDeValidade("12/11/2015")
         p.setTitular("Sim")
         p.setPis_pasep("24451.01526")

@@ -37,13 +37,12 @@ function include_document_or_template() {
 }
 
 function setPreviousModelsColor(previous_selected){
+        //Unbind eventos antigos
+        $("#previous_button").unbind("mouseout");
+        $("#previous_button").unbind("mouseover");
+        $("#templates_button").unbind("mouseout");
+        $("#templates_button").unbind("mouseover");
         if(previous_selected){
-                //Unbind eventos antigos
-                $("#previous_button").unbind("mouseout");
-                $("#previous_button").unbind("mouseover");
-                $("#templates_button").unbind("mouseout");
-                $("#templates_button").unbind("mouseover");
-                
                 //Default color para Today selecionado
                 $("#previous_button").css("background-color", "#205c90")
                 $("#previous_button").css("color", "white")
@@ -66,13 +65,7 @@ function setPreviousModelsColor(previous_selected){
                         $(this).css("text-decoration", "none");
                         })
                 }
-        else{
-                //Unbind eventos antigos
-                $("#previous_button").unbind("mouseout");
-                $("#previous_button").unbind("mouseover");
-                $("#templates_button").unbind("mouseout");
-                $("#templates_button").unbind("mouseover");
-                
+        else{                
                 //Default color para Amanha selecionado
                 $("#templates_button").css("background-color", "#205c90")
                 $("#templates_button").css("color", "white")

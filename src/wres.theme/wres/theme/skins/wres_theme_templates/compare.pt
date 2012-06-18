@@ -47,41 +47,4 @@ tal:define="ImagesAndFiles context/getUploadData;
     <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="jquery.pikachoose.mod.js"></script>
     <script type="text/javascript" src="compare.js"></script>
-        
-    <script language="javascript"> 
-//    function changeName(){
-//                    imagem = $("#gallery1")[0].getElementsByTagName("a")[0];
-//                    link_tokens = imagem.getAttribute("href").split("/")
- //                   image_name = link_tokens[link_tokens.length-1].split(".")[0]
-  //                  $("#selection").text(image_name)
-   //                 
-    //                imagem2 = $("#gallery2")[0].getElementsByTagName("a")[0];
-     //               link_tokens2 = imagem2.getAttribute("href").split("/")
-      //              image_name2 = link_tokens2[link_tokens2.length-1].split(".")[0]
-       //             $("#selection2").text(image_name2)
-        //        }         
-//    $(document).ready(function (){
-//					$("#pictures").PikaChoose({carouselVertical:true,autoPlay:false});
-  //                  $("#pictures2").PikaChoose({carouselVertical:true,autoPlay:false});
-   //             
-    ///            //Add class to big images
-      //          $("#gallery1").find("img").first().attr("class","changed1");
-       ///         $("#gallery2").find("img").first().attr("class","changed2");
-         //       });
-    //Add class to chosen image
-    // $(window).load(function() {
-        
-     //          $("#gallery1").find(".clip").click(function(){
-      //              $(".changed1").attr("class","");
-        //            var imageTag = $("#gallery1").find("img").first();
-         //           imageTag.attr("class","changed1");
-          //          });
-                    
-            //    $("#gallery2").find(".clip").click(function(){
-             //       $(".changed2").attr("class","");
-              //      var imageTag = $("#gallery2").find("img").first();
-               //     imageTag.attr("class","changed2");
-                //    }); 
-           // });
-    </script>
 </html>
