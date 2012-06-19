@@ -20,13 +20,11 @@ from wres.policy.utils.utils import set_schemata_properties
 MAIN = Schema((
     StringField('document_type',
 		required=True,
-		# default = 'Documento sem tipo',
         vocabulary = "getTypesOfDocument",
         widget = SelectionWidget(
                 label = 'Tipo do Documento',
                 macro_edit='generic_selection_edit_macro',
                 helper_js=('generic_selection_edit.js', ),             
-                # helper_css=('generic_richtext_edit.css', 'cmed.css'),
         ),
     ),
 ))
@@ -48,10 +46,8 @@ class GenericDocument(MedicalDocument):
             portal = getSite()
             vt = getToolByName(portal, 'vocabulary_tool')        
             vt.add2vocabulary('document_types', document_type, 1)
-        # self.setTitle(dl.getValue(self.getDocument_type()))
         
     def generic_document_edit_title(self):
-        # return self.getDate().strftime('%d/%m/%y %H:%M') + ' - ' + self.Title()
         return self.getDate().strftime('%d/%m/%y') + ' - ' + self.Title()
 
     def getTypesOfDocument(self):
@@ -61,7 +57,6 @@ class GenericDocument(MedicalDocument):
         vt = getToolByName(portal, 'vocabulary_tool')
         vocab_list = vt.get_vocabulary('document_types', 2)
         for vocab in vocab_list:
-            # dl_entry = (vocab, vocab)
             dl.add(vocab, vocab)
         dl.add('outro', 'Outro')
         return dl

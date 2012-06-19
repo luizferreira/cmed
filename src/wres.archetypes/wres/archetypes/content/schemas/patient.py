@@ -281,14 +281,6 @@ MAIN = Schema((
         ),
     ),
     
-
-#    IntegerField('ext',
-#        widget=IntegerWidget(
-#           label=_('Ext.'),
-#        ),
-#    ),
-
-    
     IntegerField('chart',
         default=0,
         index="FieldIndex:schema",
@@ -299,13 +291,6 @@ MAIN = Schema((
 		    i18n_domain='cmfuemr'
         ),
     ),
-
-    #BooleanField('confirmedChartNumber',
-        #default=False,
-        #widget=BooleanWidget(
-	        #label=_('Chart Number Confirmed'),
-        #),
-    #),
     
     ReferenceField('doctor',
         relationship='doctor',
@@ -492,12 +477,6 @@ CONVENIOS = Schema((
 	        label='Convênio',
         ),
     ),
-    #TODO - Retirar este campo
-    #StringField('plano',
-        #widget = StringWidget(
-	        #label='Plano',
-        #),
-    #),
 
     StringField('matricula',
         widget = StringWidget(
@@ -505,18 +484,14 @@ CONVENIOS = Schema((
         ),
     ),
     
-	DateTimeField('dataDeValidade',
-		widget=CalendarWidget(
-	       label=_('Data de Validade do Plano'),
-           format='%d/%m/%Y',
-           future_years=30,
-           starting_year=now.year,
-           show_hm=0,
+    DateTimeField('dataDeValidade',
+        widget=CalendarWidget(
+        label=_('Data de Validade do Plano'),
+        format='%d/%m/%Y',
+        future_years=30,
+        starting_year=now.year,
+        show_hm=0,
        )
-    #StringField('dataDeValidade',
-        #widget = StringWidget(
-	        #label='Data de validade',
-        #),
     ),
                 
     StringField('titular',
@@ -586,7 +561,6 @@ set_schemata_properties(DEMOGRAPHIC, schemata='Demografico')
 
 EMPLOYMENT = Schema((
    StringField('employerName',
-#      validators='isName',
        widget=StringWidget(
 	       label=_('Employer Name'),
        ),

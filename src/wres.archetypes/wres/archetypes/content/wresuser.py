@@ -97,7 +97,7 @@ class WRESUser(folder.ATFolder):
         """ Standard method to return the user home url.
         If it is necessary to use a specific method, it can be defined in
         user specific class. """
-        return self.absolute_url_path()    
+        return self.absolute_url_path()
     
     def getGroup(self):
         """ returns the group the user belongs. Must be redefined in the
@@ -121,15 +121,25 @@ class WRESUser(folder.ATFolder):
         user_id = self.getId()
         
         pm = getToolByName(self, 'portal_membership')
+        uf = getToolByName(self, 'acl_users')
         member = pm.getMemberById(user_id)
         fullname = self.getFullName()
         email = self.getEmail()
         if member is None:
             create_uemr_user(self, user_id, email=email, fullname=fullname)
+        # when migrating (importing) the member will be already created.
+        else:
+            pm.createMemberArea(member_id=user_id)
+            uf.userSetGroups(user_id, [self.getGroup()])
+            member.setMemberProperties(dict(home_url=self.get_home_url(),
+                                related_object = '/'.join(self.getPhysicalPath())))
+
 #        else:
 #            update_member_data(member, self, fullname=fullname, email=email)
 
-    
+    def at_post_edit_script(self):
+        self.formatName()
+
     #===========================================================================
     # _at_rename_after_creation = True faz com que o metodo generateNewId seja
     # chamado no momento da criação de um novo usuário
@@ -147,5 +157,23 @@ class WRESUser(folder.ATFolder):
             return create_id(pr, fname, lname)
         else:
             return old_id
+            
+    def formatName(self):
+        firstName = self.capitalizeLetters(self.getFirstName())
+        lastName = self.capitalizeLetters(self.getLastName())
+        self.setFirstName(firstName)
+        self.setLastName(lastName)
+        
+    def capitalizeLetters(self, name):
+        ignored_words = ['da','de','di','do','das','dos','e']
+        cap_name = []
+        parts = name.lower().split(' ')
+        for part in parts:
+            if part not in ignored_words:
+                part = part.capitalize()
+            cap_name.append(part)
+        cap_name = ' '.join(cap_name)
+        return cap_name
+        
 
 atapi.registerType(WRESUser, PROJECTNAME)

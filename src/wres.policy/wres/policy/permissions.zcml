@@ -79,8 +79,8 @@
     />      
     
   <permission
-    id="wres.policy.SignProgressNotes"
-    title="wres.policy: Sign Progress Notes"
+    id="wres.policy.SetChartAccess"
+    title="wres.policy: Set Chart Access"
     /> 
     
   <permission

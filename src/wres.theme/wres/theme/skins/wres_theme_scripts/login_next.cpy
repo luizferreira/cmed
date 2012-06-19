@@ -15,57 +15,35 @@ import ZTUtils
 
 REQUEST = context.REQUEST
 
-try:
-    context.acl_users.credentials_cookie_auth.login()
-except:
-    from Products.zdb import set_trace; set_trace()
-    pass
-
 util = context.plone_utils
 membership_tool=context.portal_membership
 if membership_tool.isAnonymousUser():
     REQUEST.RESPONSE.expireCookie('__ac', path='/')
-    util.addPortalMessage(_(u'Login failed'))
+    util.addPortalMessage(_(u'Login failed'), 'error')
     return state.set(status='failure')
 
 came_from = REQUEST.get('came_from', None)
+member = membership_tool.getAuthenticatedMember()
+home = member.getProperty('home_url')
 
 # if we weren't called from something that set 'came_from' or if HTTP_REFERER
 # is the 'logged_out' page, return the default 'login_success' form
-login_success = None
 if came_from is not None:
     scheme, location, path, parameters, query, fragment = util.urlparse(came_from)
     template_id = path.split('/')[-1]
-    login_success = '%s/%s' % (context.portal_url(), 'login_success')
     if template_id in ['login', 'login_success', 'login_password', 'login_failed',
-                       'login_form', 'logged_in', 'logged_out', 'registered',
-                       'mail_password', 'mail_password_form', 'join_form',
-                       'require_login', 'member_search_results', 'uemr']:
+                       'login_form', 'logged_in', 'logout', 'logged_out', 'registered',
+                       'mail_password', 'mail_password_form', 'register',
+                       'require_login', 'member_search_results', 'pwreset_finish',
+                       # We need localhost in the list, or Testing.testbrowser
+                       # tests won't be able to log in via login_form
+                       'localhost']:
         came_from = ''
     # It is probably a good idea in general to filter out urls outside the portal.
     # An added bonus: this fixes some problems with a Zope bug that doesn't
     # properly unmangle the VirtualHostMonster stuff when setting ACTUAL_URL
     if not context.portal_url.isURLInPortal(came_from):
         came_from = ''
-
-REFERER = REQUEST.get('HTTP_REFERER')
-if login_success:
-    URL = login_success
-else:
-    URL = REQUEST.get('came_from', REFERER)
-
-member = membership_tool.getAuthenticatedMember()
-URL = member.getProperty('home_url', URL)
-
-qs = context.create_query_string(
-    REQUEST.get('QUERY_STRING', ''),
-    portal_status_message=("Welcome! You are now logged in.")
-    )
-
-if URL.find('?') == -1:
-    dest = '%s?%s' % (URL, qs)
-else:
-    dest = '%s&%s' % (URL, qs)
 
 js_enabled = REQUEST.get('js_enabled','1') != '0'
 if came_from and js_enabled:
@@ -75,9 +53,12 @@ if came_from and js_enabled:
 
     util.addPortalMessage(_(u'Welcome! You are now logged in.'))
     came_from = util.urlunparse((scheme, location, path, parameters, query, fragment))
+
+    # redirect immediately
     REQUEST.RESPONSE.redirect(came_from)
 else:
-    REQUEST.RESPONSE.redirect(dest)
+    REQUEST.RESPONSE.redirect(home)
 
 state.set(came_from=came_from)
+
 return state

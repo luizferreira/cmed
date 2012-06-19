@@ -76,7 +76,10 @@ class Doctor(wresuser.WRESUser):
     def at_post_create_script(self):
         wresuser.WRESUser.at_post_create_script(self)
         self.add_visits_folder()
-        self.setSignPassword('senha1') #TODO gerar uma assinatura padrao randomica        
+        self.setSignPassword('senha1') #TODO gerar uma assinatura padrao randomica       
+        
+    def at_post_edit_script(self):
+        wresuser.WRESUser.at_post_edit_script(self)
 
     def getGroup(self):
         return DOCTOR_GROUP

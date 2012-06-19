@@ -6,7 +6,7 @@ from Products.ATContentTypes.content import schemata
 from wres.archetypes.config import PROJECTNAME
 from wres.archetypes.content import wresuser
 from wres.policy.utils.utils import set_schemata_properties, finalizeSchema
-from wres.policy.utils.permissions import EDIT_SECRETARY, VIEW_SECRETARY, SIGN_PN
+from wres.policy.utils.permissions import EDIT_SECRETARY, VIEW_SECRETARY, SET_CHART_ACCESS
 
 
 from wres.brfields.content.BrFieldsAndWidgets import*
@@ -19,8 +19,8 @@ _ = MessageFactory("cmfuemr")
 MAIN = Schema((
 
         BooleanField('isTranscriptionist', 
-            read_permission=SIGN_PN,
-            write_permission=SIGN_PN,
+            read_permission=SET_CHART_ACCESS,
+            write_permission=SET_CHART_ACCESS,
             widget = BooleanWidget(label=_(u'Transcritora?'),
                                    description=_('Check if secretary will be able to transcript documents.'),
             ),

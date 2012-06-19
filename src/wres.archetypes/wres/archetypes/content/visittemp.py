@@ -105,11 +105,6 @@ class VisitTemp(event.ATEvent):
             portal = getSite()
             vt = getToolByName(portal, 'vocabulary_tool')        
             vt.add2vocabulary('visit_reason', visit_reason, 1) 
-        
-        # doctor = self.getDoctor()
-        # doctor_id = doctor.getId()
-        # self.setSubject((doctor_id, ))
-        # self.reindexObject()
         self.at_post_edit_script()
 
     def addInsurance(self):
@@ -122,7 +117,6 @@ class VisitTemp(event.ATEvent):
         # self.setTitle(dl.getValue(self.getDocument_type()))
 
     def at_post_edit_script(self):
-        
 #        if self.isAppointment():
 #            self.setDefaultPatientId()
 #            self.updateTypeOfPatient()

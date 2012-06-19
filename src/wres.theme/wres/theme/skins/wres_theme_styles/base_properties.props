@@ -2,7 +2,7 @@ title:string=WRES Theme's color, font, logo and border defaults
 
 plone_skin:string=WRES Theme
 
-logoName:string=uemr_logo.jpg
+logoName:string=logo.png
 
 fontFamily:string="Lucida Grande", Verdana, Lucida, Helvetica, Arial, sans-serif
 fontBaseSize:string=69%
