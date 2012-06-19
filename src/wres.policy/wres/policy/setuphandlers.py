@@ -73,6 +73,9 @@ def createTemplateFolder(portal):
     consultas_folder = getOrCreateType(portal, template_folder, 'Consultas', 'TemplateFolder')
     impressos_folder = getOrCreateType(portal, template_folder, 'Impressos', 'TemplateFolder')
 
+    # a permissao Modify portal content eh necessaria pra se poder adicionar objetos dentro da pasta.
+    consultas_folder.manage_permission('Modify portal content', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE], acquire = False)
+    impressos_folder.manage_permission('Modify portal content', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE], acquire = False)
     template_folder.manage_permission('Modify portal content', [MANAGER_ROLE], acquire = False)
     template_folder.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE], acquire = False)
     template_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE], acquire = False)
