@@ -139,9 +139,9 @@ def set_patient_information(p):
     p.setBirthDate(random_birthdate())
     p.setContactPhone(phone)
     #Preenchimento do Chart
-    allergy = {'date': '07/05/2012', 'reaction': 'Edema/coceira', 'allergy': 'Camar\xc3\xa3o', 'submitted_by': 'admin'}
+    allergy = {'state': 'active', 'date': '07/05/2012', 'reaction': 'Edema/coceira', 'allergy': 'Camar\xc3\xa3o', 'submitted_by': 'admin'}
     medication = {'status': 'active', 'submitted_by': 'admin', 'use': '1 cp quando houver do de cabe\xc3\xa7a', 'medication': 'Tylenol dc', 'end_date': DateTime('2012/05/07 17:06:14.061165 GMT-3'), 'note': '', 'start': '07/05/2012', 'concentration': '80mg', 'quantity': '12'}
-    problem = {'submitted_by': 'admin', 'code': 'G43.0', 'end_date': DateTime('2012/05/07 17:09:25.103551 GMT-3'), 'started': DateTime('2012/05/07 00:00:00 GMT-3'), 'note': '', 'submitted_on': DateTime('2012/05/07 17:09:25.103459 GMT-3'), 'state': 'active', 'problem': 'Enxaqueca sem aura [enxaqueca comum]'}
+    problem = {'state': 'active', 'submitted_by': 'admin', 'code': 'G43.0', 'end_date': DateTime('2012/05/07 17:09:25.103551 GMT-3'), 'started': DateTime('2012/05/07 00:00:00 GMT-3'), 'note': '', 'submitted_on': DateTime('2012/05/07 17:09:25.103459 GMT-3'), 'problem': 'Enxaqueca sem aura [enxaqueca comum]'}
     exam = {'date': '07/05/2012', 'exam': 'Glicose', 'value': '93 mg/dl'}
     p.chart_data.save_entry(context, 'allergies', **allergy)
     p.chart_data.save_entry(context, 'medications', **medication)

@@ -1,15 +1,23 @@
 
 #content ul {
-        position:relative;
-        left:-20px;
-	list-style: none outside none; 
-	text-align: center;
+    position:relative;
+    left:-20px;
+    list-style: none outside none; 
+    text-align: center;
 }
 
 div#LSResult {
-	position:relative;
-	margin:0;
-	margin-left:auto;
-	margin-right:auto;	
+    position:relative;
+    margin:0;
+    margin-left:auto;
+    margin-right:auto;	
+}
+
+div#portal-column-content {
+    position: relative;
+    float: left;
+    left: 100%;
+    margin-left: -98.875%
+    
 }
 

@@ -35,7 +35,7 @@ for schemata in schematas:
                         continue
             if brake:
                 continue        
-        #Ignorar Medico e Data, pegos pelo template document_view, no cabeçalho e rodapé
+        #Ignorar Medico e Data, pegos pelo template cmed_document_view, no cabeçalho e rodapé
         field_name = field.getName()
         if field_name == 'doctor' or field_name == 'dateOfVisit' or field_name == 'date'  :
             continue

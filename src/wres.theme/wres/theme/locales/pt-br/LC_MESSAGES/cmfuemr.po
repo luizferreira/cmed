@@ -12192,6 +12192,27 @@ msgstr "Duração em minutos"
 msgid "Patient quick register"
 msgstr "Registro Rápido de Paciente"
 
+msgid "Reports"
+msgstr "Relatórios"
+
+msgid "Chart"
+msgstr "Prontuário"
+
+msgid "Document"
+msgstr "Documento"
+
+msgid "GenericDocument"
+msgstr "Documento"
+
+msgid "created"
+msgstr "criados"
+
+msgid "end"
+msgstr "finalizados"
+
+msgid "modified"
+msgstr "modificados"
+
 # Tipo UploadChartFolder
 msgid "uploadchartfolder_title"
 msgstr "Pasta de Upload"

@@ -18,14 +18,14 @@
 <div metal:fill-slot="main"
 	tal:define="
 	    documento context/Title;
-		title context/getFullName;
-        id context/getId;
+            title context/getFullName;
+            id context/getId;
 	    script context/documents_view_script;
 	    field_macro field_macro | context/widgets/field/macros/view
 	    ">
 	    
 	<h1>
-    	<a i18n:translate="" tal:content="string:${documento} - ${title}">Title</a>
+            <a i18n:translate="" tal:content="string:${documento} - ${title}">Title</a>
 	</h1>	    
 	    
 	

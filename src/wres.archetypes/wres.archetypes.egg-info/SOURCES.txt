@@ -197,12 +197,14 @@ wres/archetypes/browser/__init__.py
 wres/archetypes/browser/configure.zcml
 wres/archetypes/content/__init__.py
 wres/archetypes/content/admin.py
+wres/archetypes/content/admin.py~
 wres/archetypes/content/adminfolder.py
 wres/archetypes/content/chartdata.py
 wres/archetypes/content/chartfolder.py
 wres/archetypes/content/clinic.py
 wres/archetypes/content/configure.zcml
 wres/archetypes/content/doctor.py
+wres/archetypes/content/doctor.py~
 wres/archetypes/content/doctorfolder.py
 wres/archetypes/content/documentfolder.py
 wres/archetypes/content/encounter.py
@@ -212,10 +214,12 @@ wres/archetypes/content/insurance.py
 wres/archetypes/content/insurancefolder.py
 wres/archetypes/content/medicaldocument.py
 wres/archetypes/content/patient.py
+wres/archetypes/content/patient.py~
 wres/archetypes/content/patientfolder.py
 wres/archetypes/content/referringproviderfolder.py
 wres/archetypes/content/reviewofsystems.py
 wres/archetypes/content/secretary.py
+wres/archetypes/content/secretary.py~
 wres/archetypes/content/secretarydesktop.py
 wres/archetypes/content/secretaryfolder.py
 wres/archetypes/content/template.py
@@ -224,6 +228,7 @@ wres/archetypes/content/uploadchartfolder.py
 wres/archetypes/content/visitfolder.py
 wres/archetypes/content/visittemp.py
 wres/archetypes/content/wresuser.py
+wres/archetypes/content/wresuser.py~
 wres/archetypes/content/fields/__init__.py
 wres/archetypes/content/fields/defaultreferencefield.py
 wres/archetypes/content/schemas/__init__.py
