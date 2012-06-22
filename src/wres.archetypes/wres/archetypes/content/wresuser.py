@@ -118,6 +118,7 @@ class WRESUser(folder.ATFolder):
         """ Esse método é chamado no momento da criação de um objeto da classe.
         Ele cria um membro no acl_users com as informações obtidas da classe filha.
         """
+        self.formatName()
         user_id = self.getId()
         
         pm = getToolByName(self, 'portal_membership')
