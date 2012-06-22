@@ -73,10 +73,11 @@ class Doctor(wresuser.WRESUser):
         # (Maio/2012) TODO: Limpar
         # doctor_visits.setLayout('Agenda')
 
-    def at_post_create_script(self):
+    def at_post_create_script(self, migration=False):
         wresuser.WRESUser.at_post_create_script(self)
         self.add_visits_folder()
-        self.setSignPassword('senha1') #TODO gerar uma assinatura padrao randomica       
+        if not migration:
+            self.setSignPassword('senha1') #TODO gerar uma assinatura padrao randomica              
         
     def at_post_edit_script(self):
         wresuser.WRESUser.at_post_edit_script(self)
@@ -95,7 +96,7 @@ class Doctor(wresuser.WRESUser):
 
     def getAppointmentsURL(self):
         portal = getSite()
-        return portal.absolute_url_path() + '/Appointments/' + self.getId()
+        return portal.absolute_url_path() + '/Appointments/' + self.getId() + '/Agenda'
     
     def validateSignPassword(self, typed_pass):
         sign_password = self.getSignPassword()
