@@ -108,14 +108,6 @@ class WresPolicy(PloneSandboxLayer):
 
 
 	def setUpPloneSite(self, portal):
-                
-                #self.createFrontPage(portal)
-                
-                #applyProfile(portal, 'Products.CMFPlone:plone')
-                #applyProfile(portal, 'Products.CMFPlone:dependencies')
-                #applyProfile(portal, 'Products.CMFPlone:plone-content')                
-                
-                
                 applyProfile(portal, 'wres.archetypes:default')
 		applyProfile(portal, 'wres.brfields:default')
 		applyProfile(portal, 'wres.theme:default')
