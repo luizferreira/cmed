@@ -4,7 +4,7 @@ from plone.app.testing import applyProfile
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import IntegrationTesting, FunctionalTesting
 from zope.configuration import xmlconfig
-
+from Products.CMFPlone.utils import _createObjectByType
 from Products.CMFCore.utils import getToolByName
 
 DOCTOR_TEST_USER_ID = 'doctor_test_user_id'
@@ -42,7 +42,33 @@ def create_uemr_user(portal, user_id, group, email='', fullname=''):
 class WresPolicy(PloneSandboxLayer):
 
 	defaultBases = (PLONE_FIXTURE,)
-
+        
+        def createFrontPage(self,portal):
+                p = portal
+                language = p.Language
+                wftool = getToolByName(p, "portal_workflow")
+                # The front-page
+                front_title = u'Welcome to Plone'
+                front_desc = u'Congratulations! You have successfully installed Plone.'
+                front_text = None
+                _createObjectByType('Document', p, id='front-page',
+                                    title=front_title, description=front_desc)
+                fp = p['front-page']
+        
+                fp.setTitle(front_title)
+                fp.setDescription(front_desc)
+                fp.setLanguage(language)
+                fp.setText(front_text, mimetype='text/html')
+        
+                # Show off presentation mode
+                fp.setPresentation(True)
+        
+                # Mark as fully created
+                fp.unmarkCreationFlag()
+        
+                p.setDefaultPage('front-page')
+                fp.reindexObject()
+        
 	def setUpZope(self, app, configurationContext):
 
 		# Load ZCML
@@ -82,12 +108,21 @@ class WresPolicy(PloneSandboxLayer):
 
 
 	def setUpPloneSite(self, portal):
-		applyProfile(portal, 'wres.archetypes:default')
+                
+                #self.createFrontPage(portal)
+                
+                #applyProfile(portal, 'Products.CMFPlone:plone')
+                #applyProfile(portal, 'Products.CMFPlone:dependencies')
+                #applyProfile(portal, 'Products.CMFPlone:plone-content')                
+                
+                
+                applyProfile(portal, 'wres.archetypes:default')
 		applyProfile(portal, 'wres.brfields:default')
 		applyProfile(portal, 'wres.theme:default')
 		applyProfile(portal, 'wres.policy:default')
+                
 
-		create_uemr_user(portal, DOCTOR_TEST_USER_ID, 'Doctor')
+		#create_uemr_user(portal, DOCTOR_TEST_USER_ID, 'Doctor')
 
 	def tearDownZope(self, app):
 		z2.uninstallProduct(app, 'wres.archetypes')

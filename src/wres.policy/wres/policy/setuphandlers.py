@@ -185,6 +185,21 @@ def createReportsFolder(portal, clinic):
     reports_folder.reindexObject()
     print '*** Criando pasta de relatórios...... OK'       
 
+def createFrontPage(portal,front_title,front_desc,front_text):
+    wftool = getToolByName(portal, "portal_workflow")
+    _createObjectByType('Document', portal, id='front-page', title=front_title, description=front_desc)
+    fp = portal['front-page']
+    fp.setTitle(front_title)
+    fp.setDescription(front_desc)
+    fp.setLanguage(portal.Language())
+    fp.setText(front_text, mimetype='text/html')
+
+    # Show off presentation mode
+    fp.setPresentation(True)
+
+    portal.setDefaultPage('front-page')
+    fp.reindexObject()
+
 def deleteDefaultObjects(portal):
     """ Deleta objetos de um plone site out-of-the-box """
     try:
@@ -206,11 +221,18 @@ def deleteDefaultObjects(portal):
         print "No %s folder detected. Hmm... strange. Continuing..." % 'events'
 
     #front_page é usado para forçar o login de usuários anônimos.
-    front_page = getattr(portal, 'front-page')
-    front_page.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE]) 
-    front_page.setTitle('Bem-vindo ao Communimed')
-    front_page.setDescription('Você está logado como administrador.')
-    front_page.setText('Como administrador o usuário tem acesso a áreas e funções previamente restritas. Lembre-se: "Com grandes poderes vêm grandes responsabilidades".')
+    fp_title='Bem-vindo ao Communimed'
+    fp_desc='Você está logado como administrador.'
+    fp_text='Como administrador o usuário tem acesso a áreas e funções previamente restritas. Lembre-se: "Com grandes poderes vêm grandes responsabilidades".'
+    #Try/Except exists just because zope browser in tests that do not configure plone front-page correctly.
+    try:
+        front_page = getattr(portal, 'front-page')
+        front_page.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE]) 
+        front_page.setTitle(fp_title)
+        front_page.setDescription(fp_desc)
+        front_page.setText(fp_text)
+    except AttributeError:
+        createFrontPage(portal,fp_title,fp_desc,fp_text)
 
 def createGroups(portal):
     """ Funcao que cria os grupos e atribui papeis aos mesmos. As constantes aqui

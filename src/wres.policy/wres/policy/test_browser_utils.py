@@ -15,7 +15,6 @@ def login_as_admin(self):
         # Go admin
         portal = self.portal
         browser = self.browser
-        
         browser.open(portal.absolute_url() + "/login_form")
         browser.getControl(name='__ac_name').value = "admin"
         browser.getControl(name='__ac_password').value = SITE_OWNER_PASSWORD
@@ -23,7 +22,7 @@ def login_as_admin(self):
         browser.open(portal.absolute_url() + '/view')
         
         #Testa realmente se estou logado como admin
-        inicio = browser.contents.find('id="user-name"')
+        inicio = browser.contents.rfind('id="user-name"')
         fim = inicio + browser.contents[inicio:].find("</a>")
         self.failUnless("admin" in browser.contents[inicio:fim])
 
@@ -37,7 +36,7 @@ def login_as_doctor(self):
         browser.getControl(name='submit').click()
         
         #Testa realmente se estou logado como dteste
-        inicio = browser.contents.find('id="user-name"')
+        inicio = browser.contents.rfind('id="user-name"')
         fim = inicio + browser.contents[inicio:].find("</a>")
         self.failUnless("DoutorTeste" in browser.contents[inicio:fim])
 
@@ -53,7 +52,7 @@ def login_as_secretary(self):
         browser.open(portal.absolute_url() + '/view')
         
         #Testa realmente se estou logado como steste
-        inicio = browser.contents.find('id="user-name"')
+        inicio = browser.contents.rfind('id="user-name"')
         fim = inicio + browser.contents[inicio:].find("</a>")
         self.failUnless("SecretariaTeste" in browser.contents[inicio:fim])
     
