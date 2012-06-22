@@ -160,4 +160,5 @@ wait(browser)
 browser.close()
 print "----------------------------------------------------------------"
 print "Teste criar consulta, SELENIUM, terminou e foi um sucesso!!!!!!"
+print "Ignore erros relacionados a: test_create_appointment"
 print "----------------------------------------------------------------"

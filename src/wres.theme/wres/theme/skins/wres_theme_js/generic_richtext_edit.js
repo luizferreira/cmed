@@ -28,6 +28,11 @@ function include_document_or_template() {
 	/* se ja existe conteudo na richtext widget, da um append, caso contrario
 	utiliza html() para preencher tudo (inclusive o <p> vazio inicial) */
 	if(body_gdoc.find("br[mce_bogus]").length) {
+        /*existe um bug que impede o atributo 'rows' da RichTextWidget de funcionar quando
+        nao se esta na aba Principal (como eh o caso do document_body), por isso o trecho
+        a seguir aumenta o tamanho do corpo do documento na marra.*/
+        gdoc_iframe = $("#gdocument_body_ifr");
+        gdoc_iframe.css("height", "350");        
 		body_gdoc.html(doc_content);
 	}		
 	else {
@@ -92,6 +97,17 @@ function setPreviousModelsColor(previous_selected){
 
 
 $(document).ready(function(){
+
+    /*existe um bug que impede o atributo 'rows' da RichTextWidget de funcionar quando
+    nao se esta na aba Principal (como eh o caso do document_body), por isso o trecho
+    a seguir aumenta o tamanho do corpo do documento na marra.*/
+    $("#fieldsetlegend-corpo-do-documento").click(function(){
+        $("#gdocument_body_ifr").contents().find("#content").click(function(){
+            gdoc_iframe = $("#gdocument_body_ifr");
+            gdoc_iframe.css("height", "350");
+            $(this).unbind("click");
+        });
+    })
 	
 	/*	As duas funcoes a seguir controlam as tabs 'ANTERIORES'
 		e 'MODELOS'.

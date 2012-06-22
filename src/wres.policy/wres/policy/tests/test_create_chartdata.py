@@ -164,7 +164,7 @@ class TestSetup(unittest.TestCase):
         doctor_ref = self.get_doctor_ref()
         
         #Prenche campos obrigatorios, nao preenche corpo pois o msm é javascript
-        browser.getControl(name='document_type').value = ["atestado"]
+        browser.getControl(name='document_type').value = ["Atestado"]
         browser.getControl(name='doctor').value = doctor_ref
         browser.getControl(name="form.button.save").click()
         return impresso_id

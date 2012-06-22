@@ -66,5 +66,5 @@ class TestSetup(unittest.TestCase):
         browser.open(portal.absolute_url() + "/check_actual_roles")
         self.failUnless("[u'dteste'," in browser.contents)
         logout(self)
-        print "\nTeste logar com diversos passou"
+        print "\nTeste logar com diversos usuários passou"
         
