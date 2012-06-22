@@ -51,6 +51,9 @@ class Doctor(wresuser.WRESUser):
         doctor_visits.setTitle('Dr(a) ' + self.getFullName())
         # apenas o medico correspondente (Owner) pode adicionar consulta em sua pasta de consultas.
         doctor_visits.manage_permission('Add portal content', ['Secretary', 'Manager', 'Owner'])
+        doctor_visits.manage_permission('Copy or Move', ['Secretary', 'Manager', 'Owner'])
+        doctor_visits.manage_permission('Delete objects', ['Manager'])
+
         doctor_visits.setConstrainTypesMode(1)
         portal.plone_utils.changeOwnershipOf(doctor_visits, user_id)
         collection = _createObjectByType('Topic', doctor_visits, 'Agenda')
