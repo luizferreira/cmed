@@ -130,7 +130,7 @@ msgstr "Visualização padrão no qual o calendário sera mostrado"
 
 #: ../interfaces.py:230
 msgid "help_displayNoscriptList"
-msgstr "Se selecionado, quando o javascrit não estiver ativado, uma lista de consultas será mostrada ao invés do calendário."
+msgstr "Se selecionado, quando o javascript não estiver ativado, uma lista de consultas será mostrada ao invés do calendário."
 
 #: ../interfaces.py:220
 msgid "help_displayUndefined"
