@@ -84,7 +84,7 @@
 	                                      i18n:name="date">
 	                                    Start Date Time</span>
 	                                <br i18n:name="linebreak" />
-	                                de
+	                                <!-- de -->
 	                                <abbr metal:define-macro="startdatesame-field-view"
 	                                      tal:define="kss_class python:getKssClasses('startDate',
 	                                                  templateId=templateId, macro='startdatesame-field-view');"
@@ -120,13 +120,35 @@
 	                    </tr>
 	                    
 	                    <tr>
-	                        <th i18n:translate="">E-mail</th>
+	                        <th>E-mail</th>
 	                        <td>
 	                            <metal:field use-macro="python:patient.widget('email', mode='view')">
-	                            Contato
+	                            email@email.com
 	                            </metal:field> 
 	                        </td>
-	                    </tr>		                    	                    
+	                    </tr>		                                                                         
+
+                        <tr>
+                            <th>Tipo</th>
+                            <td>
+                                <tal:print content="context/getVisit_type" />
+                            </td>
+                        </tr>   
+
+                        <tr>
+                            <th>Razão</th>
+                            <td>
+                                <tal:print content="context/getVisit_reason" />
+                            </td>
+                        </tr>   
+
+                        <tr>
+                            <th>Convênio</th>
+                            <td>
+                                <tal:print content="context/getInsurance" />
+                            </td>
+                        </tr>   
+
                     </tal:def>                
                 </tbody>
             </table>

@@ -40,13 +40,13 @@
 	<table class="seclisting width-100" id="visit_table" tal:condition="doctor_visits">
 		<thead>
 			<metal:thead define-slot="thead">
-				<th style="width:80px;text-align: center;">Horário</th>
+				<th style="width:60px;text-align: center;">Horário</th>
 				<th style="width:200px;text-align: center;">Paciente</th>
 				<th style="width:80px;text-align: center;">Status</th>
-				<th style="width:270px;text-align: center;">Alterar</th>
+				<th style="width:330px;text-align: center;">Alterar</th>
                 <th style="width:90px;text-align: center;">Tipo</th>
                 <th style="width:180px;text-align: center;">Razão</th>
-                <th style="text-align: center;">Nota</th>
+                <th style="text-align: center;">Convênio</th>
 			</metal:thead>
 		</thead>
 		<tbody>
@@ -60,8 +60,7 @@
                                             id string:row_$row_number">
                             <metal:trow define-slot="trow">
                             <tal:block_aux tal:define="visit_id python:visit['absolute_url'].split('/')[-1];
-                                                       patient python:visit['getPatient'];
-                                                       note python:visit['getNote'];">
+                                                       patient python:visit['getPatient'];">
                             <td style="text-align: center;">
                                 <a tal:attributes="name visit_id" />
                                 <a class="visit_link" 
@@ -110,8 +109,7 @@
                             </td>                            
 
                             <td style="text-align: center;">
-                                <div tal:content="visit/getNote">
-                                       
+                                <div tal:content="visit/getInsurance">
                                 </div>
                             </td>
                             </tal:block_aux>
