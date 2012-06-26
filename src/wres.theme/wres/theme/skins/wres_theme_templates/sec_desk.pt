@@ -6,12 +6,12 @@
       i18n:domain="cmfuemr">
       
 <head>
-	<title>Área de Trabalho da Secretária</title>
-    
-    
-	<metal:block fill-slot="style_slot">
-		<link rel="stylesheet" type="text/css" href="sec_desk.css" />
-	</metal:block>
+    <title>Área de Trabalho da Secretária</title>
+
+    <metal:block fill-slot="style_slot">
+            <link rel="stylesheet" type="text/css" href="sec_desk.css" />
+            <link rel="stylesheet" type="text/css" href="sec_print.css" media="print" />
+    </metal:block>
     <metal:block fill-slot="javascript_head_slot">
         <script type="text/javascript" src="jquery.qtip.min.js"></script> 
     </metal:block> 
@@ -22,7 +22,9 @@
 		 tal:define="data context/sec_desk_script;
                              doctors data/doctors;
                              doctor data/logged_doctor | nothing;
-                             data python:modules['wres.archetypes.content.secretarydesktop'].SecretaryDesktopData(context, doctor);">
+                             data python:modules['wres.archetypes.content.secretarydesktop'].SecretaryDesktopData(context, doctor);
+                             today python:modules['DateTime'].DateTime().strftime('%d/%m/%Y');
+                             tomorrow python:(modules['DateTime'].DateTime()+1).strftime('%d/%m/%Y')">
 	
 		<tal:if condition="not:doctor">
 			<metal:call_macro use-macro="context/sec_desk_macros/macros/doctor_select">
@@ -31,13 +33,15 @@
         
         <!-- Idéia: colocar classes nos tr de cada visita com a id do médico. Ao mudar
         o médico no select o sistema esconde e mostra as trs apropriadas.  -->
+                <span id="print_button" style="float:right">
+                    <a title="" href="javascript:print();" class="visualNoPrint">Imprimir</a>
+                </span>
 	
 		<br />	
 		
-		<div id="day_buttons_div">
+		<div id="day_buttons_div" class="no_print">
                     <a><span class="button" id="today_button">HOJE</span> </a> - <a> <span class="button" id="tomorrow_button">AMANHÃ</span> </a>                     
 		</div> 
-		
 		<div class="show_visits" id="show_today_visits">
 	        <div metal:use-macro="context/sec_desk_macros/macros/show_visits">
 	            <metal:fill_slot fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromToday" />
@@ -52,10 +56,10 @@
             <div metal:use-macro="context/sec_desk_macros/macros/show_visits">
                 <metal:define_visits fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromTomorrow" />
                 <metal:no_activities fill-slot='no_visits'>
-                Sem Consultas para Amanhã
+                    Sem consultas amanhã - <span tal:replace="tomorrow"></span>
                 </metal:no_activities>
                 <metal:no_activities fill-slot='visits_header'>
-                Consultas de Amanhã
+                    Consultas de Amanhã - <span tal:replace="tomorrow"></span>
                 </metal:no_activities>
             </div>        
         
