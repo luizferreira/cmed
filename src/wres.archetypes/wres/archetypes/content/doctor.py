@@ -5,19 +5,19 @@
 from zope.app.component.hooks import getSite
 from Products.CMFPlone.utils import _createObjectByType
 from zope.interface import implements
+from AccessControl import ClassSecurityInfo, AuthEncoding
 
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import folder
 from Products.ATContentTypes.content import schemata
-
-from AccessControl import ClassSecurityInfo, AuthEncoding
+from Solgema.fullcalendar.interfaces import ISolgemaFullcalendarProperties
 
 from wres.archetypes.content import wresuser
 from wres.archetypes.interfaces import IDoctor
 from wres.archetypes.config import PROJECTNAME
 from wres.archetypes.content.schemas.doctor import DoctorSchema
-
 from wres.policy.utils.roles import DOCTOR_GROUP
+
 
 schemata.finalizeATCTSchema(
     DoctorSchema,
@@ -57,6 +57,13 @@ class Doctor(wresuser.WRESUser):
         doctor_visits.setConstrainTypesMode(1)
         portal.plone_utils.changeOwnershipOf(doctor_visits, user_id)
         collection = _createObjectByType('Topic', doctor_visits, 'Agenda')
+
+        # configura slot padrao para 15 minutos e o intervalo de horas mostrado para 6:00-20:00.
+        cal = ISolgemaFullcalendarProperties(collection)
+        cal.slotMinutes = 15
+        cal.minTime = '6'
+        cal.maxTime = '20'
+
         collection.setTitle('Calendário do(a) Dr(a) ' + self.Title())
         collection.setLayout('solgemafullcalendar_view')
         # medicos e secretarias nao veem 'Edicao' e 'Criterio' na colecao.
