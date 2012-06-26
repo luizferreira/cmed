@@ -3,13 +3,13 @@
         i18n:domain="cmfuemr">  
         <table id="data_table" class="listing width-100">
             <thead>
-                <th width="15px">#</th>
-                <th width="300px">Diagnóstico</th>
-                <th width="100px" i18n:translate="cmfuemr_text_code">Code</th>
-                <th width="100px" i18n:translate="">Reportado</th>
-                <th width="100px" i18n:translate="" tal:condition="python: not active">Resolvido</th>
-                <th width="400px" i18n:translate="" tal:condition="python: not active">Nota</th>
-                <th i18n:translate="cmfuemr_text_actions" tal:condition="python: not view and active">Actions</th>
+                <th width="2%">#</th>
+                <th width="28%">Diagnóstico</th>
+                <th width="7%" i18n:translate="cmfuemr_text_code">Code</th>
+                <th width="8%" i18n:translate="">Reportado</th>
+                <th width="8%" i18n:translate="" tal:condition="python: not active">Resolvido</th>
+                <th width="17%" i18n:translate="" tal:condition="python: not active">Nota</th>
+                <th width="4%" i18n:translate="cmfuemr_text_actions" tal:condition="python: not view and active">Actions</th>
             </thead>
             <tbody>
                 <tr class="odd"
@@ -100,7 +100,7 @@
             </table>
             <table id="note_table" style="float:right;display:none">
                 <tr>
-                    <td><label>Nota:&nbsp;&nbsp;</label></td>
+                    <td><label>Observação:&nbsp;&nbsp;</label></td>
                     <td><textarea style="width:200px" name="note" ></textarea></td>
                 </tr>
             </table>
@@ -114,3 +114,73 @@
     </fieldset>
     
 </metal:add_new>
+
+<metal:edit_problem define-macro="edit_problem"
+    tal:define="state options/state | request/state;
+                portal_status_msg state/kwargs/portal_status_message | request/portal_status_message | nothing;
+                errors state/getErrors;
+                error_message errors/error_message | nothing"   
+    i18n:domain="cmfuemr">
+
+    <!-- portal status message -->
+    <dl class="portalMessage info"
+        tal:condition="portal_status_msg"> 
+        <dt> Info </dt>
+        <dd tal:content="portal_status_msg"> Prescrição adicionada com sucesso. </dd>
+    </dl>
+    <dl class="portalMessage error"
+        tal:condition="error_message"> 
+        <dt> Erro </dt>
+        <dd tal:content="error_message"> Ocorreu algum erro. </dd>
+    </dl>   
+
+    <fieldset class="cmed">
+        <legend> Editar Diagnóstico </legend>        
+        <form tal:attributes="action template/id">
+            <input type="hidden" name="form.submitted" value="1" />
+            <table class="listing width-100" tal:define="vocab_desc context/getCID_desc;
+                                                         vocab_code context/getCID_code">
+                <th>Diagnóstico</th>
+                <th>Código</th>
+                <th>Data</th>
+                <tr>
+                    <td>
+                        <input type="text" name="problem" id="problem" autocomplete="off"
+                            tal:attributes="value request/problem | nothing;
+                                            onkeyup string:actb(this, event, ${vocab_desc});
+                                            onchange string:get_correspondent(this, ${vocab_desc}, ${vocab_code})"/>
+                    </td>
+                    <td>
+                        <input type="text" name="code" id="code" autocomplete="off"
+                            tal:attributes="value request/code | nothing;
+                                            onkeyup string:actb(this, event, ${vocab_code});
+                                            onchange string:get_correspondent(this, ${vocab_code}, ${vocab_desc})" />
+                    </td>
+                    <td>
+                        <input type="text" id="started" name="shown_started" size="7"
+                            maxlength="10" onFocus="javascript:vDateType='3'" 
+                            onKeyUp="DateFormat(this,this.value,event,false,'3')" 
+                            tal:attributes="value request/shown_started | python:context.getTodayDate().strftime('%d/%m/%Y')"
+                            onblur="date_higher_1900()"/>
+                        <input type="hidden" id="hidden_started" name="started"/>
+                        <span style="color: red;display: none" id="erro_date">Data muito antiga (<1900)</span>
+                    </td>
+                </tr>
+            
+            </table>
+            <table id="note_table" style="float:right;display:none">
+                <tr>
+                    <td><label>Nota:&nbsp;&nbsp;</label></td>
+                    <td><textarea style="width:200px" name="note" ></textarea></td>
+                </tr>
+            </table>
+            <div>
+                <metal:buttons define-slot="buttons">
+                    <input id="add_new" type="submit" name="form.button.save" value="Adicionar Novo Diagnóstico" class="context"/>
+                    <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
+                </metal:buttons>
+            </div>
+        </form>
+    </fieldset>
+    
+</metal:edit_problem>

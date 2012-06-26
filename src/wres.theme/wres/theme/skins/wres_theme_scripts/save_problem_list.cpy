@@ -13,7 +13,10 @@ for var in date_vars:
 member = context.portal_membership.getAuthenticatedMember()
 problem['submitted_by'] = member.id
 problem['submitted_on'] = DateTime()
-problem['end_date'] = ''
+if problem['state'] == 'active':
+    problem['end_date'] = ''
+else:
+    problem['end_date'] = DateTime().strftime('%d/%m/%Y')
 context.chart_data.save_entry(context, 'problems', **problem)
 
 state.set(portal_status_message='Diagnóstico adicionado.')

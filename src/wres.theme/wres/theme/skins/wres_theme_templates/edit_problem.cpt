@@ -19,7 +19,7 @@
             <h1 i18n:translate="heading_problem_list">Problem List</h1>
             <div id="edit"
                 tal:define="data template_data">
-                <metal:edit use-macro="here/problem_list_macros/macros/add_new">
+                <metal:edit use-macro="here/problem_list_macros/macros/edit_problem">
                     <metal:buttons fill-slot="buttons">
                         <input id="add_new" type="submit" name="form.button.save" value="Salvar" class="context" i18n:attributes="value"/>
                         <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
