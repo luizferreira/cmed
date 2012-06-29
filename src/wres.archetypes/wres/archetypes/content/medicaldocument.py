@@ -14,6 +14,7 @@ from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 
 from wres.archetypes.interfaces import IMedicalDocument
 from wres.archetypes.config import PROJECTNAME
+from wres.archetypes.content.chartdata import Event
 from wres.archetypes.content.fields.defaultreferencefield import DefaultReferenceField
 from wres.policy.utils.utils import getWresSite
 from wres.policy.utils.utils import set_schemata_properties, finalizeSchema
@@ -81,6 +82,8 @@ class MedicalDocument(folder.ATFolder):
 
     def at_post_create_script(self):
         self.setTitle('Documento Médico')
+        import ipdb; ipdb.set_trace()
+        self.create_event(Event.DOCUMENT_ADDED, self.created(), None, self, None)
 
     def getDefaultDoctor(self):
         portal = getWresSite()

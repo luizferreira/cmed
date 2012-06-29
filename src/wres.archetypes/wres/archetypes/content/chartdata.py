@@ -57,7 +57,6 @@ class Event:
         self.patient = patient
         self.date = date
         # self.str_date = date.strftime('%Y/%m/%d %H:%M')
-        self.event_text = event_text
         self.related_obj = related_obj
         self.author = self._author()
         self.type = ev_type     
