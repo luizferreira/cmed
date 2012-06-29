@@ -4,6 +4,8 @@ from ZODB.PersistentList import PersistentList
 from DateTime import DateTime
 from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass
+from Products.CMFCore.utils import getToolByName
+from zope.app.component.hooks import getSite
 
 
 #class MedicalHistories(Persistent):
@@ -30,6 +32,78 @@ from Globals import InitializeClass
         #entry = {'date': date, 'came_from': came_from, 'data': data}
         #hlist.append(entry)
 
+from random import randint
+
+class Event:
+    __allow_access_to_unprotected_subobjects__ = 1
+    ''' 
+    EVENT TYPES
+    '''
+    # EVENT TYPES
+    PATIENT_ADDED = 1
+    DOCUMENT_ADDED = 2
+    IMPRESSO_ADDED = 3
+    VISIT_ADDED = 4
+    CHART_UPLOAD = 99
+    CHART_MEDICATION_ADDED = 98
+    CHART_PRESCRIPTION_ADDED = 97
+    CHART_DIAGNOSIS_ADDED = 96
+    CHART_ALLERGIE_ADDED = 95
+    CHART_EXAM_ADDED = 94
+
+    def __init__(self, patient, ev_type, date, event_text, related_obj, author):
+        self.portal = getSite()   
+        self.cct = getToolByName(self.portal, 'cmed_catalog_tool')
+        self.patient = patient
+        self.date = date
+        # self.str_date = date.strftime('%Y/%m/%d %H:%M')
+        self.event_text = event_text
+        self.related_obj = related_obj
+        self.author = self._author()
+        self.type = ev_type     
+        self.catalog_me()
+
+    def catalog_me(self):
+        self.id = self.cct.event_catalog_map.new_docid()
+        self.cct.event_catalog_map.add(self.patient.getId(), self.id)
+        self.cct.event_catalog.index_doc(self.id, self)
+
+    def _author(self):
+        mt = getToolByName(self.portal, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        username = member.getUserName()
+        if username == 'admin':
+            return username
+        else:
+            return self.portal.restrictedTraverse(member.getProperty('related_object'))
+
+    def eprint(self):
+        related_obj = "<a target=\"_blank\" href=\"" + self.related_obj.absolute_url_path() + "\" >" + self.related_obj.Title() + "</a>"
+        return self.prefix() + related_obj + self.posfix()
+
+    def prefix(self):
+        try:
+            if self.type == Event.PATIENT_ADDED:
+                return 'Paciente '
+            if self.type == Event.DOCUMENT_ADDED:
+                return 'Documento '
+            if self.type == Event.IMPRESSO_ADDED:
+                return 'Impresso '
+        except:
+            return ''
+
+        return ''
+
+    def posfix(self):
+        try:
+            if self.type < 10:
+                if self.type == Event.VISIT_ADDED:
+                    return ''
+                else:
+                    return ' adicionado.'
+        except:
+            return ''                    
+
 class ChartData(Persistent):
     __allow_access_to_unprotected_subobjects__ = 1
     #TODO alguns atributos nao estao sendo usados. Limpar posteriormente.
@@ -48,7 +122,7 @@ class ChartData(Persistent):
                #'notes': OOBTree,
                'problems': OOBTree,
                'prescriptions': OOBTree,
-               #'encounters': OOBTree,
+               'events': OOBTree,
                #'plans': OOBTree,
                #'follow_up_notes': OOBTree,
                #'vital_signs': OOBTree,

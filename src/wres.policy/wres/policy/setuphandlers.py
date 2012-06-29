@@ -11,6 +11,7 @@ from wres.policy.utils.setup_utils import add_types_to_portal_factory,\
 from AccessControl import Unauthorized
 
 
+
 from AccessControl.Permissions import *
 from Products.Sessions.SessionPermissions import *
 from Products.CMFCore.permissions import *
@@ -627,6 +628,16 @@ def addUpgradeExternalMethods(portal):
     manage_addExternalMethod(portal, 'z_import', 'Import Cmed', 'wres.policy.importer', 'main')
 
 
+def createCmedCatalogs(portal):
+    cct = getToolByName(portal, 'cmed_catalog_tool')
+    from repoze.catalog.indexes.text import CatalogTextIndex
+    from repoze.catalog.indexes.field import CatalogFieldIndex
+
+    # event catalog
+    event_catalog = cct.add_catalog('event_catalog')
+    event_catalog['event_text'] = CatalogTextIndex('event_text')
+    event_catalog['date'] = CatalogFieldIndex('date')
+
 def setupVarious(context):
     """ Funcao generica executada na instalacao do wres policy """
 
@@ -652,6 +663,8 @@ def setupVarious(context):
         loadCIDVocabulary(portal, context)
         loadDEFVocabulary(portal,context)        
         loadInsuranceVocabulary(portal)
+
+        createCmedCatalogs(portal)
 
     if not portal.portal_types.getTypeInfo('VisitTemp'):
         print '********************************AINDA NÃO***********************************'
@@ -685,7 +698,6 @@ def setupVarious(context):
         #createScheduleCatalog(portal)
         
         #addOtherIndex(portal)
-        
         changePortalLanguage(portal)
         changePortalObjectsConfiguration(portal)
         mailHostConfiguration(portal)

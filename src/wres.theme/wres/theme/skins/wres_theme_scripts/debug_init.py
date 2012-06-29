@@ -245,6 +245,9 @@ def create_patients(portal, pr):
         fullname = patient_fname + patient_lname
         create_uemr_user(patient, new_obj_id, email=email, fullname=fullname)
         set_patient_information(patient)
+        # cria evento manualmente.
+        event_text = 'Paciente ' + patient.getFullName() + ' criado.'
+        patient.create_event(1, patient.created(), event_text, patient, 'Doutor Teste')        
         print "> Patient %s created..." % new_obj_id
     return printed
 
