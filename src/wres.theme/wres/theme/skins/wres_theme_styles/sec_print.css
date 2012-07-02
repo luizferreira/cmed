@@ -1,0 +1,17 @@
+body {
+    font-size: 8px;
+}
+
+table.seclisting {
+    border: 1px solid #ddd;
+}
+
+table.seclisting th {
+    color: black;
+    text-align: left;
+    border: 1px solid #e7e7e7;
+}
+
+.no_print {
+    display: none;
+}
