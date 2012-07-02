@@ -6,6 +6,7 @@ validators = validate_base
 
 [actions]
 action.success = redirect_to_action:string:view
+action.success.Patient.save = traverse_to:python:object.REQUEST.form.get('page2go_after_edit', 'view')
 action.success..after_uemr_edit_script = traverse_to:python:object.REQUEST.form.get('page2go_after_edit', 'view')
 action.success..after_uemr_edit_script_redirect = redirect_to:python:object.REQUEST.form.get('page2go_after_edit', 'view')
 action.success_add_reference = redirect_to:python:object.REQUEST['last_referer']
