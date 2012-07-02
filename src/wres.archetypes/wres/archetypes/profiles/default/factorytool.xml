@@ -20,7 +20,6 @@
     <type portal_type="ReviewOfSystems" />
     <type portal_type="Clinic" />
     <type portal_type="Encounter" />
-    <type portal_type="VisitTemp" />
     <type portal_type="InsuranceFolder" />
     <type portal_type="Insurance" />
     <type portal_type="Visit" />

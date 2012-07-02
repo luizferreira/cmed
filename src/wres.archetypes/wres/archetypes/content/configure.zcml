@@ -66,12 +66,6 @@
         interface="..interfaces.IEncounter"
         />
   </class>
-  <class class=".visittemp.VisitTemp">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.IVisitTemp"
-        />
-  </class>
   <class class=".insurancefolder.InsuranceFolder">
     <require
         permission="zope2.View"

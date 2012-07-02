@@ -9,7 +9,6 @@ from uploadchartfolder import IUploadChartFolder
 from reviewofsystems import IReviewOfSystems
 from clinic import IClinic
 from encounter import IEncounter
-from visittemp import IVisitTemp
 from insurancefolder import IInsuranceFolder
 from insurance import IInsurance
 from visitfolder import IVisitFolder

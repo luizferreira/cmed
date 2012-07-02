@@ -11928,6 +11928,9 @@ msgstr "Secretária"
 msgid "VisitTemp"
 msgstr "Consulta"
 
+msgid "Visit"
+msgstr "Consulta"
+
 msgid "visit_temp_description"
 msgstr "Preencha os campos abaixo e clique em Salvar"
 
