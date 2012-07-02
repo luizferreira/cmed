@@ -57,7 +57,7 @@ class SecretaryDesktopData():
         return self.getVisitsFromDate(days=1)    
         
     def getBrains(self, start, end):
-        query = {'meta_type' : 'VisitTemp',
+        query = {'meta_type' : 'Visit',
                  'start' : {'query': [start, end], 'range' : 'min:max'},
                  }
         if self.doctor_id:

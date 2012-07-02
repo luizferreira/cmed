@@ -164,6 +164,7 @@ class WRESUser(folder.ATFolder):
         lastName = self.capitalizeLetters(self.getLastName())
         self.setFirstName(firstName)
         self.setLastName(lastName)
+        self.reindexObject()
         
     def capitalizeLetters(self, name):
         ignored_words = ['da','de','di','do','das','dos','e']
@@ -176,5 +177,4 @@ class WRESUser(folder.ATFolder):
         cap_name = ' '.join(cap_name)
         return cap_name
         
-
 atapi.registerType(WRESUser, PROJECTNAME)

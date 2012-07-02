@@ -653,7 +653,7 @@ def setupVarious(context):
         loadDEFVocabulary(portal,context)        
         loadInsuranceVocabulary(portal)
 
-    if not portal.portal_types.getTypeInfo('VisitTemp'):
+    if not portal.portal_types.getTypeInfo('Visit'):
         print '********************************AINDA NÃO***********************************'
         return
 

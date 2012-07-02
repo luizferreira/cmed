@@ -1,4 +1,5 @@
 # -*- extra stuff goes here -*-
+from visit import IVisit
 from impresso import IImpresso
 from template import ITemplate
 from templatefolder import ITemplateFolder

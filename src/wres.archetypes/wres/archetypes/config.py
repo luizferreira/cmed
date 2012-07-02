@@ -5,6 +5,7 @@ PROJECTNAME = 'wres.archetypes'
 
 ADD_PERMISSIONS = {
     # -*- extra stuff goes here -*-
+    'Visit': 'wres.archetypes: Add Visit',
     'Impresso': 'wres.archetypes: Add Impresso',
     'Template': 'wres.archetypes: Add Template',
     'TemplateFolder': 'wres.archetypes: Add TemplateFolder',

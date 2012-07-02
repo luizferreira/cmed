@@ -135,7 +135,7 @@ def getWresSite():
 # Luiz
 #===============================================================================
 def createVisitObject(context, id):
-    from wres.archetypes.content.visittemp import VisitTemp as Visit
+    from wres.archetypes.content.visit import Visit
 #    from wres.archetypes.content.visittemp import Visit
     visit = Visit(id)
     return visit.__of__(context)

@@ -8,6 +8,8 @@
   -->
 <object name="portal_types" meta_type="Plone Types Tool">
   <!-- -*- extra stuff goes here -*- -->
+  <object name="Visit"
+    meta_type="Factory-based Type Information with dynamic views" />
   <object name="Impresso"
     meta_type="Factory-based Type Information with dynamic views" />
   <object name="Template"
