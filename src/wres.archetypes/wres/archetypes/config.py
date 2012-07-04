@@ -14,7 +14,6 @@ ADD_PERMISSIONS = {
     'ReviewOfSystems': 'wres.archetypes: Add ReviewOfSystems',
     'Clinic': 'wres.archetypes: Add Clinic',
     'Encounter': 'wres.archetypes: Add Encounter',
-    'VisitTemp': 'wres.archetypes: Add VisitTemp',
     'Visit': 'wres.archetypes: Add Visit',
     'InsuranceFolder': 'wres.archetypes: Add InsuranceFolder',
     'Insurance': 'wres.archetypes: Add Insurance',

@@ -2,7 +2,7 @@ from zope.interface import Interface
 # -*- Additional Imports Here -*-
 
 
-class IVisitTemp(Interface):
-    """VisitTemp"""
+class IVisit(Interface):
+    """Description of the Example Type"""
 
     # -*- schema definition goes here -*-

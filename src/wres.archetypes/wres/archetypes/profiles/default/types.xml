@@ -8,6 +8,8 @@
   -->
 <object name="portal_types" meta_type="Plone Types Tool">
   <!-- -*- extra stuff goes here -*- -->
+  <object name="Visit"
+    meta_type="Factory-based Type Information with dynamic views" />
   <object name="Impresso"
     meta_type="Factory-based Type Information with dynamic views" />
   <object name="Template"
@@ -25,8 +27,6 @@
   <object name="Clinic"
     meta_type="Factory-based Type Information with dynamic views" />
   <object name="Encounter"
-    meta_type="Factory-based Type Information with dynamic views" />
-  <object name="VisitTemp"
     meta_type="Factory-based Type Information with dynamic views" />
   <object name="InsuranceFolder"
     meta_type="Factory-based Type Information with dynamic views" />

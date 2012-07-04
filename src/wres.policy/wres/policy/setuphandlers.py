@@ -556,8 +556,8 @@ def loadCIDVocabulary(portal, context):
 def loadInsuranceVocabulary(portal):
     vt = getToolByName(portal, 'vocabulary_tool')
     insurance = []
+    insurance.append('particular')
     insurance.append('unimed')
-    insurance.append('santa casa saude')
     insurance.append('bradesco saude')
     vt.add_vocab('insurance', insurance)
 
@@ -653,7 +653,7 @@ def setupVarious(context):
         loadDEFVocabulary(portal,context)        
         loadInsuranceVocabulary(portal)
 
-    if not portal.portal_types.getTypeInfo('VisitTemp'):
+    if not portal.portal_types.getTypeInfo('Visit'):
         print '********************************AINDA NÃO***********************************'
         return
 

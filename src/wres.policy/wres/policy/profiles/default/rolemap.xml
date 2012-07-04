@@ -102,7 +102,7 @@
       <role name="Contributor"/>
       <role name="Manager"/>
     </permission>
-    <permission name="wres.archetypes: Add VisitTemp" acquire="False">
+    <permission name="wres.archetypes: Add Visit" acquire="False">
       <role name="Contributor"/>
       <role name="Manager"/>
     </permission>

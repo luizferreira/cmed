@@ -56,43 +56,19 @@
   <type type_id="Clinic"/>
   <type type_id="Topic"/>
   <type type_id="UploadChartFolder"/>
-
   <type type_id="GenericDocument"/>  
   <type type_id="Impresso"/>  
-
-  <!-- Documents -->
-  <type type_id="DocBoletim">
-   <bound-workflow workflow_id="soap_workflow"/>
-  </type>
-  <type type_id="DocPlastica">
-   <bound-workflow workflow_id="soap_workflow"/>
-  </type>
-  <!--type type_id="GenericDocument">
-   <bound-workflow workflow_id="soap_workflow"/>
-  </type-->  
-   <type type_id="InitialVisit">
-   <bound-workflow workflow_id="soap_workflow"/>
-  </type>
-  <type type_id="ProgressNotes">
-   <bound-workflow workflow_id="soap_workflow"/>
-  </type>
-  <!-- /Documents -->
   
   <type type_id="Document">
    <bound-workflow workflow_id="intranet_workflow"/>
   </type>
-  <!--type type_id="Folder">
-   <bound-workflow workflow_id="intranet_workflow"/>
-  </type-->
   <type type_id="Large Plone Folder">
    <bound-workflow workflow_id="intranet_workflow"/>
   </type>
   <type type_id="Patient">
-
    <bound-workflow workflow_id="patient_workflow"/>
-
   </type>
-  <type type_id="VisitTemp">
+  <type type_id="Visit">
    <bound-workflow workflow_id="appointment_workflow"/>
   </type>
   
