@@ -13,11 +13,12 @@
     <!-- Selection Widgets -->
 
     <metal:view_macro define-macro="view"
+                      tal:condition="python:visState == 'visible' and value"
                       tal:define="value python:accessor() or '';
                           display python:'%s-%s' % (value[:5],value[5:]);
-                          visState python:widget.isVisible(here, mode);"
-                      tal:condition="python:visState == 'visible'"
-                      tal:replace="display" />
+                          visState python:widget.isVisible(here, mode);">
+                      <span tal:replace="display"></span>
+                      </metal:view_macro>
 
     <metal:define define-macro="edit">
 

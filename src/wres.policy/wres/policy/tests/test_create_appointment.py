@@ -52,8 +52,7 @@ def create_appointment_as_doctor(browser,
                                  start_day=str(today.day),
                                  start_hour=str(14),
                                  start_min=str(30),
-                                 duration_min=str(50),
-                                 note="Nota da consulta - criada por teste no selenium"):
+                                 duration_min=str(50)):
     
     if not "id=\"portaltab-calendar\"" in browser.page_source:
         raise NameError("ERRO: Voce nao esta logado como medico.")
@@ -78,6 +77,7 @@ def create_appointment_as_doctor(browser,
     #Select Patient
     patient_field = browser.find_element_by_name("Title")
     patient_field.click()
+    wait(browser)
     patient_field.clear()
     patient_field.send_keys("pteste")
     patient_link = browser.find_element_by_class_name("contenttype-patient")
@@ -116,9 +116,10 @@ def create_appointment_as_doctor(browser,
     #Set minute
     click_option_by_text(browser,"startDate_minute",start_min)
     
-    #Set note
-    note_field = browser.find_element_by_name("note")
-    note_field.send_keys(note)
+    #Set insurance
+    click_option_by_text(browser,"insurance","Outro")
+    new_insurance = browser.find_element_by_id("other_insurance")
+    new_insurance.send_keys("Salvacao")
     
     #Submit
     browser.find_element_by_name("form.button.save").click()
@@ -148,7 +149,7 @@ def click_option_by_text(browser,field_name,text):
 def test_create_appointment(browser):
     create_appointment_as_doctor(browser,start_min="15")
     browser.get(doctor_desk)
-    assert("Nota da consulta - criada por teste no selenium" in browser.page_source)
+    assert("Salvacao" in browser.page_source)
 
 #Main commands
 print "\nTeste criar consulta, SELENIUM, comecou"
