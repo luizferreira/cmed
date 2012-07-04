@@ -76,10 +76,11 @@ MAIN = Schema((
                 helper_js=('insurance_selection_edit.js', ),             
                 ),
         ),
-        StringField('note',
-            widget=TextAreaWidget(label=_('Note'),
-            ),
-        ),                
+        #TODO: Remove comment (03/07/2012)
+        #StringField('note',
+            #widget=TextAreaWidget(label=_('Note'),
+            #),
+        #),                
         
 ))
 
