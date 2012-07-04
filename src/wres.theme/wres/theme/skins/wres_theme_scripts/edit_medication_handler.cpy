@@ -3,7 +3,7 @@ from DateTime import DateTime
 request = context.REQUEST
 id = request['id']
 whole_medication = context.chart_data.get_entry_item(id, 'medications')
-vars = ['medication', 'concentration', 'quantity', 'use', 'start', 'status', 'id']
+vars = ['medication', 'concentration', 'quantity', 'use', 'start', 'id']
 new_medication = whole_medication['data']
 for var in vars:
     new_medication[var] = request[var]
