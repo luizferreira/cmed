@@ -13,7 +13,6 @@
 
     <metal:block fill-slot="style_slot">
         <link rel="stylesheet" type="text/css" href="cmed.css" />
-        <link rel="stylesheet" type="text/css" href="patient_livesearch.css" />
         <link rel="stylesheet" type="text/css" href="popup_quick_register.css" />
     </metal:block>
 
@@ -60,7 +59,7 @@
             <label style="cursor: pointer" for="searchbox_currentfolder_only">apenas nesta seção</label>
             </div> 
             
-            <div class="LSResult teste" id="LSResult">
+            <div class="LSResult" id="LSResult">
                 <div class="LSShadow" id="LSShadow" style="width:400px"></div>
             </div>      
             
