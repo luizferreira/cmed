@@ -249,7 +249,7 @@ function patientClick(){
 function timeClick(){
 	var data = {};
 	var url = document.getElementById("visit_url").value;
-	var extra = '/SFLight_visittemp_view';
+	var extra = '/SFLight_visit_view';
 	var titulo = 'Detalhes da Consulta';
 	$dialog_content = $('#dialog_content');
 	$dialog_content.empty();
