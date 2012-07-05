@@ -1,22 +1,7 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:use-macro="context/main_template/macros/master"
-      i18n:domain="cmfuemr">
-
-<head>
-    <metal:block fill-slot="style_slot">
-            <link rel="stylesheet" type="text/css" href="cmed.css" />
-    </metal:block>
-</head>
-
-<metal:main fill-slot="main"
-    tal:define="template_data context/getPrescriptionsData">
+<metal:history define-macro="history" tal:define="template_data context/getPrescriptionsData" i18n:domain="cmfuemr">
     
     <h1>Histórico de Prescrições</h1>
     <br />
-    <span class="formHelp">Esta página é apenas para consulta, para gerar uma nova prescrição <a tal:attributes="href python:context.absolute_url()+'/show_medications'">clique aqui</a>.</span>
     <fieldset class="cmed">
     <legend> Prescrições </legend>    
     
@@ -27,7 +12,7 @@
                 <th>Documento</th>
                 <th>Data</th>
                 <th>Médico</th>
-                <th tal:condition="context/TestRoles">Ação</th>
+                <!-- <th tal:condition="context/TestRoles">Ação</th> -->
             </thead>
             <tbody>
                 <tal:loop tal:repeat="prescription template_data">
@@ -43,9 +28,9 @@
                             </td>  
                             <td tal:content="prescription/data/date">12/11/1986</td>
                             <td tal:content="doctor_name">Peter Thorun</td>
-                            <td tal:condition="context/TestRoles">
+<!--                             <td tal:condition="context/TestRoles">
                                 <input type="button" value="Visualizar" tal:attributes="onclick string:javascript:window.location = 'print_prescription?id=${id}'">
-                            </td>
+                            </td> -->
                         </tr>  
                     </tal>
                 </tal:loop>
@@ -55,6 +40,4 @@
     <div tal:condition="not:template_data">
         <i>Não há prescrições no histórico</i>
     </div>
-</metal:main>
-
-</html>
+</metal:history>

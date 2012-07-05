@@ -213,7 +213,11 @@ class ChartItemEventWrapper:
         elif mapping_name == 'laboratory':
             self.prefix = 'Exame '
             self.title = object['exam']
-            self.url_sufix = '/show_exams'                    
+            self.url_sufix = '/show_exams'
+        elif mapping_name == 'prescriptions':
+            self.prefix = ''
+            self.title = 'Prescrição'
+            self.url_sufix = '/show_medications'
         self.patient = patient
         self.id = self.patient.getId() + '_' + mapping_name + '_' + self.title 
 
