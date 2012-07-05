@@ -16,6 +16,7 @@ from Products.ATContentTypes.content import schemata
 
 # -*- Message Factory Imported Here -*-
 
+from wres.archetypes.content.chartdata import Event
 from wres.archetypes.interfaces import IVisitTemp
 from wres.archetypes.config import PROJECTNAME
 
@@ -90,7 +91,10 @@ class VisitTemp(event.ATEvent):
         """ Esse método é chamado no momento da criação de um objeto da classe.
         Ele preenche o campo subject (tags) com um id de um médico.
         """
-        self.setTitle(self.getPatient().Title())
+        patient = self.getPatient()
+        patient.create_event(Event.CREATION, self.startDate, self)
+
+        self.setTitle(patient.Title())
         self.setSubject('CalendarShow')
         visit_type = self.getVisit_type()
         dl = self.getTypesOfVisit()

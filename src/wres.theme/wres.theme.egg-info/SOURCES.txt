@@ -214,6 +214,7 @@ wres/theme/profiles/default/metadata.xml
 wres/theme/profiles/default/skins.xml
 wres/theme/profiles/default/viewlets.xml
 wres/theme/profiles/default/wres.theme_various.txt
+wres/theme/skins/uemr_logo.jpg
 wres/theme/skins/sunburst_theme/sunburst_images/logo.png
 wres/theme/skins/sunburst_theme/sunburst_images/pb_close.png
 wres/theme/skins/sunburst_theme/sunburst_styles/IEFixes.css
@@ -293,6 +294,7 @@ wres/theme/skins/wres_theme_images/loader.gif
 wres/theme/skins/wres_theme_images/loaderWhite.gif
 wres/theme/skins/wres_theme_images/loading.gif
 wres/theme/skins/wres_theme_images/logo.png
+wres/theme/skins/wres_theme_images/logo_new.png
 wres/theme/skins/wres_theme_images/lt-small.png
 wres/theme/skins/wres_theme_images/next-horizontal.png
 wres/theme/skins/wres_theme_images/next-vertical.png
@@ -315,7 +317,7 @@ wres/theme/skins/wres_theme_images/rewind.png
 wres/theme/skins/wres_theme_images/rt-small.png
 wres/theme/skins/wres_theme_images/secretary-folder-icon.png
 wres/theme/skins/wres_theme_images/transcriptionist-folder-icon.png
-wres/theme/skins/wres_theme_images/uemr_logo.jpg
+wres/theme/skins/wres_theme_images/uemr_logo_old.jpg
 wres/theme/skins/wres_theme_images/upload_icon.png
 wres/theme/skins/wres_theme_images/vital_icon.png
 wres/theme/skins/wres_theme_js/CONTENT.txt

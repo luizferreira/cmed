@@ -138,10 +138,10 @@ def set_patient_information(p):
     medication = {'status': 'active', 'submitted_by': 'admin', 'use': '1 cp quando houver do de cabe\xc3\xa7a', 'medication': 'Tylenol dc', 'end_date': DateTime('2012/05/07 17:06:14.061165 GMT-3'), 'note': '', 'start': '07/05/2012', 'concentration': '80mg', 'quantity': '12'}
     problem = {'state': 'active', 'submitted_by': 'admin', 'code': 'G43.0', 'end_date': DateTime('2012/05/07 17:09:25.103551 GMT-3'), 'started': DateTime('2012/05/07 00:00:00 GMT-3'), 'note': '', 'submitted_on': DateTime('2012/05/07 17:09:25.103459 GMT-3'), 'problem': 'Enxaqueca sem aura [enxaqueca comum]'}
     exam = {'date': '07/05/2012', 'exam': 'Glicose', 'value': '93 mg/dl'}
-    p.chart_data.save_entry(context, 'allergies', **allergy)
-    p.chart_data.save_entry(context, 'medications', **medication)
-    p.chart_data.save_entry(context, 'problems', **problem)
-    p.chart_data.save_entry(context, 'laboratory', **exam)
+    p.chart_data.save_entry(p, 'allergies', **allergy)
+    p.chart_data.save_entry(p, 'medications', **medication)
+    p.chart_data.save_entry(p, 'problems', **problem)
+    p.chart_data.save_entry(p, 'laboratory', **exam)
 
     if int(full_info):
         p.setHomePhone(phone)
@@ -246,8 +246,7 @@ def create_patients(portal, pr):
         create_uemr_user(patient, new_obj_id, email=email, fullname=fullname)
         set_patient_information(patient)
         # cria evento manualmente.
-        event_text = 'Paciente ' + patient.getFullName() + ' criado.'
-        patient.create_event(1, patient.created(), event_text, patient, 'Doutor Teste')        
+        patient.create_event(1000, patient.created(), patient)        
         print "> Patient %s created..." % new_obj_id
     return printed
 

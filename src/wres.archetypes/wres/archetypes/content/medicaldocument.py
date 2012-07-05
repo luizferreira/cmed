@@ -81,9 +81,7 @@ class MedicalDocument(folder.ATFolder):
     schema = MedicalDocumentSchema
 
     def at_post_create_script(self):
-        self.setTitle('Documento Médico')
-        import ipdb; ipdb.set_trace()
-        self.create_event(Event.DOCUMENT_ADDED, self.created(), None, self, None)
+        self.create_event(Event.CREATION, self.created(), self)
 
     def getDefaultDoctor(self):
         portal = getWresSite()

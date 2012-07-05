@@ -187,6 +187,7 @@ wres.policy.egg-info/requires.txt
 wres.policy.egg-info/top_level.txt
 wres/policy/CID_code.txt
 wres/policy/CID_desc.txt
+wres/policy/CmedCatalogTool.py
 wres/policy/DEF.txt
 wres/policy/VocabularyTool.py
 wres/policy/__init__.py

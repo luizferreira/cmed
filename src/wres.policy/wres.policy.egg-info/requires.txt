@@ -6,7 +6,7 @@ Pillow
 lxml
 Solgema.fullcalendar == 1.9
 Products.DataGridField == 1.8b2
-collective.quickupload == 1.3.1
+collective.quickupload == 1.5.2
 Products.Clouseau == 1.0
 wres.brfields
 wres.archetypes

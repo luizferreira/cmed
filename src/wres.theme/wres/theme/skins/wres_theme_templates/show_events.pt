@@ -6,56 +6,19 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="cmfuemr">
-  
-<head>
-    <metal:block fill-slot="style_slot">
-            <link rel="stylesheet" type="text/css" href="cmed.css" />
-    </metal:block>
-</head>
     
   <metal:main fill-slot="main" tal:define="template_data context/getShowMedicationsData">
   
     <h1>Eventos</h1>
-    
-     <table class="listing width-100">
-          <thead>
-              <th> Data </th>
-              <th> Evento </th>
-              <th> Autor </th>
-          </thead>
-          <tbody>
-              <tr>
-                <td> 20/03/2012 </td>
-                <td> Paciente João Maria foi registrado no sistema. </td>
-                <td> Fabiana Ribeiro </td>
-              </tr>
-              <tr>
-                <td> 28/03/2012 </td>
-                <td> Primeira consulta (Desmarcada) </td>
-                <td> Fabiana Ribeiro </td>
-              </tr>              
-              <tr>
-                <td> 05/04/2012 </td>
-                <td> Primeira consulta (Realizada) </td>
-                <td> Fabiana Ribeiro </td>
-              </tr>       
-              <tr>
-                <td> 05/04/2012 </td>
-                <td> Documento "Primeira Consulta" registrado no sistema. </td>
-                <td> Beatriz Morais </td>
-              </tr>   
-
-          </tbody>
-      </table>
 
       <table class="listing width-100">
           <thead>
-              <th> Data </th>
+              <th style="width:120px"> Data </th>
               <th> Evento </th>
-              <th> Autor </th>
+              <th style="width:200px"> Autor </th>
           </thead>
-          <tbody tal:define="events context/get_events">
-              <tr tal:repeat="event events/values">
+          <tbody>
+              <tr tal:repeat="event context/get_events">
                 <td tal:content="python: event.date.strftime('%d/%m/%Y %H:%M')">  </td>
                 <td tal:content="structure event/eprint"> </td>
                 <td tal:condition="python: event.author=='admin'" tal:content="event/author"> </td>
@@ -63,8 +26,6 @@
               </tr>
           </tbody>
       </table>      
-
-      <tal:print content="context/get_events" />
 
   </metal:main>
 </html>
