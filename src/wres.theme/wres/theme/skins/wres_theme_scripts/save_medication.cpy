@@ -21,6 +21,11 @@ member = context.portal_membership.getAuthenticatedMember()
 medication['submitted_by'] = member.id
 medication['submitted_on'] = DateTime()
 medication['note'] = ''
+if medication['status'] == 'active':
+    medication['end_date'] = ''
+else:
+    medication['end_date'] = DateTime().strftime('%d/%m/%Y')
+    
 context.chart_data.save_entry(context, 'medications', **medication)
 
 state.set(portal_status_message='Medicamento adicionado.')

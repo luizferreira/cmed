@@ -3,7 +3,7 @@
 
 <h5 class="hiddenStructure" i18n:translate="heading_personal_tools">Personal tools</h5>
 
-<div id="portal-feedbackhelp-div">
+<div id="portal-feedbackhelp-div" class="no_print">
 
   <dl class="actionMenu deactivated" id="portal-feedbackhelp">
     <dt class="actionMenuHeader">

@@ -59,11 +59,11 @@
                                         tal:attributes="value template_data/quantity | nothing" />
                             </td>
                             <td class="width-30">
-                                <input type="text" class="disabled" disabled size="35"
+                                <input type="text" class="disabled" disabled size="20"
                                         tal:attributes="value template_data/use | nothing" />
                             </td>
                             <td class="width-30">
-                                <input type="text" name="note" size="35"
+                                <input type="text" name="note" size="20"
                                             tal:attributes="value template_data/note | nothing" />
                             </td>
                         </tr>

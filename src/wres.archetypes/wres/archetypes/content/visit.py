@@ -1,5 +1,5 @@
 ## encoding=utf-8
-"""Definition of the VisitTemp content type
+"""Definition of the Visit content type
 """
 
 from Products.Archetypes.atapi import *
@@ -17,14 +17,12 @@ from Products.ATContentTypes.content import schemata
 # -*- Message Factory Imported Here -*-
 
 from wres.archetypes.content.chartdata import Event
-from wres.archetypes.interfaces import IVisitTemp
+from wres.archetypes.interfaces import IVisit
 from wres.archetypes.config import PROJECTNAME
 
 from wres.archetypes.content.schemas.visit import VisitSchema
 
-VisitTempSchema = VisitSchema
-
-schemata.finalizeATCTSchema(VisitTempSchema, moveDiscussion=False)
+schemata.finalizeATCTSchema(VisitSchema, moveDiscussion=False)
 
 # usada para adicionar minutos do campo duração à data/hora de inicio
 # da visita
@@ -41,12 +39,13 @@ def addMinutes2Date (date, minutes):
     new_date = DateTime(date._year, date._month, date._day, new_date_hour, new_date_minute)
     return new_date
 
-class VisitTemp(event.ATEvent):
-    """VisitTemp"""
-    implements(IVisitTemp)
 
-    meta_type = "VisitTemp"
-    schema = VisitTempSchema
+class Visit(event.ATEvent):
+    """Visit"""
+    implements(IVisit)
+
+    meta_type = "Visit"
+    schema = VisitSchema
 
     def getDoctor(self):
         portal = getSite()
@@ -182,6 +181,5 @@ class VisitTemp(event.ATEvent):
             dl.add(vocab, vocab)
         dl.add('outro', 'Outro')
         return dl
-    # -*- Your ATSchema to Python Property Bridges Here ... -*-
 
-atapi.registerType(VisitTemp, PROJECTNAME)
+atapi.registerType(Visit, PROJECTNAME)

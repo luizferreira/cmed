@@ -8,6 +8,10 @@ problem = whole_problem['data']
 for var in vars:
     problem[var] = request[var]
     
+date_vars = ['started']
+for var in date_vars:
+    problem[var] = DateTime(problem[var], datefmt="international")
+    
 member = context.portal_membership.getAuthenticatedMember()
 problem['edited_by'] = member.id
 problem['edited_on'] = DateTime()

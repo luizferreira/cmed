@@ -43,12 +43,12 @@
             <div class="searchSection" style="display:none">
             <input id="searchbox_currentfolder_only" class="noborder" type="checkbox" name="path" checked="True" tal:attributes="value context/absolute_url_path">
             <label style="cursor: pointer" for="searchbox_currentfolder_only">apenas nesta seção</label>
-            </div> 
-            
-            <div class="LSResult teste" id="LSResult">
-                <div class="LSShadow" id="LSShadow" style="width:400px"></div>
-            </div>            
-                          
+            </div>
+            <span id="ResultBox">
+                <div class="LSResult" id="LSResult">
+                    <div class="LSShadow" id="LSShadow" style="width:400px"></div>
+                </div>
+            </span>                         
         </div>
        
       </form>

@@ -41,7 +41,7 @@
                                     <option value="Patient">Pacientes</option>
                                     <option value="GenericDocument">Documentos</option>
                                     <option value="Impresso">Impressos</option>
-                                    <option value="VisitTemp">Consultas</option>
+                                    <option value="Visit">Consultas</option>
                                 </select>
                             </td>
                             <td>

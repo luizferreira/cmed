@@ -10,6 +10,7 @@
 <object name="portal_factory" meta_type="Plone Factory Tool">
   <factorytypes>
     <!-- -*- extra stuff goes here -*- -->
+    <type portal_type="Visit" />
     <type portal_type="Impresso" />
     <type portal_type="Template" />
     <type portal_type="TemplateFolder" />
@@ -19,7 +20,6 @@
     <type portal_type="ReviewOfSystems" />
     <type portal_type="Clinic" />
     <type portal_type="Encounter" />
-    <type portal_type="VisitTemp" />
     <type portal_type="InsuranceFolder" />
     <type portal_type="Insurance" />
     <type portal_type="Visit" />

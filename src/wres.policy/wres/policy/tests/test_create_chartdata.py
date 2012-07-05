@@ -307,7 +307,6 @@ class TestSetup(unittest.TestCase):
         browser.getControl(name='problem').value = problem
         browser.getControl(name='code').value = code
         browser.getControl(name='started').value = DateTime().Date()
-        browser.getControl(name='state').value = [status]
         browser.getControl(name="form.button.save").click()
 
     
@@ -337,10 +336,9 @@ class TestSetup(unittest.TestCase):
         browser.getControl(name='problem').value = problem
         browser.getControl(name='code').value = code
         browser.getControl(name='started').value = DateTime().Date()
-        browser.getControl(name='state').value = [status]
         browser.getControl(name="form.button.save").click()
     
-    def resolve_problems(self,PATIENT_ID,PATIENT_URL,date=DateTime().Date(),note="Nota do resolvimento"):
+    def resolve_problems(self,PATIENT_ID,PATIENT_URL,date=DateTime().Date(),note="Nota editada resolvido"):
         portal = self.portal
         browser = self.browser
         
@@ -360,10 +358,8 @@ class TestSetup(unittest.TestCase):
         inicio = inicio + len('value="problems.')
         fim = inicio + pag[inicio:].find('"')
         pro_id = pag[inicio:fim]
-        
         #Entrar na pagina de solução
         browser.open(PATIENT_URL + "/chartFolder_hidden/show_problem_list?form.submitted=1&id=problems." + pro_id + "&form.button.resolve=Resolver")
-        browser.getControl(name='end_date').value = date
         browser.getControl(name='note').value = note
         browser.getControl(name="form.button.resolve").click()
     
@@ -568,18 +564,18 @@ class TestSetup(unittest.TestCase):
         self.failUnless("Dor de cabeca" in browser.contents)
         
         #Testa se "Dor de braço" dentro do fildset "Resolvidos" por causa do status "inactive"
-        self.create_problems(PATIENT_ID, PATIENT_URL,"Dor de braço","456 7897","inactive")
+        self.create_problems(PATIENT_ID, PATIENT_URL,"Dor de braço","456 7897")
         inicio = browser.contents.find('<legend> Ativos </legend>')
         self.failUnless("Dor de braço" in browser.contents[inicio:])
         self.failUnless("Diagnóstico adicionado." in browser.contents)
         #Edit Problems
             #Edita a diarreia
-        self.edit_problems(PATIENT_ID,PATIENT_URL,problem="Tendinite",status="inactive")
-        self.failUnless("Tendinite" in browser.contents[browser.contents.find("Resolvidos"):])
+        self.edit_problems(PATIENT_ID,PATIENT_URL,problem="Dor de dente")
+        self.failUnless("Dor de dente" in browser.contents)
         #Resolve problem
             #Resolve dor de cabeça
         self.resolve_problems(PATIENT_ID,PATIENT_URL)
-        self.failUnless("Dor de cabeca" in browser.contents[browser.contents.find("Resolvidos"):])
+        self.failUnless("Nota editada resolvido" in browser.contents[browser.contents.find("Resolvidos"):])
         
         #As Doctor----------------------------------
         print "As Doctor"
@@ -595,18 +591,18 @@ class TestSetup(unittest.TestCase):
         self.failUnless("Dor de cabeca" in browser.contents)
         
         #Testa se "Dor de braço" dentro do fildset "Resolvidos" por causa do status "inactive"
-        self.create_problems(PATIENT_ID, PATIENT_URL,"Dor de braco","456 7897","inactive")
-        inicio = browser.contents.find('id="historical"')
+        self.create_problems(PATIENT_ID, PATIENT_URL,"Dor de braco","456 7897")
+        inicio = browser.contents.find('<legend> Ativos </legend>')
         self.failUnless("Dor de braco" in browser.contents[inicio:])
         self.failUnless("Diagnóstico adicionado." in browser.contents)
         #Edit Problems
             #Edita a diarreia
-        self.edit_problems(PATIENT_ID,PATIENT_URL,problem="Tendinite",status="inactive")
-        self.failUnless("Tendinite" in browser.contents[browser.contents.find("Resolvidos"):])
+        self.edit_problems(PATIENT_ID,PATIENT_URL,problem="Dor de mao")
+        self.failUnless("Dor de mao" in browser.contents)
         #Resolve problem
             #Resolve dor de cabeça
         self.resolve_problems(PATIENT_ID,PATIENT_URL)
-        self.failUnless("Dor de cabeca" in browser.contents[browser.contents.find("Resolvidos"):])
+        self.failUnless("Nota editada resolvido" in browser.contents[browser.contents.find("Resolvidos"):])
         
         print "::::Teste criar, editar, resolver problemas passou!\n" 
         

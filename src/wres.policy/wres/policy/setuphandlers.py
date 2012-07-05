@@ -11,7 +11,6 @@ from wres.policy.utils.setup_utils import add_types_to_portal_factory,\
 from AccessControl import Unauthorized
 
 
-
 from AccessControl.Permissions import *
 from Products.Sessions.SessionPermissions import *
 from Products.CMFCore.permissions import *
@@ -557,8 +556,8 @@ def loadCIDVocabulary(portal, context):
 def loadInsuranceVocabulary(portal):
     vt = getToolByName(portal, 'vocabulary_tool')
     insurance = []
+    insurance.append('particular')
     insurance.append('unimed')
-    insurance.append('santa casa saude')
     insurance.append('bradesco saude')
     vt.add_vocab('insurance', insurance)
 
@@ -673,7 +672,7 @@ def setupVarious(context):
 
         createCmedCatalogs(portal)
 
-    if not portal.portal_types.getTypeInfo('VisitTemp'):
+    if not portal.portal_types.getTypeInfo('Visit'):
         print '********************************AINDA NÃO***********************************'
         return
 
@@ -705,6 +704,7 @@ def setupVarious(context):
         #createScheduleCatalog(portal)
         
         #addOtherIndex(portal)
+        
         changePortalLanguage(portal)
         changePortalObjectsConfiguration(portal)
         mailHostConfiguration(portal)

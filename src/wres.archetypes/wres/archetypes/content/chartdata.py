@@ -117,7 +117,7 @@ class Event:
         '''
         returns html to be printed in screen
         '''
-        if self.related_obj.meta_type == 'VisitTemp':
+        if self.related_obj.meta_type == 'Visit':
             related_obj = "<a target=\"_blank\" href=\"" + self.related_obj.absolute_url_path() + "\" >" + self.related_obj.getVisit_type() + "</a>"
         else:
             related_obj = "<a target=\"_blank\" href=\"" + self.event_url() + "\" >" + self.related_obj.Title() + "</a>"
@@ -131,7 +131,7 @@ class Event:
         # necessary to be here (and not in the header), since medicaldocument import chartdata too.
         from wres.archetypes.content.medicaldocument import MedicalDocument
         if self.type == Event.CREATION:
-            if self.related_obj.meta_type == 'VisitTemp':
+            if self.related_obj.meta_type == 'Visit':
                 return ''            
             elif self.related_obj.meta_type == 'Patient':
                 return 'Paciente '
@@ -150,7 +150,7 @@ class Event:
         called by eprint
         '''
         if self.type == Event.CREATION:
-            if self.related_obj.meta_type == 'VisitTemp':
+            if self.related_obj.meta_type == 'Visit':
                 return self._visit_review_state()
             else:
                 return ' adicionado.'
@@ -215,6 +215,10 @@ class ChartItemEventWrapper:
             self.title = object['exam']
             self.url_sufix = '/show_exams'                    
         self.patient = patient
+        self.id = self.patient.getId() + '_' + mapping_name + '_' + self.title 
+
+    def getId(self):
+        return self.id
 
     def Title(self):
         return self.title

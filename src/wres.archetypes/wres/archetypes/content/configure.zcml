@@ -6,6 +6,12 @@
   <!-- configure your content components here -->
   
   <!-- -*- extra stuff goes here -*- -->
+  <class class=".visit.Visit">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IVisit"
+        />
+  </class>
   <class class=".impresso.Impresso">
     <require
         permission="zope2.View"
@@ -58,12 +64,6 @@
     <require
         permission="zope2.View"
         interface="..interfaces.IEncounter"
-        />
-  </class>
-  <class class=".visittemp.VisitTemp">
-    <require
-        permission="zope2.View"
-        interface="..interfaces.IVisitTemp"
         />
   </class>
   <class class=".insurancefolder.InsuranceFolder">

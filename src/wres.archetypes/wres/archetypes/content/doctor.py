@@ -72,7 +72,7 @@ class Doctor(wresuser.WRESUser):
         collection.manage_permission('Copy or Move', roles=[], acquire=False)
         collection.manage_permission('Delete objects', roles=[], acquire=False)
         criteria = collection.addCriterion('Type','ATPortalTypeCriterion')
-        criteria.setValue('VisitTemp')
+        criteria.setValue('Visit')
         # (Maio/2012) TODO: Limpar
         # criteria2 = collection.addCriterion('Subject', 'ATSimpleStringCriterion')
         # criteria2.setValue(user_id)

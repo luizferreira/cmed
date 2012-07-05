@@ -16,7 +16,7 @@
             tal:define="data context/getEditMedicationData">
             <h1>Editar Medicamento</h1>
             <div id="edit">
-                <metal:edit use-macro="here/medications_macros/macros/add_new">
+                <metal:edit use-macro="here/medications_macros/macros/edit_medication">
                     <metal:buttons fill-slot="buttons">
                         <input id="add_new" type="submit" name="form.button.save" value="Salvar" class="context" i18n:attributes="value"/>
                         <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />

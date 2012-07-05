@@ -11925,7 +11925,7 @@ msgstr "Paciente"
 msgid "Secretary"
 msgstr "Secretária"
 
-msgid "VisitTemp"
+msgid "Visit"
 msgstr "Consulta"
 
 msgid "visit_temp_description"
