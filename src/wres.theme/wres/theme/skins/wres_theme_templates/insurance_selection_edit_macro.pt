@@ -69,9 +69,6 @@
 Editado pela communi
 -->
                 <input id="other_insurance" type="text" style="display:none" />
-                <span id="js_data" style="display:none">
-                  <fieldname tal:content="fieldName"> </fieldname>
-                </span>
 <!--
 Editado pela communi
 -->

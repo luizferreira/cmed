@@ -179,7 +179,7 @@ class Visit(event.ATEvent):
         vocab_list = vt.get_vocabulary('insurance', 2)
         for vocab in vocab_list:
             dl.add(vocab, vocab)
-        dl.add('outro', 'Outro')
+        dl.add('outro_plano', 'Outro')
         return dl
 
 atapi.registerType(Visit, PROJECTNAME)
