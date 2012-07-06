@@ -18,7 +18,9 @@
 </head>
 
 <body>
-	<div metal:fill-slot="main"
+  <!-- retirando portal_status_message.. eh necessario deixar o id=content pra que alguns aspectos visuais de css do plone 
+  sejam aplicados. -->
+	<div metal:fill-slot="content" id="content"
 		 tal:define="data context/sec_desk_script;
                              doctors data/doctors;
                              doctor data/logged_doctor | nothing;
