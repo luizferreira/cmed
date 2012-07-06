@@ -186,6 +186,7 @@ def createReportsFolder(portal, clinic):
     print '*** Criando pasta de relatórios...... OK'       
 
 def createFrontPage(portal,front_title,front_desc,front_text):
+    #Cria a front-page - Utilizada somente nos testes
     wftool = getToolByName(portal, "portal_workflow")
     _createObjectByType('Document', portal, id='front-page', title=front_title, description=front_desc)
     fp = portal['front-page']
@@ -232,6 +233,7 @@ def deleteDefaultObjects(portal):
         front_page.setDescription(fp_desc)
         front_page.setText(fp_text)
     except AttributeError:
+        #Cria front-page para ser usado nos testes
         createFrontPage(portal,fp_title,fp_desc,fp_text)
 
 def createGroups(portal):

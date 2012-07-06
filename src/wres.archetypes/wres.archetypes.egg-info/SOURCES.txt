@@ -221,8 +221,8 @@ wres/archetypes/content/secretaryfolder.py
 wres/archetypes/content/template.py
 wres/archetypes/content/templatefolder.py
 wres/archetypes/content/uploadchartfolder.py
+wres/archetypes/content/visit.py
 wres/archetypes/content/visitfolder.py
-wres/archetypes/content/visittemp.py
 wres/archetypes/content/wresuser.py
 wres/archetypes/content/fields/__init__.py
 wres/archetypes/content/fields/defaultreferencefield.py
@@ -261,8 +261,8 @@ wres/archetypes/interfaces/secretaryfolder.py
 wres/archetypes/interfaces/template.py
 wres/archetypes/interfaces/templatefolder.py
 wres/archetypes/interfaces/uploadchartfolder.py
+wres/archetypes/interfaces/visit.py
 wres/archetypes/interfaces/visitfolder.py
-wres/archetypes/interfaces/visittemp.py
 wres/archetypes/interfaces/wresuser.py
 wres/archetypes/portlets/__init__.py
 wres/archetypes/portlets/configure.zcml
@@ -292,8 +292,8 @@ wres/archetypes/profiles/default/types/SecretaryFolder.xml
 wres/archetypes/profiles/default/types/Template.xml
 wres/archetypes/profiles/default/types/TemplateFolder.xml
 wres/archetypes/profiles/default/types/UploadChartFolder.xml
+wres/archetypes/profiles/default/types/Visit.xml
 wres/archetypes/profiles/default/types/VisitFolder.xml
-wres/archetypes/profiles/default/types/VisitTemp.xml
 wres/archetypes/profiles/default/types/WRESUser.xml
 wres/archetypes/profiles/default/workflows/CMFUEMR_workflow/definition.xml
 wres/archetypes/profiles/default/workflows/appointment_workflow/definition.xml

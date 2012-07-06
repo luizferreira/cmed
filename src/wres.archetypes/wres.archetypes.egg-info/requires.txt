@@ -1,4 +1,5 @@
 setuptools
 
-[tests]
+[test]
+plone.app.testing
 zope.testing

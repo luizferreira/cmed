@@ -1,1 +1,4 @@
 setuptools
+
+[test]
+plone.app.testing

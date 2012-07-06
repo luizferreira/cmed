@@ -192,6 +192,7 @@ wres/policy/DEF.txt
 wres/policy/VocabularyTool.py
 wres/policy/__init__.py
 wres/policy/configure.zcml
+wres/policy/event_handlers.py
 wres/policy/patch.zcml
 wres/policy/patchedMethods.py
 wres/policy/permissions.zcml

@@ -32,7 +32,7 @@ long_description = (
     'Download\n'
     '********\n')
 
-tests_require = ['zope.testing']
+
 
 setup(name='wres.archetypes',
       version=version,
@@ -57,8 +57,12 @@ setup(name='wres.archetypes',
       install_requires=['setuptools',
                         # -*- Extra requirements: -*-
                         ],
-      tests_require=tests_require,
-      extras_require=dict(tests=tests_require),
+      extras_require = {
+          'test': [
+                  'plone.app.testing',
+                  'zope.testing',
+              ],
+      },      
       test_suite='wres.archetypes.tests.test_docs.test_suite',
       entry_points="""
       # -*- entry_points -*-
