@@ -11,7 +11,7 @@
 
     <include file="permissions.zcml" />
     <include file="patch.zcml" />
-
+    <include file="events.zcml" />
     
     <genericsetup:registerProfile
         name="default"

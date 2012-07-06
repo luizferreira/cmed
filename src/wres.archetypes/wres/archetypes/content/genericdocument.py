@@ -39,6 +39,7 @@ class GenericDocument(MedicalDocument):
     schema = MAIN + GenericDocumentSchema
 
     def at_post_create_script(self):
+        MedicalDocument.at_post_create_script(self) # necessary to create an event.
         document_type = self.getDocument_type()
         self.setTitle(document_type)
         dl = self.getTypesOfDocument()

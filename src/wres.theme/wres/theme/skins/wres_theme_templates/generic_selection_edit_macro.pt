@@ -66,11 +66,21 @@
 
                 </tal:longVocab>
 
+<!--
+Editado pela communi
+-->
                 <input id="other_document_type" type="text" style="display:none" />
 
+                <!-- o trecho abaixo eh usado pelo generic_selection_edit.js para saber o nome do campo. Caso seja 
+                necessario 2 campos com "Outro" na mesma pagina sera necessario criar outro js para ele e na
+                macro desse novo campo o trecho abaixo nao podera existir -->
                 <span id="js_data" style="display:none">
                   <fieldname tal:content="fieldName"> </fieldname>
                 </span>
+<!--
+Editado pela communi
+-->
+                
 
             </metal:fill>
 

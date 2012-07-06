@@ -1,10 +1,10 @@
 
 $(document).ready(function(){
-	var other_field = "outro";
+	var other_field = "outro_plano";
 	var select_selector = "select#insurance";
 
 	$(select_selector).change(function(){		
-                if (this.value == other_field) {
+        if (this.value == other_field) {
 			$("input#other_insurance").fadeIn();
 			$("input#other_insurance").focus();
 		}

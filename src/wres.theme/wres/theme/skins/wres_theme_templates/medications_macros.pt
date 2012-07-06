@@ -67,6 +67,68 @@
     </fieldset>
 </metal:add_new>
 
+<metal:add_new define-macro="edit_medication"
+    tal:define="state options/state | request/state;
+                portal_status_msg state/kwargs/portal_status_message | request/portal_status_message | nothing;
+                errors state/getErrors;
+                error_message errors/error_message | nothing"     
+    i18n:domain="cmfuemr">
+
+    <!-- portal status message -->
+    <dl class="portalMessage info"
+        tal:condition="portal_status_msg"> 
+        <dt> Info </dt>
+        <dd tal:content="portal_status_msg"> Medicamento editado com sucesso. </dd>
+    </dl>
+    <dl class="portalMessage error"
+        tal:condition="error_message"> 
+        <dt> Erro </dt>
+        <dd tal:content="error_message"> Ocorreu algum erro. </dd>
+    </dl>   
+
+    <fieldset class="cmed">
+        <legend> Medicamento </legend>        
+        <form tal:attributes="action template/id">
+            <input type="hidden" name="form.submitted" value="1" />
+            <table class="listing width-100">
+                <thead>
+                    <th>Medicamento</th>
+                    <th>Concentração</th>
+                    <th>Quantidade</th>
+                    <th>Uso</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td tal:define="vocab context/getDEF">
+                            <input type="text" name="medication" autocomplete="off"
+                                tal:attributes="value data/medication | nothing;
+                                onkeyup string:actb(this, event, ${vocab})" />
+                        </td>
+                        <td>
+                            <input type="text" name="concentration" size="7"
+                                tal:attributes="value data/concentration | nothing" />
+                        </td>
+                        <td>
+                            <input type="text" name="quantity" size="10"
+                                tal:attributes="value data/quantity | nothing" />
+                        </td>
+                        <td>
+                            <input type="text" id="use" name="use"
+                                tal:attributes="value data/use | nothing"/>
+                            <input type="hidden" name="start" size="7"
+                                tal:attributes="value data/start | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <metal:buttons define-slot="buttons">
+                <input id="add_new" type="submit" name="form.button.save" value="Adicionar Medicamento" class="context"/>
+                <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
+            </metal:buttons>
+        </form>
+    </fieldset>
+</metal:add_new>
+
 <metal:mt define-macro="medications_table">
     <form tal:attributes="action template/id">
         <fieldset class="cmed" tal:define="data template_data/active" tal:condition="data">
@@ -76,7 +138,7 @@
                     <thead>
                         <th>#</th>
                         <th>Marcar</th>
-                        <th>Medicamentos</th>
+                        <th>Medicamento</th>
                         <th>Concentração</th>
                         <th>Quantidade</th>
                         <th>Uso</th>
@@ -117,7 +179,7 @@
                 <table class="listing width-100">
                     <thead>
                         <th>#</th>
-                        <th>Medicamentos</th>
+                        <th>Medicamento</th>
                         <th>Concentração</th>
                         <th>Quantidade</th>
                         <th>Uso</th>
@@ -130,7 +192,7 @@
                                 <td tal:content="repeat/medication/number">1</td>
                                 <td tal:content="medication/medication">Tylenol</td>
                                 <td tal:content="medication/concentration">100mg</td>
-                                 <td tal:content="medication/quantity">60 comprimidos</td>
+                                <td tal:content="medication/quantity">60 comprimidos</td>
                                 <td tal:content="medication/use">2x ao dia</td>
                                 <td tal:content="medication/note"></td>
                                 <td tal:content="medication/end_date"></td>

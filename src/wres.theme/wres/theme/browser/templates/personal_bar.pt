@@ -17,9 +17,9 @@
     </dt>
   </dl>
 
-  <dl class="actionMenu deactivated" id="portal-feedbackhelp">
+  <dl class="deactivated" id="portal-feedbackhelp">
     <dt class="actionMenuHeader">
-      <a id="user-name" href="http://plone.org.br/documentacao" target="_blank">
+      <a href="http://communimed.com.br/ajuda-1" target="_blank">
           Ajuda
       </a>
     </dt>  

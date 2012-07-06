@@ -18,7 +18,7 @@ from ComputedAttribute import ComputedAttribute
 from wres.archetypes.interfaces import IPatient
 from wres.archetypes.config import PROJECTNAME
 from wres.archetypes.content import wresuser
-from wres.archetypes.content.chartdata import ChartData #,Prescription, Maintenance, Note, Problem 
+from wres.archetypes.content.chartdata import ChartData, Event #,Prescription, Maintenance, Note, Problem 
 from wres.archetypes.content.schemas.patient import PatientSchema
 
 from wres.policy.utils.roles import *
@@ -116,6 +116,7 @@ class Patient(wresuser.WRESUser):
         return self.Title().lower()
 
     def at_post_create_script(self):
+        self.create_event(Event.CREATION, self.created(), self)
         wresuser.WRESUser.at_post_create_script(self)
         
     def at_post_edit_script(self):
@@ -136,6 +137,24 @@ class Patient(wresuser.WRESUser):
             self._p_changed = 1
         return self.chart_data_hidden
     chart_data = ComputedAttribute(__create_chart_data, 1)
+
+    def create_event(self, ev_type, date, related_obj):
+        '''
+        register an event. all modules that creates events use this method.
+        '''
+        chart_data = self.chart_data # garante a criacao do chart_data
+        events = chart_data.events
+        new_event = Event(self, ev_type, date, related_obj) 
+        events[new_event.id] = new_event
+
+    def get_events(self):
+        '''
+        return a list of events sorted by date.
+        '''
+        dic = dict(self.chart_data.events)
+        events_list = dic.values()
+        events_list.sort(cmp=Event._event_cmp)
+        return events_list
 
 #        # metodo utilizado apenas no debug_patientchartdata
     def get_chart_data_map(self):

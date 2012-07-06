@@ -46,6 +46,7 @@ class Impresso(MedicalDocument):
         um valor no campo de tipo de impresso que ainda nao esta presente
         no vocabulario 'impresso_types'. Caso nao esteja presente, adiciona.
         '''
+        MedicalDocument.at_post_create_script(self) # necessary to create an event.
         document_type = self.getDocument_type()
         self.setTitle(document_type)
         dl = self.getTypesOfImpresso()

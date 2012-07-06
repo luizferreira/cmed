@@ -16,6 +16,7 @@ from Products.ATContentTypes.content import schemata
 
 # -*- Message Factory Imported Here -*-
 
+from wres.archetypes.content.chartdata import Event
 from wres.archetypes.interfaces import IVisit
 from wres.archetypes.config import PROJECTNAME
 
@@ -89,7 +90,10 @@ class Visit(event.ATEvent):
         """ Esse método é chamado no momento da criação de um objeto da classe.
         Ele preenche o campo subject (tags) com um id de um médico.
         """
-        self.setTitle(self.getPatient().Title())
+        patient = self.getPatient()
+        patient.create_event(Event.CREATION, self.startDate, self)
+
+        self.setTitle(patient.Title())
         self.setSubject('CalendarShow')
         visit_type = self.getVisit_type()
         dl = self.getTypesOfVisit()
@@ -175,7 +179,7 @@ class Visit(event.ATEvent):
         vocab_list = vt.get_vocabulary('insurance', 2)
         for vocab in vocab_list:
             dl.add(vocab, vocab)
-        dl.add('outro', 'Outro')
+        dl.add('outro_plano', 'Outro')
         return dl
 
 atapi.registerType(Visit, PROJECTNAME)

@@ -187,6 +187,7 @@ wres.policy.egg-info/requires.txt
 wres.policy.egg-info/top_level.txt
 wres/policy/CID_code.txt
 wres/policy/CID_desc.txt
+wres/policy/CmedCatalogTool.py
 wres/policy/DEF.txt
 wres/policy/VocabularyTool.py
 wres/policy/__init__.py
@@ -199,6 +200,10 @@ wres/policy/test_browser_utils.py
 wres/policy/testing.py
 wres/policy/tests.py.old
 wres/policy/tool.gif
+wres/policy/Extensions/__init__.py
+wres/policy/Extensions/exporter.py
+wres/policy/Extensions/importer.py
+wres/policy/Extensions/upgrade.py
 wres/policy/profiles/default/actions.xml
 wres/policy/profiles/default/catalog.xml
 wres/policy/profiles/default/jsregistry.xml

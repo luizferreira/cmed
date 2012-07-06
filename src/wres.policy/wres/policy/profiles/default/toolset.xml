@@ -4,4 +4,7 @@
  <required tool_id="vocabulary_tool"
            class="wres.policy.VocabularyTool.VocabularyTool"/>
 
+ <required tool_id="cmed_catalog_tool"
+           class="wres.policy.CmedCatalogTool.CmedCatalogTool"/>           
+
 </tool-setup>

@@ -21,11 +21,13 @@
   
     <h1>Medicamentos e Prescrições</h1>
 
-    <metal:add_new use-macro="here/medications_macros/macros/add_new" />
+    <metal:add_new use-macro="context/medications_macros/macros/add_new" />
 
-    <metal:mt use-macro="here/medications_macros/macros/medications_table" />
+    <metal:mt use-macro="context/medications_macros/macros/medications_table" />
     
-    <metal:mh use-macro="here/medications_macros/macros/medications_history_table" />
+    <metal:mh use-macro="context/medications_macros/macros/medications_history_table" />
+
+    <metal:mh use-macro="context/prescriptions_history/macros/history" />
     
   </metal:main>
 </html>

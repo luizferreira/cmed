@@ -627,6 +627,23 @@ def addUpgradeExternalMethods(portal):
     manage_addExternalMethod(portal, 'z_import', 'Import Cmed', 'wres.policy.importer', 'main')
 
 
+def createCmedCatalogs(portal):
+    cct = getToolByName(portal, 'cmed_catalog_tool')
+    from repoze.catalog.indexes.text import CatalogTextIndex
+    from repoze.catalog.indexes.field import CatalogFieldIndex
+
+    # event catalog
+    event_catalog = cct.add_catalog('event_catalog')
+    event_catalog['event_text'] = CatalogTextIndex('event_text')
+    event_catalog['date'] = CatalogFieldIndex('date')
+    event_catalog['date_year'] = CatalogFieldIndex('date_year')
+    event_catalog['date_month'] = CatalogFieldIndex('date_month')
+    event_catalog['date_day'] = CatalogFieldIndex('date_day')
+    event_catalog['path'] = CatalogFieldIndex('path')
+    event_catalog['event_type'] = CatalogFieldIndex('event_type')
+    event_catalog['meta_type'] = CatalogFieldIndex('meta_type')
+    event_catalog['related_object_id'] = CatalogFieldIndex('related_object_id')
+
 def setupVarious(context):
     """ Funcao generica executada na instalacao do wres policy """
 
@@ -652,6 +669,8 @@ def setupVarious(context):
         loadCIDVocabulary(portal, context)
         loadDEFVocabulary(portal,context)        
         loadInsuranceVocabulary(portal)
+
+        createCmedCatalogs(portal)
 
     if not portal.portal_types.getTypeInfo('Visit'):
         print '********************************AINDA NÃO***********************************'

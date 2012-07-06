@@ -11,6 +11,7 @@ zopeapp-versions.cfg
 ztk-versions.cfg
 PKG-INFO
 sub_tasks
+cmed.sublime-workspace
 
 *.py[co]
 

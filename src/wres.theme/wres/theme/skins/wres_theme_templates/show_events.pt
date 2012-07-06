@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+    
+  <metal:main fill-slot="main" tal:define="template_data context/getShowMedicationsData">
+  
+    <h1>Eventos</h1>
+
+      <table class="listing width-100">
+          <thead>
+              <th style="width:120px"> Data </th>
+              <th> Evento </th>
+              <th style="width:200px"> Autor </th>
+          </thead>
+          <tbody>
+              <tr tal:repeat="event context/get_events">
+                <td tal:content="python: event.date.strftime('%d/%m/%Y %H:%M')">  </td>
+                <td tal:content="structure event/eprint"> </td>
+                <td tal:condition="python: event.author=='admin'" tal:content="event/author"> </td>
+                <td tal:condition="python: event.author!='admin'" tal:content="event/author/Title"> </td>
+              </tr>
+          </tbody>
+      </table>      
+
+  </metal:main>
+</html>

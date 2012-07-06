@@ -1,0 +1,8 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           i18n_domain="Five">
+    <subscriber
+      for="plone.app.blob.interfaces.IATBlob
+           zope.lifecycleevent.IObjectCreatedEvent"
+      handler=".event_handlers.atblob_added"
+      />
+</configure>
