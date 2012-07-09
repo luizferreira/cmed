@@ -151,7 +151,7 @@ class Validation(object):
         ('Patient', patient_counter),
         ('Secretary', secretary_counter),
         ('Template', template_counter),
-        ('VisitTemp', visit_counter),
+        ('Visit', visit_counter),
         ]
 
         for t in tuples:
@@ -445,7 +445,7 @@ registerHandler(PatientHandler)
 class VisitHandler(BaseHandler):
     ident = 'visit'
     folderish = False
-    portal_type = 'VisitTemp'
+    portal_type = 'Visit'
 
     def import2(self, obj, section):
         ''' especific Visit fields'''
