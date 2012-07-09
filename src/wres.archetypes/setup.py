@@ -55,6 +55,8 @@ setup(name='wres.archetypes',
       include_package_data=True,
       zip_safe=False,
       install_requires=['setuptools',
+                        'Products.PloneTestCase',
+                        'collective.testcaselayer',
                         # -*- Extra requirements: -*-
                         ],
       extras_require = {

@@ -38,6 +38,8 @@ setup(name='wres.policy',
           'wres.brfields',
           'wres.archetypes',
           'wres.theme',
+          'Products.PloneTestCase',
+          'collective.testcaselayer',
           # 'PIL==1.1.6',
           # Pillow e lxml sao p413
           # -*- Extra requirements: -*-
