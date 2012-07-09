@@ -43,7 +43,7 @@ span.button {
 
 #doctor_select_div
 {
-    float: right;
+    float: left;
     width: 160px;
     background-color: green;
 }

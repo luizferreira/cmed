@@ -41,7 +41,7 @@
           <input id="searchSubmit" name="submit" type="submit" value="Buscar" style="display:none" />
             
             <div class="searchSection" style="display:none">
-            <input id="searchbox_currentfolder_only" class="noborder" type="checkbox" name="path" checked="True" tal:attributes="value context/absolute_url_path">
+            <input id="searchbox_currentfolder_only" class="noborder" type="checkbox" name="path" checked="True" tal:attributes="value python:'/'.join(context.getPhysicalPath())">
             <label style="cursor: pointer" for="searchbox_currentfolder_only">apenas nesta seção</label>
             </div>
             <span id="ResultBox">

@@ -28,6 +28,9 @@
                              today python:modules['DateTime'].DateTime().strftime('%d/%m/%Y');
                              tomorrow python:(modules['DateTime'].DateTime()+1).strftime('%d/%m/%Y')">
 	
+		<span id="print_button" style="float:right">
+			<a title="" href="javascript:print();" class="visualNoPrint">Imprimir</a>
+		</span>
 		<tal:if condition="not:doctor">
 			<metal:call_macro use-macro="context/sec_desk_macros/macros/doctor_select">
 			</metal:call_macro>
@@ -35,11 +38,6 @@
         
         <!-- Idéia: colocar classes nos tr de cada visita com a id do médico. Ao mudar
         o médico no select o sistema esconde e mostra as trs apropriadas.  -->
-                <span id="print_button" style="float:right">
-                    <a title="" href="javascript:print();" class="visualNoPrint">Imprimir</a>
-                </span>
-	
-		<br />	
 		
 		<div id="day_buttons_div" class="no_print">
                     <a><span class="button" id="today_button">HOJE</span> </a> - <a> <span class="button" id="tomorrow_button">AMANHÃ</span> </a>                     

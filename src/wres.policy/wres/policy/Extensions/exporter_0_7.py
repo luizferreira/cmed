@@ -370,7 +370,7 @@ class DoctorHandler(BaseHandler):
 registerHandler(DoctorHandler)
 
 class VisitHandler(BaseHandler):
-    portal_types = ('Visit')
+    portal_types = ('VisitTemp')
     ident = 'visit'
     folderish = False
 
