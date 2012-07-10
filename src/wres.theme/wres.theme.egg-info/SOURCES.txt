@@ -215,6 +215,7 @@ wres/theme/profiles/default/metadata.xml
 wres/theme/profiles/default/skins.xml
 wres/theme/profiles/default/viewlets.xml
 wres/theme/profiles/default/wres.theme_various.txt
+wres/theme/skins/__init__.py
 wres/theme/skins/sunburst_theme/sunburst_images/logo.png
 wres/theme/skins/sunburst_theme/sunburst_images/pb_close.png
 wres/theme/skins/sunburst_theme/sunburst_styles/IEFixes.css
@@ -344,6 +345,7 @@ wres/theme/skins/wres_theme_js/transcriptionist.js
 wres/theme/skins/wres_theme_js/upload_view.js
 wres/theme/skins/wres_theme_scripts/CONTENT.txt
 wres/theme/skins/wres_theme_scripts/TestRoles.py
+wres/theme/skins/wres_theme_scripts/__init__.py
 wres/theme/skins/wres_theme_scripts/apply_mask.py
 wres/theme/skins/wres_theme_scripts/chooseImageSource.py
 wres/theme/skins/wres_theme_scripts/clinic_view_script.py

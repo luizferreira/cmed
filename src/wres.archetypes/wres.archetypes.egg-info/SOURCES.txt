@@ -307,8 +307,8 @@ wres/archetypes/profiles/default/workflows/soap_workflow/definition.xml
 wres/archetypes/profiles/default/workflows/soap_workflow/scripts/add_histories_to_chartdata.py
 wres/archetypes/profiles/default/workflows/soap_workflow/scripts/do_transition_father_or_child.py
 wres/archetypes/profiles/default/workflows/soap_workflow/scripts/make_route_to_user.py
+wres/archetypes/tests/IntegrationLayer.py
 wres/archetypes/tests/__init__.py
-wres/archetypes/tests/base.py
-wres/archetypes/tests/test_doctest.py
+wres/archetypes/tests/test_simple.py
 wres/archetypes/widgets/BuildingBlocksWidget.py
 wres/archetypes/widgets/__init__.py

@@ -1,4 +1,6 @@
 setuptools
+Products.PloneTestCase
+collective.testcaselayer
 
 [test]
 plone.app.testing
