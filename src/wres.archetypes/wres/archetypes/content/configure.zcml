@@ -5,6 +5,13 @@
 
   <!-- configure your content components here -->
   
+  <!-- -*- TODO: Retirar a patir de 09-2012 -*- -->
+  <class class=".visittemp.VisitTemp">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IVisitTemp"
+        />
+  </class>  
   <!-- -*- extra stuff goes here -*- -->
   <class class=".visit.Visit">
     <require

@@ -8,6 +8,9 @@
   -->
 <object name="portal_types" meta_type="Plone Types Tool">
   <!-- -*- extra stuff goes here -*- -->
+  <!-- -*- TODO: Retirar a partir de 09-2012 -*- -->
+  <object name="VisitTemp"
+    meta_type="Factory-based Type Information with dynamic views" />  
   <object name="Visit"
     meta_type="Factory-based Type Information with dynamic views" />
   <object name="Impresso"

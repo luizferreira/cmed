@@ -71,6 +71,10 @@
   <type type_id="Visit">
    <bound-workflow workflow_id="appointment_workflow"/>
   </type>
+  <!-- TODO: Retirar a partir de 09-2012 -->
+  <type type_id="VisitTemp">
+   <bound-workflow workflow_id="appointment_workflow"/>
+  </type>  
   
  </bindings>
 </object>
