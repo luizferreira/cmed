@@ -1,6 +1,6 @@
 from Products.CMFCore.utils import getToolByName
 
-path = context.absolute_url_path()
+path = '/'.join(context.getPhysicalPath())
 
 pc = getToolByName(context, 'portal_catalog')
 if path.rfind('documents') > 0:

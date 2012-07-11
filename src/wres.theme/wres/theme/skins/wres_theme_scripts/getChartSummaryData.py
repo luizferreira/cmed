@@ -24,7 +24,7 @@ from Products.CMFCore.utils import getToolByName
 
 def getNewDocumentsList():
     pc = getToolByName(context, 'portal_catalog')
-    brains = pc.searchResults({'portal_type': 'GenericDocument', 'path': context.absolute_url(1), 'sort_on':'created', 'sort_order':'ascending'})
+    brains = pc.searchResults({'portal_type': 'GenericDocument', 'path': '/'.join(context.getPhysicalPath()), 'sort_on':'created', 'sort_order':'ascending'})
     retorno = []
     for doc in brains:
         obj = doc.getObject()
