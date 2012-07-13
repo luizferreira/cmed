@@ -1,6 +1,6 @@
 
 pc = context.portal_catalog
-path = context.absolute_url_path()
+path = '/'.join(context.getPhysicalPath())
 base_path = path[:path.find('Patients')]
 
 if path.rfind('documents') > 0:
