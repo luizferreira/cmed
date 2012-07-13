@@ -1,5 +1,5 @@
 
-function include_document_or_template() {
+function include_document_or_template(event) {
 	/*	Inclui um documento anterior (ou modelo) no corpo do documento. 
 		doc_content eh apenas o conteudo do documento. O 2 children()
 		sao usados para retirar as divs pais, o que estava
