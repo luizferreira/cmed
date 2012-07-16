@@ -38,8 +38,6 @@ setup(name='wres.policy',
           'wres.brfields',
           'wres.archetypes',
           'wres.theme',
-          'Products.PloneTestCase',
-          'collective.testcaselayer',
           # 'PIL==1.1.6',
           # Pillow e lxml sao p413
           # -*- Extra requirements: -*-
@@ -47,6 +45,8 @@ setup(name='wres.policy',
       extras_require = {
           'test': [
                   'plone.app.testing',
+                  'Products.PloneTestCase',
+                  'collective.testcaselayer',
               ]
       },      
       entry_points="""

@@ -203,6 +203,7 @@ wres/policy/tests.py.old
 wres/policy/tool.gif
 wres/policy/Extensions/__init__.py
 wres/policy/Extensions/exporter.py
+wres/policy/Extensions/exporter_0_7.py
 wres/policy/Extensions/importer.py
 wres/policy/Extensions/upgrade.py
 wres/policy/profiles/default/actions.xml

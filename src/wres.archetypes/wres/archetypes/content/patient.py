@@ -37,28 +37,42 @@ class Patient(wresuser.WRESUser):
     schema = PatientSchema
 
     security = ClassSecurityInfo()
-    
+
+    #Doc
+    #I know pdi = jsilva, cpf = 01234567890, fullname = Joao Silva
+    #result = ['jsilva','01234567890','Joao Silva']    
     def SearchableText(self):
         pid = self.getId()
         cpf = self.getSocialSecurity()
         fullname = self.getFullName()
         return [pid, cpf, fullname]
 
+    #Doc
     # retorna um objeto do tipo json (JavaScript Object Notation),
     # utilizado no tipo visita (BuildingBlocksWidget)
     def getInformation(self):
         return json.dumps({'getLastDate': self.getLastVisitDate(), 'getContactPhone': self.getContactPhone(), 'UID': self.UID()})
         
+    #Doc
+    # Return patient group: "Patient"
     def getGroup(self):
         return PATIENT_GROUP
-
+    #Doc
+    #Return key + '_hidden'
     def createHiddenKey(self, key):
         return key + '_hidden'
-
+    
+    #Doc
+    #Sees if patient has hidden atributes of the key: key+"_hidden"
     def existSubObject(self, key):
         hidden_key = self.createHiddenKey(key)
         return hasattr(self, hidden_key)
-
+    
+    #Doc
+    #After execute:
+    #all_chartfolder = id list of all chartfolders indexed in system
+    #assertTrue("documents" in all_chartfolders) #assertTrue("impressos" in all_chartfolders) 
+    #assertTrue("exams" in all_chartfolders)     #assertTrue("upload" in all_chartfolders)
     def createChartFolder(self, id):
         from wres.archetypes.content.chartfolder import addChartFolder
         addChartFolder(self, id=id, title='Chart Folder')
