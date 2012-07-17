@@ -47,6 +47,11 @@ class Secretary(wresuser.WRESUser):
             acl.portal_role_manager.assignRoleToPrincipal(TRANSCRIPTIONIST_ROLE, sec_id)
         elif acl.getUserById(sec_id).has_role(TRANSCRIPTIONIST_ROLE):
             acl.portal_role_manager.removeRoleFromPrincipal(TRANSCRIPTIONIST_ROLE, sec_id)
+    
+    security.declarePublic('Title')
+    def Title(self):
+        """ """
+        return '%s %s' %(self.getFirstName(), self.getLastName())
 
 
 

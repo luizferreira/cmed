@@ -52,7 +52,6 @@
   </permission-map>
  </state>
  <state state_id="scheduled" title="Agendada">
-  <exit-transition transition_id="schedule"/>
   <exit-transition transition_id="confirm"/>
   <exit-transition transition_id="non show"/>
   <exit-transition transition_id="start visit"/>

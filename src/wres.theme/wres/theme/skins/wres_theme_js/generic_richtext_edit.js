@@ -33,7 +33,7 @@ function include_document_or_template(event) {
         a seguir aumenta o tamanho do corpo do documento na marra.*/
         gdoc_iframe = $("#gdocument_body_ifr");
         gdoc_iframe.css("height", "350");        
-		body_gdoc.html(doc_content);
+		body_gdoc.html(doc_content.clone());
 	}		
 	else {
 		doc_content.clone().appendTo(body_gdoc);

@@ -129,7 +129,9 @@ class Visit(event.ATEvent):
 #        self.setEndDate(self.getEndDate())#what is this for?
         #change the state from non-scheduled to scheduled.
         #Do we need this here?
-        self.portal_workflow.doActionFor(self, 'schedule')
+        # TODO: Retirar em 2013. Eh interessante isso msm? (voltar
+        # pro Agendada toda vez que houver uma edicao)
+        # self.portal_workflow.doActionFor(self, 'schedule')
 
         #esse trecho calcula o endDate com base no startDate e na duracao da consulta.
         self.endDate = addMinutes2Date(self.start(), self.getDuration())
