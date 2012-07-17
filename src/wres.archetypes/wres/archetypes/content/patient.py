@@ -187,6 +187,7 @@ class Patient(wresuser.WRESUser):
         'allergies', 'problems', 'not_signed_allergies', 'laboratory']
 
         for key in self.chart_data.mapping.keys():
-            setattr( self.chart_data, key, OOBTree(chart_dic[key]) )
+            if chart_dic.has_key(key): # increase upgrade compatibility
+                setattr( self.chart_data, key, OOBTree(chart_dic[key]) )            
 
 atapi.registerType(Patient, PROJECTNAME)
