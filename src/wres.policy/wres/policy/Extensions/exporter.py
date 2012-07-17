@@ -387,7 +387,6 @@ class VisitHandler(BaseHandler):
         self.write('contactPhone ', obj.getContactPhone())
         self.write('visit_type ', obj.getVisit_type())
         self.write('visit_reason ', obj.getVisit_reason())
-        self.write('note ', obj.getNote())
 
 registerHandler(VisitHandler)
 
