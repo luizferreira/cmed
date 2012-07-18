@@ -130,18 +130,19 @@ class BaseHandler(object):
             folder_path = obj_path.replace(self.portal_path, '')[1:]
             yield obj, obj_path, folder_path
 
+    def fix_oneline(self, s):
+        '''
+        clean possible windows shit. 
+        necessary for textarea fields.
+        '''
+        s = s.replace('\r\n', ' ')
+        s = s.replace('\n', ' ')
+        return s            
+
     def write_common(self, obj, folder_path, raw_data=False):
         ''' 
         write common fields like title, id, path, etc.
         '''
-        def fix_oneline(s):
-            '''
-            clean possible windows shit
-            '''
-            s = s.replace('\r\n', ' ')
-            s = s.replace('\n', ' ')
-            return s
-
         from Products.CMFCore.WorkflowCore import WorkflowException
 
         # get workflow state.
@@ -158,8 +159,8 @@ class BaseHandler(object):
         print >>self.fp, 'path = %s' % folder_path.lstrip('/')
         print >>self.fp, 'id = %s' % obj.getId()
         print >>self.fp, 'UID = %s' % obj.UID()
-        print >>self.fp, 'title = %s' % fix_oneline(obj.Title())
-        print >>self.fp, 'Description = %s' % fix_oneline(description)
+        print >>self.fp, 'title = %s' % self.fix_oneline(obj.Title())
+        print >>self.fp, 'Description = %s' % self.fix_oneline(description)
         print >>self.fp, 'owner = %s' % obj.getOwner()
         print >>self.fp, 'review-state = %s' % review_state
         print >>self.fp, 'created = %f' % obj.created().timeTime()
@@ -436,7 +437,7 @@ class GenericDocumentHandler(BaseHandler):
         doctor = obj.getDoctor()
         self.write('doctor ', doctor.getId())
         self.write('dateOfVisit ', obj.getDateOfVisit())
-        self.write('medicalNote ', obj.getMedicalNote())
+        self.write('medicalNote ', self.fix_oneline(obj.getMedicalNote()))
         self.write('document_type ', obj.getDocument_type())
         try:
             self.write_binary(obj.getGdocument_body())
@@ -473,11 +474,6 @@ def main(self, version='0_0_0'):
 
     plone = self
     plone_id = plone.getId() 
-
-    # verify if a instance in the same version already exist.
-    for obj in app.values():
-        if obj.getId() == plone_id + '__' + version.replace('.', '_'):
-            raise Exception('A %s instance in the version %s already exist!' % (plone_id, version))
 
     export_dir = 'export-%s' % plone.getId()
     if os.path.exists(export_dir):

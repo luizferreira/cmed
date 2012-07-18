@@ -9,7 +9,7 @@ from datetime import datetime
 from ConfigParser import ConfigParser, NoOptionError
 from Products.CMFPlone.utils import _createObjectByType
 from Testing.makerequest import makerequest
-
+from zExceptions import BadRequest
 from Products.CMFPlone import factory
 
 default_products = ['wres.policy']
@@ -39,7 +39,23 @@ def setup_plone(app, import_dir, version, products, ext_profiles=()):
 
     # add plone site
     from Products.CMFPlone.factory import addPloneSite
-    plone = addPloneSite(app, plone_id, extension_ids=ext_profiles)
+    try:
+        plone = addPloneSite(app, plone_id, extension_ids=ext_profiles)
+    except BadRequest:
+        # increment sub_version (plone site id) and then create plone site.
+        instance_list = []
+        for obj in app.values():
+            if instance_name in obj.getId():
+                instance_list.append(obj.getId())
+        instance_list.sort()
+        last = instance_list[-1]
+        if last.count('_') == 3: # second migration in some version (eg unica__0_8)
+            new_site_id =  last + '_1'
+        else: # and so on (eg unica__0_8_2)
+            to_increment = int(last[-1]) + 1
+            new_site_id = last[:-1] + str(to_increment)
+        plone = addPloneSite(app, new_site_id, extension_ids=ext_profiles)
+
 
     qit = plone.portal_quickinstaller
 
