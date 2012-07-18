@@ -12,8 +12,8 @@ repoze.catalog == 0.8.2
 wres.brfields
 wres.archetypes
 wres.theme
-Products.PloneTestCase
-collective.testcaselayer
 
 [test]
 plone.app.testing
+Products.PloneTestCase
+collective.testcaselayer

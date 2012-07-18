@@ -52,7 +52,7 @@ class WresArchetypes(PloneSandboxLayer):
 
 
 	def setUpPloneSite(self, portal):
-                applyProfile(portal, 'wres.archetypes:default')
+		applyProfile(portal, 'wres.archetypes:default')
 		applyProfile(portal, 'wres.brfields:default')
 		applyProfile(portal, 'wres.theme:default')
 		applyProfile(portal, 'wres.policy:default')

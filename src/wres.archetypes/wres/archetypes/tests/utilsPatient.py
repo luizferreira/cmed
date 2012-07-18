@@ -7,6 +7,13 @@ from Products.CMFCore.utils import getToolByName
 
 HOJE = DateTime()
 
+def getPatientOwnerFromPath(path):
+    splited = path.split('/')
+    if len(splited) > 3:
+        if splited[2] == "Patients":
+            return splited[3]
+    return None
+
 def random_birthdate():
     return DateTime(random.randrange(1901,HOJE.year()), random.randrange(1,13), random.randrange(1,28))
 

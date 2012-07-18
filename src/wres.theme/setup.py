@@ -24,13 +24,13 @@ setup(name='wres.theme',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-      'collective.testcaselayer',
           'setuptools',
           # -*- Extra requirements: -*-
       ],
        extras_require = {
           'test': [
                   'plone.app.testing',
+                  'collective.testcaselayer',
               ]
       },      
       entry_points="""

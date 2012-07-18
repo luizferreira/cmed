@@ -1,5 +1,5 @@
-collective.testcaselayer
 setuptools
 
 [test]
 plone.app.testing
+collective.testcaselayer

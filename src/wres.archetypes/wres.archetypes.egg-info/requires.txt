@@ -1,7 +1,7 @@
 setuptools
-Products.PloneTestCase
-collective.testcaselayer
 
 [test]
 plone.app.testing
 zope.testing
+Products.PloneTestCase
+collective.testcaselayer
