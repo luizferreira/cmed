@@ -93,6 +93,10 @@ class Visit(event.ATEvent):
         patient = self.getPatient()
         patient.create_event(Event.CREATION, self.startDate, self)
 
+        # make scheduled the initial state. This code needs to be here, not in 
+        # at_post_edit.
+        self.portal_workflow.doActionFor(self, 'schedule')
+
         self.setTitle(patient.Title())
         self.setSubject('CalendarShow')
         visit_type = self.getVisit_type()
