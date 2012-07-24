@@ -39,6 +39,7 @@ class Admin(wresuser.WRESUser):
 
     def get_home_url(self):
         portal = getSite()
-        return portal.absolute_url_path() + '/view'
+        return '/'.join(portal.getPhysicalPath()) + '/view'
+        
 
 atapi.registerType(Admin, PROJECTNAME)

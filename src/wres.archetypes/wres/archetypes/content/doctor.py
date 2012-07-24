@@ -6,6 +6,7 @@ from zope.app.component.hooks import getSite
 from Products.CMFPlone.utils import _createObjectByType
 from zope.interface import implements
 from AccessControl import ClassSecurityInfo, AuthEncoding
+import logging
 
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import folder
@@ -99,10 +100,46 @@ class Doctor(wresuser.WRESUser):
     def Title(self):
         """ """
         return '%s %s' %(self.getFirstName(), self.getLastName())
+
+    security.declarePublic('asc2title')
+    def asc2title(self):
+        """
+        Returns an forced asc2 title. Used as metadata.
+        Ex input:
+            title = Lúcio Gama
+        Ex output:
+            return 'Lucio Gama'
+        """
+        title = self.Title()
+        # maybe char_map will have to be incremented in future. 
+        char_map = {'á':'a', 'â':'a', 'ã':'a', 'é':'e', 'ê':'e', 'í':'i', 'ó':'o', 'ô':'o', 'ú':'u'}
+        new_title = ''
+        i = 0
+        while i < len(title):
+            if ord(title[i]) == 195: #identifies a non asc2 character
+                try:
+                    character = title[i:i+2]
+                except:
+                    raise Exception('Sorry, I supposed char ord=195 always preceds another char')
+                if character in char_map:
+                    new_title += char_map[character]
+                else:
+                    logging.warn("'Pegue o pombo!' Special character passed (not in char_map)!")
+                i += 1 # used to jump 2, since special chars have lenght 2.
+            else:
+                new_title += title[i]
+            i += 1
+
+        # verifying
+        try: 
+            new_title.decode('ascii')
+        except UnicodeDecodeError:
+            logging.warn("Sorry, seems to me that some non asc2 char passed, this will cause problmes later!")
+        return new_title        
     
     def get_home_url(self):
         portal = getSite()
-        return portal.absolute_url_path() + '/Appointments/sec_desk'
+        return '/'.join(portal.getPhysicalPath()) + '/Appointments/sec_desk'
 
     def getAppointmentsURL(self):
         portal = getSite()

@@ -33,7 +33,7 @@ class Secretary(wresuser.WRESUser):
 
     def get_home_url(self):
         portal = getSite()
-        return portal.absolute_url_path() + '/Appointments/sec_desk'
+        return '/'.join(portal.getPhysicalPath()) + '/Appointments/sec_desk'
 
     def at_post_create_script(self):
         wresuser.WRESUser.at_post_create_script(self)
