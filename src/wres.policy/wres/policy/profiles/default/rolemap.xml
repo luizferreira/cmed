@@ -25,6 +25,16 @@
       <role name="Transcriptionist"/>
     </permission>
 
+    <permission name="Delete objects" acquire="False">
+      <role name="Manager"/>
+      <role name="UemrAdmin"/>
+    </permission>    
+
+    <permission name="Modify constrain types" acquire="False">
+      <role name="Manager"/>
+      <role name="UemrAdmin"/>
+    </permission>        
+
     <!-- /PERMISSOES DE TERCEIROS -->
 
     <!-- PERMISSOES DO COMMUNIMED -->
