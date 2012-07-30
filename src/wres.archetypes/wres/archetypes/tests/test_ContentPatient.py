@@ -12,7 +12,7 @@ from wres.policy.utils.roles import PATIENT_GROUP
 
 class TestSetup(unittest.TestCase):
     layer = WRES_ARCHETYPES_INTEGRATION_TESTING
-    
+   
     def setUp(self):
         self.app = self.layer['app']
         self.portal = self.layer['portal']
@@ -23,7 +23,6 @@ class TestSetup(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         
         #Cria um paciente para ser usado nos testes 
-        
         create_patients(self.portal,self.pr,"joao","silva")        
         
         #Make patient easy to access
@@ -113,13 +112,8 @@ class TestSetup(unittest.TestCase):
         query = self.pc.searchResults({"type":"chartfolder"})
         all_chartfolders = []
         for i in range(len(query)):
-                try:
-                        obj = query[i].getObject()
-                except:
-                        print "Out of range: Provavelmente ocorreu um erro"
-                        break                        
+                obj = query[i].getObject()
                 all_chartfolders.append(obj.id)
-                print obj.id
         self.assertTrue("documents" in all_chartfolders)
         self.assertTrue("impressos" in all_chartfolders)
         self.assertTrue("exams" in all_chartfolders)
@@ -141,30 +135,48 @@ class TestSetup(unittest.TestCase):
         query = self.pc.searchResults({'id':'cjose'})
         new_patient = query[0].getObject()
         
-        #Check Cleanness
-        query = self.pc.searchResults({"type":"chartfolder"})
-        all_chartfolders = []
-        newCF = new_patient.chartFolder
+        #Check Cleanness (if chartFolder exists)
+        query = self.pc.searchResults({"id":"upload"})
         for i in range(len(query)):
                 brain = query[i]
-                if getPatientOwnerFromPath(brain.getPath()) == "cjose":
-                        obj = brain.getObject()
-                        all_chartfolders.append(obj.id)
-                getPatientOwnerFromPath(brain.getPath())
-        self.assertFalse("upload" in all_chartfolders)
+                if "cjose" in brain.getPath():
+                        raise NameError("Upload shouldn't exists")
         
-        #Pass Second if
+        #Check chart
         new_patient.createMissingObject("chartFolder")
-        new_query = self.pc.searchResults({"type":"chartfolder"})
+        query = self.pc.searchResults({"id":"upload"})
+        cjose_upload = False
         for i in range(len(query)):
-                brain = new_query[i]
-                if getPatientOwnerFromPath(brain.getPath()) == "cjose":
-                        obj = brain.getObject()
-                        all_chartfolders.append(obj.id)
-        print all_chartfolders
-        self.assertTrue("upload" in all_chartfolders)
-
+                brain = query[i]
+                if "cjose" in brain.getPath():
+                        cjose_upload = True
+        self.assertTrue(cjose_upload)
+        print "Done"
         
+    def test__getSubObject(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:_getSubObject"
+        print "-------------------------------------------------"
+        patient = self.patient
+        chart = patient._getSubObject("chartFolder")
+        self.assertTrue("<ChartFolder at" in str(chart))
         
-        
-        
+    def test_chartFolder(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:chartFolder"
+        print "-------------------------------------------------"
+        patient = self.patient
+        chart = patient.chartFolder
+        self.assertTrue("<ChartFolder at" in str(chart))
+    
+    def test_getLastVisitDate(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:getLastVisitDate"
+        print "-------------------------------------------------"
+        patient = self.patient
+        chart = patient.chartFolder
+        self.assertTrue("<ChartFolder at" in str(chart))
+    

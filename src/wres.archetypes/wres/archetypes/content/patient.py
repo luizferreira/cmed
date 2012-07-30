@@ -38,46 +38,61 @@ class Patient(wresuser.WRESUser):
 
     security = ClassSecurityInfo()
 
-    #Doc
-    #I know pdi = jsilva, cpf = 01234567890, fullname = Joao Silva
-    #result = ['jsilva','01234567890','Joao Silva']    
     def SearchableText(self):
+        """
+        Returns strings that can be searched by the SearchableText catalog index.
+        Example input:
+            pid = jsilva, cpf = 0123456790, fullname = Joao Silva
+        Example output:
+            ['jsilva', '0123456789', 'Joao Silva']
+        """
         pid = self.getId()
         cpf = self.getSocialSecurity()
         fullname = self.getFullName()
         return [pid, cpf, fullname]
 
-    #Doc
-    # retorna um objeto do tipo json (JavaScript Object Notation),
-    # utilizado no tipo visita (BuildingBlocksWidget)
     def getInformation(self):
+        """
+        Retorna um objeto do tipo json (JavaScript Object Notation).
+        Utilizado no tipo visita (BuildingBlocksWidget)
+        """
         return json.dumps({'getLastDate': self.getLastVisitDate(), 'getContactPhone': self.getContactPhone(), 'UID': self.UID()})
         
-    #Doc
-    # Return patient group: "Patient"
     def getGroup(self):
+        """
+        Return patient group: "Patient"
+        """
         return PATIENT_GROUP
-    #Doc
-    #Return key + '_hidden'
+        
     def createHiddenKey(self, key):
+        """
+        Return string: key + '_hidden'
+        """
         return key + '_hidden'
     
-    #Doc
-    #Sees if patient has hidden atributes of the key: key+"_hidden"
     def existSubObject(self, key):
+        """
+        Sees if patient has hidden atributes of the key: key+"_hidden"
+        """
         hidden_key = self.createHiddenKey(key)
         return hasattr(self, hidden_key)
     
-    #Doc
-    #After execute:
-    #all_chartfolder = id list of all chartfolders indexed in system
-    #assertTrue("documents" in all_chartfolders) #assertTrue("impressos" in all_chartfolders) 
-    #assertTrue("exams" in all_chartfolders)     #assertTrue("upload" in all_chartfolders)
     def createChartFolder(self, id):
+        """
+        Create chart folder in patient.
+        After execute:
+        all_chartfolder = id list of all chartfolders indexed in system
+        assertTrue("documents" in all_chartfolders)     assertTrue("impressos" in all_chartfolders) 
+        assertTrue("exams" in all_chartfolders)         assertTrue("upload" in all_chartfolders)
+        """
         from wres.archetypes.content.chartfolder import addChartFolder
         addChartFolder(self, id=id, title='Chart Folder')
 
     def createMissingObject(self, key):
+        """
+        Create object "key" if it doesn't exists
+        Obs: Nome fantasia, só funciona para chartFolder
+        """
         hidden_key = self.createHiddenKey(key)
         if not self.existSubObject(key):
             if key == 'chartFolder':
@@ -87,6 +102,10 @@ class Patient(wresuser.WRESUser):
         return hidden_key
 
     def _getSubObject(self, key):
+        """
+        Return patient's chartFolder (if it doen't exists, chartFolder is created')
+        Obs: Nome fantasia, só funciona para chartFolder
+        """
         hidden_key = self.createHiddenKey(key)
         if not self.existSubObject(key):
             self.createMissingObject(key)
@@ -97,9 +116,10 @@ class Patient(wresuser.WRESUser):
         return chart
     
     def chartFolder(self):
-        """ """
+        """ 
+        Just create the function used by ComputedAttribute() to create chartFolder attribute.
+        """
         return self._getSubObject('chartFolder')
-    
     chartFolder = ComputedAttribute(chartFolder, 1)
 
 #    as duas funcoes abaixo sao necessarias no tipo Visit.
