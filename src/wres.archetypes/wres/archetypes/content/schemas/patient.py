@@ -295,7 +295,7 @@ MAIN = Schema((
     ReferenceField('doctor',
         relationship='doctor',
         allowed_types=('Doctor',),
-        vocabulary_custom_label='b.Title',
+        vocabulary_custom_label='b.asc2title',
         widget=ReferenceWidget(
             macro = 'reference_formatted',
             label=_('Provider'),

@@ -8,4 +8,5 @@
     <index name="LTitle" meta_type="FieldIndex">
         <indexed_attr value="lower_title"/>
     </index>  
+    <column value="asc2title"/>
 </object>

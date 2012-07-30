@@ -26,8 +26,7 @@
             <metal:fill fill-slot="widget_body"
                         tal:define="isSpecialPhone python:str(value).startswith('0');
                                     value python:value or '';
-                                    value python:((len(value)>2) and value) or '';
-                                    value python:here.phoneFormat(value,'phone');">
+                                    value python:((len(value)>2) and value) or ''">
                     (<select tal:attributes="name python:'a%s' % fieldName;
                                             id python:'a%s' % fieldName;
                                             "
@@ -42,9 +41,12 @@
                                 />
 
                     </select>)
-                <input tal:attributes="name python:'a%s' % fieldName;" type="text" size="8" maxlength="8" onKeyUp="updatePhone(this);" onchange="updatePhone(this);"/>
+                <input tal:attributes="name python:'a%s' % fieldName;
+                                       
+                                       value python:here.phoneFormat(value,'phone')" type="text" size="8" maxlength="8" onKeyUp="updatePhone(this);" onchange="updatePhone(this);">
                 
-                <input type="hidden" id="contactPhone" tal:attributes="name fieldName" maxlength="10"/>
+                <input type="hidden" id="contactPhone" tal:attributes="name fieldName;
+                                       value value" maxlength="10">
             </metal:fill>            
         </metal:use>
     </metal:define>

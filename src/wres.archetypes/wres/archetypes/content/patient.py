@@ -162,7 +162,7 @@ class Patient(wresuser.WRESUser):
         return self.Title()
 
     def get_home_url(self):
-        return self.absolute_url_path() + '/patient_desktop_view'
+        return '/'.join(self.getPhysicalPath()) + '/patient_desktop_view'
 
     def __create_chart_data(self):
         clean_self = self.aq_base
