@@ -125,7 +125,10 @@ class Patient(wresuser.WRESUser):
 #    as duas funcoes abaixo sao necessarias no tipo Visit.
     security.declarePublic('getLastVisitDate')
     def getLastVisitDate(self, strftime='%d/%m/%Y'):
-        """ """
+        """
+        Return the patient's attribute: lastVisitDate in %d/%m/%Y
+        If it not exists return "No visits concluded"
+        """
         if not hasattr(self, 'lastVisitDate'):
             return 'No visits concluded'
         else:
@@ -133,12 +136,21 @@ class Patient(wresuser.WRESUser):
 
     security.declarePublic('setLastVisitDate')
     def setLastVisitDate(self, date):
-        """ """
+        """
+        Just set the patient's attribute: lastVisitDate
+        Obs: O parametro "date" precisar possuir a funcao strftime()
+        """
         self.lastVisitDate = date
+        if not hasattr(date,"strftime"):
+            raise ValueError("Tipo de data invalida")
 
     def Title(self):
-        """ """
-        if self.getFirstName() == '':
+        """
+        If patient.firstName = 'Joao' and patient.lastName = 'Silva'
+        This function will return 'Joao Silva'
+        If it doesn't has a first and a last name, the function will return "Sem Nome"
+        """
+        if self.getFirstName() == '' and self.getLastName() == '':
             return 'Sem Nome'
         else:
             return '%s %s' %(self.getFirstName(),
@@ -146,10 +158,16 @@ class Patient(wresuser.WRESUser):
                             )
 
     def lower_title(self):
-        """ self.Title().lower() """
+        """
+        Return all patient.Title() letters in lower case.
+        """
         return self.Title().lower()
 
     def at_post_create_script(self):
+        """
+        Just execute WRESUser.at_post_create_script(), basically register
+        the patient object as portal member
+        """
         self.create_event(Event.CREATION, self.created(), self)
         wresuser.WRESUser.at_post_create_script(self)
         
@@ -190,7 +208,7 @@ class Patient(wresuser.WRESUser):
         events_list.sort(cmp=Event._event_cmp)
         return events_list
 
-#        # metodo utilizado apenas no debug_patientchartdata
+#   Metodo utilizado apenas no debug_patientchartdata
     def get_chart_data_map(self):
         return ChartData.mapping
 

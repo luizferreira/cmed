@@ -3,12 +3,14 @@ import unittest2 as unittest
 from wres.archetypes.tests.IntegrationLayer import WRES_ARCHETYPES_INTEGRATION_TESTING
 from wres.archetypes.tests.IntegrationLayer import WRES_ARCHETYPES_INTEGRATION_TESTING
 from wres.archetypes.content.patient import Patient
+from wres.archetypes.content.visit import Visit
 from wres.archetypes.tests.utilsPatient import create_patients, getPatientOwnerFromPath
 from Products.CMFCore.utils import getToolByName
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 import json
 from wres.policy.utils.roles import PATIENT_GROUP
+from wres.policy.setuphandlers import getOrCreateType
 
 class TestSetup(unittest.TestCase):
     layer = WRES_ARCHETYPES_INTEGRATION_TESTING
@@ -177,6 +179,73 @@ class TestSetup(unittest.TestCase):
         print "Modulo: ContentPatient   Test:getLastVisitDate"
         print "-------------------------------------------------"
         patient = self.patient
-        chart = patient.chartFolder
-        self.assertTrue("<ChartFolder at" in str(chart))
+        
+        #Fist test, without lastVisitDate
+        self.assertEqual('No visits concluded',patient.getLastVisitDate())
+        
+        #Test with lastVisitDate
+        import datetime
+        DATE = datetime.datetime(2009,5,25)
+        patient.lastVisitDate = DATE
+        self.assertEqual('25/05/2009',patient.getLastVisitDate())
+        print "Done"
     
+    def test_setLastVisitDate(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:setLastVisitDate"
+        print "-------------------------------------------------"
+        patient = self.patient
+        #Set invalid date type
+        try:
+            patient.setLastVisitDate("03/07/1961")
+        except ValueError as error:
+            self.assertEqual('Tipo de data invalida',str(error))
+            
+        #Set valid date
+        import datetime
+        DATE = datetime.datetime(2009,4,21)
+        patient.setLastVisitDate(DATE)
+        self.assertEqual('21/04/2009',patient.getLastVisitDate())
+        print "Done"
+    
+    def test_Title(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:Title"
+        print "-------------------------------------------------"
+        patient = self.patient
+
+        #Check patient Title when name exists
+        self.assertEqual("Joao Silva",patient.Title())
+        
+        #Check patient Title when name doesn't exists
+        patient.firstName = ""
+        patient.lastName = ""
+        self.assertEqual("Sem Nome",patient.Title())
+        print "Done"
+    
+    def test_lower_title(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:lower_title"
+        print "-------------------------------------------------"
+        patient = self.patient
+        #Check patient Title when name exists
+        self.assertEqual("joao silva",patient.lower_title())
+        print "Done"
+    
+    def test_at_post_create_script(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:at_post_create_script"
+        print "-------------------------------------------------"
+        #This function has been used at the creation time of the patient
+        #Here we just look if his ID is registered.
+        portal = self.portal
+        pm = getToolByName(portal,'portal_membership')
+        mb = pm.getMemberById('jsilva')
+        self.assertFalse(mb is None)
+        print "Done"
+        
+
