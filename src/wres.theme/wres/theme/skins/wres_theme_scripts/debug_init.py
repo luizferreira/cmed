@@ -202,7 +202,7 @@ def set_doctor_information(d):
     d.setInitial('DT')
     d.setSignature('Assinatura do Doutor Teste')
     d.setCredentials('Credenciais do Doutor Teste')
-    d.setSpecialty('Especialidades do Doutor Teste')
+    d.setSpecialty1('general')
     d.setSignPassword('senha1')
     d.reindexObject()
 

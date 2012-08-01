@@ -38,9 +38,14 @@ class DoctorFolder(folder.ATFolder):
     meta_type = "DoctorFolder"
     schema = DoctorFolderSchema
 
-#    title = atapi.ATFieldProperty('title')
-#    description = atapi.ATFieldProperty('description')
-
-    # -*- Your ATSchema to Python Property Bridges Here ... -*-
+    def list_doctors(self):
+        '''
+        Used by anonymous to search catalog in doctor_presentation.
+        This is necessary, since a normal search in catalog would return nothing, and
+        it is not possible to call an unrestrictedSearchResults in a script.
+        Anonymous need to have 'Acess contents information' permission here, this is
+        being done in setuphandlers.
+        '''
+        return self.portal_catalog.unrestrictedSearchResults({'meta_type': 'Doctor'})
 
 atapi.registerType(DoctorFolder, PROJECTNAME)

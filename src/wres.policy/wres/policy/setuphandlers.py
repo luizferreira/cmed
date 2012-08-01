@@ -98,11 +98,12 @@ def createDoctorFolder(portal):
     print '*** Criando pasta de medicos...'
     doctor_folder = getOrCreateType(portal, portal, 'Doctors', 'DoctorFolder')
     doctor_folder.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
-    doctor_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
+    # its important that Anonymous have 'Acess cont..' permission, so he can call the method list_doctors.
+    doctor_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE, ANONYMOUS_ROLE], acquire = False)
     doctor_folder.setTitle('Médicos')
     doctor_folder.reindexObject()
     print '*** Criando pasta de medicos...... OK'
-    
+
 def createReferringProviderFolder(portal):
     """ Cria a pasta de medicos indicantes """
     print '*** Criando pasta de medicos indicantes...'
@@ -185,22 +186,6 @@ def createReportsFolder(portal, clinic):
     reports_folder.reindexObject()
     print '*** Criando pasta de relatórios...... OK'       
 
-def createFrontPage(portal,front_title,front_desc,front_text):
-    #Cria a front-page - Utilizada somente nos testes
-    wftool = getToolByName(portal, "portal_workflow")
-    _createObjectByType('Document', portal, id='front-page', title=front_title, description=front_desc)
-    fp = portal['front-page']
-    fp.setTitle(front_title)
-    fp.setDescription(front_desc)
-    fp.setLanguage(portal.Language())
-    fp.setText(front_text, mimetype='text/html')
-
-    # Show off presentation mode
-    fp.setPresentation(True)
-
-    portal.setDefaultPage('front-page')
-    fp.reindexObject()
-
 def deleteDefaultObjects(portal):
     """ Deleta objetos de um plone site out-of-the-box """
     try:
@@ -221,20 +206,11 @@ def deleteDefaultObjects(portal):
     except AttributeError:
         print "No %s folder detected. Hmm... strange. Continuing..." % 'events'
 
-    #front_page é usado para forçar o login de usuários anônimos.
-    fp_title='Bem-vindo ao Communimed'
-    fp_desc='Você está logado como administrador.'
-    fp_text='Como administrador o usuário tem acesso a áreas e funções previamente restritas. Lembre-se: "Com grandes poderes vêm grandes responsabilidades".'
-    #Try/Except exists just because zope browser in tests that do not configure plone front-page correctly.
     try:
-        front_page = getattr(portal, 'front-page')
-        front_page.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE]) 
-        front_page.setTitle(fp_title)
-        front_page.setDescription(fp_desc)
-        front_page.setText(fp_text)
+        portal.manage_delObjects('front-page')
+        print "Deleted Front page"
     except AttributeError:
-        #Cria front-page para ser usado nos testes
-        createFrontPage(portal,fp_title,fp_desc,fp_text)
+        print "No %s detected. Hmm... strange. Continuing..." % 'page'        
 
 def createGroups(portal):
     """ Funcao que cria os grupos e atribui papeis aos mesmos. As constantes aqui
@@ -518,6 +494,11 @@ def addOtherIndex(site):
 
 # o que isso esta fazendo?
 def changePortalObjectsConfiguration(portal):
+
+    # doctor_presentation as the default view
+    portal.setDefaultPage(None)
+    portal.setLayout('doctor_presentation')
+
     portal_membership = getToolByName(portal, 'portal_membership')
     #don't create a member folder
     portal_membership.memberareaCreationFlag = 1
@@ -529,7 +510,7 @@ def changePortalObjectsConfiguration(portal):
     portal_types['Plone Site'].filter_content_types = True
     portal_types['Plone Site'].allowed_content_types = ['Document', 'File', 'Folder',
                                                         'Image', 'Link', 'Event', 'News Item', 'Topic',]
-                                                        
+
 #===========================================================================
 # Muda a lingua padrao do portal
 # Peter
@@ -711,8 +692,4 @@ def setupVarious(context):
         changePortalObjectsConfiguration(portal)
         mailHostConfiguration(portal)
         addUpgradeExternalMethods(portal)
-
         createGroups(portal)
-
-    
-   

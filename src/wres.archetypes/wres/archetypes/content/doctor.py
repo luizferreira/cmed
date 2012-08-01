@@ -26,6 +26,10 @@ schemata.finalizeATCTSchema(
     moveDiscussion=False
 )
 
+COURSE_TYPES = atapi.DisplayList((
+   ('college','Ensino Superior.'),
+   ('specialization','Especialização'),
+))
 
 class Doctor(wresuser.WRESUser):
     """Doctor type for WRES website"""
@@ -43,7 +47,7 @@ class Doctor(wresuser.WRESUser):
         user_id = self.getId()
         
         portal = getSite()
-        
+
         # cria a pasta de visitas e coloca permissao 'Add portal content' (checada pelo solgema antes 
         # de adicionar uma visita no calendário) apenas para Secretary, Manager e Owner. Logo depois,
         # muda-se o owner da pasta doctor_visits para o médico reponsável para que o mesmo possa
@@ -86,6 +90,10 @@ class Doctor(wresuser.WRESUser):
 
     def at_post_create_script(self, migration=False):
         wresuser.WRESUser.at_post_create_script(self)
+        
+        # Anonymous need to have View permission here in order to see the initial page (doctor_presentation)
+        self.manage_permission('View', ['Manager', 'UemrAdmin', 'Doctor', 'Secretary', 'Transcriptionist', 'Patient', 'Anonymous'], acquire=False)
+
         self.add_visits_folder()
         if not migration:
             self.setSignPassword('senha1') #TODO gerar uma assinatura padrao randomica              
@@ -153,6 +161,18 @@ class Doctor(wresuser.WRESUser):
             return
 
         return "Password doesn't match"
+
+    def getCourseTypes(self):
+        """
+        Used by specialty1 and specialty2 fields.
+        """
+        return COURSE_TYPES
+
+    def getSchemaFields(self):
+        '''
+        Used in doctor_presentaion (doctor_presentaion.py) to pass throgh an unauthorized.
+        '''
+        return self.schema.fields()
     
 
 atapi.registerType(Doctor, PROJECTNAME)
