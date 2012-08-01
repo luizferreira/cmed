@@ -35,7 +35,7 @@ def create_uemr_user(related_object, user_id, email='', fullname=''):
     pm.createMemberArea(member_id=user_id) 
 
 
-def create_patients(portal, pr,patient_fname="joao",patient_lname="silva",email="joao@silva.com"):
+def create_patient(portal, pr,patient_fname="joao",patient_lname="silva",email="joao@silva.com"):
     patients = getattr(portal, 'Patients')
     new_obj_id = create_valid_user_id(pr, patient_fname, patient_lname)
     patient = create_new_object(portal, patients, new_obj_id, 'Patient')
@@ -44,6 +44,15 @@ def create_patients(portal, pr,patient_fname="joao",patient_lname="silva",email=
     set_patient_information(patient)
     # cria evento manualmente.
     patient.create_event(1000, patient.created(), patient)        
+
+def create_empty_patient(portal, pr,patient_fname="joao",patient_lname="silva",email="joao@silva.com"):
+    patients = getattr(portal, 'Patients')
+    new_obj_id = create_valid_user_id(pr, patient_fname, patient_lname)
+    patient = create_new_object(portal, patients, new_obj_id, 'Patient')
+    fullname = patient_fname + patient_lname
+    create_uemr_user(patient, new_obj_id, email=email, fullname=fullname)
+    # cria evento manualmente.
+    patient.create_event(1000, patient.created(), patient) 
 
 def create_new_object(portal, parent, newid, new_obj_type):
     """

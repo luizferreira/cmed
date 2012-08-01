@@ -172,17 +172,31 @@ class Patient(wresuser.WRESUser):
         wresuser.WRESUser.at_post_create_script(self)
         
     def at_post_edit_script(self):
+        """
+        Just execute WRESUser.at_post_edit_script(), basically if the patient
+        name was changed, the name will be formated.
+        """
         wresuser.WRESUser.at_post_edit_script(self)
 
 
     #the 3 functions bellow are needed to create a patient user
     def getFullName(self):
+        """
+        See self.Title() documentation
+        """
         return self.Title()
 
     def get_home_url(self):
+        """
+        Concatenate the patient url with "/patient_desktop_view"
+        """
+        #TODO: Seria mais otimizado se get_home_url fosse um atributo
         return '/'.join(self.getPhysicalPath()) + '/patient_desktop_view'
 
     def __create_chart_data(self):
+        """
+        Create chart_data_hidden attribute
+        """
         clean_self = self.aq_base
         if not hasattr(clean_self, 'chart_data_hidden'):
             self.chart_data_hidden = ChartData()
@@ -191,18 +205,19 @@ class Patient(wresuser.WRESUser):
     chart_data = ComputedAttribute(__create_chart_data, 1)
 
     def create_event(self, ev_type, date, related_obj):
-        '''
-        register an event. all modules that creates events use this method.
-        '''
+        """
+        Register an event. all modules that creates events use this method.
+        Exemple: Register event at creation o patient
+        """
         chart_data = self.chart_data # garante a criacao do chart_data
         events = chart_data.events
         new_event = Event(self, ev_type, date, related_obj) 
         events[new_event.id] = new_event
 
     def get_events(self):
-        '''
-        return a list of events sorted by date.
-        '''
+        """
+        Return a list of events sorted by date.
+        """
         dic = dict(self.chart_data.events)
         events_list = dic.values()
         events_list.sort(cmp=Event._event_cmp)
@@ -210,13 +225,24 @@ class Patient(wresuser.WRESUser):
 
 #   Metodo utilizado apenas no debug_patientchartdata
     def get_chart_data_map(self):
+        """
+        Return chardata map as:
+        {'review_of_systems': <type 'BTrees.OOBTree.OOBTree'>,
+         'not_signed_allergies': <type 'BTrees.OOBTree.OOBTree'>,
+         'medications': <type 'BTrees.OOBTree.OOBTree'>, 
+         'prescriptions': <type 'BTrees.OOBTree.OOBTree'>, 
+         'laboratory': <type 'BTrees.OOBTree.OOBTree'>, 
+         'allergies': <type 'BTrees.OOBTree.OOBTree'>, 
+         'problems': <type 'BTrees.OOBTree.OOBTree'>, 
+         'events': <type 'BTrees.OOBTree.OOBTree'>}
+        """
         return ChartData.mapping
 
     def chart_data_summary(self):
-        '''
-        method used in migration and in debug_patientchartdata.
-        just return the chart_data in format of dictionaries.
-        '''
+        """
+        Method used in migration and in debug_patientchartdata.
+        Just return the chart_data in format of dictionaries.
+        """
         keys = ['review_of_systems', 'medications', 'prescriptions', 
         'allergies', 'problems', 'not_signed_allergies', 'laboratory']
 
@@ -231,9 +257,9 @@ class Patient(wresuser.WRESUser):
         return dic_chartdata
 
     def import_chartdata(self, chart_dic):
-        '''
-        used exclusively in migration. 
-        '''
+        """
+        Used exclusively in migration. 
+        """
         from BTrees.OOBTree import OOBTree
         keys = ['review_of_systems', 'medications', 'prescriptions', 
         'allergies', 'problems', 'not_signed_allergies', 'laboratory']

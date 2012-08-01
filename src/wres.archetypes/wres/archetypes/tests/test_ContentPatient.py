@@ -4,7 +4,8 @@ from wres.archetypes.tests.IntegrationLayer import WRES_ARCHETYPES_INTEGRATION_T
 from wres.archetypes.tests.IntegrationLayer import WRES_ARCHETYPES_INTEGRATION_TESTING
 from wres.archetypes.content.patient import Patient
 from wres.archetypes.content.visit import Visit
-from wres.archetypes.tests.utilsPatient import create_patients, getPatientOwnerFromPath
+from wres.archetypes.content.chartdata import Event
+from wres.archetypes.tests.utilsPatient import create_patient, getPatientOwnerFromPath, create_empty_patient
 from Products.CMFCore.utils import getToolByName
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
@@ -25,7 +26,7 @@ class TestSetup(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         
         #Cria um paciente para ser usado nos testes 
-        create_patients(self.portal,self.pr,"joao","silva")        
+        create_patient(self.portal,self.pr,"joao","silva")        
         
         #Make patient easy to access
         query = self.pc.searchResults({'id':'jsilva'})
@@ -133,7 +134,7 @@ class TestSetup(unittest.TestCase):
         self.assertTrue("atributo_hidden" in patient.createMissingObject("atributo"))
         
         #Create new patient without chartfolder yet        
-        create_patients(self.portal,self.pr,"carlos","jose")        
+        create_patient(self.portal,self.pr,"carlos","jose")        
         query = self.pc.searchResults({'id':'cjose'})
         new_patient = query[0].getObject()
         
@@ -247,5 +248,135 @@ class TestSetup(unittest.TestCase):
         mb = pm.getMemberById('jsilva')
         self.assertFalse(mb is None)
         print "Done"
+    
+    def test_at_post_edit_script(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:at_post_edit_script"
+        print "-------------------------------------------------"
+        patient = self.patient
+        patient.setFirstName('carlos')
+        patient.at_post_edit_script()
+        self.assertEqual('Carlos',patient.getFirstName())
+        print "Done"
+    
+    def test_at_post_edit_script(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:at_post_edit_script"
+        print "-------------------------------------------------"
+        patient = self.patient
+        patient.setFirstName('carlos')
+        patient.at_post_edit_script()
+        self.assertEqual('Carlos',patient.getFirstName())
+        print "Done"
+    
+    def test_getFullName(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:getFullName"
+        print "-------------------------------------------------"
+        patient = self.patient
+        self.assertEqual('Joao Silva',patient.getFullName())
+        print "Done"
+        
+    def test_get_home_url(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:get_home_url"
+        print "-------------------------------------------------"
+        patient = self.patient
+        self.assertEqual('/plone/Patients/jsilva/patient_desktop_view',patient.get_home_url())
+        print "Done"
+    
+    def test___create_chart_data(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:__create_chart_data"
+        print "-------------------------------------------------"
+        #This function is executed when patient's event creation is executed
+        #Here it will be just checked if it has been executed
+        patient = self.patient
+        self.assertTrue(hasattr(patient,"chart_data_hidden"))
+        print "Done"
+        
+    def test_create_event(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:create_event"
+        print "-------------------------------------------------"
+        patient = self.patient
+        #Here we just check if the creation patient event has been called
+        chartdata = patient.chart_data
+        event_list = dict(chartdata.events).values()
+        event_list.sort(cmp=Event._event_cmp)
+        event_txt = event_list[0].event_text
+        self.assertEqual('Paciente <a target="_blank" href="/plone/Patients/jsilva" >Joao Silva</a> adicionado.',event_txt)
+        print "Done"
+
+    def test_get_events(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:get_events"
+        print "-------------------------------------------------"
+        patient = self.patient
+        size1 = len(patient.get_events())
+        
+        #To test, I'll add one more event to events, and see if I'll get it
+        from DateTime import DateTime 
+        patient.create_event(Event.CREATION,DateTime(),patient)
+        
+        #Check if number of events changed
+        size2 = len(patient.get_events())
+        self.assertTrue(size1 + 1 == size2)
+        
+        #Check if the last event is correct
+        events = patient.get_events()
+        event_txt = events[-1:][0].event_text
+        self.assertEqual('Paciente <a target="_blank" href="/plone/Patients/jsilva" >Joao Silva</a> adicionado.',event_txt)
+        print "Done"
+
+    def test_get_chart_data_map(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:get_chart_data_map"
+        print "-------------------------------------------------"
+        patient = self.patient
+        self.assertTrue("{'review_of_systems': <type 'BTrees.OOBTree.OOBTree'>, 'not_signed_allergies': <type 'BTrees.OOBTree.OOBTree'>, 'medications': <type 'BTrees.OOBTree.OOBTree'>, 'prescriptions': <type 'BTrees.OOBTree.OOBTree'>, 'laboratory': <type 'BTrees.OOBTree.OOBTree'>, 'allergies': <type 'BTrees.OOBTree.OOBTree'>, 'problems': <type 'BTrees.OOBTree.OOBTree'>, 'events': <type 'BTrees.OOBTree.OOBTree'>}"
+        == str(patient.get_chart_data_map()))
+        print "Done"
+    
+    def test_chart_data_summary(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:chart_data_summary"
+        print "-------------------------------------------------"
+        patient = self.patient
+        #Is difficult to test the correctness of this function.
+        #Here will be just checked the returned value of an empty chart folder.
+        #Created new clean patient       
+        create_empty_patient(self.portal,self.pr,"carlos","jose")        
+        query = self.pc.searchResults({'id':'cjose'})
+        new_patient = query[0].getObject()
+        self.assertTrue("{'review_of_systems': <type 'BTrees.OOBTree.OOBTree'>, 'not_signed_allergies': <type 'BTrees.OOBTree.OOBTree'>, 'medications': <type 'BTrees.OOBTree.OOBTree'>, 'prescriptions': <type 'BTrees.OOBTree.OOBTree'>, 'laboratory': <type 'BTrees.OOBTree.OOBTree'>, 'allergies': <type 'BTrees.OOBTree.OOBTree'>, 'problems': <type 'BTrees.OOBTree.OOBTree'>, 'events': <type 'BTrees.OOBTree.OOBTree'>}"
+        == str(new_patient.get_chart_data_map()))
+        print "Done"
+    
+    def test_import_chartdata(self):
+        print "\n"
+        print "-------------------------------------------------"
+        print "Modulo: ContentPatient   Test:import_chartdata"
+        print "-------------------------------------------------"
+        patient = self.patient
+        #The test will import the chart folder from patient to a clean patient
+        create_empty_patient(self.portal,self.pr,"carlos","jose")        
+        query = self.pc.searchResults({'id':'cjose'})
+        new_patient = query[0].getObject()
+        new_patient.import_chartdata(patient.chart_data_summary())
+        self.assertEqual(new_patient.chart_data_summary(),patient.chart_data_summary())
+        print "Done"
         
 
+        
+
+    
