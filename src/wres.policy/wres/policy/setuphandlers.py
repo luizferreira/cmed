@@ -646,6 +646,51 @@ def createCmedCatalogs(portal):
     event_catalog['meta_type'] = CatalogFieldIndex('meta_type')
     event_catalog['related_object_id'] = CatalogFieldIndex('related_object_id')
 
+def addExampleTemplate(portal):
+    document_template = '<table class="plain"><tbody><tr><th colspan="2">QUEIXA E DURAÇÃO</th></tr><tr><td><br />\
+    <br /></td></tr></tbody></table><table class="plain"><tbody><tr><th colspan="2">HISTÓRIA DA MOLÉSTIA ATUAL</th></tr><tr><td><br />\
+    <br /></td></tr></tbody></table><table class="plain"><tbody><tr><th colspan="2">ANTECEDENTES PESSOAIS</th></tr><tr><td><br /><br />\
+    </td></tr></tbody></table><table class="plain"><tbody><tr><th colspan="2">ANTECEDENTES PESSOAIS</th></tr><tr><td><br /><br /><br />\
+    </td></tr></tbody></table><table class="plain"><tbody><tr><th>Hábitos</th> <th>Frequência</th></tr><tr><td>Tabagismo    (   )\
+    </td><td><br /></td></tr><tr><td>Atividade Física (   )</td><td><br /></td></tr><tr><td>Etilismo (  )</td><td></td>\
+    </tr><tr><td colspan="2">Alimentação:</td></tr><tr><td colspan="2">Sexuais:</td></tr></tbody></table><table class="plain">\
+    <tbody><tr><th colspan="2">ANTENCENDENTES FAMILIARES</th></tr><tr><td>Doenças Cardiovasculares (  )</td><td>Diabetes ( )</td>\
+    </tr><tr><td>Hipertenção Arterial (  )</td><td>Tuberculose ( )</td></tr><tr><th colspan="2"><strong>Participação familiar\
+     na gênese do quadro atual</strong></th></tr><tr><td colspan="2" rowspan="3"><br /><br /></td></tr></tbody></table>\
+     <table class="plain"><tbody><tr><th colspan="2">HISTÓRIA SOCIAL</th></tr><tr><td colspan="2"><br /><br /></td></tr></tbody>\
+     </table><table class="plain"><tbody><tr><th colspan="2">REVISÃO DOS SISTEMAS</th></tr><tr><th>Geral (Febre, alterações\
+      de peso, alteração no dinamismo)</th></tr><tr><td colspan="2"><br /><br /></td></tr><tr><th>Cabeça (Cefaléia, tontura)\
+      </th></tr><tr><td colspan="2"><br /><br /></td></tr><tr><th>Cabeça (Cefaléia, tontura)</th></tr><tr><td colspan="2">\
+      <br /><br /></td></tr><tr><th>Olhos(Acuidade visual, dor, campo visual)</th></tr><tr><td colspan="2"><br /><br /></td>\
+      </tr><tr><th>Ouvido(Acuidade auditiva, zumbido, vertigem)</th></tr><tr><td colspan="2"><br /><br /></td></tr><tr>\
+      <th>Nariz, garganta, boca( epistaxe, IVAS freqüentes, obstrução, dor de garganta freqüente, sinusite)</th></tr><tr>\
+      <td colspan="2"><br /><br /></td></tr><tr><th>Tórax( Tosse, expectoração, dor, dispnéia, hemoptise, edemas, palpapitação)\
+      </th></tr><tr><td colspan="2"><br /><br /></td></tr><tr><th>Gastrointestinal(Disfagia, azia, pirose, hábito intestinal,\
+       sangramento, puxo, tenesmo, dia gástrico)</th></tr><tr><td colspan="2"><br /><br /></td></tr><tr><th>Gênito-urinário(Disúria,\
+        poliúria, nictúria, nódulos de mama, Papanicolaou, mamografia)</th></tr><tr><td colspan="2"><br /><br /></td></tr><tr><th>\
+        Pele e fâneros(Manchas, alopecia)</th></tr><tr><td colspan="2"><br /><br /></td></tr></tbody></table><table class="plain">\
+        <tbody><tr><th colspan="2">EXAME FÍSICO</th></tr><tr><th colspan="2">Estado Nutricional</th></tr><tr><td>Caquético (  )</td>\
+        <td>Emagrecido (  )</td></tr><tr><td>Obeso (  )</td><td>Descorado (  )</td></tr><tr><td>Desidratado (  )</td><td>Acianótico (  )\
+        </td></tr><tr><td>Anictérico (  )</td><td>Febril (  )</td></tr><tr><td colspan="2">Outro:</td></tr><tr><th colspan="2">\
+        Parâmetros vitais</th></tr><tr><td>PA(Pressão arterial)</td><td></td></tr><tr><td>FC(Freqüência cardíaca)</td><td></td>\
+        </tr><tr><td>FR(Freqüência respiratória)</td><td></td></tr><tr><td>T(Temperatura)</td><td></td></tr><tr><td>Peso(Kg)</td>\
+        <td></td></tr><tr><td>Altura(m)</td><td></td></tr><tr><td>Outros:</td><td></td></tr></tbody></table><table class="plain">\
+        <tbody><tr><th colspan="2">HIPÓTESE DIAGNÓSTICA</th></tr><tr><td><br /><br /><br /></td></tr></tbody></table><table \
+        class="plain"><tbody><tr><th colspan="2">CONDUTA E DISCUSSÃO</th></tr><tr><th colspan="2">Medicamentos</th></tr><tr><td>\
+        <br /><br /></td></tr><tr><th colspan="2">Recomendações</th></tr><tr><td><br /><br /></td></tr></tbody></table>\
+        <table class="plain"><tbody><tr><th colspan="2">DETALHES DE RETORNO</th></tr><tr><td>Data de Retorno:</td><td></td></tr>\
+        <tr><th colspan="2">Observações para retorno:</th></tr><tr><td colspan="2"><br \><br \></td></tr></tbody></table>'
+    import random
+    print '*** Criando objeto Template...'
+    templates = getattr(portal, "Templates")
+    new_id = "Modelo-"+str(random.randint(0, 9999))
+    consulta = getOrCreateType(portal, templates.Consultas, new_id, "Template")
+    consulta.setTemplate_body(document_template)
+    consulta.setTitle("[Exemplo]Primeira Consulta")
+    consulta.reindexObject()
+    
+
+
 def setupVarious(context):
     """ Funcao generica executada na instalacao do wres policy """
 
@@ -711,7 +756,7 @@ def setupVarious(context):
         changePortalObjectsConfiguration(portal)
         mailHostConfiguration(portal)
         addUpgradeExternalMethods(portal)
-
+        addExampleTemplate(portal)
         createGroups(portal)
 
     
