@@ -1,0 +1,28 @@
+
+.tabletitle {
+    color: #2A5D7F;
+    font-style: normal;
+    background-color: #CECECE;
+}
+.tablesubtitle {
+    font-style: normal;
+    background-color: #d6d6d6;
+}
+
+
+.spaced {
+    background-color: #FBFFFB;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 0px #F2F9FF solid;
+    vertical-align: top;
+}
+h6{
+    background:#EEEEEE;
+}
+#content table {
+    margin-bottom: 0em;
+}
+

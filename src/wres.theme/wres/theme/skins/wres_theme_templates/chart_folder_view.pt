@@ -7,8 +7,13 @@
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="cmfuemr">
 
+    <metal:aux fill-slot="style_slot">
+        <link rel="Stylesheet" type="text/css"
+            tal:attributes="href string:${portal_url}/tableChartFolder.css" />
+    </metal:aux>
+    
     <div metal:fill-slot="main">
-
+    
         <h1 i18n:translate="heading_chart_summary">Chart Summary</h1>
         <metal:macro metal:define-macro="chart_summary" tal:define="template_data context/getChartSummaryData"><br/>
             <table class="spaced collapse width-100">
@@ -79,7 +84,8 @@
                     <td class="center width-50 spaced"
                         tal:define="view python:True">
                         <h3 class="tabletitle" i18n:translate="heading_problem_list">Problem List</h3>
-                        <div tal:define="active python:True;data template_data/problems/active">
+                        <div>
+                        <span tal:define="active python:True;data template_data/problems/active">
                             <h5 class="tablesubtitle" i18n:translate="heading_active">Active</h5>
                             <tal:if condition="data">
                                 <metal:x use-macro="here/problem_list_macros/macros/problem_list_table" />
@@ -87,15 +93,16 @@
                             <tal:else condition="not:data">
                                 <i i18n:translate="help_no_problems">There are no active problems</i>
                             </tal:else>
-                        </div>
-                        <div tal:define="active python:False; data template_data/problems/inactive">
+                        </span>
+                        <span tal:define="active python:False; data template_data/problems/inactive">
                             <h5 class="tablesubtitle" i18n:translate="heading_inactive">Inactive</h5>
                             <tal:if condition="data">
                                 <metal:x use-macro="here/problem_list_macros/macros/problem_list_table" />
                             </tal:if>
                             <tal:else condition="not:data">
-                                <i i18n:translate="help_no_Problems">There are no inactive Problems</i>
+                                <h6 i18n:translate="help_no_Problems">There are no inactive Problems</h6>
                             </tal:else>
+                        </span>
                         </div>
                     </td>
                     <td class="center width-50 spaced" 
@@ -156,7 +163,7 @@
                             </div>
                         </tal:if>
                         <tal:else condition="not:data">
-                            <i i18n:translate="help_no_documents">There are no documents</i>
+                            <h6 i18n:translate="help_no_documents">There are no documents</h6>
                         </tal:else>
                     </td>
                 </tr>
