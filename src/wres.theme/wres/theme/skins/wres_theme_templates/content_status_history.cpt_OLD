@@ -1,3 +1,7 @@
+<!--Arquivo foir retirado pois estava dando problema ao clicar com o
+ botão direito em uma consulta no calendário > Estado > Avançado > Cancelar.
+ Obs: Motivo de existência deste arquivo desconhecido, (já que o do plone funciona perfeitamente)-->
+
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
