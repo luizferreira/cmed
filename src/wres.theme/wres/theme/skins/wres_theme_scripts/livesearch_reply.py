@@ -104,6 +104,17 @@ ts = getToolByName(context, 'translation_service')
 
 output = []
 
+def verifyViewChartPermission():
+    portal = context.portal_url.getPortalObject()
+    userRoles = portal.portal_membership.getAuthenticatedMember().getRoles()
+    roles = ['Transcriptionist','Manager','Doctor']
+    verify = 0
+    for role in roles:
+     if role in userRoles:
+       verify = 1
+    return verify
+
+
 def write(s):
     output.append(safe_unicode(s))
 
@@ -164,8 +175,9 @@ else:
                 write('''%s (%s)''' % (display_title, formatted_phone ) )
             else:
                 write('''%s (%s * %s)''' % (display_title, formatted_phone, dt.strftime("%d/%m/%Y") ) )
-            write('''(<a href="%s" title="%s" class="%s">%s </a>''' % (itemUrl, full_title, klass, "Pessoal"))
-            write(''' | <a href="%s" title="%s">%s</a>)''' % (pchart_url, "", "Prontuário"))
+            write('''(<a href="%s" title="%s" class="%s">%s</a>)''' % (itemUrl, full_title, klass, "Pessoal"))
+            if verifyViewChartPermission():
+                write('''  (<a href="%s" title="%s">%s</a>)''' % (pchart_url, "", "Prontuário"))
 
         else:
             write('''<a href="%s" title="%s" class="%s">%s</a>''' % (itemUrl, full_title, klass, display_title))

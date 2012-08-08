@@ -295,7 +295,7 @@
       name="url_expr">string:${folder_url}/chartFolder</property>
    <property name="link_target"></property>
    <property name="icon_expr"></property>
-   <property name="available_expr">python:context.meta_type == 'Patient'</property>
+   <property name="available_expr">python:context.meta_type == 'Patient' and (portal.portal_membership.getAuthenticatedMember().has_role('Manager') or portal.portal_membership.getAuthenticatedMember().has_role('Doctor') or portal.portal_membership.getAuthenticatedMember().has_role('Transcriptionist'))</property>
    <property name="permissions">
     <element value="wres.policy: Edit Patient"/>
    </property>
