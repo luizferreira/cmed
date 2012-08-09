@@ -1,3 +1,4 @@
+import copy
 from DateTime import DateTime
 
 request = context.REQUEST
@@ -7,7 +8,8 @@ checks_list = checks.split(',')
 medications = []
 for check in checks_list:
     check = check.replace('[', '').replace(']', '').replace(' ', '').replace("'", "")
-    medications.append(context.chart_data.get_entry_item(check, 'medications'))
+    med = context.chart_data.get_entry_item(check, 'medications')
+    medications.append(copy.deepcopy(med))
 
 prescription = {}
 member = context.portal_membership.getAuthenticatedMember()
