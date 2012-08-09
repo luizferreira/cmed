@@ -54,7 +54,7 @@ def allow_modules():
     allow_type(type(re.match('x','x')))
     
     import copy
-	ModuleSecurityInfo('copy').declarePublic('deepcopy')
+    ModuleSecurityInfo('copy').declarePublic('deepcopy')
 
 
     """ Modulo Archetypes """
