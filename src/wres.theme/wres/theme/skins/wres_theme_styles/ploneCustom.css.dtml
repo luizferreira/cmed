@@ -24,11 +24,11 @@ a:link, a:visited, #content a:link, #content a:visited, dl.portlet a:link, dl.po
 dl.actionMenu.activated dd,
 #content-views,
 #edit-bar {
-	background-color: blue;
-	border-color: blue;
+    background-color: blue;
+    border-color: blue;
 }
 dl.actionMenu a {
-	background-color: blue;
+    background-color: blue;
 }
 */
 
@@ -59,10 +59,10 @@ dl.actionMenu a {
 */
 
 #portal-feedbackhelp-div {
-    margin-left: auto;
-    margin-right: auto;
     width: 11em;
-    /*position: absolute;*/
+    position: absolute;
+    right: auto;
+    left: 40%;
 }
 
 #portal-feedbackhelp {
@@ -93,7 +93,7 @@ dl.actionMenu a {
 #portal-personaltools {
     float: right;
     background: #e3e3e3;
-    position: absolute;
+    position: relative;
     z-index: 3; /* personaltools should be above #portal-header (with z-index: 2) */
     top: 0;
     right: 0;
