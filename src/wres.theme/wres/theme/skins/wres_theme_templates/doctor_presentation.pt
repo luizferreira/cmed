@@ -6,22 +6,22 @@
       i18n:domain="cmfuemr">
       
 <head>
-    <title>Área de Trabalho da Secretária</title>
-
+    <title>Apresentação</title>
     <metal:block fill-slot="style_slot">
-            <link rel="stylesheet" type="text/css" href="cmed.css" />
+      <link rel="Stylesheet" type="text/css" tal:attributes="href string:${portal_url}/clinic_contact.css" />
+      <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>    
     </metal:block>
 </head>
 
 <body>
-    <div metal:fill-slot="main"
+    <div metal:fill-slot="main" id="presentation"
          tal:define="doctors context/doctor_presentation_script">
 
         <tal:if condition="python:len(doctors)==1">
-          <center><h2> Sobre mim</h2></center>
+          <center><h1> Sobre mim</h1></center>
         </tal:if>
         <tal:if condition="python:len(doctors)>1">
-          <center><h2> Sobre nós</h2></center>
+          <center><h1> Sobre nós</h1></center>
         </tal:if>      
         <br />  <br />
 
@@ -42,7 +42,7 @@
                         
                         <td style="vertical-align:top; line-height:165%">
                             <br />
-                            <div style="font-weight:bold; font-size:20px;"> Dr(a) <tal:print tal:content="python:doctor['title']" /> </div>
+                            <div id="doctor_title"> Dr(a) <tal:print tal:content="python:doctor['title']" /> </div>
                             <br />
                             <span style="font-size:15px">
                               <div>

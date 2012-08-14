@@ -47,9 +47,11 @@ def createClinic(portal):
     """ Cria o objeto clinica """
     print '*** Criando objeto clinica...'
     clinic = getOrCreateType(portal, portal, 'Clinic', 'Clinic')
-    clinic.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
+    # Anonymous need the permission view, so he can view that information in "Contato"
+    clinic.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE, ANONYMOUS_ROLE], acquire = False)
     clinic.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
     clinic.setTitle('Clínica')
+    clinic.setExcludeFromNav(True)
     clinic.reindexObject()
     """ Cria objetos dentro de clinica """
     #TODO: Atualmente os relatorios sao um template acessado de dentro do obj clinica (18/06/2012). Discutir a necessidade deste ReportsFolder.
@@ -103,6 +105,15 @@ def createDoctorFolder(portal):
     doctor_folder.setTitle('Médicos')
     doctor_folder.reindexObject()
     print '*** Criando pasta de medicos...... OK'
+
+def createContactPage(portal):
+    ''' Create contact page (visible just for anonymous) '''
+    contact = getOrCreateType(portal, portal, 'Contato', 'Document')
+    contact.setLayout('clinic_contact')
+    contact.manage_permission('View', [MANAGER_ROLE, ANONYMOUS_ROLE], acquire=False)
+    contact.manage_permission('Access contents information', [MANAGER_ROLE, ANONYMOUS_ROLE], acquire = False)
+    contact.setExcludeFromNav(True)
+    contact.reindexObject()
 
 def createReferringProviderFolder(portal):
     """ Cria a pasta de medicos indicantes """
@@ -671,6 +682,7 @@ def setupVarious(context):
         createAdminFolder(portal)    
         createTemplateFolder(portal)
         createDoctorFolder(portal)
+        createContactPage(portal)
         #TODO:Remover posteriormente
         #createInsuranceFolder(portal)
         #createTop10DefaultInsurance(portal)
