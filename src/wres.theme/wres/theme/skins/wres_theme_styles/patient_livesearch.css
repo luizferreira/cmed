@@ -20,7 +20,8 @@ div#portal-column-content {
     position: relative;
     float: left;
     left: 100%;
-    margin-left: -98.875%
+/* Portlet mode for amberjack tour*/
+    margin-left: -73.875%
     
 }
 
