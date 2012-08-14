@@ -58,6 +58,21 @@ dl.actionMenu a {
 </dtml-with>
 */
 
+
+/*aumentando o tamanho dos campos no portlet de login*/
+dl.portletLogin dd form div.field input[type="text"] {
+    width: 105px;
+}
+
+dl.portletLogin dd form div.field input[type="password"] {
+    width: 105px;
+}
+
+dl.portletLogin {
+    background-color: #F4F2ED;
+}
+
+/* posicionamento e tamnho das actions de feedback e ajuda */
 #portal-feedbackhelp-div {
     width: 11em;
     position: absolute;
@@ -65,6 +80,7 @@ dl.actionMenu a {
     left: 40%;
 }
 
+/* posicionamento e tamnho das actions de feedback e ajuda */
 #portal-feedbackhelp {
 /*    margin-left: auto;
     margin-right: auto;*/
