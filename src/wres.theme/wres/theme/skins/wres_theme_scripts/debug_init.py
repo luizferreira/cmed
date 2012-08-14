@@ -31,7 +31,13 @@ admin_lname = 'Teste'
 
 create_clinic = cli
 clinic_name = 'CliniMed'
-clinic_address = 'Av. Afonso Pena, 1500'
+clinic_street = 'Av. Afonso Pena'
+clinic_address = 'Av. Afonso Pena, 1500' #used by sec and doctor.
+clinic_number = 1500
+clinic_complemento = 'Sala 404'
+clinic_bairro = 'Centro'
+clinic_city = 'Belo Horizonte'
+clinic_state = 'mg'
 clinic_phone = '313334444'
 
 email = 'teste@communi.com.br'
@@ -227,7 +233,12 @@ def set_admin_information(a):
 
 def set_clinic_information(clinic):
     clinic.setName(clinic_name)
-    clinic.setEndereco(clinic_address)
+    clinic.setStreet(clinic_street)
+    clinic.setNumber(clinic_number)
+    clinic.setComplemento(clinic_complemento)
+    clinic.setBairro(clinic_bairro)
+    clinic.setCity(clinic_city)
+    clinic.setState(clinic_state)
     clinic.setPhone(clinic_phone)
     clinic.setFax(clinic_phone)
     clinic.setEmail(email)
