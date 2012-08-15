@@ -43,31 +43,30 @@
                     <a><span class="button" id="today_button">HOJE</span> </a> - <a> <span class="button" id="tomorrow_button">AMANHÃ</span> </a>                     
 		</div> 
 		<div class="show_visits" id="show_today_visits">
-	        <div metal:use-macro="context/sec_desk_macros/macros/show_visits">
-	            <metal:fill_slot fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromToday" />
-	        </div>
-        
-        </div>
+      <div metal:use-macro="context/sec_desk_macros/macros/show_visits">
+          <metal:fill_slot fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromToday" />
+      </div>
+    </div>
 		
-        <!-- Tomorrow's visits  -->
-        
-        <div class="show_visits" id="show_tomorrow_visits">
+    <!-- Tomorrow's visits  -->
     
-            <div metal:use-macro="context/sec_desk_macros/macros/show_visits">
-                <metal:define_visits fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromTomorrow" />
-                <metal:no_activities fill-slot='no_visits'>
-                    Sem consultas amanhã - <span tal:replace="tomorrow"></span>
-                </metal:no_activities>
-                <metal:no_activities fill-slot='visits_header'>
-                    Consultas de Amanhã - <span tal:replace="tomorrow"></span>
-                </metal:no_activities>
-            </div>        
-        
-        </div>
-            <div id="dialog_content" style="display: none">
-                    <h3>DEMO</h3>
-                    <p>NÃO RETIRE NEM COMENTE ESSA DIV!!!!!!! (Luiz)</p>
-            </div>    
+    <div class="show_visits" id="show_tomorrow_visits">
+
+      <div metal:use-macro="context/sec_desk_macros/macros/show_visits">
+          <metal:define_visits fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromTomorrow" />
+          <metal:no_activities fill-slot='no_visits'>
+              Sem consultas amanhã - <span tal:replace="tomorrow"></span>
+          </metal:no_activities>
+          <metal:no_activities fill-slot='visits_header'>
+              Consultas de Amanhã - <span tal:replace="tomorrow"></span>
+          </metal:no_activities>
+      </div>        
+    
+    </div>
+        <div id="dialog_content" style="display: none">
+                <h3>DEMO</h3>
+                <p>NÃO RETIRE NEM COMENTE ESSA DIV!!!!!!! (Luiz)</p>
+    </div>    
 	</div>
 
 </body>
