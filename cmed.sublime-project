@@ -26,14 +26,7 @@
     "settings":
     {
         "tab_size": 4
-    },
-    "build_systems":
-    [
-        {
-            "name": "Exec",
-            "cmd": ["/home/luiz/Programs/plone41/cmed/1/bin/instance"]
-        }
-    ]     
+    }
 }
 
 /*{
