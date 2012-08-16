@@ -1,63 +1,34 @@
 {
+	"build_systems":
+	[
+		{
+			"cmd":
+			[
+				"/home/luiz/Programs/plone41/cmed/1/bin/instance"
+			],
+			"name": "Exec"
+		}
+	],
 	"folders":
 	[
-/*		{
-			"path": ".",
-            "folder_exclude_patterns": ["bin", "develop-eggs", "parts", 
-            "products", "var"]
-        },*/
-        {
-            "path": "src/wres.archetypes/wres/archetypes"
-        },
-        {
-            "path": "src/wres.brfields/wres/brfields"
-        },
-        {
-            "path": "src/wres.policy/wres/policy"
-        },
-        {
-            "path": "src/wres.theme/wres/theme"
-        },
-        {
-            "path": "../buildout-cache/eggs"
-        }                                     
-
-    ],
-    "settings":
-    {
-        "tab_size": 4
-    },
-    "build_systems":
-    [
-        {
-            "name": "Exec",
-            "cmd": ["/home/luiz/Programs/plone41/cmed/1/bin/instance"]
-        }
-    ]     
+		{
+			"path": "src/wres.archetypes/wres/archetypes"
+		},
+		{
+			"path": "src/wres.brfields/wres/brfields"
+		},
+		{
+			"path": "src/wres.policy/wres/policy"
+		},
+		{
+			"path": "src/wres.theme/wres/theme"
+		},
+		{
+			"path": "/home/luiz/Programs/plone41/cmed/buildout-cache/eggs"
+		}
+	],
+	"settings":
+	{
+		"tab_size": 4
+	}
 }
-
-/*{
-    "folders":
-    [
-        {
-            "path": "src",
-            "folder_exclude_patterns": ["backup"]
-        },
-        {
-            "path": "docs",
-            "name": "Documentation",
-            "file_exclude_patterns": ["*.css"]
-        }
-    ],
-    "settings":
-    {
-        "tab_size": 8
-    },
-    "build_systems":
-    [
-        {
-            "name": "List",
-            "cmd": ["ls"]
-        }
-    ]
-}*/

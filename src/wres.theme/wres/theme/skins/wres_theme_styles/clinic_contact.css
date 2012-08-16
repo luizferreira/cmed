@@ -1,0 +1,35 @@
+div#clinic_map {
+    float:left;
+}
+
+div#clinic_info {
+    background: #DDD;
+    margin-left:550px;
+    padding-left:20px;
+    height: 512px;
+    font-family:Quicksand, sans-serif;
+    line-height: 28px;
+}
+
+div#clinic_info h1 {
+    font-family:Quicksand, sans-serif;
+    color:#205C90;
+}
+
+div#presentation {
+    font-family:Quicksand, sans-serif;
+    margin: 50px;
+    padding: 20px 50px 50px 50px;
+    background: #f4f2ed;
+}
+
+div#presentation  h1 {
+    color:#205C90;
+    font-family:Quicksand, sans-serif;
+}
+
+div#doctor_title {
+    color:#205C90;
+    font-weight:bold;
+    font-size:20px;
+}

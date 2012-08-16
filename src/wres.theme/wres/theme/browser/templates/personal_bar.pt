@@ -5,25 +5,29 @@
 
 <div id="portal-feedbackhelp-div" class="no_print">
 
-  <dl class="actionMenu deactivated" id="portal-feedbackhelp">
-    <dt class="actionMenuHeader">
-      <li id="siteaction-contact">
-          <a href="" accesskey="9" title="Sua opinião é importante!" 
-             rel="#pb_1" class="link-overlay" 
-             style="cursor: pointer; " tal:attributes="href string:${view/portal_url}/contact-info">
-             Feedback
-         </a>
-    </li>
-    </dt>
-  </dl>
+  <tal:if condition="python: not context.verifyRole(['Anonymous'])">
 
-  <dl class="deactivated" id="portal-feedbackhelp">
-    <dt class="actionMenuHeader">
-      <a href="http://communimed.com.br/ajuda-1" target="_blank">
-          Ajuda
-      </a>
-    </dt>  
-  </dl>
+    <dl class="actionMenu deactivated" id="portal-feedbackhelp">
+      <dt class="actionMenuHeader">
+        <li id="siteaction-contact">
+            <a href="" accesskey="9" title="Sua opinião é importante!" 
+               rel="#pb_1" class="link-overlay" 
+               style="cursor: pointer; " tal:attributes="href string:${view/portal_url}/contact-info">
+               Feedback
+           </a>
+      </li>
+      </dt>
+    </dl>
+
+    <dl class="deactivated" id="portal-feedbackhelp">
+      <dt class="actionMenuHeader">
+        <a href="http://communimed.com.br/ajuda-1" target="_blank">
+            Ajuda
+        </a>
+      </dt>  
+    </dl>
+
+  </tal:if>
 
 </div>
 

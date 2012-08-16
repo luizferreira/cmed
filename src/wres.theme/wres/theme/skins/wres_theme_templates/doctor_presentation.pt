@@ -1,0 +1,81 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+      
+<head>
+    <title>Apresentação</title>
+    <metal:block fill-slot="style_slot">
+      <link rel="Stylesheet" type="text/css" tal:attributes="href string:${portal_url}/clinic_contact.css" />
+      <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>    
+    </metal:block>
+</head>
+
+<body>
+    <div metal:fill-slot="main" id="presentation"
+         tal:define="doctors context/doctor_presentation_script">
+
+        <tal:if condition="python:len(doctors)==1">
+          <center><h1> Sobre mim</h1></center>
+        </tal:if>
+        <tal:if condition="python:len(doctors)>1">
+          <center><h1> Sobre nós</h1></center>
+        </tal:if>      
+        <br />  <br />
+
+        <tal:for repeat="doctor doctors">
+
+                <table>
+                    <tr>
+                        <td width="264px" height="192px">
+                            <tal tal:condition="python:doctor['photo']">
+                                <img width="70%" height="100%" tal:attributes="src python:doctor['photo'].absolute_url();
+                                alt python:doctor['photo'].alt;
+                                title python:doctor['photo'].alt"/>
+                            </tal>
+                            <tal tal:condition="python:not doctor['photo']">
+                                <img width="70%" height="100%" tal:attributes="src python:context.getDefaultPhoto()"/>
+                            </tal>  
+                        </td>
+                        
+                        <td style="vertical-align:top; line-height:165%">
+                            <br />
+                            <div id="doctor_title"> Dr(a) <tal:print tal:content="python:doctor['title']" /> </div>
+                            <br />
+                            <span style="font-size:15px">
+                              <div>
+                                  <tal:print content="python:doctor['specialty1']" />
+                                  <tal:if condition="python:doctor['specialty2']">
+                                      , <tal:print content="python:doctor['specialty2']" />
+                                  </tal:if>
+                              </div>                            
+                              <div tal:condition="python:doctor['email']" 
+                                   tal:content="python:doctor['email']"> test@test.com 
+                               </div>
+                              <div tal:condition="python:doctor['curriculum']">
+                                  <tal:for repeat="string python:doctor['curriculum']">
+                                      <tal:print content="string" /><br />
+                                  </tal:for>
+                               </div>                      
+                             </span>       
+                        </td>
+                    </tr>
+                </table>
+
+        </tal:for>
+
+        <tal:if condition="not: doctors">
+            <h1> Seja Bem vindo ao CommuniMed! </h1> <br />
+            Você instalou corretamente o sistema, a primeira coisa a se fazer agora é registrar um médico.
+        </tal:if>
+    
+
+    </div>
+
+</body>
+  
+        
+      
+</html>

@@ -24,11 +24,11 @@ a:link, a:visited, #content a:link, #content a:visited, dl.portlet a:link, dl.po
 dl.actionMenu.activated dd,
 #content-views,
 #edit-bar {
-	background-color: blue;
-	border-color: blue;
+    background-color: blue;
+    border-color: blue;
 }
 dl.actionMenu a {
-	background-color: blue;
+    background-color: blue;
 }
 */
 
@@ -58,13 +58,29 @@ dl.actionMenu a {
 </dtml-with>
 */
 
-#portal-feedbackhelp-div {
-    margin-left: auto;
-    margin-right: auto;
-    width: 11em;
-    /*position: absolute;*/
+
+/*aumentando o tamanho dos campos no portlet de login*/
+dl.portletLogin dd form div.field input[type="text"] {
+    width: 105px;
 }
 
+dl.portletLogin dd form div.field input[type="password"] {
+    width: 105px;
+}
+
+dl.portletLogin {
+    background-color: #F4F2ED;
+}
+
+/* posicionamento e tamnho das actions de feedback e ajuda */
+#portal-feedbackhelp-div {
+    width: 11em;
+    position: absolute;
+    right: auto;
+    left: 40%;
+}
+
+/* posicionamento e tamnho das actions de feedback e ajuda */
 #portal-feedbackhelp {
 /*    margin-left: auto;
     margin-right: auto;*/
@@ -93,7 +109,7 @@ dl.actionMenu a {
 #portal-personaltools {
     float: right;
     background: #e3e3e3;
-    position: absolute;
+    position: relative;
     z-index: 3; /* personaltools should be above #portal-header (with z-index: 2) */
     top: 0;
     right: 0;

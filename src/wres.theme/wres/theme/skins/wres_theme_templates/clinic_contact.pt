@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+      
+<head>
+    <title>Contato</title>
+    <metal:block fill-slot="style_slot">
+        <link rel="Stylesheet" type="text/css" tal:attributes="href string:${portal_url}/clinic_contact.css" />
+        <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+    </metal:block>
+</head>
+
+<body>
+    <div metal:fill-slot="main" tal:define="clinic_info context/get_clinic_info">
+        <div id="clinic_map">
+          <img border="0" tal:attributes="src clinic_info/map"> 
+        </div>
+
+        <div id="clinic_info">
+            <br />
+            <h1>Localização e Contato</h1>
+            <br />
+            
+            <label> Telefone: </label> 
+            <if tal:condition="python:clinic_info['phone']">
+              (<tal:print content="python:clinic_info['phone'][0:2]" />)
+                              <tal:print content="python:clinic_info['phone'][2:6]" />-<tal:print content="python:clinic_info['phone'][6:]" />
+            </if>
+            <br />
+            <label> Email: </label> <tal:print content="python:clinic_info['email']" /> <br />
+            <label> Endereço: </label> <tal:print content="python:clinic_info['address']" /> <br />
+            <span tal:condition="python:clinic_info['complemento']">
+            <label> Complemento: </label> <tal:print content="python:clinic_info['complemento']" /> <br />
+            </span>
+            <label> Bairro: </label> <tal:print content="python:clinic_info['bairro']" /> <br />
+            <label> Cidade: </label> <tal:print content="python:clinic_info['city']" /> <br />
+            <label> Estado: </label> <tal:print content="python:clinic_info['state'].upper()" /> <br />
+
+        </div>
+    </div>
+
+</body>
+  
+        
+      
+</html>

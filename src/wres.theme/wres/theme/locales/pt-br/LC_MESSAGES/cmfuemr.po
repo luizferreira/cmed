@@ -12256,3 +12256,9 @@ msgstr "Marque caso esta secretaria transcreverá documentos nos prontuários."
 
 msgid "label_no_reference"
 msgstr "Não especificado"
+
+msgid "Not selected"
+msgstr "Não selecionado"
+
+msgid "Presentation"
+msgstr "Apresentação"

@@ -7,6 +7,9 @@
 	<assignment remove="True" name="navigation" category="context" key="/"
 	manager="plone.leftcolumn" type="portlets.Navigation" />
 	
+    <!-- login portlet in presentation and contact pages -->
+    <assignment name="label_log_in" category="context" key="/" manager="plone.rightcolumn" type="portlets.Login" visible="True"/>
+
     <assignment name="agenda_navigation" category="group" key="Secretary" 
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">portlet</property>

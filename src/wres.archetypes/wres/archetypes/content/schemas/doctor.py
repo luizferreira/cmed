@@ -3,6 +3,12 @@
 from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content import schemata
 
+# datagrid field
+from Products.DataGridField import DataGridField, DataGridWidget
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
+from Products.DataGridField.DataGridField import FixedRow
+
 from wres.archetypes.config import PROJECTNAME
 from wres.archetypes.content import wresuser
 from wres.policy.utils.utils import set_schemata_properties, finalizeSchema
@@ -19,6 +25,7 @@ _ = MessageFactory("cmfuemr")
 # DisplayList de Especialidades
 #===============================================================================
 MEDICAL_SPECIALTIES = DisplayList((
+    ('', _('Not selected')), # Nao selecionado
     ('allergy', _('Allergy & Immunology')), # Alergia e Imunologia
     ('anesthesiology', _('Anesthesiology')), # Anestesiologia
     ('emergency', _('Emergency Medicine')), # Atendimento de emergência
@@ -57,6 +64,13 @@ MEDICAL_SPECIALTIES = DisplayList((
 #===============================================================================
 MAIN = Schema((
         
+       ImageField('photo',
+           max_size=(150,150),
+           widget=ImageWidget(
+               label='Foto',
+            ),
+       ),
+
         StringField('professional',
             vocabulary=[_('Provider'), _('Technician'), _('Nurse')],
             default='Provider',
@@ -150,8 +164,44 @@ MAIN = Schema((
             required=1,      
             widget=StringWidget(
                 label=_('Email'),
+                description='Eventualmente poderemos entrar em contato através dele.'
             ),
         ),      
+
+        StringField('specialty1',
+            required=True,
+            vocabulary=MEDICAL_SPECIALTIES,
+            widget=SelectionWidget(label='Especialidade 1',
+            ),
+        ),       
+
+        StringField('specialty2',
+            vocabulary=MEDICAL_SPECIALTIES,
+            widget=SelectionWidget(
+                label='Especialidade 2',
+                description="Deixe 'Não selecionado', caso não queira destacar outra especialidade.",
+            ),
+        ),        
+
+        DataGridField('curriculum',
+            description='Estas informações serão apresentadas em seu cartão de visita virtual.',
+            columns=('tipo', 'course', 'inst'),
+            allow_empty_rows = False,
+            allow_oddeven=True,
+            allow_reorder = False,
+            fixed_rows = [
+                FixedRow(keyColumn="course", initialData = { "tipo" : "", "course" : "Medicina", "inst" : "" }),
+            ],                
+            widget=DataGridWidget(
+                label='Curriculum',
+                columns={
+                    'tipo' : SelectColumn('Tipo', vocabulary='getCourseTypes'),
+                    'course' : Column('Área'),
+                    'inst' : Column('Instituição'),
+                },
+            ),
+        ),
+
 ))
 set_schemata_properties(MAIN, schemata='Principal')
 
@@ -177,12 +227,7 @@ OTHER = Schema((
             widget=StringWidget(label=_('Credentials'),
             ),
         ),
-        
-        StringField('specialty',
-            vocabulary=MEDICAL_SPECIALTIES,
-            widget=SelectionWidget(label=_('Specialty'),
-            ),
-        ),                                                            
+                                                             
 ))
 set_schemata_properties(OTHER, schemata='Outro')
 
