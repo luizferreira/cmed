@@ -219,6 +219,7 @@
       <role name="Secretary"/>
       <role name="Transcriptionist"/>
     </permission>
+    <!-- Anonymous need to have 'View Doctor' in order to see initial page (doctor_presentation) -->
     <permission name="wres.policy: View Doctor" acquire="True">
       <role name="Manager"/>
       <role name="UemrAdmin"/>
@@ -226,6 +227,7 @@
       <role name="Patient"/>
       <role name="Secretary"/> 
       <role name="Transcriptionist"/>
+      <role name="Anonymous"/>
     </permission>
     <permission name="wres.policy: View Insurance" acquire="True">
       <role name="Manager"/>

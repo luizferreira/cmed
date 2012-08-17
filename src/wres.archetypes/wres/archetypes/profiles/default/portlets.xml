@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-
-<!-- Favor usar o arquivo portlet.xml presente no modulo Policy-->
-
-<portlets
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="plone">
-
-</portlets>

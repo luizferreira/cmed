@@ -1,32 +1,26 @@
 {
 	"folders":
 	[
-/*		{
-			"path": ".",
-            "folder_exclude_patterns": ["bin", "develop-eggs", "parts", 
-            "products", "var"]
-        },*/
-        {
-            "path": "src/wres.archetypes/wres/archetypes"
-        },
-        {
-            "path": "src/wres.brfields/wres/brfields"
-        },
-        {
-            "path": "src/wres.policy/wres/policy"
-        },
-        {
-            "path": "src/wres.theme/wres/theme"
-        },
-        {
-            "path": "../buildout-cache/eggs"
-        }                                     
-
-    ],
-    "settings":
-    {
-        "tab_size": 4
-    }
+		{
+			"path": "src/wres.archetypes/wres/archetypes"
+		},
+		{
+			"path": "src/wres.brfields/wres/brfields"
+		},
+		{
+			"path": "src/wres.policy/wres/policy"
+		},
+		{
+			"path": "src/wres.theme/wres/theme"
+		},
+		{
+			"path": "/home/luiz/Programs/plone41/cmed/buildout-cache/eggs"
+		}
+	],
+	"settings":
+	{
+		"tab_size": 4
+	}
 }
 
 /*{

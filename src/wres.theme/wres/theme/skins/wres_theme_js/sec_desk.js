@@ -1,16 +1,66 @@
 
-function escondeMostraVisitas(){
+function hideOrShowDoctorVisits(){
+    /* this function is called for each option.
+    If the option is the selected one, The function
+    fadeIn all trs (visits) of the doctor, else,
+    the function hide all trs (visits) of the doctor.
+    Using "slow" effect here causes unpredictable
+    behaviors, since this effect has a considerable
+    delay, and the element will be in a state that was
+    not expected by the hideTableOrNot steps.
+    */
 	var doctor_id = this.value;
+    //if selected, show (fadeIn), else hide.
 	if (this.selected == true) {
 		var selector = "tr." + doctor_id;
-		$(selector).fadeIn("slow");
+		$(selector).show();
 	}
 	else {
 		if(doctor_id != '') {
 			var selector = "tr." + doctor_id;
-			$(selector).fadeOut("slow");
+			$(selector).hide();
 		}
 	}	
+}
+
+function hideTableOrNotStep1() {
+    /*the table need to be visible, so hideOrShowDoctorVisits
+    can show trs of the selected doctor.
+    */
+    $(".visits_table").show();
+    $(".visits-message").show();
+    $(".not-for-this-doctor").hide();
+}
+
+function hideTableOrNotStep2() {
+    /* hide table if there is not any visit being
+    showed.
+    */
+    if ($(".visit:visible").length == 0) {
+        $(".visits_table").hide("slow");
+        $(".visits-message").hide("slow");
+        $(".not-for-this-doctor").show("slow");
+    }
+    else {
+        $(".visits_table").show("slow");
+    }
+}
+
+function reloadVisitsOnScreen() {
+    /* Show or hide doctors visits depending on
+    which doctor is selected.
+    if 'Todos os medicos' selected, show all trs 
+    else: pass throw all options and leave showing
+    only the selected one.
+    */
+    hideTableOrNotStep1();
+    if($("option:selected").get(0).value == "") {
+        $("tr").show();
+    }
+    else {
+        $("option").each(hideOrShowDoctorVisits);
+    }
+    hideTableOrNotStep2();    
 }
 
 function loadPatientTip(index){
@@ -149,45 +199,31 @@ $(document).ready(function(){
 	var show_visits_reloaded = false;
         /*var fez_requisicao = false;*/
 	
+    /* initially show only today visits */
 	$("#show_tomorrow_visits").hide();
 	
+
 	$("#doctor_select").change(function(){
-	
-		if($("option:selected").get(0).value == "") {
-			$("tr").fadeIn("slow");
-		}
-		else {
-			$("option").each(escondeMostraVisitas)
-		}
+	   reloadVisitsOnScreen();
 	})
 	//Hoje por default selecionado
+    var today_selected = true;
+    setTodayTomorrowColor(today_selected)
+    $("#today_button").click(function(){
         var today_selected = true;
         setTodayTomorrowColor(today_selected)
-        $("#today_button").click(function(){
-                var today_selected = true;
-                setTodayTomorrowColor(today_selected)
-		$("#show_tomorrow_visits").hide("slow");
-		$("#show_today_visits").show("slow");
+		$("#show_tomorrow_visits").hide();
+		$("#show_today_visits").show();
 		
-		if($("option:selected").get(0).value == "") {
-			$("tr").fadeIn("slow");
-		}
-		else {
-			$("option").each(escondeMostraVisitas)
-		}		
+        reloadVisitsOnScreen();
 	})
 	$("#tomorrow_button").click(function(){
                 var today_selected = false;
                 setTodayTomorrowColor(today_selected)
-		$("#show_today_visits").hide("slow");
-		$("#show_tomorrow_visits").show("slow");
+		$("#show_today_visits").hide();
+		$("#show_tomorrow_visits").show();
 		
-		if($("option:selected").get(0).value == "") {
-			$("tr").fadeIn("slow");
-		}
-		else {
-			$("option").each(escondeMostraVisitas)
-		}		
+        reloadVisitsOnScreen();
 	})	
 	
 	
@@ -212,13 +248,7 @@ $(document).ready(function(){
 	})	
 
 	$('.show_visits').ajaxComplete(function(e, xhr, settings) {
-		
-		if($("option:selected").get(0).value == "") {
-			$("tr").fadeIn("slow");
-		}
-		else {
-			$("option").each(escondeMostraVisitas)
-		}
+        reloadVisitsOnScreen();
 	})			
 
 });

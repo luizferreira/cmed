@@ -25,7 +25,7 @@
 		<br />
 	</div>
 	<!-- Table of visits -->
-	<div class="visit_table" tal:condition="doctor_visits">
+	<div class="visit_table visits-message" tal:condition="doctor_visits">
 		<br />
 		<strong>
 			<metal:slot define-slot="visits_header">Consultas de Hoje - <span tal:replace="today"></span></metal:slot>
@@ -34,10 +34,16 @@
 	<metal:visits_table_slot define-slot="visits_table">
 		<metal:visits_table use-macro="context/sec_desk_macros/macros/visits_table" />
 	</metal:visits_table_slot>
+    <div class="not-for-this-doctor" style="display:none">
+        <br />
+        <strong>
+            Não há consultas para o médico selecionado.
+        </strong>
+    </div>
 </div>
 
 <metal:def define-macro="visits_table" i18n:domain="cmfuemr">
-	<table class="seclisting width-100" id="visit_table" tal:condition="doctor_visits">
+	<table class="seclisting width-100 visits_table" id="visit_table" tal:condition="doctor_visits">
 		<thead>
                     <metal:thead define-slot="thead">
                         <th style="width:6%;text-align: center;">Horário</th>
@@ -56,7 +62,7 @@
                                     even_odd python:test(repeat['visit'].odd(), 'odd', 'even');
                                     row_number repeat/visit/number;
                                     color python:context.getRowColor(visit);"
-                            tal:attributes="class string:$doctor_id $even_odd $color; 
+                            tal:attributes="class string:$doctor_id $even_odd $color visit; 
                                             id string:row_$row_number">
                             <metal:trow define-slot="trow">
                             <tal:block_aux tal:define="visit_id python:visit['absolute_url'].split('/')[-1];
