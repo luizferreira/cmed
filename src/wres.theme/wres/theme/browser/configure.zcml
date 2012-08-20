@@ -35,6 +35,16 @@
       layer=".interfaces.IThemeSpecific"
       permission="zope2.View"
   />    
+
+  <!-- cadastrando a nova viewlet para o banner no footer -->
+  <browser:viewlet
+      name="plone.footer_banner"
+      manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+      template="templates/footer_banner.pt"
+      for="*"
+      layer=".interfaces.IThemeSpecific"
+      permission="zope2.View"
+  />  
   
   <!-- Viewlets registration -->
   <!-- EXAMPLE (UNCOMMENT TO MAKE AVAILABLE):
@@ -46,7 +56,6 @@
       permission="zope2.View"
       />
   -->
-
   <!-- Zope 3 browser resources -->
 
   <!-- Resource directory for templates
