@@ -641,8 +641,7 @@ def createCmedCatalogs(portal):
 def addExampleTemplate(portal):
     document_template = '<table class="plain"><tbody><tr><th colspan="2">QUEIXA E DURAÇÃO</th></tr><tr><td><br />\
     <br /></td></tr></tbody></table><table class="plain"><tbody><tr><th colspan="2">HISTÓRIA DA MOLÉSTIA ATUAL</th></tr><tr><td><br />\
-    <br /></td></tr></tbody></table><table class="plain"><tbody><tr><th colspan="2">ANTECEDENTES PESSOAIS</th></tr><tr><td><br /><br />\
-    </td></tr></tbody></table><table class="plain"><tbody><tr><th colspan="2">ANTECEDENTES PESSOAIS</th></tr><tr><td><br /><br /><br />\
+    <br /></td></tr></tbody></table><table class="plain"><tbody><tr><th colspan="2">ANTECEDENTES PESSOAIS</th></tr><tr><td><br /><br /><br />\
     </td></tr></tbody></table><table class="plain"><tbody><tr><th>Hábitos</th> <th>Frequência</th></tr><tr><td>Tabagismo    (   )\
     </td><td><br /></td></tr><tr><td>Atividade Física (   )</td><td><br /></td></tr><tr><td>Etilismo (  )</td><td></td>\
     </tr><tr><td colspan="2">Alimentação:</td></tr><tr><td colspan="2">Sexuais:</td></tr></tbody></table><table class="plain">\
