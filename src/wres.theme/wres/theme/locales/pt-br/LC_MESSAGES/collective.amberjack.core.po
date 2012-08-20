@@ -1,0 +1,105 @@
+# Brazilian Potuguese translations for collective.amberjack.core package
+# Tamosauskas <thiago@simplesconsultoria.com.br>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: collective.amberjack.core\n"
+"POT-Creation-Date: 2010-10-31 16:54+0000\n"
+"PO-Revision-Date: 2009-11-26 15:15-0300\n"
+"Last-Translator: Thiago Tamosauskas <thiago@simplesconsultoria.com.br>\n"
+"Language-Team: Portuguese\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language-Code: pt-br\n"
+"Language-Name: Brazilian Portuguese\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.amberjack.core\n"
+"X-Is-Fallback-For: pt\n"
+
+#: ../controlpanel.py:40
+msgid "Amberjack Setup"
+msgstr "Configurações do Tutorial"
+
+#: ../javascript/defaults.py:28
+msgid "Amberjack alert"
+msgstr "Alerta do Tutorial"
+
+#: ../javascript/defaults.py:31
+msgid "Can't go to next step automatically. Do it manually."
+msgstr "Não é possível ir para o próximo passo de forma automática. Faça isso manualmente."
+
+#: ../interfaces.py:39
+msgid "Choose archive file"
+msgstr "Escolha o arquivo"
+
+#: ../interfaces.py:43
+msgid "Choose url"
+msgstr "Escolha a URL"
+
+#: ../controlpanel.py:35
+msgid "Configuration"
+msgstr "Configurações"
+
+#: ../controlpanel.py:41
+msgid "Configuration for Amberjack."
+msgstr "Configurações do Tutorial"
+
+#: ../javascript/defaults.py:30
+msgid "Go to next step automatically."
+msgstr "Ir para o próximo passo automáticamente"
+
+#: ../validators.py:58
+msgid "Please remove the [${path}] object to start the tour."
+msgstr "Por favor, remova [${path}] para começar o tutorial."
+
+#: ../javascript/defaults.py:27
+msgid "Please select a file."
+msgstr "Por favor selecione um arquivo."
+
+#: ../validators.py:50
+msgid "The object [${path}] doesn't exist yet."
+msgstr "O objeto [${path}] não existe ainda."
+
+#: ../interfaces.py:65
+msgid "The title of the skin shown in the select menu"
+msgstr ""
+
+#: ../javascript/defaults.py:32
+msgid "This field is required, please correct."
+msgstr ""
+
+#: ../controlpanel.py:31
+msgid "Tour registration"
+msgstr "Registro do Tutorial."
+
+#: ../interfaces.py:49
+msgid "Use Sandbox"
+msgstr ""
+
+#: ../javascript/defaults.py:29
+msgid "You cannot click on other links, please use the console's exit button."
+msgstr "Você não pode clicar em outros links com o Tutorial em curso. Utilize o botão 'X' para sair do Tutorial."
+
+#: ../validators.py:31
+msgid "You have to be ${role} to execute this step."
+msgstr "Você precisa ser ${role} para executar este passo."
+
+#: ../validators.py:18
+msgid "You have to be anonymous to execute this step."
+msgstr "Você deve ser um usuário anônimo para executar este passo."
+
+#: ../validators.py:24
+msgid "You have to be logged in to execute this step."
+msgstr "Você deve ser um usuário autenticado para executar este passo."
+
+#. Default: "Next tour:"
+#: ../viewlets/tour.pt:42
+msgid "next-tour"
+msgstr "Próximo Tutorial"
+
+#. Default: "of"
+#: ../javascript/defaults.py:49
+msgid "separator-between-steps"
+msgstr "de"
+
