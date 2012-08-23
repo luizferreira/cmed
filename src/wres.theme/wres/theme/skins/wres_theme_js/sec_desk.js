@@ -39,7 +39,10 @@ function hideTableOrNotStep2() {
     if ($(".visit:visible").length == 0) {
         $(".visits_table").hide("slow");
         $(".visits-message").hide("slow");
-        $(".not-for-this-doctor").show("slow");
+        /* avoid duplication of "non exists" message */
+        if($("#no-visits:visible").length == 0) {
+            $(".not-for-this-doctor").show("slow");
+        }
     }
     else {
         $(".visits_table").show("slow");
