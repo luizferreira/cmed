@@ -419,7 +419,7 @@
    <property name="title" i18n:translate="">Calendar</property>
    <property name="description" i18n:translate=""></property>
    <property
-      name="url_expr">python:'/'.join(portal.getPhysicalPath())+'/Appointments/'+member.getUserName()+'/Agenda'</property>
+      name="url_expr">string:${globals_view/navigationRootUrl}/Appointments/${member/getUserName}/Agenda</property>
    <property name="link_target"></property>
    <property name="icon_expr"></property>
    <property name="available_expr">python:member is not None and ( member.has_role("Doctor") )</property>

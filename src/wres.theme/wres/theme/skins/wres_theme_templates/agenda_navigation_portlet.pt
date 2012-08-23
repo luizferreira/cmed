@@ -4,16 +4,17 @@
 <body>
 <div metal:define-macro="portlet">
 
-    <dl class="portlet portletNavigationTree">
-        
-        <dt class="portletHeader">
-            <span class="portletTopLeft"></span>
-            <a href="#"
-               class="tile"
-               tal:attributes="href string:${root/absolute_url}/sitemap;"
-               i18n:translate="">Calendário</a>
-            <span class="portletTopRight"></span>
+    <dl class="portlet portletNavigationTree" tal:define="physical_path context/getPhysicalPath">
+
+        <!-- fill portlet header if the secretary is in a calendar -->
+        <dt tal:condition="python: physical_path[-1]=='Agenda'" style="background:#205C90">
+            <span style="color:white">Calendário</span>
+            <!-- script responsable for unfill Agenda section -->
+            <script type="text/javascript" src="agenda_tab_not_selected.js"></script> 
         </dt>
+        <dt tal:condition="python: physical_path[-1]!='Agenda'">
+            Calendário
+        </dt>        
 
         <div class="portletBody" id="body_chartnavigation_portlet"
             tal:define="
@@ -23,16 +24,26 @@
             <dd class="portletItem lastItem">
                 <ul class="navTree navTreeLevel0">
                     <li tal:repeat="brain brains"
-                        class="navTreeItem visualNoMarker navTreeFolderish section-dteste">
-                        <a  href="" tal:attributes="href 
-                            string:${context/portal_url}/Appointments/${brain/id}/Agenda"
-                            class="state-missing-value navTreeFolderish contenttype-visitfolder">
-                            <img width="16" height="16" src="" tal:attributes="src string:${context/portal_url}/doctor-folder-icon.png">
-                            <span> Dr(a) <tal:print content="brain/Title" /> </span>
-                        </a>
+                        class="navTreeItem visualNoMarker navTreeFolderish section-Agenda">
+                        <!-- fill current doctor link in the porlet (using navTreeCurrentItem) -->
+                        <tal:if condition="python: physical_path[-2] == brain.getId">
+                            <a  href="" tal:attributes="href 
+                                string:${context/portal_url}/Appointments/${brain/id}/Agenda"
+                                class="state-missing-value navTreeFolderish contenttype-visitfolder navTreeCurrentItem">
+                                <img width="16" height="16" src="" tal:attributes="src string:${context/portal_url}/doctor-folder-icon.png">
+                                <span> Dr(a) <tal:print content="brain/Title" /> </span>
+                            </a>
+                        </tal:if>
+                        <tal:if condition="python: physical_path[-2] != brain.getId">
+                            <a  href="" tal:attributes="href 
+                                string:${context/portal_url}/Appointments/${brain/id}/Agenda"
+                                class="state-missing-value navTreeFolderish contenttype-visitfolder">
+                                <img width="16" height="16" src="" tal:attributes="src string:${context/portal_url}/doctor-folder-icon.png">
+                                <span> Dr(a) <tal:print content="brain/Title" /> </span>
+                            </a>
+                        </tal:if>                        
                     </li>
                 </ul>
-            
             </dd>          
         </div>
     </dl>
