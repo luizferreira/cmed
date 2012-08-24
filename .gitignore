@@ -3,10 +3,7 @@
 README.html
 adminPassword.txt
 buildout.cfg
-lxml_static.cfg
 products/
-zope-versions.cfg
-ztk-versions.cfg
 PKG-INFO
 sub_tasks
 cmed.sublime-workspace
