@@ -6,7 +6,6 @@ buildout.cfg
 lxml_static.cfg
 products/
 zope-versions.cfg
-zopeapp-versions.cfg
 ztk-versions.cfg
 PKG-INFO
 sub_tasks
