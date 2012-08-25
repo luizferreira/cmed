@@ -522,12 +522,16 @@ def changePortalObjectsConfiguration(portal):
     portal_types['Plone Site'].allowed_content_types = ['Document', 'File', 'Folder',
                                                         'Image', 'Link', 'Event', 'News Item', 'Topic',]
 
-#===========================================================================
-# Muda a lingua padrao do portal
-# Peter
-#===========================================================================
 def changePortalLanguage(portal):
-        portal.portal_languages.setDefaultLanguage('pt-br')
+    '''
+    Change portal default language and change 'Adicionar item...' to 'Adicionar...'
+    '''
+    portal.portal_languages.setDefaultLanguage('pt-br')
+    # this workround was necessary, since plone.po in our packages is not overriding plone translations
+    from plone.app.contentmenu.menu import FactoriesSubMenuItem
+    FactoriesSubMenuItem.title = 'Adicionar...'
+
+
         
 #===========================================================================
 # Carrega o CID no Vocabulario do portal
