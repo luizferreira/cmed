@@ -35,11 +35,11 @@ setup(name='wres.policy',
           'collective.quickupload == 1.5.2',
           'Products.Clouseau == 1.0', 
           'repoze.catalog == 0.8.2',        
-          'collective.amberjack.core',  
-          'collective.amberjack.portlet',
           'wres.brfields',
           'wres.archetypes',
           'wres.theme',
+          'collective.amberjack.core',
+          'collective.amberjack.portlet',
           # 'PIL==1.1.6',
           # Pillow e lxml sao p413
           # -*- Extra requirements: -*-
