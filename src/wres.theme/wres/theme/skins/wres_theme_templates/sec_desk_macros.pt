@@ -20,7 +20,8 @@
 	<div tal:condition="python:not doctor_visits">
 		<br />
 		<strong>
-			<metal:no_visits define-slot="no_visits">Sem consultas hoje - <span tal:replace="today"></span></metal:no_visits>
+			<metal:no_visits define-slot="no_visits"><span id="no-visits">Sem consultas hoje - </span><span tal:replace="today"></span></metal:no_visits>
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 		</strong>
 		<br />
 	</div>

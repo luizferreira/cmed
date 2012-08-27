@@ -2,13 +2,8 @@
 .installed.cfg
 README.html
 adminPassword.txt
-bootstrap.py
 buildout.cfg
-lxml_static.cfg
 products/
-zope-versions.cfg
-zopeapp-versions.cfg
-ztk-versions.cfg
 PKG-INFO
 sub_tasks
 cmed.sublime-workspace

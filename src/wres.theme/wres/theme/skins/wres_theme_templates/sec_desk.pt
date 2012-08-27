@@ -55,7 +55,7 @@
       <div metal:use-macro="context/sec_desk_macros/macros/show_visits">
           <metal:define_visits fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromTomorrow" />
           <metal:no_activities fill-slot='no_visits'>
-              Sem consultas amanhã - <span tal:replace="tomorrow"></span>
+              <span id="no-visits">Sem consultas amanhã - </span><span tal:replace="tomorrow"></span>
           </metal:no_activities>
           <metal:no_activities fill-slot='visits_header'>
               Consultas de Amanhã - <span tal:replace="tomorrow"></span>

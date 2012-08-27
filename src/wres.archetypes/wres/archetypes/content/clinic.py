@@ -1,3 +1,5 @@
+## coding=utf-8
+
 """Definition of the Clinic content type
 """
 
@@ -21,12 +23,14 @@ class Clinic(base.ATCTContent):
     meta_type = "Clinic"
     schema = ClinicSchema
 
-    def getSampleVocabulary(self):
-        """Get a sample vocabulary
-        """
-        return atapi.DisplayList(
-
-            (("sample", _(u"Sample value 1"),),
-            ("sample2", _(u"Sample value 2"),),))
+    def fillClinicInformation(self, info):
+        self.setName(info['Nome da Clínica/Consultório'])
+        self.setStreet(info['Avenida/Rua'])
+        self.setNumber(info['Número'])
+        self.setComplemento(info['Complemento'])
+        self.setCity(info['Cidade'])
+        self.setState(info['Estado'].lower())
+        self.setPhone(info['Telefone'])
+        self.setEmail(info['E-mail'])
 
 atapi.registerType(Clinic, PROJECTNAME)

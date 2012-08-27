@@ -52,6 +52,12 @@
            based-on="Plone Default">
         <viewlet name="plone.personal_bar"
                  insert-before="*" />
-    </order>      
+    </order>
+
+     <hidden manager="plone.portalfooter" skinname="WRES Theme">
+      <viewlet name="plone.site_actions"/>
+      <viewlet name="plone.colophon"/>
+      <viewlet name="plone.footer"/>
+     </hidden>          
 
 </object>

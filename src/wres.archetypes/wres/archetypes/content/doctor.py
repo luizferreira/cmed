@@ -31,6 +31,41 @@ COURSE_TYPES = atapi.DisplayList((
    ('specialization','Especialização'),
 ))
 
+specialty_mapping = {
+    'Não Selecionada': '',
+    'Alergia e Imunologia': 'allergy',
+    'Anestesiologia': 'anesthesiology',
+    'Atendimento de emergência': 'emergency',
+    'Cardiologia': 'cardiology',
+    'Cirurgia': 'surgery',
+    'Cirurgia Neurológica': 'neurological',
+    'Cirurgia Plástica': 'plastic',
+    'Clínica geral': 'general',
+    'Dermatologia': 'dermatology',
+    'Doença infecciosa': 'infectious',
+    'Endocrinologia, Diabetes e Metabolismo': 'endocrinology',
+    'Gastroenterologia': 'gastroenterology',
+    'Geriatria': 'geriatrics',
+    'Medicina familiar': 'family',
+    'Medicina Física e Reabilitação': 'physical',
+    'Medicina Genética': 'medical',
+    'Medicina Interna': 'internal',
+    'Medicina Preventiva': 'preventive',
+    'Nefrologia': 'nephrology',
+    'Neurologia': 'neurology',
+    'Obstetrícia e Ginecologia': 'obstetrics',
+    'OftalmologiaOftalmologia': 'ophthalmology',
+    'Oncologia (Câncer)': 'oncology',
+    'Ortopedia': 'orthopedics',
+    'Otorrinolaringologia': 'otolaryngology',
+    'Outro': 'other',
+    'Patologia': 'pathology',
+    'Pediatria': 'pediatrics',
+    'Psiquiatria': 'psychiatry',
+    'Radiologia': 'radiology',
+    'Urologia': 'urology'
+}
+
 class Doctor(wresuser.WRESUser):
     """Doctor type for WRES website"""
     implements(IDoctor)
@@ -91,7 +126,9 @@ class Doctor(wresuser.WRESUser):
     def at_post_create_script(self, migration=False):
         wresuser.WRESUser.at_post_create_script(self)
         
-        # Anonymous need to have View permission here in order to see the initial page (doctor_presentation)
+        # Anonymous need to have View permission here in order to see the initial page (doctor_presentation).
+        # remember that depending in what was done in setuphandlers, the anonymous will not be able to see neither.
+        # This is controlled by the field 'Quero meu site profissional' in registration form.
         self.manage_permission('View', ['Manager', 'UemrAdmin', 'Doctor', 'Secretary', 'Transcriptionist', 'Patient', 'Anonymous'], acquire=False)
 
         self.add_visits_folder()
@@ -114,7 +151,7 @@ class Doctor(wresuser.WRESUser):
         """
         Returns an forced asc2 title. Used as metadata.
         Ex input:
-            title = Lúcio Gama
+            title = 'Lúcio Gama'
         Ex output:
             return 'Lucio Gama'
         """
@@ -174,5 +211,24 @@ class Doctor(wresuser.WRESUser):
         '''
         return self.schema.fields()
     
+    def fillFirstDoctorInfo(self, info):
+        '''
+        Used to fill information about the first system doctor. That information is collected
+        by setup_handlers in firstdoctor_info.txt file.
+        '''
+        full_name = info['Nome Completo'].split(' ')
+        firstname = full_name[0]
+        lastname = full_name[-1]
+        self.setFirstName(firstname)
+        self.setLastName(lastname)
+        self.setSsn(info['CRM'])
+        self.setPhone(info['Telefone de Contato'])
+        if info['Confirmação do e-mail'] != info['Seu endereço de e-mail']:
+            raise Exception("The two e-mail are different.")
+        else:
+            self.setEmail(info['Seu endereço de e-mail'])
+        self.setSpecialty1(specialty_mapping[info['Especialidade 1']])
+        self.setSpecialty2(specialty_mapping[info['Especialidade 2']])
+        self.at_post_create_script()
 
 atapi.registerType(Doctor, PROJECTNAME)

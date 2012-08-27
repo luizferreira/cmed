@@ -1,0 +1,16 @@
+<div i18n:domain="plone"
+     class="row">
+    <div class="cell width-full position-0">
+
+
+    	<center>
+    		<div style="font-size:10px; color:#444">
+    		Anúncio publicitário
+    		</div>
+    		<a target="_blank" href="http://communi.com.br/servicos/#3">
+    		<img tal:attributes="src string:footer_banner.png" />
+    		</a>
+    	</center>
+    <br />
+    </div>
+</div>
