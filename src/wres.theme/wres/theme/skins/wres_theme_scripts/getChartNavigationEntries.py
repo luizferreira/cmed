@@ -28,7 +28,7 @@ addLink(mc, 'Consults', '/documents', icon='copy_icon.png')
 addLink(mc, 'Impressos', '/impressos', icon='print_icon.png')
 addLink(mc, 'Arquivos Externos', '/upload', icon='upload_icon.png')
 addLink(mc, 'Medicamentos e Prescrições', '/show_medications', icon='add_icon.png')
-addLink(mc, 'Problem List', '/show_problem_list', icon='error_icon.gif')
+addLink(mc, 'Diagnósticos', '/show_problem_list', icon='error_icon.gif')
 addLink(mc, 'Alergias', '/show_allergies', icon='contentrules_icon.png')
 addLink(mc, 'Exames', '/show_exams', icon='exams_icon.png')
 

@@ -1,0 +1,101 @@
+<div metal:define-macro="events">
+      <table class="listing cmed width-100">
+          <thead>
+              <th style="width:110px"> Data </th>
+              <th> Evento </th>
+          </thead>
+          <tbody>
+              <tr tal:repeat="event data">
+                <td tal:content="python: event.date.strftime('%d/%m/%Y %H:%M')">  </td>
+                <td tal:content="structure event/eprint"> </td>
+              </tr>
+          </tbody>
+      </table>       
+</div>
+
+<div metal:define-macro="allergies">
+      <table class="listing cmed width-100">
+          <thead>
+              <th> Alergia </th>
+              <th> Reação </th>
+          </thead>
+          <tbody>
+              <tr tal:repeat="item data">
+                <td tal:content="item/allergy">  </td>
+                <td tal:content="item/reaction"> </td>
+              </tr>
+          </tbody>
+      </table>       
+</div>
+
+<div metal:define-macro="exams">
+      <table class="listing cmed width-100">
+          <thead>
+              <th> Exame </th>
+              <th> Valor </th>
+              <th style="width:70px"> Data </th>
+          </thead>
+          <tbody>
+              <tr tal:repeat="item data">
+                <td tal:content="item/exam">  </td>
+                <td tal:content="item/value"> </td>
+                <td tal:content="item/date">01/01/2001</td>
+              </tr>
+          </tbody>
+      </table>       
+</div>
+
+
+<div metal:define-macro="documents">
+  <table id="documents_table" class="listing cmed width-100">
+      <thead>
+          <th style="width:70px">Data</th>
+          <th tal:content="ttitle"></th>
+          <th>Médico</th>
+      </thead>
+      <tbody>
+          <tr class="odd"
+              tal:repeat="item data"
+              tal:attributes="class python:test(repeat['item'].number()%2 == 0, 'even', 'odd')">
+              <td tal:content="item/date">01/01/2001</td>
+              <td><a tal:attributes="href item/link" tal:content="item/type">Echocardiogram</a></td>
+              <td tal:content="item/doctor">Doutor Teste</td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+<div metal:define-macro="problems">
+  <table class="listing cmed width-100">
+      <thead>
+          <th tal:content="ttitle"></th>
+          <th style="width:70px">Início</th>
+      </thead>
+      <tbody>
+          <tr class="odd"
+              tal:repeat="item data"
+              tal:attributes="class python:test(repeat['item'].number()%2 == 0, 'even', 'odd')">
+              <td tal:content="item/data/problem"></td>
+              <td tal:content="item/data/started">01/01/2001</td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+<div metal:define-macro="medications">
+  <table class="listing cmed width-100">
+      <thead>
+          <th tal:content="ttitle"></th>
+          <th style="width:70px">Concentração</th>
+      </thead>
+      <tbody>
+          <tr class="odd"
+              tal:repeat="item data"
+              tal:attributes="class python:test(repeat['item'].number()%2 == 0, 'even', 'odd')">
+              <td tal:content="item/medication"></td>
+              <td tal:content="item/concentration"></td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
