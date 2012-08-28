@@ -169,6 +169,8 @@ else:
             patient = result.getObject()
             dt = patient.getBirthDate()
             cf = patient.getContactPhone()
+            #Added the ID to the link to help amberjack
+            patient_id = patient.getId() + "_prontuario"
             formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])
             pchart_url = patient.absolute_url()+'/chartFolder'
             if dt == None:
@@ -177,7 +179,7 @@ else:
                 write('''%s (%s * %s)''' % (display_title, formatted_phone, dt.strftime("%d/%m/%Y") ) )
             write('''(<a href="%s" title="%s" class="%s">%s</a>)''' % (itemUrl, full_title, klass, "Pessoal"))
             if verifyViewChartPermission():
-                write('''  (<a href="%s" title="%s">%s</a>)''' % (pchart_url, "", "Prontuário"))
+                write('''  (<a href="%s" id="%s" title="%s">%s</a>)''' % (pchart_url,patient_id, "", "Prontuário"))
 
         else:
             write('''<a href="%s" title="%s" class="%s">%s</a>''' % (itemUrl, full_title, klass, display_title))
