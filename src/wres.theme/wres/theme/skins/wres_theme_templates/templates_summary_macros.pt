@@ -1,0 +1,58 @@
+<metal:templates_table define-macro="templates_table">
+
+  <fieldset tal:attributes="id template_type" class="cmed" style="float:left;"
+      tal:define="meta_type string:Template;
+      here_path python:'/'.join(context.getPhysicalPath());
+      path python:here_path+'/'+template_type;
+      results python:context.portal_catalog.searchResults({'portal_type': meta_type, 'path': path})">
+
+      <legend> Modelos de <span tal:content="template_type">Consultas</span> </legend>
+
+      <tal:if condition="not: results">
+      	<i>Não há modelos de <span tal:content="template_type">Consultas</span></i>
+      	&nbsp;&nbsp;&nbsp;
+      </tal:if>
+
+      <a tal:attributes="href python:'./'+template_type+'/createObject?type_name=Template'"> 
+          <button class="cmed cmed-success" style="float:right"> Adicionar </button>
+      </a>
+      <br />
+      <br />
+
+      <tal:if condition="results">
+
+	      <table class="listing cmed">
+	          <thead>
+	              <th>
+	                  Título
+	              </th>
+	              <th>
+	                  Data
+	              </th>
+	              <th>
+	                  Ações
+	              </th>                                        
+	          </thead>
+	          <tbody>
+	            <tr tal:repeat="brain results">
+	                <tal:def define="template_url python:path+'/'+brain.getId">
+	                  <td>
+	                      <a tal:content="brain/Title"
+	                      tal:attributes="href template_url"></a>
+	                  </td>                        
+	                  <td tal:content="python:brain.created.strftime('%d/%m/%Y - %H:%M')">
+	                      25/08/2012 - 18:34
+	                  </td>
+	                 <td>
+	                      <a tal:attributes="href template_url">Ver</a> 
+	                      - <a tal:attributes="href python:template_url+'/edit'">Editar</a>
+	                      <!-- Secretary can't delete templates -->
+	                      <span tal:condition="python: not context.verifyRole(['Secretary'])"> - <a tal:attributes="href python:template_url+'/delete_confirmation'">Excluir</a> </span>
+	                  </td>   
+	                </tal:def>                     
+	            </tr>                 
+	          </tbody>
+	      </table>
+	     </tal:if>
+  </fieldset>
+</metal:templates_table>

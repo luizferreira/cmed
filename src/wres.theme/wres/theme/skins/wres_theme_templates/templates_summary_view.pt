@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="cmfuemr">
+
+<head>
+
+<metal:block fill-slot="style_slot">
+  <link rel="stylesheet" type="text/css" href="cmed.css" />
+  <style type="text/css">
+    fieldset#Impressos {
+      margin-left:20px;
+    }
+  </style>  
+</metal:block>
+
+</head>
+
+<body>
+
+ <div metal:fill-slot="main"
+        tal:define="title string:Modelos;">
+        <h1>
+            <a i18n:translate="" tal:content="string:${title}">Title</a>
+        </h1>
+
+        <br />
+        <div> Um modelo é uma espécie de esqueleto de documento. Foi criado para armazenar partes comuns a vários documentos, economizando tempo na hora do preenchimento. Existem dois tipos de modelos: <b>Consultas</b> (Primeira consulta, Retorno, etc) e <b>Impressos</b> (Atestado, Laudo, Pedido de exame, etc). O primeiro fica disponível na parte de consultas do prontuário, já o segundo é disponilizado na parte de impressos. </div>
+
+        <span tal:define="template_type string:Consultas;">
+          <span metal:use-macro="here/templates_summary_macros/macros/templates_table" />
+        </span>
+
+        <span tal:define="template_type string:Impressos;">
+          <span metal:use-macro="here/templates_summary_macros/macros/templates_table" />
+        </span>        
+        
+    </div>
+</body>
+</html>

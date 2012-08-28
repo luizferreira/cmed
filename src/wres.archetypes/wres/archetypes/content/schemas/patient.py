@@ -452,62 +452,64 @@ set_schemata_properties(COMPLEMENTAR, schemata='Complementar')
 #))
 #set_schemata_properties(GUARANTOR, schemata='Titular')
 
-CONVENIOS = Schema((
 
-	ReferenceField('insurance',
-		relationship='insurance_patient',
-		allowed_types=('Insurance',),			
-		widget=ReferenceBrowserWidget(
-			label='Plano de Saúde',
-			description='Selecione a operadora do plano de saúde',
-			startup_directory = 'Insurances',                                   
-			label_msgid='cmfuemr_label_insurance',
-			i18n_domain='cmfuemr'
-		)
-	),
+# TODO: Remove Convenios starting Nov/2012.
+# CONVENIOS = Schema((
+
+# 	ReferenceField('insurance',
+# 		relationship='insurance_patient',
+# 		allowed_types=('Insurance',),			
+# 		widget=ReferenceBrowserWidget(
+# 			label='Plano de Saúde',
+# 			description='Selecione a operadora do plano de saúde',
+# 			startup_directory = 'Insurances',                                   
+# 			label_msgid='cmfuemr_label_insurance',
+# 			i18n_domain='cmfuemr'
+# 		)
+# 	),
 	
-	StringField('tipo',
-		schemata='main',
-		widget=StringWidget(label=_('Tipo'),
-		)
-	),	
+# 	StringField('tipo',
+# 		schemata='main',
+# 		widget=StringWidget(label=_('Tipo'),
+# 		)
+# 	),	
 
-    StringField('convenio',
-        widget = StringWidget(
-	        label='Convênio',
-        ),
-    ),
+#     StringField('convenio',
+#         widget = StringWidget(
+# 	        label='Convênio',
+#         ),
+#     ),
 
-    StringField('matricula',
-        widget = StringWidget(
-	        label='Matrícula',
-        ),
-    ),
+#     StringField('matricula',
+#         widget = StringWidget(
+# 	        label='Matrícula',
+#         ),
+#     ),
     
-    DateTimeField('dataDeValidade',
-        widget=CalendarWidget(
-        label=_('Data de Validade do Plano'),
-        format='%d/%m/%Y',
-        future_years=30,
-        starting_year=now.year,
-        show_hm=0,
-       )
-    ),
+#     DateTimeField('dataDeValidade',
+#         widget=CalendarWidget(
+#         label=_('Data de Validade do Plano'),
+#         format='%d/%m/%Y',
+#         future_years=30,
+#         starting_year=now.year,
+#         show_hm=0,
+#        )
+#     ),
                 
-    StringField('titular',
-        widget = StringWidget(
-	        label='Titular',
-        ),
-    ),
+#     StringField('titular',
+#         widget = StringWidget(
+# 	        label='Titular',
+#         ),
+#     ),
     
-    StringField('cartaoNacionalDeSaude',
-        widget=StringWidget(
-	        label='Cartão Nacional de Saúde',
-        ),
-    ),    
+#     StringField('cartaoNacionalDeSaude',
+#         widget=StringWidget(
+# 	        label='Cartão Nacional de Saúde',
+#         ),
+#     ),    
     
-))
-set_schemata_properties(CONVENIOS, schemata='Planos de Saude')
+# ))
+# set_schemata_properties(CONVENIOS, schemata='Planos de Saude')
 
 DEMOGRAPHIC = Schema((
 
@@ -725,4 +727,4 @@ set_schemata_properties(EMPLOYMENT, schemata='Complementar')
 
 baseSchema = finalizeSchema(wresuser.WRESUserSchema.copy())
 
-PatientSchema = baseSchema + MAIN + COMPLEMENTAR + CONVENIOS + DEMOGRAPHIC + EMPLOYMENT #+ EMERGENCY + GUARANTOR
+PatientSchema = baseSchema + MAIN + COMPLEMENTAR + DEMOGRAPHIC + EMPLOYMENT #+ EMERGENCY + GUARANTOR

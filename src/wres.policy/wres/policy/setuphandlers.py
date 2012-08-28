@@ -92,6 +92,7 @@ def createTemplateFolder(portal):
     template_folder.manage_permission('ATContentTypes: Add Document', [], acquire = False)
     template_folder.manage_permission('ATContentTypes: Add File', [], acquire = False)
     template_folder.setTitle('Modelos')
+    template_folder.setLayout('templates_summary_view')    
     template_folder.reindexObject()
     print '*** Criando pasta de templates...... OK'    
 
@@ -522,12 +523,16 @@ def changePortalObjectsConfiguration(portal):
     portal_types['Plone Site'].allowed_content_types = ['Document', 'File', 'Folder',
                                                         'Image', 'Link', 'Event', 'News Item', 'Topic',]
 
-#===========================================================================
-# Muda a lingua padrao do portal
-# Peter
-#===========================================================================
 def changePortalLanguage(portal):
-        portal.portal_languages.setDefaultLanguage('pt-br')
+    '''
+    Change portal default language and change 'Adicionar item...' to 'Adicionar...'
+    '''
+    portal.portal_languages.setDefaultLanguage('pt-br')
+    # this workround was necessary, since plone.po in our packages is not overriding plone translations
+    from plone.app.contentmenu.menu import FactoriesSubMenuItem
+    FactoriesSubMenuItem.title = 'Adicionar...'
+
+
         
 #===========================================================================
 # Carrega o CID no Vocabulario do portal
@@ -681,7 +686,17 @@ def addExampleTemplate(portal):
     consulta.setTitle("[Exemplo]Primeira Consulta")
     consulta.reindexObject()
     
-
+def parseFirstDoctorInputFile(infile):
+    lines = infile.readlines()
+    if len(lines) < 2:
+        return None
+    dic = {}
+    for i in range(len(lines)):
+        if i % 2 == 0:
+            lines[i] = lines[i].replace('\n', '')
+            lines[i+1] = lines[i+1].replace('\n', '')
+            dic[lines[i]] = lines[i+1]
+    return dic
 
 def setupVarious(context):
     """ Funcao generica executada na instalacao do wres policy """
@@ -702,6 +717,27 @@ def setupVarious(context):
 
     if context.readDataFile('wres.policy_various.txt') is not None:
         print '********************************ACHEI O TXT***********************************'   
+        # read firstdoctor_info and create a doctor if there is information there.
+        infile = context.openDataFile('firstdoctor_info.txt')
+        doctor_info = parseFirstDoctorInputFile(infile)
+        full_name = doctor_info['Nome Completo'].split(' ')
+        firstname = full_name[0].lower(); lastname = full_name[-1].lower()
+        doctor_id = firstname[0] + lastname
+
+        if doctor_info is not None:
+            doctor_folder = getattr(portal, 'Doctors')
+            clinic = getattr(portal, 'Clinic')
+            if not int(doctor_info['Quero o meu site profissional']):
+                # removing permissions from anonymous, so he cant see initial page anymore.
+                doctor_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
+                clinic.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE, ANONYMOUS_ROLE], acquire = False)
+                doctor_folder.reindexObject()
+            doctor = getOrCreateType(portal, doctor_folder, doctor_id, 'Doctor')
+            doctor.fillFirstDoctorInfo(doctor_info)
+            clinic.fillClinicInformation(doctor_info)
+            doctor.reindexObject()
+            clinic.reindexObject()
+
         loadDocumentTypesVocabulary(portal)
         loadImpressoTypesVocaburary(portal)
         loadVisitVocabularies(portal)
