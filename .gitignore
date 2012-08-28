@@ -47,3 +47,7 @@ pip-log.txt
 
 #Tilde
 *~
+
+#Came with plone 4.2, ignoring
+src/z3c.recipe.staticlxml/
+
