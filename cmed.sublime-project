@@ -15,6 +15,9 @@
 		},
 		{
 			"path": "/home/luiz/Programs/plone41/cmed/buildout-cache/eggs"
+		},
+		{
+			"path": "src/wres.tour/wres/tour/tours"
 		}
 	],
 	"settings":
@@ -22,29 +25,3 @@
 		"tab_size": 4
 	}
 }
-
-/*{
-    "folders":
-    [
-        {
-            "path": "src",
-            "folder_exclude_patterns": ["backup"]
-        },
-        {
-            "path": "docs",
-            "name": "Documentation",
-            "file_exclude_patterns": ["*.css"]
-        }
-    ],
-    "settings":
-    {
-        "tab_size": 8
-    },
-    "build_systems":
-    [
-        {
-            "name": "List",
-            "cmd": ["ls"]
-        }
-    ]
-}*/
