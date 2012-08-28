@@ -36,6 +36,20 @@ def getNewDocumentsList():
         retorno.append(item)
     return retorno
 
+def getImpressoList():
+    pc = getToolByName(context, 'portal_catalog')
+    brains = pc.searchResults({'portal_type': 'Impresso', 'path': '/'.join(context.getPhysicalPath()), 'sort_on':'created', 'sort_order':'ascending'})
+    retorno = []
+    for doc in brains:
+        obj = doc.getObject()
+        item = {}
+        item['type'] = obj.Title()
+        item['date'] = obj.date.strftime('%d/%m/%Y')
+        item['doctor'] = str(obj.getDoctor().Title())
+        item['link'] = obj.absolute_url(1)
+        retorno.append(item)
+    return retorno    
+
 #TODO: Remover (03/07/2012)
 #def getSignedDocumentsList():
     #pc = getToolByName(context, 'portal_catalog')
@@ -74,6 +88,8 @@ result = {}
 result['problems'] = context.getProblemListData()
 result['medications'] = context.getShowMedicationsData()
 result['laboratory'] = context.getExamsData()
+result['events'] = context.get_events()
 result['documents_list'] = getNewDocumentsList()
+result['impressos_list'] = getImpressoList()
 
 return result
