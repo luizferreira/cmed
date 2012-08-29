@@ -1,5 +1,6 @@
 # CommuniMed files
 .installed.cfg
+.codeintel
 README.html
 adminPassword.txt
 buildout.cfg
