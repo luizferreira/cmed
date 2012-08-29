@@ -3,5 +3,6 @@
   <version>1000</version>
   <dependencies>
         <dependency>profile-collective.amberjack.core:default</dependency>		
+        <dependency>profile-collective.amberjack.portlet:default</dependency>	
 	</dependencies>
 </metadata>
