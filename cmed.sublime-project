@@ -14,7 +14,7 @@
 			"path": "src/wres.theme/wres/theme"
 		},
 		{
-			"path": "/home/luiz/Programs/plone41/cmed/buildout-cache/eggs"
+			"path": "../buildout-cache/eggs"
 		},
 		{
 			"path": "src/wres.tour/wres/tour/tours"
