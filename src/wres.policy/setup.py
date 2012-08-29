@@ -34,12 +34,10 @@ setup(name='wres.policy',
           'Products.DataGridField == 1.8b2',
           'collective.quickupload == 1.5.2',
           'Products.Clouseau == 1.0', 
-          'repoze.catalog == 0.8.2',        
+          'repoze.catalog == 0.8.2',       
           'wres.brfields',
           'wres.archetypes',
           'wres.theme',
-          'collective.amberjack.core',
-          'collective.amberjack.portlet',
           # 'PIL==1.1.6',
           # Pillow e lxml sao p413
           # -*- Extra requirements: -*-

@@ -7,9 +7,8 @@
     xmlns:collective.amberjack="http://namespaces.plone.org/collective.amberjack.core"
     >
 
-  <include package="collective.amberjack.core" file="meta.zcml" />
-  
-  <five:registerPackage package="." initialize=".initialize" />
+  <include package="collective.amberjack.core" />
+  <include package="collective.amberjack.portlet" />
 
   <genericsetup:registerProfile
       name="default"
