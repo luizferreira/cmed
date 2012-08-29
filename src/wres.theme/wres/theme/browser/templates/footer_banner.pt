@@ -8,7 +8,7 @@
     		Anúncio publicitário
     		</div>
     		<a target="_blank" href="http://communi.com.br/servicos/#3">
-    		<img tal:attributes="src string:footer_banner.png" />
+    		<img class="visualNoPrint" tal:attributes="src string:footer_banner.png" />
     		</a>
     	</center>
     <br />
