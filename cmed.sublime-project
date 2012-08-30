@@ -14,10 +14,10 @@
 			"path": "src/wres.theme/wres/theme"
 		},
 		{
-			"path": "../buildout-cache/eggs"
+			"path": "src/wres.tour/wres/tour/"
 		},
 		{
-			"path": "src/wres.tour/wres/tour/tours"
+			"path": "../buildout-cache/eggs"
 		}
 	],
 	"settings":
