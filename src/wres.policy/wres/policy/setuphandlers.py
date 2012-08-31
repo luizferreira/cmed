@@ -116,6 +116,7 @@ def createAjudaFolder(portal):
     ajuda_folder.manage_permission('ATContentTypes: Add File', [], acquire=False)
     ajuda_folder.setTitle('Ajuda')
     ajuda_folder.setExcludeFromNav(True)
+    ajuda_folder.setLayout('ajuda_view')
     ajuda_folder.reindexObject()
     print '*** Criando pasta de ajuda...... OK'
 

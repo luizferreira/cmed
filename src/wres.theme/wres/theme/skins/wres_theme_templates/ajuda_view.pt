@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+	<title i18n:translate="cmfuemr_help_center">Help Center</title>
+	
+	<metal:aux fill-slot="style_slot">
+		<link rel="Stylesheet" type="text/css"
+        tal:attributes="href string:${portal_url}/ajuda_view.css" />
+	</metal:aux>
+</head>
+
+<body>
+
+	<div metal:fill-slot="main" id="main_chart_print">
+		
+		<div class="help_title">Nós estamos aqui para ajuda-lo.</div>
+	<div class="help_content">
+		<img src="left_arrow.png" id="left_arrow" alt="tour"/>
+		<p style="margin-left: 50px">
+			O suporte do CommuniMed, como o nosso produto, é grátis. Aprenda como marcar consultas, escrever uma prescrição, adicionar uma paciente, dentre outras diversas funcionalidades pelos links do <b>Tour Virtual no lado esquerdo</b>. 
+		</p>
+		<img src="right_arrow.png" id="right_arrow" alt="menu"/>
+		<p style="margin-right: 50px">
+			Nossa equipe está aqui para lhe acompanhar em prol do entendimento completo do sistema, desde da sua decisão inicial de utilizar o CommuniMed como uma ferramenta de gerenciamento de dados clínicos até a personalização de sua conta. O CommuniMed oferece suporte gratuito e ilimitado para cada passo deste caminho.
+		</p>
+	</div>
+<ul class="help_navigation" style="list-style-type: none;">
+	<li>
+		<h3 class="title_menu">Contate-nos:</h3>
+	</li>
+	<li>
+		<p class="subtitle_menu">Manual:</p>
+		<p>
+			<a href="http://communimed.com.br/ajuda-1" title="Manual CommuniMed">Leia os nossos manuais de fácil entendimento.</a>
+		</p>
+		
+	</li>
+	<li>
+		<p class="subtitle_menu">Visite o nosso site:</p>
+		<p>
+			<a href="http://communimed.com.br/" title="Site CommuniMed">CommuniMed.com.br</a>
+		</p>
+	</li>
+	<li>
+		<p class="subtitle_menu">Mande-nos um email:</p>
+		<p style="color: #427597;">
+			suporte@communimed.com.br
+		</p>
+	</li>
+	</ul>
+</div>
+</body>
+</html>
