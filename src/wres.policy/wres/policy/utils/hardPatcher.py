@@ -4,7 +4,6 @@ def i18n_patch():
     was necessary, since plone.po in our packages is not overriding plone
     translations.
     '''
-    import ipdb; ipdb.set_trace()
     from plone.app.contentmenu.menu import FactoriesSubMenuItem
     FactoriesSubMenuItem.title = 'Adicionar...'
 
