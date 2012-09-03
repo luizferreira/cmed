@@ -23,6 +23,8 @@
   <collective.amberjack:tour tourlocation="tours" />
 
   <cmf:registerDirectory name="javascripts"/>
+  
+  <browser:resource name="bulb.png" file="bulb.png" />
 </configure>
 
 
