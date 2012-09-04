@@ -82,9 +82,11 @@ def allow_modules():
     """ Modulo Policy """
     ModuleSecurityInfo('wres').declarePublic('policy')
     ModuleSecurityInfo('wres.policy').declarePublic('utils')
+    ModuleSecurityInfo('wres.policy').declarePublic('cmedstat')
     ModuleSecurityInfo('wres.policy.utils').declarePublic('utils')
 
     allow_module('wres.policy.utils.utils')
+    allow_module('wres.policy.cmedstat')
 
     """ Modulo Theme """
     ModuleSecurityInfo('wres').declarePublic('theme')
@@ -101,4 +103,3 @@ def init_tools(context):
 
     tool_initializer = ToolInit('Vocabulary Tool', tools=(VocabularyTool,), icon='tool.gif')
     tool_initializer.initialize(context)
-

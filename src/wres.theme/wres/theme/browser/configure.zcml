@@ -23,7 +23,7 @@
       for="*"
       layer=".interfaces.IThemeSpecific"
       permission="zope2.View"
-  />  
+  />
 
   <!-- cadastrando a nova viewlet para o personal_bar -->
   <browser:viewlet
@@ -34,7 +34,7 @@
       for="*"
       layer=".interfaces.IThemeSpecific"
       permission="zope2.View"
-  />    
+  />
 
   <!-- cadastrando a nova viewlet para o banner no footer -->
   <browser:viewlet
@@ -44,8 +44,18 @@
       for="*"
       layer=".interfaces.IThemeSpecific"
       permission="zope2.View"
-  />  
-  
+  />
+
+  <!-- adding new viewlet to handle statistics requests to cstat -->
+  <browser:viewlet
+      name="plone.footer_cstat"
+      manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
+      template="templates/footer_cstat.pt"
+      for="*"
+      layer=".interfaces.IThemeSpecific"
+      permission="zope2.View"
+  />
+
   <!-- Viewlets registration -->
   <!-- EXAMPLE (UNCOMMENT TO MAKE AVAILABLE):
   <browser:viewlet
