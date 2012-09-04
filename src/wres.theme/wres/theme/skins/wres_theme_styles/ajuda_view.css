@@ -1,5 +1,5 @@
 
-div.help_title {    
+div.help_title {
     font-size: 25px;
     color: #0065A4;
     font-weight: normal;
@@ -52,4 +52,12 @@ padding: 10px 0 0 0;
 }
 #main_chart_print {
 width: 1000px;
+}
+
+dl.help#portal-feedbackhelp {
+    background:#205C90;
+}
+
+dl.help#portal-feedbackhelp dt a {
+    color:white;
 }
