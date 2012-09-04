@@ -9,5 +9,6 @@
 		<dependency>profile-wres.brfields:default</dependency>
 		<dependency>profile-wres.archetypes:default</dependency>
 		<dependency>profile-wres.theme:default</dependency>
+		<dependency>profile-wres.tour:default</dependency>			
 	</dependencies>
 </metadata>
