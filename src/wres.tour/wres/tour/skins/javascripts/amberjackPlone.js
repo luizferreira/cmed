@@ -544,7 +544,7 @@ AmberjackPlone = {
 			}
 			else {
 				//Edited by CommuniMed, URL to back to Agenda
-				var backURL = document.URL.split("?")[0].split("/")
+				var backURL = document.URL.split("@")[0].split("?")[0].split("/")
 				backURL.length = 4
 				backURL = backURL.join("/") + "/Ajuda"
 				ajClose.attr("onClick", "Amberjack.close();location.href = '" + backURL + "';return false");
