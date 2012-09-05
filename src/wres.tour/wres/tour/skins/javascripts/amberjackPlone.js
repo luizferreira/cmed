@@ -1,4 +1,4 @@
-
+// Trecho Editado pela CommuniMed a partir da linha 546
 var numberMicrostep=0;  //used to set the number of each microstep
 
 /**

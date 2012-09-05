@@ -16,9 +16,7 @@
 
  <assignment name="amberjack-choice-portlet" category="context" key="/Ajuda" 
     manager="plone.leftcolumn" type="collective.amberjack.portlet.AmberjackChoicePortlet">
-        <property name="macro">portlet</property>
-        <property name="template">chart_navigation</property>
-    </assignment>
+ </assignment>
     
 
 </portlets>
