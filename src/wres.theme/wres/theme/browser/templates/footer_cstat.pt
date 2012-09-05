@@ -3,7 +3,6 @@
     <div class="cell width-full position-0">
 
         <span tal:define="stat context/call_cmed_stat">
-            <h2><tal:print content="stat" /></h2>
         </span>
 
     </div>
