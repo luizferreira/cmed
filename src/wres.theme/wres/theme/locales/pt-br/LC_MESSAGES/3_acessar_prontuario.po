@@ -18,4 +18,4 @@ msgstr ""
 "Domain: 3_acessar_prontuario\n"
 
 msgid "amberjack_title"
-msgstr "Como acessar o prontuário do paciente."
+msgstr "Acessando o prontuário de um paciente."

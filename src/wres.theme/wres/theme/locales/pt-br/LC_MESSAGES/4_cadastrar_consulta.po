@@ -18,4 +18,4 @@ msgstr ""
 "Domain: 4_cadastrar_consulta\n"
 
 msgid "amberjack_title"
-msgstr "Marcando consulta de paciente já cadastrado."
+msgstr "Marcando consulta de um paciente previamente cadastrado."
