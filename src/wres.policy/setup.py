@@ -35,10 +35,11 @@ setup(name='wres.policy',
           'collective.quickupload == 1.5.2',
           'Products.Clouseau == 1.0',
           'repoze.catalog == 0.8.2',
+          'requests == 0.13.9',
           'wres.brfields',
           'wres.archetypes',
           'wres.theme',
-          'wres.tour', 
+          'wres.tour',
           # 'PIL==1.1.6',
           # Pillow e lxml sao p413
           # -*- Extra requirements: -*-
@@ -49,7 +50,7 @@ setup(name='wres.policy',
                   'Products.PloneTestCase',
                   'collective.testcaselayer',
               ]
-      },      
+      },
       entry_points="""
       # -*- Entry points: -*-
 

@@ -25,8 +25,8 @@ setup(name='wres.tour',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'collective.amberjack.core',
-          'collective.amberjack.portlet',
+          'collective.amberjack.core == 1.1',
+          'collective.amberjack.portlet == 1.1',
           # -*- Extra requirements: -*-
       ],
       entry_points="""

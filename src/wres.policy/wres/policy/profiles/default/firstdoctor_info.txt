@@ -1,13 +1,13 @@
 Nome Completo
-Luiz Gustavo da Fonseca Ferreira
+Commmuni Teste
 CRM
 1234567890
 Telefone de Contato
 3136612345
 Seu endereço de e-mail
-lgustavo.fonseca@gmail.com
+suporte@communi.com.br
 Confirmação do e-mail
-lgustavo.fonseca@gmail.com
+suporte@communi.com.br
 Especialidade 1
 Cardiologia
 Especialidade 2
@@ -15,7 +15,7 @@ Clínica geral
 Quero o meu site profissional
 1
 Nome da Clínica/Consultório
-CliniMed
+CommuniMed
 Avenida/Rua
 Av. Afonso Pena
 Número
