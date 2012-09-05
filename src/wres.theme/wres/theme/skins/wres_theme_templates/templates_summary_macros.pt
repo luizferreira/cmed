@@ -14,7 +14,7 @@
       </tal:if>
 
       <a tal:attributes="href python:'./'+template_type+'/createObject?type_name=Template'"> 
-          <button class="cmed cmed-success" style="float:right"> Adicionar </button>
+          <button tal:attributes="id python:'add_'+template_type" class="cmed cmed-success" style="float:right"> Adicionar </button>
       </a>
       <br />
       <br />
