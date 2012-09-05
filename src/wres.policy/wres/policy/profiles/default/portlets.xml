@@ -233,6 +233,7 @@
     <blacklist category="group" location="/Doctors" manager="plone.leftcolumn" status="block"/>   
     <blacklist category="group" location="/Secretaries" manager="plone.leftcolumn" status="block"/>  
     <blacklist category="group" location="/Insurances" manager="plone.leftcolumn" status="block"/>
+    <blacklist category="group" location="/Ajuda" manager="plone.leftcolumn" status="block"/>
     
      
 
