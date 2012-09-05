@@ -1,15 +1,15 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.2'
+version = '1.0'
 
-setup(name='wres.policy',
+setup(name='wres.tour',
       version=version,
-      description="Policy product for WRES website",
+      description="Wres Tour Package",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
-      # http://pypi.python.org/pypi?%3Aaction=list_classifiers
+      # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",
@@ -25,30 +25,11 @@ setup(name='wres.policy',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'Products.CMFPlone',
-          'Products.Archetypes',
-          'plone.app.portlets',
-          'Pillow',
-          'lxml',
-          'Solgema.fullcalendar == 1.9',
-          'Products.DataGridField == 1.8b2',
-          'collective.quickupload == 1.5.2',
-          'Products.Clouseau == 1.0', 
-          'repoze.catalog == 0.8.2',       
-          'wres.brfields',
-          'wres.archetypes',
-          'wres.theme',
-          # 'PIL==1.1.6',
-          # Pillow e lxml sao p413
+          'wres.policy',
+          'collective.amberjack.core',
+          'collective.amberjack.portlet',
           # -*- Extra requirements: -*-
       ],
-      extras_require = {
-          'test': [
-                  'plone.app.testing',
-                  'Products.PloneTestCase',
-                  'collective.testcaselayer',
-              ]
-      },      
       entry_points="""
       # -*- Entry points: -*-
 

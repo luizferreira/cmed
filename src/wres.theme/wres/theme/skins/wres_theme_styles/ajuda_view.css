@@ -1,0 +1,63 @@
+
+div.help_title {
+    font-size: 25px;
+    color: #0065A4;
+    font-weight: normal;
+    padding: 20px 0 10px 0;
+    position: relative;
+    width: 600px;
+}
+
+#main_chart_print .help_content {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.4;
+    margin-bottom: 15px;
+    position: relative;
+    width: 600px;
+    text-align:justify;
+    float: left;
+}
+.help_navigation{
+    position: relative;
+    right: 0px;
+    margin: -30px 70px 0px 0px;
+    width: 200px;
+    float: right;
+    margin-left: 20px;
+}
+#left_arrow{
+    float: left;
+    position:relative;
+    width:35px;
+    margin-top:40px;
+}
+#right_arrow{
+    float: right;
+    position:relative;
+    width:35px;
+    margin-top:20px;
+}
+.title_menu{
+font-size: 21px;
+color: #0065A4;
+font-weight: normal;
+padding: 10px 0 0 0;
+}
+.subtitle_menu{
+    color: #0065A4;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 15px;
+}
+#main_chart_print {
+width: 1000px;
+}
+
+dl.help#portal-feedbackhelp {
+    background:#205C90;
+}
+
+dl.help#portal-feedbackhelp dt a {
+    color:white;
+}

@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="wres.tour"
+    xmlns:collective.amberjack="http://namespaces.plone.org/collective.amberjack.core"
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+  <include package="collective.amberjack.core" />
+  <include package="collective.amberjack.portlet" />
+
+  <genericsetup:registerProfile
+      name="default"
+      title="WRES Tour"
+      directory="profiles/default"
+      description="Installs amberjack and Wres Tour to CommuniMed system"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+  <!-- -*- extra stuff goes here -*- -->
+
+  <collective.amberjack:tour tourlocation="tours" />
+
+  <cmf:registerDirectory name="javascripts"/>
+  
+  <browser:resource name="bulb.png" file="bulb.png" />
+</configure>
+
+

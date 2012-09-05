@@ -10,6 +10,8 @@ def createGroup(name):
 def addLink(group, text, href, icon='document_icon.gif'):
     base = context.chartFolder.absolute_url_path()
     link_template = href.split('/')[-1]
+    #The id was added to help amberjack find the link on tours (use the first word in lower case)
+    id = "navigation_" + text.lower().split(' ')[0]
     if TEMPLATE_ID == link_template:
         css = 'currentNavItem'
     else:
@@ -18,6 +20,7 @@ def addLink(group, text, href, icon='document_icon.gif'):
                            'href': base + href,
                            'icon': icon,
                            'css': css,
+                           'id' : id,
                            })
 
 structure = []

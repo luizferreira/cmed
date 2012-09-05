@@ -47,3 +47,6 @@ pip-log.txt
 #Came with plone 4.2, ignoring
 src/z3c.recipe.staticlxml/
 
+
+#4.2 Plone comes with this src
+z3c.recipe.staticlxml

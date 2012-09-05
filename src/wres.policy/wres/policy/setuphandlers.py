@@ -96,6 +96,31 @@ def createTemplateFolder(portal):
     template_folder.reindexObject()
     print '*** Criando pasta de templates...... OK'
 
+def createAjudaFolder(portal):
+    """ Create the Ajuda folder """
+    print '*** Criando pasta de ajuda...'
+    ajuda_folder = getOrCreateType(portal, portal, 'Ajuda', 'Folder')
+
+    # a permissao Modify portal content eh necessaria pra se poder adicionar objetos dentro da pasta.
+    ajuda_folder.manage_permission('Modify portal content', [MANAGER_ROLE], acquire=False)
+    ajuda_folder.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE], acquire=False)
+    ajuda_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE], acquire=False)
+    # adds
+    ajuda_folder.manage_permission('ATContentTypes: Add File', [], acquire=False)
+    ajuda_folder.manage_permission('Add portal topics', [], acquire=False)
+    ajuda_folder.manage_permission('ATContentTypes: Add Event', [], acquire=False)
+    ajuda_folder.manage_permission('ATContentTypes: Add Image', [], acquire=False)
+    ajuda_folder.manage_permission('ATContentTypes: Add Link', [], acquire=False)
+    ajuda_folder.manage_permission('ATContentTypes: Add News Item', [], acquire=False)
+    ajuda_folder.manage_permission('ATContentTypes: Add Folder', [], acquire=False)
+    ajuda_folder.manage_permission('ATContentTypes: Add Document', [], acquire=False)
+    ajuda_folder.manage_permission('ATContentTypes: Add File', [], acquire=False)
+    ajuda_folder.setTitle('Ajuda')
+    ajuda_folder.setExcludeFromNav(True)
+    ajuda_folder.setLayout('ajuda_view')
+    ajuda_folder.reindexObject()
+    print '*** Criando pasta de ajuda...... OK'
+
 def createDoctorFolder(portal):
     """ Cria a pasta de medicos """
     print '*** Criando pasta de medicos...'
@@ -643,8 +668,7 @@ def createCmedCatalogs(portal):
 def addExampleTemplate(portal):
     document_template = '<table class="plain"><tbody><tr><th colspan="2">QUEIXA E DURAÇÃO</th></tr><tr><td><br />\
     <br /></td></tr></tbody></table><table class="plain"><tbody><tr><th colspan="2">HISTÓRIA DA MOLÉSTIA ATUAL</th></tr><tr><td><br />\
-    <br /></td></tr></tbody></table><table class="plain"><tbody><tr><th colspan="2">ANTECEDENTES PESSOAIS</th></tr><tr><td><br /><br />\
-    </td></tr></tbody></table><table class="plain"><tbody><tr><th colspan="2">ANTECEDENTES PESSOAIS</th></tr><tr><td><br /><br /><br />\
+    <br /></td></tr></tbody></table><table class="plain"><tbody><tr><th colspan="2">ANTECEDENTES PESSOAIS</th></tr><tr><td><br /><br /><br />\
     </td></tr></tbody></table><table class="plain"><tbody><tr><th>Hábitos</th> <th>Frequência</th></tr><tr><td>Tabagismo    (   )\
     </td><td><br /></td></tr><tr><td>Atividade Física (   )</td><td><br /></td></tr><tr><td>Etilismo (  )</td><td></td>\
     </tr><tr><td colspan="2">Alimentação:</td></tr><tr><td colspan="2">Sexuais:</td></tr></tbody></table><table class="plain">\
@@ -767,6 +791,7 @@ def setupVarious(context):
 
         createPatientFolder(portal)
         createSecretaryFolder(portal)
+        createAjudaFolder(portal)
 
         # conforme decidido na reuniao 21-10-2011 os medicos indicantes
         # serao removidos, fica aqui comentado caso decida-se voltar atras.

@@ -1,14 +1,4 @@
 {
-	"build_systems":
-	[
-		{
-			"cmd":
-			[
-				"/home/luiz/Programs/plone41/cmed/1/bin/instance"
-			],
-			"name": "Exec"
-		}
-	],
 	"folders":
 	[
 		{
@@ -24,7 +14,10 @@
 			"path": "src/wres.theme/wres/theme"
 		},
 		{
-			"path": "/home/luiz/Programs/plone41/cmed/buildout-cache/eggs"
+			"path": "src/wres.tour/wres/tour/"
+		},
+		{
+			"path": "../buildout-cache/eggs"
 		}
 	],
 	"settings":

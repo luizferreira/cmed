@@ -2,7 +2,7 @@
 #content ul {
     position:relative;
     left:-20px;
-    list-style: none outside none; 
+    list-style: none outside none;
     text-align: center;
 }
 
@@ -20,7 +20,7 @@ div#portal-column-content {
     position: relative;
     float: left;
     left: 100%;
-    margin-left: -98.875%
-    
+/* Portlet mode for amberjack tour*/
+    /*margin-left: -73.875%*/
 }
 

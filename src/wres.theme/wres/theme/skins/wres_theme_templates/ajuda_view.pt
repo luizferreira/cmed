@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+	<title i18n:translate="cmfuemr_help_center">Help Center</title>
+
+	<metal:aux fill-slot="style_slot">
+		<link rel="Stylesheet" type="text/css"
+        tal:attributes="href string:${portal_url}/ajuda_view.css" />
+	</metal:aux>
+</head>
+
+<body>
+
+	<div metal:fill-slot="main" id="main_chart_print">
+
+		<div class="help_title">Nós estamos aqui para ajudá-lo.</div>
+		<br />
+	<div class="help_content">
+		<img src="left_arrow.png" id="left_arrow" alt="tour"/>
+		<p style="margin-left: 50px">
+			O suporte do CommuniMed, assim como o nosso produto, é gratuito. A maneira mais fácil de começar no Communimed é pelo nosso <b>Guia Virtual</b>, mostrado no lado esquerdo da sua tela. Com ele você aprenderá funções básicas de um prontuário eletrônico, como marcar consultas, adicionar um paciente e gerar uma prescrição.
+		</p>
+		<img src="right_arrow.png" id="right_arrow" alt="menu"/>
+		<p style="margin-right: 50px">
+			Nossa equipe está aqui para lhe acompanhar durante todo o processo, começando pela sua decisão inicial de utilizar o CommuniMed como o seu sistema de prontuário eletrônico. Caso o nosso guia virtual ou o nosso <b>manual de usuário</b> não tenham sidos suficientes para dirimir as suas dúvidas, por favor, entre em contato conosco, ficaremos felizes em poder ajudar.
+		</p>
+	</div>
+<ul class="help_navigation" style="list-style-type: none;">
+	<li>
+		<h3 class="title_menu">+ Ajuda:</h3>
+	</li>
+	<li>
+		<p class="subtitle_menu">Manual:</p>
+		<p>
+			<a target="_blank" href="http://communimed.com.br/ajuda-1" title="Manual CommuniMed">Leia o manual de úsuário do CommuniMed.</a>
+		</p>
+
+	</li>
+	<li>
+		<p class="subtitle_menu">Visite o nosso site:</p>
+		<p>
+			<a target="_blank" href="http://communimed.com.br/" title="Site CommuniMed">communimed.com.br</a>
+		</p>
+	</li>
+	<li>
+		<p class="subtitle_menu">Mande-nos um email:</p>
+		<p style="color: #427597;"><a target="_blank" href="mailto:suporte@communimed.com.br">
+			suporte@communimed.com.br</a>
+		</p>
+	</li>
+	</ul>
+</div>
+</body>
+</html>

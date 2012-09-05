@@ -8,10 +8,10 @@
   <tal:if condition="python: not context.verifyRole(['Anonymous'])">
 
     <dl class="actionMenu deactivated" id="portal-feedbackhelp">
-      <dt class="actionMenuHeader">
+      <dt class="actionMenuHeader feedback">
         <li id="siteaction-contact">
-            <a href="" accesskey="9" title="Sua opinião é importante!" 
-               rel="#pb_1" class="link-overlay" 
+            <a href="" accesskey="9" title="Sua opinião é importante!"
+               rel="#pb_1" class="link-overlay"
                style="cursor: pointer; " tal:attributes="href string:${view/portal_url}/contact-info">
                Feedback
            </a>
@@ -19,12 +19,12 @@
       </dt>
     </dl>
 
-    <dl class="deactivated" id="portal-feedbackhelp">
+    <dl class="deactivated help" id="portal-feedbackhelp">
       <dt class="actionMenuHeader">
-        <a href="http://communimed.com.br/ajuda-1" target="_blank">
+        <a tal:attributes="href string:${view/portal_url}/Ajuda" title="Visite nossa central de ajuda.">
             Ajuda
         </a>
-      </dt>  
+      </dt>
     </dl>
 
   </tal:if>

@@ -6026,6 +6026,10 @@ msgstr ""
 msgid "cmfuemr_patient_search"
 msgstr "Procurar Paciente"
 
+#. Default: "Help Center"
+msgid "cmfuemr_help_center"
+msgstr "Central de Ajuda"
+
 #. Default: "Person"
 #: uemr_templates\dt_objective.pt
 msgid "cmfuemr_person"
