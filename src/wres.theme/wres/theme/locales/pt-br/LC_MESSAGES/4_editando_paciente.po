@@ -18,4 +18,4 @@ msgstr ""
 "Domain: 0_criar_paciente\n"
 
 msgid "amberjack_title"
-msgstr "Cadastrando um paciente pela seção 'Pacientes'."
+msgstr "Editando paciente pela seção 'Pacientes'."
