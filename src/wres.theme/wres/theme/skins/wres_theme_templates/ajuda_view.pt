@@ -25,7 +25,7 @@
 	<div class="help_content">
 		<img src="left_arrow.png" id="left_arrow" alt="tour"/>
 		<p style="margin-left: 50px">
-			O suporte do CommuniMed, assim como o nosso produto, é gratuito. A maneira mais fácil de começar no Communimed é pelo nosso <b>Guia Virtual</b>, mostrado no lado esquerdo da sua tela. Com ele você aprenderá funções básicas de um prontuário eletrônico, como marcar consultas, adicionar um paciente e gerar uma prescrição.
+			O suporte do CommuniMed, assim como o nosso produto, é gratuito. A maneira mais fácil de começar no Communimed é pelo nosso <b>Guia Virtual</b>, mostrado no lado esquerdo da sua tela. Com ele você aprenderá funções básicas de um sistema de prontuário eletrônico, como marcar consultas, adicionar um paciente e gerar uma prescrição. Recomendamos inicialmente que os tutoriais sejam realizados na ordem, já que o aprendizado de um influencia no entendimento do próximo.
 		</p>
 		<img src="right_arrow.png" id="right_arrow" alt="menu"/>
 		<p style="margin-right: 50px">
