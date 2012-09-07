@@ -150,7 +150,11 @@ msgstr "Conteúdo do cabeçalho direito do calendário"
 
 #: ../interfaces.py:190
 msgid "help_minTime"
-msgstr "Coloque a primeira hora que sera visível no calendário (precisa ser do tipo '5' ou '5:30')."
+msgstr "Coloque a primeira hora que será visível no calendário (precisa ser do tipo '5' ou '5:30')."
+
+#: ../interfaces.py:191
+msgid "help_maxTime"
+msgstr "Coloque a última hora que será visível no calendário (precisa ser do tipo '18' ou '18:30')."
 
 #: ../interfaces.py:225
 msgid "help_overrideStateForAdmin"
