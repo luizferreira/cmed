@@ -45,19 +45,21 @@
            based-on="Plone Default">
         <viewlet name="plone.footer"
                  insert-before="*" />
-    </order>  
+    </order>
 
     <!-- O trecho abaixo cadastra a viewlet que substuira o personal_bar -->
     <order manager="plone.portalheader" skinname="WRES Theme"
            based-on="Plone Default">
-        <viewlet name="plone.personal_bar"
+        <viewlet name="plone.browser_update"
                  insert-before="*" />
+        <viewlet name="plone.personal_bar"
+                 insert-before="plone.browser_update" />
     </order>
 
      <hidden manager="plone.portalfooter" skinname="WRES Theme">
       <viewlet name="plone.site_actions"/>
       <viewlet name="plone.colophon"/>
       <viewlet name="plone.footer"/>
-     </hidden>          
+     </hidden>
 
 </object>
