@@ -49,6 +49,7 @@ class WresPolicy(PloneSandboxLayer):
 		import wres.archetypes
 		import wres.brfields
 		import wres.theme
+		import wres.tour
 
 		xmlconfig.file('configure.zcml',
 			wres.archetypes,
@@ -74,6 +75,12 @@ class WresPolicy(PloneSandboxLayer):
 		z2.installProduct(app, 'wres.theme')				
 		
 		xmlconfig.file('configure.zcml',
+			wres.tour,
+			context=configurationContext)
+
+		z2.installProduct(app, 'wres.tour')
+
+		xmlconfig.file('configure.zcml',
 			wres.policy,
 			context=configurationContext)
 
@@ -81,9 +88,10 @@ class WresPolicy(PloneSandboxLayer):
 
 
 	def setUpPloneSite(self, portal):
-                applyProfile(portal, 'wres.archetypes:default')
+        	applyProfile(portal, 'wres.archetypes:default')
 		applyProfile(portal, 'wres.brfields:default')
 		applyProfile(portal, 'wres.theme:default')
+		applyProfile(portal, 'wres.tour:default')
 		applyProfile(portal, 'wres.policy:default')
                 
 
@@ -93,6 +101,7 @@ class WresPolicy(PloneSandboxLayer):
 		z2.uninstallProduct(app, 'wres.archetypes')
 		z2.uninstallProduct(app, 'wres.brfields')
 		z2.uninstallProduct(app, 'wres.theme')	
+		z2.uninstallProduct(app, 'wres.tour')	
 		z2.uninstallProduct(app, 'wres.policy')
 		
 WRES_POLICY_FIXTURE = WresPolicy()
