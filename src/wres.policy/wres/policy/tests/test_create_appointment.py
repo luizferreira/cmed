@@ -37,7 +37,7 @@ def go_to_window_with_text(browser,text):
             
 def click_option_by_text(browser,field_name,text):
     field = browser.find_element_by_name(field_name)
-    options = field.find_elements()
+    options = field.find_elements_by_tag_name("option")
     wait(browser)
     for option in options:
         #print "Comparando " + text + " " + option.text
@@ -125,7 +125,7 @@ class TestSetup(unittest.TestCase):
         
         #Set month
         click_option_by_text(browser,"startDate_month",start_month)
-        
+
         #Set days
         click_option_by_text(browser,"startDate_day", start_day)
         
@@ -143,6 +143,7 @@ class TestSetup(unittest.TestCase):
         #Set insurance
         click_option_by_text(browser,"insurance","Outro")
         new_insurance = browser.find_element_by_id("other_insurance")
+        wait(browser)
         new_insurance.send_keys("Salvacao")
         
         #Submit
