@@ -56,6 +56,16 @@
       permission="zope2.View"
   />
 
+  <!-- adding new viewlet to detect old browsers -->
+  <browser:viewlet
+      name="plone.browser_update"
+      manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+      template="templates/browser_update.pt"
+      for="*"
+      layer=".interfaces.IThemeSpecific"
+      permission="zope2.View"
+  />
+
   <!-- Viewlets registration -->
   <!-- EXAMPLE (UNCOMMENT TO MAKE AVAILABLE):
   <browser:viewlet
