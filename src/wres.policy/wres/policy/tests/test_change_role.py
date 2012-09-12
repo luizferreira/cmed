@@ -8,11 +8,13 @@ from plone.testing import z2
 from plone.app.testing import TEST_USER_ID, TEST_USER_NAME, TEST_USER_PASSWORD, SITE_OWNER_NAME, SITE_OWNER_PASSWORD
 from plone.app.testing import setRoles
 from wres.policy.testing import WRES_POLICY_FUNCTIONAL_TESTING
+from Products.PloneTestCase.PloneTestCase import FunctionalTestCase
 from wres.policy.test_browser_utils import *
 
 from Testing.ZopeTestCase.utils import  startZServer
 from Products.CMFCore.utils import getToolByName
 from wres.policy.test_browser_utils import *
+from Testing import ZopeTestCase
 import random
 
 
@@ -36,8 +38,12 @@ class TestSetup(unittest.TestCase):
     
     def setUp(self):
         self.app = self.layer['app']
+        ZopeTestCase.utils.setupCoreSessions(self.app)
+        self.app.REQUEST['SESSION'] = Session()
+
         self.portal = self.layer['portal']
         self.browser = Browser(self.app)
+        self.browser.handleErrors = False # Don't get HTTP 500 pages
     
     def logout(self):
         browser = self.browser
