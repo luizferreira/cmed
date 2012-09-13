@@ -1,7 +1,6 @@
 #coding=utf-8
 import unittest2 as unittest
 from wres.archetypes.tests.IntegrationLayer import WRES_ARCHETYPES_INTEGRATION_TESTING
-from wres.archetypes.tests.IntegrationLayer import WRES_ARCHETYPES_INTEGRATION_TESTING
 from wres.archetypes.content.patient import Patient
 from wres.archetypes.content.visit import Visit
 from wres.archetypes.content.chartdata import Event
