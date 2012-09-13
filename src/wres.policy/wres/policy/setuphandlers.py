@@ -6,8 +6,7 @@ from zope.app.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
 from Products.CMFPlone.CatalogTool import CatalogTool
-from wres.policy.utils.setup_utils import add_types_to_portal_factory,\
-     install_dependencies, create_metadatas, add_index, add_layer
+from wres.policy.utils.setup_utils import create_metadatas, add_index
 from AccessControl import Unauthorized
 
 
@@ -196,17 +195,6 @@ def createVisitFolder(portal):
     visit_folder.reindexObject()
     print '*** Criando pasta de visitas...... OK'
 
-#TODO: Remover comentarios referente ao insurance folder posteriormente
-#def createInsuranceFolder(portal):
-    #""" Cria a pasta de planos de saude """
-    #print '*** Criando pasta de planos de saude...'
-    #insurance_folder = getOrCreateType(portal, portal, 'Insurances', 'InsuranceFolder')
-    #insurance_folder.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance_folder.setTitle('Planos de Saúde')
-    #insurance_folder.reindexObject()
-    #print '*** Criando pasta de planos de saude...... OK'
-
 def createReportsFolder(portal, clinic):
     """ Cria a pasta de relatórios """
     print '*** Criando pasta de relatórios...'
@@ -274,261 +262,6 @@ def createGroups(portal):
     if not acl_users.searchGroups(id=UEMRADMIN_GROUP):
         portal_groups.addGroup(UEMRADMIN_GROUP, roles = [UEMRADMIN_ROLE, MEMBER_ROLE, OWNER_ROLE, MANAGER_ROLE])
 
-#TODO: Remover posteriormente estes comentarios
-#def createTop10DefaultInsurance(portal):
-    ##-------Bradesco Saúde------------------------------------------
-    #print '*** Criando Plano Bradesco...'
-    #insurance = getOrCreateType(portal, portal.Insurances, 'Bradesco', 'Insurance')
-    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.setTitle('Bradesco Saúde')
-    #insurance.setName('Bradesco Saúde')
-    #insurance.setPhoneNumber('0800 701 2700')
-    #insurance.setWebPage('http://www.bradescosaude.com.br')
-    #insurance.reindexObject()
-    #print '*** Criando objeto Plano Bradesco...... OK'
-
-    ##-------Amil Assistencia ------------------------------------------
-    #print '*** Criando Amil Assitência...'
-    #insurance = getOrCreateType(portal, portal.Insurances, 'Amil', 'Insurance')
-    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.setTitle('Amil Assitência')
-    #insurance.setName('Amil Assitência')
-    #insurance.setPhoneNumber('(31) 3316-1000')
-    #insurance.setWebPage('http://www.amil.com.br/')
-    #insurance.reindexObject()
-    #print '*** Criando objeto Amil Assitência...... OK'
-
-     ##-------Unimed BH------------------------------------------
-    #print '*** Criando Unimed BH...'
-    #insurance = getOrCreateType(portal, portal.Insurances, 'UnimedBH', 'Insurance')
-    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.setTitle('Unimed BH')
-    #insurance.setName('Unimed BH')
-    #insurance.setPhoneNumber('0800 30 30 03')
-    #insurance.setWebPage('http://www.unimedbh.com.br/')
-    #insurance.reindexObject()
-    #print '*** Criando objeto Unimed BH...... OK'
-
-     ##-------Intermédica------------------------------------------
-    #print '*** Criando Intermédica...'
-    #insurance = getOrCreateType(portal, portal.Insurances, 'Intermedica', 'Insurance')
-    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.setTitle('Intermédica')
-    #insurance.setName('Intermédica')
-    #insurance.setPhoneNumber('0800 770 084')
-    #insurance.setWebPage('http://www.intermedica.com.br/')
-    #insurance.reindexObject()
-    #print '*** Criando objeto Intermédica...... OK'
-
-     ##-------Medial------------------------------------------
-    #print '*** Criando Medial...'
-    #insurance = getOrCreateType(portal, portal.Insurances, 'Medial', 'Insurance')
-    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.setTitle('Medial')
-    #insurance.setName('Medial')
-    #insurance.setPhoneNumber('0800 724 1331')
-    #insurance.setWebPage('http://www.medialsaude.com.br/')
-    #insurance.reindexObject()
-    #print '*** Criando objeto Medial...... OK'
-
-    ##-------Sul América Saúde------------------------------------------
-    #print '*** Criando Sul América Saúde...'
-    #insurance = getOrCreateType(portal, portal.Insurances, 'Sulamerica', 'Insurance')
-    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.setTitle('Sul América Saúde')
-    #insurance.setName('Sul América Saúde')
-    #insurance.setPhoneNumber('0800 724 1331')
-    #insurance.setWebPage('http://www.sulamericaweb.com.br/')
-    #insurance.reindexObject()
-    #print '*** Criando objeto Sul América Saúde...... OK'
-
-    ##-------Golden Cross Saúde------------------------------------------
-    #print '*** Criando Golden Cross...'
-    #insurance = getOrCreateType(portal, portal.Insurances, 'Goldencross', 'Insurance')
-    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.setTitle('Golden Cross')
-    #insurance.setName('Golden Cross')
-    #insurance.setPhoneNumber('0800 728 2001')
-    #insurance.setWebPage('http://www.goldencross.com.br/')
-    #insurance.reindexObject()
-    #print '*** Criando objeto Golden Cross...... OK'
-
-   ##-------SóSaúde------------------------------------------
-    #print '*** Criando SóSaúde...'
-    #insurance = getOrCreateType(portal, portal.Insurances, 'Sosaude', 'Insurance')
-    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.setTitle('Só Saúde Assistência Medico Hospitalar')
-    #insurance.setName('Só Saúde Assistência Medico Hospitalar')
-    #insurance.setPhoneNumber('(31)3078-8000')
-    #insurance.setWebPage('http://www.sosaude.com.br/')
-    #insurance.reindexObject()
-    #print '*** Criando objeto SóSaúde...... OK'
-
-    ##-------Santa Casa Saúde------------------------------------------
-    #print '*** Criando Santa Casa...'
-    #insurance = getOrCreateType(portal, portal.Insurances, 'Santacasa', 'Insurance')
-    #insurance.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-    #insurance.setTitle('Santa Casa Saúde')
-    #insurance.setName('Santa Casa Saúde')
-    #insurance.setPhoneNumber('(31)3271-1601')
-    #insurance.setWebPage('http://www.santacasaplanos.com.br/')
-    #insurance.reindexObject()
-    #print '*** Criando objeto Santa Casa...... OK'
-
-#===============================================================================
-# Objeto Vazio
-#===============================================================================
-class Empty: pass
-
-#===============================================================================
-# Adiciona Lexicos > Lexicon('Lexicon', '', HTMLWordSplitter(), CaseNormalizer(), StopWordRemover())
-# Peter
-#===============================================================================
-def addLexicon(catalog, name, description, wordsplitter, case, stopwords):
-
-    elem = []
-    wordSplitter = Empty()
-    wordSplitter.group = 'Word Splitter'
-    wordSplitter.name = wordsplitter #'HTML aware splitter'
-
-    caseNormalizer = Empty()
-    caseNormalizer.group = 'Case Normalizer'
-    caseNormalizer.name = case #'Case Normalizer'
-
-    stopWords = Empty()
-    stopWords.group = 'Stop Words'
-    stopWords.name = stopwords #'Remove listed and single char words'
-
-    elem.append(wordSplitter)
-    elem.append(caseNormalizer)
-    elem.append(stopWords)
-    catalog.manage_addProduct['ZCTextIndex'].manage_addLexicon(name, description, elem)
-
-#===============================================================================
-# Cria o schedule_catalog
-# Peter
-#===============================================================================
-def createScheduleCatalog(site):
-    try:
-        site.schedule_catalog
-    except:
-        site._setObject('schedule_catalog', CatalogTool())
-
-    schedule_catalog = getToolByName(site, 'schedule_catalog')
-    at = getToolByName(site, 'archetype_tool')
-    at.setCatalogsByType(schedule_catalog.meta_type, ['portal_catalog', 'schedule_catalog'])
-    at.setCatalogsByType('Visit', ['schedule_catalog'])
-
-    #Adicionando Lexicos
-    addLexicon(site.schedule_catalog, 'htmltext_lexicon', '', 'HTML aware splitter', 'Case Normalizer', 'Remove listed stop words only')
-    addLexicon(site.schedule_catalog, 'plaintext_lexicon', '', 'Whitespace splitter', 'Case Normalizer', 'Remove listed stop words only')
-    addLexicon(site.schedule_catalog, 'plone_lexicon', '', 'Whitespace splitter', 'Case Normalizer', 'Remove listed stop words only')
-
-    #Declaracoes ZCTextIndex
-    add_index(site, 'getParsedLastName', 'ZCTextIndex',
-                catalog='schedule_catalog',
-                extra={'lexicon_id': 'plone_lexicon',
-                        'doc_attr': 'getParsedLastName',
-                        'index_type': 'Okapi BM25 Rank',
-                    }
-                )
-    add_index(site, 'Description', 'ZCTextIndex',
-                catalog='schedule_catalog',
-                extra={'lexicon_id': 'plaintext_lexicon',
-                        'doc_attr': 'Description',
-                        'index_type': 'Okapi BM25 Rank',
-                    }
-                )
-    add_index(site, 'SearchableText', 'ZCTextIndex',
-                catalog='schedule_catalog',
-                extra={'lexicon_id': 'htmltext_lexicon',
-                        'doc_attr': 'SearchableText',
-                        'index_type': 'Okapi BM25 Rank',
-                    }
-                )
-    add_index(site, 'Title', 'ZCTextIndex',
-                catalog='schedule_catalog',
-                extra={'lexicon_id': 'plaintext_lexicon',
-                        'doc_attr': 'Title',
-                        'index_type': 'Okapi BM25 Rank',
-                    }
-                )
-
-    add_index(site, 'start', 'FieldIndex', catalog='schedule_catalog')
-    add_index(site, 'end', 'FieldIndex', catalog='schedule_catalog')
-    add_index(site, 'getLastName', 'FieldIndex', catalog='schedule_catalog')
-    add_index(site, 'getSocialSecurity', 'FieldIndex', catalog='schedule_catalog')
-    add_index(site, 'getChart', 'FieldIndex', catalog='schedule_catalog')
-    add_index(site, 'getProfessional', 'FieldIndex', catalog='schedule_catalog')
-    add_index(site, 'getProviderId', 'FieldIndex', catalog='schedule_catalog')
-    add_index(site, 'review_state', 'FieldIndex', catalog='schedule_catalog')
-    add_index(site, 'Type', 'FieldIndex', catalog='schedule_catalog')
-    add_index(site, 'Creator', 'FieldIndex', catalog='schedule_catalog')
-    add_index(site, 'Date', 'DateIndex', catalog='schedule_catalog')
-    add_index(site, 'Subject', 'KeywordIndex', catalog='schedule_catalog')
-    add_index(site, 'allowedRolesAndUsers', 'KeywordIndex', catalog='schedule_catalog')
-    add_index(site, 'created', 'DateIndex', catalog='schedule_catalog')
-    add_index(site, 'effective', 'DateIndex', catalog='schedule_catalog')
-    add_index(site, 'expires', 'DateIndex', catalog='schedule_catalog')
-    add_index(site, 'getId', 'FieldIndex', catalog='schedule_catalog')
-    add_index(site, 'in_reply_to', 'FieldIndex', catalog='schedule_catalog')
-    add_index(site, 'meta_type', 'FieldIndex', catalog='schedule_catalog')
-    add_index(site, 'listCreators', 'KeywordIndex', catalog='schedule_catalog')
-    add_index(site, 'portal_type', 'FieldIndex', catalog='schedule_catalog')
-
-    ids = ['getPatientInfo', 'getReason', 'appointmentOrActivity',
-            'getTypeOfLocationValue', 'UID', 'start', 'end',
-            'getContactPhone', 'getRoomNumber', 'getDuration',
-            'getLocationTitle', 'getSocialSecurity', 'getChart', 'getDoctor', 'Type',
-            'CreationDate', 'Creator', 'Date', 'Description','EffectiveDate',
-            'ExpirationDate', 'ModificationDate', 'Subject', 'Title', 'getIcon', 'getId',
-            'listCreators', 'modified', 'portal_type', 'created', 'effective', 'expires', 'review_state', ]
-    create_metadatas(site, ids, catalog='schedule_catalog')
-
-#===========================================================================
-# Adiciona indices ao portal catalog e uid catalog
-# Peter
-#===========================================================================
-def addOtherIndex(site):
-
-    # TODO: Verificar a real necessidade dessas metadados, já que a quantidade
-    # de metadados em um catalog impacta a velocidade do msm. (Luiz)
-    ids = ['getPatientInfo', 'getReason', 'appointmentOrActivity',
-           'getTypeOfLocationValue', 'UID']
-    create_metadatas(site, ids)
-
-    add_index(site, 'LTitle', 'FieldIndex',
-              extra={'indexed_attrs': 'lower_title'})
-    add_index(site, 'getProviderId', 'FieldIndex')
-    add_index(site, 'idIncoherent', 'FieldIndex')
-    add_index(site, 'getParsedLastName', 'ZCTextIndex',
-              extra={'lexicon_id': 'plone_lexicon',
-                     'doc_attr': 'getParsedLastName',
-                     'index_type': 'Okapi BM25 Rank',
-                     }
-              )
-    add_index(site, 'getDate_of_visit', 'DateIndex')
-    add_index(site, 'getRouted_to', 'FieldIndex')
-    add_index(site, 'getRouted_by', 'FieldIndex')
-    add_index(site, 'getWorkflowStatus', 'FieldIndex')
-    add_index(site, 'getStatus', 'FieldIndex')
-    add_index(site, 'UID', 'FieldIndex', catalog='portal_catalog')
-    add_index(site, 'getCode', 'FieldIndex', catalog='portal_catalog')
-    add_index(site, 'getCodeType', 'FieldIndex', catalog='portal_catalog')
-
-    add_index(site, 'getProfessional', 'FieldIndex',
-          extra={'indexed_attrs': 'getProfessional'},
-          catalog='uid_catalog')
-
 # o que isso esta fazendo?
 def changePortalObjectsConfiguration(portal):
 
@@ -554,8 +287,6 @@ def changePortalLanguage(portal):
     '''
     portal.portal_languages.setDefaultLanguage('pt-br')
 
-
-
 #===========================================================================
 # Carrega o CID no Vocabulario do portal
 # Peter
@@ -568,7 +299,6 @@ def loadCIDVocabulary(portal, context):
     print "Inserindo CID no Portal ..."
     vt.add_vocab('CID_desc', CID_desc)
     vt.add_vocab('CID_code', CID_code)
-
 
 #===========================================================================
 # Carrega o vocabulario de tipos insurance.
@@ -646,7 +376,6 @@ def addUpgradeExternalMethods(portal):
     manage_addExternalMethod(portal, '0_upgrade', 'Upgrade (Export/Import) Cmed', 'wres.policy.upgrade', 'main')
     manage_addExternalMethod(portal, 'z_export', 'Export Cmed', 'wres.policy.exporter', 'main')
     manage_addExternalMethod(portal, 'z_import', 'Import Cmed', 'wres.policy.importer', 'main')
-
 
 def createCmedCatalogs(portal):
     cct = getToolByName(portal, 'cmed_catalog_tool')
@@ -785,9 +514,6 @@ def setupVarious(context):
         createTemplateFolder(portal)
         createDoctorFolder(portal)
         createContactPage(portal)
-        #TODO:Remover posteriormente
-        #createInsuranceFolder(portal)
-        #createTop10DefaultInsurance(portal)
 
         createPatientFolder(portal)
         createSecretaryFolder(portal)
@@ -798,10 +524,6 @@ def setupVarious(context):
         # Os transcritores serao mantidos apenas na versao paga do CMed.
         # createReferringProviderFolder(portal)
         # createTranscriptionistFolder(portal)
-
-        #createScheduleCatalog(portal)
-
-        #addOtherIndex(portal)
 
         changePortalLanguage(portal)
         changePortalObjectsConfiguration(portal)
