@@ -13,6 +13,7 @@ from wres.policy.test_browser_utils import *
 from Testing.ZopeTestCase.utils import  startZServer
 
 from Products.CMFCore.utils import getToolByName
+from Testing import ZopeTestCase
 import random
 
 DOCTOR_TEST_USER_ID = 'doctor_test_user_id'
@@ -33,6 +34,9 @@ class TestSetup(unittest.TestCase):
     
     def setUp(self):
         self.app = self.layer['app']
+        ZopeTestCase.utils.setupCoreSessions(self.app)
+        self.app.REQUEST['SESSION'] = Session()
+
         self.portal = self.layer['portal']
         self.browser = Browser(self.app)
         
@@ -235,7 +239,6 @@ class TestSetup(unittest.TestCase):
         browser.getControl(name='concentration').value = "Concentracao Editado"
         browser.getControl(name='quantity').value = "Quantidade Editado"
         browser.getControl(name='use').value = "Uso Editado"
-        browser.getControl(name='status').value = ["active"]
         browser.getControl(name='form.button.save').click()
         
     def inactivate_medications(self,PATIENT_ID,PATIENT_URL):

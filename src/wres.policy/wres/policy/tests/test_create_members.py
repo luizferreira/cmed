@@ -11,7 +11,7 @@ from wres.policy.testing import WRES_POLICY_FUNCTIONAL_TESTING
 from wres.policy.test_browser_utils import *
 
 from Testing.ZopeTestCase.utils import  startZServer
-
+from Testing import ZopeTestCase
 from Products.CMFCore.utils import getToolByName
 
 
@@ -47,7 +47,6 @@ def create_uemr_user(portal, user_id, group, email='', fullname=''):
     uf.userSetGroups(user_id, [group])
     pm.createMemberArea(member_id=user_id) 
     
-    
 
 class TestSetup(unittest.TestCase):
     
@@ -55,6 +54,9 @@ class TestSetup(unittest.TestCase):
     
     def setUp(self):
         self.app = self.layer['app']
+        ZopeTestCase.utils.setupCoreSessions(self.app)
+        self.app.REQUEST['SESSION'] = Session()
+        
         self.portal = self.layer['portal']
         self.browser = Browser(self.app)
 
@@ -62,7 +64,7 @@ class TestSetup(unittest.TestCase):
         z2.login(self.app['acl_users'], SITE_OWNER_NAME)
         create_members_by_debug_init(self)
 
-    def create_doctor(self,fname="Joao",lname="Doutor"):
+    def create_doctor(self,fname="Joao",lname="Doutor",email="jd@email.com",specialty="endocrinology"):
         # vai pra pagina inicial e depois entra na pasta Patients
         portal = self.portal
         browser = self.browser
@@ -76,7 +78,9 @@ class TestSetup(unittest.TestCase):
         browser.getControl(name='firstName').value = fname
         browser.getControl(name='lastName').value = lname        
         browser.getControl(name='email').value = "aa@aa.com"
+        browser.getControl(name='specialty1').value = [specialty]
         browser.getControl(name="form.button.save").click()
+        
     
     def create_secretary(self,fname="Viviane",lname="Secretaria"):
         # vai pra pagina inicial e depois entra na pasta secretaria
@@ -123,7 +127,11 @@ class TestSetup(unittest.TestCase):
         browser.open(portal.absolute_url() + '/Clinic/edit')
         # preenche os dados da clinica
         browser.getControl(name='name').value = "Clinica Grande"
-        browser.getControl(name='endereco').value = "Av Afonso Pena, 1500"
+        browser.getControl(name='street').value = "Av Afonso Pena"
+        browser.getControl(name='number').value = "1500"
+        browser.getControl(name='complemento').value = "Sala 404"
+        browser.getControl(name='bairro').value = "Centro"
+        browser.getControl(name='city').value = "Belo Horizonte"
         browser.getControl(name='phone').value = "3199584756"
         browser.getControl(name='fax').value = "3199584757"
         browser.getControl(name='email').value = "aa@aa.com"
@@ -217,6 +225,7 @@ class TestSetup(unittest.TestCase):
         setRoles(portal, TEST_USER_ID, MANAGER_ROLES)
         self.create_doctor()
         # testa a url e a mensagem de status
+        #import ipdb;ipdb.set_trace()
         self.assertEqual(portal.absolute_url() + "/Doctors/jdoutor/", browser.url)
         self.assertEqual(True, "As alterações foram salvas." in browser.contents)  
 

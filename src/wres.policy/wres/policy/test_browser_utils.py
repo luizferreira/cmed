@@ -11,6 +11,10 @@ from Products.CMFCore.utils import getToolByName
 
 PW = "senha1"
 
+class Session(dict):
+        def set(self, key, value):
+            self[key] = value
+
 def login_as_admin(self):
         # Go admin
         portal = self.portal
