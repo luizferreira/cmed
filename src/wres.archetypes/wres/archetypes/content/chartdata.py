@@ -2,7 +2,6 @@
 
 from Persistence import Persistent
 from BTrees.OOBTree import OOBTree
-from ZODB.PersistentList import PersistentList
 from DateTime import DateTime
 from AccessControl import ClassSecurityInfo
 from Globals import InitializeClass

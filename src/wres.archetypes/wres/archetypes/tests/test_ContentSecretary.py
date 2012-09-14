@@ -6,7 +6,6 @@ from wres.policy.utils.roles import SECRETARY_GROUP
 from Products.CMFCore.utils import getToolByName
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from zope.app.component.hooks import getSite
 
 
 class TestSetup(unittest.TestCase):
@@ -21,13 +20,12 @@ class TestSetup(unittest.TestCase):
         #Set me as Manager
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         
-        #Cria um médico para ser usado nos testes 
+        #Cria uma sec para ser usado nos testes 
         create_secretary(self.portal,self.pr,"Anna","Kournikova")        
         
         #Make patient easy to access
         query = self.pc.searchResults({'id':'akournikova'})
         self.sec = query[0].getObject()
-        self.portal = getSite()
 
     def test_getGroup(self):
         print "\n"

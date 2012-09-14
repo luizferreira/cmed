@@ -6,7 +6,6 @@ from Products.CMFCore.utils import getToolByName
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from wres.policy.utils.roles import DOCTOR_GROUP
-from zope.app.component.hooks import getSite
 
 class TestSetup(unittest.TestCase):
     layer = WRES_ARCHETYPES_INTEGRATION_TESTING
@@ -26,7 +25,6 @@ class TestSetup(unittest.TestCase):
         #Make patient easy to access
         query = self.pc.searchResults({'id':'dfrankenstein'})
         self.doctor = query[0].getObject()
-        self.portal = getSite()
         
     def test_add_visits_folder(self):
         print "\n"
