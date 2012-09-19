@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-
-from Products.CMFCore.utils import getToolByName
-import codecs
-
 import os
 import shutil
 import tempfile
@@ -36,7 +32,6 @@ def export_members(plone, export_dir, verbose):
     for username in acl_users.getUserNames():
         if verbose:
             print '-> %s' % username
-        user = acl_users.getUserById(username)
         member = pm.getMemberById(username)
         if member is None:
             continue
@@ -255,7 +250,11 @@ class ClinicHandler(BaseHandler):
     def export2(self, obj):
         ''' especific Secretary fields'''
         self.write('name ', obj.getName())
-        self.write('endereco ', obj.getEndereco())
+        self.write('street ', obj.getStreet())
+        self.write('complemento ', obj.getComplemento())
+        self.write('bairro ', obj.getBairro())
+        self.write('city ', obj.getCity())
+        self.write('state ', obj.getState())
         self.write('phone ', obj.getPhone())
         self.write('fax ', obj.getFax())
         self.write('email ', obj.getEmail())
@@ -294,11 +293,6 @@ class PatientHandler(BaseHandler):
         self.write('pis_pasep ', obj.getPis_pasep())
         self.write('CTPS ', obj.getCTPS())
         self.write('tituloEleitor ', obj.getTituloEleitor())
-        self.write('tipo ', obj.getTipo())
-        self.write('convenio ', obj.getConvenio())
-        self.write('matricula ', obj.getMatricula())
-        self.write('titular ', obj.getTitular())
-        self.write('cartaoNacionalDeSaude ', obj.getCartaoNacionalDeSaude())
         self.write('nomeDoPai ', obj.getNomeDoPai())
         self.write('nomeDaMae ', obj.getNomeDaMae())
         self.write('nacionalidade ', obj.getNacionalidade())
@@ -365,7 +359,8 @@ class DoctorHandler(BaseHandler):
         self.write('initial ', obj.getInitial())
         self.write('signature ', obj.getSignature())
         self.write('credentials ', obj.getCredentials())
-        self.write('specialty ', obj.getSpecialty())
+        self.write('specialty1 ', obj.getSpecialty1())
+        self.write('specialty2 ', obj.getSpecialty2())
         self.write('signPassword ', obj.getSignPassword())
 
 registerHandler(DoctorHandler)
@@ -464,7 +459,6 @@ registerHandler(FileHandler)
 def main(self, version='0_0_0'):
     ''' function called by Zope '''
 
-    from optparse import OptionParser
     from AccessControl.SecurityManagement import newSecurityManager
 
     username = 'admin' # must be an user with admin priviligies in Zope.

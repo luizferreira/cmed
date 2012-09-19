@@ -1,5 +1,5 @@
 # edit this line before upgrade.
-version = '0.5' # ex: '0.8'
+version = '0.11' # ex: '0.8'
 
 import os
 # from wres.policy.Extensions import exporter
