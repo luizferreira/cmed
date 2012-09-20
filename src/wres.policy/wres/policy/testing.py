@@ -6,6 +6,9 @@ from plone.app.testing import IntegrationTesting, FunctionalTesting
 from zope.configuration import xmlconfig
 from Products.CMFPlone.utils import _createObjectByType
 from Products.CMFCore.utils import getToolByName
+import gocept.selenium.plonetesting.testing_plone
+import gocept.selenium.plonetesting.testing
+import plone.app.testing.layers
 
 DOCTOR_TEST_USER_ID = 'doctor_test_user_id'
 DOCTOR_TEST_USER_NAME = 'doctor_test_user_name'
@@ -103,7 +106,71 @@ class WresPolicy(PloneSandboxLayer):
 		z2.uninstallProduct(app, 'wres.theme')	
 	#	z2.uninstallProduct(app, 'wres.tour')	
 		z2.uninstallProduct(app, 'wres.policy')
+
+class WresPolicySelenium(PloneSandboxLayer):
+
+	defaultBases = (gocept.selenium.plonetesting.testing.layer,PLONE_FIXTURE,)
+       
+	def setUpZope(self, app, configurationContext):
+		# Load ZCML
+		import wres.policy
+		import wres.archetypes
+		import wres.brfields
+		import wres.theme
+		import wres.tour
+
+		xmlconfig.file('configure.zcml',
+			wres.archetypes,
+			context=configurationContext)
+
+		z2.installProduct(app, 'wres.archetypes')
+
+		xmlconfig.file('configure.zcml',
+			wres.brfields,
+			context=configurationContext)
+
+		z2.installProduct(app, 'wres.brfields')
+			
+		xmlconfig.file('configure.zcml',
+			wres.theme,
+			context=configurationContext)		
+			
+		z2.installProduct(app, 'wres.theme')				
+		
+		# xmlconfig.file('configure.zcml',
+		# 	wres.tour,
+		# 	context=configurationContext)
+
+		# z2.installProduct(app, 'wres.tour')
+
+		xmlconfig.file('configure.zcml',
+			wres.policy,
+			context=configurationContext)
+
+		z2.installProduct(app, 'wres.policy')
+
+
+	def setUpPloneSite(self, portal):
+        	applyProfile(portal, 'wres.archetypes:default')
+		applyProfile(portal, 'wres.brfields:default')
+		applyProfile(portal, 'wres.theme:default')
+#		applyProfile(portal, 'wres.tour:default')
+		applyProfile(portal, 'wres.policy:default')
+                
+
+		#create_uemr_user(portal, DOCTOR_TEST_USER_ID, 'Doctor')
+
+	def tearDownZope(self, app):
+		z2.uninstallProduct(app, 'wres.archetypes')
+		z2.uninstallProduct(app, 'wres.brfields')
+		z2.uninstallProduct(app, 'wres.theme')	
+	#	z2.uninstallProduct(app, 'wres.tour')	
+		z2.uninstallProduct(app, 'wres.policy')
+		
 		
 WRES_POLICY_FIXTURE = WresPolicy()
 WRES_POLICY_INTEGRATION_TESTING = IntegrationTesting(bases=(WRES_POLICY_FIXTURE,), name="WresPolicy:Integration")
 WRES_POLICY_FUNCTIONAL_TESTING = FunctionalTesting(bases=(WRES_POLICY_FIXTURE,), name="WresPolicy:Functional")
+
+WRES_POLICY_SELENIUM_FIXTURE = WresPolicySelenium()
+WRES_POLICY_SELENIUM_FUNCTIONAL_TESTING = FunctionalTesting(bases=(WRES_POLICY_SELENIUM_FIXTURE,), name="WresPolicySelenium:Functional")
