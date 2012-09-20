@@ -1,19 +1,15 @@
 #coding=utf-8
-from Products.PloneTestCase.layer import PloneSiteLayer
 import Products.PloneTestCase.PloneTestCase
 import gocept.selenium.tests.isolation
 import gocept.selenium.zope2
 import gocept.selenium.zope2.testing
 import gocept.selenium.plone
-from wres.policy.testing import WRES_POLICY_FUNCTIONAL_TESTING, WRES_POLICY_SELENIUM_FUNCTIONAL_TESTING
+from wres.policy.testing import WRES_POLICY_SELENIUM_FUNCTIONAL_TESTING
 from wres.policy.test_browser_utils import Session
 from Testing import ZopeTestCase
-from plone.app.testing import setRoles
-from wres.policy.setuphandlers import getOrCreateType
 import gocept.selenium.plonetesting.testing_plone
-import gocept.selenium.ztk
-import pkg_resources
-import zope.app.testing.functional
+
+
 
 
 Products.PloneTestCase.PloneTestCase.setupPloneSite(id='plone')
@@ -35,6 +31,7 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
 		self.app.REQUEST["SESSION"] = Session()
 		
     def test_create_appointment(self):
+        print "\nTeste criar consulta, SELENIUM, comecou"
         sel = self.selenium
         sel.open("/plone")
         sel.click("id=personaltools-login")
@@ -63,15 +60,18 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
         sel.waitForPageToLoad()
         sel.mouseDownAt('//*[@id="calendar"]/div[1]/div/table/tbody/tr/td[3]','')
         sel.mouseUp('//*[@id="calendar"]/div[1]/div/table/tbody/tr/td[3]')
+        print "\n------>Forced Sleep: 2000 ms to create iframe"
+        sel.pause(2000)
         sel.selenium.select_frame("SFEventEditIFRAME")
-        sel.selenium.wait_for_frame_to_load("SFEventEditIFRAME","5000")
+        print "\n------>Forced Sleep: 1000 ms get search_patient buttom"
+        sel.pause(1000)
         sel.click("id=popup_search_patient")
         #Go to child window
         sel.waitForPopUp("_blank")
         sel.selectPopUp()
         sel.type("id=searchGadget", "pte")
         print "\n------>Forced Sleep: 2000 ms to get ajax service"
-        sel.pause(1000)
+        sel.pause(2000)
         #Precisa de um wait aqui!
         sel.click("class=contenttype-patient")
         #Back to parent window
@@ -84,3 +84,4 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
         print "------>Forced Sleep: 1000 ms to back to parent iframe"
         sel.pause(1000)
         sel.assertTextPresent("Paciente Teste")
+        rint "\nTeste criar consulta, SELENIUM, terminou"
