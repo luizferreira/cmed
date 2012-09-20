@@ -84,4 +84,4 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
         print "------>Forced Sleep: 1000 ms to back to parent iframe"
         sel.pause(1000)
         sel.assertTextPresent("Paciente Teste")
-        rint "\nTeste criar consulta, SELENIUM, terminou"
+        print "\nTeste criar consulta, SELENIUM, terminou"
