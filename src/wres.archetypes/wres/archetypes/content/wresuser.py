@@ -169,6 +169,7 @@ class WRESUser(folder.ATFolder):
     def capitalizeLetters(self, name):
         ignored_words = ['da','de','di','do','das','dos','e']
         cap_name = []
+        name = unicode(name, "utf-8")
         parts = name.lower().split(' ')
         for part in parts:
             if part not in ignored_words:

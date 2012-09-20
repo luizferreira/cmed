@@ -9,7 +9,6 @@ from AccessControl import ClassSecurityInfo, AuthEncoding
 import logging
 
 from Products.Archetypes import atapi
-from Products.ATContentTypes.content import folder
 from Products.ATContentTypes.content import schemata
 from Solgema.fullcalendar.interfaces import ISolgemaFullcalendarProperties
 

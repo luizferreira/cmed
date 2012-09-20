@@ -243,8 +243,6 @@ class Patient(wresuser.WRESUser):
         Method used in migration and in debug_patientchartdata.
         Just return the chart_data in format of dictionaries.
         """
-        keys = ['review_of_systems', 'medications', 'prescriptions', 
-        'allergies', 'problems', 'not_signed_allergies', 'laboratory']
 
         dic_chartdata = {}
         dic_chartdata['allergies'] = dict(self.chart_data.allergies)
@@ -261,8 +259,6 @@ class Patient(wresuser.WRESUser):
         Used exclusively in migration. 
         """
         from BTrees.OOBTree import OOBTree
-        keys = ['review_of_systems', 'medications', 'prescriptions', 
-        'allergies', 'problems', 'not_signed_allergies', 'laboratory']
 
         for key in self.chart_data.mapping.keys():
             if chart_dic.has_key(key): # increase upgrade compatibility
