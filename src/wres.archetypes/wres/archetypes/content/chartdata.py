@@ -191,6 +191,15 @@ class Event:
         else:
             return 1
 
+    def export_dict(self):
+        if isinstance(self.related_obj, ChartItemEventWrapper):
+            return {'type': self.type, 'date': self.date, 'related_obj' : self.related_obj.meta_type, 
+                    'mapping_name' : self.related_obj.mapping_name,  'prefix' : self.related_obj.prefix,
+                    'title' : self.related_obj.title, 'url_sufix' : self.related_obj.url_sufix}
+        else:
+            return {'type': self.type, 'date': self.date, 'related_obj' : self.related_obj.getId()}
+
+
 class ChartItemEventWrapper:
     '''
     wrapper for creating chart_data events.
@@ -217,6 +226,7 @@ class ChartItemEventWrapper:
             self.prefix = ''
             self.title = 'Prescrição'
             self.url_sufix = '/show_medications'
+        self.mapping_name = mapping_name
         self.patient = patient
         self.id = self.patient.getId() + '_' + mapping_name + '_' + self.title 
 

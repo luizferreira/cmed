@@ -1,18 +1,15 @@
 # coding=utf-8
 
 from Products.Archetypes.atapi import *
-from Products.ATContentTypes.content import schemata
-
-from wres.archetypes.config import PROJECTNAME
 from wres.archetypes.content import wresuser
 from wres.policy.utils.utils import set_schemata_properties, finalizeSchema
-from wres.policy.utils.permissions import EDIT_SECRETARY, VIEW_SECRETARY, SET_CHART_ACCESS
+from wres.policy.utils.permissions import SET_CHART_ACCESS
 
 
 from wres.brfields.content.BrFieldsAndWidgets import*
 from wres.brfields.validators import *
 
-from zope.i18nmessageid import MessageFactory, Message
+from zope.i18nmessageid import MessageFactory
 
 _ = MessageFactory("cmfuemr")
 
@@ -22,6 +19,7 @@ MAIN = Schema((
             read_permission=SET_CHART_ACCESS,
             write_permission=SET_CHART_ACCESS,
             widget = BooleanWidget(label=_(u'Transcritora?'),
+                                   visible={'view': 'invisible'},
                                    description=_('Check if secretary will be able to transcript documents.'),
             ),
         ),
