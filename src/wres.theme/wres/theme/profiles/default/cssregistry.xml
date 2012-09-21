@@ -34,4 +34,11 @@
     media="screen" rel="stylesheet" rendering="import"
     cacheable="True" compression="safe" cookable="True"
     enabled="1" expression=""/>
+
+ <stylesheet title=""
+    id="++resource++wres.theme.stylesheets/adm_dropdown.css"
+    media="screen" rel="stylesheet" rendering="import"
+    cacheable="True" compression="safe" cookable="True"
+    enabled="1" expression=""/>
+
 </object>

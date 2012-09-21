@@ -15,6 +15,17 @@
       name="WRES Theme"
       />
 
+  <!-- cadastrando a nova viewlet para o global_sections -->
+  <browser:viewlet
+      name="plone.global_sections"
+      manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+      class="plone.app.layout.viewlets.common.GlobalSectionsViewlet"
+      template="templates/global_sections.pt"
+      for="*"
+      layer=".interfaces.IThemeSpecific"
+      permission="zope2.View"
+  />
+
   <!-- cadastrando a nova viewlet para o footer -->
   <browser:viewlet
       name="plone.footer"

@@ -8,10 +8,10 @@
  * the selectors below, and insert new color values:                        */
 
 /*
-a:link, a:visited, #content a:link, #content a:visited, dl.portlet a:link, dl.portlet a:visited { 
+a:link, a:visited, #content a:link, #content a:visited, dl.portlet a:link, dl.portlet a:visited {
     color: red;
 }
-#portal-globalnav .selected a, #portal-globalnav a:hover { 
+#portal-globalnav .selected a, #portal-globalnav a:hover {
     background-color: red;
 }
 */
@@ -52,12 +52,15 @@ dl.actionMenu a {
 
 /*
 
-/* 
+/*
 <dtml-with base_properties>
     #content a:link { color: &dtml-linkColor;; }
 </dtml-with>
 */
 
+body {
+    background: #EAEAEA url(./body_bg.png);
+}
 
 /*aumentando o tamanho dos campos no portlet de login*/
 dl.portletLogin dd form div.field input[type="text"] {

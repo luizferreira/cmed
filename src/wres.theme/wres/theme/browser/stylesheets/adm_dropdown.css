@@ -1,0 +1,139 @@
+
+/*WHITOUT BULLET MARKS*/
+.navmenu,
+.navmenu ul,
+.navmenu li
+{
+  padding: 0px;
+  margin: 0px;
+}
+.navmenu li
+{
+  list-style-type: none;
+}
+
+/*MENU BAR HORIZONTAL*/
+.navmenu li
+{
+  float: left;
+}
+.navmenu + *
+{
+  clear: left;
+}
+.endmenu
+{
+  clear: left;
+}
+
+/*SUBMENUS ON DEMAND*/
+.navmenu ul
+{
+  display: none;
+}
+.navmenu li:hover > ul
+{
+  display: block;
+}
+.navmenu ul.parent_hover
+{
+  display: block;
+}
+
+/*NICE AND CLEAN LAYOUT*/
+.navmenu ul
+{
+  position: absolute;
+  box-shadow: 8px 13px 12px rgba(0, 0, 0, 0.4)
+}
+
+/*LINKS OCUPYING THE ENTIRE BOX*/
+.navmenu a
+{
+  display:block;
+  text-decoration: none;
+}
+
+/*SUB-SUB-MENUS MUST APPEAR RIGHT TO SUB-MENUS*/
+.navmenu li
+{
+  position: relative;
+}
+.navmenu ul ul
+{
+  top: 0;
+  left: 99%;
+}
+
+.navmenu ul ul
+{
+  margin-top: -1.2em;
+  left: 99%;
+}
+
+.navmenu ul
+{
+  margin-left: -2px;
+}
+
+.navmenu span
+{
+  display: block;
+}
+
+/*EXPOSED BACKGROUND*/
+.navmenu
+{
+  width: 100%;
+}
+.navmenu
+{
+  float: left;
+
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /*shadow effect*/
+}
+
+/* IMPROVING APPEARENCE ON MENU AND SUBMENU */
+
+li#adm_li {
+  border-left:0.1em solid white;
+  float:right;
+}
+
+li#adm_li a#adm_a {
+  color: #205C90;
+  width: 85px; padding-bottom: 1.1em;
+}
+
+li#adm_li a#adm_a:hover {
+  color: white;
+  /*background: #205C90;;*/
+}
+
+ul#section-adm li#start a{
+    background:url(./admdd_toparrow.png);
+    padding: 0px;
+    height: 7px;
+}
+
+ul#section-adm li#end a{
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+ul#section-adm li#second a{
+    -webkit-border-top-left-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-radius-topleft: 10px;
+    -moz-border-radius-topright: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+ul#section-adm li a{
+    width:88px;
+}
+ul#section-adm li {
+    border-bottom: 1px white;
+}
