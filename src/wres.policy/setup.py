@@ -49,6 +49,8 @@ setup(name='wres.policy',
                   'plone.app.testing',
                   'Products.PloneTestCase',
                   'collective.testcaselayer',
+                  'selenium',
+                  'gocept.selenium[plone]',
               ]
       },
       entry_points="""

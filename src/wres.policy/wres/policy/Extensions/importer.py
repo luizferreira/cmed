@@ -1,16 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import os
-import shutil
-import tempfile
-import glob
 import transaction
-from datetime import datetime
 from ConfigParser import ConfigParser, NoOptionError
 from Products.CMFPlone.utils import _createObjectByType
 from Testing.makerequest import makerequest
 from zExceptions import BadRequest
-from Products.CMFPlone import factory
 
 default_products = ['wres.policy']
 
@@ -210,7 +205,7 @@ class BaseHandler(object):
                 context.plone_utils.changeOwnershipOf(context, 'raetsch')
             except:
                 if not 'admin' in context.portal_membership.listMemberIds():
-                    pm = context.portal_registration.addMember('admin', '"&§%/!')
+                    context.portal_registration.addMember('admin', '"&§%/!')
                 context.plone_utils.changeOwnershipOf(context, 'admin')
 
     def folder_create(self, root, dirname):
@@ -333,7 +328,11 @@ class ClinicHandler(BaseHandler):
     def import2(self, obj, section):
         ''' especific Clinic fields'''
         obj.setName(self.cfg.get(section, 'name'))
-        obj.setEndereco(self.cfg.get(section, 'endereco'))
+        obj.setStreet(self.cfg.get(section, 'street'))
+        obj.setComplemento(self.cfg.get(section, 'complemento'))
+        obj.setBairro(self.cfg.get(section, 'bairro'))
+        obj.setCity(self.cfg.get(section, 'city'))
+        obj.setState(self.cfg.get(section, 'state'))
         obj.setPhone(self.cfg.get(section, 'phone'))
         obj.setFax(self.cfg.get(section, 'fax'))
         obj.setEmail(self.cfg.get(section, 'email'))
@@ -365,7 +364,8 @@ class DoctorHandler(BaseHandler):
         obj.setInitial(self.cfg.get(section, 'initial'))
         obj.setSignature(self.cfg.get(section, 'signature'))
         obj.setCredentials(self.cfg.get(section, 'credentials'))
-        obj.setSpecialty(self.cfg.get(section, 'specialty'))
+        obj.setSpecialty1(self.cfg.get(section, 'specialty1'))
+        obj.setSpecialty2(self.cfg.get(section, 'specialty2'))
         obj.setSignPassword(self.cfg.get(section, 'signPassword'))
         obj.at_post_create_script(migration=True)
         obj.reindexObject()
@@ -427,11 +427,11 @@ class PatientHandler(BaseHandler):
         obj.setPis_pasep(self.cfg.get(section, 'pis_pasep'))
         obj.setCTPS(self.cfg.get(section, 'CTPS'))
         obj.setTituloEleitor(self.cfg.get(section, 'tituloEleitor'))
-        obj.setTipo(self.cfg.get(section, 'tipo'))
-        obj.setConvenio(self.cfg.get(section, 'convenio'))
-        obj.setMatricula(self.cfg.get(section, 'matricula'))
-        obj.setTitular(self.cfg.get(section, 'titular'))
-        obj.setCartaoNacionalDeSaude(self.cfg.get(section, 'cartaoNacionalDeSaude'))
+        # self.write('tipo ', obj.getTipo())
+        # self.write('convenio ', obj.getConvenio())
+        # self.write('matricula ', obj.getMatricula())
+        # self.write('titular ', obj.getTitular())
+        # self.write('cartaoNacionalDeSaude ', obj.getCartaoNacionalDeSaude())
         obj.setNomeDoPai(self.cfg.get(section, 'nomeDoPai'))
         obj.setNomeDaMae(self.cfg.get(section, 'nomeDaMae'))
         obj.setNacionalidade(self.cfg.get(section, 'nacionalidade'))
@@ -450,7 +450,6 @@ class PatientHandler(BaseHandler):
             obj.setPhoto(self.get_binary(section))
         except NoOptionError:
             pass # patient photo is the default photo. 
-        from DateTime import DateTime
         chart_dic = eval( self.cfg.get(section, 'chartdata') )
         obj.import_chartdata(chart_dic) # there is a method in Patient to handle the chartdata import
         obj.at_post_create_script()
@@ -600,7 +599,6 @@ def import_plone(self, import_dir, version, verbose=False):
     return plone
 
 def main(self, import_dir=None, version=None):
-    from optparse import OptionParser
     from AccessControl.SecurityManagement import newSecurityManager
 
     if import_dir == None or version == None:
@@ -622,6 +620,6 @@ def main(self, import_dir=None, version=None):
     transaction.commit()
     print 'done'
 
-    validation = Validation(plone, import_dir)
+    Validation(plone, import_dir)
 
     print plone.absolute_url()

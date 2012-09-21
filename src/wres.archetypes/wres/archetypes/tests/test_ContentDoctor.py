@@ -160,7 +160,7 @@ class TestSetup(unittest.TestCase):
         #Get requirements
         doctor = self.doctor
         info = {
-            'Nome Completo': 'Dr. Dráuzio Varela',
+            'Nome Completo': 'Dráuzio Varela',
             'CRM': '012302301',
             'Telefone de Contato': '31 9785 0818',
             'Seu endereço de e-mail': ' ',
@@ -168,7 +168,7 @@ class TestSetup(unittest.TestCase):
             'Especialidade 1': 'Cardiologia',
             'Especialidade 2': 'Outro',
         }
-        pm = getToolByName(self.portal, 'portal_membership')
         doctor.fillFirstDoctorInfo(info)
-        self.assertTrue(pm.getMemberById('dvarela'))
+        self.assertEqual(doctor.getFullName(), 'Dráuzio Varela')
+        self.assertEqual(doctor.getSsn(), '012302301')
         print "Done"
