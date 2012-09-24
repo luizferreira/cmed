@@ -128,6 +128,7 @@ def createDoctorFolder(portal):
     # its important that Anonymous have 'Acess cont..' permission, so he can call the method list_doctors.
     doctor_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE, ANONYMOUS_ROLE], acquire = False)
     doctor_folder.setTitle('Médicos')
+    doctor_folder.setExcludeFromNav(True)
     doctor_folder.reindexObject()
     print '*** Criando pasta de medicos...... OK'
 
@@ -167,6 +168,7 @@ def createSecretaryFolder(portal):
     secretary_folder.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
     secretary_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
     secretary_folder.setTitle('Secretárias')
+    secretary_folder.setExcludeFromNav(True)
     secretary_folder.reindexObject()
     print '*** Criando pasta de secretarias...... OK'
 

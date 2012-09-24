@@ -1,17 +1,14 @@
 #coding=utf-8
 
 from Products.Archetypes.atapi import *
-from Products.ATContentTypes.content import schemata
-from archetypes.referencebrowserwidget import ReferenceBrowserWidget
 
-from wres.archetypes.config import PROJECTNAME
 from wres.archetypes.content import wresuser
 from wres.policy.utils.utils import set_schemata_properties, finalizeSchema
 
 from wres.brfields.content.BrFieldsAndWidgets import *
 from wres.brfields.validators import *
 
-from zope.i18nmessageid import MessageFactory, Message
+from zope.i18nmessageid import MessageFactory
 
 import datetime
 now = datetime.datetime.now()

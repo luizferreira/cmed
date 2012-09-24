@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from Products.Archetypes.atapi import *
-from Products.ATContentTypes.content import schemata
 
 # datagrid field
 from Products.DataGridField import DataGridField, DataGridWidget
@@ -9,7 +8,6 @@ from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from Products.DataGridField.DataGridField import FixedRow
 
-from wres.archetypes.config import PROJECTNAME
 from wres.archetypes.content import wresuser
 from wres.policy.utils.utils import set_schemata_properties, finalizeSchema
 from wres.policy.utils.permissions import EDIT_DOCTOR, VIEW_DOCTOR
@@ -17,7 +15,7 @@ from wres.policy.utils.permissions import EDIT_DOCTOR, VIEW_DOCTOR
 from wres.brfields.content.BrFieldsAndWidgets import *
 from wres.brfields.validators import *
 
-from zope.i18nmessageid import MessageFactory, Message
+from zope.i18nmessageid import MessageFactory
 
 _ = MessageFactory("cmfuemr")
 
@@ -211,12 +209,12 @@ OTHER = Schema((
             ),
         ),
         StringField('signature',
-                    index=':schema',
-                    widget=StringWidget(label=_('Signature'),
-                                        description='Enter with the doctor signature label.',
-                                        description_msgid='cmfuemr_help_signature',
-                                        i18n_domain='cmfuemr',
-                    ),
+            index=':schema',
+            widget=StringWidget(label=_('Signature'),
+                                description='Enter with the doctor signature label.',
+                                description_msgid='cmfuemr_help_signature',
+                                i18n_domain='cmfuemr',
+            ),
         ),
         # StringField('dea',
         #             widget=StringWidget(label=_('DEA #'),
@@ -233,13 +231,13 @@ set_schemata_properties(OTHER, schemata='Outro')
 
 SIGN_PASSWORD = Schema((
     StringField('signPassword',
-                        encryption='SSHA',
-                        widget=PasswordWidget(label=_('Sign Password'),
-                                                    visible={'edit': 'invisible',
-                                                             'view': 'invisible',
-                                                             }
-                                                    ),
-                        ),
+        encryption='SSHA',
+        widget=PasswordWidget(label=_('Sign Password'),
+                                    visible={'edit': 'invisible',
+                                             'view': 'invisible',
+                                             }
+                                    ),
+        ),
 ))
 set_schemata_properties(SIGN_PASSWORD, schemata='Assinatura Eletronica')
         

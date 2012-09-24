@@ -401,7 +401,7 @@
     <element value="View"/>
    </property>
    <property name="visible">True</property>
-  </object>  
+  </object>
   <object name="agenda" meta_type="CMF Action" i18n:domain="plone">
    <property name="title" i18n:translate="">Agenda</property>
    <property name="description" i18n:translate=""></property>
@@ -428,19 +428,7 @@
    </property>
    <property name="visible">True</property>
   </object>
-  <object name="clinic" meta_type="CMF Action" i18n:domain="cmfuemr">
-   <property name="title" i18n:translate="">Clinic</property>
-   <property name="description" i18n:translate=""></property>
-   <property name="url_expr">string:${globals_view/navigationRootUrl}/Clinic</property>
-   <property name="link_target"></property>
-   <property name="icon_expr"></property>
-   <property name="available_expr">python:member is not None and ( member.has_role("Manager") or member.has_role("Doctor") or member.has_role("Secretary") )</property>
-   <property name="permissions">
-    <element value="View"/>
-   </property>
-   <property name="visible">True</property>
-  </object>  
- </object>   
+ </object>
  <object name="user" meta_type="CMF Action Category">
   <property name="title"></property>
   <object name="dashboard" meta_type="CMF Action" i18n:domain="plone">
