@@ -163,6 +163,7 @@ class TestSetup(unittest.TestCase):
         patient = self.patient
         chart = patient._getSubObject("chartFolder")
         self.assertTrue("<ChartFolder at" in str(chart))
+        print "Done"
         
     def test_chartFolder(self):
         print "\n"
@@ -172,6 +173,7 @@ class TestSetup(unittest.TestCase):
         patient = self.patient
         chart = patient.chartFolder
         self.assertTrue("<ChartFolder at" in str(chart))
+        print "Done"
     
     def test_getLastVisitDate(self):
         print "\n"
