@@ -14,5 +14,5 @@
     id="sec_desk.js" inline="False"/>
     <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""
-    id="jquery.qtip.min.js" inline="False"/>
+    id="jquery.qtip.js" inline="False"/>
 </object>

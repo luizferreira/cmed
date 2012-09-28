@@ -11,9 +11,10 @@
     <metal:block fill-slot="style_slot">
             <link rel="stylesheet" type="text/css" href="sec_desk.css" />
             <link rel="stylesheet" type="text/css" href="sec_print.css" media="print" />
+            <link rel="stylesheet" type="text/css" href="jquery.qtip.css"/>
     </metal:block>
     <metal:block fill-slot="javascript_head_slot">
-        <script type="text/javascript" src="jquery.qtip.min.js"></script> 
+        <script type="text/javascript" src="jquery.qtip.js"></script> 
     </metal:block> 
 </head>
 
