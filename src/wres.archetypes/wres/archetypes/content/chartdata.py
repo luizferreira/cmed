@@ -265,17 +265,20 @@ class ChartData(Persistent):
                'laboratory': OOBTree,
                #'histories': MedicalHistories,
               }
+
     security = ClassSecurityInfo()
     def __init__(self):
         self.clean_chart()
 
-    def __getattr__(self, attr):
-        mapping = self.mapping
-        if attr in mapping:
-            setattr(self, attr, mapping[attr]())
-        else:
-            raise AttributeError
-        return getattr(self, attr)
+    #Funcao marcada para delecao (27/09/12)
+    # def __getattr__(self, attr):
+    #     import pdb; pdb.set_trace()
+    #     mapping = self.mapping
+    #     if attr in mapping:
+    #         setattr(self, attr, mapping[attr]())
+    #     else:
+    #         raise AttributeError
+    #     return getattr(self, attr)
     #Roteamento dos documentos
     #def add_not_signed_allergies(self, date, came_from, allergies):
         #entry = {'date': date, 'came_from': came_from, 'data': allergies}
@@ -481,34 +484,34 @@ class ChartData(Persistent):
             #result[attr] = getattr(self, attr)
         #return result
 
-class Problem:
-    __allow_access_to_unprotected_subobjects__ = 1
-    attrs = {'problem': '',
-             'code': '',
-             'started': None,
-             'reported': None,
-             'chronicity': '',
-             'submitted_on': None,
-             'submitted_by': '',
-             'id': '',
-             'state': 'active',
-             'end_date': None,
-             'note': '',
-             }
-    def __init__(self, **kwargs):
-        if not 'id' in kwargs:
-            self.id = kwargs['problem']
-        else:
-            self.id = kwargs['id']
-        for attr, default in self.attrs.items():
-            if attr != 'id':
-                setattr(self, attr, kwargs.get(attr, default))
+# class Problem:
+#     __allow_access_to_unprotected_subobjects__ = 1
+#     attrs = {'problem': '',
+#              'code': '',
+#              'started': None,
+#              'reported': None,
+#              'chronicity': '',
+#              'submitted_on': None,
+#              'submitted_by': '',
+#              'id': '',
+#              'state': 'active',
+#              'end_date': None,
+#              'note': '',
+#              }
+#     def __init__(self, **kwargs):
+#         if not 'id' in kwargs:
+#             self.id = kwargs['problem']
+#         else:
+#             self.id = kwargs['id']
+#         for attr, default in self.attrs.items():
+#             if attr != 'id':
+#                 setattr(self, attr, kwargs.get(attr, default))
 
-    def toDict(self):
-        result = {}
-        for attr in self.attrs.keys():
-            result[attr] = getattr(self, attr)
-        return result
+#     def toDict(self):
+#         result = {}
+#         for attr in self.attrs.keys():
+#             result[attr] = getattr(self, attr)
+#         return result
 
 #class Prescription:
     #__allow_access_to_unprotected_subobjects__ = 1
