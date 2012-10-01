@@ -15,7 +15,7 @@ msgstr ""
 "Language-Code: pt\n"
 "Language-Name: Portuguese\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: 7_alterar_senha\n"
+"Domain: 8_alterar_senha\n"
 
 msgid "amberjack_title"
 msgstr ""
