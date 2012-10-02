@@ -1,50 +1,52 @@
 
 <metal:def define-macro="doctor_select">
-	<div id="doctor_select_div">
+	<div id="doctor_select_div" class="no_print">
             <select name="doctor_id" id="doctor_select">
-                <option selected="" value=""> Todos os médicos </option>         
+                <option selected="" value=""> Todos os médicos </option>
                 <tal:for repeat="doctor doctors">
                         <option tal:attributes="value doctor/getId"
                                 tal:content="doctor/Title">
                         </option>
-                </tal:for>                
-            </select>	
+                </tal:for>
+            </select>
 	</div>
 </metal:def>
 
 <div metal:define-macro="show_visits" i18n:domain="cmfuemr">
 
 	<metal:slot define-slot="doctor_visits" />
-	
+
 	<!-- No visits message -->
 	<div tal:condition="python:not doctor_visits">
 		<br />
 		<strong>
+        <h1><center>
 			<metal:no_visits define-slot="no_visits"><span id="no-visits">Sem consultas hoje - </span><span tal:replace="today"></span></metal:no_visits>
-            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        </center></h1>
+            <br /><br /><br /><br /><br /><br />
 		</strong>
 		<br />
 	</div>
 	<!-- Table of visits -->
-	<div class="visit_table visits-message" tal:condition="doctor_visits">
+<!-- 	<div class="visit_table visits-message" tal:condition="doctor_visits">
 		<br />
 		<strong>
 			<metal:slot define-slot="visits_header">Consultas de Hoje - <span tal:replace="today"></span></metal:slot>
 		</strong>
-	</div>
+	</div> -->
 	<metal:visits_table_slot define-slot="visits_table">
 		<metal:visits_table use-macro="context/sec_desk_macros/macros/visits_table" />
 	</metal:visits_table_slot>
     <div class="not-for-this-doctor" style="display:none">
         <br />
-        <strong>
+        <strong style="font-family:Quicksand; color:#205C90">
             Não há consultas para o médico selecionado.
         </strong>
     </div>
 </div>
 
 <metal:def define-macro="visits_table" i18n:domain="cmfuemr">
-	<table class="seclisting width-100 visits_table" id="visit_table" tal:condition="doctor_visits">
+	<table class="seclisting width-100 visits_table cmed" id="visit_table" tal:condition="doctor_visits">
 		<thead>
                     <metal:thead define-slot="thead">
                         <th style="width:6%;text-align: center;">Horário</th>
@@ -60,22 +62,21 @@
                 <tal:for tal:repeat="visit doctor_visits">
                     <tr tal:define="doctor python:visit['getDoctor'];
                                     doctor_id doctor/getId;
-                                    even_odd python:test(repeat['visit'].odd(), 'odd', 'even');
                                     row_number repeat/visit/number;
                                     color python:context.getRowColor(visit);"
-                            tal:attributes="class string:$doctor_id $even_odd $color visit; 
+                            tal:attributes="class string:$doctor_id $color visit;
                                             id string:row_$row_number">
                             <metal:trow define-slot="trow">
                             <tal:block_aux tal:define="visit_id python:visit['absolute_url'].split('/')[-1];
                                                        patient python:visit['getPatient'];">
                             <td style="text-align: center;">
                                 <a tal:attributes="name visit_id" />
-                                <a class="visit_link" 
-                                    href="javascript: void(0)"	
-                                    tal:content="python:visit['start'].strftime('%H:%M')" 
+                                <a class="visit_link"
+                                    href="javascript: void(0)"
+                                    tal:content="python:visit['start'].strftime('%H:%M')"
                                     i18n:translate=""
                                     onclick="timeClick()">Feb 1, 2005 5:17 pm</a>
-                                <img tal:attributes="src string:${portal_url}/popup_icon.gif;" />
+                                <img class="no_print" tal:attributes="src string:${portal_url}/popup_icon.gif;" />
                                 <input id="visit_url" style="display:none" tal:attributes="value visit/absolute_url"/>
                             </td>
                             <td style="text-align: center;">
@@ -94,7 +95,7 @@
                                 tal:content="python:visit['getReviewState']" i18n:translate=""
                                 style="text-align: center;">Status
                             </td>
-                            
+
                             <!-- Conteudo da celula CHANGE  -->
                             <td style="text-align: center;" class="no_print">
                                 <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
@@ -102,18 +103,18 @@
                                         <metal:change use-macro="here/sec_desk_macros/macros/change_cell" />
                                 </div>
                             </td>
-                            
+
                             <td style="text-align: center;">
                                 <div tal:content="visit/getVisit_type | nothing">
-                                       
+
                                 </div>
-                            </td>      
+                            </td>
 
                             <td style="text-align: center;">
                                 <div tal:content="visit/getVisit_reason | nothing">
-                                       
+
                                 </div>
-                            </td>                            
+                            </td>
 
                             <td style="text-align: center;">
                                 <div tal:content="visit/getInsurance">
@@ -151,4 +152,4 @@
 			 </tal:not>
 		</tal:links>
 	</tal:notconcluded>
-</metal:def>		
+</metal:def>

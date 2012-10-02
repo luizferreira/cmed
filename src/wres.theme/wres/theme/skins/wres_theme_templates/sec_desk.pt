@@ -1,76 +1,91 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="cmfuemr">
-      
-<head>
-    <title>Área de Trabalho da Secretária</title>
 
-    <metal:block fill-slot="style_slot">
-            <link rel="stylesheet" type="text/css" href="sec_desk.css" />
-            <link rel="stylesheet" type="text/css" href="sec_print.css" media="print" />
-    </metal:block>
-    <metal:block fill-slot="javascript_head_slot">
-        <script type="text/javascript" src="jquery.qtip.min.js"></script> 
-    </metal:block> 
+<head>
+  <title>Área de Trabalho da Secretária</title>
+
+  <metal:block fill-slot="style_slot">
+    <link rel="stylesheet" type="text/css" href="new_sec_desk.css" />
+    <link rel="stylesheet" type="text/css" href="cmed.css" />
+    <link rel="stylesheet" type="text/css" href="sec_print.css" media="print" />
+    <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+  </metal:block>
+<metal:block fill-slot="javascript_head_slot">
+  <script type="text/javascript" src="jquery.qtip.min.js"></script>
+</metal:block>
 </head>
 
 <body>
-  <!-- retirando portal_status_message.. eh necessario deixar o id=content pra que alguns aspectos visuais de css do plone 
+<!-- retirando portal_status_message.. eh necessario deixar o id=content pra que alguns aspectos visuais de css do plone
   sejam aplicados. -->
-	<div metal:fill-slot="content" id="content"
-		 tal:define="data context/sec_desk_script;
-                             doctors data/doctors;
-                             doctor data/logged_doctor | nothing;
-                             data python:modules['wres.archetypes.content.secretarydesktop'].SecretaryDesktopData(context, doctor);
-                             today python:modules['DateTime'].DateTime().strftime('%d/%m/%Y');
-                             tomorrow python:(modules['DateTime'].DateTime()+1).strftime('%d/%m/%Y')">
-	
-		<span id="print_button" style="float:right">
-			<a title="" href="javascript:print();" class="visualNoPrint">Imprimir</a>
-		</span>
-		<tal:if condition="not:doctor">
-			<metal:call_macro use-macro="context/sec_desk_macros/macros/doctor_select">
-			</metal:call_macro>
-		</tal:if>
-        
-        <!-- Idéia: colocar classes nos tr de cada visita com a id do médico. Ao mudar
-        o médico no select o sistema esconde e mostra as trs apropriadas.  -->
-		
-		<div id="day_buttons_div" class="no_print">
-                    <a><span class="button" id="today_button">HOJE</span> </a> - <a> <span class="button" id="tomorrow_button">AMANHÃ</span> </a>                     
-		</div> 
-		<div class="show_visits" id="show_today_visits">
-      <div metal:use-macro="context/sec_desk_macros/macros/show_visits">
-          <metal:fill_slot fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromToday" />
-      </div>
-    </div>
-		
-    <!-- Tomorrow's visits  -->
-    
-    <div class="show_visits" id="show_tomorrow_visits">
+<div metal:fill-slot="content" id="content"
+   tal:define="data context/sec_desk_script;
+               doctors data/doctors;
+               doctor data/logged_doctor | nothing;
+               data python:modules['wres.archetypes.content.secretarydesktop'].SecretaryDesktopData(context, doctor);
+               today python:modules['DateTime'].DateTime().strftime('%d/%m/%Y');
+               tomorrow python:(modules['DateTime'].DateTime()+1).strftime('%d/%m/%Y')">
 
-      <div metal:use-macro="context/sec_desk_macros/macros/show_visits">
-          <metal:define_visits fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromTomorrow" />
-          <metal:no_activities fill-slot='no_visits'>
-              <span id="no-visits">Sem consultas amanhã - </span><span tal:replace="tomorrow"></span>
+
+<center><h1 class="cmed"> Agenda </h1></center>
+
+<span id="print_button" style="float:right">
+  <a title="" href="javascript:print();" class="visualNoPrint">Imprimir</a>
+</span>
+<tal:if condition="not:doctor">
+  <metal:call_macro use-macro="context/sec_desk_macros/macros/doctor_select">
+  </metal:call_macro>
+</tal:if>
+
+<br />
+<br />
+<table id="agenda_parent" class="listing cmed width-100">
+
+  <tr>
+    <td style="padding:0px">
+      <dl class="enableFormTabbing">
+        <dt id="fieldsetlegend-today">Hoje</dt>
+        <dd id="fieldset-today">
+          <div class="show_visits" id="show_today_visits">
+            <div metal:use-macro="context/sec_desk_macros/macros/show_visits">
+              <metal:fill_slot fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromToday" />
+            </div>
+          </div>
+      </dd>
+
+      <dt id="fieldsetlegend-tomorrow">Amanhã</dt>
+      <dd id="fieldset-tomorrow">
+
+        <div class="show_visits" id="show_tomorrow_visits">
+
+          <div metal:use-macro="context/sec_desk_macros/macros/show_visits">
+            <metal:define_visits fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromTomorrow" />
+            <metal:no_activities fill-slot='no_visits'>
+            <span id="no-visits">Sem consultas amanhã -</span>
+            <span tal:replace="tomorrow"></span>
           </metal:no_activities>
           <metal:no_activities fill-slot='visits_header'>
-              Consultas de Amanhã - <span tal:replace="tomorrow"></span>
-          </metal:no_activities>
-      </div>        
-    
+          Consultas de Amanhã -
+          <span tal:replace="tomorrow"></span>
+        </metal:no_activities>
+      </div>
+
     </div>
-        <div id="dialog_content" style="display: none">
-                <h3>DEMO</h3>
-                <p>NÃO RETIRE NEM COMENTE ESSA DIV!!!!!!! (Luiz)</p>
-    </div>    
-	</div>
+
+  </dd>
+
+</dl>
+</td>
+</tr>
+
+</table>
+
+</div>
 
 </body>
-  
-        
-      
+
 </html>

@@ -1,3 +1,6 @@
+/* nao esta sendo usado desde 02/10/2012 por causa do novo sec_desk.
+Lembrar de renomear o new_seck_desk.css para sec_desk.css antes de deletar
+este arquivo. Alem disso precisa reproduzir isso no cabecalho do sec_desk.pt */
 
 body
 {
@@ -23,7 +26,7 @@ span.button {
     width: 100px;
     padding: 1px;
     border: 2px solid #205c90;
-    margin: 0px;		
+    margin: 0px;
 }
 
 .day_button {
@@ -31,7 +34,7 @@ span.button {
     font-weight : bold;
     border : 1px solid #205c90;
     color: #205c90;
-    background-color: white;		
+    background-color: white;
 /*  background-color : #9999CC;*/
     font-style: normal;
     text-align: center;
@@ -62,7 +65,7 @@ span.button {
 }
 
 .visit_table {
-    text-align: center; 
+    text-align: center;
     padding: 10px;
 }
 

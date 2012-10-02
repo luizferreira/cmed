@@ -125,3 +125,11 @@ dl.portletLogin {
     -moz-border-radius-bottomleft: 0.5em;
     -moz-border-radius-bottomright: 0.5em;
 }
+
+/*Styling main title with Quicksand font and plone blue color*/
+#content h1{
+font-family: Quicksand, "Helvetica Neue", Arial, FreeSans, sans-serif;
+font-weight: bold;
+color: #205C90;
+line-height: 1.5em;
+}

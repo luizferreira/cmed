@@ -20,7 +20,7 @@ function hideOrShowDoctorVisits(){
 			var selector = "tr." + doctor_id;
 			$(selector).hide();
 		}
-	}	
+	}
 }
 
 function hideTableOrNotStep1() {
@@ -52,7 +52,7 @@ function hideTableOrNotStep2() {
 function reloadVisitsOnScreen() {
     /* Show or hide doctors visits depending on
     which doctor is selected.
-    if 'Todos os medicos' selected, show all trs 
+    if 'Todos os medicos' selected, show all trs
     else: pass throw all options and leave showing
     only the selected one.
     */
@@ -63,7 +63,7 @@ function reloadVisitsOnScreen() {
     else {
         $("option").each(hideOrShowDoctorVisits);
     }
-    hideTableOrNotStep2();    
+    hideTableOrNotStep2();
 }
 
 function loadPatientTip(index){
@@ -71,7 +71,7 @@ function loadPatientTip(index){
      var patient_url = $("#patient_url"+index).val()
      var AmIDoctor = $("#AmIDoctor").val()
      if (AmIDoctor == 1){
-        $("#patient_link"+index).qtip({ 
+        $("#patient_link"+index).qtip({
             content: "<a href='"+patient_url+"'>Dados</a><br><a href='"+patient_url+"/chartFolder"+"'>Prontuário</a>",
             position:{
                 corner: "rigthMiddle",
@@ -80,9 +80,9 @@ function loadPatientTip(index){
                         x: 100,
                         y: 0
                     }
-    
+
             },
-            style: { 
+            style: {
                 padding: 2,
                 background: '#DDDDDD',
                 color: 'black',
@@ -99,11 +99,11 @@ function loadPatientTip(index){
                     event: 'unfocus'
                 }
             }
-    
+
             })
         }
     else {
-        $("#patient_link"+index).qtip({ 
+        $("#patient_link"+index).qtip({
             content: "<a href='"+patient_url+"'>Dados</a>",
             position:{
                 corner: "rigthMiddle",
@@ -112,9 +112,9 @@ function loadPatientTip(index){
                         x: 100,
                         y: 0
                     }
-    
+
             },
-            style: { 
+            style: {
                 padding: 2,
                 background: '#DDDDDD',
                 color: 'black',
@@ -131,114 +131,30 @@ function loadPatientTip(index){
                     event: 'unfocus'
                 }
             }
-    
+
             })
         }
-        
-    }
 
-function setTodayTomorrowColor(today_selected){
-        if(today_selected){
-                //Unbind eventos antigos
-                $("#today_button").unbind("mouseout");
-                $("#today_button").unbind("mouseover");
-                $("#tomorrow_button").unbind("mouseout");
-                $("#tomorrow_button").unbind("mouseover");
-                
-                //Default color para Today selecionado
-                $("#today_button").css("background-color", "#205c90")
-                $("#today_button").css("color", "white")
-                $("#tomorrow_button").css("background-color", "white")
-                $("#tomorrow_button").css("color", "#205c90")
-                
-                $("#tomorrow_button").mouseover(function(){
-                        $(this).css("background-color", "#205c90");
-                        $(this).css("color", "white");
-                        })
-                $("#tomorrow_button").mouseout(function(){
-                        $(this).css("background-color", "white");
-                        $(this).css("color", "#205c90");
-                        })	
-                
-                $("#today_button").mouseover(function(){
-                        $(this).css("text-decoration", "underline");
-                        })
-                $("#today_button").mouseout(function(){
-                        $(this).css("text-decoration", "none");
-                        })
-                }
-        else{
-                //Unbind eventos antigos
-                $("#today_button").unbind("mouseout");
-                $("#today_button").unbind("mouseover");
-                $("#tomorrow_button").unbind("mouseout");
-                $("#tomorrow_button").unbind("mouseover");
-                
-                //Default color para Amanha selecionado
-                $("#tomorrow_button").css("background-color", "#205c90")
-                $("#tomorrow_button").css("color", "white")
-                $("#today_button").css("background-color", "white")
-                $("#today_button").css("color", "#205c90")
-                
-                $("#today_button").mouseover(function(){
-                        $(this).css("background-color", "#205c90");
-                        $(this).css("color", "white");
-                        })
-                $("#today_button").mouseout(function(){
-                        $(this).css("background-color", "white");
-                        $(this).css("color", "#205c90");
-                        })	
-                
-                $("#tomorrow_button").mouseover(function(){
-                        $(this).css("text-decoration", "underline");
-                        })
-                $("#tomorrow_button").mouseout(function(){
-                        $(this).css("text-decoration", "none");
-                        })
-                }
-        }
+    }
 
 $(document).ready(function(){
 	var show_visits_reloaded = false;
         /*var fez_requisicao = false;*/
-	
-    /* initially show only today visits */
-	$("#show_tomorrow_visits").hide();
-	
 
 	$("#doctor_select").change(function(){
 	   reloadVisitsOnScreen();
 	})
-	//Hoje por default selecionado
-    var today_selected = true;
-    setTodayTomorrowColor(today_selected)
-    $("#today_button").click(function(){
-        var today_selected = true;
-        setTodayTomorrowColor(today_selected)
-		$("#show_tomorrow_visits").hide();
-		$("#show_today_visits").show();
-		
-        reloadVisitsOnScreen();
-	})
-	$("#tomorrow_button").click(function(){
-                var today_selected = false;
-                setTodayTomorrowColor(today_selected)
-		$("#show_today_visits").hide();
-		$("#show_tomorrow_visits").show();
-		
-        reloadVisitsOnScreen();
-	})	
-	
-	
+
+
 	$(".show_visits").delegate("a.change_state_link", "click", function(event) {
-        event.preventDefault();		
+        event.preventDefault();
 
         /* esconde links e mostra loader gif */
         pai = $(this).parent();
         avo = pai.parent();
         avo.children("img").show();
-        pai.hide();	
-        
+        pai.hide();
+
         href = $(this).attr('href');
         $.post(href, function(data) {
         	  if ($("#show_today_visits").is(":visible")) {
@@ -247,12 +163,16 @@ $(document).ready(function(){
         	  else {
         		  $("#show_tomorrow_visits").load(location.href + " #show_tomorrow_visits");
         	  }
-        }) 
-	})	
+        })
+	})
 
 	$('.show_visits').ajaxComplete(function(e, xhr, settings) {
-        reloadVisitsOnScreen();
-	})			
+        /* this avoid reloadVisitsOnScreen to be executed in Doctor sec_desk, since
+        the doctor already see only his visits. */
+        if($("option:selected").length > 0) {
+            reloadVisitsOnScreen();
+        }
+	})
 
 });
 
@@ -276,9 +196,9 @@ function patientClick(){
 	          });
 	     }
 	);
-	
+
 }
-    
+
 function timeClick(){
 	var data = {};
 	var url = document.getElementById("visit_url").value;

@@ -1,0 +1,62 @@
+
+table#agenda_parent dd {
+    background: #DEE7EC;
+    margin: 0;
+    padding:20px;
+}
+
+/*#content a:visited,
+dl.portlet a:visited {
+    color: #427597;
+    border-bottom: 0.1em solid #ccc;
+}*/
+
+#content table#agenda_parent li.formTab a:visited,
+#content table#agenda_parent li.formTab a {
+    color: white;
+}
+
+#content table#agenda_parent li.formTab a:hover {
+    color: #205C90;
+    background: #DEE7EC;
+
+    /*background: #DEE7EC;*/
+}
+
+table#agenda_parent a.selected {
+    color: #205C90 !important;
+    background: #DEE7EC !important;
+}
+
+table#agenda_parent ul.formTabs {
+    background: #205C90;
+}
+
+table#agenda_parent tbody tr td {
+    background: transparent;
+}
+
+table#agenda_parent tr.yellow {
+    background-color: #FAFAD2;
+}
+
+table#agenda_parent tr.green {
+    background-color: #CDE2A7;
+}
+
+table#agenda_parent tr.light {
+    background-color: #E0FFFF;
+}
+
+table#agenda_parent tr.red {
+    background-color: #FFE4E1;
+}
+
+table#agenda_parent tr,
+table#agenda_parent tr {
+    background: #EEE;
+}
+
+/*table#agenda_parent {
+    font-size: 65%;
+}*/
