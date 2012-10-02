@@ -4,8 +4,12 @@ import os
 import transaction
 from ConfigParser import ConfigParser, NoOptionError
 from Products.CMFPlone.utils import _createObjectByType
+from wres.archetypes.content.chartdata import ChartItemEventWrapper
+from zope.app.component.hooks import getSite
 from Testing.makerequest import makerequest
 from zExceptions import BadRequest
+from DateTime import DateTime
+
 
 default_products = ['wres.policy']
 
@@ -92,6 +96,16 @@ def import_members(plone, import_dir, verbose):
         member.setMemberProperties(dict(email=get(section, 'email'),
                                         fullname=get(section, 'fullname'),
                                   ))
+
+def search_catalog_by_id(id):
+    portal = getSite()
+    catalog = portal.portal_catalog
+    brains = catalog.search({'id': id})
+    try:
+        return brains[0].getObject()
+    except:
+        print 'Object not in catalog.'
+
 
 class Relation:
     def __init__(self, obj, set_method_str, referenced_obj_type, referenced_obj_id):
@@ -427,11 +441,6 @@ class PatientHandler(BaseHandler):
         obj.setPis_pasep(self.cfg.get(section, 'pis_pasep'))
         obj.setCTPS(self.cfg.get(section, 'CTPS'))
         obj.setTituloEleitor(self.cfg.get(section, 'tituloEleitor'))
-        # self.write('tipo ', obj.getTipo())
-        # self.write('convenio ', obj.getConvenio())
-        # self.write('matricula ', obj.getMatricula())
-        # self.write('titular ', obj.getTitular())
-        # self.write('cartaoNacionalDeSaude ', obj.getCartaoNacionalDeSaude())
         obj.setNomeDoPai(self.cfg.get(section, 'nomeDoPai'))
         obj.setNomeDaMae(self.cfg.get(section, 'nomeDaMae'))
         obj.setNacionalidade(self.cfg.get(section, 'nacionalidade'))
@@ -452,6 +461,8 @@ class PatientHandler(BaseHandler):
             pass # patient photo is the default photo. 
         chart_dic = eval( self.cfg.get(section, 'chartdata') )
         obj.import_chartdata(chart_dic) # there is a method in Patient to handle the chartdata import
+        ev_list = eval( self.cfg.get(section, 'events') )
+        import_events(obj, ev_list)
         obj.at_post_create_script()
         obj.reindexObject()
 
@@ -464,7 +475,6 @@ class VisitHandler(BaseHandler):
 
     def import2(self, obj, section):
         ''' especific Visit fields'''
-        from DateTime import DateTime
         patient_id = self.cfg.get(section, 'patient')
         if patient_id:
             relations2build.append((Relation(obj, 'setPatient', 'Patient', patient_id)))
@@ -551,13 +561,15 @@ class FileHandler(BaseHandler):
 
 registerHandler(FileHandler)
 
-# def fixup(plone):
-#     """ 
-#     perform post-migration actions 
-#     """
-#     for brain in plone.portal_catalog(portal_type=('Document', 'NewsItem')):
-#         obj = brain.getObject()
-#         obj.setFormat('text/structured')
+def import_events(patient, ev_list):
+    for event in ev_list:
+        if event['related_obj'] is 'ChartItemEventWrapper':
+            dummy = {}
+            dummy['medication'] = dummy['problem'] = dummy['allergy'] = dummy['exam'] = event['title']
+            wrapper = ChartItemEventWrapper(event['mapping_name'], patient, **dummy)
+            patient.create_event(event['type'], DateTime(event['date']), wrapper)
+        else:
+            patient.create_event(event['type'], DateTime(event['date']), search_catalog_by_id(event['related_obj']))
 
 def import_plone(self, import_dir, version, verbose=False):
     '''

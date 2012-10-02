@@ -1,26 +1,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
+	  xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="cmfuemr">
 
 <head>
-  <title>Área de Trabalho da Secretária</title>
+    <title>Área de Trabalho da Secretária</title>
 
   <metal:block fill-slot="style_slot">
     <link rel="stylesheet" type="text/css" href="new_sec_desk.css" />
     <link rel="stylesheet" type="text/css" href="cmed.css" />
     <link rel="stylesheet" type="text/css" href="sec_print.css" media="print" />
+	<link rel="stylesheet" type="text/css" href="jquery.qtip.css"/>
     <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
   </metal:block>
 <metal:block fill-slot="javascript_head_slot">
-  <script type="text/javascript" src="jquery.qtip.min.js"></script>
+  <script type="text/javascript" src="jquery.qtip.js"></script>
 </metal:block>
 </head>
 
 <body>
-<!-- retirando portal_status_message.. eh necessario deixar o id=content pra que alguns aspectos visuais de css do plone
+  <!-- retirando portal_status_message.. eh necessario deixar o id=content pra que alguns aspectos visuais de css do plone
   sejam aplicados. -->
 <div metal:fill-slot="content" id="content"
    tal:define="data context/sec_desk_script;

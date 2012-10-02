@@ -73,64 +73,45 @@ function loadPatientTip(index){
      if (AmIDoctor == 1){
         $("#patient_link"+index).qtip({
             content: "<a href='"+patient_url+"'>Dados</a><br><a href='"+patient_url+"/chartFolder"+"'>Prontuário</a>",
-            position:{
-                corner: "rigthMiddle",
-                adjust:
-                    {
-                        x: 100,
-                        y: 0
-                    }
+            show: {
+                event: 'click',
+            },
+            position: {
+                    my: 'left center',
+                    at: 'right center',
+                },
 
+            hide: {
+                effect: function(offset) {
+                $(this).slideDown(1000); // "this" refers to the tooltip
+                },
+                event: false,
+                inactive: 3000
             },
             style: {
-                padding: 2,
-                background: '#DDDDDD',
-                color: 'black',
-                textAlign: 'center',
-                fontSize: 13,
-                border: {
-                    radius: 2
+                    classes: 'ui-tooltip-shadow ui-tooltip-' + 'blue'
                 }
-            },
-            show: 'click',
-            hide: {
-                fixed: true,
-                when: {
-                    event: 'unfocus'
-                }
-            }
 
             })
         }
     else {
-        $("#patient_link"+index).qtip({
-            content: "<a href='"+patient_url+"'>Dados</a>",
-            position:{
-                corner: "rigthMiddle",
-                adjust:
-                    {
-                        x: 100,
-                        y: 0
-                    }
-
+        $("#patient_link"+index).qtip({ 
+            content: "<a href='"+patient_url+"'>Dados</a><br>",
+            show: 'click',
+            position: {
+                    my: 'left center',
+                    at: 'right center',
+                },
+            hide: {
+                effect: function(offset) {
+                $(this).slideDown(100); // "this" refers to the tooltip
+                },
+                event: false,
+                inactive: 2000
             },
             style: {
-                padding: 2,
-                background: '#DDDDDD',
-                color: 'black',
-                textAlign: 'center',
-                fontSize: 13,
-                border: {
-                    radius: 2
+                    classes: 'ui-tooltip-shadow ui-tooltip-' + 'blue'
                 }
-            },
-            show: 'click',
-            hide: {
-                fixed: true,
-                when: {
-                    event: 'unfocus'
-                }
-            }
 
             })
         }

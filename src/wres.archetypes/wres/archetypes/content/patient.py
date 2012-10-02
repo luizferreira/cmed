@@ -2,7 +2,6 @@
 
 """Definition of the Patient content type
 """
-from DateTime import DateTime
 from AccessControl import ClassSecurityInfo
 
 import json
@@ -10,7 +9,6 @@ import json
 from zope.interface import implements
 
 from Products.Archetypes import atapi
-from Products.ATContentTypes.content import folder
 from Products.ATContentTypes.content import schemata
 
 from ComputedAttribute import ComputedAttribute

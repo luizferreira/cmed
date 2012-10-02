@@ -82,7 +82,6 @@
                             <td style="text-align: center;">
                                     <!-- Link para o nome do paciente-->
                                 <a  href="javascript: void(0)"
-                                    disabled="true"
                                     tal:attributes="id python: 'patient_link' + str(repeat['visit'].index);
                                     onmouseover string:loadPatientTip(${repeat/visit/index})"
                                     tal:content="python:patient.Title()" i18n:translate="" > Nome do Paciente </a>

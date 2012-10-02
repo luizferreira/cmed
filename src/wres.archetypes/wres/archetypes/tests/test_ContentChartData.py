@@ -110,3 +110,62 @@ class TestSetup(unittest.TestCase):
         self.assertTrue('pparker' in parts)
         self.assertTrue('show_problem_list' in parts)
         print "Done"
+
+    #Classe ChartData
+    def test_ChartData(self):
+        print "\n"
+        print "----------------------------------------------"
+        print "Modulo: ContentChartData   Test:__init__"
+        print "Modulo: ContentChartData   Test:clean_chart"
+        print "Modulo: ContentChartData   Test:update_chart"
+        print "----------------------------------------------"
+        #Get requirements
+        self.assertTrue(self.patient.chart_data)
+        self.patient.create_event(1000, DateTime(), self.patient)
+        self.assertTrue(self.patient.get_events()) #init
+        self.patient.chart_data.clean_chart()
+        self.assertFalse(self.patient.get_events()) #clean
+        del self.patient.chart_data.events
+        self.assertFalse(hasattr(self.patient.chart_data, 'events'))
+        self.patient.chart_data.update_chart()
+        self.patient.create_event(1000, DateTime(), self.patient)
+        self.assertTrue(dict(self.patient.chart_data.events)) #update
+        print "Done"
+
+    def test_raise_event(self):
+        print "\n"
+        print "----------------------------------------------"
+        print "Modulo: ContentChartData   Test:raise_event"
+        print "----------------------------------------------"
+        #Get requirements
+        patient = self.patient
+        patient.chart_data.clean_chart()
+        medication = {'status': 'active', 'submitted_by': 'admin', 'use': '1 cp quando houver do de cabe\xc3\xa7a', 'medication': 'Tylenol dc', 'end_date': DateTime('2012/05/07 17:06:14.061165 GMT-3'), 'note': '', 'start': '07/05/2012', 'concentration': '80mg', 'quantity': '12'}
+        patient.chart_data.raise_event(patient, 'medications', 1000, **medication)
+        self.assertTrue(dict(self.patient.chart_data.events))
+        print "Done"
+
+    def test_manage_data(self):
+        print "\n"
+        print "----------------------------------------------"
+        print "Modulo: ContentChartData   Test:save_entry"
+        print "Modulo: ContentChartData   Test:edit_entry"
+        print "Modulo: ContentChartData   Test:get_entry"
+        print "Modulo: ContentChartData   Test:get_entry_item"
+        print "----------------------------------------------"
+        #Get requirements
+        patient = self.patient
+        patient.chart_data.clean_chart()
+        medication = {'status': 'active', 'submitted_by': 'admin', 'use': '1 cp quando houver do de cabe\xc3\xa7a', 'medication': 'Tylenol dc', 'end_date': DateTime('2012/05/07 17:06:14.061165 GMT-3'), 'note': '', 'start': '07/05/2012', 'concentration': '80mg', 'quantity': '12'}
+        med_id = patient.chart_data.save_entry(patient, 'medications', **medication)
+        self.assertTrue(dict(self.patient.chart_data.medications)) #save_entry
+        medication['submitted_by'] = 'pparker'
+        patient.chart_data.edit_entry(med_id, 'medications', **medication)
+        saved_med = patient.chart_data.get_entry_item(med_id, 'medications')
+        self.assertTrue(saved_med) #get_enty_item
+        self.assertEqual(saved_med['submitted_by'], 'pparker') #edit_entry
+        patient.chart_data.save_entry(patient, 'medications', **medication)
+        patient.chart_data.save_entry(patient, 'medications', **medication)
+        all_med = patient.chart_data.get_entry('medications')
+        self.assertEqual(len(all_med), 3) #get_entry
+        print "Done"

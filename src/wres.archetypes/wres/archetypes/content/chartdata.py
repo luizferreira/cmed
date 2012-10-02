@@ -191,6 +191,15 @@ class Event:
         else:
             return 1
 
+    def export_dict(self):
+        if isinstance(self.related_obj, ChartItemEventWrapper):
+            return {'type': self.type, 'date': self.date, 'related_obj' : self.related_obj.meta_type, 
+                    'mapping_name' : self.related_obj.mapping_name,  'prefix' : self.related_obj.prefix,
+                    'title' : self.related_obj.title, 'url_sufix' : self.related_obj.url_sufix}
+        else:
+            return {'type': self.type, 'date': self.date, 'related_obj' : self.related_obj.getId()}
+
+
 class ChartItemEventWrapper:
     '''
     wrapper for creating chart_data events.
@@ -217,6 +226,7 @@ class ChartItemEventWrapper:
             self.prefix = ''
             self.title = 'Prescrição'
             self.url_sufix = '/show_medications'
+        self.mapping_name = mapping_name
         self.patient = patient
         self.id = self.patient.getId() + '_' + mapping_name + '_' + self.title 
 
@@ -255,17 +265,20 @@ class ChartData(Persistent):
                'laboratory': OOBTree,
                #'histories': MedicalHistories,
               }
+
     security = ClassSecurityInfo()
     def __init__(self):
         self.clean_chart()
 
-    def __getattr__(self, attr):
-        mapping = self.mapping
-        if attr in mapping:
-            setattr(self, attr, mapping[attr]())
-        else:
-            raise AttributeError
-        return getattr(self, attr)
+    #Funcao marcada para delecao (27/09/12)
+    # def __getattr__(self, attr):
+    #     import pdb; pdb.set_trace()
+    #     mapping = self.mapping
+    #     if attr in mapping:
+    #         setattr(self, attr, mapping[attr]())
+    #     else:
+    #         raise AttributeError
+    #     return getattr(self, attr)
     #Roteamento dos documentos
     #def add_not_signed_allergies(self, date, came_from, allergies):
         #entry = {'date': date, 'came_from': came_from, 'data': allergies}
@@ -471,34 +484,34 @@ class ChartData(Persistent):
             #result[attr] = getattr(self, attr)
         #return result
 
-class Problem:
-    __allow_access_to_unprotected_subobjects__ = 1
-    attrs = {'problem': '',
-             'code': '',
-             'started': None,
-             'reported': None,
-             'chronicity': '',
-             'submitted_on': None,
-             'submitted_by': '',
-             'id': '',
-             'state': 'active',
-             'end_date': None,
-             'note': '',
-             }
-    def __init__(self, **kwargs):
-        if not 'id' in kwargs:
-            self.id = kwargs['problem']
-        else:
-            self.id = kwargs['id']
-        for attr, default in self.attrs.items():
-            if attr != 'id':
-                setattr(self, attr, kwargs.get(attr, default))
+# class Problem:
+#     __allow_access_to_unprotected_subobjects__ = 1
+#     attrs = {'problem': '',
+#              'code': '',
+#              'started': None,
+#              'reported': None,
+#              'chronicity': '',
+#              'submitted_on': None,
+#              'submitted_by': '',
+#              'id': '',
+#              'state': 'active',
+#              'end_date': None,
+#              'note': '',
+#              }
+#     def __init__(self, **kwargs):
+#         if not 'id' in kwargs:
+#             self.id = kwargs['problem']
+#         else:
+#             self.id = kwargs['id']
+#         for attr, default in self.attrs.items():
+#             if attr != 'id':
+#                 setattr(self, attr, kwargs.get(attr, default))
 
-    def toDict(self):
-        result = {}
-        for attr in self.attrs.keys():
-            result[attr] = getattr(self, attr)
-        return result
+#     def toDict(self):
+#         result = {}
+#         for attr in self.attrs.keys():
+#             result[attr] = getattr(self, attr)
+#         return result
 
 #class Prescription:
     #__allow_access_to_unprotected_subobjects__ = 1
