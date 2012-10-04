@@ -5,8 +5,6 @@ import os
 from zope.app.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import _createObjectByType
-from Products.CMFPlone.CatalogTool import CatalogTool
-from wres.policy.utils.setup_utils import create_metadatas, add_index
 from AccessControl import Unauthorized
 
 

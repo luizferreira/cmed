@@ -8,6 +8,7 @@ from wres.policy.testing import WRES_POLICY_SELENIUM_FUNCTIONAL_TESTING
 from wres.policy.test_browser_utils import Session
 from Testing import ZopeTestCase
 import gocept.selenium.plonetesting.testing_plone
+from datetime import datetime
 
 
 
@@ -31,6 +32,9 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
 		self.app.REQUEST["SESSION"] = Session()
 		
     def test_create_appointment(self):
+        strBegin = strEnd = datetime.now().strftime("%Y-%m-%d")
+        
+
         print "\nTeste criar consulta, SELENIUM, comecou"
         sel = self.selenium
         sel.open("/plone")
@@ -53,18 +57,24 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
         sel.waitForPageToLoad()
         sel.click('//*[@id="portaltab-calendar"]/a')
         sel.waitForPageToLoad()
-        sel.click('//*[@id="contentview-solgemafullcalendar_view"]/a')
+        calendarioLink = sel.getLocation()
+        sel.open("http://localhost:5698/plone/Appointments/dteste/createSFEvent?startDate=%s+13:30&endDate=%s+13:45&type_name=Visit" % (strBegin,strEnd))        
         sel.waitForPageToLoad()
-        sel.select("id=form-widgets-defaultCalendarView", u"value=basicWeek")
-        sel.click('id=form-buttons-apply')
-        sel.waitForPageToLoad()
-        sel.mouseDownAt('//*[@id="calendar"]/div[1]/div/table/tbody/tr/td[3]','')
-        sel.mouseUp('//*[@id="calendar"]/div[1]/div/table/tbody/tr/td[3]')
-        print "\n------>Forced Sleep: 2000 ms to create iframe"
-        sel.pause(2000)
-        sel.selenium.select_frame("SFEventEditIFRAME")
-        print "\n------>Forced Sleep: 1000 ms get search_patient buttom"
-        sel.pause(1000)
+        # TODO Clean this comments one day
+        # sel.click('//*[@id="portaltab-calendar"]/a')
+        # sel.waitForPageToLoad()
+        # sel.click('//*[@id="contentview-solgemafullcalendar_view"]/a')
+        # sel.waitForPageToLoad()
+        # sel.select("id=form-widgets-defaultCalendarView", u"value=basicWeek")
+        # sel.click('id=form-buttons-apply')
+        # sel.waitForPageToLoad()
+        # sel.mouseDownAt('//*[@id="calendar"]/div[1]/div/table/tbody/tr/td[3]','')
+        # sel.mouseUp('//*[@id="calendar"]/div[1]/div/table/tbody/tr/td[3]')
+        # print "\n------>Forced Sleep: 2000 ms to create iframe"
+        # sel.pause(5000)
+        #sel.selenium.select_frame("SFEventEditIFRAME")
+        #print "\n------>Forced Sleep: 1000 ms get search_patient buttom"
+        #sel.pause(1000)
         sel.click("id=popup_search_patient")
         #Go to child window
         sel.waitForPopUp("_blank")
@@ -72,16 +82,16 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
         sel.type("id=searchGadget", "pte")
         print "\n------>Forced Sleep: 2000 ms to get ajax service"
         sel.pause(2000)
-        #Precisa de um wait aqui!
         sel.click("class=contenttype-patient")
         #Back to parent window
         sel.selenium.select_window("null")
+        sel.type("id=duration", "15")
         sel.select("id=visit_reason", u"value=outro")
         sel.type("id=other_document_type", "Urgencia")
         sel.select("id=insurance", u"value=outro_plano")
         sel.type("id=other_insurance", "Salvador das Vidas")
         sel.click("name=form.button.save") 
-        print "------>Forced Sleep: 1000 ms to back to parent iframe"
-        sel.pause(1000)
+        sel.open(calendarioLink)        
+        sel.waitForPageToLoad()
         sel.assertTextPresent("Paciente Teste")
         print "\nTeste criar consulta, SELENIUM, terminou"

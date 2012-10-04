@@ -1,16 +1,13 @@
 #coding=utf-8
 import unittest2 as unittest
 from wres.archetypes.tests.IntegrationLayer import WRES_ARCHETYPES_INTEGRATION_TESTING
-from wres.archetypes.content.patient import Patient
-from wres.archetypes.content.visit import Visit
 from wres.archetypes.content.chartdata import Event
-from wres.archetypes.tests.utilsPatient import create_patient, getPatientOwnerFromPath, create_empty_patient
+from wres.archetypes.tests.utilsPatient import create_patient, create_empty_patient
 from Products.CMFCore.utils import getToolByName
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 import json
 from wres.policy.utils.roles import PATIENT_GROUP
-from wres.policy.setuphandlers import getOrCreateType
 
 class TestSetup(unittest.TestCase):
     layer = WRES_ARCHETYPES_INTEGRATION_TESTING

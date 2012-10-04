@@ -54,7 +54,6 @@ class Visit(event.ATEvent):
         return getattr(portal.Doctors, doctor_id)
         
     def getProviderId(self):
-        portal = getSite()
         pai = self.getParentNode()
         doctor_id = pai.getId()
         return doctor_id
@@ -94,7 +93,7 @@ class Visit(event.ATEvent):
         patient.create_event(Event.CREATION, self.startDate, self)
 
         # make scheduled the initial state. This code needs to be here, not in 
-        # at_post_edit.
+        # at_post_edit
         self.portal_workflow.doActionFor(self, 'schedule')
 
         self.setTitle(patient.Title())
@@ -105,7 +104,6 @@ class Visit(event.ATEvent):
             portal = getSite()
             vt = getToolByName(portal, 'vocabulary_tool')        
             vt.add2vocabulary('visit_types', visit_type, 1)     
-
         visit_reason = self.getVisit_reason()
         dl = self.getVisitReason()
         if visit_reason not in dl:
