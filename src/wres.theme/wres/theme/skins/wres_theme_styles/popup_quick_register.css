@@ -52,7 +52,7 @@ legend {
 
 fieldset {
 	border-color:#205C90;
-	border-width:2px;	
+	border-width:2px;
 }
 
 p#no_results {
@@ -64,10 +64,22 @@ div#portal-column-content {
     float: left;
     left: 100%;
     margin-left: -98.875%
-    
+
 }
 
-div#LSResult {
+#choose_patient div#LSResult {
     position:static;
     margin:0 auto;
+}
+
+#choose_patient div#LSResult fieldset {
+    width: 650px;
+}
+
+#choose_patient div#LSResult h2 {
+    display:none;
+}
+
+#choose_patient div#LSResult div.LSIEFix {
+    width: 600px;
 }

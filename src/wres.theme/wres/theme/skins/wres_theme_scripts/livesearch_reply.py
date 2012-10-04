@@ -83,10 +83,12 @@ if path[-1] == '*':
 else:
     building_search = False
 
-results = catalog(SearchableText=r, portal_type=friendly_types, path=path,
+# transforming this in a 'only chart search' #cmed
+results = catalog(SearchableText=r, portal_type='Patient', path=path,
     sort_limit=limit)
 
-searchterm_query = '?searchterm=%s'%url_quote_plus(q)
+# removing yellow highlight #cmed
+# searchterm_query = '?searchterm=%s'%url_quote_plus(q)
 
 REQUEST = context.REQUEST
 RESPONSE = REQUEST.RESPONSE
@@ -119,9 +121,10 @@ def write(s):
     output.append(safe_unicode(s))
 
 if not results:
-    write('''<fieldset class="livesearchContainer cmedgray" style="width:650px">''')
+    write('''<fieldset class="livesearchContainer cmedgray">''')
     write('''<legend id="livesearchLegend">%s</legend>''' % "Resultados")
-    write('''<div class="LSIEFix" style="width:600px">''')
+    write('''<h2 id="results_title">%s</h2>''' % "Resultados")
+    write('''<div class="LSIEFix">''')
     write('''<div id="LSNothingFound">%s</div>''' % ts.translate(label_no_results_found, context=REQUEST))
     write('''<div class="LSRow">''')
     write('''</div>''')
@@ -129,20 +132,23 @@ if not results:
     write('''</fieldset>''')
 
 else:
-    write('''<fieldset class="livesearchContainer cmedgray" style="width:650px">''')
+    write('''<fieldset class="livesearchContainer cmedgray">''')
     write('''<legend id="livesearchLegend">%s</legend>''' % "Resultados")
-    write('''<div class="LSIEFix" style="width:600px">''')
+    write('''<h2 id="results_title">%s</h2>''' % "Resultados")
+    write('''<div class="LSIEFix">''')
     write('''<ul class="LSTable">''')
+
     for result in results[:limit]:
 
         icon = plone_view.getIcon(result)
         itemUrl = result.getURL()
         if result.portal_type in useViewAction:
             itemUrl += '/view'
-        itemUrl = itemUrl + searchterm_query
+        # removing yellow highlight #cmed
+        # itemUrl = itemUrl + searchterm_query
 
-        
-        write('''<li class="LSRow" style="width:550px;">''')
+
+        write('''<li class="LSRow" style="width:425px;">''')
         write(icon.html_tag() or '')
         full_title = safe_unicode(pretty_title_or_id(result))
         if len(full_title) > MAX_TITLE:
@@ -151,11 +157,11 @@ else:
             display_title = full_title
         full_title = full_title.replace('"', '&quot;')
         klass = 'contenttype-%s' % ploneUtils.normalizeString(result.portal_type)
-        
+
         # tratamento especial para o tipo patient
         # o primeiro if se refere ao Procurar do adicionar consulta
         # o elif se refere a pesquisa da pasta Patients
-        if building_search and result.portal_type == 'Patient':
+        if building_search:
             patient = result.getObject()
             dt = patient.getBirthDate()
             cf = patient.getContactPhone()
@@ -165,7 +171,7 @@ else:
                 write('''<a title="%s" class="%s" onClick="selectPatient('%s', '%s')">%s (%s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone))
             else:
                 write('''<a title="%s" class="%s" onClick="selectPatient('%s', '%s')">%s (%s * %s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone, dt.strftime("%d/%m/%Y")))
-        elif result.portal_type == 'Patient':
+        else:
             patient = result.getObject()
             dt = patient.getBirthDate()
             cf = patient.getContactPhone()
@@ -174,16 +180,26 @@ else:
             patient_id_prontuario = patient.getId() + "_prontuario"
             formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])
             pchart_url = patient.absolute_url()+'/chartFolder'
-            if dt == None:
-                write('''%s (%s)''' % (display_title, formatted_phone ) )
-            else:
-                write('''%s (%s * %s)''' % (display_title, formatted_phone, dt.strftime("%d/%m/%Y") ) )
-            write('''(<a href="%s" id="%s" title="%s" class="%s">%s</a>)''' % (itemUrl, patient_id_pessoal,full_title, klass, "Pessoal"))
-            if verifyViewChartPermission():
-                write('''  (<a href="%s" id="%s" title="%s">%s</a>)''' % (pchart_url,patient_id_prontuario, "", "Prontuário"))
 
-        else:
-            write('''<a href="%s" title="%s" class="%s">%s</a>''' % (itemUrl, full_title, klass, display_title))
+            if dt == None:
+                display_text = "%s (%s)" % (display_title, formatted_phone )
+            else:
+                display_text = "%s (%s * %s)" % (display_title, formatted_phone, dt.strftime("%d/%m/%Y") )
+            if verifyViewChartPermission():
+                write('''<a href="%s" id="%s" title="%s" class="%s">%s</a>''' % (pchart_url, patient_id_pessoal,full_title, klass, display_text))
+            else:
+                write('''<a href="%s" id="%s" title="%s" class="%s">%s</a>''' % (itemUrl, patient_id_pessoal,full_title, klass, display_text))
+            # if dt == None:
+            #     write('''%s (%s)''' % (display_title, formatted_phone ) )
+            # else:
+            #     write('''%s (%s * %s)''' % (display_title, formatted_phone, dt.strftime("%d/%m/%Y") ) )
+            # write('''(<a href="%s" id="%s" title="%s" class="%s">%s</a>)''' % (itemUrl, patient_id_pessoal,full_title, klass, "Pessoal"))
+            # if verifyViewChartPermission():
+            #     write('''  (<a href="%s" id="%s" title="%s">%s</a>)''' % (pchart_url,patient_id_prontuario, "", "Prontuário"))
+
+        # only patients returned in search, so this doenst make sense anymore #cmed
+        # else:
+        #     write('''<a href="%s" title="%s" class="%s">%s</a>''' % (itemUrl, full_title, klass, display_title))
         display_description = safe_unicode(result.Description)
         if len(display_description) > MAX_DESCRIPTION:
             display_description = ''.join((display_description[:MAX_DESCRIPTION],'...'))
@@ -202,7 +218,7 @@ else:
         write('''</li>''')
     write('''</ul>''')
     write('''</div>''')
-    write('''</fieldset>''')
+    write('''</div>''')
 
 return '\n'.join(output).encode(site_encoding)
 

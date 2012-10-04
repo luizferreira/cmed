@@ -47,6 +47,17 @@
       permission="zope2.View"
   />
 
+  <!-- cadastrando a nova viewlet para o search box -->
+  <browser:viewlet
+      name="plone.searchbox"
+      manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+      class="plone.app.layout.viewlets.common.SearchBoxViewlet"
+      template="templates/searchbox.pt"
+      for="*"
+      layer=".interfaces.IThemeSpecific"
+      permission="zope2.View"
+  />
+
   <!-- cadastrando a nova viewlet para o banner no footer -->
   <browser:viewlet
       name="plone.footer_banner"

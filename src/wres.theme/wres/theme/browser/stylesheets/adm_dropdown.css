@@ -111,7 +111,7 @@ li#adm_li a#adm_a:hover {
 }
 
 ul#section-adm li#start a{
-    background:url(./admdd_toparrow.png);
+    background: transparent;
     padding: 0px;
     height: 7px;
 }

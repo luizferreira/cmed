@@ -23,23 +23,23 @@
 	<tal:if condition="python: searchableTextt=='@All'">
 	</tal:if>
 
-<div metal:fill-slot="main" tal:define="title string:Buscar Paciente" style="height:550px"> 
-     
+<div metal:fill-slot="main" tal:define="title string:Buscar Paciente" style="height:550px">
+
     <center>
 
     <h1>
         <a tal:content="string:${title}">Title</a>
-    </h1>        
+    </h1>
 
     <br />
-        
+
     <div i18n:translate="">
       <form id="portletx_form" name="portletxform" method="post">
-        <div class="LSBox">
+        <div id="patient_folder" class="LSBox">
           <input id="searchGadget" class="inputLabel" style="width:250px; height:25px; text-align:center"
                  title="Digite o nome, CPF ou ID do paciente" autocomplete="on" name="Title" value="" />
           <input id="searchSubmit" name="submit" type="submit" value="Buscar" style="display:none" />
-            
+
             <div class="searchSection" style="display:none">
             <input id="searchbox_currentfolder_only" class="noborder" type="checkbox" name="path" checked="True" tal:attributes="value python:'/'.join(context.getPhysicalPath())">
             <label style="cursor: pointer" for="searchbox_currentfolder_only">apenas nesta seção</label>
@@ -48,14 +48,14 @@
                 <div class="LSResult" id="LSResult">
                     <div class="LSShadow" id="LSShadow" style="width:400px"></div>
                 </div>
-            </span>                         
+            </span>
         </div>
-       
+
       </form>
     </div>
 
     </center>
-     
+
 </div>
 
 </body>
