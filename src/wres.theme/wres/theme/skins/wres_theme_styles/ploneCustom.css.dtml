@@ -133,3 +133,32 @@ font-weight: bold;
 color: #205C90;
 line-height: 1.5em;
 }
+
+/*Styling main search box*/
+#portal-searchbox div#LSResult {
+    background: #EEE;
+    box-shadow: 8px 13px 12px rgba(0, 0, 0, 0.4);
+    z-index:5;
+}
+#portal-searchbox div#LSResult h2 {
+    font-family: Quicksand, "Helvetica Neue", Arial, FreeSans, sans-serif;
+    font-weight: bold;
+    color: #205C90;
+}
+#portal-searchbox div#LSResult a:hover {
+    text-decoration: underline;
+}
+
+#portal-searchbox div#LSResult fieldset {
+    width: 450px;
+    border: 0;
+}
+
+#portal-searchbox div#LSResult legend {
+    display:none;
+}
+
+
+#portal-searchbox div#LSResult div.LSIEFix {
+    width: 450px;
+}

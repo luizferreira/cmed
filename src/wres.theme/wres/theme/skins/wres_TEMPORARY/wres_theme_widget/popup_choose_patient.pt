@@ -22,7 +22,7 @@
             window.opener.startPopulatingField(window, title, path);
             setTimeout("window.close()", 100);
         }
-    </script>    
+    </script>
 
 </head>
 
@@ -31,48 +31,48 @@
 	<tal:if condition="python: searchableTextt=='@All'">
 	</tal:if>
 
-<div metal:fill-slot="content" style="height:460px" 
+<div metal:fill-slot="content" style="height:460px"
 	 tal:define="title string:Buscar Paciente;
-	 			 portal context/@@plone_portal_state/portal;"> 
-     
+	 			 portal context/@@plone_portal_state/portal;">
+
 
     <h1 style="color:#000066">
         <a i18n:translate="" tal:content="string:${title}">Title</a>
-    </h1>     
-     
+    </h1>
+
 
     <!--label i18n:translate="">
       Procurar
     </label-->
 
     <br />
-        
+
     <div i18n:translate="" id="search_patient">
       <form id="portletx_form" name="portletxform" method="post">
-        <div class="LSBox">
+        <div id="choose_patient" class="LSBox">
           <input id="searchGadget" class="inputLabel" style="width:250px; height:25px; text-align:center"
                  title="Digite o nome, CPF ou ID do paciente" autocomplete="on" name="Title" value="" />
           <input id="searchSubmit" name="submit" type="submit" value="Buscar" style="display:none" />
-            
+
             <div class="searchSection" style="display:none">
             <input tal:define="root_url python:'/'.join(portal.getPhysicalPath())" id="searchbox_currentfolder_only" class="noborder" type="checkbox" name="path" checked="True" tal:attributes="value string:${root_url}/Patients*">
             <label style="cursor: pointer" for="searchbox_currentfolder_only">apenas nesta seção</label>
-            </div> 
-            
+            </div>
+
             <div class="LSResult" id="LSResult">
                 <div class="LSShadow" id="LSShadow" style="width:400px"></div>
-            </div>      
-            
+            </div>
+
         </div>
-       
+
       </form>
     </div>
 
     <br />
     <div>
         <a href="#" onclick="javascript:window.close();">Fechar Janela</a>
-    </div>    
-	
+    </div>
+
 </div>
 
 
