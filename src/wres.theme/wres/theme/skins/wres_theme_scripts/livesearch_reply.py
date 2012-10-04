@@ -84,8 +84,8 @@ else:
     building_search = False
 
 # transforming this in a 'only chart search' #cmed
-results = catalog(SearchableText=r, portal_type='Patient', path=path,
-    sort_limit=limit)
+# results = catalog(SearchableText=r, portal_type='Patient', path=path, sort_limit=limit)
+results = catalog(SearchableText=r, portal_type='Patient', path=path)
 
 # removing yellow highlight #cmed
 # searchterm_query = '?searchterm=%s'%url_quote_plus(q)
@@ -189,13 +189,7 @@ else:
                 write('''<a href="%s" id="%s" title="%s" class="%s">%s</a>''' % (pchart_url, patient_id_pessoal,full_title, klass, display_text))
             else:
                 write('''<a href="%s" id="%s" title="%s" class="%s">%s</a>''' % (itemUrl, patient_id_pessoal,full_title, klass, display_text))
-            # if dt == None:
-            #     write('''%s (%s)''' % (display_title, formatted_phone ) )
-            # else:
-            #     write('''%s (%s * %s)''' % (display_title, formatted_phone, dt.strftime("%d/%m/%Y") ) )
-            # write('''(<a href="%s" id="%s" title="%s" class="%s">%s</a>)''' % (itemUrl, patient_id_pessoal,full_title, klass, "Pessoal"))
-            # if verifyViewChartPermission():
-            #     write('''  (<a href="%s" id="%s" title="%s">%s</a>)''' % (pchart_url,patient_id_prontuario, "", "Prontuário"))
+
 
         # only patients returned in search, so this doenst make sense anymore #cmed
         # else:
@@ -210,11 +204,12 @@ else:
         full_title, display_title, display_description = None, None, None
 
     write('''<br />''')
-
     if len(results)>limit:
         # add a more... row
-        write('''<li class="LSRow">''')
-        write( '<a href="%s" style="font-weight:normal">%s</a>' % ('search?SearchableText=' + searchterms, ts.translate(label_show_all, context=REQUEST)))
+        write('''<li class="LSRow" style="width:425px;">''')
+        # just print a message when the results explodes #cmed
+        write( '<span style="font-weight:normal; font-size:80%">Alguns resultados não foram exibidos, refina melhor a sua busca.</span>' )
+        # write( '<a href="%s" style="font-weight:normal">%s</a>' % ('search?SearchableText=' + searchterms, ts.translate(label_show_all, context=REQUEST)))
         write('''</li>''')
     write('''</ul>''')
     write('''</div>''')
