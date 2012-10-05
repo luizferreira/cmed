@@ -11911,9 +11911,6 @@ msgstr "Data Inicial"
 
 # * Archetypes - Tipos
 
-msgid "type for WRES website"
-msgstr "Preencha os dados para adicionar ao site"
-
 msgid "Admin"
 msgstr "Administrador"
 
