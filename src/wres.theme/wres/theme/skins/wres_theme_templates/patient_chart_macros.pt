@@ -5,7 +5,8 @@
 
 <!-- Allergies -->
 <div metal:define-macro="allergies">
-    <div tal:define="all_data context/getAllergiesData;
+    <div tal:condition="python:context.verifyRole(['Manager', 'Doctor', 'Transcriptionist'])"
+         tal:define="all_data context/getAllergiesData;
                      active all_data/active;
                      patient context/getPatient;
                      portal_url context/getPortalURL">
@@ -43,7 +44,7 @@
                 <!-- Show only actives allergies -->
                 <tal:immunizations repeat="immunization_list records">
                     <div tal:repeat="immunization immunization_list">
-                        <span tal:content="python:'- %s'%(immunization)"> </span>               
+                        <span tal:content="python:'- %s'%(immunization)"> </span>
                         <br/>
                     </div>
                 </tal:immunizations>
@@ -64,7 +65,7 @@
         <div class="portletBody">
             <tal:forEachProgressNotes repeat="dx dxs" condition="dxs">
                 <strong><span i18n:translate="cmfuemr_text_date">
-                    Date:</span> 
+                    Date:</span>
                     <span tal:define="date python:dx.get('date', '')"
                           tal:content="string:${date/mm}/${date/dd}/${date/year}">
                         1981/12/26
@@ -84,12 +85,12 @@
         </div>
     </div>
 </div>
-<div metal:define-macro="referred_by" 
+<div metal:define-macro="referred_by"
      tal:define="referred python:context.chartFolder.aq_parent.getReferredBy()">
     <div class="portlet">
         <h5 i18n:translate="cmfuemr_box_referred_by">Referred by</h5>
         <div class="portletBody">
-            <a href="" tal:condition="python:referred" 
+            <a href="" tal:condition="python:referred"
                        tal:attributes="href python:referred.absolute_url()">
                 <span tal:content="string:${referred/getFirstName} ${referred/getLastName}" i18n:translate="">DoctorLastName, doctorFirstName</span>
             </a>

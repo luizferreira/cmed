@@ -7,12 +7,13 @@
 	tal:omit-tag=""
 	tal:define="portlet_data context/getChartNavigationEntries">
 
-	<div class="portlet" 
+	<div tal:condition="python:context.verifyRole(['Manager', 'Doctor', 'Transcriptionist'])"
+         class="portlet"
 		 id="portlet-navigation-tree"
 		 tal:define="patient context/getPatient;
 		 			 body_portlet_id string:${patient/id}_body_chartnavigation_portlet;
 		 			 portal_url python:context.getPortalURL">
-		
+
 		<div class="portletBody" id="body_chartnavigation_portlet"
 			tal:attributes="style python:context.showOrHidePortlet(body_portlet_id);
 							id body_portlet_id">

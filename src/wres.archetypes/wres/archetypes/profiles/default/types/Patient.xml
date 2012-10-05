@@ -14,7 +14,7 @@
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
 <!--
-    <element value="ChartFolder" />  
+    <element value="ChartFolder" />
 -->
   </property>
   <property name="allow_discussion">False</property>
@@ -28,11 +28,11 @@
   <alias from="edit" to="atct_edit" />
   <alias from="sharing" to="@@sharing" />
   <alias from="view" to="(selected layout)" />
-  <action title="View" action_id="view" category="object" condition_expr=""
+  <action title="Ver Dados Pessoais" action_id="view" category="object" condition_expr=""
     url_expr="string:${folder_url}/" visible="True">
     <permission value="wres.policy: View Patient" />
   </action>
-  <action title="Edit" action_id="edit" category="object" condition_expr=""
+  <action title="Editar Dados Pessoais" action_id="edit" category="object" condition_expr=""
     url_expr="string:${object_url}/edit" visible="True">
     <permission value="wres.policy: Edit Patient" />
   </action>
