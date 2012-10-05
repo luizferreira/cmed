@@ -481,3 +481,7 @@ o main.css.; */
     font-size: 13px;
 }
 
+li.actionSeparator {
+    display: none;
+}
+
