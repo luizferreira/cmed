@@ -1,13 +1,17 @@
 <html>
+<head>
+    <title>Comparação de imagens</title>
+
     <link type="text/css" href="galleryStyles.css" rel="stylesheet" />
     <link type="text/css" href="compare.css" rel="stylesheet" />
-<title></title>
-<head>
-    <title i18n:translate="cmfuemr_patient_search">Patient search</title>
+
+    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="jquery.pikachoose.mod.js"></script>
+    <script type="text/javascript" src="compare.js"></script>
 </head>
 <body>
     <div id="main_chart_print" 
-tal:define="ImagesAndFiles context/getUploadData;
+            tal:define="ImagesAndFiles context/getUploadData;
             images python:ImagesAndFiles[0];
             files  python:ImagesAndFiles[1];">
         <table id="table">
@@ -41,10 +45,22 @@ tal:define="ImagesAndFiles context/getUploadData;
                     </div>
                 </td>
             </tr>
+            <tr>            
+                <td><br/>Selecione:<br/>
+                    <span tal:repeat="image python:images">
+                        <input type="radio" class="left" name="left" tal:attributes="value python:image[0];
+                                                                        id  python:image[3]">
+                        <span tal:content="python:image[2]">nome da imagem</span><br/>
+                    </span><br/>
+                <td><br/>Selecione:<br/>
+                    <span tal:repeat="image python:images">
+                        <input type="radio" class="right" name="right" tal:attributes="value python:image[0];
+                                                                         id  python:image[3]">
+                        <span tal:content="python:image[2]">nome da imagem</span><br/>
+                    </span><br/>
+                </td>
+            </tr>
         </table>
     </div>
 </body>
-    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="jquery.pikachoose.mod.js"></script>
-    <script type="text/javascript" src="compare.js"></script>
 </html>

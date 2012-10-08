@@ -103,6 +103,7 @@ font-size: 80%;
 div.pika-stage {
     height: 350px;
     width: 500px;
+    min-height: 350px;
     padding: 5px 0px 5px 0px
 }
 
@@ -151,3 +152,18 @@ dl.portlet a:link {
 #pictures{display:none;}
 #pictures2{display:none;}
 
+div div.qq-upload-button {
+display: block;
+width: 105px;
+padding: 7px;
+text-align: center;
+background: #800;
+border-bottom: 1px solid #DDD;
+color: white;
+float: center; /*sobreescreve o float: right; do Plone*/
+cursor: pointer !important;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+margin: auto;
+}
