@@ -23,7 +23,7 @@ def getFilesAndImages(context):
         parts.pop(0)
         path = '/'.join(parts)
         date = brain.created.strftime("%y/%m/%d")
-        name = parts[-1]
+        name = parts[-1].split('.')[0]
         imagens.append((path,date,name,index))
         index = index + 1
 

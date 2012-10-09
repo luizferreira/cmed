@@ -6,235 +6,175 @@
 
 	<assignment remove="True" name="navigation" category="context" key="/"
 	manager="plone.leftcolumn" type="portlets.Navigation" />
-	
+
     <!-- login portlet in presentation and contact pages -->
     <assignment name="label_log_in" category="context" key="/" manager="plone.rightcolumn" type="portlets.Login" visible="True"/>
 
-    <assignment name="agenda_navigation" category="group" key="Secretary" 
+    <assignment name="agenda_navigation" category="group" key="Secretary"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">portlet</property>
         <property name="template">agenda_navigation_portlet</property>
     </assignment>
 
-    <assignment name="patient_portlet" category="content_type" key="Patient" 
-    manager="plone.leftcolumn" type="portlets.Classic">
-        <property name="macro">patient_portlet_macro</property>
-        <property name="template">patient_portlet</property>
-    </assignment>  
-
     <assignment name="upload" category="content_type" key="UploadChartFolder"
     manager="plone.rightcolumn" type="collective.quickupload.QuickUploadPortlet" visible="True">
         <property name="header">Envio Rápido de Arquivos</property>
-    </assignment>  
-    
+    </assignment>
+
     <assignment name="to_compare" category="content_type" key="UploadChartFolder"
     manager="plone.rightcolumn" type="portlets.Classic" visible="True">
         <property name="header">Ir para o modo Comparação de Imagens</property>
         <property name="macro">to_compare_macro</property>
         <property name="template">to_compare_portlet</property>
-    </assignment>  
+    </assignment>
 
-    <!-- inicio - associando o patient portlet ao prontuario -->
+    <!-- inicio - associando o patient portlet ao prontuario e paciente -->
 
-    <assignment name="patient_portlet" category="content_type" key="ChartFolder" 
+    <assignment name="patient_portlet" category="content_type" key="Patient"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">patient_portlet_macro</property>
         <property name="template">patient_portlet</property>
     </assignment>
-    
+
+    <assignment name="patient_portlet" category="content_type" key="ChartFolder"
+    manager="plone.leftcolumn" type="portlets.Classic">
+        <property name="macro">patient_portlet_macro</property>
+        <property name="template">patient_portlet</property>
+    </assignment>
+
     <assignment name="patient_portlet" category="content_type" key="DocumentFolder"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">patient_portlet_macro</property>
         <property name="template">patient_portlet</property>
-    </assignment>    
-    
+    </assignment>
+
     <assignment name="patient_portlet" category="content_type" key="UploadChartFolder"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">patient_portlet_macro</property>
         <property name="template">patient_portlet</property>
-    </assignment> 
+    </assignment>
 
    <assignment name="patient_portlet" category="content_type" key="MedicalDocument"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">patient_portlet_macro</property>
         <property name="template">patient_portlet</property>
-    </assignment>     
+    </assignment>
 
    <assignment name="patient_portlet" category="content_type" key="GenericDocument"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">patient_portlet_macro</property>
         <property name="template">patient_portlet</property>
-    </assignment>    
-    
+    </assignment>
+
    <assignment name="patient_portlet" category="content_type" key="Impresso"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">patient_portlet_macro</property>
         <property name="template">patient_portlet</property>
-    </assignment>          
+    </assignment>
 
-   <assignment name="patient_portlet" category="content_type" key="InitialVisit"
-    manager="plone.leftcolumn" type="portlets.Classic">
-        <property name="macro">patient_portlet_macro</property>
-        <property name="template">patient_portlet</property>
-    </assignment>  
-    
-   <assignment name="patient_portlet" category="content_type" key="ProgressNotes"
-    manager="plone.leftcolumn" type="portlets.Classic">
-        <property name="macro">patient_portlet_macro</property>
-        <property name="template">patient_portlet</property>
-    </assignment>  
-    
-   <assignment name="patient_portlet" category="content_type" key="DocBoletim"
-    manager="plone.leftcolumn" type="portlets.Classic">
-        <property name="macro">patient_portlet_macro</property>
-        <property name="template">patient_portlet</property>
-    </assignment>  
-    
-   <assignment name="patient_portlet" category="content_type" key="DocPlastica"
-    manager="plone.leftcolumn" type="portlets.Classic">
-        <property name="macro">patient_portlet_macro</property>
-        <property name="template">patient_portlet</property>
-    </assignment>                  
-    
-    <!-- fim - associando o patient portlet ao prontuario -->      
+    <!-- fim - associando o patient portlet ao prontuario -->
 
-    <!-- inicio - associando o allergies portlet ao prontuario -->
-	
-    <assignment name="allergies" category="content_type" key="ChartFolder" 
+    <!-- inicio - associando o allergies portlet ao prontuario e paciente -->
+
+    <assignment name="allergies" category="content_type" key="Patient"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">allergies</property>
         <property name="template">patient_chart_macros</property>
     </assignment>
 
-    <assignment name="allergies" category="content_type" key="DocumentFolder" 
+    <assignment name="allergies" category="content_type" key="ChartFolder"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">allergies</property>
         <property name="template">patient_chart_macros</property>
     </assignment>
-    
-    <assignment name="allergies" category="content_type" key="UploadChartFolder" 
-    manager="plone.leftcolumn" type="portlets.Classic">
-        <property name="macro">allergies</property>
-        <property name="template">patient_chart_macros</property>
-    </assignment>     
-    
-    <assignment name="allergies" category="content_type" key="MedicalDocument" 
-    manager="plone.leftcolumn" type="portlets.Classic">
-        <property name="macro">allergies</property>
-        <property name="template">patient_chart_macros</property>
-    </assignment>          
 
-    <assignment name="allergies" category="content_type" key="GenericDocument" 
+    <assignment name="allergies" category="content_type" key="DocumentFolder"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">allergies</property>
         <property name="template">patient_chart_macros</property>
-    </assignment> 
+    </assignment>
 
-    <assignment name="allergies" category="content_type" key="Impresso" 
+    <assignment name="allergies" category="content_type" key="UploadChartFolder"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">allergies</property>
         <property name="template">patient_chart_macros</property>
-    </assignment>     
+    </assignment>
 
-<!--     <assignment name="allergies" category="content_type" key="InitialVisit" 
+    <assignment name="allergies" category="content_type" key="MedicalDocument"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">allergies</property>
         <property name="template">patient_chart_macros</property>
-    </assignment>  
-    
-    <assignment name="allergies" category="content_type" key="ProgressNotes" 
+    </assignment>
+
+    <assignment name="allergies" category="content_type" key="GenericDocument"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">allergies</property>
         <property name="template">patient_chart_macros</property>
-    </assignment>  
-    
-    <assignment name="allergies" category="content_type" key="DocBoletim" 
+    </assignment>
+
+    <assignment name="allergies" category="content_type" key="Impresso"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">allergies</property>
         <property name="template">patient_chart_macros</property>
-    </assignment>  
-    
-    <assignment name="allergies" category="content_type" key="DocPlastica" 
-    manager="plone.leftcolumn" type="portlets.Classic">
-        <property name="macro">allergies</property>
-        <property name="template">patient_chart_macros</property>
-    </assignment>  -->     
+    </assignment>
 
     <!-- fim - associando o allergies portlet ao prontuario -->
-    
-    <!-- inicio - associando o chart navigation portlet ao prontuario -->
 
-    <assignment name="chart_navigation" category="content_type" key="ChartFolder" 
+    <!-- inicio - associando o chart navigation portlet ao prontuario e paciente -->
+
+    <assignment name="chart_navigation" category="content_type" key="Patient"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">portlet</property>
         <property name="template">chart_navigation</property>
     </assignment>
-    
+
+    <assignment name="chart_navigation" category="content_type" key="ChartFolder"
+    manager="plone.leftcolumn" type="portlets.Classic">
+        <property name="macro">portlet</property>
+        <property name="template">chart_navigation</property>
+    </assignment>
+
     <assignment name="chart_navigation" category="content_type" key="DocumentFolder"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">portlet</property>
         <property name="template">chart_navigation</property>
-    </assignment>    
-    
+    </assignment>
+
     <assignment name="chart_navigation" category="content_type" key="UploadChartFolder"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">portlet</property>
         <property name="template">chart_navigation</property>
-    </assignment>     
-    
+    </assignment>
+
     <assignment name="chart_navigation" category="content_type" key="MedicalDocument"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">portlet</property>
         <property name="template">chart_navigation</property>
-    </assignment>  
+    </assignment>
 
     <assignment name="chart_navigation" category="content_type" key="GenericDocument"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">portlet</property>
         <property name="template">chart_navigation</property>
-    </assignment>     
-    
+    </assignment>
+
     <assignment name="chart_navigation" category="content_type" key="Impresso"
     manager="plone.leftcolumn" type="portlets.Classic">
         <property name="macro">portlet</property>
         <property name="template">chart_navigation</property>
-    </assignment>          
-    
-    <assignment name="chart_navigation" category="content_type" key="InitialVisit"
-    manager="plone.leftcolumn" type="portlets.Classic">
-        <property name="macro">portlet</property>
-        <property name="template">chart_navigation</property>
-    </assignment>    
-    
-    <assignment name="chart_navigation" category="content_type" key="ProgresNotes"
-    manager="plone.leftcolumn" type="portlets.Classic">
-        <property name="macro">portlet</property>
-        <property name="template">chart_navigation</property>
-    </assignment>    
-                         
-    <assignment name="chart_navigation" category="content_type" key="DocBoletim"
-    manager="plone.leftcolumn" type="portlets.Classic">
-        <property name="macro">portlet</property>
-        <property name="template">chart_navigation</property>
-    </assignment> 
-    
-    <assignment name="chart_navigation" category="content_type" key="DocPlastica"
-    manager="plone.leftcolumn" type="portlets.Classic">
-        <property name="macro">portlet</property>
-        <property name="template">chart_navigation</property>
-    </assignment>    
+    </assignment>
 
     <!-- fim - associando o chart navigation portlet ao prontuario -->
 
     <assignment name="review-list" category="context" key="/"
     manager="plone.rightcolumn" type="portlets.Review" visible="True"/>
 
-    <blacklist category="group" location="/Patients" manager="plone.leftcolumn" status="block"/>   
-    <blacklist category="group" location="/Doctors" manager="plone.leftcolumn" status="block"/>   
-    <blacklist category="group" location="/Secretaries" manager="plone.leftcolumn" status="block"/>  
+    <blacklist category="group" location="/Patients" manager="plone.leftcolumn" status="block"/>
+    <blacklist category="group" location="/Doctors" manager="plone.leftcolumn" status="block"/>
+    <blacklist category="group" location="/Secretaries" manager="plone.leftcolumn" status="block"/>
     <blacklist category="group" location="/Insurances" manager="plone.leftcolumn" status="block"/>
     <blacklist category="group" location="/Ajuda" manager="plone.leftcolumn" status="block"/>
-    
-     
+
+
 
 </portlets>

@@ -4,6 +4,7 @@
 
     <link type="text/css" href="galleryStyles.css" rel="stylesheet" />
     <link type="text/css" href="compare.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="cmed.css" />
 
     <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="jquery.pikachoose.mod.js"></script>
@@ -46,13 +47,18 @@
                 </td>
             </tr>
             <tr>            
-                <td><br/>Selecione:<br/>
+                <td style="background: #2A5D7F; color: white; padding: 5px;">Selecione:</td>
+                <td style="background: #2A5D7F; color: white; padding: 5px;">Selecione:</td>
+            </tr>
+            <tr>
+                <td style="background: #DEE7EC;">
                     <span tal:repeat="image python:images">
                         <input type="radio" class="left" name="left" tal:attributes="value python:image[0];
                                                                         id  python:image[3]">
                         <span tal:content="python:image[2]">nome da imagem</span><br/>
                     </span><br/>
-                <td><br/>Selecione:<br/>
+                </td>
+                <td style="background: #DEE7EC;">
                     <span tal:repeat="image python:images">
                         <input type="radio" class="right" name="right" tal:attributes="value python:image[0];
                                                                          id  python:image[3]">
