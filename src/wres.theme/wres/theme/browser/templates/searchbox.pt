@@ -22,10 +22,10 @@
                                id search_input_id"
                class="searchField inputLabel" />
 
-        <input class="searchButton"
+<!--         <input class="searchButton"
                type="submit"
                value="Search"
-               i18n:attributes="value label_search;" />
+               i18n:attributes="value label_search;" /> -->
 
         <div class="searchSection">
             <input id="searchbox_currentfolder_only"
@@ -33,11 +33,10 @@
                    type="checkbox"
                    name="path"
                    tal:attributes="value view/folder_path"
+                   style="display:none"
                    />
-            <label for="searchbox_currentfolder_only"
-                   i18n:translate="label_searchbox_currentfolder_only"
-                   style="cursor: pointer">
-                only in current section
+            <label for="searchbox_currentfolder_only">
+                   Digite o nome (ou sobrenome).
             </label>
         </div>
 
