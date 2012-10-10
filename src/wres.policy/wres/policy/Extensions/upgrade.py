@@ -8,7 +8,6 @@ import os
 def main(self):
     if version == '0.0':
         raise Exception('You need to set the release version!')
-    import pdb; pdb.set_trace()
     export_dir = self.z_export(self, version)
     # export_dir = exporter.main(self, version)
     abs_export_dir = os.path.abspath(export_dir)
