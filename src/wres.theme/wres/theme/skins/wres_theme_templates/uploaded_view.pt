@@ -27,7 +27,7 @@
 <body>
 
 <div metal:fill-slot="main" id="main_chart_print" 
-tal:define="urls context/getUploadData" >
+        tal:define="urls context/getUploadData" >
 
 <table>
     <tr>

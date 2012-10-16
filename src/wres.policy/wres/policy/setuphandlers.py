@@ -373,8 +373,8 @@ def addUpgradeExternalMethods(portal):
     add upgrade external methods in site root.
     '''
     from Products.ExternalMethod.ExternalMethod import manage_addExternalMethod
-    manage_addExternalMethod(portal, '0_upgrade', 'Upgrade (Export/Import) Cmed', 'wres.policy.upgrade', 'main')
-    manage_addExternalMethod(portal, '0_generic_upgrade', 'Manual Upgrade Cmed', 'wres.policy.generic_upgrade', 'main')
+    manage_addExternalMethod(portal, '0_upgrade', 'Cmed Upgrade', 'wres.policy.upgrade', 'main')
+    manage_addExternalMethod(portal, '1_generic_upgrade', 'Cmed Manual Upgrade', 'wres.policy.generic_upgrade', 'main')
     manage_addExternalMethod(portal, 'z_export', 'Export Cmed', 'wres.policy.exporter', 'main')
     manage_addExternalMethod(portal, 'z_import', 'Import Cmed', 'wres.policy.importer', 'main')
 

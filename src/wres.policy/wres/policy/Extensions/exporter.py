@@ -44,6 +44,31 @@ def export_members(plone, export_dir, verbose):
         print >>fp
     fp.close()
 
+def export_vocabulary(plone, export_dir):
+    '''
+    exports vocabulary tool.
+    '''
+
+    print 'Exporting Vocabularies'
+    fp = file(os.path.join(export_dir, 'vocabulary.ini'), 'w')
+
+    vt = plone.vocabulary_tool
+    vocabs = []
+    attr_list = dir(vt)[-30:-15]
+    for attr in attr_list:
+        if attr.find('vocab_') != -1 and attr.find('CID') == -1 and attr.find('DEF') == -1:
+            vocabs.append(attr)
+    for vocab in vocabs:
+        vocab_name = vocab.split('vocab_')[1]
+        words = vt.get_vocabulary(vocab_name)
+        print >>fp, '['+vocab+']'
+        print >>fp, 'name = %s' % vocab_name
+        print >>fp, 'words = %s' % words
+        print >>fp
+
+    fp.close()
+
+
 class Validation(object):
 
     def __init__(self, export_dir):
@@ -495,6 +520,7 @@ def main(self, version='0_0_0'):
     newSecurityManager(None, user.__of__(uf))
 
     export_members(plone, export_dir, verbose)
+    export_vocabulary(plone, export_dir)
 
     # call exporters for each handler previusly registered.
     for portal_type in handlers:

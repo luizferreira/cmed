@@ -97,6 +97,22 @@ def import_members(plone, import_dir, verbose):
                                         fullname=get(section, 'fullname'),
                                   ))
 
+def import_vocabulary(plone, import_dir):
+
+    print 'Importing vocabularies'
+
+    vt = plone.vocabulary_tool    
+
+    vocab_ini = os.path.join(import_dir, 'vocabulary.ini')
+
+    CP = ConfigParser()
+    CP.read([vocab_ini])
+    get = CP.get
+    for section in CP.sections():
+        name = get(section, 'name')
+        words = eval(get(section, 'words'))
+        vt._persist_vocabulary_manager('vocab_'+name, words)
+
 def search_catalog_by_id(id):
     portal = getSite()
     catalog = portal.portal_catalog
@@ -461,8 +477,6 @@ class PatientHandler(BaseHandler):
             pass # patient photo is the default photo. 
         chart_dic = eval( self.cfg.get(section, 'chartdata') )
         obj.import_chartdata(chart_dic) # there is a method in Patient to handle the chartdata import
-        ev_list = eval( self.cfg.get(section, 'events') )
-        import_events(obj, ev_list)
         obj.at_post_create_script()
         obj.reindexObject()
 
@@ -561,15 +575,25 @@ class FileHandler(BaseHandler):
 
 registerHandler(FileHandler)
 
-def import_events(patient, ev_list):
-    for event in ev_list:
-        if event['related_obj'] is 'ChartItemEventWrapper':
-            dummy = {}
-            dummy['medication'] = dummy['problem'] = dummy['allergy'] = dummy['exam'] = event['title']
-            wrapper = ChartItemEventWrapper(event['mapping_name'], patient, **dummy)
-            patient.create_event(event['type'], DateTime(event['date']), wrapper)
-        else:
-            patient.create_event(event['type'], DateTime(event['date']), search_catalog_by_id(event['related_obj']))
+def import_events(import_dir):
+
+    print 'Importing events'
+
+    events_file = os.path.join(import_dir, 'patients.ini')
+
+    CP = ConfigParser()
+    CP.read([events_file])
+    get = CP.get
+    for section in CP.sections():
+        ev_list = eval(get(section, 'events'))
+        for event in ev_list:
+            if event['related_obj'] is 'ChartItemEventWrapper':
+                dummy = {}
+                dummy['medication'] = dummy['problem'] = dummy['allergy'] = dummy['exam'] = event['title']
+                wrapper = ChartItemEventWrapper(event['mapping_name'], patient, **dummy)
+                patient.create_event(event['type'], DateTime(event['date']), wrapper)
+            else:
+                patient.create_event(event['type'], DateTime(event['date']), search_catalog_by_id(event['related_obj']))
 
 def import_plone(self, import_dir, version, verbose=False):
     '''
@@ -590,6 +614,7 @@ def import_plone(self, import_dir, version, verbose=False):
     print 'Products: %s' % ','.join(products)
     print 'Profiles: %s' % profiles
 
+    import_vocabulary(plone, import_dir)
     import_members(plone, import_dir, verbose)
     transaction.commit()
 
@@ -601,6 +626,8 @@ def import_plone(self, import_dir, version, verbose=False):
         handler = handler(plone, import_dir, fname, verbose) # init handler
         handler() # run it
         transaction.commit()
+
+    import_events(import_dir)
 
     # fixup(plone)
     print 'Building relations'
