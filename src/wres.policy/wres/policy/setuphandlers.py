@@ -442,11 +442,25 @@ def parseFirstDoctorInputFile(infile):
     if len(lines) < 2:
         return None
     dic = {}
+    # if communimed site register form changes, this list will probably have to be updated.
+    keys = ['Nome Completo', 'CRM', 'Telefone de Contato', 'Seu endereço de e-mail', 'Confirmação do e-mail', 'Especialidade 1', 'Especialidade 2', 'Quero o meu site profissional', 'Nome da Clínica/Consultório', 'Avenida/Rua', 'Número', 'Complemento', 'Cidade', 'Estado', 'Telefone', 'E-mail', 'Como nos conheceu?']
+    for key in keys:
+        dic[key] = None
+
     for i in range(len(lines)):
-        if i % 2 == 0:
-            lines[i] = lines[i].replace('\n', '')
-            lines[i+1] = lines[i+1].replace('\n', '')
-            dic[lines[i]] = lines[i+1]
+        lines[i] = lines[i].replace('\n', '')
+        if lines[i] in dic.keys():
+            try:
+                # remove \n from next line.
+                lines[i+1] = lines[i+1].replace('\n', '')
+                # maybe the next line is a form label (in case the current label was left blank)
+                if lines[i+1] in dic.keys():
+                    continue
+                else:
+                    dic[lines[i]] = lines[i+1]
+            except IndexError:
+                # the IndexError indicates that the list is over, nothing to do here.
+                pass
     return dic
 
 def setupVarious(context):
@@ -532,3 +546,4 @@ def setupVarious(context):
         addUpgradeExternalMethods(portal)
         addExampleTemplate(portal)
         createGroups(portal)
+
