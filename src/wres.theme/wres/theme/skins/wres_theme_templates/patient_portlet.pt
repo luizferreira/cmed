@@ -21,7 +21,7 @@
             <tr>
                 <td width="110px" height="80px">
                     <tal tal:condition="photo">
-                        <img width="70%" height="100%" tal:attributes="src python:photo.absolute_url();
+                        <img width="100%" height="100%" tal:attributes="src python:photo.absolute_url();
                         alt photo/alt;
                         title photo/alt"/>
                     </tal>
@@ -30,7 +30,7 @@
                     </tal>  
                 </td>
                 
-                <td style="vertical-align:top; font-size:12px; line-height:165%">
+                <td style="vertical-align:top; font-size:12px; line-height:165%; padding-left:10px;">
                     <div style="font-weight:bold" tal:content="title"> </div>
                     <div tal:condition="bdate" style="font-style:italic">
                         <span tal:content="python:bdate.strftime('%d/%m/%Y')"> 01/01/1990 </span>
