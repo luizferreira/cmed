@@ -2,6 +2,7 @@
 <metadata>
 	<version>1000</version>
 	<dependencies>
+		<dependency>profile-j3c.jbot:default</dependency>
 		<dependency>profile-Solgema.fullcalendar:default</dependency>
 		<dependency>profile-Products.DataGridField:default</dependency>
 		<dependency>profile-collective.quickupload:default</dependency>	
