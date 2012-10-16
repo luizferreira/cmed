@@ -19,9 +19,9 @@
 
         <table>
             <tr>
-                <td width="110px" height="80px">
+                <td >
                     <tal tal:condition="photo">
-                        <img width="100%" height="100%" tal:attributes="src python:photo.absolute_url();
+                        <img tal:attributes="src python:photo.absolute_url();
                         alt photo/alt;
                         title photo/alt"/>
                     </tal>
