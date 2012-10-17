@@ -550,7 +550,7 @@ DEMOGRAPHIC = Schema((
     ),
     
    ImageField('photo',
-       max_size=(150,150),
+       max_size=(110,110),
        widget=ImageWidget(
 	       label='Foto',
         ),

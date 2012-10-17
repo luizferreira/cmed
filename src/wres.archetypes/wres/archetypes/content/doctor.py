@@ -6,7 +6,6 @@ from zope.app.component.hooks import getSite
 from Products.CMFPlone.utils import _createObjectByType
 from zope.interface import implements
 from AccessControl import ClassSecurityInfo, AuthEncoding
-import logging
 
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import schemata
@@ -17,7 +16,7 @@ from wres.archetypes.interfaces import IDoctor
 from wres.archetypes.config import PROJECTNAME
 from wres.archetypes.content.schemas.doctor import DoctorSchema
 from wres.policy.utils.roles import DOCTOR_GROUP
-
+from wres.policy.utils.utils import asc2Filter
 
 schemata.finalizeATCTSchema(
     DoctorSchema,
@@ -71,18 +70,18 @@ class Doctor(wresuser.WRESUser):
 
     meta_type = "Doctor"
     schema = DoctorSchema
-    
-    security = ClassSecurityInfo() 
-    
+
+    security = ClassSecurityInfo()
+
     security.declarePublic('add_visits_folder')
     def add_visits_folder(self):
         ''' adiciona a pasta onde serao colocadas as consultas do medico e tambem a colecao onde sera
         colocado o calendario '''
         user_id = self.getId()
-        
+
         portal = getSite()
 
-        # cria a pasta de visitas e coloca permissao 'Add portal content' (checada pelo solgema antes 
+        # cria a pasta de visitas e coloca permissao 'Add portal content' (checada pelo solgema antes
         # de adicionar uma visita no calendário) apenas para Secretary, Manager e Owner. Logo depois,
         # muda-se o owner da pasta doctor_visits para o médico reponsável para que o mesmo possa
         # adicionar visitas no seu calendário.
@@ -117,14 +116,14 @@ class Doctor(wresuser.WRESUser):
         # criteria2.setValue(user_id)
         criteria2 = collection.addCriterion('path', 'ATRelativePathCriterion')
         criteria2.relativePath = '..'
-        criteria3 = collection.addCriterion('Subject', 'ATSelectionCriterion')       
+        criteria3 = collection.addCriterion('Subject', 'ATSelectionCriterion')
         criteria3.setValue('CalendarShow')
         # (Maio/2012) TODO: Limpar
         # doctor_visits.setLayout('Agenda')
 
     def at_post_create_script(self, migration=False):
         wresuser.WRESUser.at_post_create_script(self)
-        
+
         # Anonymous need to have View permission here in order to see the initial page (doctor_presentation).
         # remember that depending in what was done in setuphandlers, the anonymous will not be able to see neither.
         # This is controlled by the field 'Quero meu site profissional' in registration form.
@@ -132,14 +131,14 @@ class Doctor(wresuser.WRESUser):
 
         self.add_visits_folder()
         if not migration:
-            self.setSignPassword('senha1') #TODO gerar uma assinatura padrao randomica              
-        
+            self.setSignPassword('senha1') #TODO gerar uma assinatura padrao randomica
+
     def at_post_edit_script(self):
         wresuser.WRESUser.at_post_edit_script(self)
 
     def getGroup(self):
         return DOCTOR_GROUP
-    
+
     security.declarePublic('Title')
     def Title(self):
         """ """
@@ -154,33 +153,8 @@ class Doctor(wresuser.WRESUser):
         Ex output:
             return 'Lucio Gama'
         """
-        title = self.Title()
-        # maybe char_map will have to be incremented in future. 
-        char_map = {'á':'a', 'â':'a', 'ã':'a', 'é':'e', 'ê':'e', 'í':'i', 'ó':'o', 'ô':'o', 'ú':'u'}
-        new_title = ''
-        i = 0
-        while i < len(title):
-            if ord(title[i]) == 195: #identifies a non asc2 character
-                try:
-                    character = title[i:i+2]
-                except:
-                    raise Exception('Sorry, I supposed char ord=195 always preceds another char')
-                if character in char_map:
-                    new_title += char_map[character]
-                else:
-                    logging.warn("'Pegue o pombo!' Special character passed (not in char_map)!")
-                i += 1 # used to jump 2, since special chars have lenght 2.
-            else:
-                new_title += title[i]
-            i += 1
+        return asc2Filter(self.Title())
 
-        # verifying
-        try: 
-            new_title.decode('ascii')
-        except UnicodeDecodeError:
-            logging.warn("Sorry, seems to me that some non asc2 char passed, this will cause problmes later!")
-        return new_title        
-    
     def get_home_url(self):
         portal = getSite()
         return '/'.join(portal.getPhysicalPath()) + '/Appointments/sec_desk'
@@ -188,7 +162,7 @@ class Doctor(wresuser.WRESUser):
     def getAppointmentsURL(self):
         portal = getSite()
         return portal.absolute_url_path() + '/Appointments/' + self.getId() + '/Agenda'
-    
+
     def validateSignPassword(self, typed_pass):
         sign_password = self.getSignPassword()
         password_matches = AuthEncoding.pw_validate(sign_password, typed_pass)
@@ -209,7 +183,7 @@ class Doctor(wresuser.WRESUser):
         Used in doctor_presentaion (doctor_presentaion.py) to pass throgh an unauthorized.
         '''
         return self.schema.fields()
-    
+
     def fillFirstDoctorInfo(self, info):
         '''
         Used to fill information about the first system doctor. That information is collected
