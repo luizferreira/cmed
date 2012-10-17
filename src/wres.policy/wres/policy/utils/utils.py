@@ -2,7 +2,6 @@
 
 from DateTime import DateTime
 from datetime import datetime
-from datetime import timedelta
 from Products.CMFCore.utils import getToolByName
 from Products.Archetypes.atapi import *
 from zope.app.component.hooks import getSite
@@ -14,12 +13,14 @@ from Products.Archetypes.utils import DisplayList
 from Products.Archetypes.Registry import setSecurity
 from Products.Archetypes.interfaces.vocabulary import IVocabulary
 
+import logging
+
 #===============================================================================
 # Esse método é necessário para contornar o validador que define que startDate precisa
 # ser menor que endDate.
 # Luiz
 #===============================================================================
-def endDateDefaultMethod(): 
+def endDateDefaultMethod():
     return DateTime(2100, 1, 1)
 
 #===============================================================================
@@ -29,7 +30,7 @@ def endDateDefaultMethod():
 # schema base, de onde serão tirados os campos desnecessários. Obs. Essa função
 # foi criada para ser utilizada com schemas do baseados no ATFolderSchema, que
 # é o caso do WRESUserSchema.
-# non_eclude_schematas: lista de schematas dentre os default que nao eh para 
+# non_eclude_schematas: lista de schematas dentre os default que nao eh para
 #   retirar.
 # non exclude_fields: lista de fields dentro dos schematas default que nao eh
 #   para retirar.
@@ -48,26 +49,26 @@ def finalizeSchema(baseSchema, type='None', non_exclude_schematas=[], non_exclud
                                     visible={'edit':'invisible',
                                              'view':'invisible'})
 
-    
+
     newSchema['description'].widget = TextAreaWidget(
                                                     label=_(u'label_description', default=u'Description'),
                                                     description=_(u'help_description',
                                                         default=u'Used in item listings and search results.'),
                                                     rows='2',
                                                     )
-                                                    
+
 
     #- Esconde os fields dos schematas default, categorization, dates, ownership
     #---------------------------------------------------------------- e settings
-    
+
     # Esconde os fields dos schematas default, categorization, date, ownership
     # e settings.
-    
+
     if type == 'Visit':
         fields = newSchema.getSchemataFields('default')
         for field in fields:
-            field_name = field.getName() 
-            if field_name is not 'startDate' and field_name is not 'endDate': 
+            field_name = field.getName()
+            if field_name is not 'startDate' and field_name is not 'endDate':
                 field.widget.visible = {'edit': 'invisible', 'view': 'invisible'}
             else:
                 if field_name is 'startDate':
@@ -96,30 +97,30 @@ def finalizeSchema(baseSchema, type='None', non_exclude_schematas=[], non_exclud
                 if field not in non_exclude_fields:
                     field.widget.visible = {'edit': 'invisible', 'view': 'invisible'}
 
-    if 'categorization' not in non_exclude_schematas:        
+    if 'categorization' not in non_exclude_schematas:
         fields = newSchema.getSchemataFields('categorization')
         for field in fields:
             if field not in non_exclude_fields:
                 field.widget.visible = {'edit': 'invisible', 'view': 'invisible'}
-        
-    if 'dates' not in non_exclude_schematas:            
+
+    if 'dates' not in non_exclude_schematas:
         fields = newSchema.getSchemataFields('dates')
         if field not in non_exclude_fields:
             for field in fields:
                 field.widget.visible = {'edit': 'invisible', 'view': 'invisible'}
-    
-    if 'ownership' not in non_exclude_schematas:                        
+
+    if 'ownership' not in non_exclude_schematas:
         fields = newSchema.getSchemataFields('ownership')
         if field not in non_exclude_fields:
             for field in fields:
-                field.widget.visible = {'edit': 'invisible', 'view': 'invisible'} 
-    
-    if 'settings' not in non_exclude_schematas:        
+                field.widget.visible = {'edit': 'invisible', 'view': 'invisible'}
+
+    if 'settings' not in non_exclude_schematas:
         fields = newSchema.getSchemataFields('settings')
         if field not in non_exclude_fields:
             for field in fields:
-                field.widget.visible = {'edit': 'invisible', 'view': 'invisible'}                               
-        
+                field.widget.visible = {'edit': 'invisible', 'view': 'invisible'}
+
     return newSchema
 
 #===============================================================================
@@ -139,18 +140,48 @@ def createVisitObject(context, id):
     visit = Visit(id)
     return visit.__of__(context)
 
+def asc2Filter(string):
+    '''
+    transform a string to asc2. Ex:
+    if string = 'jassumção', returns jassumpcao.
+    '''
+    char_map = {'á':'a', 'â':'a', 'ã':'a', 'é':'e', 'ê':'e', 'í':'i', 'ó':'o', 'ô':'o', 'ú':'u', 'ç':'c'}
+    new_string = ''
+    i = 0
+    while i < len(string):
+        if ord(string[i]) == 195: #identifies a non asc2 character
+            try:
+                character = string[i:i+2]
+            except:
+                raise Exception('Sorry, I supposed char ord=195 always preceds another char')
+            if character in char_map:
+                new_string += char_map[character]
+            else:
+                logging.warn("'Pegue o pombo!' Special character passed (not in char_map)!")
+            i += 1 # used to jump 2, since special chars have lenght 2.
+        else:
+            new_string += string[i]
+        i += 1
+
+    # verifying
+    try:
+        new_string.decode('ascii')
+    except UnicodeDecodeError:
+        logging.warn("Sorry, seems to me that some non asc2 char passed, this will cause problmes later!")
+    return new_string
+
 def create_base_of_id(first_name, last_name):
     """ Essa função cria o id do usuário com base
     no seu nome e sobrenome
     Chamada por create_id()
     """
+    first_name, last_name = (asc2Filter(first_name.lower()), asc2Filter(last_name.lower()))
     import re
     pattern = re.compile('[a-z\d]')
     filter_func = lambda c: re.match(pattern, c)
-    fname_filtered = filter(filter_func, first_name.lower())
-    lname_filtered = filter(filter_func, last_name.lower())
+    fname_filtered = filter(filter_func, first_name)
+    lname_filtered = filter(filter_func, last_name)
     return fname_filtered[:1] + lname_filtered
-
 
 def create_valid_user_id(portal_registration, first_name, last_name):
     """ Essa função testa se o id já está em uso e caso
@@ -317,14 +348,14 @@ def mk2d(num):
         return '0%s' % num
     else:
         return str_num
-    
+
 def getFieldVocabularyValue(obj, field_id):
     field = obj.getField(field_id)
     accessor_id = field.accessor
     accessor = obj[accessor_id]
     vocabulary = field.Vocabulary(obj)
     return vocabulary.getValue(accessor())
-    
+
 # Retorna um nome pre-definido associado ao vocabulario;
 # Se o usuario define um outro nome, esse valor e retornado do field
 def getFieldVocabularyName(obj, field_id):
@@ -346,7 +377,7 @@ def getRecordSubfieldDisplayValue(obj, field_id, subfield_id, key, default=None)
 def canSignPn(self, doctor, entered_passwd):
     error = doctor.validateSignPassword(entered_passwd)
     return error == None
-    
+
 class DayInformation:
     def __init__(self, date_inf):
         self._date_inf = date_inf
@@ -451,7 +482,7 @@ class SlotInformation:
 
     def getActivityName(self):
         return self._activity_name
-    
+
     def setActivity(self, activity):
         self._activity = activity
 
@@ -472,7 +503,7 @@ class SlotInformation:
 
 def getTypesOfDocument(self):
     mapping = {}
-    
+
     def addEntry(specialty, key, value, display):
         if not 'neutro' in mapping:
             mapping['neutro'] = {}
@@ -508,7 +539,7 @@ def getTypesOfDocument(self):
     types_of_document = types_by_specialty.get(obj_id, [])
 
     return types_of_document
-    
+
 #==========================================================================================================
 #A função abaixo é uma aproximação da real idade da pessoa, mas não conta com tratamento para anos bisextos
 #Nao pode ser usada para validações
@@ -518,13 +549,13 @@ def getPatientAge(BirthDate):
     a = datetime.strptime(BirthDate.strftime("%Y/%m/%d"),"%Y/%m/%d")
     b = datetime.now()
     c = b - a
-    return c.days/365 
-    
+    return c.days/365
+
 #Custom DisplayList usada em MultipleCheckboxWidget
 class MyDisplayList:
 
     __implements__ = (IVocabulary,)
-    
+
     def __init__(self, tuples):
         self.tuples = tuples
 

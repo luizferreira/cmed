@@ -463,6 +463,32 @@ def parseFirstDoctorInputFile(infile):
                 pass
     return dic
 
+def createFirstDoctor(portal, context):
+    '''
+    if there is a doctor in firstdoctor_info.txt, then this functino creates that doctor.
+    '''
+    from wres.policy.utils.utils import create_base_of_id
+    # read firstdoctor_info and create a doctor if there is information there.
+    infile = context.openDataFile('firstdoctor_info.txt')
+    doctor_info = parseFirstDoctorInputFile(infile)
+    full_name = doctor_info['Nome Completo'].split(' ')
+    firstname = full_name[0].lower(); lastname = full_name[-1].lower()
+    doctor_id = create_base_of_id(firstname, lastname)
+
+    if doctor_info is not None:
+        doctor_folder = getattr(portal, 'Doctors')
+        clinic = getattr(portal, 'Clinic')
+        if not int(doctor_info['Quero o meu site profissional']):
+            # removing permissions from anonymous, so he cant see initial page anymore.
+            doctor_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
+            clinic.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE, ANONYMOUS_ROLE], acquire = False)
+            doctor_folder.reindexObject()
+        doctor = getOrCreateType(portal, doctor_folder, doctor_id, 'Doctor')
+        doctor.fillFirstDoctorInfo(doctor_info)
+        clinic.fillClinicInformation(doctor_info)
+        doctor.reindexObject()
+        clinic.reindexObject()
+
 def setupVarious(context):
     """ Funcao generica executada na instalacao do wres policy """
 
@@ -482,27 +508,8 @@ def setupVarious(context):
 
     if context.readDataFile('wres.policy_various.txt') is not None:
         print '********************************ACHEI O TXT***********************************'
-        # read firstdoctor_info and create a doctor if there is information there.
-        infile = context.openDataFile('firstdoctor_info.txt')
-        doctor_info = parseFirstDoctorInputFile(infile)
-        full_name = doctor_info['Nome Completo'].split(' ')
-        firstname = full_name[0].lower(); lastname = full_name[-1].lower()
-        doctor_id = firstname[0] + lastname
 
-        if doctor_info is not None:
-            doctor_folder = getattr(portal, 'Doctors')
-            clinic = getattr(portal, 'Clinic')
-            if not int(doctor_info['Quero o meu site profissional']):
-                # removing permissions from anonymous, so he cant see initial page anymore.
-                doctor_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
-                clinic.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE, ANONYMOUS_ROLE], acquire = False)
-                doctor_folder.reindexObject()
-            doctor = getOrCreateType(portal, doctor_folder, doctor_id, 'Doctor')
-            doctor.fillFirstDoctorInfo(doctor_info)
-            clinic.fillClinicInformation(doctor_info)
-            doctor.reindexObject()
-            clinic.reindexObject()
-
+        createFirstDoctor(portal, context)
         loadDocumentTypesVocabulary(portal)
         loadImpressoTypesVocaburary(portal)
         loadVisitVocabularies(portal)

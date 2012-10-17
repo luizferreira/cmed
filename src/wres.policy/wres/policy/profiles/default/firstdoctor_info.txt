@@ -1,34 +1,33 @@
 Nome Completo
-Commmuni Teste
+Jairo de Oliveira Assumpção
 CRM
-1234567890
+54227
 Telefone de Contato
-3136612345
+19-34625681
 Seu endereço de e-mail
-suporte@communi.com.br
+jairo.assumpcao@yahoo.com.br
 Confirmação do e-mail
-suporte@communi.com.br
+jairo.assumpcao@yahoo.com.br
 Especialidade 1
-Cardiologia
+Psiquiatria
 Especialidade 2
-Clínica geral
+Não Selecionada
 Quero o meu site profissional
-1
+0
 Nome da Clínica/Consultório
-CommuniMed
+Clíca Saúde Mental Assumpção Ltda
 Avenida/Rua
-Av. Afonso Pena
+Rua Luiza Meneghel Mancini
 Número
-1500
+112
 Complemento
-Sala 404A
 Cidade
-Belo Horizonte
+Americana
 Estado
-MG
+SP
 Telefone
-313334-4444
+19-34625681
 E-mail
-aa@aa.com
+jairo.assumpcao@yahoo.com.br
 Como nos conheceu?
 Sites de Busca
