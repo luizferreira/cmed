@@ -1,6 +1,5 @@
 ##bind context=context
 from Products.CMFCore.utils import getToolByName
-from DateTime import DateTime
 
 pc = getToolByName(context, 'portal_catalog')
 imagens = []
@@ -17,15 +16,25 @@ def getFilesAndImages(context):
     portal = context.getPortal()
     patientPath = '/' + portal.getId() + '/Patients/' + getPatientId(context) + '/'
     brains = pc.search({'portal_type': 'Image','path': patientPath})
+    index = 0
     for brain in brains:
-        imagePath = portal.absolute_url() + brain.getPath().replace("/"+portal.getId(),"")
+        parts = brain.getPath().split("/")
+        parts.pop(0)
+        parts.pop(0)
+        path = '/'.join(parts)
         date = brain.created.strftime("%y/%m/%d")
-        imagens.append((imagePath,date))
+        name = parts[-1].split('.')[0]
+        imagens.append((path,date,name,index))
+        index = index + 1
 
     #Get Other Files
     brains += pc.search({'portal_type': 'File','path': patientPath})
     for brain in brains:
-        filePath = portal.absolute_url() + brain.getPath().replace("/"+portal.getId(),"")
+        parts = brain.getPath().split("/")
+        parts.pop(0)
+        parts.pop(0)
+        path = '/'.join(parts)
+        filePath = portal.absolute_url() + path
         name = brain.Title
         icon = brain.getIcon
         file = (filePath,name,icon)

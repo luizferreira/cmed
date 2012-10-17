@@ -12263,3 +12263,6 @@ msgstr "Não selecionado"
 
 msgid "Presentation"
 msgstr "Apresentação"
+
+msgid "Object"
+msgstr "Objeto"

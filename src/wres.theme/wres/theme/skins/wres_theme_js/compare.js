@@ -1,26 +1,40 @@
 $(document).ready(function (){
-					$("#pictures").PikaChoose({carouselVertical:true,autoPlay:false});
-                    $("#pictures2").PikaChoose({carouselVertical:true,autoPlay:false});
-                
-                //Add class to big images
-                $("#gallery1").find("img").first().attr("class","changed1");
-                $("#gallery2").find("img").first().attr("class","changed2");
-                });
+		$("#pictures").PikaChoose({carouselVertical:true,autoPlay:false});
+        $("#pictures2").PikaChoose({carouselVertical:true,autoPlay:false});
+    
+        //Add class to big images
+        $("#gallery1").find("img").first().attr("class","changed1");
+        $("#gallery2").find("img").first().attr("class","changed2");
+
+        $("input:radio").change(function(){
+            // alert($("#gallery1").html());
+            if (this.name == "left") {
+                $("#pictures").data("pikachoose").GoTo(this.id);
+            }
+            if (this.name == "right") {
+                $("#pictures2").data("pikachoose").GoTo(this.id);
+            }
+        
+        });
+    });
+
     //Add class to chosen image
      $(window).load(function() {
+       $(".left").first().attr("checked", "1");
+       $(".right").first().attr("checked", "1");
         
-               $("#gallery1").find(".clip").click(function(){
-                    $(".changed1").attr("class","");
-                    var imageTag = $("#gallery1").find("img").first();
-                    imageTag.attr("class","changed1");
-                    });
-                    
-                $("#gallery2").find(".clip").click(function(){
-                    $(".changed2").attr("class","");
-                    var imageTag = $("#gallery2").find("img").first();
-                    imageTag.attr("class","changed2");
-                    }); 
+       $("#gallery1").find(".clip").click(function(){
+            $(".changed1").attr("class","");
+            var imageTag = $("#gallery1").find("img").first();
+            imageTag.attr("class","changed1");
             });
+            
+        $("#gallery2").find(".clip").click(function(){
+            $(".changed2").attr("class","");
+            var imageTag = $("#gallery2").find("img").first();
+            imageTag.attr("class","changed2");
+            }); 
+    });
 
 function changeName(){
                     images = $("#gallery1")[0].getElementsByTagName("a");
