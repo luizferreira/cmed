@@ -22,21 +22,20 @@
 
 <body>
 
-<div metal:fill-slot="main" id="main_chart_print"   
+<div metal:fill-slot="main" id="main_chart_print"
 	tal:define="
             title context/getFullName;
             id context/getId;
             script context/patient_view_script;
             patient context/getPatient;
             photo patient/photo | nothing">
-        
+
     <center>
     	<div id="day_buttons_div">
             <a>	<span class="botao" id="principal_button">&nbsp;Principal&nbsp;</span> </a> -
             <a> <span class="botao" id="complementar_button">&nbsp;Complementar&nbsp;</span> </a> -
-            <a>	<span class="botao" id="plano_button">&nbsp;Plano&nbsp;</span> </a> - 
             <a> <span class="botao" id="demografico_button">&nbsp;Demográfico&nbsp;</span> </a>
-        </div> 
+        </div>
 <!--
     FieldSet Basico
 -->
@@ -58,7 +57,7 @@
                                     </div>
                                     <td>
                                         <span class="dado"><metal:macro use-macro="python: context.widget(field.getName(),mode='view')" /></span>
-                                            
+
                                 </td>
                             </tal:def>
                         </tal:for3>
@@ -72,7 +71,7 @@
                                     </div>
                                     <td>
                                         <span class="dado"><metal:macro use-macro="python: context.widget(field.getName(),mode='view')" /></span>
-                                            
+
                                 </td>
                             </tal:def>
                         </tal:for3>
@@ -82,7 +81,7 @@
             </fieldset>
         </div   >
     </tal:for>
-	
+
 </center>
 </div>
 </body>
