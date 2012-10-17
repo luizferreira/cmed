@@ -15,6 +15,7 @@
         <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
         <script type="text/javascript" src="jquery.pikachoose.mod.js"></script>
         <script type="text/javascript" src="upload_view.js"></script>
+        <script type="text/javascript" src="chart.js"></script>
     </metal:block>
     
 <head>
