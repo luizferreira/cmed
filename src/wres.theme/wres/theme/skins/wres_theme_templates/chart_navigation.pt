@@ -7,7 +7,7 @@
 	tal:omit-tag=""
 	tal:define="portlet_data context/getChartNavigationEntries">
 
-	<div tal:condition="python:context.verifyRole(['Manager', 'Doctor', 'Transcriptionist'])"
+	<div tal:condition="python:context.verifyRole(['Manager', 'Doctor', 'Transcriptionist']) and 'portal_factory' not in context.getPhysicalPath()"
          class="portlet"
 		 id="portlet-navigation-tree"
 		 tal:define="patient context/getPatient;
@@ -39,7 +39,7 @@
 						<div tal:repeat="link group/links">
 							<a style="padding-left: 0.5em;display:block"
 								tal:attributes="href link/href;id link/id">
-                                <div class="navconteudo">
+                                <div class="navconteudo" tal:attributes="id link/temp">
                                     <img tal:attributes="src string:${here/portal_url}/${link/icon}" />
                                     &nbsp;
                                     <span tal:attributes="class link/css"

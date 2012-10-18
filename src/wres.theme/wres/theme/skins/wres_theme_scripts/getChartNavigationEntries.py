@@ -18,6 +18,7 @@ def addLink(group, text, href, icon='document_icon.gif'):
         css = ''
     group['links'].append({'text': text,
                            'href': base + href,
+                           'temp': link_template,
                            'icon': icon,
                            'css': css,
                            'id' : id,

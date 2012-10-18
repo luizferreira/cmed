@@ -9,11 +9,12 @@
       
 <head>
     <metal:block fill-slot="style_slot">
-            <link rel="stylesheet" type="text/css" href="cmed.css" />
+        <link rel="stylesheet" type="text/css" href="cmed.css" />
     </metal:block>
 
     <metal:block fill-slot="javascript_head_slot">
-            <script type="text/javascript" src="show_problems.js"></script>
+        <script type="text/javascript" src="show_problems.js"></script>
+        <script type="text/javascript" src="chart.js"></script>
     </metal:block> 
 </head>
       	

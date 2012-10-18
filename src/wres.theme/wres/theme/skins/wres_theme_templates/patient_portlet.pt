@@ -26,7 +26,7 @@
                         title photo/alt"/>
                     </tal>
                     <tal tal:condition="not:photo">
-                        <img width="70%" height="100%" tal:attributes="src python:context.getDefaultPhoto()"/>
+                        <img tal:attributes="src python:context.getDefaultPhoto()"/>
                     </tal>  
                 </td>
                 

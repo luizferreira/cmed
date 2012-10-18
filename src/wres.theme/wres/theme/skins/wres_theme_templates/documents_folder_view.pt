@@ -10,6 +10,10 @@
 <head>
 
 <title i18n:translate="cmfuemr_documents_view">Documents View</title>
+<metal:block fill-slot="javascript_head_slot">
+    <script type="text/javascript" src="chart.js"></script>
+</metal:block>
+
 
 </head>
 

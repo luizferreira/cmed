@@ -14,19 +14,7 @@ from AccessControl import ClassSecurityInfo
 
 from wres.archetypes.interfaces import IWRESUser
 from wres.archetypes.config import PROJECTNAME
-
-def create_base_of_id(first_name, last_name):
-    """ Essa função cria o id do usuário com base
-    no seu nome e sobrenome
-    Chamada por create_id()
-    """
-    import re
-    pattern = re.compile('[a-z\d]')
-    filter_func = lambda c: re.match(pattern, c)
-    fname_filtered = filter(filter_func, first_name.lower())
-    lname_filtered = filter(filter_func, last_name.lower())
-    return fname_filtered[:1] + lname_filtered
-
+from wres.policy.utils.utils import create_base_of_id
 
 def create_id(portal_registration, first_name, last_name):
     """ Essa função testa se o id já está em uso e caso
@@ -68,9 +56,9 @@ def create_uemr_user(related_object, user_id, email='', fullname=''):
         },
     )
     #uf.changeUser(user_id, groups=[related_object.getGroup()])
-#    pm.setLocalRoles(obj=related_object, member_ids=(user_id,), member_role='Owner')    
+#    pm.setLocalRoles(obj=related_object, member_ids=(user_id,), member_role='Owner')
     uf.userSetGroups(user_id, [related_object.getGroup()])
-    pm.createMemberArea(member_id=user_id) 
+    pm.createMemberArea(member_id=user_id)
 
 WRESUserSchema = folder.ATFolderSchema.copy()
 
@@ -87,32 +75,32 @@ class WRESUser(folder.ATFolder):
 
     meta_type = "WRESUser"
     schema = WRESUserSchema
-    
+
     security = ClassSecurityInfo()
-    
+
     def getFullName(self):
         return self.getFirstName() + ' ' + self.getLastName()
-    
+
     def get_home_url(self):
         """ Standard method to return the user home url.
         If it is necessary to use a specific method, it can be defined in
         user specific class. """
         return self.absolute_url_path()
-    
+
     def getGroup(self):
         """ returns the group the user belongs. Must be redefined in the
             subclasses.
         """
-        
+
     def getParsedLastName(self):
         """
         Utilizado para indexar o parsedLastName do tipo
         """
         from wres.policy.utils.utils import do_transformation
-        return do_transformation(self.getLastName())          
-    
+        return do_transformation(self.getLastName())
+
 #    Se for patient, o login sera luizfonseca, senao sera lfonseca.
-#    No estagio atual, falta modificar o title. No membership ja 
+#    No estagio atual, falta modificar o title. No membership ja
 #    esta criando um usuario com a id certa.
     def at_post_create_script(self):
         """ Esse método é chamado no momento da criação de um objeto da classe.
@@ -120,7 +108,7 @@ class WRESUser(folder.ATFolder):
         """
         self.formatName()
         user_id = self.getId()
-        
+
         pm = getToolByName(self, 'portal_membership')
         uf = getToolByName(self, 'acl_users')
         member = pm.getMemberById(user_id)
@@ -158,14 +146,14 @@ class WRESUser(folder.ATFolder):
             return create_id(pr, fname, lname)
         else:
             return old_id
-            
+
     def formatName(self):
         firstName = self.capitalizeLetters(self.getFirstName())
         lastName = self.capitalizeLetters(self.getLastName())
         self.setFirstName(firstName)
         self.setLastName(lastName)
         self.reindexObject()
-        
+
     def capitalizeLetters(self, name):
         ignored_words = ['da','de','di','do','das','dos','e']
         cap_name = []
@@ -177,5 +165,5 @@ class WRESUser(folder.ATFolder):
             cap_name.append(part)
         cap_name = ' '.join(cap_name)
         return cap_name
-        
+
 atapi.registerType(WRESUser, PROJECTNAME)
