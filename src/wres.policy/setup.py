@@ -40,6 +40,7 @@ setup(name='wres.policy',
           'wres.archetypes',
           'wres.theme',
           'wres.tour',
+          'Products.TinyMCE',
           # 'PIL==1.1.6',
           # Pillow e lxml sao p413
           # -*- Extra requirements: -*-
