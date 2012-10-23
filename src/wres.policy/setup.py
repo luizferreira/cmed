@@ -40,7 +40,6 @@ setup(name='wres.policy',
           'wres.archetypes',
           'wres.theme',
           'wres.tour',
-          'z3c.jbot',
           # 'PIL==1.1.6',
           # Pillow e lxml sao p413
           # -*- Extra requirements: -*-

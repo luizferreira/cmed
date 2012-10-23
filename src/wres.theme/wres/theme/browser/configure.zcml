@@ -1,6 +1,8 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:zope="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="wres.theme">
 
   <!-- 'WRES Theme' Zope 3 browser layer
@@ -133,4 +135,15 @@
       layer=".interfaces.IThemeSpecific"
       />
 
+  <zope:adapter
+      for="Products.Five.BrowserView"
+      factory=".popupView.default_popup_template"
+      name="popup_cmed"
+      provides="zope.formlib.namedtemplate.INamedTemplate"
+      />
+  <browser:resource
+        name="popupReferenceWidget.css"
+        file="popupReferenceWidget.css"
+        layer=".interfaces.IThemeSpecific"
+        />
 </configure>
