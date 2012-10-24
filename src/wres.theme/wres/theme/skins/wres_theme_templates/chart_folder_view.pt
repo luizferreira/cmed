@@ -11,9 +11,6 @@
     <metal:aux fill-slot="style_slot">
         <link rel="stylesheet" type="text/css" href="cmed.css" />
     </metal:aux>
-    <metal:block fill-slot="javascript_head_slot">
-        <script type="text/javascript" src="chart.js"></script>
-    </metal:block>
 </head>
     
     <div metal:fill-slot="main">

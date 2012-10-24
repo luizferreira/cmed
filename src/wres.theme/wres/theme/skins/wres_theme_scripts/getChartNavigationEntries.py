@@ -2,6 +2,10 @@ request = context.REQUEST
 current_url = request.URL
 
 TEMPLATE_ID = current_url.split('/')[-1]
+#Links para objetos archetypes (links diferentes do nome do template):
+archs = ['documents_folder_view', 'uploaded_view']
+if TEMPLATE_ID in archs:
+    TEMPLATE_ID = context.absolute_url().split('/')[-1]
 def createGroup(name):
     return {'group_id': name.lower().replace(' ', '_'),
             'title': name,

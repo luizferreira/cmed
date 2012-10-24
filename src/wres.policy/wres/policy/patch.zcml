@@ -26,4 +26,12 @@
         replacement=".patchedMethods.patchedGetHourFormat"
     />
 
+    <!-- TODO:Tentar consertar isto de outra maneira, tentar adapters ou jbot -->
+    <monkey:patch
+        description="Patch para editar o popup do referenceBrowserWidget para os medicalDocuments"
+        class="archetypes.referencebrowserwidget.browser.view.ReferenceBrowserPopup"
+        original="update"
+        replacement=".patchedMethods.patchedUpdate"
+    />
+
 </configure>
