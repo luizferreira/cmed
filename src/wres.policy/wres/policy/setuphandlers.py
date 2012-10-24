@@ -443,7 +443,7 @@ def parseFirstDoctorInputFile(infile):
         return None
     dic = {}
     # if communimed site register form changes, this list will probably have to be updated.
-    keys = ['Nome Completo', 'CRM', 'Telefone de Contato', 'Seu endereço de e-mail', 'Confirmação do e-mail', 'Especialidade 1', 'Especialidade 2', 'Quero o meu site profissional', 'Nome da Clínica/Consultório', 'Avenida/Rua', 'Número', 'Complemento', 'Cidade', 'Estado', 'Telefone', 'E-mail', 'Como nos conheceu?']
+    keys = ['Nome Completo', 'CRM', 'Telefone de Contato', 'Seu endereço de e-mail', 'Confirmação do e-mail', 'Especialidade 1', 'Especialidade 2', 'Nome da Clínica/Consultório', 'Avenida/Rua', 'Número', 'Complemento', 'Cidade', 'Estado', 'Telefone', 'E-mail', 'Como nos conheceu?']
     for key in keys:
         dic[key] = None
 
@@ -467,6 +467,7 @@ def createFirstDoctor(portal, context):
     '''
     if there is a doctor in firstdoctor_info.txt, then this functino creates that doctor.
     '''
+    PROFESSIONAL_SITE = True
     from wres.policy.utils.utils import create_base_of_id
     # read firstdoctor_info and create a doctor if there is information there.
     infile = context.openDataFile('firstdoctor_info.txt')
@@ -478,7 +479,7 @@ def createFirstDoctor(portal, context):
     if doctor_info is not None:
         doctor_folder = getattr(portal, 'Doctors')
         clinic = getattr(portal, 'Clinic')
-        if not int(doctor_info['Quero o meu site profissional']):
+        if not PROFESSIONAL_SITE:
             # removing permissions from anonymous, so he cant see initial page anymore.
             doctor_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
             clinic.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE, ANONYMOUS_ROLE], acquire = False)

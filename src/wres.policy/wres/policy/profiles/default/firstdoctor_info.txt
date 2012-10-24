@@ -1,34 +1,30 @@
 Nome Completo
-Communi Teste
+Diogo Malagoli Figueiredo
 CRM
-1234567890
+40614
 Telefone de Contato
-3136612345
+31 8792-5135
 Seu endereço de e-mail
-suporte@communi.com.br
+diogomalagoli@yahoo.com.br
 Confirmação do e-mail
-suporte@communi.com.br
+diogomalagoli@yahoo.com.br
 Especialidade 1
-Cardiologia
+Cirurgia Plástica
 Especialidade 2
-Clínica geral
-Quero o meu site profissional
-1
+Não Selecionada
 Nome da Clínica/Consultório
-CommuniMed
+Clínica Imagem Cirurgia Plástica
 Avenida/Rua
-Av. Afonso Pena
+Raja Gabaglia
 Número
-1500
+561
 Complemento
-Sala 404A
 Cidade
 Belo Horizonte
 Estado
 MG
 Telefone
-313334-4444
+31 3335-7799
 E-mail
-aa@aa.com
 Como nos conheceu?
-Sites de Busca
+Indicação
