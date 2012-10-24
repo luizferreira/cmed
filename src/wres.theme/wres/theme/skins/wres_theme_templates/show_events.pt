@@ -8,9 +8,6 @@
       i18n:domain="cmfuemr">
     
   <metal:main fill-slot="main" tal:define="template_data context/getShowMedicationsData">
-    <head>
-        <script type="text/javascript" src="chart.js"></script>
-    </head>
   
     <h1>Eventos</h1>
 

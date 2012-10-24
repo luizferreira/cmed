@@ -16,7 +16,7 @@
 /*    background: #EEE;*/
 }
 
-.portlet_selected {
+.currentNavItem {
     background: #DDD;
-    padding:2px 0 2px 10px;
+    padding:2px 0 2px 0;
 }

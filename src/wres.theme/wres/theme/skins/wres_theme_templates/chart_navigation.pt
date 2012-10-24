@@ -37,15 +37,14 @@
 					<div tal:attributes="style python:context.showOrHidePortlet(sub_portlet_id);
 										 id sub_portlet_id">
 						<div tal:repeat="link group/links">
-							<a style="padding-left: 0.5em;display:block"
-								tal:attributes="href link/href;id link/id">
-                                <div class="navconteudo" tal:attributes="id link/temp">
-                                    <img tal:attributes="src string:${here/portal_url}/${link/icon}" />
-                                    &nbsp;
-                                    <span tal:attributes="class link/css"
-                                        i18n:translate="" tal:content="link/text">Problem List</span>
-                                </div>
-							</a>
+								<a style="padding-left: 0.5em;display:block"
+									tal:attributes="href link/href;id link/id">
+	                                <div class="navconteudo" tal:attributes="id link/temp;class link/css">
+	                                    <img tal:attributes="src string:${here/portal_url}/${link/icon}" />
+	                                    &nbsp;
+	                                    <span i18n:translate="" tal:content="link/text">Problem List</span>
+	                                </div>
+								</a>
                             <div class="divisor">........................................................................</div>
 						</div>
 					</div>
