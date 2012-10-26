@@ -17,9 +17,8 @@
 </head>
 
 <body>
-
 	<div metal:fill-slot="main" id="main_chart_print">
-
+<input type="checkbox" tal:attributes=" checked here/TestRoles" name="isDoctorOrAdmin" id="isDoctorOrAdmin" style="display:none"/>
 		<div class="help_title">Nós estamos aqui para ajudá-lo.</div>
 		<br />
 	<div class="help_content">

@@ -8,7 +8,7 @@ PMF = MessageFactory('plone')
 class AmberjackDefaults(BrowserView): 
     def __call__(self, context, request):
         constants = """
-            if (casa){
+            if (AmberjackPlone){
                 AmberjackPlone.aj_plone_consts['Error'] = "%s";
                 AmberjackPlone.aj_plone_consts['ErrorValidation'] = "%s";
                 AmberjackPlone.aj_plone_consts['BrowseFile'] = "%s";
