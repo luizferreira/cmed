@@ -1,0 +1,81 @@
+<dl class="portlet portletAmberjackChoicePortlet"
+    i18n:domain="collective.amberjack.portlet">
+  <input type="checkbox" tal:attributes=" checked here/TestRoles" name="isDoctorOrAdmin" id="isDoctorOrAdmin"/>
+  <dt class="portletHeader">
+    <span class="portletTopLeft"></span>
+    <span tal:condition="not:view/user_title"
+              i18n:translate="title_choice_run_the_demo">Choose and run a tour</span>
+    <span tal:condition="view/user_title"
+              tal:content="view/user_title"/>
+    <span class="portletTopRight"></span>
+  </dt>
+
+  <dd class="portletItem odd"
+        tal:define="portal_url context/@@plone_portal_state/portal_url">
+    <tal:has_root_url condition="view/root_url">
+      <img style="float:right"
+             tal:attributes="src string:${portal_url}/++resource++bulb.png" />
+      <tal:secretary_view_mode condition="python: context.TestRoles()==0">
+        <ol>
+          <tal:li repeat="tour view/tours">
+            <tal:loop define="tour_invalid python: view.validate_tour(tour);
+                        next_tours_id python:view.next_tours_id(tour);titulo python:context.translate(tour['title'])">
+              <li tal:condition="python: titulo[0]=='s'">
+                <a tal:condition="not:tour_invalid"
+                       tal:attributes="href tour/url;
+                                       class python:tour_invalid and 'tour_inactive' or '';
+                                       onclick string:set_cookie('$next_tours_id')"
+                       tal:content="python:titulo[1:]" />
+                <p tal:condition="tour_invalid"
+                         class="invalid_tour">
+                  <span tal:content="tour/title"/>
+                  <span tal:content="python:tour_invalid[0]" 
+                              class="discreet" />
+                </p>
+                <span class="completed_tour" tal:condition="view/completed">
+                  <img tal:attributes="src string:${portal_url}/++resource++completed_tour.gif" />
+                </span>
+              </li>
+            </tal:loop>
+          </tal:li>
+        </ol>
+      </tal:secretary_view_mode>
+      <tal:doctor_view_mode condition="python: context.TestRoles()==1">
+        <ol>
+          <li tal:repeat="tour view/tours">
+            <tal:loop define="tour_invalid python: view.validate_tour(tour);
+                        next_tours_id python:view.next_tours_id(tour);titulo python:context.translate(tour['title'])">
+              <a tal:condition="not:tour_invalid"
+                     tal:attributes="href tour/url;
+                                     class python:tour_invalid and 'tour_inactive' or '';
+                                     onclick string:set_cookie('$next_tours_id')"
+                     tal:content="python: titulo[1:]" />
+              <p tal:condition="tour_invalid"
+                       class="invalid_tour">
+                <span tal:content="tour/title"/>
+                <span tal:content="python:tour_invalid[0]" 
+                            class="discreet" />
+              </p>
+              <span class="completed_tour" tal:condition="view/completed">
+                <img tal:attributes="src string:${portal_url}/++resource++completed_tour.gif" />
+              </span>
+            </tal:loop>
+          </li>
+        </ol>
+      </tal:doctor_view_mode>
+    </tal:has_root_url>
+    <tal:not_root_url condition="not:view/root_url">
+      <img style="float:right"
+             tal:attributes="src string:${portal_url}/++resource++error.png" />
+      <span>
+        Sorry!
+        <br/>
+        Amberjack is configured to work with a sandbox but your user hasn't the member folder.
+      </span>
+    </tal:not_root_url>
+  </dd>
+
+  <span class="portletBottomLeft"></span>
+  <span class="portletBottomRight"></span>
+
+</dl>

@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
+    i18n_domain="wres.tour">
+
+   <plone:portlet
+      name="wres.tour.AmberjackChoicePortlet"
+      interface=".amberjackWresPortlet.IAmberjackChoicePortlet"
+      assignment=".amberjackWresPortlet.Assignment"
+      view_permission="zope2.View"
+      edit_permission="cmf.ManagePortal"
+      renderer=".amberjackWresPortlet.Renderer"
+      addview=".amberjackWresPortlet.AddForm"
+      editview=".amberjackWresPortlet.EditForm"
+      />
+
+</configure>

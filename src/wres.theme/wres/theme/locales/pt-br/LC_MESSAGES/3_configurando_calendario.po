@@ -18,4 +18,4 @@ msgstr ""
 "Domain: 3_configurando_calendario\n"
 
 msgid "amberjack_title"
-msgstr "Configurando o seu calendário."
+msgstr "s Configurando o seu calendário."
