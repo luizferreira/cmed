@@ -1,6 +1,6 @@
 <dl class="portlet portletAmberjackChoicePortlet"
     i18n:domain="collective.amberjack.portlet">
-  <input type="checkbox" tal:attributes=" checked here/TestRoles" name="isDoctorOrAdmin" id="isDoctorOrAdmin"/>
+  <input type="hidden" tal:attributes=" checked here/TestRoles" name="isDoctorOrAdmin" id="isDoctorOrAdmin"/>
   <dt class="portletHeader">
     <span class="portletTopLeft"></span>
     <span tal:condition="not:view/user_title"
@@ -19,22 +19,26 @@
         <ol>
           <tal:li repeat="tour view/tours">
             <tal:loop define="tour_invalid python: view.validate_tour(tour);
-                        next_tours_id python:view.next_tours_id(tour);titulo python:context.translate(tour['title'])">
-              <li tal:condition="python: titulo[0]=='s'">
+                        next_tours_id python:view.next_tours_id(tour);
+                        titulo python:context.translate(tour['title']);
+                        fileNameTour python:tour['object']._filename">
+              <!-- Se a letra depois do primeiro undescore for s ou S, a secretaria pode ver o tour -->
+              <li tal:condition="python:fileNameTour[fileNameTour.find('_') + 1] =='s' or fileNameTour[fileNameTour.find('_') + 1] =='S'">
                 <a tal:condition="not:tour_invalid"
                        tal:attributes="href tour/url;
                                        class python:tour_invalid and 'tour_inactive' or '';
                                        onclick string:set_cookie('$next_tours_id')"
-                       tal:content="python:titulo[1:]" />
+                       tal:content="python:titulo" />
                 <p tal:condition="tour_invalid"
                          class="invalid_tour">
                   <span tal:content="tour/title"/>
                   <span tal:content="python:tour_invalid[0]" 
                               class="discreet" />
                 </p>
+                <!--Fazer os links para o próximo tour funcionarem corretamente
                 <span class="completed_tour" tal:condition="view/completed">
                   <img tal:attributes="src string:${portal_url}/++resource++completed_tour.gif" />
-                </span>
+                </span> -->
               </li>
             </tal:loop>
           </tal:li>
@@ -42,25 +46,30 @@
       </tal:secretary_view_mode>
       <tal:doctor_view_mode condition="python: context.TestRoles()==1">
         <ol>
-          <li tal:repeat="tour view/tours">
+          <tal:li repeat="tour view/tours">
             <tal:loop define="tour_invalid python: view.validate_tour(tour);
-                        next_tours_id python:view.next_tours_id(tour);titulo python:context.translate(tour['title'])">
+                        next_tours_id python:view.next_tours_id(tour);titulo python:context.translate(tour['title']);
+                        fileNameTour python:tour['object']._filename">
+              <!-- Se a letra depois do primeiro undescore for s ou d, o doutor pode ver o tour, caso for S, ele não verá ver -->  
+              <li tal:condition="python:fileNameTour[fileNameTour.find('_') + 1] =='d' or fileNameTour[fileNameTour.find('_') + 1] =='s'">
               <a tal:condition="not:tour_invalid"
                      tal:attributes="href tour/url;
                                      class python:tour_invalid and 'tour_inactive' or '';
                                      onclick string:set_cookie('$next_tours_id')"
-                     tal:content="python: titulo[1:]" />
+                     tal:content="python: titulo" />
               <p tal:condition="tour_invalid"
                        class="invalid_tour">
                 <span tal:content="tour/title"/>
                 <span tal:content="python:tour_invalid[0]" 
                             class="discreet" />
               </p>
-              <span class="completed_tour" tal:condition="view/completed">
+              <!--TODO: Fazer os links para o próximo tour funcionarem corretamente
+               <span class="completed_tour" tal:condition="view/completed">
                 <img tal:attributes="src string:${portal_url}/++resource++completed_tour.gif" />
-              </span>
+              </span> -->
+            </li>
             </tal:loop>
-          </li>
+          </tal:li>
         </ol>
       </tal:doctor_view_mode>
     </tal:has_root_url>

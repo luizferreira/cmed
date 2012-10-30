@@ -18,4 +18,4 @@ msgstr ""
 "Domain: 7_criar_imprimir_prescricoes\n"
 
 msgid "amberjack_title"
-msgstr "- Gerando e imprimindo prescrições."
+msgstr "Gerando e imprimindo prescrições."
