@@ -130,7 +130,6 @@ class Doctor(wresuser.WRESUser):
         # when the member is already created.
         portal = getSite()
         pm = portal.portal_membership
-        import ipdb; ipdb.set_trace()
         if pm.getMemberById(self.getId()) != None:
             return
 
