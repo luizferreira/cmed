@@ -85,7 +85,9 @@ class Doctor(wresuser.WRESUser):
         # de adicionar uma visita no calendário) apenas para Secretary, Manager e Owner. Logo depois,
         # muda-se o owner da pasta doctor_visits para o médico reponsável para que o mesmo possa
         # adicionar visitas no seu calendário.
+
         doctor_visits = _createObjectByType('VisitFolder', portal.Appointments, user_id)
+
         doctor_visits.setTitle('Dr(a) ' + self.getFullName())
         # apenas o medico correspondente (Owner) pode adicionar consulta em sua pasta de consultas.
         doctor_visits.manage_permission('Add portal content', ['Secretary', 'Manager', 'Owner'])
@@ -122,6 +124,16 @@ class Doctor(wresuser.WRESUser):
         # doctor_visits.setLayout('Agenda')
 
     def at_post_create_script(self, migration=False):
+
+        # the code bellow is to consider the case of doctors created in firstdoctor_info. For some reason the
+        # at_post_create_script is running when editing a doctor created that way. So, we need to stop the execution
+        # when the member is already created.
+        portal = getSite()
+        pm = portal.portal_membership
+        import ipdb; ipdb.set_trace()
+        if pm.getMemberById(self.getId()) != None:
+            return
+
         wresuser.WRESUser.at_post_create_script(self)
 
         # Anonymous need to have View permission here in order to see the initial page (doctor_presentation).
