@@ -162,3 +162,7 @@ line-height: 1.5em;
 #portal-searchbox div#LSResult div.LSIEFix {
     width: 450px;
 }
+
+div#ajLastStep{
+    display:none;
+}

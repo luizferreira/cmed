@@ -26,9 +26,11 @@
                     <li tal:repeat="brain brains"
                         class="navTreeItem visualNoMarker navTreeFolderish section-Agenda">
                         <!-- fill current doctor link in the porlet (using navTreeCurrentItem) -->
+                        <!-- id in <a> helps amberjack -->
                         <tal:if condition="python: physical_path[-2] == brain.getId">
                             <a  href="" tal:attributes="href 
-                                string:${context/portal_url}/Appointments/${brain/id}/Agenda"
+                                string:${context/portal_url}/Appointments/${brain/id}/Agenda;
+                                id python: 'doc' + str(repeat['brain'].index)"
                                 class="state-missing-value navTreeFolderish contenttype-visitfolder navTreeCurrentItem">
                                 <img width="16" height="16" src="" tal:attributes="src string:${context/portal_url}/doctor-folder-icon.png">
                                 <span> Dr(a) <tal:print content="brain/Title" /> </span>
@@ -36,7 +38,8 @@
                         </tal:if>
                         <tal:if condition="python: physical_path[-2] != brain.getId">
                             <a  href="" tal:attributes="href 
-                                string:${context/portal_url}/Appointments/${brain/id}/Agenda"
+                                string:${context/portal_url}/Appointments/${brain/id}/Agenda;
+                                id python: 'doc' + str(repeat['brain'].index)"
                                 class="state-missing-value navTreeFolderish contenttype-visitfolder">
                                 <img width="16" height="16" src="" tal:attributes="src string:${context/portal_url}/doctor-folder-icon.png">
                                 <span> Dr(a) <tal:print content="brain/Title" /> </span>

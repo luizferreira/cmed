@@ -17,9 +17,7 @@
 </head>
 
 <body>
-
 	<div metal:fill-slot="main" id="main_chart_print">
-
 		<div class="help_title">Nós estamos aqui para ajudá-lo.</div>
 		<br />
 	<div class="help_content">
