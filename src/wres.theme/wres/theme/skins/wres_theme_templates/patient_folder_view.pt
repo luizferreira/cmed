@@ -13,45 +13,76 @@
 
     <metal:block fill-slot="style_slot">
         <link rel="stylesheet" type="text/css" href="cmed.css" />
-        <link rel="stylesheet" type="text/css" href="patient_livesearch.css" />
     </metal:block>
+    <metal:block fill-slot="javascript_head_slot">
+      <script type="text/javascript" src="patient_folder_view.js"></script>
+    </metal:block>
+
 
 </head>
 
 <body>
 
-	<tal:if condition="python: searchableTextt=='@All'">
-	</tal:if>
-
-<div metal:fill-slot="main" tal:define="title string:Buscar Paciente" style="height:550px">
+<div metal:fill-slot="main" tal:define="title string:Pacientes" style="height:550px">
 
     <center>
+      <form id="portletx_form" name="portletxform" method="post">
+        <div id="patient_folder" class="LSBox">
+          <input id="textBoxSearch" class="inputLabel" style="width:250px; height:25px; text-align:center"
+                 title="" autocomplete="on" name="Title" value=""  onkeyup="tableSearch.search(event);"/>
+          <input type="button" class="form-wrapper" value="Filtrar" onclick="tableSearch.runSearch();" />
+        </div>
 
-    <h1>
-        <a tal:content="string:${title}">Title</a>
-    </h1>
+      </form>
+      <br/><br/>
+    <tal:define define="allPatients context/getAllPatient;numberPatients python:len(allPatients)">
+      <div class="tableContainer">
+        <table class="listing cmed" id="tabela" class="tabela">
+          <thead class="chart-entry fixedHeader">
+            <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry">
+              Total: <span tal:content="numberPatients"></span>
+            </th>
+            <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry">
+              Nome do Paciente
+            <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry">
+              Telefone
+              <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry">
+              Data de Nascimento
+            </th>
+          </thead>
+          <tbody id="data"  class="scrollContent" class="tabela">
+            <tal:for repeat="patient python:allPatients">
+            <tr>
+              
+              <td class="index-col" tal:content="python: repeat['patient'].index + 1">
+              </td>
+              
+              <td>
+                <a id="celulas" tal:attributes="href patient/chartUrl | nothing" tal:content="patient/name | nothing"></a>
+              </td>
+              
+              <td id="celulas" tal:content="patient/phone | nothing">
+              </td>
+
+              <td id="celulas" tal:content="patient/birth | nothing">
+              </td>
+            
+            </tr>
+            </tal:for>
+          </tbody>
+        </table>
+      </div>
+    <!-- <tal:if condition="python:numberPatients > 10">
+      <div class="arrow-down"></div>
+      </tal:if>
+     -->  
+    </tal:define>
 
     <br />
 
     <div i18n:translate="">
-      <form id="portletx_form" name="portletxform" method="post">
-        <div id="patient_folder" class="LSBox">
-          <input id="searchGadget" class="inputLabel" style="width:250px; height:25px; text-align:center"
-                 title="Digite o nome, CPF ou ID do paciente" autocomplete="on" name="Title" value="" />
-          <input id="searchSubmit" name="submit" type="submit" value="Buscar" style="display:none" />
+      
 
-            <div class="searchSection" style="display:none">
-            <input id="searchbox_currentfolder_only" class="noborder" type="checkbox" name="path" checked="True" tal:attributes="value python:'/'.join(context.getPhysicalPath())">
-            <label style="cursor: pointer" for="searchbox_currentfolder_only">apenas nesta seção</label>
-            </div>
-            <span id="ResultBox">
-                <div class="LSResult" id="LSResult">
-                    <div class="LSShadow" id="LSShadow" style="width:400px"></div>
-                </div>
-            </span>
-        </div>
-
-      </form>
     </div>
 
     </center>
