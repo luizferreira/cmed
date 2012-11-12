@@ -270,3 +270,69 @@ html>body tbody.scrollContent td + td + td + td {
 #celulas {
 text-align: center;
 }
+
+
+/*Custom Listing para a pasta de Patients*/
+
+table.listing_patients{
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table.listing_patients td,
+table.listing_patients th {
+    padding: 0.5em 1em;
+    vertical-align: top;
+}
+
+table.listing_patients td.listingCheckbox,
+table.listing_patients th.listingCheckbox {
+    text-align: center;
+}
+
+table.listing_patients .top {
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+table.listing_patients th {
+    text-align: left;
+    color: #666;
+    border: 0.1em solid #e7e7e7;
+    border-style: solid solid none;
+    background: #ddd;
+}
+table.listing_patients tr.odd th {
+    border: 0.1em solid #fff;
+    border-style: solid solid none none;
+}
+table.listing_patients tbody th {
+    font-weight: bold;
+}
+table.listing_patients tbody tr {
+    text-align:left;
+}
+table.listing_patients tbody tr.odd {
+    background: #eee;
+}
+table.listing_patients tbody tr td {
+    background: transparent;
+}
+table.listing_patients tbody tr.odd td {
+    background: #eee;
+}
+table.listing_patients td {
+    border: 1px solid #ddd;;
+}
+table.listing_patients a {
+    border: none;
+    display: inline-block;
+    border-bottom: none !important;
+}
+
+table.listing_patients td.draggable {
+    text-shadow: White 1px 1px 1px;
+    background: #ddd !important;
+    border-bottom: 1px solid white;
+    padding: 0.4em 0.4em 0 0.5em;
+}
