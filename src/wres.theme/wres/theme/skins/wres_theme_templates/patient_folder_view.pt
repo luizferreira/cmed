@@ -37,10 +37,11 @@
       <br/><br/>
     <tal:define define="allPatients context/getAllPatient;numberPatients python:len(allPatients)">
       <div class="tableContainer">
+        <div id="semResultado" style="display:none;font-weight:bold" >Nenhum resultado encontrado.</div>
         <table class="listing cmed" id="tabela" class="tabela">
           <thead class="chart-entry fixedHeader">
-            <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry">
-              Total: <span tal:content="numberPatients"></span>
+            <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry" id="total">
+              
             </th>
             <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry">
               Nome do Paciente
