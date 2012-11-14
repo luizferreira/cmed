@@ -85,7 +85,13 @@ else:
 
 # transforming this in a 'only chart search' #cmed
 # results = catalog(SearchableText=r, portal_type='Patient', path=path, sort_limit=limit)
-results = catalog(SearchableText=r, portal_type='Patient', path=path)
+results_aux = catalog(SearchableText=r, portal_type='Patient', path=path)
+results = []
+for result in results_aux:
+    patient = result.getObject()
+    if patient.getState_cmed() == 'inactive':
+        continue
+    results.append(patient)
 
 # removing yellow highlight #cmed
 # searchterm_query = '?searchterm=%s'%url_quote_plus(q)
@@ -138,8 +144,8 @@ else:
     write('''<div class="LSIEFix">''')
     write('''<ul class="LSTable">''')
 
-    for result in results[:limit]:
-
+    for patient in results[:limit]:
+        #get patient
         icon = plone_view.getIcon(result)
         itemUrl = result.getURL()
         if result.portal_type in useViewAction:
@@ -162,7 +168,6 @@ else:
         # o primeiro if se refere ao Procurar do adicionar consulta
         # o elif se refere a pesquisa da pasta Patients
         if building_search:
-            patient = result.getObject()
             dt = patient.getBirthDate()
             cf = patient.getContactPhone()
             formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])
@@ -172,7 +177,6 @@ else:
             else:
                 write('''<a title="%s" class="%s" onClick="selectPatient('%s', '%s')">%s (%s * %s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone, dt.strftime("%d/%m/%Y")))
         else:
-            patient = result.getObject()
             dt = patient.getBirthDate()
             cf = patient.getContactPhone()
             #Added the ID to the link to help amberjack

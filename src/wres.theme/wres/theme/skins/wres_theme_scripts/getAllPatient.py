@@ -1,5 +1,3 @@
-from Products.CMFCore.utils import getToolByName
-
 class PatientSomeInfo():
 	phone = ""
 	birth = ""
@@ -7,12 +5,13 @@ class PatientSomeInfo():
 	chartUrl = ""
 
 pc = context.portal_catalog
+
 brains = pc.search({'meta_type': 'Patient'})
 listMetaPatients = []
-
 for brain in brains:
 	obj = brain.getObject()
-
+	if obj.getState_cmed() == 'inactive':
+			continue
 	patient = PatientSomeInfo()
 	
 	phone = obj.getContactPhone()

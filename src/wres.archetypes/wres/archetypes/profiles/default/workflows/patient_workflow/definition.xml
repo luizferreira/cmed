@@ -49,13 +49,13 @@
  <transition transition_id="inactivate" title=""
              new_state="inactive" trigger="USER"
              before_script="" after_script="">
-  <action url="inactivity_reason" category="workflow">Desativar</action>
+  <action url="javascript:askConfirmation('inactivate')" category="workflow">Desativar</action>
   <guard>
    <guard-role>Doctor</guard-role>
    <guard-role>Secretary</guard-role>
   </guard>
  </transition>
-
+<!-- patient_status_modify?workflow_action=inactivate -->
 <!--
  TODO:<transition transition_id="really_review" title=""
              new_state="pending" trigger="USER"
