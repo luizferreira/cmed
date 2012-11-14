@@ -344,6 +344,7 @@ def loadVisitVocabularies(portal):
     visit_types.append('1a consulta')
     visit_types.append('consulta')
     visit_types.append('retorno')
+    visit_types.append('cirurgia')
     vt.add_vocab('visit_types', visit_types)
 
     visit_reason = []

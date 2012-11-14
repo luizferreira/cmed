@@ -501,6 +501,7 @@ class VisitHandler(BaseHandler):
         obj.setVisit_type(self.cfg.get(section, 'visit_type'))
         obj.setVisit_reason(self.cfg.get(section, 'visit_reason'))
         obj.reindexObject()
+        obj.setSubject(obj.getVisit_type())
 
 registerHandler(VisitHandler)
 

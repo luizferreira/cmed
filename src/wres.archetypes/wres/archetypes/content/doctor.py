@@ -113,15 +113,11 @@ class Doctor(wresuser.WRESUser):
         collection.manage_permission('Delete objects', roles=[], acquire=False)
         criteria = collection.addCriterion('Type','ATPortalTypeCriterion')
         criteria.setValue('Visit')
-        # (Maio/2012) TODO: Limpar
-        # criteria2 = collection.addCriterion('Subject', 'ATSimpleStringCriterion')
-        # criteria2.setValue(user_id)
         criteria2 = collection.addCriterion('path', 'ATRelativePathCriterion')
         criteria2.relativePath = '..'
-        criteria3 = collection.addCriterion('Subject', 'ATSelectionCriterion')
-        criteria3.setValue('CalendarShow')
-        # (Maio/2012) TODO: Limpar
-        # doctor_visits.setLayout('Agenda')
+        # criteria3 = collection.addCriterion('Subject', 'ATSelectionCriterion')
+        # criteria3.setValue(['1a Consulta', 'Consulta', 'Retorno', 'Cirurgia'])
+        # Peter novembro/2012 pra que filtrar por tags?
 
     def at_post_create_script(self, migration=False):
 
