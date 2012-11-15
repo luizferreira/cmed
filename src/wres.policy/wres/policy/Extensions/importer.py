@@ -397,6 +397,7 @@ class DoctorHandler(BaseHandler):
         obj.setSpecialty1(self.cfg.get(section, 'specialty1'))
         obj.setSpecialty2(self.cfg.get(section, 'specialty2'))
         obj.setSignPassword(self.cfg.get(section, 'signPassword'))
+        obj.add_visits_folder()
         obj.at_post_create_script(migration=True)
         obj.reindexObject()
 
@@ -658,7 +659,7 @@ def main(self, import_dir=None, version=None):
     plone = import_plone(app, import_dir, version, verbose)
     print 'Committing...'
     transaction.commit()
-    print 'done'
+    print 'Upgrade done'
 
     Validation(plone, import_dir)
 

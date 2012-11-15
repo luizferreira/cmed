@@ -374,8 +374,9 @@ def addUpgradeExternalMethods(portal):
     add upgrade external methods in site root.
     '''
     from Products.ExternalMethod.ExternalMethod import manage_addExternalMethod
-    manage_addExternalMethod(portal, '0_upgrade', 'Cmed Upgrade', 'wres.policy.upgrade', 'main')
-    manage_addExternalMethod(portal, '1_generic_upgrade', 'Cmed Manual Upgrade', 'wres.policy.generic_upgrade', 'main')
+    manage_addExternalMethod(portal, '0_create_first_doctor', 'Create First Doctor', 'wres.policy.create_first_doctor', 'main')
+    manage_addExternalMethod(portal, '0_upgrade_automatic', 'Cmed Automatic Upgrade', 'wres.policy.upgrade', 'main')
+    manage_addExternalMethod(portal, '0_upgrade_manual', 'Cmed Manual Upgrade', 'wres.policy.generic_upgrade', 'main')
     manage_addExternalMethod(portal, 'z_export', 'Export Cmed', 'wres.policy.exporter', 'main')
     manage_addExternalMethod(portal, 'z_import', 'Import Cmed', 'wres.policy.importer', 'main')
 
@@ -489,7 +490,7 @@ def createFirstDoctor(portal, context):
         doctor.fillFirstDoctorInfo(doctor_info)
         clinic.fillClinicInformation(doctor_info)
         doctor.reindexObject()
-        clinic.reindexObject()
+        clinic.reindexObject() 
 
 def setupVarious(context):
     """ Funcao generica executada na instalacao do wres policy """
