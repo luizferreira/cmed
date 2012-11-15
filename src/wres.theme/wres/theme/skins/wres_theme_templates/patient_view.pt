@@ -30,6 +30,7 @@
             patient context/getPatient;
             photo patient/photo | nothing">
 
+
     <center>
     	<div id="day_buttons_div">
             <a>	<span class="botao" id="principal_button">&nbsp;Principal&nbsp;</span> </a> -

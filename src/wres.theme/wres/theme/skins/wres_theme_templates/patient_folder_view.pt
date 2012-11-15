@@ -23,9 +23,23 @@
 
 <body>
 
-<div metal:fill-slot="main" tal:define="title string:Pacientes" style="height:550px">
+<div metal:fill-slot="main" style="height:550px" 
+  tal:define="  title string:Pacientes;
+                portal_status_msg request/portal_status_message | nothing;
+                error_message request/portal_error_message  | nothing" >
 
     <center>
+      <dl class="portalMessage info"
+        tal:condition="portal_status_msg"> 
+        <dt> Info </dt>
+        <dd tal:content="portal_status_msg"> Exame adicionado com sucesso. </dd>
+      </dl>
+      <dl class="portalMessage error"
+        tal:condition="error_message"> 
+        <dt> Erro </dt>
+        <dd tal:content="error_message"> Ocorreu algum erro. </dd>
+      </dl> 
+
       <form id="portletx_form" name="portletxform" method="post">
         <div id="patient_folder" class="LSBox">
           <input id="textBoxSearch" class="inputLabel" style="width:250px; height:25px; text-align:center"
@@ -37,10 +51,11 @@
       <br/><br/>
     <tal:define define="allPatients context/getAllPatient;numberPatients python:len(allPatients)">
       <div class="tableContainer">
+        <div id="semResultado" style="display:none;font-weight:bold" >Nenhum resultado encontrado.</div>
         <table class="listing cmed" id="tabela" class="tabela">
           <thead class="chart-entry fixedHeader">
-            <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry">
-              Total: <span tal:content="numberPatients"></span>
+            <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry" id="total">
+              
             </th>
             <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry">
               Nome do Paciente

@@ -18,6 +18,7 @@ from wres.archetypes.config import PROJECTNAME
 from wres.archetypes.content import wresuser
 from wres.archetypes.content.chartdata import ChartData, Event #,Prescription, Maintenance, Note, Problem 
 from wres.archetypes.content.schemas.patient import PatientSchema
+from Products.CMFCore.utils import getToolByName
 
 from wres.policy.utils.roles import *
 
@@ -261,5 +262,19 @@ class Patient(wresuser.WRESUser):
         for key in self.chart_data.mapping.keys():
             if chart_dic.has_key(key): # increase upgrade compatibility
                 setattr( self.chart_data, key, OOBTree(chart_dic[key]) )            
+
+    def doWorkflowAction(self,action):
+        portal = self.portal_url.getPortalObject()
+        pw = getToolByName(portal,"portal_workflow")
+        patient_workflow = pw.getWorkflowById("patient_workflow")
+        patient_workflow.doActionFor(self,action)
+        state = pw.getStatusOf("patient_workflow",self)
+        return state
+    
+    def getState_cmed(self):
+        portal = self.portal_url.getPortalObject()
+        pw = getToolByName(portal,"portal_workflow")
+        state = pw.getStatusOf("patient_workflow",self)
+        return state['review_state']
 
 atapi.registerType(Patient, PROJECTNAME)
