@@ -2,6 +2,24 @@
 
 import Products.GenericSetup.context as import_context
 import Products.GenericSetup.interfaces as interfaces
+import wres.policy
+
+def getOrCreateType(portal, atobj, newid, newtypeid):
+    """
+    Gets the object specified by newid if it already exists under
+    atobj or creates it there with the id given in newtypeid
+    """
+    try:
+        newobj = getattr(atobj,newid) #get it if it already exists
+    except AttributeError:  #newobj doesn't already exist
+        try:
+            _ = atobj.invokeFactory(id=newid,type_name=newtypeid)
+        except ValueError:
+            _createObjectByType(newtypeid, atobj, newid)
+        except Unauthorized:
+            _createObjectByType(newtypeid, atobj, newid)
+        newobj = getattr(atobj,newid)
+    return newobj
 
 def parseFirstDoctorInputFile(infile):
     lines = infile.readlines()
@@ -31,29 +49,29 @@ def parseFirstDoctorInputFile(infile):
 
 def main(self):
     '''
-    if there is a doctor in firstdoctor_info.txt, then this functino creates that doctor.
+    if there is a doctor in firstdoctor_info.txt, then this function creates that doctor.
     '''
     base = import_context.BaseContext(self, import_context.SetupEnviron())
     context = import_context.DirectoryImportContext(self, base)
     PROFESSIONAL_SITE = True
     from wres.policy.utils.utils import create_base_of_id
-    #import pdb; pdb.set_trace()
+    path = wres.policy.__path__[0]
     # read firstdoctor_info and create a doctor if there is information there.
-    infile = context.openDataFile('firstdoctor_info.txt' , '/profiles/default')
+    infile = context.openDataFile('firstdoctor_info.txt', path)
     doctor_info = parseFirstDoctorInputFile(infile)
     full_name = doctor_info['Nome Completo'].split(' ')
     firstname = full_name[0].lower(); lastname = full_name[-1].lower()
     doctor_id = create_base_of_id(firstname, lastname)
 
     if doctor_info is not None:
-        doctor_folder = getattr(portal, 'Doctors')
-        clinic = getattr(portal, 'Clinic')
+        doctor_folder = getattr(self, 'Doctors')
+        clinic = getattr(self, 'Clinic')
         if not PROFESSIONAL_SITE:
             # removing permissions from anonymous, so he cant see initial page anymore.
             doctor_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
             clinic.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE, ANONYMOUS_ROLE], acquire = False)
             doctor_folder.reindexObject()
-        doctor = getOrCreateType(portal, doctor_folder, doctor_id, 'Doctor')
+        doctor = getOrCreateType(self, doctor_folder, doctor_id, 'Doctor')
         doctor.fillFirstDoctorInfo(doctor_info)
         clinic.fillClinicInformation(doctor_info)
         doctor.reindexObject()
