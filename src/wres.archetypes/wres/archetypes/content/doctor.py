@@ -103,7 +103,6 @@ class Doctor(wresuser.WRESUser):
         cal.slotMinutes = 15
         cal.minTime = '6'
         cal.maxTime = '20'
-        import pdb; pdb.set_trace()
         collection.setTitle('Calendário do(a) Dr(a) ' + self.Title())
         collection.setLayout('solgemafullcalendar_view')
         # medicos e secretarias nao veem 'Edicao' e 'Criterio' na colecao.
