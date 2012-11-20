@@ -37,7 +37,7 @@ def main(self):
     context = import_context.DirectoryImportContext(self, base)
     PROFESSIONAL_SITE = True
     from wres.policy.utils.utils import create_base_of_id
-    import pdb; pdb.set_trace()
+    #import pdb; pdb.set_trace()
     # read firstdoctor_info and create a doctor if there is information there.
     infile = context.openDataFile('firstdoctor_info.txt' , '/profiles/default')
     doctor_info = parseFirstDoctorInputFile(infile)
