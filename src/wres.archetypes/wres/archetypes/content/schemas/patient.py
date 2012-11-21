@@ -327,6 +327,13 @@ COMPLEMENTAR = Schema((
         ),
     ),
     
+    StringField('indicado',
+	required=0,
+	widget=StringWidget(
+		label=_('Indicado Por'),
+	),
+    ),
+    
     CEPField('zipcode',
         searchable=1,
         widget=CEPWidget(
