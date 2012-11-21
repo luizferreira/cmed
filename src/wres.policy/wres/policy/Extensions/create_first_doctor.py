@@ -57,7 +57,7 @@ def main(self):
     from wres.policy.utils.utils import create_base_of_id
     path = wres.policy.__path__[0]
     # read firstdoctor_info and create a doctor if there is information there.
-    infile = context.openDataFile('firstdoctor_info.txt', path)
+    infile = context.openDataFile('profiles/default/firstdoctor_info.txt', path)
     doctor_info = parseFirstDoctorInputFile(infile)
     full_name = doctor_info['Nome Completo'].split(' ')
     firstname = full_name[0].lower(); lastname = full_name[-1].lower()
