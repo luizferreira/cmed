@@ -397,6 +397,7 @@ class DoctorHandler(BaseHandler):
         obj.setSpecialty1(self.cfg.get(section, 'specialty1'))
         obj.setSpecialty2(self.cfg.get(section, 'specialty2'))
         obj.setSignPassword(self.cfg.get(section, 'signPassword'))
+        obj.add_visits_folder()
         obj.at_post_create_script(migration=True)
         obj.reindexObject()
 
@@ -500,6 +501,7 @@ class VisitHandler(BaseHandler):
         obj.setContactPhone(self.cfg.get(section, 'contactPhone'))
         obj.setVisit_type(self.cfg.get(section, 'visit_type'))
         obj.setVisit_reason(self.cfg.get(section, 'visit_reason'))
+        obj.setSubject(obj.getVisit_type())
         obj.reindexObject()
 
 registerHandler(VisitHandler)
@@ -563,6 +565,7 @@ class ImageHandler(BaseHandler):
 
     def import2(self, obj, section):
         obj.setImage(self.get_binary(section))
+        import pdb; pdb.set_trace()
 
 registerHandler(ImageHandler)
 
@@ -657,8 +660,10 @@ def main(self, import_dir=None, version=None):
     plone = import_plone(app, import_dir, version, verbose)
     print 'Committing...'
     transaction.commit()
-    print 'done'
+    print 'Upgrade done'
 
     Validation(plone, import_dir)
 
     print plone.absolute_url()
+
+    return 'Importing Complete'

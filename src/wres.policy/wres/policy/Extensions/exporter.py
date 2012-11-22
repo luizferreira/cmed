@@ -337,12 +337,12 @@ class PatientHandler(BaseHandler):
             self.write_binary(str(image.data))
         chart_summary = obj.chart_data_summary()
         self.write('chartdata ', chart_summary)
-        events = obj.get_events()
-        ev_list = []
-        for event in events:
-            ev_dict = event.export_dict()
-            ev_list.append(ev_dict)
-        self.write('events', ev_list)
+        #events = obj.get_events()
+        #ev_list = []
+        #for event in events:
+        #    ev_dict = event.export_dict()
+        #    ev_list.append(ev_dict)
+        #self.write('events', ev_list)
 
 registerHandler(PatientHandler)
 

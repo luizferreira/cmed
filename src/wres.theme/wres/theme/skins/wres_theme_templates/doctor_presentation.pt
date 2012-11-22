@@ -29,14 +29,14 @@
 
                 <table>
                     <tr>
-                        <td width="264px" height="192px">
+                        <td width="264px" height="192px" style="vertical-align: top;">
                             <tal tal:condition="python:doctor['photo']">
-                                <img width="70%" height="100%" tal:attributes="src python:doctor['photo'].absolute_url();
+                                <img max-width="70%" max-height="100%" tal:attributes="src python:doctor['photo'].absolute_url();
                                 alt python:doctor['photo'].alt;
                                 title python:doctor['photo'].alt"/>
                             </tal>
                             <tal tal:condition="python:not doctor['photo']">
-                                <img width="70%" height="100%" tal:attributes="src python:context.getDefaultPhoto()"/>
+                                <img max-width="70%" max-height="100%" tal:attributes="src python:context.getDefaultPhoto()"/>
                             </tal>  
                         </td>
                         

@@ -122,6 +122,7 @@ class Visit(event.ATEvent):
         # self.setTitle(dl.getValue(self.getDocument_type()))
 
     def at_post_edit_script(self):
+        self.setSubject(self.getVisit_type())
 #        if self.isAppointment():
 #            self.setDefaultPatientId()
 #            self.updateTypeOfPatient()
