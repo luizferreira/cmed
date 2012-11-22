@@ -565,6 +565,7 @@ class ImageHandler(BaseHandler):
 
     def import2(self, obj, section):
         obj.setImage(self.get_binary(section))
+        import pdb; pdb.set_trace()
 
 registerHandler(ImageHandler)
 
@@ -664,3 +665,5 @@ def main(self, import_dir=None, version=None):
     Validation(plone, import_dir)
 
     print plone.absolute_url()
+
+    return 'Importing Complete'

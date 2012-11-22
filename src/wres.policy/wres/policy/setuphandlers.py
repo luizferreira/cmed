@@ -375,8 +375,7 @@ def addUpgradeExternalMethods(portal):
     '''
     from Products.ExternalMethod.ExternalMethod import manage_addExternalMethod
     manage_addExternalMethod(portal, '0_create_first_doctor', 'Create First Doctor', 'wres.policy.create_first_doctor', 'main')
-    manage_addExternalMethod(portal, '0_upgrade_automatic', 'Cmed Automatic Upgrade', 'wres.policy.upgrade', 'main')
-    manage_addExternalMethod(portal, '0_upgrade_manual', 'Cmed Manual Upgrade', 'wres.policy.generic_upgrade', 'main')
+    manage_addExternalMethod(portal, '0_upgrade', 'Cmed Automatic Upgrade', 'wres.policy.upgrade', 'main')
     manage_addExternalMethod(portal, 'z_export', 'Export Cmed', 'wres.policy.exporter', 'main')
     manage_addExternalMethod(portal, 'z_import', 'Import Cmed', 'wres.policy.importer', 'main')
 
