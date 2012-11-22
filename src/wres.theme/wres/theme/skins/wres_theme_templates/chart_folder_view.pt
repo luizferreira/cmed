@@ -8,6 +8,9 @@
       i18n:domain="cmfuemr">
 
 <head>
+    <metal:block fill-slot="javascript_head_slot">
+            <script type="text/javascript" src="patient_view.js"></script>
+    </metal:block>
     <metal:aux fill-slot="style_slot">
         <link rel="stylesheet" type="text/css" href="cmed.css" />
     </metal:aux>
