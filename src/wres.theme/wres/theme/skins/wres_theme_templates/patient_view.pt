@@ -8,7 +8,7 @@
       i18n:domain="plone">
 
 	<metal:block fill-slot="javascript_head_slot">
-            <script type="text/javascript" src="patient_view.js"></script>
+            <!-- <script type="text/javascript" src="patient_view.js"></script> -->
     </metal:block>
 <head>
 
@@ -16,6 +16,8 @@
     <metal:aux fill-slot="style_slot">
         <link rel="Stylesheet" type="text/css"
             tal:attributes="href string:${portal_url}/patient_view.css" />
+        <link rel="Stylesheet" type="text/css"
+            tal:attributes="href string:${portal_url}/cmed.css" />
     </metal:aux>
 
 </head>
@@ -32,57 +34,61 @@
 
 
     <center>
-    	<div id="day_buttons_div">
-            <a>	<span class="botao" id="principal_button">&nbsp;Principal&nbsp;</span> </a> -
-            <a> <span class="botao" id="complementar_button">&nbsp;Complementar&nbsp;</span> </a> -
-            <a> <span class="botao" id="demografico_button">&nbsp;Demográfico&nbsp;</span> </a>
-        </div>
 <!--
     FieldSet Basico
 -->
 
-    <tal:for repeat="schemata script">
-    <!--
-    This small script in python gets the first word of schemata[0]
-    -->
-        <div tal:attributes="id python:schemata[0].split(' ',1)[0]">
-            <fieldset id="fieldset_doc_view" ><legend tal:content="python:schemata[0]"> Legend </legend>
-                <table id="tabela" border="0">
-                <tal:for2 repeat="group python:schemata[1]">
-                    <tr tal:condition="repeat/group/odd" bgColor="#FBFFFB">
-                        <tal:for3 repeat="tupla group">
-                            <tal:def define="field python:tupla[0]; value python:tupla[1]">
-                                <td>
-                                    <div class="label">
-                                        <tal:print content="field/widget/label" />:
-                                    </div>
-                                    <td>
-                                        <span class="dado"><metal:macro use-macro="python: context.widget(field.getName(),mode='view')" /></span>
+    <table class="listing cmed width-100">
+        <thead>
+            <tr>
+                <th>
+                Dados do Paciente
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tal:for repeat="schemata script">
+                <tr>
+                    <td>
+                        <table class="listing cmed width-100">
+                            <thead class="chart-entry">
+                                <tr class="even">
+                                    <th style="background: #2A5D7F; color:white;" class="nosort chart-entry" tal:content="python:schemata[0]">
+                                        Label
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>
+                                    <table class="listing cmed width-100">
+                                        <tbody>
+                                            <tal:for2 repeat="group python:schemata[1]">
+                                                <tr>
+                                                    <tal:for3 repeat="tupla group">
+                                                        <tal:def define="field python:tupla[0]; value python:tupla[1]">
+                                                            <td>
+                                                                <div class="label">
+                                                                    <tal:print content="field/widget/label" />:
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <span class="dado"><metal:macro use-macro="python: context.widget(field.getName(),mode='view')" /></span>
 
-                                </td>
-                            </tal:def>
-                        </tal:for3>
-                    </tr>
-                    <tr tal:condition="repeat/group/even" bgColor="#EEEEEE">
-                        <tal:for3 repeat="tupla group">
-                            <tal:def define="field python:tupla[0]; value python:tupla[1]">
-                                <td>
-                                    <div class="label">
-                                        <tal:print content="field/widget/label" />:
-                                    </div>
-                                    <td>
-                                        <span class="dado"><metal:macro use-macro="python: context.widget(field.getName(),mode='view')" /></span>
-
-                                </td>
-                            </tal:def>
-                        </tal:for3>
-                    </tr>
-                </tal:for2>
-                </table>
-            </fieldset>
-        </div   >
-    </tal:for>
-
+                                                            </td>
+                                                        </tal:def>
+                                                    </tal:for3>
+                                                </tr>
+                                            </tal:for2>
+                                        </tbody>
+                                    </table>
+                                </td></tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tal:for>
+        </tbody>
+    </table>
 </center>
 </div>
 </body>
