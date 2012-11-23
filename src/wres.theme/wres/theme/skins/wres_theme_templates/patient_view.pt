@@ -14,10 +14,12 @@
 
 <title i18n:translate="cmfuemr_patient_search">Patient search</title>
     <metal:aux fill-slot="style_slot">
-        <link rel="Stylesheet" type="text/css"
+        <link rel="Stylesheet" media="screen" type="text/css"
             tal:attributes="href string:${portal_url}/patient_view.css" />
-        <link rel="Stylesheet" type="text/css"
+        <link rel="Stylesheet" media="screen" type="text/css"
             tal:attributes="href string:${portal_url}/cmed.css" />
+        <link rel="Stylesheet" media="print" type="text/css"
+            tal:attributes="href string:${portal_url}/cmedPrint.css" />
     </metal:aux>
 
 </head>
@@ -37,6 +39,9 @@
 <!--
     FieldSet Basico
 -->
+    <span id="print_button" style="float:right">
+        <a title="" href="javascript:print();" class="visualNoPrint">Imprimir</a>
+    </span>
 
     <table class="listing nosort cmed width-100">
         <thead>
@@ -73,6 +78,66 @@
                                                             </td>
                                                             <td>
                                                                 <span class="dado"><metal:macro use-macro="python: context.widget(field.getName(),mode='view')" /></span>
+
+                                                            </td>
+                                                        </tal:def>
+                                                    </tal:for3>
+                                                </tr>
+                                            </tal:for2>
+                                        </tbody>
+                                    </table>
+                                </td></tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tal:for>
+        </tbody>
+    </table>
+</center>
+
+
+
+<center class="cmedPrint">
+<!--
+    FieldSet Basico
+-->
+<img tal:attributes="src python: str(context.absolute_url()) + '/logoGrayScale.png'" style="max-height:150px" />
+    <table class="externalTable">
+        <thead>
+            <tr>
+                <th class="pageTitle">
+                Dados do Paciente - <span tal:content="context/getFullName"></span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tal:for repeat="schemata script">
+                <tr>
+                    <td>
+                        <table class="internalTable0">
+                            <thead class="">
+                                <tr class="even">
+                                    <th style="" class="" tal:content="python:schemata[0]">
+                                        Label
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>
+                                    <table class="internalTable1">
+                                        <tbody>
+                                            <tal:for2 repeat="group python:schemata[1]">
+                                                <tr>
+                                                    <tal:for3 repeat="tupla group">
+                                                        <tal:def define="field python:tupla[0]; value python:tupla[1]">
+                                                            <td style="min-width:150px">
+                                                                <div style="font-weight: bold">
+                                                                    <tal:print content="field/widget/label" />:
+                                                                </div>
+                                                            </td>
+                                                            <td style="min-width:140px">
+                                                                <span><metal:macro use-macro="python: context.widget(field.getName(),mode='view')" /></span>
 
                                                             </td>
                                                         </tal:def>

@@ -270,3 +270,7 @@ html>body tbody.scrollContent td + td + td + td {
 #celulas {
 text-align: center;
 }
+
+.cmedPrint{
+  display:none;
+}
