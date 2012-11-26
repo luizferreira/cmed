@@ -23,7 +23,7 @@ SEX = DisplayList((
     ('Male', _('Male')),
     ('Female', _('Female')),
     ))
-    
+
 ORGAOEMISSOR = DisplayList((
     ('', ''),
     ('ssp', 'Secretaria de Segurança Pública'),
@@ -90,7 +90,7 @@ STATUS = DisplayList((
     ('retired', _('Retired')),
     ('unknown', _('Unknown')),
     ))
-    
+
 #PATIENT_TYPE = DisplayList((
     #('estabilished', _('Established')),
     #('new', _('New'))
@@ -101,7 +101,7 @@ STATUS = DisplayList((
 #===============================================================================
 
 MAIN = Schema((
-    
+
     #Campo irrelevante
     #StringField('type_of_patient',
         #required=0,
@@ -128,7 +128,7 @@ MAIN = Schema((
 	        label=_('Last Name'),
         ),
     ),
-    
+
     # conforme decidido, a data de nascimento deixa de ser obrigaoria
     DateTimeField('birthDate',
         widget=CalendarWidget(
@@ -138,14 +138,14 @@ MAIN = Schema((
                 future_years=0,
                 show_hm=0,
        )
-   ),    
-    
+   ),
+
     StringField('email',
 #      validators='isEmail',
        widget=StringWidget(
 	       label=_('Email'),
        ),
-    ),    
+    ),
 
 #        StringField('socialSecurity',#O Nome não foi mudado para não dar conflitos em search, mas creio que isso deve ser resolvido rapidamente
 ##            validators=('isCPF',),#Validadores são definidos  em Products.CMFUEMR.validators
@@ -175,10 +175,10 @@ MAIN = Schema((
            i18n_domain='cmfuemr',
        ),
     ),
-    
+
     BrPhoneField('contactPhone',
 #       validators='isBrTelefone',
-        required=1, 
+        required=1,
         index=':schema',
         widget=BrPhoneWidget(
             label=_('Contact Phone'),
@@ -191,24 +191,24 @@ MAIN = Schema((
 #           + ('uemr_widgets/js/contactphone_patient.js',),
         ),
     ),
-    
+
 
 
 #===============================================================================
 # Luiz
-# Falta migrar o campo birthDate - Update: foi colocado um birthdate temporário, 
-# precisa ser melhorado posteriormente. 
+# Falta migrar o campo birthDate - Update: foi colocado um birthdate temporário,
+# precisa ser melhorado posteriormente.
 #===============================================================================
 
 #        DateTimeField('birthDate',
 #            index="DateIndex",
 #            with_time=0, # set to False if you want date only objects
-#            with_date=1, # set to False if you want time only objects            
+#            with_date=1, # set to False if you want time only objects
 #            widget=DateTimeWidget(label='Birth Date',
 #                                   label_msgid='cmfuemr_label_birth_date',
 #                                   i18n_domain='cmfuemr',),
 #        ),
-    
+
 
     StringField('sex',
         vocabulary=SEX,
@@ -249,7 +249,7 @@ MAIN = Schema((
 #                                                 'location': '/referringprovider_folder'
 #                                                 },),),
 #        ),
-    
+
 #===============================================================================
 # Falta migrar o campo seguinte: insurance
 #===============================================================================
@@ -277,18 +277,18 @@ MAIN = Schema((
 	        label=_('State'),
         ),
     ),
-    
+
     IntegerField('chart',
         default=0,
         index="FieldIndex:schema",
         widget=IntegerWidget(
-            label=_('Chart Number'),                                
+            label=_('Chart Number'),
 		    description='Must contain only numbers',
 		    description_msgid='cmfuemr_help_chart_number',
 		    i18n_domain='cmfuemr'
         ),
     ),
-    
+
     ReferenceField('doctor',
         relationship='doctor',
         allowed_types=('Doctor',),
@@ -296,8 +296,8 @@ MAIN = Schema((
         widget=ReferenceWidget(
             macro = 'reference_formatted',
             label=_('Provider'),
-            startup_directory = 'Doctors',   
-            restrict_browsing_to_startup_directory = True,         
+            startup_directory = 'Doctors',
+            restrict_browsing_to_startup_directory = True,
         ),
     ),
 
@@ -313,27 +313,27 @@ COMPLEMENTAR = Schema((
                 label=_('SSN'),
         ),
      ),
-    
+
     StringField('identidade',
         widget=StringWidget(
                 label='Identidade',
         ),
     ),
-    
+
     StringField('orgaoEmissor',
         vocabulary=ORGAOEMISSOR,
         widget=SelectionWidget(
                 label='Órgão Emissor',
         ),
     ),
-    
+
     StringField('indicado',
-	required=0,
-	widget=StringWidget(
-		label=_('Indicado Por'),
-	),
+    	required=0,
+    	widget=StringWidget(
+    		label=_('Indicado Por'),
+    	),
     ),
-    
+
     CEPField('zipcode',
         searchable=1,
         widget=CEPWidget(
@@ -385,24 +385,24 @@ set_schemata_properties(COMPLEMENTAR, schemata='Complementar')
 	        #label=_('Relationship'),
         #),
     #),
-                
+
    #StringField('guarantor_identidade',
         #widget=StringWidget(
 	        #label='Identidade',
         #),
     #),
-    
+
     #StringField('guarantor_orgaoEmissor',
         #vocabulary=ORGAOEMISSOR,
         #widget=SelectionWidget(
 	        #label='Orgão Emissor',
         #),
     #),
-    
+
 ##===============================================================================
-## O campo guarantor_contact_phone precisa de validador         
+## O campo guarantor_contact_phone precisa de validador
 ##===============================================================================
-    
+
    #StringField('guarantor_contact_phone',
 ##      validators='isBrTelefone',
        #widget=StringWidget(
@@ -442,11 +442,11 @@ set_schemata_properties(COMPLEMENTAR, schemata='Complementar')
 	        #label=_('State'),
         #),
     #),
-    
+
 ##===============================================================================
-## O campo guarantor_zipcode precisa de validador        
+## O campo guarantor_zipcode precisa de validador
 ##===============================================================================
-    
+
     #StringField('guarantor_zipcode',
 ##       validators='isCEP',
         #widget=StringWidget(
@@ -462,21 +462,21 @@ set_schemata_properties(COMPLEMENTAR, schemata='Complementar')
 
 # 	ReferenceField('insurance',
 # 		relationship='insurance_patient',
-# 		allowed_types=('Insurance',),			
+# 		allowed_types=('Insurance',),
 # 		widget=ReferenceBrowserWidget(
 # 			label='Plano de Saúde',
 # 			description='Selecione a operadora do plano de saúde',
-# 			startup_directory = 'Insurances',                                   
+# 			startup_directory = 'Insurances',
 # 			label_msgid='cmfuemr_label_insurance',
 # 			i18n_domain='cmfuemr'
 # 		)
 # 	),
-	
+
 # 	StringField('tipo',
 # 		schemata='main',
 # 		widget=StringWidget(label=_('Tipo'),
 # 		)
-# 	),	
+# 	),
 
 #     StringField('convenio',
 #         widget = StringWidget(
@@ -489,7 +489,7 @@ set_schemata_properties(COMPLEMENTAR, schemata='Complementar')
 # 	        label='Matrícula',
 #         ),
 #     ),
-    
+
 #     DateTimeField('dataDeValidade',
 #         widget=CalendarWidget(
 #         label=_('Data de Validade do Plano'),
@@ -499,19 +499,19 @@ set_schemata_properties(COMPLEMENTAR, schemata='Complementar')
 #         show_hm=0,
 #        )
 #     ),
-                
+
 #     StringField('titular',
 #         widget = StringWidget(
 # 	        label='Titular',
 #         ),
 #     ),
-    
+
 #     StringField('cartaoNacionalDeSaude',
 #         widget=StringWidget(
 # 	        label='Cartão Nacional de Saúde',
 #         ),
-#     ),    
-    
+#     ),
+
 # ))
 # set_schemata_properties(CONVENIOS, schemata='Planos de Saude')
 
@@ -522,18 +522,18 @@ DEMOGRAPHIC = Schema((
 	        label='Nome do Pai',
         ),
     ),
-    
+
     StringField('nomeDaMae',
         widget=StringWidget(
 	        label='Nome da Mãe',
         ),
     ),
-    
+
     StringField('nacionalidade',
         widget=StringWidget(
 	        label='Nacionalidade',
         ),
-    ),    
+    ),
 
     StringField('race',
         vocabulary=RACE,
@@ -555,7 +555,7 @@ DEMOGRAPHIC = Schema((
 	        label=_('Education Completed'),
         ),
     ),
-    
+
    ImageField('photo',
        max_size=(110,110),
        widget=ImageWidget(
@@ -657,12 +657,12 @@ set_schemata_properties(EMPLOYMENT, schemata='Complementar')
 	        #label=_('Relationship'),
         #),
      #),
-                
+
 #===============================================================================
 # Os campos emergency_work_phone, emergency_home_phone e emergency_other_phone
-# precisam de validadores                
+# precisam de validadores
 #===============================================================================
-                
+
    #StringField('emergency_work_phone',
 ##      validators='isBrTelefone',
        #widget=StringWidget(
@@ -716,11 +716,11 @@ set_schemata_properties(EMPLOYMENT, schemata='Complementar')
 	        #label=_('State'),
         #),
     #),
-    
+
 ##===============================================================================
-## O campo emergency_zipcode precisa de validador        
+## O campo emergency_zipcode precisa de validador
 ##===============================================================================
-    
+
     #StringField('emergency_zipcode',
         #widget=StringWidget(
 	        #label=_('ZipCode'),
