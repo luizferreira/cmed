@@ -3,7 +3,7 @@
 
 <h5 class="hiddenStructure" i18n:translate="heading_personal_tools">Personal tools</h5>
 
-<div id="portal-feedbackhelp-div" class="no_print">
+<div id="portal-feedbackhelp-div" class="visualNoPrint">
 
   <tal:if condition="python: not context.verifyRole(['Anonymous'])">
 

@@ -21,7 +21,7 @@ function askConfirmation(inactivate){
             text:'Sim',
             class:'save',
             click: function(){
-                parent.location= document.URL + "/patient_status_modify?workflow_action=inactivate";
+                parent.location= document.URL + "patient_status_modify?workflow_action=inactivate";
             }
         },
         {
