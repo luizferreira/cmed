@@ -310,28 +310,28 @@ COMPLEMENTAR = Schema((
         index="FieldIndex:schema",
         searchable=1,
         widget=CPFWidget(
-                label=_('SSN'),
+            label=_('SSN'),
         ),
      ),
     
     StringField('identidade',
         widget=StringWidget(
-                label='Identidade',
+            label='Identidade',
         ),
     ),
     
     StringField('orgaoEmissor',
         vocabulary=ORGAOEMISSOR,
         widget=SelectionWidget(
-                label='Órgão Emissor',
+            label='Órgão Emissor',
         ),
     ),
     
     StringField('indicado',
-	required=0,
-	widget=StringWidget(
-		label=_('Indicado Por'),
-	),
+    	required=0,
+    	widget=StringWidget(
+	       label=_('Indicado Por'),
+	   ),
     ),
     
     CEPField('zipcode',
