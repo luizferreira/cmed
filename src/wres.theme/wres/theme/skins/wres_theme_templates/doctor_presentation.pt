@@ -14,63 +14,60 @@
 </head>
 
 <body>
-    <div metal:fill-slot="main" id="presentation"
+    <div metal:fill-slot="content" id="content"
          tal:define="doctors context/doctor_presentation_script">
+        <div id="presentation">
+          <tal:if condition="python:len(doctors)==1">
+            <center><h1> Sobre mim</h1></center>
+          </tal:if>
+          <tal:if condition="python:len(doctors)>1">
+            <center><h1> Sobre nós</h1></center>
+          </tal:if>
+          <tal:for repeat="doctor doctors">
+                  <table>
+                      <tr>
+                          <td width="264px" height="192px" style="vertical-align: top;">
+                              <tal tal:condition="python:doctor['photo']">
+                                  <img max-width="70%" max-height="100%" tal:attributes="src python:doctor['photo'].absolute_url();
+                                  alt python:doctor['photo'].alt;
+                                  title python:doctor['photo'].alt"/>
+                              </tal>
+                              <tal tal:condition="python:not doctor['photo']">
+                                  <img max-width="70%" max-height="100%" tal:attributes="src python:context.getDefaultPhoto()"/>
+                              </tal>  
+                          </td>
+                          
+                          <td style="vertical-align:top; line-height:165%">
+                              <br />
+                              <div id="doctor_title"> Dr(a) <tal:print tal:content="python:doctor['title']" /> </div>
+                              <br />
+                              <span style="font-size:15px">
+                                <div>
+                                    <tal:print content="python:doctor['specialty1']" />
+                                    <tal:if condition="python:doctor['specialty2']">
+                                        , <tal:print content="python:doctor['specialty2']" />
+                                    </tal:if>
+                                </div>                            
+                                <div tal:condition="python:doctor['email']" 
+                                     tal:content="python:doctor['email']"> test@test.com 
+                                 </div>
+                                <div tal:condition="python:doctor['curriculum']">
+                                    <tal:for repeat="string python:doctor['curriculum']">
+                                        <tal:print content="string" /><br />
+                                    </tal:for>
+                                 </div>                      
+                               </span>       
+                          </td>
+                      </tr>
+                  </table>
 
-        <tal:if condition="python:len(doctors)==1">
-          <center><h1> Sobre mim</h1></center>
-        </tal:if>
-        <tal:if condition="python:len(doctors)>1">
-          <center><h1> Sobre nós</h1></center>
-        </tal:if>      
-        <br />  <br />
+          </tal:for>
 
-        <tal:for repeat="doctor doctors">
-
-                <table>
-                    <tr>
-                        <td width="264px" height="192px" style="vertical-align: top;">
-                            <tal tal:condition="python:doctor['photo']">
-                                <img max-width="70%" max-height="100%" tal:attributes="src python:doctor['photo'].absolute_url();
-                                alt python:doctor['photo'].alt;
-                                title python:doctor['photo'].alt"/>
-                            </tal>
-                            <tal tal:condition="python:not doctor['photo']">
-                                <img max-width="70%" max-height="100%" tal:attributes="src python:context.getDefaultPhoto()"/>
-                            </tal>  
-                        </td>
-                        
-                        <td style="vertical-align:top; line-height:165%">
-                            <br />
-                            <div id="doctor_title"> Dr(a) <tal:print tal:content="python:doctor['title']" /> </div>
-                            <br />
-                            <span style="font-size:15px">
-                              <div>
-                                  <tal:print content="python:doctor['specialty1']" />
-                                  <tal:if condition="python:doctor['specialty2']">
-                                      , <tal:print content="python:doctor['specialty2']" />
-                                  </tal:if>
-                              </div>                            
-                              <div tal:condition="python:doctor['email']" 
-                                   tal:content="python:doctor['email']"> test@test.com 
-                               </div>
-                              <div tal:condition="python:doctor['curriculum']">
-                                  <tal:for repeat="string python:doctor['curriculum']">
-                                      <tal:print content="string" /><br />
-                                  </tal:for>
-                               </div>                      
-                             </span>       
-                        </td>
-                    </tr>
-                </table>
-
-        </tal:for>
-
-        <tal:if condition="not: doctors">
-            <h1> Seja Bem vindo ao CommuniMed! </h1> <br />
-            Você instalou corretamente o sistema, a primeira coisa a se fazer agora é registrar um médico.
-        </tal:if>
-    
+          <tal:if condition="not: doctors">
+              <h1> Seja Bem vindo ao CommuniMed! </h1> <br />
+              Você instalou corretamente o sistema, a primeira coisa a se fazer agora é registrar um médico.
+          </tal:if>
+      </div>      
 
     </div>
 
