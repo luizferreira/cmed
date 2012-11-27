@@ -31,7 +31,7 @@ def setup_plone(app, import_dir, version, products, ext_profiles=()):
     app = makerequest(app)
 
     # derivate the instance id
-    instance_name = import_dir[import_dir.rfind('/export-')+8:]    
+    instance_name = import_dir[import_dir.rfind('/export-')+8:]
     instance_name = instance_name.split('__')[0] # exclude version from instance_name, if exist
     version = str(version).replace('.', '_')
     plone_id = instance_name + '__' + version
@@ -101,7 +101,7 @@ def import_vocabulary(plone, import_dir):
 
     print 'Importing vocabularies'
 
-    vt = plone.vocabulary_tool    
+    vt = plone.vocabulary_tool
 
     vocab_ini = os.path.join(import_dir, 'vocabulary.ini')
 
@@ -131,9 +131,9 @@ class Relation:
         self.referenced_obj_id = referenced_obj_id
 
     def build_relation(self, portal):
-        ''' 
+        '''
         build the relations between objects. The relations is in the list relations2build following
-        the schema (obj, set_method_str_name, type_of_referenced_obj, referenced_obj_id) 
+        the schema (obj, set_method_str_name, type_of_referenced_obj, referenced_obj_id)
         '''
         print 'Building relation: %s -> %s (method: %s)' % (self.obj.getId(), self.referenced_obj_id, self.str_method)
         catalog = portal.portal_catalog
@@ -205,7 +205,7 @@ class Validation(object):
         '''
         wrapper to the print function
         '''
-        print 'Validating ' + validator_string + '...', 
+        print 'Validating ' + validator_string + '...',
         if eval(str_exp):
             print ' ok (%s)' % str_exp
         else:
@@ -239,7 +239,7 @@ class BaseHandler(object):
                 context.plone_utils.changeOwnershipOf(context, 'admin')
 
     def folder_create(self, root, dirname):
-        ''' 
+        '''
         create 'Folders' to fetch the object being imported
         '''
         current = root
@@ -252,7 +252,7 @@ class BaseHandler(object):
         return current
 
     def set_data(self, obj, section):
-        ''' 
+        '''
         import common fields like title, id, path, etc.
         '''
 
@@ -300,7 +300,7 @@ class BaseHandler(object):
             if state == 'published':
                 wf_tool = obj.portal_workflow
                 try:
-                    wf_tool.doActionFor(obj, 'publish') 
+                    wf_tool.doActionFor(obj, 'publish')
                 except:
                     pass
 
@@ -318,7 +318,7 @@ class BaseHandler(object):
         portal_type = getattr(self, 'portal_type', None)
         if portal_type is None:
             print 'Omitting %s' % self.__class__.__name__
-            return 
+            return
 
         print 'Importing %s' % portal_type
 
@@ -475,7 +475,7 @@ class PatientHandler(BaseHandler):
         try:
             obj.setPhoto(self.get_binary(section))
         except NoOptionError:
-            pass # patient photo is the default photo. 
+            pass # patient photo is the default photo.
         chart_dic = eval( self.cfg.get(section, 'chartdata') )
         obj.import_chartdata(chart_dic) # there is a method in Patient to handle the chartdata import
         obj.at_post_create_script()
@@ -519,7 +519,7 @@ class ImpressoHandler(BaseHandler):
         if doctor_id:
             relations2build.append((Relation(obj, 'setDoctor', 'Doctor', doctor_id)))
         else:
-            obj.setDoctor(None)        
+            obj.setDoctor(None)
         obj.setDateOfVisit(self.cfg.get(section, 'dateOfVisit'))
         obj.setMedicalNote(self.cfg.get(section, 'medicalNote'))
         obj.setDocument_type(self.cfg.get(section, 'document_type'))
@@ -539,7 +539,7 @@ class GenericDocumentHandler(BaseHandler):
         if doctor_id:
             relations2build.append((Relation(obj, 'setDoctor', 'Doctor', doctor_id)))
         else:
-            obj.setDoctor(None)        
+            obj.setDoctor(None)
         obj.setDateOfVisit(self.cfg.get(section, 'dateOfVisit'))
         obj.setMedicalNote(self.cfg.get(section, 'medicalNote'))
         obj.setDocument_type(self.cfg.get(section, 'document_type'))
@@ -555,7 +555,7 @@ class TemplateHandler(BaseHandler):
     def import2(self, obj, section):
         ''' especific Template fields'''
         obj.setTemplate_body(self.get_binary(section))
-        obj.reindexObject()      
+        obj.reindexObject()
 
 registerHandler(TemplateHandler)
 
@@ -565,7 +565,6 @@ class ImageHandler(BaseHandler):
 
     def import2(self, obj, section):
         obj.setImage(self.get_binary(section))
-        import pdb; pdb.set_trace()
 
 registerHandler(ImageHandler)
 
@@ -603,9 +602,9 @@ def import_plone(self, import_dir, version, verbose=False):
     makes the importation de factory
     '''
 
-    print '-'*80    
+    print '-'*80
     print 'Importing Plone site from %s ' % import_dir
-    print '-'*80    
+    print '-'*80
 
     products = default_products
     profiles = []

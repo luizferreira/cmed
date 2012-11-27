@@ -258,6 +258,8 @@ def create_patients(portal, pr):
         set_patient_information(patient)
         # cria evento manualmente.
         patient.create_event(1000, patient.created(), patient)        
+        #Force to create chartFolder_hidden accessing chartFolder
+        accessChartFolder = patient.chartFolder
         print "> Patient %s created..." % new_obj_id
     return printed
 

@@ -104,7 +104,7 @@ button.cmed-success {
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff51a351', GradientType=0);
   filter: progid:dximagetransform.microsoft.gradient(enabled=false);    
 }
-/* ========= Definições Básicas ============ */
+/* ========= Patient Folder View ============ */
 
 
 .index-col{
@@ -128,7 +128,7 @@ div.tableContainer {
   clear: both;
   height: 500px;
   overflow: auto;
-  width: 800px;
+  width: 1000px;
 }
 
 /* Reset overflow value to hidden for all non-IE browsers. */
@@ -229,14 +229,14 @@ tbody.scrollContent tr.alternateRow td {
   min-width: 100px;
 }*/
 html>body thead.fixedHeader th {
-  width: 100px;
+  width: 80px;
 }
 html>body thead.fixedHeader th + th {
-  width: 150px;
+  width: 350px;
 }
 
 html>body thead.fixedHeader th + th + th {
-  width: 150px;
+  width: 100px;
 }
 
 html>body thead.fixedHeader th + th + th + th {
@@ -250,17 +250,17 @@ html>body thead.fixedHeader th + th + th + th {
 }*/
 
 html>body tbody.scrollContent  td {
-  width: 100px;
+  width: 80px;
   
 }
 
 html>body tbody.scrollContent td + td {
-  width: 150px;
+  width: 350px;
   
 }
 
 html>body tbody.scrollContent td + td + td {
-    width: 150px;
+    width: 100px;
   
 }
 html>body tbody.scrollContent td + td + td + td {
@@ -269,4 +269,8 @@ html>body tbody.scrollContent td + td + td + td {
 
 #celulas {
 text-align: center;
+}
+
+.cmedPrint{
+  display:none;
 }

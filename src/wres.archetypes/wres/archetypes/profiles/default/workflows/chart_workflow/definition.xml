@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="chart_workflow" title="Chart Workflow" description="" state_variable="review_state" initial_state="ativo" manager_bypass="False">
+ <permission>Access contents information</permission>
+ <permission>Change portal events</permission>
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <state state_id="ativo" title="Paciente Ativo">
+  <exit-transition transition_id="desativar_patient"/>
+  <permission-map name="Access contents information" acquired="True">
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Secretary</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="True">
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Secretary</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="True">
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Secretary</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="True">
+   <permission-role>Doctor</permission-role>
+   <permission-role>Manager</permission-role>
+   <permission-role>Secretary</permission-role>
+  </permission-map>
+ </state>
+ <transition transition_id="desativar_patient" title="Desativar Paciente" new_state="" trigger="USER" before_script="" after_script="">
+  <action url="javascript:askConfirmation('inactivate')" category="workflow" icon="">Desativar Paciente</action>
+  <guard>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+   <guard-role>Manager</guard-role>
+  </guard>
+ </transition>
+</dc-workflow>

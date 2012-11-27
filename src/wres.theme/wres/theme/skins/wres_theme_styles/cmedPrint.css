@@ -1,0 +1,77 @@
+.cmed{
+	display:none;
+}
+.pageTitle{
+	text-align: center;
+	background-color: rgb(166,166,166);
+    margin-bottom: 15px;
+}
+@page{
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+.cmedPrint{
+	display:inline;
+}
+
+.internalTable0{
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
+	position: relative;
+	width: 100%;
+	padding: 0em 1em 0em 1em;
+}
+.internalTable1{
+	padding: 0em 1em 0em 1em;
+	position: relative;
+	width: 100%;
+}
+
+.externalTable{
+	width:100%;
+    font-size:12px;
+    font-family:"Times New Roman", Times, serif;
+    border-top: solid 1px #CCCCCC;
+    height: 150%;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0px;
+}
+
+table td,
+table th {
+    background-color: transparent;
+    overflow: hidden;
+    z-index: 1;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+table th:before,
+table td:before {
+    content: "";
+    padding: 0;
+    height: 1px;
+    line-height: 1px;
+    width: 1px;
+    margin: -4px -994px -996px -6px;
+    display: block;
+    border: 0;
+    z-index: -1;
+    position:relative;
+    top: -500px;
+}
+
+table th:before {
+    border-top: 999px solid #c9c9c9;
+    border-left: 999px solid #c9c9c9;
+    width: 100%;
+}
+
+table td:before {
+    border-top: 999px solid #eeeeee;
+    border-left: 999px solid #eeeeee;
+}

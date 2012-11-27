@@ -44,6 +44,7 @@
   <guard>
    <guard-role>Doctor</guard-role>
    <guard-role>Secretary</guard-role>
+   <guard-role>Manager</guard-role>
   </guard>
  </transition>
  <transition transition_id="inactivate" title=""
@@ -53,6 +54,7 @@
   <guard>
    <guard-role>Doctor</guard-role>
    <guard-role>Secretary</guard-role>
+   <guard-role>Manager</guard-role>
   </guard>
  </transition>
 <!-- patient_status_modify?workflow_action=inactivate -->

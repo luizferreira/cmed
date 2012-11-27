@@ -4,15 +4,11 @@
     name="title">Contains workflow definitions for your portal</property>
  <object name="CMFUEMR_workflow" meta_type="Workflow"/>
  <object name="appointment_workflow" meta_type="Workflow"/>
+ <object name="chart_workflow" meta_type="Workflow"/>
  <object name="folder_workflow" meta_type="Workflow"/>
- <object name="intranet_folder_workflow" meta_type="Workflow"/>
- <object name="intranet_workflow" meta_type="Workflow"/>
- <object name="one_state_workflow" meta_type="Workflow"/>
  <object name="patient_workflow" meta_type="Workflow"/>
  <object name="plone_workflow" meta_type="Workflow"/>
- <object name="simple_publication_workflow" meta_type="Workflow"/>
  <object name="soap_workflow" meta_type="Workflow"/>
- <object name="task_workflow" meta_type="Workflow"/>
  <bindings>
   <default>
    <bound-workflow workflow_id="CMFUEMR_workflow"/>
@@ -31,50 +27,48 @@
   <type type_id="ATSimpleStringCriterion"/>
   <type type_id="ATSortCriterion"/>
   <type type_id="AdminFolder"/>
-  <type type_id="ChartFolder"/>
+  <type type_id="ChartFolder">
+   <bound-workflow workflow_id="chart_workflow"/>
+  </type>
+  <type type_id="Clinic"/>
   <type type_id="Discussion Item"/>
   <type type_id="Doctor"/>
   <type type_id="DoctorFolder"/>
-  <type type_id="Template"/>
-  <type type_id="TemplateFolder"/>  
+  <type type_id="Document">
+   <bound-workflow workflow_id="intranet_workflow"/>
+  </type>
   <type type_id="DocumentFolder"/>
   <type type_id="ExamFolder"/>
   <type type_id="File"/>
   <type type_id="Folder"/>
-  <type type_id="Large Plone Folder" />
+  <type type_id="GenericDocument"/>
   <type type_id="Image"/>
+  <type type_id="Impresso"/>
   <type type_id="InsuranceFolder"/>
-  <type type_id="PatientFolder"/>
-  <type type_id="Plone Site"/>
-  <type type_id="ReferringProviderFolder"/>
-  <type type_id="Secretary"/>
-  <type type_id="SecretaryFolder"/>
-  <type type_id="Transcriptionist"/>
-  <type type_id="TranscriptionistFolder"/>
-  <type type_id="VisitFolder"/>
-  <type type_id="WresAdmin"/>
-  <type type_id="Clinic"/>
-  <type type_id="Topic"/>
-  <type type_id="UploadChartFolder"/>
-  <type type_id="GenericDocument"/>  
-  <type type_id="Impresso"/>  
-  
-  <type type_id="Document">
-   <bound-workflow workflow_id="intranet_workflow"/>
-  </type>
   <type type_id="Large Plone Folder">
    <bound-workflow workflow_id="intranet_workflow"/>
   </type>
   <type type_id="Patient">
    <bound-workflow workflow_id="patient_workflow"/>
   </type>
+  <type type_id="PatientFolder"/>
+  <type type_id="Plone Site"/>
+  <type type_id="ReferringProviderFolder"/>
+  <type type_id="Secretary"/>
+  <type type_id="SecretaryFolder"/>
+  <type type_id="Template"/>
+  <type type_id="TemplateFolder"/>
+  <type type_id="Topic"/>
+  <type type_id="Transcriptionist"/>
+  <type type_id="TranscriptionistFolder"/>
+  <type type_id="UploadChartFolder"/>
   <type type_id="Visit">
    <bound-workflow workflow_id="appointment_workflow"/>
   </type>
-  <!-- TODO: Retirar a partir de 09-2012 -->
+  <type type_id="VisitFolder"/>
   <type type_id="VisitTemp">
    <bound-workflow workflow_id="appointment_workflow"/>
-  </type>  
-  
+  </type>
+  <type type_id="WresAdmin"/>
  </bindings>
 </object>

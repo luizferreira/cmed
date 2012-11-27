@@ -60,8 +60,13 @@ tableSearch.init = function() {
 
 $(document).ready(function(){
 tableSearch.init();
-
-
 total = document.getElementById('total')
 total.innerText = "Total: " + tableSearch.RowsLength
+
+tabela = document.getElementById('tabela')
+resultado = document.getElementById('semResultado')
+if(tableSearch.RowsLength == 0){
+            tabela.style.display = "none";
+            resultado.style.display = "inline"
+        }
 });
