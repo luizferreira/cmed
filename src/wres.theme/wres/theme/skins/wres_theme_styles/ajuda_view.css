@@ -20,9 +20,10 @@ div.help_title {
 }
 .help_navigation{
     position: relative;
-    right: 0px;
+    right: 20px;
+    top: -40px;
     margin: -30px 70px 0px 0px;
-    width: 200px;
+    width: 260px;
     float: right;
     margin-left: 20px;
 }
