@@ -155,6 +155,8 @@ $(document).ready(function(){
         }
 	})
 
+    temporizador(300, "#content");
+
 });
 
 function patientClick(){
