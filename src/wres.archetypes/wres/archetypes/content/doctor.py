@@ -166,7 +166,8 @@ class Doctor(wresuser.WRESUser):
 
     def getAppointmentsURL(self):
         portal = getSite()
-        return portal.absolute_url_path() + '/Appointments/' + self.getId() + '/Agenda'
+        #return portal.absolute_url_path() + '/Appointments/' + self.getId() + '/Agenda'
+        return '/'.join(portal.getPhysicalPath()) + '/Appointments/' + self.getId() + '/Agenda'
 
     def validateSignPassword(self, typed_pass):
         sign_password = self.getSignPassword()
