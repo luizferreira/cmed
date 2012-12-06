@@ -60,7 +60,7 @@
       permission="zope2.View"
   />
 
-  <!-- cadastrando a nova viewlet para o banner no footer -->
+  <!-- cadastrando a nova viewlet para o banner no footer
   <browser:viewlet
       name="plone.footer_banner"
       manager="plone.app.layout.viewlets.interfaces.IPortalFooter"
@@ -68,7 +68,7 @@
       for="*"
       layer=".interfaces.IThemeSpecific"
       permission="zope2.View"
-  />
+  />-->
 
   <!-- adding new viewlet to handle statistics requests to cstat -->
   <browser:viewlet
