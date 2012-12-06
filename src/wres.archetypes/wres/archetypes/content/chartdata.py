@@ -17,9 +17,9 @@ class EventBrain:
         for metadata in event.metadata:
             setattr(self, metadata, getattr(event, metadata))
         self.review_state = ''
-    
+
     def getObject(self):
-        ''' 
+        '''
         search catalog for Patient with id self.patient_id
         events = patient.get_events()
         return events[self.id]
@@ -32,7 +32,7 @@ class Event:
     cmed event, similar to encounter concept.
     '''
     __allow_access_to_unprotected_subobjects__ = 1
-    ''' 
+    '''
     EVENT TYPES
     '''
     # EVENT TYPES
@@ -43,13 +43,13 @@ class Event:
                 'path', 'patient_id', 'id', 'event_type', 'meta_type']
 
     def __init__(self, patient, ev_type, date, related_obj):
-        self.portal = getSite()   
+        self.portal = getSite()
         self.cct = getToolByName(self.portal, 'cmed_catalog_tool')
         self.patient_id = patient.getId()
         self.date = date
         self.related_obj = related_obj
         self.author = self._author()
-        self.type = ev_type     
+        self.type = ev_type
 
         # indexes and metadata
         self.event_text = self.eprint()
@@ -65,7 +65,7 @@ class Event:
 
     def catalog_me(self):
         '''
-        index an event (through an EventBrain) in event_catalog. 
+        index an event (through an EventBrain) in event_catalog.
         '''
         self.id = self.cct.event_catalog_map.new_docid()
         self.cct.event_catalog_map.add(EventBrain(self), self.id)
@@ -75,7 +75,7 @@ class Event:
         '''
         used to solve a problem in some urls with absolute_url_path().
         '''
-        portal_url = self.portal.absolute_url_path()
+        portal_url = '/'.join(self.portal.getPhysicalPath())
         patient_url = portal_url + '/Patients/' + self.patient_id
         chart_url = patient_url + '/chartFolder_hidden'
 
@@ -83,27 +83,27 @@ class Event:
             return chart_url + self.related_obj.url_sufix
         elif self.related_obj.meta_type == 'Patient':
             return patient_url
-        return self.related_obj.absolute_url_path()
+        return '/'.join(self.related_obj.getPhysicalPath())
 
     def eprint(self):
         '''
         returns html to be printed in screen
         '''
         if self.related_obj.meta_type == 'Visit':
-            related_obj = "<a target=\"_blank\" href=\"" + self.related_obj.absolute_url_path() + "\" >" + self.related_obj.getVisit_type() + "</a>"
+            related_obj = "<a target=\"_blank\" href=\"" + '/'.join(self.related_obj.getPhysicalPath()) + "\" >" + self.related_obj.getVisit_type() + "</a>"
         else:
             related_obj = "<a target=\"_blank\" href=\"" + self.event_url() + "\" >" + self.related_obj.Title() + "</a>"
         return self.prefix() + related_obj + self.posfix()
 
     def prefix(self):
-        ''' 
-        called by eprint. 
+        '''
+        called by eprint.
         '''
         # necessary to be here (and not in the header), since medicaldocument import chartdata too.
         from wres.archetypes.content.medicaldocument import MedicalDocument
         if self.type == Event.CREATION:
             if self.related_obj.meta_type == 'Visit':
-                return ''            
+                return ''
             elif self.related_obj.meta_type == 'Patient':
                 return 'Paciente '
             elif isinstance(self.related_obj, ChartItemEventWrapper):
@@ -113,7 +113,7 @@ class Event:
             elif self.related_obj.portal_type == 'Image':
                 return 'Imagem '
             elif self.related_obj.portal_type == 'File':
-                return 'Arquivo '            
+                return 'Arquivo '
         return ''
 
     def posfix(self):
@@ -165,7 +165,7 @@ class Event:
 
     def export_dict(self):
         if isinstance(self.related_obj, ChartItemEventWrapper):
-            return {'type': self.type, 'date': self.date, 'related_obj' : self.related_obj.meta_type, 
+            return {'type': self.type, 'date': self.date, 'related_obj' : self.related_obj.meta_type,
                     'mapping_name' : self.related_obj.mapping_name,  'prefix' : self.related_obj.prefix,
                     'title' : self.related_obj.title, 'url_sufix' : self.related_obj.url_sufix}
         else:
@@ -185,11 +185,11 @@ class ChartItemEventWrapper:
         elif mapping_name == 'problems':
             self.prefix = 'Diagnóstico '
             self.title = object['problem']
-            self.url_sufix = '/show_problem_list'            
+            self.url_sufix = '/show_problem_list'
         elif mapping_name == 'allergies':
             self.prefix = 'Alergia '
             self.title = object['allergy']
-            self.url_sufix = '/show_allergies'         
+            self.url_sufix = '/show_allergies'
         elif mapping_name == 'laboratory':
             self.prefix = 'Exame '
             self.title = object['exam']
@@ -200,7 +200,7 @@ class ChartItemEventWrapper:
             self.url_sufix = '/show_medications'
         self.mapping_name = mapping_name
         self.patient = patient
-        self.id = self.patient.getId() + '_' + mapping_name + '_' + self.title 
+        self.id = self.patient.getId() + '_' + mapping_name + '_' + self.title
 
     def getId(self):
         return self.id
@@ -208,9 +208,10 @@ class ChartItemEventWrapper:
     def Title(self):
         return self.title
 
-    def absolute_url_path(self):
-        chart_folder = self.patient.chartFolder
-        return chart_folder.absolute_url_path() + self.url_sufix
+    # TODO: Remover a partir de 01/04/2013
+    # def absolute_url_path(self):
+    #     chart_folder = self.patient.chartFolder
+    #     return chart_folder.absolute_url_path() + self.url_sufix
 
 class ChartData(Persistent):
     __allow_access_to_unprotected_subobjects__ = 1
@@ -265,22 +266,22 @@ class ChartData(Persistent):
         entry['data'] = object
         mappings[id] = entry
         return id
-        
-    #Edita um item do atributo mappings do chart_data    
+
+    #Edita um item do atributo mappings do chart_data
     def edit_entry(self, id, mapping_name, **data):
         mappings = getattr(self, mapping_name)
         object = mappings[id]
         for key, value in data.items():
             object[key] = value
         mappings[id] = object
-    
+
     #Pega um atributo completo do mappings em chart_data
     def get_entry(self, mapping_name):
         return dict(getattr(self, mapping_name))
-    
+
     #Pega um item do atributo mappings do chart_data
     def get_entry_item(self, id, mapping_name):
         mappings = getattr(self, mapping_name)
         return mappings[id]
-    
+
 InitializeClass(ChartData)
