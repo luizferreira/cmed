@@ -27,12 +27,10 @@
                   <table>
                       <tr>
                           <td width="264px" height="192px" style="vertical-align: top;">
-                              <tal tal:condition="python:doctor['photo']">
-                                  <img max-width="70%" max-height="100%" tal:attributes="src python:doctor['photo'].absolute_url();
-                                  alt python:doctor['photo'].alt;
-                                  title python:doctor['photo'].alt"/>
+                              <tal tal:condition="doctor/photo">
+                                  <img max-width="70%" max-height="100%" tal:attributes="src doctor/photo_path;"/>
                               </tal>
-                              <tal tal:condition="python:not doctor['photo']">
+                              <tal tal:condition="not: doctor/photo">
                                   <img max-width="70%" max-height="100%" tal:attributes="src python:context.getDefaultPhoto()"/>
                               </tal>  
                           </td>

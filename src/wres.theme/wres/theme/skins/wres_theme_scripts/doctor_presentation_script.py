@@ -1,7 +1,6 @@
 ## Script (Python) "create_encounter"
 ##
 
-
 results = context.Doctors.list_doctors()
 
 def get_vocabulary(obj):
@@ -19,6 +18,7 @@ for result in results:
     dic['email'] = doc.getEmail()
     dic['curriculum'] = []
     dic['photo'] = doc.getPhoto()
+    dic['photo_path'] = doc.getPhoto().absolute_url()
 
     vocabulary = get_vocabulary(doc)
     dic['specialty1'] = vocabulary.getValue(doc.getSpecialty1())
