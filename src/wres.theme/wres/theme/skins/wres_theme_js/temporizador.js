@@ -16,3 +16,4 @@ function temporizador(timer, elemento){
         }
     }, 1000);
 }
+temporizador(300, "#content");

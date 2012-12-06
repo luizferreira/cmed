@@ -154,9 +154,6 @@ $(document).ready(function(){
             reloadVisitsOnScreen();
         }
 	})
-
-    temporizador(300, "#content");
-
 });
 
 function patientClick(){
