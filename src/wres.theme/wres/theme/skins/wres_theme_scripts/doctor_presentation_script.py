@@ -18,7 +18,8 @@ for result in results:
     dic['email'] = doc.getEmail()
     dic['curriculum'] = []
     dic['photo'] = doc.getPhoto()
-    dic['photo_path'] = doc.getPhoto().absolute_url()
+    if dic['photo']:
+        dic['photo_path'] = doc.getPhoto().absolute_url()
 
     vocabulary = get_vocabulary(doc)
     dic['specialty1'] = vocabulary.getValue(doc.getSpecialty1())
@@ -37,7 +38,7 @@ for result in results:
             string = 'Especialista em '
 
         string += course_dic['course'] + ' pelo(a) ' + course_dic['inst'] + '.'
-        dic['curriculum'].append(string)    
+        dic['curriculum'].append(string)
 
     doctors_list.append(dic)
 
