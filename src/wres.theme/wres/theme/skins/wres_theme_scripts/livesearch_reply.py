@@ -156,16 +156,17 @@ else:
 
         write('''<li class="LSRow" style="width:425px;">''')
         write(icon.html_tag() or '')
-        full_title = safe_unicode(pretty_title_or_id(result))
+        full_title = safe_unicode(pretty_title_or_id(patient))
         if len(full_title) > MAX_TITLE:
             display_title = ''.join((full_title[:MAX_TITLE],'...'))
         else:
             display_title = full_title
+        #import pdb; pdb.set_trace()
         full_title = full_title.replace('"', '&quot;')
         klass = 'contenttype-%s' % ploneUtils.normalizeString(result.portal_type)
 
         # tratamento especial para o tipo patient
-        # o primeiro if se refere ao Procurar do adicionar consulta
+        # o primeiro if se refere ao Procurar do adicionar consulta1
         # o elif se refere a pesquisa da pasta Patients
         if building_search:
             dt = patient.getBirthDate()
