@@ -184,7 +184,7 @@ else:
             patient_id_pessoal = patient.getId() + "_pessoal"
             patient_id_prontuario = patient.getId() + "_prontuario"
             formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])
-            pchart_url = patient.absolute_url()+'/chartFolder_hidden'
+            pchart_url = patient.absolute_url()+'/chartFolder'
 
             if dt == None:
                 display_text = "%s (%s)" % (display_title, formatted_phone )
