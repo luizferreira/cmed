@@ -24,7 +24,7 @@ for brain in brains:
 	if birth:
 		patient.birth = birth.strftime('%d/%m/%Y')
 
-	patient.chartUrl = obj.absolute_url() + '/chartFolder_hidden/'
+	patient.chartUrl = obj.absolute_url() + '/chartFolder'
 
 	
 	listMetaPatients.append(patient)
