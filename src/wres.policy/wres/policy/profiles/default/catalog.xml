@@ -7,6 +7,9 @@
     </index>
     <index name="LTitle" meta_type="FieldIndex">
         <indexed_attr value="lower_title"/>
-    </index>  
+    </index>
+    <index name="getProviderId" meta_type="FieldIndex">
+        <indexed_attr value="getProviderId" />
+    </index>
     <column value="asc2title"/>
 </object>
