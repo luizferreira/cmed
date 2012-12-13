@@ -36,11 +36,11 @@ setup(name='wres.policy',
           'Products.Clouseau == 1.0',
           'repoze.catalog == 0.8.2',
           'requests == 0.13.9',
+          'Products.TinyMCE == 1.2.14',
           'wres.brfields',
           'wres.archetypes',
           'wres.theme',
           'wres.tour',
-          'Products.TinyMCE',
           # 'PIL==1.1.6',
           # Pillow e lxml sao p413
           # -*- Extra requirements: -*-
