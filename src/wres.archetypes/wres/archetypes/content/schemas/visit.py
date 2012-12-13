@@ -53,7 +53,7 @@ MAIN = Schema((
             default="1a Consulta",
             vocabulary = "getTypesOfVisit",
             widget = SelectionWidget(
-                    label = 'Tipo de Consulta',
+                    label = 'Tipo de Visita',
             ),
         ),
 
@@ -61,7 +61,7 @@ MAIN = Schema((
             required=False,
             vocabulary = "getVisitReason",
             widget = SelectionWidget(
-                    label = 'Razão da Consulta',
+                    label = 'Razão da Visita',
                     macro_edit='generic_selection_edit_macro',
                     helper_js=('generic_selection_edit.js', ),             
             ),

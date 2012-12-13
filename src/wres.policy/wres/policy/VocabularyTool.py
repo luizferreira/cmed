@@ -78,7 +78,7 @@ class VocabularyTool(SimpleItem, PropertyManager):
                 new_vocab_list.append(new_vocab)
         return new_vocab_list
 
-    def add2vocabulary(self, vocab_name, new_vocabule, add_type=0):
+    def add2vocabulary(self, vocab_name, new_vocabule, add_type=0, sort=0):
         """ add_type refers to the way the words will be saved in the vocab.
         0 = words saved the exact way the word came.
         1 = words saved lower cased.
@@ -88,5 +88,7 @@ class VocabularyTool(SimpleItem, PropertyManager):
         current_vocab = self.get_vocabulary(vocab_name)
         if new_vocabule not in current_vocab:
             current_vocab.append(new_vocabule)
+            if sort:
+                current_vocab.sort()
             property_name = self.__get_property_name(self.property_prefix, vocab_name)
             self._persist_vocabulary_manager(property_name, current_vocab)

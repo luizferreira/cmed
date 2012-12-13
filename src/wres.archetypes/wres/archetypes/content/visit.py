@@ -87,7 +87,7 @@ class Visit(event.ATEvent):
 
     def at_post_create_script(self):
         """ Esse método é chamado no momento da criação de um objeto da classe.
-        Ele preenche o campo subject (tags) com um id de um médico.
+        Ele preenche o campo subject (tags) com visit type no edit.
         """
         patient = self.getPatient()
         patient.create_event(Event.CREATION, self.startDate, self)
@@ -109,7 +109,7 @@ class Visit(event.ATEvent):
         if visit_reason not in dl:
             portal = getSite()
             vt = getToolByName(portal, 'vocabulary_tool')        
-            vt.add2vocabulary('visit_reason', visit_reason, 1) 
+            vt.add2vocabulary('visit_reason', visit_reason, 1, 1) 
         self.at_post_edit_script()
 
     def addInsurance(self):
@@ -118,7 +118,7 @@ class Visit(event.ATEvent):
         if new_insurance not in dl:
             portal = getSite()
             vt = getToolByName(portal, 'vocabulary_tool')        
-            vt.add2vocabulary('insurance', new_insurance, 1)
+            vt.add2vocabulary('insurance', new_insurance, 1, 1)
         # self.setTitle(dl.getValue(self.getDocument_type()))
 
     def at_post_edit_script(self):
