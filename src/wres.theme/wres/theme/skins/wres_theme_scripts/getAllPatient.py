@@ -1,7 +1,11 @@
+from wres.policy.utils.utils import remove_accents
+from wres.policy.utils.utils import strip_accents
+
 class PatientSomeInfo():
 	phone = ""
 	birth = ""
 	name = ""
+	comp_name = ""
 	chartUrl = ""
 
 pc = context.portal_catalog
@@ -25,9 +29,9 @@ for brain in brains:
 		patient.birth = birth.strftime('%d/%m/%Y')
 
 	patient.chartUrl = obj.absolute_url() + '/chartFolder'
-
-	
+	patient.comp_name = strip_accents(unicode(patient.name, 'utf-8'))
 	listMetaPatients.append(patient)
-listMetaPatients.sort(key=lambda patient: patient.name, reverse=False)
+	
+listMetaPatients.sort(key=lambda patient: patient.comp_name, reverse=False)
 return listMetaPatients
 

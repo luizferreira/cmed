@@ -13,6 +13,7 @@ from Products.Archetypes.utils import DisplayList
 from Products.Archetypes.Registry import setSecurity
 from Products.Archetypes.interfaces.vocabulary import IVocabulary
 
+import unicodedata
 import logging
 
 #===============================================================================
@@ -232,6 +233,9 @@ def do_transformation(undone):
 
 def getDefaultPhotoUrl():
     return getSite().portal_skins.wres_theme_images.__getitem__('nophoto.jpeg').absolute_url()
+
+def strip_accents(s):
+   return ''.join((c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn'))
 
 class LogoWrapper:
     def __init__(self, obj):
