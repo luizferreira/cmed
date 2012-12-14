@@ -349,7 +349,7 @@ COMPLEMENTAR = Schema((
 
     StringField('CTPS',
         widget = StringWidget(
-	        label='Carteira de Trabalho e Previdência Social',
+	        label='Carteira de Trabalho',
         ),
     ),
 
