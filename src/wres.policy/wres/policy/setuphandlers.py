@@ -429,11 +429,10 @@ def addExampleTemplate(portal):
         <br /><br /></td></tr><tr><th colspan="2">Recomendações</th></tr><tr><td><br /><br /></td></tr></tbody></table>\
         <table class="plain"><tbody><tr><th colspan="2">DETALHES DE RETORNO</th></tr><tr><td>Data de Retorno:</td><td></td></tr>\
         <tr><th colspan="2">Observações para retorno:</th></tr><tr><td colspan="2"><br \><br \></td></tr></tbody></table>'
-    import random
     print '*** Criando objeto Template...'
     templates = getattr(portal, "Templates")
-    new_id = "Modelo-"+str(random.randint(0, 9999))
-    consulta = getOrCreateType(portal, templates.Consultas, new_id, "Template")
+    template_id = 'exemplo-primeira-consulta'
+    consulta = getOrCreateType(portal, templates.Consultas, template_id, "Template")
     consulta.setTemplate_body(document_template)
     consulta.setTitle("[Exemplo]Primeira Consulta")
     consulta.reindexObject()
@@ -489,7 +488,7 @@ def createFirstDoctor(portal, context):
         doctor.fillFirstDoctorInfo(doctor_info)
         clinic.fillClinicInformation(doctor_info)
         doctor.reindexObject()
-        clinic.reindexObject() 
+        clinic.reindexObject()
 
 def setupVarious(context):
     """ Funcao generica executada na instalacao do wres policy """
