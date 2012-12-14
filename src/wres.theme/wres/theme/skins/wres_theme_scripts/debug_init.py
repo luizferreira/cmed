@@ -114,7 +114,7 @@ def create_uemr_user(related_object, user_id, email='', fullname=''):
         },
     )
     uf.userSetGroups(user_id, [related_object.getGroup()])
-    pm.createMemberArea(member_id=user_id) 
+    pm.createMemberArea(member_id=user_id)
 
 def create_new_object(portal, parent, newid, new_obj_type):
     """
@@ -133,7 +133,7 @@ def random_birthdate():
     return DateTime(random.randrange(1901,HOJE.year()), random.randrange(1,13), random.randrange(1,28))
 
 def set_patient_information(p):
-	
+
     p.setFirstName(patient_fname)
     p.setLastName(patient_lname)
     p.setEmail(email)
@@ -151,7 +151,7 @@ def set_patient_information(p):
 
     if int(full_info):
         p.setHomePhone(phone)
-        p.setMobile(cphone)    
+        p.setMobile(cphone)
         p.setSocialSecurity('55351927403')
         p.setIdentidade('MG13082425')
         p.setOrgaoEmissor('ssp')
@@ -221,8 +221,8 @@ def set_secretary_information(s):
     s.setCity('Belo Horizonte')
     s.setState('Minas Gerais')
     s.setPhone(phone)
-    s.setCel(cphone)    
-    s.reindexObject()    
+    s.setCel(cphone)
+    s.reindexObject()
 
 def set_admin_information(a):
     a.setFirstName(admin_fname)
@@ -257,7 +257,7 @@ def create_patients(portal, pr):
         create_uemr_user(patient, new_obj_id, email=email, fullname=fullname)
         set_patient_information(patient)
         # cria evento manualmente.
-        patient.create_event(1000, patient.created(), patient)        
+        patient.create_event(1000, patient.created(), patient)
         #Force to create chartFolder_hidden accessing chartFolder
         accessChartFolder = patient.chartFolder
         print "> Patient %s created..." % new_obj_id
@@ -277,7 +277,7 @@ def create_doctors(portal, pr):
         set_doctor_information(doctor)
         doctor.add_visits_folder()
         print "> Doctor %s created..." % new_obj_id
-    return printed   
+    return printed
 
 def create_secretaries(portal, pr):
 
@@ -292,7 +292,7 @@ def create_secretaries(portal, pr):
         create_uemr_user(secretary, new_obj_id, email=email, fullname=fullname)
         set_secretary_information(secretary)
         print "> Secretary %s created..." % new_obj_id
-    return printed     
+    return printed
 
 def create_admins(portal, pr):
 
@@ -307,7 +307,7 @@ def create_admins(portal, pr):
         create_uemr_user(admin, new_obj_id, email=email, fullname=fullname)
         set_admin_information(admin)
         print "> Admin %s created..." % new_obj_id
-    return printed      
+    return printed
 
 def set_clinic(portal, pr):
 
@@ -318,7 +318,7 @@ def set_clinic(portal, pr):
     set_clinic_information(clinic)
     print "> Clinic initialized..."
     return printed
-    
+
 def create_other(portal):
     templates = getattr(portal, "Templates")
     context.plone_log("Creating templates")
@@ -333,6 +333,7 @@ def create_other(portal):
     impresso.setTemplate_body("<p>Atesto para os devidos fins que: <b>José Carlos de Oliveira</b> \
     se encontrou enfermo entre 07/05/2012 e 12/05/2012 e incapaz de exercer suas atribuições normalmente. CID A09.</p>")
     impresso.setTitle("Licença Médica")
+    impresso.reindexObject()
     return printed
 
 def init():
@@ -340,7 +341,7 @@ def init():
     intro = """==========================================================
 INITIALIZATION SCRIPT
 
-Summary: Used to automate the creation of cmed users. 
+Summary: Used to automate the creation of cmed users.
 
 Params:
 > pat = number of patients to be created (Default = 2)
@@ -375,7 +376,7 @@ Example of usage:
         print create_patients(portal, pr)
     else:
         print 'I will not create patients.\n'
-    
+
     if int(doctor_num) > 0:
         print create_doctors(portal, pr)
     else:
@@ -390,12 +391,12 @@ Example of usage:
         print create_admins(portal, pr)
     else:
         print 'I will not create admins.\n'
-        
+
     if int(create_clinic):
         print set_clinic(portal, pr)
     else:
         print 'I will not set clinic information.\n'
-        
+
     create_other(portal)
 
     context.plone_log("---------------------------------------------\n")
