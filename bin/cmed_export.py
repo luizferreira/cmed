@@ -83,7 +83,7 @@ def export_vocabulary(plone, validation, export_dir):
 
 class Validation(object):
 
-    def __init__(self, export_dir):
+    def __init__(self, plone, export_dir):
         self.export_dir = export_dir
         self.counters = []
         for handler in handlers.values():
@@ -104,6 +104,11 @@ class Validation(object):
             counter_name = 'vocab_' + vocab + '_counter'
             setattr(self, counter_name, 0)
             self.counters.append(counter_name)
+
+        # counting events.
+        index = plone.cmed_catalog_tool.event_catalog['event_type']
+        setattr(self, 'events_counter', len(index.docids()))
+        self.counters.append('events_counter')
 
         fname = os.path.join(self.export_dir, 'validation' + '.ini')
         if not os.path.exists(os.path.dirname(fname)):
@@ -535,7 +540,7 @@ if __name__ == '__main__':
             shutil.rmtree(export_dir, ignore_errors=True)
         os.makedirs(export_dir)
 
-        validation = Validation(export_dir) # validation object, store validation data.
+        validation = Validation(plone, export_dir) # validation object, store validation data.
 
         print '-'*80
         print 'Exporting Plone site: %s' % path

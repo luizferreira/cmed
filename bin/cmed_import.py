@@ -670,8 +670,6 @@ if __name__ == '__main__':
 
     options, args = parser.parse_args()
 
-    import ipdb; ipdb.set_trace()
-
     for import_dir in args:
 
         uf = app.acl_users
