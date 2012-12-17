@@ -369,12 +369,13 @@ class PatientHandler(BaseHandler):
             self.write_binary(str(image.data))
         chart_summary = obj.chart_data_summary()
         self.write('chartdata ', chart_summary)
-        #events = obj.get_events()
-        #ev_list = []
-        #for event in events:
-        #    ev_dict = event.export_dict()
-        #    ev_list.append(ev_dict)
-        #self.write('events', ev_list)
+
+        events = obj.get_events()
+        ev_list = []
+        for event in events:
+           ev_dict = event.export_dict()
+           ev_list.append(ev_dict)
+        self.write('events', ev_list)
 
 registerHandler(PatientHandler)
 
@@ -527,7 +528,7 @@ if __name__ == '__main__':
     parser = OptionParser()
     parser.add_option('-u', '--user', dest='username', default='admin')
     parser.add_option('-v', '--verbose', dest='verbose', action='store_true',
-                      default=False)
+                      default=True)
 
     options, args = parser.parse_args()
 
@@ -562,7 +563,3 @@ if __name__ == '__main__':
             exporter.export(portal_type)
 
         validation.write()
-        import ipdb; ipdb.set_trace()
-        final_msg = '''Os dados da instância foram exportados para a pasta:\n%s\nO próximo passo é criar uma instância Cmed na nova release e rodar o script\nnew_importer.py com os dados da exportação no $INSTANCE_HOME.''' % os.path.abspath(export_dir)
-
-        print final_msg

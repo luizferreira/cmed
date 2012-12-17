@@ -193,6 +193,8 @@ class Validation(object):
             'insurance': self.cfg.get(section, 'vocab_insurance_counter'),
         }
 
+        events_counter = self.cfg.get(section, 'events_counter')
+
         tuples = [
         ('Clinic', clinic_counter),
         ('Doctor', doctor_counter),
@@ -218,6 +220,11 @@ class Validation(object):
             vocab = vt.get_vocabulary(key)
             str_exp = '%d == %s' % (len(vocab), vocabs[key])
             self.vprint('number of %s' % 'vocab_'+key, str_exp)
+
+        index = self.plone.cmed_catalog_tool.event_catalog['event_type']
+        str_exp = '%d == %s' % (len(index.docids()), events_counter)
+        self.vprint('number of %s' % 'Events', str_exp)
+
 
     def vprint(self, validator_string, str_exp, verror='Erro'):
         '''
@@ -496,6 +503,8 @@ class PatientHandler(BaseHandler):
             pass # patient photo is the default photo.
         chart_dic = eval( self.cfg.get(section, 'chartdata') )
         obj.import_chartdata(chart_dic) # there is a method in Patient to handle the chartdata import
+        events = self.cfg.get(section, 'events')
+        import_events(obj, events)
         obj.at_post_create_script()
         obj.reindexObject()
 
@@ -595,25 +604,22 @@ class FileHandler(BaseHandler):
 
 registerHandler(FileHandler)
 
-def import_events(import_dir):
-
-    print 'Importing events'
-
-    events_file = os.path.join(import_dir, 'patients.ini')
-
-    CP = ConfigParser()
-    CP.read([events_file])
-    get = CP.get
-    for section in CP.sections():
-        ev_list = eval(get(section, 'events'))
-        for event in ev_list:
-            if event['related_obj'] is 'ChartItemEventWrapper':
-                dummy = {}
-                dummy['medication'] = dummy['problem'] = dummy['allergy'] = dummy['exam'] = event['title']
-                wrapper = ChartItemEventWrapper(event['mapping_name'], patient, **dummy)
-                patient.create_event(event['type'], DateTime(event['date']), wrapper)
-            else:
-                patient.create_event(event['type'], DateTime(event['date']), search_catalog_by_id(event['related_obj']))
+def import_events(patient, events):
+    '''
+    Get event list exported and re-create the events, except the 'Patient Created',
+    that it was already created when the patient was created.
+    OLHAR QUESTÃO DA DATA!
+    '''
+    for event in eval(events):
+        if event['related_obj'] == patient.getId() and event['type'] == 1000:
+            continue
+        if event['related_obj'] is 'ChartItemEventWrapper':
+            temp = {}
+            temp['medication'] = temp['problem'] = temp['allergy'] = temp['exam'] = event['title']
+            wrapper = ChartItemEventWrapper(event['mapping_name'], patient, **temp)
+            patient.create_event(event['type'], DateTime(event['date']), wrapper)
+        else:
+            patient.create_event(event['type'], DateTime(event['date']), search_catalog_by_id(event['related_obj']))
 
 def import_plone(self, import_dir, version, verbose=False):
     '''
@@ -647,8 +653,6 @@ def import_plone(self, import_dir, version, verbose=False):
         handler() # run it
         transaction.commit()
 
-    import_events(import_dir)
-
     # fixup(plone)
     print 'Building relations'
     for relation in relations2build:
@@ -665,7 +669,7 @@ if __name__ == '__main__':
     parser = OptionParser()
     parser.add_option('-u', '--user', dest='username', default='admin')
     parser.add_option('-v', '--verbose', dest='verbose', action='store_true',
-                      default=False)
+                      default=True)
     parser.add_option('-r', '--release', dest='release', default='0.0')
 
     options, args = parser.parse_args()
