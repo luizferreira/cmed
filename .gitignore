@@ -57,6 +57,9 @@ bin/zeoctl
 bin/zeomultipack
 bin/zeopack
 bin/zeopasswd
+bin/os
+bin/shutil
+bin/tempfile
 var
 sdist
 develop-eggs
