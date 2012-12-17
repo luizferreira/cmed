@@ -16,7 +16,7 @@ class CmedCatalogTool(SimpleItem):
     def add_catalog(self, catalog_id):
         setattr(self, catalog_id, Catalog())
         setattr(self, catalog_id+'_map', DocumentMap())
-        self.catalogs.append(id)
+        self.catalogs.append(catalog_id)
         return getattr(self, catalog_id)
 
     def catalog_obj(self, catalog_id, obj):
