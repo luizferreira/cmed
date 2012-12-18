@@ -121,6 +121,7 @@ def search_catalog_by_id(id):
         return brains[0].getObject()
     except:
         print 'Object not in catalog.'
+        return None
 
 
 class Relation:
@@ -503,8 +504,8 @@ class PatientHandler(BaseHandler):
             pass # patient photo is the default photo.
         chart_dic = eval( self.cfg.get(section, 'chartdata') )
         obj.import_chartdata(chart_dic) # there is a method in Patient to handle the chartdata import
-        events = self.cfg.get(section, 'events')
-        import_events(obj, events)
+        # events = self.cfg.get(section, 'events')
+        # import_events(obj, events)
         obj.at_post_create_script()
         obj.reindexObject()
 
@@ -604,22 +605,38 @@ class FileHandler(BaseHandler):
 
 registerHandler(FileHandler)
 
-def import_events(patient, events):
+def import_events(import_dir):
     '''
     Get event list exported and re-create the events, except the 'Patient Created',
-    that it was already created when the patient was created.
-    OLHAR QUESTÃO DA DATA!
+    that it was already created when the patient was created and for Images and Files.
+    Patient, Images (ATBlob) and Files (ATBlob) creation events are created when them
+    is imported.
     '''
-    for event in eval(events):
-        if event['related_obj'] == patient.getId() and event['type'] == 1000:
-            continue
-        if event['related_obj'] is 'ChartItemEventWrapper':
-            temp = {}
-            temp['medication'] = temp['problem'] = temp['allergy'] = temp['exam'] = event['title']
-            wrapper = ChartItemEventWrapper(event['mapping_name'], patient, **temp)
-            patient.create_event(event['type'], DateTime(event['date']), wrapper)
-        else:
-            patient.create_event(event['type'], DateTime(event['date']), search_catalog_by_id(event['related_obj']))
+
+    patients_file = os.path.join(import_dir, 'patient.ini')
+
+    CP = ConfigParser()
+    CP.read([patients_file])
+
+    # patients, images and files creation events are created when importing them
+    except_types_list = ['ATBlob', 'Patient']
+
+    for section in CP.sections():
+        ev_list = eval(CP.get(section, 'events'))
+        patient = search_catalog_by_id(CP.get(section, 'id'))
+        for event in ev_list:
+            related_obj = search_catalog_by_id(event['related_obj'])
+            if related_obj != None:
+                if related_obj.meta_type in except_types_list and event['type'] == 1000:
+                    continue
+            # we need to use the ChartItemEventWrapper for this type of chartdata events.
+            if event['related_obj'] is 'ChartItemEventWrapper':
+                temp = {}
+                temp['medication'] = temp['problem'] = temp['allergy'] = temp['exam'] = event['title']
+                wrapper = ChartItemEventWrapper(event['mapping_name'], patient, **temp)
+                patient.create_event(event['type'], DateTime(event['date']), wrapper)
+            else:
+                patient.create_event(event['type'], DateTime(event['date']), related_obj)
 
 def import_plone(self, import_dir, version, verbose=False):
     '''
@@ -681,8 +698,8 @@ if __name__ == '__main__':
         if user is None:
             raise ValueError('Unknown user: %s' % options.username)
         newSecurityManager(None, user.__of__(uf))
-
         cmed_instance = import_plone(app, import_dir, options.release, options.verbose)
+        import_events(import_dir)
         print 'Committing...'
         transaction.commit()
         print 'done'
