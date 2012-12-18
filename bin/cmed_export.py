@@ -265,7 +265,11 @@ class BaseHandler(object):
             os.makedirs(dirpath)
         tempf = tempfile.mktemp(dir=dirpath) + suffix
         open(tempf, 'wb').write(str(data))
-        self.write(key, os.path.abspath(tempf))
+        # using relative path (tempf) to be able to migrate to different zope instance,
+        # if we need later to use absolute_path it will be in get_binary method of
+        # cmed_import.py script. The sintax is like the following:
+        # self.write(key, os.path.abspath(tempf))
+        self.write(key, tempf)
 
 
     def write(self, key, value):

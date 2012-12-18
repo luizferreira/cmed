@@ -120,7 +120,8 @@ def search_catalog_by_id(id):
     try:
         return brains[0].getObject()
     except:
-        print 'Object not in catalog.'
+        if id != 'ChartItemEventWrapper':
+            print 'Strange.. Object not in catalog.'
         return None
 
 
