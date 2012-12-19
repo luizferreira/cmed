@@ -52,12 +52,12 @@ class Visit(event.ATEvent):
         pai = self.getParentNode()
         doctor_id = pai.getId()
         return getattr(portal.Doctors, doctor_id)
-        
+
     def getProviderId(self):
         pai = self.getParentNode()
         doctor_id = pai.getId()
         return doctor_id
-        
+
     def getTagDefault(self):
         return 'tag'
 
@@ -83,7 +83,7 @@ class Visit(event.ATEvent):
             # dl_entry = (vocab, vocab)
             dl.add(vocab, vocab)
         dl.add('outro', 'Outro')
-        return dl        
+        return dl
 
     def at_post_create_script(self):
         """ Esse método é chamado no momento da criação de um objeto da classe.
@@ -92,32 +92,37 @@ class Visit(event.ATEvent):
         patient = self.getPatient()
         patient.create_event(Event.CREATION, self.startDate, self)
 
-        # make scheduled the initial state. This code needs to be here, not in 
+        # make scheduled the initial state. This code needs to be here, not in
         # at_post_edit
         self.portal_workflow.doActionFor(self, 'schedule')
 
         self.setTitle(patient.Title())
         self.setSubject('CalendarShow')
+
+        self.at_post_edit_script()
+
+    def addVisitType(self):
         visit_type = self.getVisit_type()
         dl = self.getTypesOfVisit()
         if visit_type not in dl:
             portal = getSite()
-            vt = getToolByName(portal, 'vocabulary_tool')        
-            vt.add2vocabulary('visit_types', visit_type, 1)     
+            vt = getToolByName(portal, 'vocabulary_tool')
+            vt.add2vocabulary('visit_types', visit_type, 1)
+
+    def addVisitReason(self):
         visit_reason = self.getVisit_reason()
         dl = self.getVisitReason()
         if visit_reason not in dl:
             portal = getSite()
-            vt = getToolByName(portal, 'vocabulary_tool')        
-            vt.add2vocabulary('visit_reason', visit_reason, 1, 1) 
-        self.at_post_edit_script()
+            vt = getToolByName(portal, 'vocabulary_tool')
+            vt.add2vocabulary('visit_reason', visit_reason, 1, 1)
 
     def addInsurance(self):
         new_insurance = self.getInsurance()
         dl = self.getInsurancesNames()
         if new_insurance not in dl:
             portal = getSite()
-            vt = getToolByName(portal, 'vocabulary_tool')        
+            vt = getToolByName(portal, 'vocabulary_tool')
             vt.add2vocabulary('insurance', new_insurance, 1, 1)
         # self.setTitle(dl.getValue(self.getDocument_type()))
 
@@ -138,25 +143,27 @@ class Visit(event.ATEvent):
 
         #esse trecho calcula o endDate com base no startDate e na duracao da consulta.
         self.endDate = addMinutes2Date(self.start(), self.getDuration())
+        self.addVisitType()
+        self.addVisitReason()
         self.addInsurance()
         self.reindexObject()
 
     def getStartDate(self):
         return self.startDate
-        
+
     def getSocialSecurity(self):
         patient = self.getPatient()
-        return patient.getSocialSecurity()        
-    
+        return patient.getSocialSecurity()
+
     # utilizado pela BuildingBlocksWidget para pegar um script do
-    # portal_skins    
+    # portal_skins
     def popup_search_script(self, arg=None):
         portal = getSite()
         portal_skins = getToolByName(portal, 'portal_skins')
         script = portal_skins.wres_theme_widget.popup_search_script
         return script
-    
-    # utilizado pelo PatientWrapper em secretarydesktop    
+
+    # utilizado pelo PatientWrapper em secretarydesktop
     def getPatientInfo(self):
         info = {}
         try:
@@ -174,8 +181,8 @@ class Visit(event.ATEvent):
             info['getHomePhone'] = ''
             # info['getConfirmedChartNumber'] = ''
             info['Title'] = ''
-        return info        
-        
+        return info
+
     def getInsurancesNames(self):
         dl = DisplayList()
         dl.add('', 'Selecione')
