@@ -377,6 +377,10 @@ class BaseHandler(object):
             if hasattr(self, 'import2'):
                 self.import2(obj, section)
 
+            # commiting per object avoid a strange ZODB bug (can't serialize Acsition Wrapper).
+            transaction.commit()
+
+
 class ClinicHandler(BaseHandler):
     ident = 'clinic'
     folderish = False
