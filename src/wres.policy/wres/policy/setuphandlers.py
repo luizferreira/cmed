@@ -469,7 +469,6 @@ def createFirstDoctor(portal, context):
     '''
     if there is a doctor in firstdoctor_info.txt, then this function creates that doctor.
     '''
-    import ipdb; ipdb.set_trace()
     PROFESSIONAL_SITE = True
     from wres.policy.utils.utils import create_base_of_id
     # read firstdoctor_info and create a doctor if there is information there.
