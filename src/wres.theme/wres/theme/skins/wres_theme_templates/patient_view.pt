@@ -8,7 +8,7 @@
       i18n:domain="plone">
 
 	<metal:block fill-slot="javascript_head_slot">
-            <!-- <script type="text/javascript" src="patient_view.js"></script> -->
+            <script type="text/javascript" src="patient_view.js"></script>
     </metal:block>
 <head>
 
