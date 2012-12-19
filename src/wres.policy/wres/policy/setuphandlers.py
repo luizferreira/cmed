@@ -438,6 +438,8 @@ def addExampleTemplate(portal):
     consulta.reindexObject()
 
 def parseFirstDoctorInputFile(infile):
+    if infile == None:
+        return None
     lines = infile.readlines()
     if len(lines) < 2:
         return None
@@ -465,18 +467,20 @@ def parseFirstDoctorInputFile(infile):
 
 def createFirstDoctor(portal, context):
     '''
-    if there is a doctor in firstdoctor_info.txt, then this functino creates that doctor.
+    if there is a doctor in firstdoctor_info.txt, then this function creates that doctor.
     '''
+    import ipdb; ipdb.set_trace()
     PROFESSIONAL_SITE = True
     from wres.policy.utils.utils import create_base_of_id
     # read firstdoctor_info and create a doctor if there is information there.
     infile = context.openDataFile('firstdoctor_info.txt')
+
     doctor_info = parseFirstDoctorInputFile(infile)
-    full_name = doctor_info['Nome Completo'].split(' ')
-    firstname = full_name[0].lower(); lastname = full_name[-1].lower()
-    doctor_id = create_base_of_id(firstname, lastname)
 
     if doctor_info is not None:
+        full_name = doctor_info['Nome Completo'].split(' ')
+        firstname = full_name[0].lower(); lastname = full_name[-1].lower()
+        doctor_id = create_base_of_id(firstname, lastname)
         doctor_folder = getattr(portal, 'Doctors')
         clinic = getattr(portal, 'Clinic')
         if not PROFESSIONAL_SITE:
@@ -510,7 +514,7 @@ def setupVarious(context):
     if context.readDataFile('wres.policy_various.txt') is not None:
         print '********************************ACHEI O TXT***********************************'
 
-        #createFirstDoctor(portal, context)
+        createFirstDoctor(portal, context)
         loadDocumentTypesVocabulary(portal)
         loadImpressoTypesVocaburary(portal)
         loadVisitVocabularies(portal)
