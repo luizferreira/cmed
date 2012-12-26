@@ -40,7 +40,12 @@ def export_members(plone, export_dir, verbose):
         print >>fp, 'password = %s' % passwords.get(username)
         print >>fp, 'fullname = %s' % member.getProperty('fullname')
         print >>fp, 'email = %s' % member.getProperty('email')
-        print >>fp, 'related_object = %s' % member.getProperty('related_object')
+        # related_object = member.getProperty('related_object')
+        # path = related_object.split('/')
+        # # this if is only necessary for instances before 0.14 release. (TODO: remove later)
+        # while plone.getId() in path:
+        #     path = path[1:]
+        # print >>fp, 'related_object = %s' % '/'.join(path)
         print >>fp
     fp.close()
 
@@ -114,8 +119,6 @@ class Validation(object):
         if not os.path.exists(os.path.dirname(fname)):
             os.makedirs(os.path.dirname(fname))
         self.fp = file(fname, 'a')
-
-        # write about events (need to export/import events!)
 
     def count(self, ident):
         '''

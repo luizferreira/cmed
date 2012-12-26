@@ -16,7 +16,7 @@ from ComputedAttribute import ComputedAttribute
 from wres.archetypes.interfaces import IPatient
 from wres.archetypes.config import PROJECTNAME
 from wres.archetypes.content import wresuser
-from wres.archetypes.content.chartdata import ChartData, Event #,Prescription, Maintenance, Note, Problem 
+from wres.archetypes.content.chartdata import ChartData, Event #,Prescription, Maintenance, Note, Problem
 from wres.archetypes.content.schemas.patient import PatientSchema
 from Products.CMFCore.utils import getToolByName
 
@@ -56,32 +56,32 @@ class Patient(wresuser.WRESUser):
         Utilizado no tipo visita (BuildingBlocksWidget)
         """
         return json.dumps({'getLastDate': self.getLastVisitDate(), 'getContactPhone': self.getContactPhone(), 'UID': self.UID()})
-        
+
     def getGroup(self):
         """
         Return patient group: "Patient"
         """
         return PATIENT_GROUP
-        
+
     def createHiddenKey(self, key):
         """
         Return string: key + '_hidden'
         """
         return key + '_hidden'
-    
+
     def existSubObject(self, key):
         """
         Sees if patient has hidden atributes of the key: key+"_hidden"
         """
         hidden_key = self.createHiddenKey(key)
         return hasattr(self, hidden_key)
-    
+
     def createChartFolder(self, id):
         """
         Create chart folder in patient.
         After execute:
         all_chartfolder = id list of all chartfolders indexed in system
-        assertTrue("documents" in all_chartfolders)     assertTrue("impressos" in all_chartfolders) 
+        assertTrue("documents" in all_chartfolders)     assertTrue("impressos" in all_chartfolders)
         assertTrue("exams" in all_chartfolders)         assertTrue("upload" in all_chartfolders)
         """
         from wres.archetypes.content.chartfolder import addChartFolder
@@ -113,9 +113,9 @@ class Patient(wresuser.WRESUser):
         chart = getattr(self, hidden_key)
         chart.setTitle('Prontuário')
         return chart
-    
+
     def chartFolder(self):
-        """ 
+        """
         Just create the function used by ComputedAttribute() to create chartFolder attribute.
         """
         return self._getSubObject('chartFolder')
@@ -169,7 +169,7 @@ class Patient(wresuser.WRESUser):
         """
         self.create_event(Event.CREATION, self.created(), self)
         wresuser.WRESUser.at_post_create_script(self)
-        
+
     def at_post_edit_script(self):
         """
         Just execute WRESUser.at_post_edit_script(), basically if the patient
@@ -203,14 +203,15 @@ class Patient(wresuser.WRESUser):
         return self.chart_data_hidden
     chart_data = ComputedAttribute(__create_chart_data, 1)
 
-    def create_event(self, ev_type, date, related_obj):
+    def create_event(self, ev_type, date, related_obj, author=None):
         """
         Register an event. all modules that creates events use this method.
         Exemple: Register event at creation o patient
+        author param is used only in importation of ChartDataItemWrapper's.
         """
         chart_data = self.chart_data # garante a criacao do chart_data
         events = chart_data.events
-        new_event = Event(self, ev_type, date, related_obj) 
+        new_event = Event(self, ev_type, date, related_obj, author)
         events[new_event.id] = new_event
 
     def get_events(self):
@@ -228,11 +229,11 @@ class Patient(wresuser.WRESUser):
         Return chardata map as:
         {'review_of_systems': <type 'BTrees.OOBTree.OOBTree'>,
          'not_signed_allergies': <type 'BTrees.OOBTree.OOBTree'>,
-         'medications': <type 'BTrees.OOBTree.OOBTree'>, 
-         'prescriptions': <type 'BTrees.OOBTree.OOBTree'>, 
-         'laboratory': <type 'BTrees.OOBTree.OOBTree'>, 
-         'allergies': <type 'BTrees.OOBTree.OOBTree'>, 
-         'problems': <type 'BTrees.OOBTree.OOBTree'>, 
+         'medications': <type 'BTrees.OOBTree.OOBTree'>,
+         'prescriptions': <type 'BTrees.OOBTree.OOBTree'>,
+         'laboratory': <type 'BTrees.OOBTree.OOBTree'>,
+         'allergies': <type 'BTrees.OOBTree.OOBTree'>,
+         'problems': <type 'BTrees.OOBTree.OOBTree'>,
          'events': <type 'BTrees.OOBTree.OOBTree'>}
         """
         return ChartData.mapping
@@ -255,13 +256,13 @@ class Patient(wresuser.WRESUser):
 
     def import_chartdata(self, chart_dic):
         """
-        Used exclusively in migration. 
+        Used exclusively in migration.
         """
         from BTrees.OOBTree import OOBTree
 
         for key in self.chart_data.mapping.keys():
             if chart_dic.has_key(key): # increase upgrade compatibility
-                setattr( self.chart_data, key, OOBTree(chart_dic[key]) )            
+                setattr( self.chart_data, key, OOBTree(chart_dic[key]) )
 
     def doWorkflowAction(self,action):
         portal = self.portal_url.getPortalObject()
@@ -270,7 +271,7 @@ class Patient(wresuser.WRESUser):
         patient_workflow.doActionFor(self,action)
         state = pw.getStatusOf("patient_workflow",self)
         return state
-    
+
     def getState_cmed(self):
         portal = self.portal_url.getPortalObject()
         pw = getToolByName(portal,"portal_workflow")

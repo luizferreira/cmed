@@ -52,7 +52,7 @@ def create_uemr_user(related_object, user_id, email='', fullname=''):
             'username': user_id,
             'email': email,
             'fullname': fullname,
-            'related_object': '/'.join(related_object.getPhysicalPath()),
+            'related_object': '/'.join(related_object.getPhysicalPath()[2:]), # removing instance name from path.
         },
     )
     #uf.changeUser(user_id, groups=[related_object.getGroup()])
@@ -121,7 +121,7 @@ class WRESUser(folder.ATFolder):
             pm.createMemberArea(member_id=user_id)
             uf.userSetGroups(user_id, [self.getGroup()])
             member.setMemberProperties(dict(home_url=self.get_home_url(),
-                                related_object = '/'.join(self.getPhysicalPath())))
+                                related_object = '/'.join(self.getPhysicalPath()[2:]))) # removing instance name from path.
 
 #        else:
 #            update_member_data(member, self, fullname=fullname, email=email)

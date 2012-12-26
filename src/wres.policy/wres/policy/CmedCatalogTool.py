@@ -25,3 +25,14 @@ class CmedCatalogTool(SimpleItem):
             doc_map = getattr(self, catalog_id+'_map')
         except:
             raise Exception("Catalog "+catalog_id+" doenst exist.")
+
+    def clear_catalog(self, catalog_id):
+        try:
+            catalog = getattr(self, catalog_id)
+            doc_map = getattr(self, catalog_id+'_map')
+        except:
+            raise Exception("Catalog "+catalog_id+" doenst exist.")
+        setattr(self, catalog_id, Catalog())
+        setattr(self, catalog_id+'_map', DocumentMap())
+
+

@@ -42,13 +42,21 @@ class Event:
     metadata = ['date_year', 'date_month', 'date_day', 'related_object_id',
                 'path', 'patient_id', 'id', 'event_type', 'meta_type']
 
-    def __init__(self, patient, ev_type, date, related_obj):
+    def __init__(self, patient, ev_type, date, related_obj, author=None):
+        '''
+        author param is used only in migration of ChartItemEventWrapper's
+        '''
         self.portal = getSite()
         self.cct = getToolByName(self.portal, 'cmed_catalog_tool')
         self.patient_id = patient.getId()
         self.date = date
         self.related_obj = related_obj
-        self.author = self._author()
+        # author input keyword param is seted only when importing ChartDataItemWrapper's
+        if author:
+            self.author = author
+        else:
+            self.author = related_obj.getOwner().getId()
+
         self.type = ev_type
 
         # indexes and metadata
@@ -126,17 +134,16 @@ class Event:
             else:
                 return ' adicionado.'
 
-    def _author(self):
+    def getAuthor(self):
         '''
-        return the authenticated member.
+        If not admin, return the related object of the self.author.
         '''
+        # admin doesnt have a member neither a related_object.
+        if self.author == 'admin':
+            return 'admin'
         mt = getToolByName(self.portal, 'portal_membership')
-        member = mt.getAuthenticatedMember()
-        username = member.getUserName()
-        if username == 'admin':
-            return username
-        else:
-            return self.portal.restrictedTraverse(member.getProperty('related_object'))
+        member = mt.getMemberById(self.author)
+        return self.portal.restrictedTraverse(member.getProperty('related_object'))
 
     def _visit_review_state(self):
         '''
@@ -164,12 +171,15 @@ class Event:
             return 1
 
     def export_dict(self):
+        '''
+        function that transform an event instance in a dictionary to be exported.
+        '''
         if isinstance(self.related_obj, ChartItemEventWrapper):
-            return {'type': self.type, 'date': self.date, 'related_obj' : self.related_obj.meta_type,
+            return {'type': self.type, 'date': self.date, 'author': self.author, 'related_obj' : self.related_obj.meta_type,
                     'mapping_name' : self.related_obj.mapping_name,  'prefix' : self.related_obj.prefix,
-                    'title' : self.related_obj.title, 'url_sufix' : self.related_obj.url_sufix}
+                    'title' : self.related_obj.title, 'url_sufix' : self.related_obj.url_sufix,}
         else:
-            return {'type': self.type, 'date': self.date, 'related_obj' : self.related_obj.getId()}
+            return {'type': self.type, 'date': self.date, 'author': self.author, 'related_obj' : self.related_obj.getId()}
 
 
 class ChartItemEventWrapper:
@@ -204,6 +214,10 @@ class ChartItemEventWrapper:
 
     def getId(self):
         return self.id
+
+    def getOwner(self):
+        portal = getSite()
+        return getToolByName(portal, 'portal_membership').getAuthenticatedMember()
 
     def Title(self):
         return self.title

@@ -95,6 +95,7 @@ def import_members(plone, import_dir, verbose):
         pm.createMemberArea(username)
         member.setMemberProperties(dict(email=get(section, 'email'),
                                         fullname=get(section, 'fullname'),
+                                        # related_object=get(section, 'related_object'),
                                   ))
 
 def import_vocabulary(plone, import_dir):
@@ -428,7 +429,7 @@ class DoctorHandler(BaseHandler):
         obj.setSpecialty1(self.cfg.get(section, 'specialty1'))
         obj.setSpecialty2(self.cfg.get(section, 'specialty2'))
         obj.setSignPassword(self.cfg.get(section, 'signPassword'))
-        obj.add_visits_folder()
+        # obj.add_visits_folder()
         obj.at_post_create_script(migration=True)
         obj.reindexObject()
 
@@ -451,8 +452,8 @@ class SecretaryHandler(BaseHandler):
         obj.setState(self.cfg.get(section, 'state'))
         obj.setPhone(self.cfg.get(section, 'phone'))
         obj.setCel(self.cfg.get(section, 'cel'))
-        obj.reindexObject()
         obj.at_post_create_script()
+        obj.reindexObject()
 
 registerHandler(SecretaryHandler)
 
@@ -509,8 +510,6 @@ class PatientHandler(BaseHandler):
             pass # patient photo is the default photo.
         chart_dic = eval( self.cfg.get(section, 'chartdata') )
         obj.import_chartdata(chart_dic) # there is a method in Patient to handle the chartdata import
-        # events = self.cfg.get(section, 'events')
-        # import_events(obj, events)
         obj.at_post_create_script()
         obj.reindexObject()
 
@@ -610,38 +609,39 @@ class FileHandler(BaseHandler):
 
 registerHandler(FileHandler)
 
-def import_events(import_dir):
+def import_events(plone, import_dir):
     '''
-    Get event list exported and re-create the events, except the 'Patient Created',
-    that it was already created when the patient was created and for Images and Files.
-    Patient, Images (ATBlob) and Files (ATBlob) creation events are created when them
-    is imported.
+    Get event list exported and re-create the events. Events created early in the migration
+    process are removed, cause sometimes we can't know the author for this events. Event catalog
+    is cleared too.
     '''
+    from wres.archetypes.content.chartdata import ChartData
+    from wres.policy.setuphandlers import createCmedCatalogs
 
     patients_file = os.path.join(import_dir, 'patient.ini')
 
     CP = ConfigParser()
     CP.read([patients_file])
 
-    # patients, images and files creation events are created when importing them
-    except_types_list = ['ATBlob', 'Patient']
+    plone.cmed_catalog_tool.clear_catalog('event_catalog') # clear all catalog registries
+    createCmedCatalogs(plone) # rebuild event catalog
 
     for section in CP.sections():
         ev_list = eval(CP.get(section, 'events'))
         patient = search_catalog_by_id(CP.get(section, 'id'))
+        # clear events. This is done cause patient creation and ATBlobs creation (in early migration process)
+        # results in creation of events.
+        setattr(patient.chart_data, 'events', ChartData.mapping['events']())
         for event in ev_list:
             related_obj = search_catalog_by_id(event['related_obj'])
-            if related_obj != None:
-                if related_obj.meta_type in except_types_list and event['type'] == 1000:
-                    continue
-            # we need to use the ChartItemEventWrapper for this type of chartdata events.
+            # we need to use the ChartItemEventWrapper class for this type of chartdata events.
             if event['related_obj'] is 'ChartItemEventWrapper':
                 temp = {}
                 temp['medication'] = temp['problem'] = temp['allergy'] = temp['exam'] = event['title']
                 wrapper = ChartItemEventWrapper(event['mapping_name'], patient, **temp)
-                patient.create_event(event['type'], DateTime(event['date']), wrapper)
+                patient.create_event(event['type'], DateTime(event['date']), wrapper, author=event['author'])
             else:
-                patient.create_event(event['type'], DateTime(event['date']), related_obj)
+                patient.create_event(event['type'], DateTime(event['date']), related_obj, author=event['author'])
 
 def import_plone(self, import_dir, version, verbose=False):
     '''
@@ -704,7 +704,7 @@ if __name__ == '__main__':
             raise ValueError('Unknown user: %s' % options.username)
         newSecurityManager(None, user.__of__(uf))
         cmed_instance = import_plone(app, import_dir, options.release, options.verbose)
-        import_events(import_dir)
+        import_events(cmed_instance, import_dir)
         print 'Committing...'
         transaction.commit()
         print 'done'

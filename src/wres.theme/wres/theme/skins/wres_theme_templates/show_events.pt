@@ -6,9 +6,9 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="cmfuemr">
-    
+
   <metal:main fill-slot="main" tal:define="template_data context/getShowMedicationsData">
-  
+
     <h1>Eventos</h1>
 
       <table class="listing width-100">
@@ -21,11 +21,11 @@
               <tr tal:repeat="event context/get_events">
                 <td tal:content="python: event.date.strftime('%d/%m/%Y %H:%M')">  </td>
                 <td tal:content="structure event/eprint"> </td>
-                <td tal:condition="python: event.author=='admin'" tal:content="event/author"> </td>
-                <td tal:condition="python: event.author!='admin'" tal:content="event/author/Title"> </td>
+                <td tal:condition="python: event.getAuthor()=='admin'" tal:content="event/getAuthor"> </td>
+                <td tal:condition="python: event.getAuthor()!='admin'" tal:content="python: event.getAuthor().Title()"> </td>
               </tr>
           </tbody>
-      </table>      
+      </table>
 
   </metal:main>
 </html>

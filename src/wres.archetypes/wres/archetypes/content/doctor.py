@@ -116,7 +116,7 @@ class Doctor(wresuser.WRESUser):
         criteria2.relativePath = '..'
         criteria3 = collection.addCriterion('Subject', 'ATSelectionCriterion')
         criteria3.setValue(['1a Consulta', 'Consulta', 'Retorno', 'Cirurgia'])
-        
+
     def at_post_create_script(self, migration=False):
 
         # the code bellow is to consider the case of doctors created in firstdoctor_info. For some reason the
@@ -124,7 +124,7 @@ class Doctor(wresuser.WRESUser):
         # when the member is already created.
         portal = getSite()
         pm = portal.portal_membership
-        if pm.getMemberById(self.getId()) != None:
+        if pm.getMemberById(self.getId()) != None and migration == False:
             return
 
         wresuser.WRESUser.at_post_create_script(self)
