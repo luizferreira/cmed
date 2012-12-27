@@ -431,7 +431,24 @@ class DoctorHandler(BaseHandler):
         obj.setSignPassword(self.cfg.get(section, 'signPassword'))
         # obj.add_visits_folder()
         obj.at_post_create_script(migration=True)
+        self.import_calendar_info(obj, section)
         obj.reindexObject()
+
+    def get_doctor_collection(self, obj):
+        try:
+            collection = self.plone.restrictedTraverse('Appointments/' + obj.getId() + '/Agenda')
+        except:
+            raise Exception("Can't get doctor '%s' collection." % obj.getId())
+        return collection
+
+    def import_calendar_info(self, obj, section):
+        from Solgema.fullcalendar.interfaces import ISolgemaFullcalendarProperties
+        collection = self.get_doctor_collection(obj)
+        calendar = ISolgemaFullcalendarProperties(collection)
+        calendar_info = eval(self.cfg.get(section, 'calendar_info'))
+
+        for key, value in calendar_info.items():
+            setattr(calendar, key, value)
 
 registerHandler(DoctorHandler)
 

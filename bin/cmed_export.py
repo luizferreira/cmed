@@ -433,6 +433,25 @@ class DoctorHandler(BaseHandler):
         self.write('specialty1 ', obj.getSpecialty1())
         self.write('specialty2 ', obj.getSpecialty2())
         self.write('signPassword ', obj.getSignPassword())
+        self.export_calendar_info(obj)
+
+    def get_doctor_collection(self, obj):
+        try:
+            collection = self.plone.restrictedTraverse('Appointments/' + obj.getId() + '/Agenda')
+        except:
+            raise Exception("Can't get doctor '%s' collection." % obj.getId())
+        return collection
+
+    def export_calendar_info(self, obj):
+        from Solgema.fullcalendar.interfaces import ISolgemaFullcalendarProperties
+        collection = self.get_doctor_collection(obj)
+        calendar = ISolgemaFullcalendarProperties(collection)
+        calendar_info = {
+            'slotMinutes': calendar.slotMinutes,
+            'minTime': calendar.minTime,
+            'maxTime': calendar.maxTime,
+        }
+        self.write('calendar_info ', calendar_info)
 
 registerHandler(DoctorHandler)
 
