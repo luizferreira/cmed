@@ -143,7 +143,7 @@ class Event:
             return 'admin'
         mt = getToolByName(self.portal, 'portal_membership')
         member = mt.getMemberById(self.author)
-        return self.portal.restrictedTraverse(member.getProperty('related_object'))
+        return self.portal.unrestrictedTraverse(member.getProperty('related_object'))
 
     def _visit_review_state(self):
         '''
