@@ -429,7 +429,10 @@ class DoctorHandler(BaseHandler):
         obj.setSpecialty1(self.cfg.get(section, 'specialty1'))
         obj.setSpecialty2(self.cfg.get(section, 'specialty2'))
         obj.setSignPassword(self.cfg.get(section, 'signPassword'))
-        # obj.add_visits_folder()
+        try:
+            obj.setPhoto(self.get_binary(section))
+        except NoOptionError:
+            pass # doctor photo is the default photo.
         obj.at_post_create_script(migration=True)
         self.import_calendar_info(obj, section)
         obj.reindexObject()

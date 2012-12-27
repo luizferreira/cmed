@@ -413,6 +413,9 @@ class DoctorHandler(BaseHandler):
 
     def export2(self, obj):
         ''' especific Doctor fields'''
+        image = obj.getPhoto()
+        if image != '':
+            self.write_binary(str(image.data))
         self.write('professional ', obj.getProfessional())
         self.write('ssn ', obj.getSsn())
         self.write('firstName ', obj.getFirstName())
