@@ -513,7 +513,7 @@ def setupVarious(context):
     if context.readDataFile('wres.policy_various.txt') is not None:
         print '********************************ACHEI O TXT***********************************'
 
-        createFirstDoctor(portal, context)
+        # createFirstDoctor(portal, context)
         loadDocumentTypesVocabulary(portal)
         loadImpressoTypesVocaburary(portal)
         loadVisitVocabularies(portal)
