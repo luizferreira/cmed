@@ -93,7 +93,10 @@ class Event:
         '''
         uid = self.related_obj.UID()
         portal_catalog = self.portal.portal_catalog
-        return portal_catalog.search(dict(UID=uid))[0]
+        try:
+            return portal_catalog.search(dict(UID=uid))[0]
+        except IndexError:
+            return None
 
     def event_url(self):
         '''
@@ -106,7 +109,9 @@ class Event:
         if self.related_obj.meta_type == 'ChartItemEventWrapper':
             return chart_url + self.related_obj.url_sufix
         else:
-            return self.get_contextualized_object().getPath()
+            contextualized_object = self.get_contextualized_object()
+            if contextualized_object != None:
+                return contextualized_object.getPath()
 
     def eprint(self):
         '''
