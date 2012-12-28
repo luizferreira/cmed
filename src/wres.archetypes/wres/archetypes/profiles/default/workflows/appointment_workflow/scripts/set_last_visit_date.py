@@ -10,4 +10,5 @@
 obj = state_change.object
 date = obj.getStartDate()
 patient = obj.getPatient()
-patient.setLastVisitDate(date)
+if patient != None: # in importation, the patient field won't be setted yet.
+    patient.setLastVisitDate(date)
