@@ -2,6 +2,7 @@
 
 import os
 import transaction
+from plone import api
 from ConfigParser import ConfigParser, NoOptionError
 from Products.CMFPlone.utils import _createObjectByType
 from wres.archetypes.content.chartdata import ChartItemEventWrapper
@@ -540,6 +541,15 @@ class VisitHandler(BaseHandler):
     folderish = False
     portal_type = 'Visit'
 
+    wf_path = {
+        'concluded': ['schedule', 'confirm', 'start visit', 'conclude'],
+        'confirmed': ['schedule', 'confirm'],
+        'non-show': ['schedule', 'non show'],
+        'running': ['schedule', 'confirm', 'start visit'],
+        'scheduled': ['schedule'],
+        'unscheduled': ['schedule', 'unconfirm'],
+    }
+
     def import2(self, obj, section):
         ''' especific Visit fields'''
         patient_id = self.cfg.get(section, 'patient')
@@ -554,7 +564,22 @@ class VisitHandler(BaseHandler):
         obj.setVisit_type(self.cfg.get(section, 'visit_type'))
         obj.setVisit_reason(self.cfg.get(section, 'visit_reason'))
         obj.setSubject(obj.getVisit_type())
+        self.set_review_state(obj, section)
         obj.reindexObject()
+
+    def set_review_state(self, obj, section):
+        '''
+        All visits begin in the state 'not scheduled' (cause we dont run at_post_create_script for Visit - in
+        at_post_create_script occur a transition for scheduled).
+        This method follow the wf_path of the state to achive the required state (read in visit.ini)
+        '''
+        state = self.cfg.get(section, 'review-state')
+        wf_path = self.wf_path[state]
+        for transition in wf_path:
+            api.content.transition(obj=obj, transition=transition)
+        if api.content.get_state(obj=obj) != state:
+            raise Exception("I can't set the state of object %s (type %s) properly!" % (obj.getId(), self.portal_type))
+
 
 registerHandler(VisitHandler)
 
