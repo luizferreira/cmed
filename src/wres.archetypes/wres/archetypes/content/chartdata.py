@@ -60,7 +60,7 @@ class Event:
         self.type = ev_type
 
         # indexes and metadata
-        self.event_text = self.eprint()
+        # self.event_text = self.eprint() # commenting: this is problemetic when migrating, since the object isnt in catalog yet. (ATBlob early creation)
         self.date_year = date.year()
         self.date_month = date.month()
         self.date_day = date.day()

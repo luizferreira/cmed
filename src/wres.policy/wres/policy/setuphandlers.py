@@ -386,7 +386,7 @@ def createCmedCatalogs(portal):
 
     # event catalog
     event_catalog = cct.add_catalog('event_catalog')
-    event_catalog['event_text'] = CatalogTextIndex('event_text')
+    # event_catalog['event_text'] = CatalogTextIndex('event_text')
     event_catalog['date'] = CatalogFieldIndex('date')
     event_catalog['date_year'] = CatalogFieldIndex('date_year')
     event_catalog['date_month'] = CatalogFieldIndex('date_month')
