@@ -69,6 +69,13 @@ class Event:
         self.meta_type = self.related_obj.meta_type
         self.related_object_id = self.related_obj.getId()
 
+        # this attributes gonna replace self.related_obj soon.
+        # we gonna do this cause a reference for an object is not the right thing to do, in many
+        # cases can lead to bugs difficult to debug. ro = related_object.
+        # self.ro_id = self.related_obj.getId()
+        # self.ro_uid = self.related_obj.UID()
+        # self.ro_meta_type = self.related_obj.meta_type
+
         self.catalog_me()
 
     def catalog_me(self):
@@ -78,6 +85,15 @@ class Event:
         self.id = self.cct.event_catalog_map.new_docid()
         self.cct.event_catalog_map.add(EventBrain(self), self.id)
         self.cct.event_catalog.index_doc(self.id, self)
+
+    def get_contextualized_object(self):
+        '''
+        Used to workaround the problem of objects that getPhysicalPath doesnt work
+        properly. Returns a catalog brain object.
+        '''
+        uid = self.related_obj.UID()
+        portal_catalog = self.portal.portal_catalog
+        return portal_catalog.search(dict(UID=uid))[0]
 
     def event_url(self):
         '''
@@ -89,16 +105,15 @@ class Event:
 
         if self.related_obj.meta_type == 'ChartItemEventWrapper':
             return chart_url + self.related_obj.url_sufix
-        elif self.related_obj.meta_type == 'Patient':
-            return patient_url
-        return '/'.join(self.related_obj.getPhysicalPath())
+        else:
+            return self.get_contextualized_object().getPath()
 
     def eprint(self):
         '''
         returns html to be printed in screen
         '''
         if self.related_obj.meta_type == 'Visit':
-            related_obj = "<a target=\"_blank\" href=\"" + '/'.join(self.related_obj.getPhysicalPath()) + "\" >" + self.related_obj.getVisit_type() + "</a>"
+            related_obj = "<a target=\"_blank\" href=\"" + self.event_url() + "\" >" + self.related_obj.getVisit_type() + "</a>"
         else:
             related_obj = "<a target=\"_blank\" href=\"" + self.event_url() + "\" >" + self.related_obj.Title() + "</a>"
         return self.prefix() + related_obj + self.posfix()
