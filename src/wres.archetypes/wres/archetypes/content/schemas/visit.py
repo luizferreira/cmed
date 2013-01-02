@@ -29,16 +29,16 @@ MAIN = Schema((
                                                 {'id':'popup_quick_register', 'value':_('Quick Register'), 'extra_fields':('birthDate', 'homePhone', 'mobile'), 'location':'/Patients'}),
                                         helper_js=('buildingblockwidget.js',),
                                         ),
-        ),        
-        
+        ),
+
         IntegerField('duration',
             required=1,
             widget=IntegerWidget(
                 label=_('Duration'),
-                description=_('Duration in minutes'),
+                description=_('Can be used to filter visits in calendar'),
             ),
         ),
-               
+
         BrPhoneField('contactPhone',
             index=':schema',
             widget=BrPhoneWidget(label=_('Contact Phone'),
@@ -46,7 +46,7 @@ MAIN = Schema((
                                      description_msgid='cmfuemr_help_contact_phone',
                                      i18n_domain='cmfuemr',
             ),
-        ),        
+        ),
 
         StringField('visit_type',
             required=True,
@@ -54,6 +54,7 @@ MAIN = Schema((
             vocabulary = "getTypesOfVisit",
             widget = SelectionWidget(
                     label = 'Tipo de Visita',
+                    description=_('Can be used to filter visits in calendar'),
             ),
         ),
 
@@ -63,32 +64,27 @@ MAIN = Schema((
             widget = SelectionWidget(
                     label = 'Razão da Visita',
                     macro_edit='generic_selection_edit_macro',
-                    helper_js=('generic_selection_edit.js', ),             
+                    helper_js=('generic_selection_edit.js', ),
             ),
-        ),        
-      
+        ),
+
         StringField('insurance',
 		required=False,
         vocabulary = "getInsurancesNames",
         widget = SelectionWidget(
                 label = 'Plano de Saúde',
                 macro_edit='insurance_selection_edit_macro',
-                helper_js=('insurance_selection_edit.js', ),             
+                helper_js=('insurance_selection_edit.js', ),
                 ),
         ),
-        #TODO: Remove comment (03/07/2012)
-        #StringField('note',
-            #widget=TextAreaWidget(label=_('Note'),
-            #),
-        #),                
-        
+
 ))
 
 set_schemata_properties(MAIN, schemata='default')
 
 baseSchema = finalizeSchema(event.ATEventSchema.copy(), type='Visit')
 
-VisitSchema = baseSchema + MAIN                       
+VisitSchema = baseSchema + MAIN
 
 # move os campos patient e doctor para a 1a e 2a posicao, respectivamente.
 VisitSchema._moveFieldToPosition('patient', 1)

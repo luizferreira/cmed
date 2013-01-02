@@ -58,9 +58,6 @@ class Visit(event.ATEvent):
         doctor_id = pai.getId()
         return doctor_id
 
-    def getTagDefault(self):
-        return 'tag'
-
     def getTypesOfVisit(self):
         dl = DisplayList()
         # dl.add('', 'Selecione')
@@ -107,7 +104,7 @@ class Visit(event.ATEvent):
         if visit_type not in dl:
             portal = getSite()
             vt = getToolByName(portal, 'vocabulary_tool')
-            vt.add2vocabulary('visit_types', visit_type, 1)
+            vt.add2vocabulary('visit_types', visit_type, 1, 1)
 
     def addVisitReason(self):
         visit_reason = self.getVisit_reason()
@@ -124,7 +121,6 @@ class Visit(event.ATEvent):
             portal = getSite()
             vt = getToolByName(portal, 'vocabulary_tool')
             vt.add2vocabulary('insurance', new_insurance, 1, 1)
-        # self.setTitle(dl.getValue(self.getDocument_type()))
 
     def at_post_edit_script(self):
         self.setSubject(self.getVisit_type())

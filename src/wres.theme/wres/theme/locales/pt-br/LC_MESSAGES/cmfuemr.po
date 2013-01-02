@@ -12190,6 +12190,9 @@ msgstr "Duração"
 msgid "Duration in minutes"
 msgstr "Duração em minutos"
 
+msgid "Can be used to filter visits in calendar"
+msgstr "Pode ser utilizado para filtrar visitas no calendário"
+
 msgid "Patient quick register"
 msgstr "Registro Rápido de Paciente"
 

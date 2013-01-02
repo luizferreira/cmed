@@ -342,9 +342,9 @@ def loadVisitVocabularies(portal):
     vt = getToolByName(portal, 'vocabulary_tool')
     visit_types = []
     visit_types.append('1a consulta')
+    visit_types.append('cirurgia')
     visit_types.append('consulta')
     visit_types.append('retorno')
-    # visit_types.append('cirurgia') # 'cirurgia' is not a general case.
     vt.add_vocab('visit_types', visit_types)
 
     visit_reason = []
