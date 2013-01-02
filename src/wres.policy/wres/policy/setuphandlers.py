@@ -307,9 +307,9 @@ def loadCIDVocabulary(portal, context):
 def loadInsuranceVocabulary(portal):
     vt = getToolByName(portal, 'vocabulary_tool')
     insurance = []
+    insurance.append('bradesco saude')
     insurance.append('particular')
     insurance.append('unimed')
-    insurance.append('bradesco saude')
     vt.add_vocab('insurance', insurance)
 
 #===========================================================================
@@ -344,7 +344,7 @@ def loadVisitVocabularies(portal):
     visit_types.append('1a consulta')
     visit_types.append('consulta')
     visit_types.append('retorno')
-    visit_types.append('cirurgia')
+    # visit_types.append('cirurgia') # 'cirurgia' is not a general case.
     vt.add_vocab('visit_types', visit_types)
 
     visit_reason = []

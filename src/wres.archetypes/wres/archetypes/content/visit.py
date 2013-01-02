@@ -137,7 +137,7 @@ class Visit(event.ATEvent):
 #        self.setEndDate(self.getEndDate())#what is this for?
         #change the state from non-scheduled to scheduled.
         #Do we need this here?
-        # TODO: Retirar em 2013. Eh interessante isso msm? (voltar
+        # TODO: Retirar em 06/2013. Eh interessante isso msm? (voltar
         # pro Agendada toda vez que houver uma edicao)
         # self.portal_workflow.doActionFor(self, 'schedule')
 
