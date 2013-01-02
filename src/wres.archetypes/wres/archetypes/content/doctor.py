@@ -100,7 +100,7 @@ class Doctor(wresuser.WRESUser):
 
         # configura slot padrao para 15 minutos e o intervalo de horas mostrado para 6:00-20:00.
         cal = ISolgemaFullcalendarProperties(collection)
-        cal.availableCriterias.append('Subject') # show the Tags filter in the bottom of calendar.
+        cal.availableCriterias = 'Subject' # show the Tags filter in the bottom of calendar.
         cal.slotMinutes = 15
         cal.minTime = '6'
         cal.maxTime = '20'
