@@ -3,5 +3,5 @@
 ##title=
 ##
 obj = state_change.object
-obj.setSubject('')
+obj.setSubject('Desmarcada')
 obj.reindexObject()

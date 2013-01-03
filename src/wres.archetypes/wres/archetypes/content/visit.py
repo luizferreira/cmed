@@ -59,6 +59,11 @@ class Visit(event.ATEvent):
         return doctor_id
 
     def getTypesOfVisit(self):
+        '''
+        For now, the fild visit type will not have the 'Outro' option. The reason is that, if we
+        let the doctor create his own visit types, the tags filter probably will poluted, and frequentely
+        we will need to clean manually.
+        '''
         dl = DisplayList()
         # dl.add('', 'Selecione')
         portal = getSite()
@@ -89,14 +94,49 @@ class Visit(event.ATEvent):
         patient = self.getPatient()
         patient.create_event(Event.CREATION, self.startDate, self)
 
-        # make scheduled the initial state. This code needs to be here, not in
-        # at_post_edit
+        # make scheduled the initial state. This code needs to be here, not in at_post_edit
         self.portal_workflow.doActionFor(self, 'schedule')
 
         self.setTitle(patient.Title())
-        self.setSubject('CalendarShow')
 
         self.at_post_edit_script()
+
+    def at_post_edit_script(self):
+        # set the tag with the visit type, needed to the visit become showed in calendar.
+        self.setSubject(self.getVisit_type())
+
+        # add the visit type as a subject criteria, if it wasnt included yet.
+        # that way, if the doctor ask, we just need to create the new visit type in the correspondent
+        # vocabulary, and after a visit is created with that type, the system will update the criteria.
+        visit_folder = self.getParentNode()
+        try:
+            collection = getattr(visit_folder, 'Agenda')
+        except:
+            raise AttributeError("Ow! I can't get the collection Agenda from the visit_folder %s" % visit_folder.getId())
+        criteria = getattr(collection, 'crit__Subject_ATSelectionCriterion')
+        tags = criteria.getRawValue()
+        if self.getVisit_type() not in tags:
+            new_tags = tags + (self.getVisit_type(), )
+            criteria.setValue(new_tags)
+            collection.reindexObject()
+
+        # TODO: maybe we need to test if the contact phone here is the same as the registered one in the
+        # patient chart.
+
+        #change the state from non-scheduled to scheduled.
+        #Do we need this here?
+        # TODO: Retirar em 06/2013. Eh interessante isso msm? (voltar
+        # pro Agendada toda vez que houver uma edicao)
+        # talvez sim, pq se o médico mover no calendário para outra data, talvez seja interessante
+        # voltar ao estado inicial, para recomeçar o processo de confirmaçao, etc.
+        # self.portal_workflow.doActionFor(self, 'schedule')
+
+        #esse trecho calcula o endDate com base no startDate e na duracao da consulta.
+        self.endDate = addMinutes2Date(self.start(), self.getDuration())
+        self.addVisitType()
+        self.addVisitReason()
+        self.addInsurance()
+        self.reindexObject()
 
     def addVisitType(self):
         visit_type = self.getVisit_type()
@@ -121,28 +161,6 @@ class Visit(event.ATEvent):
             portal = getSite()
             vt = getToolByName(portal, 'vocabulary_tool')
             vt.add2vocabulary('insurance', new_insurance, 1, 1)
-
-    def at_post_edit_script(self):
-        self.setSubject(self.getVisit_type())
-#        if self.isAppointment():
-#            self.setDefaultPatientId()
-#            self.updateTypeOfPatient()
-#            self.updateOtherVisitsContactPhone()
-#        self.updateObjectOwner()
-#        self.updateScheduleFolderSettings()
-#        self.setEndDate(self.getEndDate())#what is this for?
-        #change the state from non-scheduled to scheduled.
-        #Do we need this here?
-        # TODO: Retirar em 06/2013. Eh interessante isso msm? (voltar
-        # pro Agendada toda vez que houver uma edicao)
-        # self.portal_workflow.doActionFor(self, 'schedule')
-
-        #esse trecho calcula o endDate com base no startDate e na duracao da consulta.
-        self.endDate = addMinutes2Date(self.start(), self.getDuration())
-        self.addVisitType()
-        self.addVisitReason()
-        self.addInsurance()
-        self.reindexObject()
 
     def getStartDate(self):
         return self.startDate
