@@ -379,6 +379,8 @@ class BaseHandler(object):
             if hasattr(self, 'import2'):
                 self.import2(obj, section)
 
+            obj.unmarkCreationFlag() # prevent at_post_created_script to be executed the first time the object is edited.
+
             # commiting per object avoid a strange ZODB bug (can't serialize Acsition Wrapper).
             transaction.commit()
 

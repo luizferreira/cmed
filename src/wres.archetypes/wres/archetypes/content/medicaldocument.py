@@ -42,8 +42,8 @@ MAIN = Schema((
         default_method = 'getDefaultDoctor',
         widget=ReferenceBrowserWidget(
             label=_('Provider'),
-            startup_directory = 'Doctors',   
-            restrict_browsing_to_startup_directory = True,         
+            startup_directory = 'Doctors',
+            restrict_browsing_to_startup_directory = True,
         ),
     ),
 
@@ -63,8 +63,8 @@ MAIN = Schema((
             description='Coloque aqui comentários a respeito do documento.',
             visible={'view':'invisible', 'edit':'visible'},
         ),
-    ),    
-    
+    ),
+
 ))
 
 set_schemata_properties(MAIN, schemata='Principal')
@@ -81,6 +81,9 @@ class MedicalDocument(folder.ATFolder):
     schema = MedicalDocumentSchema
 
     def at_post_create_script(self):
+        now = DateTime()
+        if now - self.created() > 1.0:
+            return
         self.create_event(Event.CREATION, self.created(), self)
 
     def getDefaultDoctor(self):
@@ -94,7 +97,7 @@ class MedicalDocument(folder.ATFolder):
             if member.has_role('Doctor'):
                 username = member.getUserName()
                 pc = portal.portal_catalog
-                brains = pc.search({'meta_type': 'Doctor', 'getId': username}) 
+                brains = pc.search({'meta_type': 'Doctor', 'getId': username})
                 doctor = brains[0].getObject()
                 uid = doctor.UID()
                 return uid

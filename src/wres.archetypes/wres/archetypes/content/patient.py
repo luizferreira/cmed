@@ -167,6 +167,11 @@ class Patient(wresuser.WRESUser):
         Just execute WRESUser.at_post_create_script(), basically register
         the patient object as portal member
         """
+        from DateTime import DateTime
+        now = DateTime()
+        if now - self.created() > 1.0:
+            return
+
         self.create_event(Event.CREATION, self.created(), self)
         wresuser.WRESUser.at_post_create_script(self)
 
