@@ -2,6 +2,7 @@
 """Definition of the Visit content type
 """
 
+from plone import api
 from Products.Archetypes.atapi import *
 from zope.app.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
@@ -89,6 +90,13 @@ class Visit(event.ATEvent):
         """ Esse método é chamado no momento da criação de um objeto da classe.
         Ele preenche o campo subject (tags) com visit type no edit.
         """
+
+        state = api.content.get_state(obj=self)
+        # workraound: at_post_create_script is being executed when editing a visit
+        # problaby cause it wasnt runned when migrating.
+        if state != 'not scheduled':
+            return
+
         patient = self.getPatient()
         patient.create_event(Event.CREATION, self.startDate, self)
 
