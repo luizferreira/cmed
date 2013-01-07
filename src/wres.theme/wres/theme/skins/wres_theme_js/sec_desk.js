@@ -64,6 +64,7 @@ function reloadVisitsOnScreen() {
         $("option").each(hideOrShowDoctorVisits);
     }
     hideTableOrNotStep2();
+    hideAppointments();
 }
 
 function loadPatientTip(index){
@@ -131,7 +132,7 @@ function hideAppointments(){
             hided++;
         }
     }
-    if(visits_rows.length == hided){
+    if(visits_rows.length == hided && visits_rows.length != 0){
         today_table.find("#visit_table").hide();
         today_table.find(".not-for-this-doctor").show();
     }
@@ -148,7 +149,7 @@ function hideAppointments(){
             hided++;
         }
     }
-    if(visits_rows.length == hided){
+    if(visits_rows.length == hided && visits_rows.length != 0){
         tomorrow_table.find("#visit_table").hide();
         tomorrow_table.find(".not-for-this-doctor").show();
     }
@@ -190,10 +191,11 @@ $(document).ready(function(){
         if($("option:selected").length > 0) {
             reloadVisitsOnScreen();
         }
+        hideAppointments();
 	})
 
     //Hide Appointment according WorkFlow
-    hideAppointments();
+     hideAppointments();
 
 });
 
