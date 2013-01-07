@@ -281,6 +281,7 @@ MAIN = Schema((
     IntegerField('chart',
         default=0,
         index="FieldIndex:schema",
+        validators = ('isInt',),
         widget=IntegerWidget(
             label=_('Chart Number'),
 		    description='Must contain only numbers',

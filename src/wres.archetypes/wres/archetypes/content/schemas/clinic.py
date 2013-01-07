@@ -50,7 +50,7 @@ INFO = Schema((
         widget=StringWidget(
             label='Nome',
         ),
-    ),                  
+    ),
 
     StringField('street',
         widget=StringWidget(
@@ -59,6 +59,7 @@ INFO = Schema((
     ),
 
     IntegerField('number',
+        validators = ('isInt',),
         widget=IntegerWidget(
             label='Número',
         ),
@@ -68,7 +69,7 @@ INFO = Schema((
         widget=StringWidget(
             label='Complemento',
         ),
-    ),    
+    ),
 
     StringField('bairro',
         widget=StringWidget(
@@ -80,15 +81,15 @@ INFO = Schema((
         widget=StringWidget(
             label='Cidade',
         ),
-    ),        
+    ),
 
     StringField('state',
         vocabulary=STATES,
         widget=SelectionWidget(
             label='Estado',
         ),
-    ),            
-    
+    ),
+
     BrPhoneField('phone',
 #       required=1,   bax migrando
 #       validators='isBrTelefone',
@@ -98,8 +99,8 @@ INFO = Schema((
             description_msgid='cmfuemr_help_home_phone',
             i18n_domain='cmfuemr'
         ),
-    ),  
-    
+    ),
+
     BrPhoneField('fax',
 #       required=1,   bax migrando
 #       validators='isBrTelefone',
@@ -109,14 +110,14 @@ INFO = Schema((
             description_msgid='cmfuemr_help_home_phone',
             i18n_domain='cmfuemr'
         ),
-    ),         
-    
+    ),
+
     StringField('email',
 #      validators='isEmail',
        widget=StringWidget(
            label='Email',
        ),
-    ),    
+    ),
 
 ))
 
@@ -126,4 +127,4 @@ baseSchema = finalizeSchema(schemata.ATContentTypeSchema.copy())
 
 ClinicSchema =  baseSchema + INFO
 
-set_schemata_properties(ClinicSchema, read_permission=VIEW_DOCTOR) 
+set_schemata_properties(ClinicSchema, read_permission=VIEW_DOCTOR)
