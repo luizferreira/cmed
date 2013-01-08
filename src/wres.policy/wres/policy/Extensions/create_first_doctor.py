@@ -19,6 +19,7 @@ def getOrCreateType(portal, atobj, newid, newtypeid):
         except Unauthorized:
             _createObjectByType(newtypeid, atobj, newid)
         newobj = getattr(atobj,newid)
+    newobj.unmarkCreationFlag() # prevent at_post_created_script to be executed the first time the object is edited.
     return newobj
 
 def parseFirstDoctorInputFile(infile):
@@ -75,4 +76,4 @@ def main(self):
         doctor.fillFirstDoctorInfo(doctor_info)
         clinic.fillClinicInformation(doctor_info)
         doctor.reindexObject()
-        clinic.reindexObject() 
+        clinic.reindexObject()

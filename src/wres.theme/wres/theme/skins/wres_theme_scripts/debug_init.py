@@ -127,6 +127,7 @@ def create_new_object(portal, parent, newid, new_obj_type):
         context.plone_log("-> %s %s created..." % (new_obj_type, newid))
     else:
         context.plone_log("*** ERROR while creating object")
+    newobj.unmarkCreationFlag() # prevent at_post_created_script to be executed the first time the object is edited.
     return newobj
 
 def random_birthdate():
