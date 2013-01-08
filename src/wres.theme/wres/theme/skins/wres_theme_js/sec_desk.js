@@ -64,6 +64,7 @@ function reloadVisitsOnScreen() {
         $("option").each(hideOrShowDoctorVisits);
     }
     hideTableOrNotStep2();
+    hideAppointments();
 }
 
 function loadPatientTip(index){
@@ -118,7 +119,44 @@ function loadPatientTip(index){
 
     }
 
+function hideAppointments(){
+    //hide today visists
+    today_table = $("#show_today_visits");
+    visits_rows = today_table.find(".visit");
+    hided = 0;
+    for(row = 0; row < visits_rows.length; row++){
+        row_tag = visits_rows[row]
+        status_tag = row_tag.getElementsByTagName("td")[2];
+        if(status_tag.textContent == "Escondido"){
+            today_table.find("#"+row_tag.id).hide();
+            hided++;
+        }
+    }
+    if(visits_rows.length == hided && visits_rows.length != 0){
+        today_table.find("#visit_table").hide();
+        today_table.find(".not-for-this-doctor").show();
+    }
+
+    //hide tomorrow visists
+    tomorrow_table = $("#show_tomorrow_visits");
+    visits_rows = tomorrow_table.find(".visit");
+    hided = 0;
+    for(row = 0; row < visits_rows.length; row++){
+        row_tag = visits_rows[row]
+        status_tag = row_tag.getElementsByTagName("td")[2];
+        if(status_tag.textContent == "Escondido"){
+            tomorrow_table.find("#"+row_tag.id).hide();
+            hided++;
+        }
+    }
+    if(visits_rows.length == hided && visits_rows.length != 0){
+        tomorrow_table.find("#visit_table").hide();
+        tomorrow_table.find(".not-for-this-doctor").show();
+    }
+}
+
 $(document).ready(function(){
+    
 	var show_visits_reloaded = false;
         /*var fez_requisicao = false;*/
 
@@ -153,7 +191,12 @@ $(document).ready(function(){
         if($("option:selected").length > 0) {
             reloadVisitsOnScreen();
         }
+        hideAppointments();
 	})
+
+    //Hide Appointment according WorkFlow
+     hideAppointments();
+
 });
 
 function patientClick(){

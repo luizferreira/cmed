@@ -65,6 +65,9 @@
   </permission-map>
  </state>
  <state state_id="unscheduled" title="Desmarcada">
+  <exit-transition transition_id="hide"/>
+ </state>
+ <state state_id="hided" title="Escondido">
  </state>
  <transition transition_id="conclude" title="Concluir" new_state="concluded" trigger="USER" before_script="" after_script="">
   <action url="" category="workflow" icon="">Concluir</action>
@@ -82,6 +85,15 @@
    <guard-role>Doctor</guard-role>
    <guard-role>Secretary</guard-role>
    <guard-expression>python: not(here.portal_factory.isTemporary(here))</guard-expression>
+  </guard>
+ </transition>
+ <transition transition_id="hide" title="Esconder" new_state="hided" trigger="USER" before_script="" after_script="">
+  <action url="" category="workflow" icon="">Esconder</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Doctor</guard-role>
+   <guard-role>Secretary</guard-role>
+   <guard-expression>python:not(here.portal_factory.isTemporary(here))</guard-expression>
   </guard>
  </transition>
  <transition transition_id="non show" title="Ausente" new_state="non-show" trigger="USER" before_script="" after_script="">
@@ -176,6 +188,6 @@
   <guard>
   </guard>
  </variable>
-  <script script_id="set_last_visit_date" type="Script (Python)" filename="workflows/appointment_workflow/scripts/set_last_visit_date.py" module="" function=""/>
-  <script script_id="remove_visit_from_calendar" type="Script (Python)" filename="workflows/appointment_workflow/scripts/remove_visit_from_calendar.py" module="" function=""/>
+ <script script_id="remove_visit_from_calendar" type="Script (Python)" filename="workflows/appointment_workflow/scripts/remove_visit_from_calendar.py" module="" function=""/>
+ <script script_id="set_last_visit_date" type="Script (Python)" filename="workflows/appointment_workflow/scripts/set_last_visit_date.py" module="" function=""/>
 </dc-workflow>
