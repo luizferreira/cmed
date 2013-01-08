@@ -125,6 +125,10 @@
                 </tal:for>
             </tbody>
 	</table>
+    <!-- Do not remove this div, it is used to show "Detalhes da Consulta" in a dialog_content -->
+    <div id="dialog_content" style="display:none">
+    </div>
+
 </metal:def>
 
 <metal:def define-macro="change_cell"
