@@ -75,3 +75,6 @@ table td:before {
     border-top: 999px solid #eeeeee;
     border-left: 999px solid #eeeeee;
 }
+fieldset {
+     border:2px solid black
+}

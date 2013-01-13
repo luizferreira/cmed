@@ -97,12 +97,16 @@
 </center>
 
 
+<metal:call_macro 
+    use-macro="context/print_pages_macros/macros/patient_info">
+</metal:call_macro>
 
-<center class="cmedPrint">
+<!-- DELETAR ESSES COMENTARIO:08/01/2013 -->
+<!-- <center class="cmedPrint"> -->
 <!--
     FieldSet Basico
 -->
-<img tal:attributes="src python: str(context.absolute_url()) + '/logoGrayScale.png'" style="max-height:150px" />
+<!-- <img tal:attributes="src python: str(context.absolute_url()) + '/logoGrayScale.png'" style="max-height:150px" />
     <table class="externalTable">
         <thead>
             <tr>
@@ -153,8 +157,8 @@
                 </tr>
             </tal:for>
         </tbody>
-    </table>
-</center>
+    </table> -->
+<!-- </center> -->
 </div>
 </body>
 </html>

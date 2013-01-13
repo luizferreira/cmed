@@ -1,0 +1,212 @@
+
+<metal:def define-macro="patient_info"> 
+  <center class="cmedPrint">
+  <!--
+      FieldSet Basico
+  -->
+  <img tal:attributes="src python: str(context.absolute_url()) + '/logoGrayScale.png'" style="max-height:150px" />
+      <table class="externalTable">
+          <thead>
+              <tr>
+                  <th class="pageTitle">
+                  Dados do Paciente - <span tal:content="context/getFullName"></span>
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tal:for repeat="schemata script">
+                  <tr>
+                      <td>
+                          <table class="internalTable0">
+                              <thead class="">
+                                  <tr class="even">
+                                      <th style="" class="" tal:content="python:schemata[0]">
+                                          Label
+                                      </th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr><td>
+                                      <table class="internalTable1">
+                                          <tbody>
+                                              <tal:for2 repeat="group python:schemata[1]">
+                                                  <tr>
+                                                      <tal:for3 repeat="tupla group">
+                                                          <tal:def define="field python:tupla[0]; value python:tupla[1]">
+                                                              <td style="min-width:150px">
+                                                                  <div style="font-weight: bold">
+                                                                      <tal:print content="field/widget/label" />:
+                                                                  </div>
+                                                              </td>
+                                                              <td style="min-width:140px">
+                                                                  <span><metal:macro use-macro="python: context.widget(field.getName(),mode='view')" /></span>
+
+                                                              </td>
+                                                          </tal:def>
+                                                      </tal:for3>
+                                                  </tr>
+                                              </tal:for2>
+                                          </tbody>
+                                      </table>
+                                  </td></tr>
+                              </tbody>
+                          </table>
+                      </td>
+                  </tr>
+              </tal:for>
+          </tbody>
+      </table>
+  </center>
+</metal:def>
+
+<metal:def define-macro="prescription_info"> 
+  <center class="cmedPrint">
+  <fieldset>
+              <table class="size-secondary width-max">
+                  <br/>
+                  <tr>
+
+                      <!--
+                      ====================================
+                          Clinic Header
+                      ====================================
+                      -->
+                              <div tal:define="clinicData python:context.getClinic();">
+                              <div class="clinic_title"
+                                  tal:content="clinicData/getName | nothing" >CARDIOLOGY ASSOCIATES OF FLORIDA</div>
+                              <div class="clinic_subtitle"
+                                  tal:content="clinicData/getEndereco | nothing">7715 SW 71th STREET, SUITE 101- NEW YORK, FL 66286</div>
+                              <div class="clinic_phone" tal:condition="clinicData/getPhone">
+                                  Telefone: <metal:macro use-macro="python:clinicData.widget('phone',mode='view')"> </metal:macro> - Fax: <metal:macro1 use-macro="python:clinicData.widget('fax',mode='view')"></metal:macro1>
+                              </div>
+                          </div>
+
+                  </tr>
+                  <tr>
+                      <td class="center">
+                          <div class="width-90 margin">
+                              <br />
+                              <center>
+                              <table class="width-70" tal:define="information context/getPatientData">
+                                  <tr>
+                                      <td>
+                                          <table tal:define="info information/info">
+                                              <tr>
+                                                  <td class="width-10 td_cell">
+                                                      Médico:
+                                                  </td>
+                                                  <td class="width-50">
+                                                      <span tal:content="doctor_name | nothing">Doctor</span>
+                                                  </td>
+                                                  <td class="width-5 td_cell">
+                                                      CRM:
+                                                      
+                                                  </td>
+                                                  <td class="width-10 td_cell">
+                                                      <span tal:content="doc_obj/getSsn | nothing">Ssn</span>
+                                                  </td>
+                                              </tr>
+                                              <tr>
+                                                  <td>
+                                                      <span class="bold">
+                                                          Paciente:
+                                                      </span>
+                                                  </td>
+                                                  <td>
+                                                      <span>
+                                                          <tal:value content="info/name"/>
+                                                      </span>
+                                                  </td>
+                                                  <td >
+                                                      <span class="bold">
+                                                      </span>
+                                                  </td>
+                                                  <td  tal:define="today python:context.getTodayDate(request.get('date_str', ''))">
+                                                  </td>
+                                              </tr>
+                                          </table>
+                                      </td>
+                                  </tr>
+                              </table>
+                              </center>
+                          </div>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td align="center">
+                          <div class="width-90 size-small">
+                              <table id="prescriptions" class="width-max table_collapse">
+                                  <thead class="width-max theader">
+                                      <th class="width-30 th_bold">
+                                          Medicamento
+                                      </th>
+                                      <th class="width-15 th_bold">
+                                          Concentração
+                                      </th>
+                                      <th class="width-15 th_bold">
+                                          Quantidade
+                                      </th>
+                                      <th class="width-40 th_bold">
+                                          Uso
+                                      </th>
+                                  </thead>
+                                  <tbody tal:define="medications prescriptions/data/medications">
+                                      <tr class="width-max" tal:repeat="medication medications" 
+                                          tal:attributes="style python:test(repeat['medication'].number()%2 == 0, 'background-color: #EEEEEE', 'background-color:')">
+                                          <td class="width-30 td_black">
+                                              <tal:content content="medication/data/medication | nothing"/>
+                                          </td>
+                                          <td class="width-15 td_black">
+                                                  <tal:content content="medication/data/concentration | nothing"/>
+                                          </td>
+                                          <td class="width-15 td_black">
+                                              <tal:content content="medication/data/quantity | nothing"/>
+                                          </td>
+                                          <td class="width-40 td_black">
+                                              <tal:content content="medication/data/use | nothing"/>
+                                          </td>
+                                      </tr>
+                                      <tal:empty-lines tal:condition="python:len(medications) < 5">
+                                          <tr tal:repeat="i python:range(len(medications) + 1, 6)" tal:attributes="style python:test(i%2 == 0, 'background-color: #EEEEEE', 'background-color:')">
+                                              <td class="width-30 td_empty">
+                                                  &nbsp;
+                                              </td>
+                                              <td class="width-15 td_empty"/>
+                                              <td class="width-15 td_empty"/>
+                                              <td class="width-40 td_empty"/>
+                                              </tr>
+                                      </tal:empty-lines>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td>
+                          <br />
+                          <table class="width-max">
+                              <tr>
+
+                                  <td colspan="2">
+                                      <center>                   
+                                          <br /><br />
+                                              ____________________________________<br/>                                       
+                                      </center>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="2">
+                                      <center>
+                                              <label style="display:none" tal:content="prescriptions/data/date" id="pres_data">Data</label>
+                                              <div id="data"></div>
+                                      </center>
+                                  </td>
+                              </tr>
+                              <br/><br/>
+                          </table>
+                      </td>
+                  </tr>
+              </table>
+              </fieldset>
+  </center>
+</metal:def>

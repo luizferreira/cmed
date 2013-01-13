@@ -8,7 +8,7 @@
         <link rel="Stylesheet" type="text/css"
             tal:attributes="href string:${portal_url}/doc_view.css" />
         <link rel="stylesheet" type="text/css"
-        tal:attributes="href string:${portal_url}/cmed_print.css" media="print" />
+        tal:attributes="href string:${portal_url}/cmedPrint.css" media="print" />
     </metal:aux>
     
     <metal:block fill-slot="javascript_head_slot">
@@ -21,13 +21,13 @@
                      doctor_id prescriptions/data/doctor;
                      doctor_name python:context.getDoctorNameById(doctor_id)">
         <tal:doctors define="doc_obj python:context.getDoctorById(doctor_id)">
-        <span class="size-title">
+        <span class="size-title visualNoPrint">
             <span i18n:translate="heading_doctor">Doctor:</span> <tal:doc content="doctor_name"/></span>
             <span id="print_button" style="float:right">
                 <a title="" href="javascript:print();" class="visualNoPrint">Imprimir</a>
             </span>
             <hr>
-            <fieldset id="fieldset_doc_view">
+            <fieldset id="fieldset_doc_view" class="visualNoPrint">
             <table class="size-secondary width-max">
                 <br/>
                 <tr>
@@ -174,9 +174,17 @@
                 </tr>
             </table>
             </fieldset>
+
+        <!-- PRINT SECTION -->
+        <metal:call_macro 
+            use-macro="context/print_pages_macros/macros/prescription_info">
+        </metal:call_macro>
+
         </tal:doctors>
     </tal:def>
     </metal:main>
+
+
 </body>
 </html>
 </metal:html>

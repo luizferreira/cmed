@@ -14,10 +14,28 @@
 			"path": "src/wres.theme/wres/theme"
 		},
 		{
-			"path": "src/wres.tour/wres/tour/"
+			"path": "src/wres.tour/wres/tour"
 		},
 		{
-			"path": "../buildout-cache/eggs"
+			"path": "/home/matheus/plone_instances/communi/buildout-cache/eggs"
+		},
+		{
+			"path": "bin"
+		},
+		{
+			"path": "develop-eggs"
+		},
+		{
+			"path": "parts"
+		},
+		{
+			"path": "products"
+		},
+		{
+			"path": "src"
+		},
+		{
+			"path": "var"
 		}
 	],
 	"settings":
