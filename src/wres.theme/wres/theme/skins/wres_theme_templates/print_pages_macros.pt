@@ -1,7 +1,7 @@
 
 <metal:def define-macro="patient_info"> 
   <center class="cmedPrint">
-  <!--
+  <!-- 
       FieldSet Basico
   -->
   <img tal:attributes="src python: str(context.absolute_url()) + '/logoGrayScale.png'" style="max-height:150px" />
