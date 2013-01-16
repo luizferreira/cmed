@@ -164,7 +164,7 @@
                                 <td colspan="2">
                                     <center>
                                             <label style="display:none" tal:content="prescriptions/data/date" id="pres_data">Data</label>
-                                            <div id="data"></div>
+                                            <div class="data"></div>
                                     </center>
                                 </td>
                             </tr>

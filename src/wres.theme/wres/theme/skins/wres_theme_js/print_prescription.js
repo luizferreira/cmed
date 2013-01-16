@@ -45,6 +45,9 @@ function novaData(n) {
         }
      $(document).ready(function(){
 		var presc_date = stringToDate();
-		$("#data").html(NData(presc_date));
+
+		$(".data").each(function(index,value){
+          $(this).html(NData(presc_date));  
+        });
     });
                             

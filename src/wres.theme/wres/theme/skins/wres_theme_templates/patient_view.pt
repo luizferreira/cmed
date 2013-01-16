@@ -20,6 +20,8 @@
             tal:attributes="href string:${portal_url}/cmed.css" />
         <link rel="Stylesheet" media="print" type="text/css"
             tal:attributes="href string:${portal_url}/cmedPrint.css" />
+        <link rel="Stylesheet" media="print" type="text/css"
+            tal:attributes="href string:${portal_url}/patientViewPrint.css" />
     </metal:aux>
 
 </head>
