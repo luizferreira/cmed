@@ -12,18 +12,24 @@
         <link rel="stylesheet" type="text/css"
             tal:attributes="href string:${portal_url}/doc_view.css" media="screen" />
         <link rel="stylesheet" type="text/css"
-            tal:attributes="href string:${portal_url}/cmed_print.css" media="print"/>
+            tal:attributes="href string:${portal_url}/cmed_print.css" media="screen"/>
             <link rel="stylesheet" type="text/css"
         tal:attributes="href string:${portal_url}/cmedPrint.css" media="print" />
     </metal:aux>
-    <title>Primeira Visita</title>
+
+    <metal:block fill-slot="javascript_head_slot">
+            <script type="text/javascript" src="date_to_text.js"></script>
+    </metal:block>
 </head>
 
 <body>
 <div metal:fill-slot="main"
     tal:define="patientData python:context.getPatient();                
                 clinicData python:context.getClinic();
-                phone_field python:clinicData.getField('phone')"    
+                phone_field python:clinicData.getField('phone');
+                title python:context.getDocument_type();
+                doctor_name python:context.getDoctor().getFullName();
+                document_date python:context.creation_date.strftime('%d/%m/%Y')"    
                 >
 <div class="visualNoPrint">                
 <metal:body_macro metal:define-macro="body">
@@ -80,25 +86,25 @@ Body
 ====================================
 -->
 <div tal:define ="data context/getDataDoc">
-<tal:for repeat="schemata data">
-    <tal:fieldset_name define="fieldset_name python:schemata[0]">
-        <fieldset id="fieldset_doc_view">
-            
-            <tal:for2 repeat="field_data schemata">
-                <tal:if condition="not:repeat/field_data/start">        
-                    <tal:def define="field_name python:field_data[0];
-                                     field_label python:field_data[1]">
-                        <strong tal:condition="field_label"><br /><tal:print_content content="field_label" />:</strong>
-                        <br /> 
-                        <metal:macro use-macro="python: context.widget(field_name,mode='view')" /><br />
+  <tal:for repeat="schemata data">
+      <tal:fieldset_name define="fieldset_name python:schemata[0]">
+          <fieldset id="fieldset_doc_view">
+              
+              <tal:for2 repeat="field_data schemata">
+                  <tal:if condition="not:repeat/field_data/start">        
+                      <tal:def define="field_name python:field_data[0];
+                                       field_label python:field_data[1]">
+                          <strong tal:condition="field_label"><br /><tal:print_content content="field_label" />:</strong>
+                          <br /> 
+                          <metal:macro use-macro="python: context.widget(field_name,mode='view')" /><br />
 
 
-                    </tal:def>
-                </tal:if>
-            </tal:for2>
-        </fieldset>
-        </tal:fieldset_name>
-</tal:for>
+                      </tal:def>
+                  </tal:if>
+              </tal:for2>
+          </fieldset>
+          </tal:fieldset_name>
+  </tal:for>
 </div>
 <!--
 ====================================

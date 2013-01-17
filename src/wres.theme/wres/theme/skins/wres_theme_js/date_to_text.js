@@ -38,16 +38,16 @@ function novaData(n) {
         return Dia + ", " + cDate.getDate() + " de " + Mes + " " +  " de " + ano
     }     
     function stringToDate(){
-		var presc_date = document.getElementById("pres_data").innerHTML;
-		var dateArray = presc_date.split("/");
+		var doc_date = document.getElementById("doc_date").innerHTML;
+		var dateArray = doc_date.split("/");
 		var	date = new Date(dateArray[2],dateArray[1]-1,dateArray[0]);
 			return date;
         }
      $(document).ready(function(){
-		var presc_date = stringToDate();
+		var doc_date = stringToDate();
 
-		$(".data").each(function(index,value){
-          $(this).html(NData(presc_date));  
+		$(".date").each(function(index,value){
+          $(this).html(NData(doc_date));  
         });
     });
                             
