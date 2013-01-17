@@ -10,9 +10,11 @@
 <head>
     <metal:aux fill-slot="style_slot">
         <link rel="stylesheet" type="text/css"
-            tal:attributes="href string:${portal_url}/doc_view.css" />
+            tal:attributes="href string:${portal_url}/doc_view.css" media="screen" />
         <link rel="stylesheet" type="text/css"
             tal:attributes="href string:${portal_url}/cmed_print.css" media="print"/>
+            <link rel="stylesheet" type="text/css"
+        tal:attributes="href string:${portal_url}/cmedPrint.css" media="print" />
     </metal:aux>
     <title>Primeira Visita</title>
 </head>
@@ -23,7 +25,10 @@
                 clinicData python:context.getClinic();
                 phone_field python:clinicData.getField('phone')"    
                 >
+<div class="visualNoPrint">                
 <metal:body_macro metal:define-macro="body">
+
+
 <!--
 ====================================
     Clinic Header
@@ -110,6 +115,12 @@ Document Footer
     Data da Criação: <span tal:content="python:context.creation_date.strftime('%d/%m/%Y')">Data de criação</span>
     
     </metal:body_macro>
+
+</div>
+
+<metal:call_macro 
+    use-macro="context/print_pages_macros/macros/cmed_document">
+</metal:call_macro>
 
 </div>
 </body>

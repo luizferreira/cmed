@@ -225,3 +225,130 @@
               </fieldset>
   </center>
 </metal:def>
+
+<metal:def define-macro="cmed_document"> 
+<div class="cmedPrint">
+
+    <metal:call_macro 
+              use-macro="context/print_pages_macros/macros/header">
+    </metal:call_macro>
+
+    <!--
+====================================
+    Patient Data Header
+====================================
+-->
+    <br/>
+    <div class="document_print_body">
+        <table class="document_patient_infos" tal:define="birth_date patientData/getBirthDate | nothing;">
+            <tr>
+                 <td class="document_item_title">Nome: </td>
+                 <td> <span class="item_content" tal:content="patientData/getFullName"></span></td>
+                 <td class="document_item_title">Data de Nascimento: </td>
+                 <td ><span tal:condition="birth_date" class="item_content" tal:content="python:birth_date.strftime('%d/%m/%Y')"></span><br></td>
+                 <td class="document_item_title">Número de Registro: </td>
+                 <td><span class="item_content" tal:content="patientData/getChart"></span><br></td>
+            </tr>
+            <tr>
+                 <td class="document_item_title">Data da Consulta: </td>
+                 <td><span class="document_item_content" tal:content="python:context.dateOfVisit.strftime('%d/%m/%Y')"></span><br></td>
+                 <td class="document_item_title">Idade: </td>
+                 <td><span class="document_item_content" tal:content="python:context.getPatientAge(birth_date)"></span><br></td>
+             </tr>
+        </table>
+    </div>
+<!--
+====================================
+Body
+====================================
+-->
+<div tal:define ="data context/getDataDoc">
+<tal:for repeat="schemata data">
+    <tal:fieldset_name define="fieldset_name python:schemata[0]">
+        <fieldset id="fieldset_doc_view">
+            
+            <tal:for2 repeat="field_data schemata">
+                <tal:if condition="not:repeat/field_data/start">        
+                    <tal:def define="field_name python:field_data[0];
+                                     field_label python:field_data[1]">
+                        <strong tal:condition="field_label"><br /><tal:print_content content="field_label" />:</strong>
+                        <br /> 
+                        <metal:macro use-macro="python: context.widget(field_name,mode='view')" /><br />
+
+
+                    </tal:def>
+                </tal:if>
+            </tal:for2>
+        </fieldset>
+        </tal:fieldset_name>
+</tal:for>
+</div>
+<!--
+====================================
+Document Footer
+====================================
+-->
+<br />
+<br />
+    <span class="lineSignature">_________________________</span> <br>
+    
+    Criado por <span class="doctor" tal:content="python:context.getDoctor().getFullName()" i18n:translate="">
+    Nome do Doutor
+    </span><br>
+    Data da Criação: <span tal:content="python:context.creation_date.strftime('%d/%m/%Y')">Data de criação</span>
+  <!-- 
+      FieldSet Basico
+  -->
+      <!-- <table class="externalTable">
+          <thead>
+              <tr>
+                  <th class="pageTitle">
+                  Dados do Paciente - <span tal:content="context/getFullName"></span>
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tal:for repeat="schemata script">
+                  <tr>
+                      <td>
+                          <table class="internalTable0">
+                              <thead class="">
+                                  <tr class="even">
+                                      <th style="" class="" tal:content="python:schemata[0]">
+                                          Label
+                                      </th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr><td>
+                                      <table class="internalTable1">
+                                          <tbody>
+                                              <tal:for2 repeat="group python:schemata[1]">
+                                                  <tr>
+                                                      <tal:for3 repeat="tupla group">
+                                                          <tal:def define="field python:tupla[0]; value python:tupla[1]">
+                                                              <td style="min-width:150px">
+                                                                  <div style="font-weight: bold">
+                                                                      <tal:print content="field/widget/label" />:
+                                                                  </div>
+                                                              </td>
+                                                              <td style="min-width:140px">
+                                                                  <span><metal:macro use-macro="python: context.widget(field.getName(),mode='view')" /></span>
+
+                                                              </td>
+                                                          </tal:def>
+                                                      </tal:for3>
+                                                  </tr>
+                                              </tal:for2>
+                                          </tbody>
+                                      </table>
+                                  </td></tr>
+                              </tbody>
+                          </table>
+                      </td>
+                  </tr>
+              </tal:for>
+          </tbody>
+      </table> -->
+  </div>
+</metal:def>

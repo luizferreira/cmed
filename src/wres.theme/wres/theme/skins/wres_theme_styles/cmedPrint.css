@@ -1,3 +1,4 @@
+*{-webkit-print-color-adjust: exact;}
 .cmed{
 	display:none;
 }
@@ -6,9 +7,14 @@
 	background-color: rgb(166,166,166);
     margin-bottom: 15px;
 }
+/*body
+{
+  margin: 10mm 5mm 10mm 5mm;
+}*/
 @page{
-	margin-top: 2px;
-	margin-bottom: 2px;
+	margin-top: 25px;
+	margin-bottom: 20px;
+
 }
 .cmedPrint{
 	display:inline;
@@ -16,4 +22,41 @@
 
 fieldset {
      border:0px solid black
+}
+
+/*document print styles*/
+.document_patient_infos{
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    background: #e0e0e0;
+}
+.document_print_body{
+    margin-right: 0.0em;
+    border: 0px;
+    width: 100%;
+}
+.document_item_title{
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+.document_item_content{
+    font-size: 13px;
+    text-align: left;
+}
+.document_item_name{
+    font-family: Thurmond, Martina;
+    font-size: 18px;
+}
+table.plain th{
+    background: #e0e0e0;
+    width: 100%;
+    border: 1px solid #8c8c8c;
+
+}
+table.plain {
+    margin-top: 10px;
+    page-break-inside: avoid;
+    width:100%;
 }
