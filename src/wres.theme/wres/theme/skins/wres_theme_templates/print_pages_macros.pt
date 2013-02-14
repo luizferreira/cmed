@@ -5,6 +5,7 @@ GLOBAL TAL VARIABLES that need to be defined
 doctor_name : Doctor name or noe
 title: Type of Document
 document_date: Date of document, format DD/MM/YYY;
+need_patient: Boolean need Patient header Information;
 
 ============================================
 IMPORTS required
@@ -19,6 +20,14 @@ IMPORTS required
     <metal:block fill-slot="javascript_head_slot">
             <script type="text/javascript" src="date_to_text.js"></script>
     </metal:block>
+=============================================
+Use header without patient_info
+=============================================
+<div tal:define="title string:Agenda de Consultas Hoje / Amanhã; need_patient python:False">
+      <metal:call_macro 
+                use-macro="context/print_pages_macros/macros/header">
+      </metal:call_macro>
+    </div>
 -->
 
 <metal:def define-macro="header">
@@ -49,6 +58,7 @@ IMPORTS required
     Patient Data Header
 ====================================
 -->
+  <tal:if condition="need_patient">
     <br/>
     <div class="document_print_body" tal:define="patientData python:context.getPatient();">
         <table class="document_patient_infos" tal:define="birth_date patientData/getBirthDate | nothing;">
@@ -68,6 +78,7 @@ IMPORTS required
              </tr>
         </table>
     </div>
+    </tal:if>
 
 </metal:def>
 
@@ -91,11 +102,15 @@ IMPORTS required
 
 
 <metal:def define-macro="patient_info"> 
-  <center class="cmedPrint">
+  <div class="cmedPrint">
+    <div tal:define="title string:Dados do Paciente; need_patient python:False">
+      <metal:call_macro 
+                use-macro="context/print_pages_macros/macros/header">
+      </metal:call_macro>
+    </div>
   <!-- 
       FieldSet Basico
   -->
-  <img tal:attributes="src python: str(context.absolute_url()) + '/logoGrayScale.png'" style="max-height:150px" />
       <table class="externalTable">
           <thead>
               <tr>
@@ -147,72 +162,19 @@ IMPORTS required
               </tal:for>
           </tbody>
       </table>
-  </center>
+  </div>
 </metal:def>
 
 <metal:def define-macro="prescription_info"> 
 <div class="cmedPrint">
+  <div tal:define="need_patient python:True">
     <metal:call_macro 
               use-macro="context/print_pages_macros/macros/header">
     </metal:call_macro>
+  </div>
   <center>
   <fieldset>
-              <table class="plain">
-                  <br/>
-                  <tr>
-
-
-                  </tr>
-                  <tr>
-                      <td class="center">
-                          <div class="">
-                              <br />
-                              <center>
-                              <!-- <table class="width-70" tal:define="information context/getPatientData">
-                                  <tr>
-                                      <td>
-                                          <table tal:define="info information/info">
-                                              <tr>
-                                                  <td class="width-10 td_cell">
-                                                      Médico:
-                                                  </td>
-                                                  <td class="width-50">
-                                                      <span tal:content="doctor_name | nothing">Doctor</span>
-                                                  </td>
-                                                  <td class="width-5 td_cell">
-                                                      CRM:
-                                                      
-                                                  </td>
-                                                  <td class="width-10 td_cell">
-                                                      <span tal:content="doc_obj/getSsn | nothing">Ssn</span>
-                                                  </td>
-                                              </tr>
-                                              <tr>
-                                                  <td>
-                                                      <span class="bold">
-                                                          Paciente:
-                                                      </span>
-                                                  </td>
-                                                  <td>
-                                                      <span>
-                                                          <tal:value content="info/name"/>
-                                                      </span>
-                                                  </td>
-                                                  <td >
-                                                      <span class="bold">
-                                                      </span>
-                                                  </td>
-                                                  <td  tal:define="today python:context.getTodayDate(request.get('date_str', ''))">
-                                                  </td>
-                                              </tr>
-                                          </table>
-                                      </td>
-                                  </tr>
-                              </table> -->
-                              </center>
-                          </div>
-                      </td>
-                  </tr>
+              <table class="plain_print">
                   <tr>
                       <td align="center">
                           <div class="">
@@ -286,36 +248,14 @@ IMPORTS required
 
 <metal:def define-macro="cmed_document"> 
 <div class="cmedPrint">
-
+  <div tal:define="need_patient python:True">
     <metal:call_macro 
               use-macro="context/print_pages_macros/macros/header">
     </metal:call_macro>
+  </div>
 
     <!--
-====================================
-    Patient Data Header
-====================================
--->
-    <!-- <br/>
-    <div class="document_print_body">
-        <table class="document_patient_infos" tal:define="birth_date patientData/getBirthDate | nothing;">
-            <tr>
-                 <td class="document_item_title">Nome: </td>
-                 <td> <span class="item_content" tal:content="patientData/getFullName"></span></td>
-                 <td class="document_item_title">Data de Nascimento: </td>
-                 <td ><span tal:condition="birth_date" class="item_content" tal:content="python:birth_date.strftime('%d/%m/%Y')"></span><br></td>
-                 <td class="document_item_title">Número de Registro: </td>
-                 <td><span class="item_content" tal:content="patientData/getChart"></span><br></td>
-            </tr>
-            <tr>
-                 <td class="document_item_title">Data da Consulta: </td>
-                 <td><span class="document_item_content" tal:content="python:context.dateOfVisit.strftime('%d/%m/%Y')"></span><br></td>
-                 <td class="document_item_title">Idade: </td>
-                 <td><span class="document_item_content" tal:content="python:context.getPatientAge(birth_date)"></span><br></td>
-             </tr>
-        </table>
-    </div> -->
-<!--
+
 ====================================
 Body
 ====================================
@@ -346,18 +286,165 @@ Body
 Document Footer
 ====================================
 -->
-<!-- <br />
-<br />
-    <span class="lineSignature">_________________________</span> <br>
-    
-    Criado por <span class="doctor" tal:content="python:context.getDoctor().getFullName()" i18n:translate="">
-    Nome do Doutor
-    </span><br>
-    Data da Criação: <span tal:content="python:context.creation_date.strftime('%d/%m/%Y')">Data de criação</span>
- -->  
+
  <metal:call_macro 
               use-macro="context/print_pages_macros/macros/footer">
   </metal:call_macro>
 </div>
 
+</metal:def>
+
+<metal:def define-macro="cmed_sec_desk">
+  <div class="cmedPrint">
+    <div tal:define="title string:Agenda de Consultas Hoje / Amanhã; need_patient python:False">
+      <metal:call_macro 
+                use-macro="context/print_pages_macros/macros/header">
+      </metal:call_macro>
+    </div>
+
+    <table id="" class="width-100">
+
+    <tr>
+      <td style="padding:0px">
+        <dl id="day-tables">
+          <div id="hoje-table">
+            <p class="day-title">Hoje - <span class="date"></span></p>
+            <dd id="fieldset-today">
+              <div class="show_visits" id="show_today_visits">
+                <div metal:use-macro="context/print_pages_macros/macros/show_visits_print">
+                  <metal:fill_slot fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromToday" />
+                </div>
+              </div>
+            </dd>
+          </div>
+
+        <div id="amanha-table">
+          <p class="day-title">Amanhã - <span class="tomorrow-string"></span></p>
+          <dd id="fieldset-tomorrow">
+
+            <div class="show_visits" id="show_tomorrow_visits">
+
+              <div metal:use-macro="context/print_pages_macros/macros/show_visits_print">
+                <metal:define_visits fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromTomorrow" />
+
+                <metal:no_activities fill-slot='no_visits'>
+                  <span id="">Sem consultas amanhãs -</span>
+                  <span tal:replace="tomorrow"></span>
+                </metal:no_activities>
+              
+                <metal:no_activities fill-slot='visits_header'>
+                  Consultas de Amanhã -
+                  <span tal:replace="tomorrow"></span>
+                </metal:no_activities>
+              </div>
+
+            </div>
+          </dd>
+        </div>
+        </dl>
+        
+      </td>
+      </tr>
+    </table>
+  </div>
+</metal:def>
+
+<!-- 
+====================
+PRINT MACROS VISITS
+====================
+-->
+
+<metal:def define-macro="show_visits_print"> 
+
+    <metal:slot define-slot="doctor_visits" />
+
+    <!-- No visits message -->
+    <div tal:condition="python:not doctor_visits">
+        <br />
+        <strong>
+        <h1><center>
+            <metal:no_visits define-slot="no_visits">
+                <span id="no-visits">Sem consultas hoje - </span><span tal:replace="today"></span>
+            </metal:no_visits>
+        </center></h1>
+            <br /><br /><br /><br /><br /><br />
+        </strong>
+        <br />
+    </div>
+
+  <table class="seclisting_print" id="" tal:condition="doctor_visits">
+    <thead>
+                    <metal:thead define-slot="thead">
+                        <th style="width:5%;text-align: center;">Horário</th>
+                        <th style="width:35%;text-align: center;">Paciente</th>
+                        <th style="width:10%;text-align: center;">Status</th>
+                        <th style="width:15%;text-align: center;">Tipo</th>
+                        <th style="width:15%;text-align: center;">Razão</th>
+                        <th style="width:15%;text-align: center;">Convênio</th>
+                    </metal:thead>
+    </thead>
+    <tbody>
+                <tal:for tal:repeat="visit doctor_visits">
+                    <tr tal:define="doctor python:visit['getDoctor'];
+                                    doctor_id doctor/getId;
+                                    row_number repeat/visit/number;
+                                    color python:context.getRowColor(visit);"
+                            tal:attributes="class string:$doctor_id $color visit;
+                                            id string:row_$row_number">
+                            <metal:trow define-slot="trow">
+                            <tal:block_aux tal:define="visit_id python:visit['absolute_url'].split('/')[-1];
+                                                       patient python:visit['getPatient'];">
+                            <td style="text-align: center;">
+                                <div tal:content="python:visit['start'].strftime('%H:%M')">
+                                </div>
+                                <img class="visualNoPrint" tal:attributes="src string:${portal_url}/popup_icon.gif;" />
+                                <input id="visit_url" style="display:none" tal:attributes="value visit/absolute_url"/>
+                            </td>
+                            <td style="text-align: center;">
+                                    <!-- Link para o nome do paciente-->
+                                <a  href="javascript: void(0)"
+                                    tal:attributes="id python: 'patient_link' + str(repeat['visit'].index);
+                                    onmouseover string:loadPatientTip(${repeat/visit/index})"
+                                    tal:content="python:patient.Title()" i18n:translate="" > Nome do Paciente </a>
+                                <input style="display:none" tal:attributes="value python:patient.absolute_url();
+                                id python: 'patient_url' + str(repeat['visit'].index)"/>
+                                <input id="AmIDoctor" style="display:none" tal:attributes="value python:context.TestRoles()"/>
+                            </td>
+
+                            <td class="desktop_visit_status"
+                                tal:content="python:visit['getReviewState']" i18n:translate=""
+                                style="text-align: center;">Status
+                            </td>
+                            <td style="text-align: center;">
+                                <div tal:content="visit/getVisit_type | nothing">
+
+                                </div>
+                            </td>
+
+                            <td style="text-align: center;">
+                                <div tal:content="visit/getVisit_reason | nothing">
+
+                                </div>
+                            </td>
+
+                            <td style="text-align: center;">
+                                <div tal:content="visit/getInsurance">
+                                </div>
+                            </td>
+                            </tal:block_aux>
+                        </metal:trow>
+                    </tr>
+                </tal:for>
+            </tbody>
+  </table>
+    <!-- Do not remove this div, it is used to show "Detalhes da Consulta" in a dialog_content -->
+    <div id="dialog_content" style="display:none">
+    </div>
+    <div class="not-for-this-doctor" style="display:none">
+        <br />
+        <strong style="font-family:Quicksand; color:#205C90">
+            Não há consultas para o médico selecionado.
+        </strong>
+    </div>
 </metal:def>

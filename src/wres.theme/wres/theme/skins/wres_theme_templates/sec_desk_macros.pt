@@ -52,7 +52,7 @@
                         <th style="width:6%;text-align: center;">Horário</th>
                         <th style="width:18%;text-align: center;">Paciente</th>
                         <th style="width:10%;text-align: center;">Status</th>
-                        <th style="width:28%;text-align: center;" class="no_print">Alterar</th>
+                        <th style="width:28%;text-align: center;">Alterar</th>
                         <th style="width:10%;text-align: center;">Tipo</th>
                         <th style="width:10%;text-align: center;">Razão</th>
                         <th style="width:12%;text-align: center;">Convênio</th>
@@ -96,7 +96,7 @@
                             </td>
 
                             <!-- Conteudo da celula CHANGE  -->
-                            <td style="text-align: center;" class="no_print">
+                            <td style="text-align: center;">
                                 <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
                                 <div tal:define="repeat_number repeat/visit/number" tal:attributes="id string:change_cell_div_${repeat_number}">
                                         <metal:change use-macro="here/sec_desk_macros/macros/change_cell" />
@@ -156,3 +156,5 @@
 		</tal:links>
 	</tal:notconcluded>
 </metal:def>
+
+

@@ -10,13 +10,17 @@
 
   <metal:block fill-slot="style_slot">
     <link rel="stylesheet" type="text/css" href="new_sec_desk.css" />
-    <link rel="stylesheet" type="text/css" href="cmed.css" />
-    <link rel="stylesheet" type="text/css" href="sec_print.css" media="print" />
-	<link rel="stylesheet" type="text/css" href="jquery.qtip.css"/>
-    <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="cmed.css" media="screen"/>
+	 <link rel="stylesheet" type="text/css" href="jquery.qtip.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type="text/css" tal:attributes="href string:${portal_url}/cmed_print.css" media="screen"/>
+    <link rel="stylesheet" type="text/css" tal:attributes="href string:${portal_url}/cmedPrint.css" media="print" />
   </metal:block>
 <metal:block fill-slot="javascript_head_slot">
   <script type="text/javascript" src="jquery.qtip.js"></script>
+  <script type="text/javascript" src="date_to_text.js"></script>
+  <script type="text/javascript" src="sec_desk_print.js"></script>
+  <script type="text/javascript" src="date_to_text.js"></script>
 </metal:block>
 </head>
 
@@ -32,10 +36,10 @@
                tomorrow python:(modules['DateTime'].DateTime()+1).strftime('%d/%m/%Y')">
 
 
-<center><h1 class="cmed"> Agenda </h1></center>
+<center  class="cmed"><h1> Agenda </h1> <h2 class="font-quicksand"> <span class="date"></span></h2> </center>
 
 <span id="print_button" style="float:right">
-  <a title="" href="javascript:print();" class="visualNoPrint">Imprimir</a>
+  <a title="" href="javascript:secDeskPrint();" class="visualNoPrint">Imprimir</a>
 </span>
 <tal:if condition="not:doctor">
   <metal:call_macro use-macro="context/sec_desk_macros/macros/doctor_select">
@@ -44,7 +48,7 @@
 
 <br />
 <br />
-<table id="agenda_parent" class="listing cmed width-100">
+<table id="agenda_parent" class="listing cmed width-100 visualNoPrint">
 
   <tr>
     <td style="padding:0px">
@@ -84,7 +88,10 @@
 </tr>
 
 </table>
-
+  <!-- PRINT SECTION -->
+  <metal:call_macro 
+      use-macro="context/print_pages_macros/macros/cmed_sec_desk">
+  </metal:call_macro>
 </div>
 
 </body>

@@ -38,15 +38,26 @@ function novaData(n) {
         return Dia + ", " + cDate.getDate() + " de " + Mes + " " +  " de " + ano
     }     
     function stringToDate(){
-		var doc_date = document.getElementById("doc_date").innerHTML;
-		var dateArray = doc_date.split("/");
-		var	date = new Date(dateArray[2],dateArray[1]-1,dateArray[0]);
-			return date;
+        try{
+        var doc_date = document.getElementById("doc_date").innerHTML;
+        var dateArray = doc_date.split("/");
+        var date = new Date(dateArray[2],dateArray[1]-1,dateArray[0]);
+            return date;    
         }
+        catch(err){
+          d1 = new Date()
+		  return d1;
+        }
+    }
      $(document).ready(function(){
 		var doc_date = stringToDate();
 
 		$(".date").each(function(index,value){
+          $(this).html(NData(doc_date));  
+        });
+
+        $(".tomorrow-string").each(function(index,value){
+          doc_date = new Date(doc_date.getTime() +  24 * 60 * 60 * 1000)
           $(this).html(NData(doc_date));  
         });
     });

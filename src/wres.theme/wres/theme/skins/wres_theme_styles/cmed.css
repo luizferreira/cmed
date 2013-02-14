@@ -274,3 +274,7 @@ text-align: center;
 .cmedPrint{
   display:none;
 }
+
+.font-quicksand{
+  font-family: Quicksand, "Helvetica Neue", Arial, FreeSans, sans-serif;
+}
