@@ -166,7 +166,7 @@ Use header without patient_info
 </metal:def>
 
 <metal:def define-macro="prescription_info"> 
-<div class="cmedPrint">
+<div class="">
   <div tal:define="need_patient python:True">
     <metal:call_macro 
               use-macro="context/print_pages_macros/macros/header">
@@ -196,27 +196,27 @@ Use header without patient_info
                                   <tbody tal:define="medications prescriptions/data/medications">
                                       <tr class="" tal:repeat="medication medications" 
                                           tal:attributes="style python:test(repeat['medication'].number()%2 == 0, 'background-color: #EEEEEE', 'background-color:')">
-                                          <td class="">
+                                          <td class="center-text">
                                               <tal:content content="medication/data/medication | nothing"/>
                                           </td>
-                                          <td class="">
+                                          <td class="center-text">
                                                   <tal:content content="medication/data/concentration | nothing"/>
                                           </td>
-                                          <td class="">
+                                          <td class="center-text">
                                               <tal:content content="medication/data/quantity | nothing"/>
                                           </td>
-                                          <td class="">
+                                          <td class="center-text">
                                               <tal:content content="medication/data/use | nothing"/>
                                           </td>
                                       </tr>
                                       <tal:empty-lines tal:condition="python:len(medications) < 5">
                                           <tr tal:repeat="i python:range(len(medications) + 1, 6)" tal:attributes="style python:test(i%2 == 0, 'background-color: #EEEEEE', 'background-color:')">
-                                              <td class="">
+                                              <td class="center-text">
                                                   &nbsp;
                                               </td>
-                                              <td class=""/>
-                                              <td class=""/>
-                                              <td class=""/>
+                                              <td class="center-text"/>
+                                              <td class="center-text"/>
+                                              <td class="center-text"/>
                                               </tr>
                                       </tal:empty-lines>
                                   </tbody>

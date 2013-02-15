@@ -130,3 +130,7 @@ table.plain_print {
   font-size: 15px;
   text-decoration: underline;
 }
+
+.center-text{
+    text-align: center;
+}
