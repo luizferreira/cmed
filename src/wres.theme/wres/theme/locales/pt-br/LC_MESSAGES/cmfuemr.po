@@ -1,4 +1,3 @@
-
 msgid ""
 msgstr ""
 
@@ -202,9 +201,6 @@ msgstr "Africano"
 msgid "African American"
 msgstr ""
 
-msgid "Allergies"
-msgstr "Alergias"
-
 #: vocabularies.py
 msgid "Allergy & Immunology"
 msgstr "Alergia e Imunologia"
@@ -370,13 +366,6 @@ msgstr ""
 msgid "Calendar"
 msgstr "Calendário"
 
-#. Default: "Cancel"
-#: uemr_templates\add_new_prescription.cpt
-#: uemr_templates\appointment_cancel_form.cpt
-#: uemr_templates\delete_patient_template.cpt
-msgid "Cancel"
-msgstr "Cancelar"
-
 #: code.py
 msgid "Cardiology"
 msgstr "Cardiologia"
@@ -413,11 +402,6 @@ msgstr "Alterar Ids"
 #: uemr_templates\deposits_payments_window.pt
 msgid "Charge"
 msgstr ""
-
-#. Default: "Chart Number"
-#: uemr_templates\print_out_balance.pt
-msgid "Chart Number"
-msgstr "Número de Prontuário"
 
 msgid "Chart Summary"
 msgstr "Sumário"
@@ -612,11 +596,6 @@ msgstr "Dermatologia"
 msgid "Desktop"
 msgstr "Área de trabalho"
 
-#. Default: "Diagnosis"
-#: uemr_templates\account_item_view.pt
-msgid "Diagnosis"
-msgstr "Diagnóstico"
-
 msgid "Diagnosis Codes"
 msgstr "Cód. de Diagnóstico"
 
@@ -670,9 +649,6 @@ msgstr "Devido a"
 #: uemr_templates\show_health_maintenance.cpt
 msgid "E = Done Elsewhere"
 msgstr ""
-
-msgid "ECG"
-msgstr "ECG"
 
 #: Patient.py
 msgid "Eastern European"
@@ -958,9 +934,6 @@ msgstr "ID"
 msgid "Id"
 msgstr "Id"
 
-msgid "Imaging"
-msgstr "Imagem"
-
 msgid "Immunizations"
 msgstr "Imunizações"
 
@@ -987,8 +960,6 @@ msgstr "Doença infecciosa"
 
 #. Default: "Initial Visit"
 #: uemr_templates\initial_visit_template.pt
-msgid "Initial Visit"
-msgstr "Primeira Consulta"
 
 #. Default: "Initial Visit Plastic Surgery"
 msgid "Initial Visit Plastic Surgery"
@@ -1052,10 +1023,6 @@ msgstr "Intervalo de data"
 #: uemr_templates\fill_superbill_macros.pt
 msgid "Items"
 msgstr "Itens"
-
-#: code.py
-msgid "Laboratory"
-msgstr "Laboratório"
 
 #. Default: "Labs"
 #: uemr_templates\document_edit_template.pt
@@ -1291,13 +1258,6 @@ msgstr "Nova Busca"
 msgid "New item"
 msgstr "Novo item"
 
-#. Default: "Next"
-#: uemr_templates\accountitem_edit_template.cpt
-#: uemr_templates\account_item_edit.cpt
-#: uemr_templates\base_sign.cpt
-msgid "Next"
-msgstr "Próximo"
-
 #. Default: "No"
 #: uemr_templates\account_item_view.pt
 #: uemr_templates\guarantor_search_pick.pt
@@ -1432,10 +1392,6 @@ msgstr "Sem chiado - respiração asmática"
 msgid "Non Gravida, normal menstrual period, no hormonal replacement."
 msgstr "Ausência de gravidez, período menstrual normal, sem reposição hormonal."
 
-#: DocumentType.py
-msgid "Non Specified"
-msgstr "Não especificado"
-
 #: code.py
 msgid "None"
 msgstr ""
@@ -1468,9 +1424,6 @@ msgstr ""
 #: uemr_templates\inactivity_reason_visualization.pt
 msgid "Note:"
 msgstr "Observação:"
-
-msgid "Notes"
-msgstr "Notas"
 
 #. Default: "O = Ordered"
 #: uemr_templates\show_health_maintenance.cpt
@@ -1514,10 +1467,6 @@ msgstr "Ordenar por:"
 #: vocabularies.py
 msgid "Orthopedics"
 msgstr "Ortopedia"
-
-#: Patient.py
-msgid "Other"
-msgstr "Outro"
 
 #: vocabularies.py
 msgid "Otolaryngology"
@@ -1563,10 +1512,6 @@ msgstr "Trabalho em tempo parcial"
 #: vocabularies.py
 msgid "Pathology"
 msgstr "Patologia"
-
-#: doc.py
-msgid "Patient"
-msgstr "Paciente"
 
 msgid "Patient Chart"
 msgstr "Prontuário do Paciente"
@@ -1677,13 +1622,6 @@ msgstr "Prescrições"
 msgid "Preventive Medicine"
 msgstr "Medicina Preventiva"
 
-#. Default: "Previous"
-#: uemr_templates\accountitem_edit_template.cpt
-#: uemr_templates\account_item_edit.cpt
-#: uemr_templates\base_sign.cpt
-msgid "Previous"
-msgstr "Anterior"
-
 #. Default: "Print Claim"
 #: uemr_templates\transaction_folder_view.cpt
 msgid "Print Claim"
@@ -1707,10 +1645,6 @@ msgstr "Exames"
 #: ProceduresCodes.py
 msgid "Product charge"
 msgstr ""
-
-#: ProgressNotes.py
-msgid "Progress Notes"
-msgstr "Evolução do paciente"
 
 msgid "Providers"
 msgstr "Prof. da saúde"
@@ -1745,10 +1679,6 @@ msgstr "Raça"
 #: vocabularies.py
 msgid "Radiology"
 msgstr "Radiologia"
-
-#: DocumentType.py
-msgid "Rash"
-msgstr ""
 
 #. Default: "Recommended for"
 #: uemr_templates\health_maintenance_macros.pt
@@ -1854,13 +1784,6 @@ msgstr "Direita"
 msgid "Route to"
 msgstr ""
 
-#. Default: "SSN"
-#: uemr_templates\frontdesktwo_desktop_view.pt
-#: uemr_templates\frontdesktwo_search.pt
-#: uemr_templates\print_out_balance.pt
-msgid "SSN"
-msgstr "CPF"
-
 msgid "Sa"
 msgstr "Sa"
 
@@ -1868,25 +1791,6 @@ msgstr "Sa"
 #: uemr_templates\calendarMonth.pt
 msgid "Saturday"
 msgstr "Sábado"
-
-#. Default: "Save"
-#: uemr_templates\calendar_multi_doctor_management.pt
-#: uemr_templates\diagnoses_codes_edit-new.pt
-#: uemr_templates\dt_main.pt
-msgid "Save"
-msgstr "Salvar"
-
-#. Default: "Schedule Manager"
-#: uemr_templates\secretarydesktop_navigation.pt
-msgid "Schedule Manager"
-msgstr "Gerenciamento de agenda"
-
-#. Default: "Search"
-#: uemr_templates\diagnosis_icd_search_pick.pt
-#: uemr_templates\guarantor_search_pick.pt
-#: uemr_templates\patient_search.pt
-msgid "Search"
-msgstr "Buscar"
 
 #. Default: "Search Patient"
 #: uemr_templates\add_payment.pt
@@ -2193,11 +2097,6 @@ msgstr "Te"
 msgid "Tuesday"
 msgstr "Terça-feira"
 
-#. Default: "Type"
-#: uemr_templates\insurances_view.pt
-msgid "Type"
-msgstr "Tipo"
-
 #. Default: "Type of results:"
 #: uemr_templates\guarantor_search_pick.pt
 msgid "Type of results:"
@@ -2243,10 +2142,6 @@ msgstr "Ultrassonografia renal"
 msgid "Ultrasound Thyroid"
 msgstr "Ultrassonografia da tireóide"
 
-#: DocumentType.py
-msgid "Unable to breath"
-msgstr "Impossível respirar"
-
 #. Default: "Unapplied:"
 #: uemr_templates\deposits_payments_window.pt
 msgid "Unapplied:"
@@ -2284,9 +2179,6 @@ msgstr "Uso"
 #: uemr_templates\fill_superbill_macros.pt
 msgid "Value"
 msgstr "Valor"
-
-msgid "Vital Signs"
-msgstr "Sinais Vitais"
 
 #. Default: "Vitals Signs"
 #: uemr_templates\dt_vitals_signs.pt
@@ -2469,7 +2361,6 @@ msgstr "visão embaçada"
 #. Default: "Change the contact phone of all patient's visits"
 #: uemr_widgets\contact_phone_edit.pt
 msgid "box_change_contact_phone_all_patient_visit"
-msgstr ""
 msgstr "Alterar os telefones de contato de todas as visitas do paciente"
 
 #. Default: "Import from Chart"
@@ -6694,11 +6585,6 @@ msgstr "Não há problemas."
 msgid "cmfuemr_text_no_visits_tomorrow"
 msgstr "Sem consultas para amanhã"
 
-#. Default: "Note"
-#: uemr_templates\patient_notes_macros.pt
-msgid "cmfuemr_text_note"
-msgstr "Nota"
-
 #. Default: "OB/GYN History"
 #: uemr_templates\show_obgyn_history.pt
 msgid "cmfuemr_text_ob_gyn_history"
@@ -8227,12 +8113,6 @@ msgstr "Editar"
 msgid "heading_edit_health_maintenance"
 msgstr "Editar Acompanhamento Médico"
 
-#. Default: "Edit ${itemtype} <a name=\"default\"/>"
-#: uemr_templates\patient_edit.pt
-#: uemr_templates\visit_edit.pt
-msgid "heading_edit_item"
-msgstr "Editar ${itemtype} <a name=\"default\"/>"
-
 #. Default: "Eob's Processed"
 #: uemr_templates\show_processed.pt
 #: uemr_templates\view_processed_data.pt
@@ -8455,7 +8335,6 @@ msgstr ""
 #. Default: "Change the contact phone of all patient's visits"
 #: uemr_widgets\js\patient_controller.pt
 msgid "help_change_contact_phone_all_patient_visit"
-msgstr "Alterar os telefones de contato de todos os pacientes visitados"
 msgstr "Alterar os telefones de contato de todas as visitas do paciente"
 
 #. Default: "Change Sign Password"
@@ -9617,11 +9496,6 @@ msgstr "Atividade"
 #: uemr_templates\print_prescription.cpt
 msgid "listingheader_address"
 msgstr "Endereço"
-
-#. Default: "Age:"
-#: uemr_templates\patient_chart_print.pt
-msgid "listingheader_age"
-msgstr "Idade:"
 
 #. Default: "All"
 #: uemr_auxiliary\schedule_manager_aux\calendar_entry_repeat.pt
@@ -11376,35 +11250,14 @@ msgstr "Sab"
 msgid "Consultations"
 msgstr "Consultas"
 
-msgid "Notes"
-msgstr "Notas"
-
-msgid "customization"
-msgstr "Customização"
-
-msgid "Chief Complaint"
-msgstr "Queixa Principal"
-
-msgid "History"
-msgstr "Histórico"
-
-msgid "Review of Systems"
-msgstr "Revisão dos Sistemas"
-
 msgid "REVIEW OF SYSTEMS"
 msgstr "Revisão dos Sistemas"
 
 msgid "Allergies, Immunization and Medication"
 msgstr "Alergias, Imunizações e Medicamentos"
 
-msgid "Medical History"
-msgstr "Histórico Medico"
-
 msgid "Physical Examination"
 msgstr "Exame Físico"
-
-msgid "Pulse"
-msgstr "Pulsação"
 
 msgid "Exams"
 msgstr "Exames"
@@ -11412,20 +11265,11 @@ msgstr "Exames"
 msgid "Make Appt"
 msgstr "Agendar"
 
-msgid "Courtesy Copy"
-msgstr "Cópia de Cortesia"
-
-msgid "Prescription"
-msgstr "Prescrição"
-
 msgid "Plans"
 msgstr "Planos"
 
 msgid "New orders"
 msgstr "Novos Pedidos"
-
-msgid "Follow up"
-msgstr "Dar Seguimento"
 
 msgid "Echocardiogram"
 msgstr "Ecocardiograma"
@@ -11434,12 +11278,6 @@ msgstr "Ecocardiograma"
 #: skins/CMFUEMR/uemr_templates/progressnotes_edit.pt
 msgid "progress_heading_edit_item"
 msgstr "Criar ${type}"
-
-msgid "Secretary"
-msgstr "Secretária"
-
-msgid "Secretary Search"
-msgstr "Buscar Secretário(a)"
 
 msgid "UEMR Admin Search"
 msgstr "Buscar WRes Admin"
@@ -11520,18 +11358,6 @@ msgstr "Queixa Principal"
 
 msgid "Present Illness"
 msgstr "Doenças Atuais"
-
-msgid "Review of Systems"
-msgstr "Revisão dos Sistemas"
-
-msgid "Allergies"
-msgstr "Alergias"
-
-msgid "Immunization"
-msgstr "Imunização"
-
-msgid "Medication"
-msgstr "Medicamento"
 
 msgid "Pulse"
 msgstr "Pulso"
@@ -11784,21 +11610,6 @@ msgstr "Exames"
 
 #. Default: "="
 #: uemr_templates_mig\patient_chart_print.pt
-msgid "Imaging"
-msgstr "Imagem"
-
-#. Default: "="
-#: uemr_templates_mig\patient_chart_print.pt
-msgid "Laboratory"
-msgstr "Laboratório"
-
-#. Default: "="
-#: uemr_templates_mig\patient_chart_print.pt
-msgid "respiratory_rate_label"
-msgstr "Respiração"
-
-#. Default: "="
-#: uemr_templates_mig\patient_chart_print.pt
 msgid "COURTESY COPY"
 msgstr "Cópia de Cortesia"
 
@@ -11937,9 +11748,6 @@ msgstr "Principal"
 
 msgid "Other"
 msgstr "Outro"
-
-msgid "First Name"
-msgstr "Nome"
 
 msgid "Last Name"
 msgstr "Sobrenome"
@@ -12139,9 +11947,6 @@ msgstr "Retorno (Evolução)"
 msgid "Insurance"
 msgstr "Plano de Saúde"
 
-msgid "Visit"
-msgstr "Visita"
-
 msgid "Register of patient's evolution"
 msgstr "Registro da evolução do paciente"
 
@@ -12189,9 +11994,6 @@ msgstr "Duração"
 
 msgid "Duration in minutes"
 msgstr "Duração em minutos"
-
-msgid "Can be used to filter visits in calendar"
-msgstr "Pode ser utilizado para filtrar visitas no calendário"
 
 msgid "Patient quick register"
 msgstr "Registro Rápido de Paciente"
@@ -12245,10 +12047,6 @@ msgstr "Corpo do Documento"
 # Denied
 msgid "denied"
 msgstr "Negado"
-
-# Published
-msgid "published"
-msgstr "Publicado"
 
 # Review_Document
 msgid "review"
