@@ -85,6 +85,7 @@ class Patient(wresuser.WRESUser):
         assertTrue("exams" in all_chartfolders)         assertTrue("upload" in all_chartfolders)
         """
         from wres.archetypes.content.chartfolder import addChartFolder
+        import ipdb;ipdb.set_trace()
         addChartFolder(self, id=id, title='Chart Folder')
 
     def createMissingObject(self, key):
@@ -162,12 +163,25 @@ class Patient(wresuser.WRESUser):
         """
         return self.Title().lower()
 
+    def setPatientChartSystemID(self):
+        """
+        Set auto-increment chartSystemID field
+        """
+        patientFolder = self.getParentNode()
+        nextChartSystemID = patientFolder.getLastChartSystemID() + 1
+        self.setChartSystemID(nextChartSystemID)
+        patientFolder.setLastChartSystemID(nextChartSystemID)
+
     def at_post_create_script(self):
         """
-        Just execute WRESUser.at_post_create_script(), basically register
+        Create evente about patient creation
+        Set chartSystemID
+        Execute WRESUser.at_post_create_script(), basically register
         the patient object as portal member
         """
         self.create_event(Event.CREATION, self.created(), self)
+        self.setPatientChartSystemID()
+        #lastChartSystemID = self.getParentNode().getLastChartSystem
         wresuser.WRESUser.at_post_create_script(self)
 
     def at_post_edit_script(self):
@@ -201,6 +215,7 @@ class Patient(wresuser.WRESUser):
             self.chart_data_hidden = ChartData()
             self._p_changed = 1
         return self.chart_data_hidden
+
     chart_data = ComputedAttribute(__create_chart_data, 1)
 
     def create_event(self, ev_type, date, related_obj, author=None):

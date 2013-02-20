@@ -3790,8 +3790,21 @@ msgstr "Celular"
 #: Content Type:
 #: Patient, Field:
 #: chart
-msgid "cmfuemr_label_chart_number"
-msgstr "Número do Prontuário"
+msgid "Paper Chart Number"
+msgstr "Prontuário em Papel"
+
+msgid "Chart System ID"
+msgstr "ID do Prontário do sistema"
+
+msgid "cmfuemr_help_paper_chart_number"
+msgstr "Referência para Prontuário já existente (em Papel)."
+
+#. Default: "Chart Number"
+#: Content Type:
+#: Patient, Field:
+#: chart
+msgid "cmfuemr_help_chart_system_id"
+msgstr "Identificador do prontuário do sistema."
 
 #. Default: "Chart Number Confirmed"
 #: Content Type:
@@ -12065,8 +12078,14 @@ msgstr "Não especificado"
 msgid "Not selected"
 msgstr "Não selecionado"
 
+msgid "LastChartSystemID"
+msgstr "Último ID de prontário do sistema"
+
 msgid "Presentation"
 msgstr "Apresentação"
 
 msgid "Object"
 msgstr "Objeto"
+
+msgid "Last System Chart Number"
+msgstr "Último número de prontuário no sistema"

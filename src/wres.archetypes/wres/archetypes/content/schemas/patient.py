@@ -278,17 +278,31 @@ MAIN = Schema((
         ),
     ),
 
-    IntegerField('chart',
+    IntegerField('paperChart',
         default=0,
         index="FieldIndex:schema",
         validators = ('isInt',),
         widget=IntegerWidget(
-            label=_('Chart Number'),
+            label=_('Paper Chart Number'),
 		    description='Must contain only numbers',
-		    description_msgid='cmfuemr_help_chart_number',
+		    description_msgid='cmfuemr_help_paper_chart_number',
 		    i18n_domain='cmfuemr'
         ),
     ),
+
+    IntegerField('chartSystemID',
+        default=0,
+        index="FieldIndex:schema",
+        validators = ('isInt',),
+        widget=IntegerWidget(
+            visible={'edit':'invisible'},
+            label=_('Chart System ID'),
+            description='Must contain only numbers',
+            description_msgid='cmfuemr_help_chart_system_id',
+            i18n_domain='cmfuemr',
+        ),
+    ),
+    
 
     ReferenceField('doctor',
         relationship='doctor',

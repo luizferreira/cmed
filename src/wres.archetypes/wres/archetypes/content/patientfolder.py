@@ -4,6 +4,7 @@
 from zope.interface import implements
 
 from Products.Archetypes import atapi
+from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content import folder
 from Products.ATContentTypes.content import schemata
 
@@ -15,6 +16,15 @@ from wres.archetypes.config import PROJECTNAME
 PatientFolderSchema = folder.ATFolderSchema.copy() + atapi.Schema((
 
     # -*- Your Archetypes field definitions here ... -*-
+     IntegerField('lastChartSystemID',
+        index="FieldIndex:schema",
+        validators = ('isInt',),
+        widget=IntegerWidget(
+            visible={'edit':'invisible'},
+            description='Last System Chart Number',
+            i18n_domain='cmfuemr',
+        ),
+    ),
 
 ))
 
@@ -34,6 +44,10 @@ class PatientFolder(folder.ATFolder):
 
     meta_type = "PatientFolder"
     schema = PatientFolderSchema
+
+    def at_post_create_script(self):
+        #Start LastChartSystemID couter
+        self.setLastChartSystemID(0)
 
     # -*- Your ATSchema to Python Property Bridges Here ... -*-
 

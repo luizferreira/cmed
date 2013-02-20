@@ -153,6 +153,7 @@ def createPatientFolder(portal):
     """ Cria a pasta de pacientes """
     print '*** Criando pasta de pacientes...'
     patient_folder = getOrCreateType(portal, portal, 'Patients', 'PatientFolder')
+    patient_folder.at_post_create_script()
     patient_folder.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
     patient_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
     patient_folder.setTitle('Pacientes')
