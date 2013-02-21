@@ -85,7 +85,6 @@ class Patient(wresuser.WRESUser):
         assertTrue("exams" in all_chartfolders)         assertTrue("upload" in all_chartfolders)
         """
         from wres.archetypes.content.chartfolder import addChartFolder
-        import ipdb;ipdb.set_trace()
         addChartFolder(self, id=id, title='Chart Folder')
 
     def createMissingObject(self, key):
