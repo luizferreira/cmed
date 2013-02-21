@@ -23,12 +23,12 @@ changed = []
 for brain in brains:
 	patient = brain.getObject()
 	chartID = patient.getChartSystemID()
-	nextChartSystemID = pf.getLastChartSystemID()
+	nextChartSystemID = pf.getLastChartSystemID() + 1
 	
 	if chartID == 0 or chartID == None:
 		patient.setChartSystemID(nextChartSystemID)
 		pf.setLastChartSystemID(nextChartSystemID)
-		changed.append(patient.getId())
+		changed.append(str(patient.getId()) + ": " + str(nextChartSystemID))
 
 return '<html><body><div>\
 			<b>Agora todos pacientes estão com chartSystemID</b><br/>\
