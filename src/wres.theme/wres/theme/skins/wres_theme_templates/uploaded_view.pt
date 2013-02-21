@@ -39,7 +39,8 @@
             <div tal:repeat="file python:urls[1]">
                 <div>
                     <img tal:attributes="src python:file[2]"/>
-                    <a tal:attributes="href python:file[0]" ><span tal:content="python:file[1]"></span></a>
+                    <a tal:attributes="href python:file[0]" ><span tal:content="python:file[1]"></span></a><span style="float:right;margin-right:5px;"><a tal:attributes="href python:'/'.join(context.getPhysicalPath())+
+                    '/deleteExternalFile?imgURL=' + file[0]">Deletar</a></span>
                 </div>
             </div>
         </td>
