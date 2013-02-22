@@ -45,18 +45,14 @@ tableSearch.init = function() {
     total.innerText = "Total: " + (lines)
     }
 
- //handles the enter key being pressed
-        tableSearch.search = function(e) {
-            //checks if the user pressed the enter key, and if they did then run the search
-            var keycode;
-            if (window.event) { keycode = window.event.keyCode; }
-            else if (e) { keycode = e.which; }
-            else { return false; }
-            if (keycode == 13) {
-                tableSearch.runSearch();
-            }
-            else { return false; }
-        }
+    //handles the enter key being pressed
+    //Check if there is more than 3 letters to start search
+    tableSearch.search = function(e) {
+    input = $("#textBoxSearch")
+    if(input.val().length >= 3) tableSearch.runSearch();
+    }
+
+$(document).unbind("keypress.key13");
 
 $(document).ready(function(){
 tableSearch.init();

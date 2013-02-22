@@ -278,3 +278,14 @@ text-align: center;
 .font-quicksand{
   font-family: Quicksand, "Helvetica Neue", Arial, FreeSans, sans-serif;
 }
+
+.patientFolderDivFilter{
+  background-color: rgb(42, 93, 127);
+  width: 50%;
+  color: white;
+  border-radius: 5px;
+}
+.patientFolderInputFilter{
+  border-color: rgb(42, 93, 127);
+  border-style:solid;
+}

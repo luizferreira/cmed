@@ -40,11 +40,11 @@
         <dd tal:content="error_message"> Ocorreu algum erro. </dd>
       </dl> 
 
-      <form id="portletx_form" name="portletxform" method="post">
-        <div id="patient_folder" class="LSBox">
-          <input id="textBoxSearch" class="inputLabel" style="width:250px; height:25px; text-align:center"
-                 title="" autocomplete="on" name="Title" value=""  onkeyup="tableSearch.search(event);"/>
-          <input type="button" class="form-wrapper" value="Filtrar" onclick="tableSearch.runSearch();" />
+      <form id="portletx_form" name="portletxform">
+        <div id="patient_folder" class="patientFolderDivFilter">
+          <label>Filtrar tabela (nome, cpf, data de nascimento):</label>
+          <input id="textBoxSearch" class="inputLabel patientFolderInputFilter" style="width:250px; height:25px; text-align:center"
+                 title="" autocomplete="on" name="Title" value=""  onkeyup="tableSearch.search();"/>
         </div>
 
       </form>
