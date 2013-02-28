@@ -96,11 +96,11 @@ Use header without patient_info
     <label style="display:none" tal:content="document_date" id="doc_date">Data</label>
       <div class="date"></div>
 </metal:def>
-  <!-- 
-      Header Default
- -->
-
-
+  <!--
+====================================
+    Patient Info
+====================================
+-->
 <metal:def define-macro="patient_info"> 
   <div class="cmedPrint">
     <div tal:define="title string:Dados do Paciente; need_patient python:False">
@@ -164,6 +164,12 @@ Use header without patient_info
       </table>
   </div>
 </metal:def>
+
+  <!--
+====================================
+    Prescription Print
+====================================
+-->
 
 <metal:def define-macro="prescription_info"> 
 <div class="">
@@ -246,107 +252,112 @@ Use header without patient_info
   </div>
 </metal:def>
 
+  <!--
+====================================
+    CMED DOCUMENT
+====================================
+-->
 <metal:def define-macro="cmed_document"> 
-<div class="cmedPrint">
+<div class="">
   <div tal:define="need_patient python:True">
     <metal:call_macro 
               use-macro="context/print_pages_macros/macros/header">
     </metal:call_macro>
   </div>
 
-    <!--
+      <!--
 
-====================================
-Body
-====================================
--->
-<div tal:define ="data context/getDataDoc">
-<tal:for repeat="schemata data">
-    <tal:fieldset_name define="fieldset_name python:schemata[0]">
-        <fieldset id="fieldset_doc_view">
-            
-            <tal:for2 repeat="field_data schemata">
-                <tal:if condition="not:repeat/field_data/start">        
-                    <tal:def define="field_name python:field_data[0];
-                                     field_label python:field_data[1]">
-                        <strong tal:condition="field_label"><br /><tal:print_content content="field_label" />:</strong>
-                        <br /> 
-                        <metal:macro use-macro="python: context.widget(field_name,mode='view')" /><br />
+  ------------------------------------
+  Body
+  ------------------------------------
+  -->
+  <div tal:define ="data context/getDataDoc">
+  <tal:for repeat="schemata data">
+      <tal:fieldset_name define="fieldset_name python:schemata[0]">
+          <fieldset id="fieldset_doc_view">
+              
+              <tal:for2 repeat="field_data schemata">
+                  <tal:if condition="not:repeat/field_data/start">        
+                      <tal:def define="field_name python:field_data[0];
+                                       field_label python:field_data[1]">
+                          <strong tal:condition="field_label"><br /><tal:print_content content="field_label" />:</strong>
+                          <br /> 
+                          <metal:macro use-macro="python: context.widget(field_name,mode='view')" /><br />
 
 
-                    </tal:def>
-                </tal:if>
-            </tal:for2>
-        </fieldset>
-        </tal:fieldset_name>
-</tal:for>
-</div>
-<!--
-====================================
-Document Footer
-====================================
--->
+                      </tal:def>
+                  </tal:if>
+              </tal:for2>
+          </fieldset>
+          </tal:fieldset_name>
+  </tal:for>
+  </div>
+  <!--
+  ------------------------------------
+  Document Footer
+  ------------------------------------
+  -->
 
- <metal:call_macro 
-              use-macro="context/print_pages_macros/macros/footer">
-  </metal:call_macro>
-</div>
+   <metal:call_macro 
+                use-macro="context/print_pages_macros/macros/footer">
+    </metal:call_macro>
+  </div>
 
-</metal:def>
+  </metal:def>
 
-<metal:def define-macro="cmed_sec_desk">
-  <div class="cmedPrint">
-    <div tal:define="title string:Agenda de Consultas Hoje / Amanhã; need_patient python:False">
-      <metal:call_macro 
-                use-macro="context/print_pages_macros/macros/header">
-      </metal:call_macro>
-    </div>
+  <metal:def define-macro="cmed_sec_desk">
+    <div class="cmedPrint">
+      <div tal:define="title string:Agenda de Consultas Hoje / Amanhã; need_patient python:False">
+        <metal:call_macro 
+                  use-macro="context/print_pages_macros/macros/header">
+        </metal:call_macro>
+      </div>
 
-    <table id="" class="width-100">
+      <table id="" class="width-100">
 
-    <tr>
-      <td style="padding:0px">
-        <dl id="day-tables">
-          <div id="hoje-table">
-            <p class="day-title">Hoje - <span class="date"></span></p>
-            <dd id="fieldset-today">
-              <div class="show_visits" id="show_today_visits">
-                <div metal:use-macro="context/print_pages_macros/macros/show_visits_print">
-                  <metal:fill_slot fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromToday" />
+      <tr>
+        <td style="padding:0px">
+          <dl id="day-tables">
+            <div id="hoje-table">
+              <p class="day-title">Hoje - <span class="date"></span></p>
+              <dd id="fieldset-today">
+                <div class="show_visits" id="show_today_visits">
+                  <div metal:use-macro="context/print_pages_macros/macros/show_visits_print">
+                    <metal:fill_slot fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromToday" />
+                  </div>
                 </div>
+              </dd>
+            </div>
+
+          <div id="amanha-table">
+            <p class="day-title">Amanhã - <span class="tomorrow-string"></span></p>
+            <dd id="fieldset-tomorrow">
+
+              <div class="show_visits" id="show_tomorrow_visits">
+
+                <div metal:use-macro="context/print_pages_macros/macros/show_visits_print">
+                  <metal:define_visits fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromTomorrow" />
+
+                  <metal:no_activities fill-slot='no_visits'>
+                    <span id="">Sem consultas amanhã -</span>
+                    <span tal:replace="tomorrow"></span>
+                  </metal:no_activities>
+                
+                  <metal:no_activities fill-slot='visits_header'>
+                    Consultas de Amanhã -
+                    <span tal:replace="tomorrow"></span>
+                  </metal:no_activities>
+                </div>
+
               </div>
             </dd>
           </div>
-
-        <div id="amanha-table">
-          <p class="day-title">Amanhã - <span class="tomorrow-string"></span></p>
-          <dd id="fieldset-tomorrow">
-
-            <div class="show_visits" id="show_tomorrow_visits">
-
-              <div metal:use-macro="context/print_pages_macros/macros/show_visits_print">
-                <metal:define_visits fill-slot="doctor_visits" tal:define="global doctor_visits data/getVisitsFromTomorrow" />
-
-                <metal:no_activities fill-slot='no_visits'>
-                  <span id="">Sem consultas amanhãs -</span>
-                  <span tal:replace="tomorrow"></span>
-                </metal:no_activities>
-              
-                <metal:no_activities fill-slot='visits_header'>
-                  Consultas de Amanhã -
-                  <span tal:replace="tomorrow"></span>
-                </metal:no_activities>
-              </div>
-
-            </div>
-          </dd>
-        </div>
-        </dl>
-        
-      </td>
-      </tr>
-    </table>
-  </div>
+          </dl>
+          
+        </td>
+        </tr>
+      </table>
+    </div>
 </metal:def>
 
 <!-- 
@@ -363,17 +374,17 @@ PRINT MACROS VISITS
     <div tal:condition="python:not doctor_visits">
         <br />
         <strong>
-        <h1><center>
+        <center>
             <metal:no_visits define-slot="no_visits">
                 <span id="no-visits">Sem consultas hoje - </span><span tal:replace="today"></span>
             </metal:no_visits>
-        </center></h1>
+        </center>
             <br /><br /><br /><br /><br /><br />
         </strong>
         <br />
     </div>
 
-  <table class="seclisting_print" id="" tal:condition="doctor_visits">
+  <table class="seclisting_print cmedPrint" tal:condition="doctor_visits">
     <thead>
                     <metal:thead define-slot="thead">
                         <th style="width:5%;text-align: center;">Horário</th>
