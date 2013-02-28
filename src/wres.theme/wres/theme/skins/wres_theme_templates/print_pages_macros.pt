@@ -65,8 +65,8 @@ Use header without patient_info
             <tr>
                  <td class="document_item_title">Nome: </td>
                  <td> <span class="item_content" tal:content="patientData/getFullName"></span></td>
-                 <td class="document_item_title">Número de Registro: </td>
-                 <td><span class="document_item_content" tal:content="patientData/getChart"></span><br></td>
+                 <td class="document_item_title">Registro no Sistema: </td>
+                 <td><span class="document_item_content" tal:content="patientData/getChartSystemID"></span><br></td>
             </tr>
             <tr>
                  <td tal:condition="birth_date" class="document_item_title">Data de Nascimento: </td>
@@ -258,7 +258,7 @@ Use header without patient_info
 ====================================
 -->
 <metal:def define-macro="cmed_document"> 
-<div class="">
+<div class="cmedPrint">
   <div tal:define="need_patient python:True">
     <metal:call_macro 
               use-macro="context/print_pages_macros/macros/header">
@@ -375,6 +375,7 @@ PRINT MACROS VISITS
         <br />
         <strong>
         <center>
+
             <metal:no_visits define-slot="no_visits">
                 <span id="no-visits">Sem consultas hoje - </span><span tal:replace="today"></span>
             </metal:no_visits>

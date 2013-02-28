@@ -69,8 +69,8 @@
                  <td> <span class="item_content" tal:content="patientData/getFullName"></span></td>
                  <td class="item_title">Data de Nascimento: </td>
                  <td ><span tal:condition="birth_date" class="item_content" tal:content="python:birth_date.strftime('%d/%m/%Y')"></span><br></td>
-                 <td class="item_title">Número de Registro: </td>
-                 <td><span class="item_content" tal:content="patientData/getChart"></span><br></td>
+                 <td class="item_title">Registro no Sistema: </td>
+                 <td><span class="item_content" tal:content="patientData/getChartSystemID"></span><br></td>
             </tr>
             <tr>
                  <td class="item_title">Data da Consulta: </td>
