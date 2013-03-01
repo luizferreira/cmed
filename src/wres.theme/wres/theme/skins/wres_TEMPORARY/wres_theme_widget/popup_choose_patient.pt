@@ -14,15 +14,8 @@
     <metal:block fill-slot="style_slot">
         <link rel="stylesheet" type="text/css" href="cmed.css" />
         <link rel="stylesheet" type="text/css" href="popup_quick_register.css" />
+        <script type="text/javascript" src="popup_choose_patient.js"></script>
     </metal:block>
-
-    <script type="text/javascript">
-        function selectPatient(title, path){
-            document.body.style.cursor = 'progress';
-            window.opener.startPopulatingField(window, title, path);
-            setTimeout("window.close()", 100);
-        }
-    </script>
 
 </head>
 
