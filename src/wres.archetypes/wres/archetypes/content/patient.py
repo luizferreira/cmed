@@ -182,6 +182,15 @@ class Patient(wresuser.WRESUser):
         self.setPatientChartSystemID()
         #lastChartSystemID = self.getParentNode().getLastChartSystem
         wresuser.WRESUser.at_post_create_script(self)
+        
+
+        #Add Reader Role
+        acl = self.acl_users
+        self.manage_setLocalRoles(self.getId(),[READER_ROLE])
+        
+        #Set Reader to view
+        self.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, READER_ROLE], acquire = False)
+        self.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, READER_ROLE], acquire = False)
 
     def at_post_edit_script(self):
         """
