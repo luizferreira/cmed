@@ -45,18 +45,33 @@ def create_uemr_user(related_object, user_id, email='', fullname=''):
     uf = getToolByName(related_object, 'acl_users')
     if email == '':
         email = 'sem@email.com'
-    pr.addMember(
-        user_id, 'senha1',
-        properties={
-            'home_url': related_object.get_home_url(),
-            'username': user_id,
-            'email': email,
-            'fullname': fullname,
-            'related_object': '/'.join(related_object.getPhysicalPath()[2:]), # removing instance name from path.
-        },
-    )
+
+    if related_object.getGroup() == 'Patient':
+        import string, random
+        password = ''.join([random.choice(string.ascii_letters + string.digits) for x in range(20)])
+        pr.addMember(
+            user_id, password,
+            properties={
+                'home_url': related_object.get_home_url(),
+                'username': user_id,
+                'email': email,
+                'fullname': fullname,
+                'related_object': '/'.join(related_object.getPhysicalPath()),
+            },
+        )
+    else:
+        pr.addMember(
+            user_id, 'senha1',
+            properties={
+                'home_url': related_object.get_home_url(),
+                'username': user_id,
+                'email': email,
+                'fullname': fullname,
+                'related_object': '/'.join(related_object.getPhysicalPath()),
+            },
+        )
     #uf.changeUser(user_id, groups=[related_object.getGroup()])
-#    pm.setLocalRoles(obj=related_object, member_ids=(user_id,), member_role='Owner')
+    #pm.setLocalRoles(obj=related_object, member_ids=(user_id,), member_role='Owner')
     uf.userSetGroups(user_id, [related_object.getGroup()])
     pm.createMemberArea(member_id=user_id)
 
