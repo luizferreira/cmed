@@ -633,12 +633,12 @@ class TestSetup(unittest.TestCase):
         self.failUnless("Energil C" in browser.contents)
         #Generate Prescriptions
         self.generate_prescription(PATIENT_ID,PATIENT_URL)
-        self.failUnless('id="pres_data"' in browser.contents)
+        self.failUnless("Energil C" in browser.contents)
         self.failUnless("CRM:" in browser.contents)
         #Visualize Prescription
         self.visualize_prescription(PATIENT_ID,PATIENT_URL)
         self.failUnless("CRM:" in browser.contents)
-        self.failUnless('id="pres_data"' in browser.contents)
+        self.failUnless("Energil C" in browser.contents)
         #Edit Medications
         self.edit_medications(PATIENT_ID,PATIENT_URL)
         self.failUnless("Medicamento Editado" in browser.contents)
@@ -668,12 +668,12 @@ class TestSetup(unittest.TestCase):
         self.failUnless("Energil C" in browser.contents)
         #Generate Prescriptions
         self.generate_prescription(PATIENT_ID,PATIENT_URL)
-        self.failUnless('id="prescriptions"' in browser.contents)
+        self.failUnless("Energil C" in browser.contents)
         self.failUnless("CRM:" in browser.contents)
         #Visualize Prescription
         self.visualize_prescription(PATIENT_ID,PATIENT_URL)
         self.failUnless("CRM:" in browser.contents)
-        self.failUnless('id="prescriptions"' in browser.contents)
+        self.failUnless("Energil C" in browser.contents)
         #Edit Medications
         self.edit_medications(PATIENT_ID,PATIENT_URL)
         self.failUnless("Medicamento Editado" in browser.contents)

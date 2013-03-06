@@ -175,7 +175,7 @@ class Doctor(wresuser.WRESUser):
         password_matches = AuthEncoding.pw_validate(sign_password, typed_pass)
 
         if password_matches:
-            return
+            return True
 
         return "Password doesn't match"
 

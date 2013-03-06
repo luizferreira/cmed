@@ -58,7 +58,7 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
         sel.click('//*[@id="portaltab-calendar"]/a')
         sel.waitForPageToLoad()
         calendarioLink = sel.getLocation()
-        sel.open("http://localhost:5698/plone/Appointments/dteste/createSFEvent?startDate=%s+13:30&endDate=%s+13:45&type_name=Visit" % (strBegin,strEnd))        
+        sel.open("/plone/Appointments/dteste/createSFEvent?startDate=%s+13:30&endDate=%s+13:45&type_name=Visit" % (strBegin,strEnd))        
         sel.waitForPageToLoad()
         # TODO Clean this comments one day
         # sel.click('//*[@id="portaltab-calendar"]/a')

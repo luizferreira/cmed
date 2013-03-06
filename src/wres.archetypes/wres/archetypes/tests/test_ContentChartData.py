@@ -62,12 +62,10 @@ class TestSetup(unittest.TestCase):
         print "----------------------------------------------"
         #Get requirements
         ev = Event(self.patient, 1000, DateTime(), self.patient)
-        autor = ev._author()
         parts = ev.eprint().split(' ')
         self.assertTrue('href="/plone/Patients/pparker"' in parts)
         self.assertTrue('Paciente' in parts)
         self.assertTrue('adicionado.' in parts)
-        self.assertTrue(autor, 'admin')
         print "Done"
 
     def test_event_cmp(self):
@@ -105,10 +103,9 @@ class TestSetup(unittest.TestCase):
         cw = ChartItemEventWrapper('problems', self.patient, **{'problem': 'teste'})
         self.assertEqual(cw.getId(), 'pparker_problems_teste')
         self.assertEqual(cw.Title(), 'teste')
-        parts = cw.absolute_url_path().split('/')
-        self.assertTrue('Patients' in parts)
-        self.assertTrue('pparker' in parts)
-        self.assertTrue('show_problem_list' in parts)
+        pat = cw.patient
+        self.assertTrue('pparker' == pat.getId())
+        self.assertTrue('/show_problem_list' == cw.url_sufix)
         print "Done"
 
     #Classe ChartData

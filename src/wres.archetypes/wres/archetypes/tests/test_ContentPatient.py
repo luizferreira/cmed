@@ -308,7 +308,7 @@ class TestSetup(unittest.TestCase):
         chartdata = patient.chart_data
         event_list = dict(chartdata.events).values()
         event_list.sort(cmp=Event._event_cmp)
-        event_txt = event_list[0].event_text
+        event_txt = event_list[0].eprint()
         self.assertEqual('Paciente <a target="_blank" href="/plone/Patients/jsilva" >Joao Silva</a> adicionado.',event_txt)
         print "Done"
 
@@ -330,7 +330,7 @@ class TestSetup(unittest.TestCase):
         
         #Check if the last event is correct
         events = patient.get_events()
-        event_txt = events[-1:][0].event_text
+        event_txt = events[-1:][0].eprint()
         self.assertEqual('Paciente <a target="_blank" href="/plone/Patients/jsilva" >Joao Silva</a> adicionado.',event_txt)
         print "Done"
 
