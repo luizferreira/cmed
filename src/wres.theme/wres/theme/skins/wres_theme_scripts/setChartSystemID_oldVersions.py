@@ -17,7 +17,7 @@ except:
     Dado que Patient Folder não tem lastChartSystemID"
 
 #Fill chartSystemID patient field
-brains = pc.searchResults({'Type':'Patient'})
+brains = pc.searchResults({'Type':'Patient','sort_on':'created'})
 changed = []
 
 for brain in brains:

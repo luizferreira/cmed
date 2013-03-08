@@ -33,7 +33,6 @@ class TestSetup(unittest.TestCase):
         print "----------------------------------------------"
         #Get requirements
         doctor = self.doctor
-        doctor.add_visits_folder()
         self.assertTrue(getattr(self.portal.Appointments, self.doctor.getId()))
         print "Done"
 
@@ -44,10 +43,9 @@ class TestSetup(unittest.TestCase):
         print "----------------------------------------------"
         #Get requirements
         doctor = self.doctor
-        doctor.setFirstName('DR. VICTOR')
-        doctor.at_post_create_script()
         pm = getToolByName(self.portal, 'portal_membership')
         self.assertTrue(pm.getMemberById(doctor.getId()))
+        #Check if DR. VICTOR becomes Dr.Victor
         self.assertEqual(doctor.getFullName(), 'Dr. Victor Frankenstein')
         print "Done"
 

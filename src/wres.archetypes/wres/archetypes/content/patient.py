@@ -182,6 +182,7 @@ class Patient(wresuser.WRESUser):
         self.setPatientChartSystemID()
         #lastChartSystemID = self.getParentNode().getLastChartSystem
         wresuser.WRESUser.at_post_create_script(self)
+        self.setReaderLocalRole()
 
     def at_post_edit_script(self):
         """
@@ -203,8 +204,8 @@ class Patient(wresuser.WRESUser):
         Concatenate the patient url with "/patient_desktop_view"
         """
         #TODO: Seria mais otimizado se get_home_url fosse um atributo
-        return '/'.join(self.getPhysicalPath()) + '/patient_desktop_view'
-
+        return '/'.join(self.getPhysicalPath()) 
+        
     def __create_chart_data(self):
         """
         Create chart_data_hidden attribute
@@ -291,5 +292,14 @@ class Patient(wresuser.WRESUser):
         pw = getToolByName(portal,"portal_workflow")
         state = pw.getStatusOf("patient_workflow",self)
         return state['review_state']
+
+    def setReaderLocalRole(self):
+        #Add Reader Role
+        acl = self.acl_users
+        self.manage_setLocalRoles(self.getId(),[READER_ROLE])
+        
+        #Set Reader to view
+        self.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, READER_ROLE], acquire = False)
+        self.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, READER_ROLE], acquire = False)        
 
 atapi.registerType(Patient, PROJECTNAME)

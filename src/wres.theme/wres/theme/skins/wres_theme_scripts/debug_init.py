@@ -103,16 +103,34 @@ def create_uemr_user(related_object, user_id, email='', fullname=''):
     pr = getToolByName(related_object, 'portal_registration')
     pm = getToolByName(related_object, 'portal_membership')
     uf = getToolByName(related_object, 'acl_users')
-    pr.addMember(
-        user_id, 'senha1',
-        properties={
-            'home_url': related_object.get_home_url(),
-            'username': user_id,
-            'email': email,
-            'fullname': fullname,
-            'related_object': '/'.join(related_object.getPhysicalPath()),
-        },
-    )
+    
+    #If for random password to patients
+    
+    if related_object.getGroup() == 'Patient':
+        import string, random
+        password = ''.join([random.choice(string.ascii_letters + string.digits) for x in range(20)])
+        context.plone_log("Senha: %s" % password)
+        pr.addMember(
+            user_id, password,
+            properties={
+                'home_url': related_object.get_home_url(),
+                'username': user_id,
+                'email': email,
+                'fullname': fullname,
+                'related_object': '/'.join(related_object.getPhysicalPath()),
+            },
+        )
+    else:
+        pr.addMember(
+            user_id, 'senha1',
+            properties={
+                'home_url': related_object.get_home_url(),
+                'username': user_id,
+                'email': email,
+                'fullname': fullname,
+                'related_object': '/'.join(related_object.getPhysicalPath()),
+            },
+        )
     uf.userSetGroups(user_id, [related_object.getGroup()])
     pm.createMemberArea(member_id=user_id)
 
@@ -254,6 +272,7 @@ def create_patients(portal, pr):
     for i in range(int(patient_num)):
         new_obj_id = create_valid_user_id(pr, patient_fname, patient_lname)
         patient = create_new_object(portal, patients, new_obj_id, 'Patient')
+        patient.setReaderLocalRole()
         fullname = patient_fname + patient_lname
         create_uemr_user(patient, new_obj_id, email=email, fullname=fullname)
         set_patient_information(patient)

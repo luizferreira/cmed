@@ -3,7 +3,6 @@
 
 from zope.interface import implements
 
-from Products.Archetypes import atapi
 from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content import folder
 from Products.ATContentTypes.content import schemata
@@ -13,7 +12,7 @@ from Products.ATContentTypes.content import schemata
 from wres.archetypes.interfaces import IPatientFolder
 from wres.archetypes.config import PROJECTNAME
 
-PatientFolderSchema = folder.ATFolderSchema.copy() + atapi.Schema((
+PatientFolderSchema = folder.ATFolderSchema.copy() + Schema((
 
     # -*- Your Archetypes field definitions here ... -*-
      IntegerField('lastChartSystemID',
@@ -51,4 +50,4 @@ class PatientFolder(folder.ATFolder):
 
     # -*- Your ATSchema to Python Property Bridges Here ... -*-
 
-atapi.registerType(PatientFolder, PROJECTNAME)
+registerType(PatientFolder, PROJECTNAME)

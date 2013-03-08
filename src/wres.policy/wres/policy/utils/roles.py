@@ -6,6 +6,7 @@ UEMRADMIN_GROUP = UEMRADMIN_ROLE =  'UemrAdmin'
 PATIENT_GROUP = PATIENT_ROLE = 'Patient'
 VISIT_VIEWER_ROLE = 'Visit Viewer'
 MEMBER_ROLE = 'Member'
+READER_ROLE = 'Reader'
 CONTRIBUTOR_ROLE = 'Contributor'  # bax migrando -> Access to '@@plone_portal_state' requires one of the following roles: ['Contributor', 'Editor', 'Manager', 'Reader']. 
 ANONYMOUS_ROLE = 'Anonymous'
 OWNER_ROLE = 'Owner'
