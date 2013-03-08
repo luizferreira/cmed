@@ -648,6 +648,18 @@ EMPLOYMENT = Schema((
            visible={'edit':'visible'}
        ),
    ),
+   
+   StringField('facebookLink',
+       widget=StringWidget(
+           label=_('Facebook'),
+       ),
+    ),
+
+    StringField('twitterLink',
+       widget=StringWidget(
+           label=_('Twitter'),
+       ),
+   )
 ))
 
 #===============================================================================
