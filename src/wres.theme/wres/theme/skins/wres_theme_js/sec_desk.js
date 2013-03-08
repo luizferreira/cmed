@@ -153,6 +153,7 @@ function hideAppointments(){
         tomorrow_table.find("#visit_table").hide();
         tomorrow_table.find(".not-for-this-doctor").show();
     }
+
 }
 
 $(document).ready(function(){

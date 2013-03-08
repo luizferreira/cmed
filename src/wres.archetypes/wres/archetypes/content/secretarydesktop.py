@@ -38,7 +38,7 @@ class SecretaryDesktopData():
             visit_dic['getReviewState'] = visit.getReviewState()
             visit_dic['getWorkflowActions'] = visit.getWorkflowActions()
             if visit.getInsurance() == "":
-                visit_dic['getInsurance'] = '-'
+                visit_dic['getInsurance'] = '---'
             else:
                 visit_dic['getInsurance'] = visit.getInsurance()
             visit_dic['start'] = visit.start()
