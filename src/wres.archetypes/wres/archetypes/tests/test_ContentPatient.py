@@ -284,7 +284,7 @@ class TestSetup(unittest.TestCase):
         print "Modulo: ContentPatient   Test:get_home_url"
         print "-------------------------------------------------"
         patient = self.patient
-        self.assertEqual('/plone/Patients/jsilva/patient_desktop_view',patient.get_home_url())
+        self.assertEqual('/plone/Patients/jsilva',patient.get_home_url())
         print "Done"
     
     def test___create_chart_data(self):
