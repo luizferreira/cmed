@@ -204,8 +204,8 @@ class Patient(wresuser.WRESUser):
         Concatenate the patient url with "/patient_desktop_view"
         """
         #TODO: Seria mais otimizado se get_home_url fosse um atributo
-        return '/'.join(self.getPhysicalPath()) + '/patient_desktop_view'
-
+        return '/'.join(self.getPhysicalPath()) 
+        
     def __create_chart_data(self):
         """
         Create chart_data_hidden attribute
