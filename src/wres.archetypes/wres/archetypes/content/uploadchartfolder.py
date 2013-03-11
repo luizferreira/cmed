@@ -11,6 +11,7 @@ from Products.ATContentTypes.content import schemata
 
 from wres.archetypes.interfaces import IUploadChartFolder
 from wres.archetypes.config import PROJECTNAME
+from wres.policy.utils.roles import DOCTOR_ROLE
 
 UploadChartFolderSchema = folder.ATFolderSchema.copy() + atapi.Schema((
 
@@ -35,6 +36,8 @@ class UploadChartFolder(folder.ATFolder):
     meta_type = "UploadChartFolder"
     schema = UploadChartFolderSchema
 
+    def manage_afterAdd(self, item=None, container=None):
+		self.manage_permission('Delete objects', [DOCTOR_ROLE], acquire=False)
     # -*- Your ATSchema to Python Property Bridges Here ... -*-
 
 atapi.registerType(UploadChartFolder, PROJECTNAME)
