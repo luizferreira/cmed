@@ -17,25 +17,7 @@
 			"path": "src/wres.tour/wres/tour"
 		},
 		{
-			"path": "/home/matheus/plone_instances/communi/buildout-cache/eggs"
-		},
-		{
-			"path": "bin"
-		},
-		{
-			"path": "develop-eggs"
-		},
-		{
-			"path": "parts"
-		},
-		{
-			"path": "products"
-		},
-		{
-			"path": "src"
-		},
-		{
-			"path": "var"
+			"path": "../buildout-cache/eggs"
 		}
 	],
 	"settings":
