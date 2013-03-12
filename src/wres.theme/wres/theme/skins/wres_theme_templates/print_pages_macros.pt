@@ -172,7 +172,7 @@ Use header without patient_info
 -->
 
 <metal:def define-macro="prescription_info"> 
-<div class="">
+<div class="cmedPrint">
   <div tal:define="need_patient python:True">
     <metal:call_macro 
               use-macro="context/print_pages_macros/macros/header">

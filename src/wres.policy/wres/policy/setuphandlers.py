@@ -88,6 +88,8 @@ def createTemplateFolder(portal):
     template_folder.manage_permission('ATContentTypes: Add Folder', [], acquire = False)
     template_folder.manage_permission('ATContentTypes: Add Document', [], acquire = False)
     template_folder.manage_permission('ATContentTypes: Add File', [], acquire = False)
+    # del
+    template_folder.manage_permission('Delete objects', [DOCTOR_ROLE], acquire=False)
     template_folder.setTitle('Modelos')
     template_folder.setLayout('templates_summary_view')
     template_folder.reindexObject()

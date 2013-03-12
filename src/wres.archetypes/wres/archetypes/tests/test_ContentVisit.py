@@ -28,7 +28,6 @@ class TestSetup(unittest.TestCase):
         #Make patient easy to access
         query = self.pc.searchResults({'id':'dfrankenstein'})
         self.doctor = query[0].getObject()
-        self.doctor.add_visits_folder()
 
         #Make patient easy to access
         query = self.pc.searchResults({'id':'asilva'})
@@ -56,7 +55,6 @@ class TestSetup(unittest.TestCase):
         visit = self.visit
         self.assertEqual(visit.getDoctor(), self.doctor)
         self.assertEqual(visit.getProviderId(), 'dfrankenstein')
-        self.assertEqual(visit.getTagDefault(), 'tag')
         self.assertTrue('1a Consulta' in visit.getTypesOfVisit())
         self.assertTrue('Acompanhamento' in visit.getVisitReason())
         print "Done"

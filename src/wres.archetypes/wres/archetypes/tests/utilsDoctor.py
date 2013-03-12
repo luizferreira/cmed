@@ -23,12 +23,12 @@ def create_uemr_user(related_object, user_id, email='', fullname=''):
     pm.createMemberArea(member_id=user_id) 
 
 
-def create_doctor(portal, pr,doctor_fname="Dr. Victor",doctor_lname="Frankenstein",email="vfrank@gmail.com"):
+def create_doctor(portal, pr,doctor_fname="DR. VICTOR",doctor_lname="Frankenstein",email="vfrank@gmail.com"):
     doctors = getattr(portal, 'Doctors')
     new_obj_id = create_valid_user_id(pr, doctor_fname, doctor_lname)
     doctor = create_new_object(portal, doctors, new_obj_id, 'Doctor')
     fullname = doctor_fname + doctor_lname
-    create_uemr_user(doctor, new_obj_id, email=email, fullname=fullname)
+    doctor.at_post_create_script()
     set_doctor_information(doctor)
 
 def create_new_object(portal, parent, newid, new_obj_type):
