@@ -159,7 +159,8 @@ MAIN = Schema((
             ),
         ),
         StringField('email',
-            required=1,      
+            required=1,    
+            validators = ('isEmail',),
             widget=StringWidget(
                 label=_('Email'),
                 description='Eventualmente poderemos entrar em contato através dele.'

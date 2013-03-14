@@ -45,6 +45,7 @@ MAIN = Schema((
         
         StringField('email',
             required=1,      
+            validators = ('isEmail',),
             widget=StringWidget(label=_('Email'),
             ),
         ),         

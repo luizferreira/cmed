@@ -113,7 +113,7 @@ INFO = Schema((
     ),
 
     StringField('email',
-#      validators='isEmail',
+       validators='isEmail',
        widget=StringWidget(
            label='Email',
        ),
