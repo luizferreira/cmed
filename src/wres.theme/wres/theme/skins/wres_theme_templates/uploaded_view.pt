@@ -32,18 +32,36 @@
 
 <table id="filesTable">
     <tr>
-        <th width="350px" align="center">Arquivos</th>
-        <th align="center">Imagens</th>
+        <th width="350px">
+            <div tal:condition="python: urls[0]">
+                Arquivos <span class="to_right">Excluir?</span>
+            </div>
+        </th>
+        <th align="center">
+            <div>
+                Imagens
+            </div>
+        </th>
     </tr>
     <tr>
-        <td align="top" style="vertical-align:text-top;"> 
-            <div tal:repeat="file python:urls[1]">
-                <div>
-                    <img tal:attributes="src python:file[2]"/>
-                    <a  class="fileLink" tal:attributes="href python:file[0]" ><span class="fileName" tal:content="python:file[1]"></span></a><span style="float:right;margin-right:5px;"><a tal:attributes="href python:'/'.join(context.getPhysicalPath())+
-                    '/deleteExternalFile?imgURL=' + file[0]">Deletar</a></span>
+        <td align="top" class="top_align"> 
+            <form action="deleteExternalFile" method="GET"> 
+                <tal:for repeat="file python:urls[1]"> 
+                    <div>
+                        <img tal:attributes="src python:file[2]"/>
+                        <a  class="fileLink" tal:attributes="href python:file[0]" >
+                            <span class="fileName" tal:content="python:file[1]"></span>
+                        </a>
+                        <input class="delete_checkbox" type="checkbox" tal:attributes="name python:file[0]" />
+                    </div>
+                </tal:for>
+                <br/>
+                <input tal:condition="python: urls[0]" type="submit" value="Excluir Listados"/>
+                <div class="no_files" tal:condition="not: python: urls[0]">
+                    Não há arquivos externos deste paciente
                 </div>
-            </div>
+
+            </form>
         </td>
         <td>
             <span class="mensageOnImage" id="image_name">Nome: <span id="selection"></span></span>

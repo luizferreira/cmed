@@ -1,27 +1,44 @@
+.no_files{
+    color: #686868;
+    font-style: italic;
+}
+.to_right{
+    float: right;
+}
+.top_align{
+    vertical-align:text-top;
+}
+
+.delete_checkbox{
+    float:right;
+    margin-right:20px;
+}
 /*
 Content
 */
-div.position-1\3a 4 {margin-left:    -80%;} /* .position-1:4 */
-div.width-1\3a 2 { width:    60%; } /* .width-3:4 */
+/*div.position-1\3a 4 {margin-left:    -80%;} /* .position-1:4 */
+div.width-1\3a 2 { width:    55.75%%; } /* .width-3:4 */
 /*
 Patient Portlet
 */
-div.width-1\3a 4 { width:    18%; } /* .width-1:4 */
-div.position-0  { margin-left: -98.875% }
+/*div.width-1\3a 4 { width:    18%; } /* .width-1:4 */
+/*div.position-0  { margin-left: -98.875% }*/
 /*
 Upload Portlet
 */
-div.position-3\3a 4 {margin-left:   -19.125%;} /* .position-1:4 */
-
+div.position-3\3a 4 {
+    margin-left: -16.875%;
+    width:   16%;
+}
 /*
 Remove breadcombs and edit-bar
 */
-div#viewlet-above-content{
+/*div#viewlet-above-content{
     display:block;
 }
 div#edit-bar{
     display:none;
-}
+}*/
 /*
 Ajust content heigth
 */
