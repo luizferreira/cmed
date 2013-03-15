@@ -1,0 +1,107 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+    <metal:aux fill-slot="style_slot">
+        <link rel="stylesheet" type="text/css"
+            tal:attributes="href string:${portal_url}/doc_view.css" media="screen" />
+        <link rel="stylesheet" type="text/css"
+            tal:attributes="href string:${portal_url}/cmed_print.css" media="screen"/>
+            <link rel="stylesheet" type="text/css"
+        tal:attributes="href string:${portal_url}/cmedPrint.css" media="print" />
+    </metal:aux>
+
+    <metal:block fill-slot="javascript_head_slot">
+            <script type="text/javascript" src="date_to_text.js"></script>
+    </metal:block>
+</head>
+
+<body>
+<div metal:fill-slot="main"
+    tal:define="clinicData python:context.getClinic();
+                phone_field python:clinicData.getField('phone');
+                document_date python:context.creation_date.strftime('%d/%m/%Y')"    
+                >
+<div class="visualNoPrint">                
+<metal:body_macro metal:define-macro="body">
+
+
+<!--
+====================================
+    Clinic Header
+====================================
+-->
+    <span id="print_button" style="float:right">
+        <a title="" href="javascript:print();" class="visualNoPrint">Imprimir</a>
+    </span>
+    <br/>
+     <div>
+            <div class="clinic_title"
+                    tal:content="clinicData/getName | nothing" >CARDIOLOGY ASSOCIATES OF FLORIDA</div>
+            <div class="clinic_subtitle"
+                    tal:content="clinicData/getEndereco | nothing">7715 SW 71th STREET, SUITE 101- NEW YORK, FL 66286</div>        
+            <div class="clinic_phone">
+                Telefone: <metal:macro use-macro="python:clinicData.widget('phone',mode='view')"> </metal:macro> 
+                <span tal:condition="python:clinicData.getFax() != ''">
+                    - Fax: <metal:macro1 use-macro="python:clinicData.widget('fax',mode='view')"></metal:macro1>
+                </span>
+            </div>
+    </div>
+
+<!--
+====================================
+Body
+====================================
+-->
+<div tal:define ="data context/getDataDoc">
+  <tal:for repeat="schemata data">
+      <tal:fieldset_name define="fieldset_name python:schemata[0]">
+          <fieldset id="fieldset_doc_view">
+              
+              <tal:for2 repeat="field_data schemata">
+                  <tal:if condition="not:repeat/field_data/start">        
+                      <tal:def define="field_name python:field_data[0];
+                                       field_label python:field_data[1]">
+                          <strong tal:condition="field_label"><br /><tal:print_content content="field_label" />:</strong>
+                          <br /> 
+                          <metal:macro use-macro="python: context.widget(field_name,mode='view')" /><br />
+
+
+                      </tal:def>
+                  </tal:if>
+              </tal:for2>
+          </fieldset>
+          </tal:fieldset_name>
+  </tal:for>
+</div>
+<!--
+====================================
+Document Footer
+====================================
+-->
+<br />
+<br />
+    <span class="lineSignature">_________________________</span> <br>
+    
+    Criado por <span class="doctor" tal:content="python:context.getDocumentOwnerName()" i18n:translate="">
+    Nome do Doutor
+    </span><br>
+    Data da Criação: <span tal:content="python:context.creation_date.strftime('%d/%m/%Y')">Data de criação</span>
+    
+    </metal:body_macro>
+
+</div>
+<!-- 
+<metal:call_macro 
+    use-macro="context/print_pages_macros/macros/cmed_document">
+</metal:call_macro>
+ -->
+</div>
+</body>
+</html>

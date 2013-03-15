@@ -13,7 +13,7 @@ from Products.ATContentTypes.content import schemata
 
 from wres.archetypes.interfaces import ITemplate
 from wres.archetypes.config import PROJECTNAME
-
+from wres.policy.utils.roles import DOCTOR_ROLE, MANAGER_ROLE
 from wres.policy.utils.utils import set_schemata_properties, finalizeSchema
 
 MAIN = Schema((
@@ -55,5 +55,8 @@ class Template(base.ATCTContent):
 
     meta_type = "Template"
     schema = TemplateSchema
+
+    def manage_afterAdd(self, item=None, container=None):
+		self.manage_permission('View management screens', [DOCTOR_ROLE, MANAGER_ROLE], acquire=False)
 
 registerType(Template, PROJECTNAME)
