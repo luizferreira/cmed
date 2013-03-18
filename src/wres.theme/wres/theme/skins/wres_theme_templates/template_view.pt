@@ -10,9 +10,7 @@
 <head>
     <metal:aux fill-slot="style_slot">
         <link rel="stylesheet" type="text/css"
-            tal:attributes="href string:${portal_url}/doc_view.css" media="screen" />
-        <link rel="stylesheet" type="text/css"
-            tal:attributes="href string:${portal_url}/cmed_print.css" media="screen"/>
+            tal:attributes="href string:${portal_url}/template_view.css" media="screen" />
             <link rel="stylesheet" type="text/css"
         tal:attributes="href string:${portal_url}/cmedPrint.css" media="print" />
     </metal:aux>
@@ -26,7 +24,8 @@
 <div metal:fill-slot="main"
     tal:define="clinicData python:context.getClinic();
                 phone_field python:clinicData.getField('phone');
-                document_date python:context.creation_date.strftime('%d/%m/%Y')"    
+                document_date python:context.creation_date.strftime('%d/%m/%Y');
+                doctor_name python:context.getDocumentOwnerName();"    
                 >
 <div class="visualNoPrint">                
 <metal:body_macro metal:define-macro="body">
@@ -53,26 +52,45 @@
                 </span>
             </div>
     </div>
-
+<!--
+====================================
+    Patient Data Header
+====================================
+-->
+    <br/>
+    <div class="print_body" tal:define="patientData python:context.getPatient()">
+        <table class="patient_infos" tal:define="birth_date patientData/getBirthDate | nothing;">
+            <tr>
+                 <td class="item_title">Nome: </td>
+                 <td></td>
+                 <td class="item_title">Data de Nascimento: </td>
+                 <td ><br/></td>
+                 <td class="item_title">Registro no Sistema: </td>
+                 <td><br/></td>
+            </tr>
+            <tr>
+                 <td class="item_title">Data da Consulta: </td>
+                 <td><br/></td>
+                 <td class="item_title">Idade: </td>
+                 <td><br/></td>
+             </tr>
+        </table>
+    </div>
 <!--
 ====================================
 Body
 ====================================
 -->
-<div tal:define ="data context/getDataDoc">
+<div tal:define="data context/getDataTemplate">
   <tal:for repeat="schemata data">
       <tal:fieldset_name define="fieldset_name python:schemata[0]">
           <fieldset id="fieldset_doc_view">
               
               <tal:for2 repeat="field_data schemata">
-                  <tal:if condition="not:repeat/field_data/start">        
+                  <tal:if condition="not: python: repeat['field_data'].index < 2">        
                       <tal:def define="field_name python:field_data[0];
                                        field_label python:field_data[1]">
-                          <strong tal:condition="field_label"><br /><tal:print_content content="field_label" />:</strong>
-                          <br /> 
                           <metal:macro use-macro="python: context.widget(field_name,mode='view')" /><br />
-
-
                       </tal:def>
                   </tal:if>
               </tal:for2>
@@ -89,7 +107,7 @@ Document Footer
 <br />
     <span class="lineSignature">_________________________</span> <br>
     
-    Criado por <span class="doctor" tal:content="python:context.getDocumentOwnerName()" i18n:translate="">
+    Criado por <span class="doctor" tal:content="doctor_name" i18n:translate="">
     Nome do Doutor
     </span><br>
     Data da Criação: <span tal:content="python:context.creation_date.strftime('%d/%m/%Y')">Data de criação</span>
@@ -97,11 +115,11 @@ Document Footer
     </metal:body_macro>
 
 </div>
-<!-- 
-<metal:call_macro 
-    use-macro="context/print_pages_macros/macros/cmed_document">
-</metal:call_macro>
- -->
+
+  <metal:call_macro 
+      use-macro="context/print_pages_macros/macros/cmed_template">
+  </metal:call_macro>
+
 </div>
 </body>
 </html>

@@ -38,7 +38,7 @@ Use header without patient_info
         Clinic Header
     ====================================
   -->
-  <div class="document_title" tal:content="title"></div><br/>
+  <div class="document_title" tal:content="title | nothing"></div><br/>
     <div tal:define="clinicData python:context.getClinic();">
       <div class="clinic_title"
       tal:content="clinicData/getName | nothing" >CARDIOLOGY ASSOCIATES OF FLORIDA</div>
@@ -64,16 +64,17 @@ Use header without patient_info
         <table class="document_patient_infos" tal:define="birth_date patientData/getBirthDate | nothing;">
             <tr>
                  <td class="document_item_title">Nome: </td>
-                 <td> <span class="item_content" tal:content="patientData/getFullName"></span></td>
+                 <td> <span class="item_content" tal:content="patientData/getFullName |nothing"></span></td>
                  <td class="document_item_title">Registro no Sistema: </td>
-                 <td><span class="document_item_content" tal:content="patientData/getChartSystemID"></span><br></td>
+                 <td><span class="document_item_content" tal:content="patientData/getChartSystemID | nothing"></span><br></td>
             </tr>
             <tr>
-                 <td tal:condition="birth_date" class="document_item_title">Data de Nascimento: </td>
-                 <td tal:condition="birth_date"><span class="document_item_content" tal:content="python:birth_date.strftime('%d/%m/%Y')"></span><br></td>
-                 <td tal:condition="birth_date" class="document_item_title">Idade: </td>
-                 <td tal:condition="birth_date">
-                    <span class="document_item_content" tal:content="python:context.getPatientAge(birth_date)"></span>
+                 <td class="document_item_title">Data de Nascimento: </td>
+                 <td ><span tal:condition="birth_date" class="document_item_content" tal:content="python:birth_date.strftime('%d/%m/%Y')"></span><br></td>
+                 
+                 <td class="document_item_title">Idade: </td>
+                 <td>
+                    <span tal:condition="birth_date" class="document_item_content" tal:content="python:context.getPatientAge(birth_date)"></span>
                   <br></td>
              </tr>
         </table>
@@ -90,7 +91,7 @@ Use header without patient_info
 -->
  <span class="lineSignature">_________________________</span> <br>
     
-    Criado por <span class="doctor" style="font-weight:bold" tal:content="doctor_name" i18n:translate="">
+    Criado por <span class="doctor" style="font-weight:bold" tal:content="doctor_name | nothing" i18n:translate="">
     <span>Nome do Doutor</span>
     </span><br/> 
     <label style="display:none" tal:content="document_date" id="doc_date">Data</label>
@@ -460,3 +461,57 @@ PRINT MACROS VISITS
         </strong>
     </div>
 </metal:def>
+
+<!--
+====================================
+    CMED TEMPLATE
+====================================
+-->
+<metal:def define-macro="cmed_template"> 
+<div class="cmedPrint">
+  <div tal:define="need_patient python:True">
+    <metal:call_macro 
+              use-macro="context/print_pages_macros/macros/header">
+    </metal:call_macro>
+  </div>
+
+      <!--
+
+  ------------------------------------
+  Body
+  ------------------------------------
+  -->
+  <br />
+  <br />
+  <br />
+  <div tal:define ="data context/getDataTemplate">
+  <tal:for repeat="schemata data">
+      <tal:fieldset_name define="fieldset_name python:schemata[0]">
+          <fieldset id="fieldset_doc_view">
+              
+              <tal:for2 repeat="field_data schemata">
+                  <tal:if condition="not: python:repeat['field_data'].index < 2">        
+                      <tal:def define="field_name python:field_data[0];
+                                       field_label python:field_data[1]">
+                          <metal:macro use-macro="python: context.widget(field_name,mode='view')" /><br />
+
+
+                      </tal:def>
+                  </tal:if>
+              </tal:for2>
+          </fieldset>
+          </tal:fieldset_name>
+  </tal:for>
+  </div>
+  <!--
+  ------------------------------------
+  Document Footer
+  ------------------------------------
+  -->
+
+   <metal:call_macro 
+                use-macro="context/print_pages_macros/macros/footer">
+    </metal:call_macro>
+  </div>
+
+  </metal:def>
