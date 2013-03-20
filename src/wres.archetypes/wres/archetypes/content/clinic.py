@@ -3,7 +3,7 @@
 """Definition of the Clinic content type
 """
 
-from Products.DataGridField import DGFMessageFactory as _
+# from Products.DataGridField import DGFMessageFactory as _
 
 from zope.interface import implements
 
@@ -24,13 +24,13 @@ class Clinic(base.ATCTContent):
     schema = ClinicSchema
 
     def fillClinicInformation(self, info):
-        self.setName(info['Nome da Clínica/Consultório'])
-        self.setStreet(info['Avenida/Rua'])
-        self.setNumber(info['Número'])
-        self.setComplemento(info['Complemento'])
-        self.setCity(info['Cidade'])
-        self.setState(info['Estado'].lower())
-        self.setPhone(info['Telefone'])
-        self.setEmail(info['E-mail'])
+        self.setName(info['clinic_name'])
+        self.setStreet(info['clinic_street'])
+        self.setNumber(info['clinic_number'])
+        self.setComplemento(info['clinic_complemento'])
+        self.setCity(info['clinic_city'])
+        self.setState(info['clinic_state'].lower())
+        # self.setPhone(info['clinic_phone'])
+        # self.setEmail(info['E-mail'])
 
 atapi.registerType(Clinic, PROJECTNAME)

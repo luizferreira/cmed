@@ -29,40 +29,40 @@ COURSE_TYPES = atapi.DisplayList((
    ('specialization','Especialização'),
 ))
 
-specialty_mapping = {
-    'Não Selecionada': '',
-    'Alergia e Imunologia': 'allergy',
-    'Anestesiologia': 'anesthesiology',
-    'Atendimento de emergência': 'emergency',
-    'Cardiologia': 'cardiology',
-    'Cirurgia': 'surgery',
-    'Cirurgia Neurológica': 'neurological',
-    'Cirurgia Plástica': 'plastic',
-    'Clínica geral': 'general',
-    'Dermatologia': 'dermatology',
-    'Doença infecciosa': 'infectious',
-    'Endocrinologia, Diabetes e Metabolismo': 'endocrinology',
-    'Gastroenterologia': 'gastroenterology',
-    'Geriatria': 'geriatrics',
-    'Medicina familiar': 'family',
-    'Medicina Física e Reabilitação': 'physical',
-    'Medicina Genética': 'medical',
-    'Medicina Interna': 'internal',
-    'Medicina Preventiva': 'preventive',
-    'Nefrologia': 'nephrology',
-    'Neurologia': 'neurology',
-    'Obstetrícia e Ginecologia': 'obstetrics',
-    'OftalmologiaOftalmologia': 'ophthalmology',
-    'Oncologia (Câncer)': 'oncology',
-    'Ortopedia': 'orthopedics',
-    'Otorrinolaringologia': 'otolaryngology',
-    'Outro': 'other',
-    'Patologia': 'pathology',
-    'Pediatria': 'pediatrics',
-    'Psiquiatria': 'psychiatry',
-    'Radiologia': 'radiology',
-    'Urologia': 'urology'
-}
+# specialty_mapping = {
+#     'Não Selecionada': '',
+#     'Alergia e Imunologia': 'allergy',
+#     'Anestesiologia': 'anesthesiology',
+#     'Atendimento de emergência': 'emergency',
+#     'Cardiologia': 'cardiology',
+#     'Cirurgia': 'surgery',
+#     'Cirurgia Neurológica': 'neurological',
+#     'Cirurgia Plástica': 'plastic',
+#     'Clínica geral': 'general',
+#     'Dermatologia': 'dermatology',
+#     'Doença infecciosa': 'infectious',
+#     'Endocrinologia, Diabetes e Metabolismo': 'endocrinology',
+#     'Gastroenterologia': 'gastroenterology',
+#     'Geriatria': 'geriatrics',
+#     'Medicina familiar': 'family',
+#     'Medicina Física e Reabilitação': 'physical',
+#     'Medicina Genética': 'medical',
+#     'Medicina Interna': 'internal',
+#     'Medicina Preventiva': 'preventive',
+#     'Nefrologia': 'nephrology',
+#     'Neurologia': 'neurology',
+#     'Obstetrícia e Ginecologia': 'obstetrics',
+#     'OftalmologiaOftalmologia': 'ophthalmology',
+#     'Oncologia (Câncer)': 'oncology',
+#     'Ortopedia': 'orthopedics',
+#     'Otorrinolaringologia': 'otolaryngology',
+#     'Outro': 'other',
+#     'Patologia': 'pathology',
+#     'Pediatria': 'pediatrics',
+#     'Psiquiatria': 'psychiatry',
+#     'Radiologia': 'radiology',
+#     'Urologia': 'urology'
+# }
 
 class Doctor(wresuser.WRESUser):
     """Doctor type for WRES website"""
@@ -196,19 +196,17 @@ class Doctor(wresuser.WRESUser):
         Used to fill information about the first system doctor. That information is collected
         by setup_handlers in firstdoctor_info.txt file.
         '''
-        full_name = info['Nome Completo'].split(' ')
-        firstname = full_name[0]
-        lastname = full_name[-1]
-        self.setFirstName(firstname)
-        self.setLastName(lastname)
-        self.setSsn(info['CRM'])
-        self.setPhone(info['Telefone de Contato'])
-        if info['Confirmação do e-mail'] != info['Seu endereço de e-mail']:
+        self.setFirstName(info['doctor_firstName'])
+        self.setLastName(info['doctor_lastName'])
+        self.setSsn(info['doctor_ssn'])
+        self.setPhone(info['doctor_phone'])
+
+        if info['doctor_email'] != info['doctor_email_conf']:
             raise Exception("The two e-mail are different.")
         else:
-            self.setEmail(info['Seu endereço de e-mail'])
-        self.setSpecialty1(specialty_mapping[info['Especialidade 1']])
-        self.setSpecialty2(specialty_mapping[info['Especialidade 2']])
+            self.setEmail(info['doctor_email'])
+        self.setSpecialty1(info['doctor_especialty1'])
+        self.setSpecialty2(info['doctor_especialty2'])
         self.at_post_create_script()
 
 atapi.registerType(Doctor, PROJECTNAME)
