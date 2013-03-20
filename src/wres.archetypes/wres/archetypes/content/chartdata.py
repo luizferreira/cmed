@@ -112,15 +112,22 @@ class Event:
             contextualized_object = self.get_contextualized_object()
             if contextualized_object != None:
                 return contextualized_object.getPath()
+            return None
 
     def eprint(self):
         '''
         returns html to be printed in screen
         '''
-        if self.related_obj.meta_type == 'Visit':
-            related_obj = "<a target=\"_blank\" href=\"" + self.event_url() + "\" >" + self.related_obj.getVisit_type() + "</a>"
+        event_url = self.event_url()
+        if event_url == None:
+            klass = 'obj_deleted' # related object deleted.
+            event_url = ''
         else:
-            related_obj = "<a target=\"_blank\" href=\"" + self.event_url() + "\" >" + self.related_obj.Title() + "</a>"
+            klass = ''
+        if self.related_obj.meta_type == 'Visit':
+            related_obj = "<a class=\"%s\" target=\"_blank\" href=\"%s\"> %s </a>" % (klass, event_url, self.related_obj.getVisit_type())
+        else:
+            related_obj = "<a class=\"%s\" target=\"_blank\" href=\"%s\"> %s </a>" % (klass, event_url, self.related_obj.Title())
         return self.prefix() + related_obj + self.posfix()
 
     def prefix(self):

@@ -13,6 +13,13 @@
     </metal:block>
     <metal:aux fill-slot="style_slot">
         <link rel="stylesheet" type="text/css" href="cmed.css" />
+        <style>
+            a.obj_deleted {
+                text-decoration: line-through;
+                pointer-events: none;
+                cursor: default;                
+            }
+        </style>
     </metal:aux>
 </head>
     
