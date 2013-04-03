@@ -10,6 +10,9 @@
 <head>
 
 <title i18n:translate="cmfuemr_documents_view">Documents View</title>
+<metal:block fill-slot="style_slot">
+  <link rel="stylesheet" type="text/css" href="cmed.css" media="screen"/>
+</metal:block>
 <metal:block fill-slot="javascript_head_slot">
     <script type="text/javascript" src="chart.js"></script>
 </metal:block>
@@ -22,6 +25,9 @@
      tal:define="documents context/documents_folder_view_script">
 	   
 	   <div metal:use-macro="here/documents_folder_view_macros/macros/body_macro">&nbsp;</div>
+     <div style="position: absolute; top:75px; right:5px" class="aprenda">
+      <a tal:attributes="href string: ${portal_url}?tourId=6_d_criar_documento_a_partir_de_modelo-criando-um&skinId=sunburst" class="btn btn-info">Aprenda +</a>
+    </div>
        
 </div>
 </body>

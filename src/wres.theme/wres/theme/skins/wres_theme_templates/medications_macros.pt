@@ -16,7 +16,9 @@
         <dt> Erro </dt>
         <dd tal:content="error_message"> Ocorreu algum erro. </dd>
     </dl>   
-
+    <div style="position: absolute; top:75px; right:5px" class="aprenda">
+      <a tal:attributes="href string: ${portal_url}?tourId=7_d_criar_imprimir_prescricoes-gerando-e&skinId=sunburst" class="btn btn-info">Aprenda +</a>
+    </div>
     <fieldset class="cmed">
         <legend> Medicamento </legend>        
         <form tal:attributes="action template/id">

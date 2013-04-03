@@ -35,7 +35,9 @@
                today python:modules['DateTime'].DateTime().strftime('%d/%m/%Y');
                tomorrow python:(modules['DateTime'].DateTime()+1).strftime('%d/%m/%Y')">
 
-
+<div style="position: absolute; top:35px; right:5px" class="aprenda">
+  <a tal:attributes="href string: ${portal_url}/Ajuda" class="btn btn-info">Aprenda +</a>
+</div>
 <center  class="cmed"><h1> Agenda </h1> <h2 class="font-quicksand"> <span class="date"></span></h2> </center>
 
 <span id="print_button" style="float:right">

@@ -24,6 +24,9 @@
 
  <div metal:fill-slot="main"
         tal:define="title string:Modelos;">
+        <div style="position: absolute; top:75px; right:5px" class="aprenda">
+          <a tal:attributes="href string: ${portal_url}?tourId=5_d_criar_modelo_consulta-criando-um-modelo-de&skinId=sunburst" class="btn btn-info">Aprenda +</a>
+        </div>
         <h1>
             <a i18n:translate="" tal:content="string:${title}">Title</a>
         </h1>

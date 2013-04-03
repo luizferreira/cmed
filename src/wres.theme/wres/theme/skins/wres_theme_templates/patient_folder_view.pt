@@ -27,7 +27,9 @@
   tal:define="  title string:Pacientes;
                 portal_status_msg request/portal_status_message | nothing;
                 error_message request/portal_error_message  | nothing" >
-
+<div style="position: absolute; top:70px; right:5px" class="aprenda">
+  <a tal:attributes="href string: ${portal_url}?tourId=4_d_editando_paciente-editando-paciente-pela-secao&skinId=sunburst" class="btn btn-info">Aprenda +</a>
+</div>
     <center>
       <dl class="portalMessage info"
         tal:condition="portal_status_msg"> 
