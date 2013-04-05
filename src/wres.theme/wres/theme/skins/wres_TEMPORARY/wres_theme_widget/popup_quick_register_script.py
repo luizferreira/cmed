@@ -7,15 +7,13 @@
 
 
 opener = context.popup_opener()
-
 field = opener.getField(field_id)
-type_name = field.allowed_types[0]
+type_name = 'Patient'
 widget = field.widget
 #from Products.zdb import set_trace; set_trace()
 block = widget.getBlock('popup_quick_register')
 location = block.get('location')
 path = context.portal_url.getPortalPath()
-
 place_to_create = context.restrictedTraverse(path + location)
 
 id = context.generateUniqueId(type_name)

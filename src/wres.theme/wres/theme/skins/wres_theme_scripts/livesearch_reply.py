@@ -20,7 +20,6 @@ from Products.PythonScripts.standard import html_quote
 # as mudancas e' so' comparar com o arquivo de mesmo nome no egg
 # do Plone versao 4.0. As mudancas sao basicamente para adaptar
 # o livesearch do Plone a pesquisa de pacientes do CommuniMed.
-
 ploneUtils = getToolByName(context, 'plone_utils')
 portal_url = getToolByName(context, 'portal_url')()
 pretty_title_or_id = ploneUtils.pretty_title_or_id
@@ -174,9 +173,9 @@ else:
             formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])
             ppath = patient.absolute_url_path()
             if dt == None:
-                write('''<a title="%s" class="%s" onClick="selectPatient('%s', '%s')">%s (%s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone))
+                write('''<a title="%s" class="%s" onClick="choosePatient('%s', '%s')">%s (%s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone))
             else:
-                write('''<a title="%s" class="%s" onClick="selectPatient('%s', '%s')">%s (%s * %s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone, dt.strftime("%d/%m/%Y")))
+                write('''<a title="%s" class="%s" onClick="choosePatient('%s', '%s')">%s (%s * %s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone, dt.strftime("%d/%m/%Y")))
         else:
             dt = patient.getBirthDate()
             cf = patient.getContactPhone()
@@ -217,6 +216,8 @@ else:
         # write( '<a href="%s" style="font-weight:normal">%s</a>' % ('search?SearchableText=' + searchterms, ts.translate(label_show_all, context=REQUEST)))
         write('''</li>''')
     write('''</ul>''')
+    if building_search:
+        write('''<div><a class="link" onClick="createPatient()">Adicionar Novo Paciente</a></div>''')
     write('''</div>''')
     write('''</div>''')
 

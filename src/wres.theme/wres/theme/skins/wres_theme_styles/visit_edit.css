@@ -1,0 +1,45 @@
+
+
+
+#searchGadget{
+  border: solid 2px #205C90;
+  position: relative; 
+  height: 40px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#LSResult{
+  margin:auto !important;
+  position: relative !important;
+  background: none !important;
+  color: #205C90;
+  margin-left: -40px !important;
+}
+a.contenttype-patient:link, a.classe1:visited,.link:visited {
+  text-decoration: none;
+  }
+a.contenttype-patient:hover,.link:hover {
+  text-decoration: underline; 
+  color: #205C90;
+  cursor: pointer;
+}
+a.contenttype-patient:active,.link:active {
+  text-decoration: none
+  }
+
+#content ul {
+      list-style-type: none !important;
+      margin-left: 0em !important;
+  }
+
+  .livesearchContainer{
+    border-style: none none none none !important;
+    padding: 0em 0 0;
+  }
+  #livesearchLegend{
+    display: none;
+  }
+  .link{
+    font-weight: bold;
+  }

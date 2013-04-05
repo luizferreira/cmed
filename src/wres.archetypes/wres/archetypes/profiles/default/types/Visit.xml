@@ -8,7 +8,7 @@
   <property name="content_icon">document_icon.gif</property>
   <property name="product">wres.archetypes</property>
   <property name="factory">addVisit</property>
-  <property name="immediate_view">atct_edit</property>
+  <property name="immediate_view">visit_edit</property>
   <property name="global_allow">False</property>
   <property name="filter_content_types">False</property>
   <property name="allow_discussion">False</property>

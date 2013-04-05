@@ -3,10 +3,12 @@
 ##bind namespace=
 ##bind script=script
 ##bind subpath=traverse_subpath
-##parameters=opener, field
+##parameters=patient
 def getRequiredFields(obj):
     schema = obj.Schema()
     fields = schema.filterFields(required=1)
+    fields.append(schema.getField("homePhone"))
+    fields.append(schema.getField("mobile"))
     return fields
 
 def filterDefaultValues(result, default_values):
@@ -33,14 +35,14 @@ def getSortedFields(obj, result):
     return [field for field in getNames(obj.Schema()) if field in result]
 
 request = context.REQUEST
-widget = field.widget
-block = widget.getBlock('popup_quick_register')
+context = patient
+# widget = field.widget
+# block = widget.getBlock('popup_quick_register')
 
-default_values = block.get('default_values', {})
+# default_values = block.get('default_values', {})
 
 result = getRequiredFields(context)
-result = filterDefaultValues(result, default_values)
-result+= getExtraFields(context, block)
+# result = filterDefaultValues(result, default_values)
+# result+= getExtraFields(context, block)
 result = getSortedFields(context, result)
-
 return tuple(result)

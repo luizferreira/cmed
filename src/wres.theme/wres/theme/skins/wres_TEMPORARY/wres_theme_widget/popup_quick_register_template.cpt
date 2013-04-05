@@ -1,6 +1,5 @@
-<tal:page>
-<metal:block use-macro="here/popup_defines/macros/defines" />
-<html tal:define="opener context/popup_opener;
+
+<div class="quick_register" tal:define="opener context/popup_opener;
                   field_id options/field_id | request/field_id;
                   field_name string:${field_id}:list;
                   field python:opener.getField(field_id);
@@ -9,37 +8,9 @@
                   block python:widget.getBlock('popup_quick_register');
                   fields python:context.get_quick_register_fields(opener, field);
                   js python:here.getUniqueWidgetAttr(fields, 'helper_js');"
-				  i18n:domain="cmfuemr">
+				  >
 
-<head>
 
-<metal:use use-macro="here/wres_header/macros/html_header">
-    <metal:fill fill-slot="javascript_head_slot">
-        <tal:block define="macro here/archetypes_custom_js/macros/javascript_head | nothing"
-                   condition="macro">
-            <metal:block use-macro="macro" />
-        </tal:block>
-
-		<link rel="stylesheet" type="text/css" href="popup_quick_register.css" />
-
-		<script type="text/javascript" src="jquery.js"></script>
-		
-        <tal:js condition="js"
-                repeat="item js">
-        <script type="text/javascript"
-                charset="iso-8859-1"
-                tal:condition="python:exists('portal/%s' % item)"
-                tal:attributes="src string:$portal_url/$item">
-        </script>
-        </tal:js>
-    </metal:fill>
-</metal:use>
-
-	<title tal:content='string:${meta_type} quick register' i18n:translate="">Patient quick register</title>
-
-</head>
-
-<body class="quick_register">
 	<fieldset>
 	
 	
@@ -73,6 +44,4 @@
 
 	</form>
 	</fieldset>
-</body>
-</html>
-</tal:page>
+</div>

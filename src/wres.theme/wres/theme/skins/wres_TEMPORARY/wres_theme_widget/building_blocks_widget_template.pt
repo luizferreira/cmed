@@ -60,7 +60,7 @@
 				<option tal:attributes="value patient/UID;" tal:content="python: patient.getFirstName() + ' ' + patient.getLastName()" selected="selected"></option>
 			</select>
                         <span style="font-size:14px; text-decoration:underline;" tal:content="python: patient.getFirstName() + ' ' + patient.getLastName()"></span>
-                        <input type="hidden" tal:attributes="value python:context.getContactPhone()" id="hiddenPhone"/>
+                        <input type="text" tal:attributes="value python:context.getContactPhone()" id="hiddenPhone"/>
                         
                 </div>
 <!--

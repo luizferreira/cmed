@@ -11,6 +11,7 @@ from Products.ATContentTypes.content import schemata
 
 from wres.archetypes.interfaces import IVisitFolder
 from wres.archetypes.config import PROJECTNAME
+from zope.app.component.hooks import getSite
 
 VisitFolderSchema = folder.ATFolderSchema.copy() + atapi.Schema((
 
@@ -34,6 +35,26 @@ class VisitFolder(folder.ATFolder):
 
     meta_type = "VisitFolder"
     schema = VisitFolderSchema
+
+    def createNewPatient(self):
+		type_name = 'Patient'
+		location = '/Patients'
+		path = self.portal_url.getPortalPath()
+		
+		place_to_create = self.restrictedTraverse(path + location)
+
+		id = self.generateUniqueId(type_name)
+
+		if place_to_create.portal_factory.getFactoryTypes().has_key(type_name):
+		    o = place_to_create.restrictedTraverse('portal_factory/' + type_name + '/' + id)
+		else:
+		    new_id = place_to_create.invokeFactory(id=id, type_name=type_name)
+		    if new_id is None or new_id == '':
+		       new_id = id
+		    o = getattr(place_to_create, new_id, None)
+		
+		return o
+
 
     # -*- Your ATSchema to Python Property Bridges Here ... -*-
 

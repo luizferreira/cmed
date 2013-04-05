@@ -19,6 +19,9 @@
  <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""
     id="jquery.qtip.js" inline="False"/>
+    <javascript authenticated="False" cacheable="True" compression="safe"
+    conditionalcomment="" cookable="True" enabled="True" expression=""
+    id="set_visit_solgema.js" inline="False"/>
 <javascript id="amberjackDefaults.js"
     authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression="" inline="False"/>/>

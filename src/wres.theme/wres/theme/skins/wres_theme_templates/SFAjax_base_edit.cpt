@@ -319,8 +319,12 @@ function setDuration(){
 
       <script type="text/javascript">
         jq(document).ready(function(){
-            jq("iframe[name='SFEventEditIFRAME']", window.parent.document).height(jq('body.ajax_edition').height()+30)
+            jq("iframe[name='SFEventEditIFRAME']", window.parent.document).height("100%")
+        
+          StartVisitScheduleWorkFlow()
+        
         });
+        
       </script>
 </body>
 </html>

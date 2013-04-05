@@ -113,11 +113,9 @@ function defaultPopulate(fieldname, title, path){
 	getAttributesFromRemoteObj(path, attrs, handler);
 }
 
-function selectPatient(title, path){
+function selectPatient(path,title){
 //    alert("Funcao: " + "selectPatient\n" + "title: " + title + "\n" + "path: " + path);
-	document.body.style.cursor = 'progress';
-	window.opener.startPopulatingField(window, title, path);
-	setTimeout("window.close()", 100);
+	startPopulatingField(window, title, path);
 }
 /* Função inicial, ela que inicia o processo de preenchimento do campo
  * no schema */
@@ -150,11 +148,6 @@ function populate(title, path){
 	    updateCPhone(result.getContactPhone);
     	setTextElement(document, 'lastOfficeVisit', result.getLastVisitDate);
     	setTextElement(document, 'ext', result.getExt);
-    	var closeWindow = function(){
-    		//popup_window.close();
-			document.getElementById('patient:list').focus();
-    	};
-    	setTimeout(closeWindow, 100);
 	}
 	var attrs = ['UID', 'getContactPhone', 'getLastVisitDate', 'getExt'];
 	getAttributesFromRemoteObj(path, attrs, handler);
