@@ -1,0 +1,11 @@
+=====================================
+Change log for CommuniMed
+=====================================
+
+0.3.0 (2013-03-28)
+==================
+
+- UPDATE: Novo site em produção
+- UPDATE: Página 404 do site
+- UPDATE: Configuração automática do DNS
+- UPDATE: Página 'Iniciando no CommuniMed'

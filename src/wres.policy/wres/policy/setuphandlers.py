@@ -355,6 +355,20 @@ def loadVisitVocabularies(portal):
     visit_reason.append('check up')
     vt.add_vocab('visit_reason', visit_reason)
 
+#=============================================================================
+#  Carrega a versão do sistema para uma variável no vocabulary_tools
+#  Carlos
+#=============================================================================
+def loadVersionVocabulary(portal, context):
+    import string
+    vt = getToolByName(portal, 'vocabulary_tool')
+    VRS = context.readDataFile("CHANGES.txt")
+    print "Inserindo a versão do Portal ..."
+    VRS = VRS[string.find(VRS,'=\n\n')+3:len(VRS)-1]
+    versaoV = VRS[0:string.find(VRS,' (')]
+    dataV = VRS[string.find(VRS,' (')+2:string.find(VRS,')\n')]
+    vt.add2vocabulary('cmed_version',versaoV,0)
+    vt.add2vocabulary('cmed_data',dataV,0)
 
 def loadDEFVocabulary(portal,context):
     #Dicionario de especialidades farmaceuticas
@@ -523,6 +537,7 @@ def setupVarious(context):
         loadCIDVocabulary(portal, context)
         loadDEFVocabulary(portal,context)
         loadInsuranceVocabulary(portal)
+        loadVersionVocabulary(portal, context)
 
         createCmedCatalogs(portal)
 
