@@ -391,7 +391,9 @@ def addUpgradeExternalMethods(portal):
     add upgrade external methods in site root.
     '''
     from Products.ExternalMethod.ExternalMethod import manage_addExternalMethod
-    manage_addExternalMethod(portal, '0_create_first_doctor', 'Create First Doctor', 'wres.policy.create_first_doctor', 'main')
+    # this function is DEPRECATED since we change the process of creating new instances.
+    # TODO: Remove starting from July 2013.
+    # manage_addExternalMethod(portal, '0_create_first_doctor', 'Create First Doctor', 'wres.policy.create_first_doctor', 'main')
     manage_addExternalMethod(portal, '0_upgrade', 'Cmed Automatic Upgrade', 'wres.policy.upgrade', 'main')
     manage_addExternalMethod(portal, 'z_export', 'Export Cmed', 'wres.policy.exporter', 'main')
     manage_addExternalMethod(portal, 'z_import', 'Import Cmed', 'wres.policy.importer', 'main')
@@ -482,33 +484,35 @@ def parseFirstDoctorInputFile(infile):
                 pass
     return dic
 
-def createFirstDoctor(portal, context):
-    '''
-    if there is a doctor in firstdoctor_info.txt, then this function creates that doctor.
-    '''
-    PROFESSIONAL_SITE = True
-    from wres.policy.utils.utils import create_base_of_id
-    # read firstdoctor_info and create a doctor if there is information there.
-    infile = context.openDataFile('firstdoctor_info.txt')
+# this function is DEPRECATED since we change the process of creating new instances.
+# TODO: Remove starting from July 2013.
+# def createFirstDoctor(portal, context):
+#     '''
+#     if there is a doctor in firstdoctor_info.txt, then this function creates that doctor.
+#     '''
+#     PROFESSIONAL_SITE = True
+#     from wres.policy.utils.utils import create_base_of_id
+#     # read firstdoctor_info and create a doctor if there is information there.
+#     infile = context.openDataFile('firstdoctor_info.txt')
 
-    doctor_info = parseFirstDoctorInputFile(infile)
+#     doctor_info = parseFirstDoctorInputFile(infile)
 
-    if doctor_info is not None:
-        full_name = doctor_info['Nome Completo'].split(' ')
-        firstname = full_name[0].lower(); lastname = full_name[-1].lower()
-        doctor_id = create_base_of_id(firstname, lastname)
-        doctor_folder = getattr(portal, 'Doctors')
-        clinic = getattr(portal, 'Clinic')
-        if not PROFESSIONAL_SITE:
-            # removing permissions from anonymous, so he cant see initial page anymore.
-            doctor_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
-            clinic.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE, ANONYMOUS_ROLE], acquire = False)
-            doctor_folder.reindexObject()
-        doctor = getOrCreateType(portal, doctor_folder, doctor_id, 'Doctor')
-        doctor.fillFirstDoctorInfo(doctor_info)
-        clinic.fillClinicInformation(doctor_info)
-        doctor.reindexObject()
-        clinic.reindexObject()
+#     if doctor_info is not None:
+#         full_name = doctor_info['Nome Completo'].split(' ')
+#         firstname = full_name[0].lower(); lastname = full_name[-1].lower()
+#         doctor_id = create_base_of_id(firstname, lastname)
+#         doctor_folder = getattr(portal, 'Doctors')
+#         clinic = getattr(portal, 'Clinic')
+#         if not PROFESSIONAL_SITE:
+#             # removing permissions from anonymous, so he cant see initial page anymore.
+#             doctor_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE], acquire = False)
+#             clinic.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, PATIENT_ROLE, ANONYMOUS_ROLE], acquire = False)
+#             doctor_folder.reindexObject()
+#         doctor = getOrCreateType(portal, doctor_folder, doctor_id, 'Doctor')
+#         doctor.fillFirstDoctorInfo(doctor_info)
+#         clinic.fillClinicInformation(doctor_info)
+#         doctor.reindexObject()
+#         clinic.reindexObject()
 
 def setupVarious(context):
     """ Funcao generica executada na instalacao do wres policy """
