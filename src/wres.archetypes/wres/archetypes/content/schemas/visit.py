@@ -39,9 +39,9 @@ MAIN = Schema((
             ),
         ),
 
-        BrPhoneField('contactPhone',
+        BrPhoneField('contactPhoneVisit',
             index=':schema',
-            widget=BrPhoneWidget(label=_('Contact Phone'),
+            widget=BrPhoneWidget(label=_('Visit Contact Phone'),
                                      description='You must enter only numbers',
                                      description_msgid='cmfuemr_help_contact_phone',
                                      i18n_domain='cmfuemr',

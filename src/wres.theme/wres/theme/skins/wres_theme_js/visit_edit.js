@@ -70,13 +70,34 @@ $(document).ready(function(){
 //------------------------------------------------------
 $("#visitBody").hide()
 $("#createPatientBody").hide()
+$("#registerButton").click(function(){
+	firstName = $("#firstName").val()
+	lastName = $("#lastName").val()
+	contactPhone = $("#contactPhone").val()
+	patientID = $("#patientID").val()
 
+	$.get("/Plone3/Appointments/dteste/save_quick_patient",
+		{"firstName":firstName,"lastName":lastName,"contactPhone":contactPhone,"patientID":patientID},
+		function(data){
+			data = JSON.parse(data)
+			choosePatient(data.name,data.url)
+	})
+	
+})
+
+$("#registerButton2").click(function(){
+	
+	
+})
 
 });
 
 function choosePatient(patient_name, patient_url){	
 	$("#searchPatient").hide()
-    $("#visitBody").fadeIn()
+    $("#createPatientBody").hide()
+    $("#visitBody").show()
+    populate(patient_url,patient_name)
+debugger;
     selectPatient(patient_url,patient_name)
 }
 

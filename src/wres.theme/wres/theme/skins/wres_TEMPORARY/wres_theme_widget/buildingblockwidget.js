@@ -132,16 +132,16 @@ function startPopulatingField(popup_window, title, path){
 function updateCPhone(cphone) {
 	area_code = cphone.substring(0,2);
 	phone = cphone.substring(2);
-	$("select#acontactPhone").val(area_code);
-	$('input[name="acontactPhone"]').val(phone);
-	$('#contactPhone').val(area_code+phone);
+	$('select[name="acontactPhoneVisit"]').val(area_code);
+	$('input[name="acontactPhoneVisit"]').val(phone);
+	$('input[name="contactPhoneVisit"]').val(area_code+phone);
 }
 
 /* função que controla o processo de seleção do item (e.g paciente) */
 function populate(title, path){
 //	alert("Funcao: " + "populate\n" + "title: " + title + "\n" + "path: " + path);
     var handler = function(result){
-//        alert("entrei no handler");
+
 		addOption(document, 'patient:list', title, result.UID);
 		selectOption(document, 'patient:list', result.UID);
 	    setTextElement(document, 'contactPhone', result.getContactPhone);
@@ -302,11 +302,12 @@ VocabularyController.prototype.changeList = function(evt){
 	}
 }
 
-//TODO:Gambiarra para pegar o telefone
-$(document).ready(function(){
-if($("#acontactPhone")[0]){
-                if($("#hiddenPhone")[0]){
-                updateCPhone($("#hiddenPhone")[0].value)
-                }
-        }
-});
+// //TODO:Gambiarra para pegar o telefone
+// $(document).ready(function(){
+// 	debugger;
+// if($("#acontactPhone")[0]){
+//                 if($("#hiddenPhone")[0]){
+//                 updateCPhone($("#hiddenPhone")[0].value)
+//                 }
+//         }
+// });

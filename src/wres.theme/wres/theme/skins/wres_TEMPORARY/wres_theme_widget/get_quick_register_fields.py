@@ -4,6 +4,7 @@
 ##bind script=script
 ##bind subpath=traverse_subpath
 ##parameters=patient
+
 def getRequiredFields(obj):
     schema = obj.Schema()
     fields = schema.filterFields(required=1)
@@ -45,4 +46,5 @@ result = getRequiredFields(context)
 # result = filterDefaultValues(result, default_values)
 # result+= getExtraFields(context, block)
 result = getSortedFields(context, result)
+
 return tuple(result)

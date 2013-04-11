@@ -1,17 +1,17 @@
 
-function updateCPhone(){
-	hidden_cphone = $('input[name="contactPhone"]');
-	ddd = $("select#acontactPhone").val();
-	phone = $("input#cphone_number").val();
-	hidden_cphone.val(ddd+phone);
-}
+// function updateCPhone(){
+// 	hidden_cphone = $('input[name="contactPhone"]');
+// 	ddd = $("select#acontactPhone").val();
+// 	phone = $("input#cphone_number").val();
+// 	hidden_cphone.val(ddd+phone);
+// }
 
 function getResidencial(){
 	ddd = $("select#ahomePhone").val();
 	phone = $('input[name="ahomePhone"]').val();
 
 	if(ddd == "--" || phone == "") {
-		window.alert("Por favor, preencha corretamente o campo 'Telefone Residencial'.");
+		alert("Por favor, preencha corretamente o campo 'Telefone Residencial'.");
 		$("input#cphone_residencial").removeAttr("checked");
 		$("input#cphone_number").val("");
 		$("div#cphone_field").hide('slow');

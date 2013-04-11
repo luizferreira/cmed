@@ -8,10 +8,15 @@ from Products.ATContentTypes.content import folder
 from Products.ATContentTypes.content import schemata
 
 # -*- Message Factory Imported Here -*-
-
+from Products.CMFCore.utils import getToolByName
+  
+  
 from wres.archetypes.interfaces import IVisitFolder
 from wres.archetypes.config import PROJECTNAME
 from zope.app.component.hooks import getSite
+from wres.archetypes.content.wresuser import create_id
+
+import json
 
 VisitFolderSchema = folder.ATFolderSchema.copy() + atapi.Schema((
 
@@ -52,8 +57,28 @@ class VisitFolder(folder.ATFolder):
 		    if new_id is None or new_id == '':
 		       new_id = id
 		    o = getattr(place_to_create, new_id, None)
-		
 		return o
+
+    def saveNewDataPatient(self,firstName,lastName,contactPhone):
+		# firstName = self.REQUEST.get("firstName")
+		# lastName = self.REQUEST.get("lastName")
+		# contactPhone = self.REQUEST.get("contactPhone")
+
+		portal = getSite()
+		patient = self.createNewPatient()
+
+		patient.setFirstName(firstName)
+		patient.setLastName(lastName)
+		patient.setContactPhone(contactPhone)
+
+		pr = getToolByName(portal,"portal_registration")
+		new_id = create_id(pr,firstName,lastName)
+		
+		patient = patient.portal_factory.doCreate(patient, new_id)
+		patient.processForm()
+		return patient
+		
+
 
 
     # -*- Your ATSchema to Python Property Bridges Here ... -*-

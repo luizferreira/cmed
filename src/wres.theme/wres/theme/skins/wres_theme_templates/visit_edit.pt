@@ -106,6 +106,7 @@
 
   <metal:head define-macro="javascript_head">
  <script type="text/javascript" src="visit_edit.js"></script>
+ <script type="text/javascript" src="patient_cphone_edit.js"></script>
   </metal:head>
 
 
@@ -187,30 +188,30 @@
   
   <legend i18n:translate="">Patient quick register</legend>
   <form tal:define="errors options/state/getErrors"
-        tal:attributes="action string:${here/absolute_url}/${template/id};"
         method="post">
 
-    <input type="hidden" name="form.submitted" value="1" />
-    <input type="hidden" name="form.is_in_quick_register" value="1" />
+    <input type="hidden" id="patientID" tal:attributes="value patient/getId"/>
+    <input type="hidden" id="visitFolderURL" tal:attributes="value python: '/'.join(context.getParentNode().getPhysicalPath())"/>
+    <!-- <input type="hidden" name="form.is_in_quick_register" value="1" />
     <input type="hidden" name="form.opener_path" tal:attributes="value python:'/'.join(opener.getPhysicalPath())" />
     <input type="hidden" name="opener_type" tal:attributes="value opener/meta_type" />
     <input type="hidden" name="form.opener_field_id" tal:attributes="value field_id" />
-    <input type="hidden" name="form.button.after_uemr_edit_script" value="popup_quick_register_confirmation_template" />
-    <input type="hidden" name="page2go_after_edit" value="popup_quick_register_confirmation_template" />
     <input type="hidden" name="field_id" tal:attributes="value field_id" />
     <input type="hidden" name="opener_url" tal:attributes="value python:opener.absolute_url(1)" />
     <input type="hidden" tal:repeat="item python:context.get_quick_register_default(field)"
                          tal:attributes="name python:item[0];
                                          value python:item[1]" />
+ -->
 
     <p tal:define="err errors/foo|nothing" tal:condition="err" tal:content="err" />
 
         <tal:fields repeat="field fields">
           <metal:fieldMacro use-macro="python:patient.widget(field.getName(), mode='edit')" />
         </tal:fields>
-
+  <input tal:attributes="value python:'/'.join(context.getPhysicalPath())" />
+  <a href="javascript:void(0)" id="registerButton">Registrar</a>
     <div align="right">
-      <br /><input class="button" id="registerButton" type="submit" name="form.button.save" value="Register" i18n:attributes="value"/>
+      <br /><input class="button" id="registerButton" type="submit" name="" value="Register" i18n:attributes="value"/>
     </div>
 
   </form>
@@ -252,15 +253,18 @@
 
               <!-- within the formControls these are the default previous, next, save, cancel buttons -->
 
-             <!--  <metal:block fill-slot="buttons">
-
-              </metal:block> -->
-              <!-- within the formControls a slot for extra buttons -->
-
-              <!-- <metal:block fill-slot="extra_buttons">
+               <metal:block fill-slot="buttons">
 
               </metal:block>
- -->
+              <!-- within the formControls a slot for extra buttons -->
+
+          <metal:block fill-slot="extra_buttons">
+            <input class="context"
+              type="submit"
+              name="form.button.save_visit"
+              value="Salvar"
+              tal:attributes="disabled python:test(isLocked, 'disabled', None);"/>
+          </metal:block>
 
 
             </metal:default_body>
