@@ -52,8 +52,7 @@ function getXmlHttpRequest(){
 function getAttributesFromRemoteObj(path, attrs, handler){
 //    alert("Funcao: " + "getAtributesFromRemoteObj\n" + "attrs: " + attrs + "\n" + "handler: " + handler + "\n\n\n" + "path: " + path);
 //	var url = 'getattributesfromremoteobj?path=' + path;
-    
-    var url = path + "/getPatientInformation";
+    var url = path + "/getInformation";
     
 	var xml_request = getXmlHttpRequest();
 	xml_request.onreadystatechange = function () {
@@ -148,6 +147,7 @@ function populate(title, path){
 	    updateCPhone(result.getContactPhone);
     	setTextElement(document, 'lastOfficeVisit', result.getLastVisitDate);
     	setTextElement(document, 'ext', result.getExt);
+    	$("#patientFullName").html(result.fullName)
 	}
 	var attrs = ['UID', 'getContactPhone', 'getLastVisitDate', 'getExt'];
 	getAttributesFromRemoteObj(path, attrs, handler);

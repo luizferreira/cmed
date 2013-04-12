@@ -131,6 +131,7 @@ if not results:
     write('''<h2 id="results_title">%s</h2>''' % "Resultados")
     write('''<div class="LSIEFix">''')
     write('''<div id="LSNothingFound">%s</div>''' % ts.translate(label_no_results_found, context=REQUEST))
+    write('''<div><a class="link" onClick="createPatient()">Adicionar Novo Paciente</a></div>''')
     write('''<div class="LSRow">''')
     write('''</div>''')
     write('''</div>''')

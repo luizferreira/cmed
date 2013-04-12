@@ -42,4 +42,49 @@ a.contenttype-patient:active,.link:active {
   }
   .link{
     font-weight: bold;
+    text-decoration: underline;
   }
+
+  .formQuestion{
+    font-size: 12px;
+  }
+  input[type=text], #ahomePhone, #amobile, input[type=radio]{
+    border-radius: 3px;
+    border: solid 1px rgb(28, 86, 136);
+    height: 20px;
+  }
+
+.more {
+  width: 80px;
+  padding: 6px 0;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-bottom: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  background-color: #fff;
+  background-repeat: repeat-x;
+  background-position: left top;
+  font-size: 14px;
+  text-shadow: 1px 1px 1px #fff;
+  font-weight: bold;
+  height: 22px;
+  line-height: 1.5em;
+  margin-bottom: 6px;
+  background-color: rgb(219, 219, 219);
+}
+
+.more:hover {
+  border: 1px solid #bbb;
+  text-decoration: none;
+  background-position: left -78px;
+}
+
+.more:active {
+  color: #666;
+  background-position: left -38px;
+}
+
+.round {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}

@@ -1,102 +1,10 @@
-<!-- <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:tal="http://xml.zope.org/namespaces/tal"
-	  xmlns:metal="http://xml.zope.org/namespaces/metal"
-	  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-	  i18n:domain="cmfuemr">
-
-  <head>
-          <title></title>
-          <script></script>
-
-    <link rel="stylesheet" type="text/css" href="cmed.css" />
-    <link rel="stylesheet" type="text/css" href="popup_quick_register.css" />
-    <script type="text/javascript" src="popup_choose_patient.js"></script>
-    <script type="text/javascript" src="patient_folder_view.js"></script>
-  </head>
-
-  <body>
-
- <metal:search_macro define-macro="search">
- 
-   <form id="portletx_form" name="portletxform">
-        <div id="patient_folder" class="patientFolderDivFilter">
-          <label>Filtrar tabela (nome, cpf, data de nascimento):</label>
-          <input id="textBoxSearch" class="inputLabel patientFolderInputFilter" style="width:250px; height:25px; text-align:center"
-                 title="" autocomplete="on" name="Title" value=""  onkeyup="tableSearch.search();"/>
-        </div>
-
-      </form>
-      <br/><br/>
-    <tal:define define="allPatients context/getAllPatient;numberPatients python:len(allPatients)">
-      <div class="tableContainer">
-        <div id="semResultado" style="display:none;font-weight:bold" >Nenhum resultado encontrado.</div>
-        <table class="listing cmed" id="tabela" class="tabela">
-          <thead class="chart-entry fixedHeader">
-            <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry" id="total">
-              
-            </th>
-            <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry">
-              Nome do Paciente
-            <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry">
-              Telefone
-              <th colspan="1" style="background: #2A5D7F; color:white;text-align:center" class="chart-entry">
-              Data de Nascimento
-            </th>
-          </thead>
-          <tbody id="data"  class="tabela">
-            <tal:for repeat="patient python:allPatients">
-            <tr>
-              
-              <td class="index-col" tal:content="python: repeat['patient'].index + 1">
-              </td>
-              
-              <td>
-                <a id="celulas" tal:attributes="href patient/chartUrl | nothing" tal:content="patient/name | nothing"></a>
-              </td>
-              
-              <td id="celulas" tal:content="patient/phone | nothing">
-              </td>
-
-              <td id="celulas" tal:content="patient/birth | nothing">
-              </td>
-            
-            </tr>
-            </tal:for>
-          </tbody>
-        </table>
-      </div>
-    </tal:define>
-
-</metal:search_macro>
-
-
-
-<metal:edit_macro define-macro="edit">
-  
-  casa
-
-</metal:edit_macro>
-	
-
-  </body> 
-</html>
- -->
-
- <html xmlns="http://www.w3.org/1999/xhtml"
-
-      xml:lang="en"
-
-      lang="en"
-
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-
-      i18n:domain="plone">
-
-
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xml:lang="en"
+  lang="en"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="plone">
 
   <metal:head define-macro="topslot">
     <link rel="stylesheet" type="text/css" href="visit_edit.css" />
@@ -104,32 +12,19 @@
   </metal:head>
 
 
-  <metal:head define-macro="javascript_head">
- <script type="text/javascript" src="visit_edit.js"></script>
- <script type="text/javascript" src="patient_cphone_edit.js"></script>
-  </metal:head>
+ <metal:head define-macro="javascript_head">
+   <script type="text/javascript" src="visit_edit.js"></script>
+   <script type="text/javascript" src="patient_cphone_edit.js"></script>
+ </metal:head>
 
 
 
-  <body>
+ <body>
+  <metal:header define-macro="header">
+  </metal:header>
 
-        <!-- header, h1 of Edit <Type>, schemata links and webdav lock message -->
-
-        <metal:header define-macro="header">
-
-
-
-        </metal:header>
-
-       
-
-        <!-- typedesription, typeDescription from the content type -->
-
-        <metal:typedescription define-macro="typedescription">
-
-
-
-        </metal:typedescription>
+  <metal:typedescription define-macro="typedescription">
+  </metal:typedescription>
 
         <!-- body, editform , fields, buttons, the default macro 
 
@@ -139,154 +34,72 @@
 
              fill the slots
 
-        -->
+           -->
 
-        <metal:body define-macro="body">
+   <metal:body define-macro="body">
 
-<div id="searchPatient">
-   <center>
-<div i18n:translate="" id="search_patient">
-      <form id="portletx_form" name="portletxform" method="post">
-        <div id="choose_patient" class="LSBox">
-          <input id="searchGadget" class="inputLabel" style="width:300px"
-                 title="Digite o nome, CPF ou ID do paciente" autocomplete="on" name="Title" value="" />
-          <input id="searchSubmit" name="submit" type="submit" value="Buscar" style="display:none" />
+    <div id="searchPatient">
+     <center>
+      <h2> Buscar paciente para visita </h2>
+      <div i18n:translate="" id="search_patient">
+        <form id="portletx_form" name="portletxform" method="post">
+          <div id="choose_patient" class="LSBox">
+            <input id="searchGadget" class="inputLabel" style="width:300px"
+             title="Digite o nome, CPF ou ID do paciente" autocomplete="on" name="Title" value="" />
+             <input id="searchSubmit" name="submit" type="submit" value="Buscar" style="display:none" />
 
-            <div class="searchSection" style="display:none">
-            <input tal:define="root_url python:'/'.join(portal.getPhysicalPath())" id="searchbox_currentfolder_only" class="noborder" type="checkbox" name="path" checked="True" tal:attributes="value string:${root_url}/Patients*">
-            <label style="cursor: pointer" for="searchbox_currentfolder_only">apenas nesta seção</label>
+             <div class="searchSection" style="display:none">
+              <input tal:define="root_url python:'/'.join(portal.getPhysicalPath())" id="searchbox_currentfolder_only" class="noborder" type="checkbox" name="path" checked="True" tal:attributes="value string:${root_url}/Patients*">
+                <label style="cursor: pointer" for="searchbox_currentfolder_only">apenas nesta seção</label>
+              </div>
+
+              <div id="LSResult" style="">
+                <div class="LSShadow" id="LSShadow" style="width:80%; height: 80%; overflow-x: hidden; overflow-y:auto; margin-left:48px"></div>
+              </div>
+
             </div>
 
-            <div id="LSResult" style="">
-                <div class="LSShadow" id="LSShadow" style="width:400px"></div>
-            </div>
-
+          </form>
         </div>
-
-      </form>
-    </div>
-    </center>
-</div>
-
-<div id="createPatientBody">
-  <tal:define define="patient here/createNewPatient">
-    
-<div class="quick_register" tal:define="opener context/popup_opener;
-                  field_id string:patient;
-                  field_name string:${field_id}:list;
-                  field python:opener.getField(field_id);
-                  meta_type python:field.allowed_types[0];
-                  widget python:field.widget;
-                  block python:widget.getBlock('popup_quick_register');
-                  fields python:context.get_quick_register_fields(patient);
-                  js python:here.getUniqueWidgetAttr(fields, 'helper_js');"
-          >
-
-
-  <fieldset>
-  
-  
-  <legend i18n:translate="">Patient quick register</legend>
-  <form tal:define="errors options/state/getErrors"
-        method="post">
-
-    <input type="hidden" id="patientID" tal:attributes="value patient/getId"/>
-    <input type="hidden" id="visitFolderURL" tal:attributes="value python: '/'.join(context.getParentNode().getPhysicalPath())"/>
-    <!-- <input type="hidden" name="form.is_in_quick_register" value="1" />
-    <input type="hidden" name="form.opener_path" tal:attributes="value python:'/'.join(opener.getPhysicalPath())" />
-    <input type="hidden" name="opener_type" tal:attributes="value opener/meta_type" />
-    <input type="hidden" name="form.opener_field_id" tal:attributes="value field_id" />
-    <input type="hidden" name="field_id" tal:attributes="value field_id" />
-    <input type="hidden" name="opener_url" tal:attributes="value python:opener.absolute_url(1)" />
-    <input type="hidden" tal:repeat="item python:context.get_quick_register_default(field)"
-                         tal:attributes="name python:item[0];
-                                         value python:item[1]" />
- -->
-
-    <p tal:define="err errors/foo|nothing" tal:condition="err" tal:content="err" />
-
-        <tal:fields repeat="field fields">
-          <metal:fieldMacro use-macro="python:patient.widget(field.getName(), mode='edit')" />
-        </tal:fields>
-  <input tal:attributes="value python:'/'.join(context.getPhysicalPath())" />
-  <a href="javascript:void(0)" id="registerButton">Registrar</a>
-    <div align="right">
-      <br /><input class="button" id="registerButton" type="submit" name="" value="Register" i18n:attributes="value"/>
+      </center>
     </div>
 
-  </form>
-  </fieldset>
-</div>
-  </tal:define>
-</div>
+    <div id="createPatientBody">
+        <tal:define define="patient here/createNewPatient">
+          <div class="quick_register" tal:define="fields python:context.get_quick_register_fields(patient);">     
+            <form tal:define="errors options/state/getErrors"
+              method="post">
 
-
-<div id="visitBody">
-          
-          <metal:default_body use-macro="here/edit_macros/macros/body">
-
-              <!-- inside the fieldset but above all the fields -->
-
-             <!--  <metal:block fill-slot="extra_top">
-
-              </metal:block> -->
-
+              <p tal:define="err errors/foo|nothing" tal:condition="err" tal:content="err" />
+              <input type="hidden" id="patientID" tal:attributes="value patient/getId"/>
+              <input type="hidden" id="visitFolderURL" tal:attributes="value python: '/'.join(context.getParentNode().getPhysicalPath())"/>
+              <input type="hidden" tal:attributes="value python:'/'.join(context.getPhysicalPath())" />
+              <tal:fields repeat="field fields">
+                <metal:fieldMacro use-macro="python:patient.widget(field.getName(), mode='edit')" />
+              </tal:fields>
+              <div class="more round">
+                <a href="javascript:void(0)" id="registerButton">Registrar</a>  
+              </div>
               
 
-              <!-- listing of the fields, usually I won't customise this
-
-              <metal:block fill-slot="widgets">
-
-              </metal:block>
-
-              -->
+            </form>
+          </div>
+        </tal:define>
+      </div>
 
 
+    <div id="visitBody">
+      <metal:default_body use-macro="here/edit_macros/macros/body">
+      </metal:default_body>
+    </div>
 
-              <!-- below the fields above the formControls (hidden fields for reference stuff is above buttons) -->
+  </metal:body>
 
-            <!-- <metal:block fill-slot="extra_bottom">
-
-            </metal:block>
- -->
-
-
-              <!-- within the formControls these are the default previous, next, save, cancel buttons -->
-
-               <metal:block fill-slot="buttons">
-
-              </metal:block>
-              <!-- within the formControls a slot for extra buttons -->
-
-          <metal:block fill-slot="extra_buttons">
-            <input class="context"
-              type="submit"
-              name="form.button.save_visit"
-              value="Salvar"
-              tal:attributes="disabled python:test(isLocked, 'disabled', None);"/>
-          </metal:block>
-
-
-            </metal:default_body>
-</div>
-        </metal:body>
+  <metal:footer define-macro="footer">
+  </metal:footer>
 
 
 
-        
-
-        <!-- footer, by line created date etc. -->
-
-        <metal:footer define-macro="footer">
-
-        
-
-        </metal:footer>
-
-
-
-  </body>
-
-
+ </body>
 
 </html>

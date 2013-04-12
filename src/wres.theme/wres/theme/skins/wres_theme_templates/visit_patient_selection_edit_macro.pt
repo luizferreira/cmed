@@ -1,0 +1,87 @@
+
+    <metal:define define-macro="edit">
+
+        <metal:use use-macro="field_macro|context/widgets/field/macros/edit">
+
+            <metal:fill fill-slot="widget_body"
+                        tal:define="vocab python:field.Vocabulary(context);
+                                    vlen python:len(vocab);
+                                    selectionview context/@@at_selection_widget;
+                                    selection python:selectionview.getSelected(vocab, value);
+                                    format python:widget.format;
+                                    fieldName python:fieldName+':list';
+                                    uids python:same_type(value, []) and value or [value]">
+
+                <strong tal:condition="python:field.required"> 
+                  <tal:print content="python:field.widget.label" />
+                  <span class="required" title="Obrigatório" style="color: #f00;">
+                    ■
+                  </span>  
+                </strong>
+
+                <strong tal:condition="python:not field.required"> 
+                  <tal:print content="python:field.widget.label" />  
+                </strong> 
+
+                <br />                
+
+
+                <span tal:condition="python:(vlen &lt; 4 and format == 'flex') or (format == 'radio')"
+                      tal:attributes="id fieldName;">
+                    
+                    <!-- Radio when the vocab is short < 4 -->
+
+                    <tal:radios repeat="item vocab">
+
+                        <input class="noborder blurrable"
+                               type="radio"
+                               tal:attributes="name fieldName;
+                                               id string:${fieldName}_${repeat/item/number};
+                                               checked python:item in selection and 'checked' or None;
+                                               value item;"
+                               />
+
+                        <label tal:content="python:vocab.getValue(item)"
+                               i18n:translate=""
+                               tal:attributes="for string:${fieldName}_${repeat/item/number}" />
+
+                        <br />
+
+                    </tal:radios>
+
+                </span>
+
+                <tal:longVocab condition="python:(vlen >= 4 and format == 'flex') or (format in ('select', 'pulldown'))">
+
+                    <!-- Pulldown when longer -->
+                    <!-- MODIFICADO PELA COMMUNI -->
+                    <div id="goodMessage">
+                      <span id="patientFullName"></span>
+                    </div>
+
+                    <div style="display:none" id="badMessage">
+                      Houve um problema em selecionar o paciente, contate o suporte para solucioná-lo
+                    </div>
+                      
+                    <select style="display:none" tal:attributes="name fieldName;
+                                id fieldName;">
+
+                      <option value="no_patient" selected="selected">Procure ou Registre um Paciente&nbsp;&nbsp;</option>
+
+                     <tal:item tal:repeat="item vocab">
+                      <option selected="selected"
+                          tal:define="no_ref python: value is None and item == '';"
+                          tal:attributes="value item;
+                                  selected python:test((item in uids) or no_ref, 'selected', '')"></option>
+                     </tal:item>
+                    </select>
+
+                    <!-- MODIFICADO PELA COMMUNI -->                    
+
+                </tal:longVocab>                
+
+            </metal:fill>
+
+        </metal:use>
+
+    </metal:define>
