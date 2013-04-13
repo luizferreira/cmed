@@ -200,7 +200,7 @@ $(document).ready(function(){
 
      var path_ = window.location.pathname.split('/');
      var url_ = window.location.protocol + "//" + window.location.host + "/" + path_[1];
-    if((path_[path_.length-1]=="Agenda")||(path_[path_.length-1]=="")){
+    if((path_[path_.length-1]=="Agenda")||((path_[path_.length-1]=="")&&(path_[path_.length-2]=="Agenda"))){
         $("head").append("<link rel='stylesheet' type='text/css' href='cmed.css' media='screen'/>");
         $("#content").append("<div style='position: absolute; top:75px; right:5px' class='aprenda'><a href='"+url_+"?tourId=3_d_configurando_calendario-configurando-o-seu&skinId=sunburst' class='btn btn-info'>Aprenda +</a></div>");
     }

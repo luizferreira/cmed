@@ -1,28 +1,41 @@
 <?xml version="1.0"?>
 <object name="portal_javascripts" meta_type="JavaScripts Registry">
+
  <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""
     id="BrFieldsAndWidgets.js" inline="False"/>
+
  <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""
     id="visit_edit.js" inline="False"/>
+
  <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""
     id="autocomplete.js" inline="False"/>
+
  <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""
     id="sec_desk.js" inline="False"/>
+
  <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True"
     expression="python: context.getPhysicalPath()[-1]==&quot;Agenda&quot; or context.getPhysicalPath()[-1]==&quot;sec_desk&quot; or context.getPhysicalPath()[-1]==&quot;Appointments&quot;"
     id="temporizador.js" inline="False"/>
+
  <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""
     id="jquery.qtip.js" inline="False"/>
-    <javascript authenticated="False" cacheable="True" compression="safe"
+
+ <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""
     id="set_visit_solgema.js" inline="False"/>
-<javascript id="amberjackDefaults.js"
+
+ <javascript id="amberjackDefaults.js"
     authenticated="False" cacheable="True" compression="safe"
-    conditionalcomment="" cookable="True" enabled="True" expression="" inline="False"/>/>
+    conditionalcomment="" cookable="True" enabled="True" expression="" inline="False"/>
+
+  <javascript id="olarkIM.js"
+    authenticated="False" cacheable="True" compression="safe"
+    conditionalcomment="" cookable="True" enabled="True" expression="" inline="False"/>
+
 </object>

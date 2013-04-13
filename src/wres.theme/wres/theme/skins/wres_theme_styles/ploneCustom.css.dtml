@@ -75,6 +75,11 @@ dl.portletLogin {
     background-color: #F4F2ED;
 }
 
+/* escondendo propaganda da Olark no chat */
+#habla_link_div {
+    display: none !important;
+}
+
 /* posicionamento e tamnho das actions de feedback e ajuda */
 #portal-feedbackhelp-div {
     width: 11em;

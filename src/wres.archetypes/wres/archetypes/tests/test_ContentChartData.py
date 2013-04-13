@@ -36,7 +36,7 @@ class TestSetup(unittest.TestCase):
         print "Modulo: ContentChartData   Test:catalog_me"
         print "----------------------------------------------"
         #Get requirements
-        ev = Event(self.patient, 1000, DateTime(), self.patient)
+        ev = Event(self.patient, Event.CREATION, DateTime(), self.patient)
         self.assertTrue(self.cct.event_catalog.query(Eq('date', ev.date))[0])
         print "Done"
 
@@ -46,7 +46,7 @@ class TestSetup(unittest.TestCase):
         print "Modulo: ContentChartData   Test:event_url"
         print "----------------------------------------------"
         #Get requirements
-        ev = Event(self.patient, 1000, DateTime(), self.patient)
+        ev = Event(self.patient, Event.CREATION, DateTime(), self.patient)
         parts = ev.event_url().split('/')
         self.assertTrue('Patients' in parts)
         self.assertTrue('pparker' in parts)
@@ -61,9 +61,9 @@ class TestSetup(unittest.TestCase):
         print "Modulo: ContentChartData   Test:_author"
         print "----------------------------------------------"
         #Get requirements
-        ev = Event(self.patient, 1000, DateTime(), self.patient)
+        ev = Event(self.patient, Event.CREATION, DateTime(), self.patient)
         parts = ev.eprint().split(' ')
-        self.assertTrue('href="/plone/Patients/pparker"' in parts)
+        self.assertTrue('href="/plone/Patients/pparker">' in parts)
         self.assertTrue('Paciente' in parts)
         self.assertTrue('adicionado.' in parts)
         print "Done"
@@ -74,8 +74,8 @@ class TestSetup(unittest.TestCase):
         print "Modulo: ContentChartData   Test:_event_cmp"
         print "----------------------------------------------"
         #Get requirements
-        ev = Event(self.patient, 1000, DateTime(), self.patient)
-        ev2 = Event(self.patient, 1000, DateTime()+1, self.patient)
+        ev = Event(self.patient, Event.CREATION, DateTime(), self.patient)
+        ev2 = Event(self.patient, Event.CREATION, DateTime()+1, self.patient)
         result = ev._event_cmp(ev2)
         self.assertEqual(result, -1)
         print "Done"
@@ -88,7 +88,7 @@ class TestSetup(unittest.TestCase):
         #Get requirements
         visit = createVisitObject(self.portal, 'teste')
         visit.reindexObject()
-        ev = Event(visit, 1000, DateTime(), visit)
+        ev = Event(visit, Event.CREATION, DateTime(), visit)
         result = ev._visit_review_state()
         self.assertEqual(result, ' (nao agendada).')
         print "Done"
@@ -118,14 +118,14 @@ class TestSetup(unittest.TestCase):
         print "----------------------------------------------"
         #Get requirements
         self.assertTrue(self.patient.chart_data)
-        self.patient.create_event(1000, DateTime(), self.patient)
+        self.patient.create_event(Event.CREATION, DateTime(), self.patient)
         self.assertTrue(self.patient.get_events()) #init
         self.patient.chart_data.clean_chart()
         self.assertFalse(self.patient.get_events()) #clean
         del self.patient.chart_data.events
         self.assertFalse(hasattr(self.patient.chart_data, 'events'))
         self.patient.chart_data.update_chart()
-        self.patient.create_event(1000, DateTime(), self.patient)
+        self.patient.create_event(Event.CREATION, DateTime(), self.patient)
         self.assertTrue(dict(self.patient.chart_data.events)) #update
         print "Done"
 
@@ -138,7 +138,7 @@ class TestSetup(unittest.TestCase):
         patient = self.patient
         patient.chart_data.clean_chart()
         medication = {'status': 'active', 'submitted_by': 'admin', 'use': '1 cp quando houver do de cabe\xc3\xa7a', 'medication': 'Tylenol dc', 'end_date': DateTime('2012/05/07 17:06:14.061165 GMT-3'), 'note': '', 'start': '07/05/2012', 'concentration': '80mg', 'quantity': '12'}
-        patient.chart_data.raise_event(patient, 'medications', 1000, **medication)
+        patient.chart_data.raise_event(patient, 'medications', Event.CREATION, **medication)
         self.assertTrue(dict(self.patient.chart_data.events))
         print "Done"
 

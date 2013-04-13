@@ -193,8 +193,9 @@ class Doctor(wresuser.WRESUser):
 
     def fillFirstDoctorInfo(self, info):
         '''
+        Used externally by the add_cmed_instance.py in the cmed site project.
         Used to fill information about the first system doctor. That information is collected
-        by setup_handlers in firstdoctor_info.txt file.
+        by the cmed site registration form.
         '''
         self.setFirstName(info['doctor_firstName'])
         self.setLastName(info['doctor_lastName'])
