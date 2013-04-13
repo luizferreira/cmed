@@ -13,20 +13,40 @@ from wres.brfields.content.BrFieldsAndWidgets import *
 from wres.brfields.validators import *
 
 from wres.archetypes.validators import *
-from wres.archetypes.widgets.BuildingBlocksWidget import BuildingBlocksWidget
 
 _ = MessageFactory("cmfuemr")
 
 MAIN = Schema((
 
+        # Workaround
+        # Os campos firstName e lastName estão aqui para não dar conflito no kssValidadeField
+        # ao registrar uma novo paciente. Este problema ocorre pois são usados campos do Patient
+        # no template visit_edit.pt, o kss tenta validar um campo do patient mas o contexto é a visita
+        # e assim ocorre um erro.
+        
+        StringField('firstName',
+        widget=StringWidget(
+            label=_('First Name'),
+            visible={'edit':'invisible','view':'invisible'},
+        ),
+    ),
+
+        StringField('lastName',
+            index="ZCTextIndex",
+            widget=StringWidget(
+                label=_('Last Name'),
+                visible={'edit':'invisible','view':'invisible'},
+            ),
+        ),
+
+        # Fim do workaround
+
         ReferenceField('patient',
             required = 1,
             relationship='patient',
             allowed_types=('Patient',),
-            validators = ('isValidReference',),
             widget=SelectionWidget(label='Paciente',
                                         macro_edit='visit_patient_selection_edit_macro',
-                                        helper_js=('buildingblockwidget.js',),
                                         ),
         ),
 

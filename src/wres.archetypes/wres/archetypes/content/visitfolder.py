@@ -77,6 +77,8 @@ class VisitFolder(folder.ATFolder):
 		patient = patient.portal_factory.doCreate(patient, new_id)
 		patient.processForm()
 		return patient
+
+
 		
 
 

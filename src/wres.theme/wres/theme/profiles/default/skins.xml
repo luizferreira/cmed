@@ -16,15 +16,12 @@
       of your product (on the filesystem) as Filesystem Directory Views within
       the portal_skins tool, so that they become usable as skin layers.
       -->
- <object name="wres_theme_widget"
+<!--  <object name="wres_theme_widget"
     meta_type="Filesystem Directory View"
-    directory="wres.theme:skins/wres_theme_widget"/>
+    directory="wres.theme:skins/wres_theme_widget"/> -->
  <object name="wres_TEMPORARY"
     meta_type="Filesystem Directory View"
-    directory="wres.theme:skins/wres_TEMPORARY"/>       
- <object name="BuildingBlocksWidget"
-    meta_type="Filesystem Directory View"
-    directory="wres.theme:skins/wres_TEMPORARY/wres_theme_widget"/>            
+    directory="wres.theme:skins/wres_TEMPORARY"/>              
  <object name="wres_theme_js"
     meta_type="Filesystem Directory View"
     directory="wres.theme:skins/wres_theme_js"/>     
@@ -74,14 +71,10 @@
      insert-after="wres_theme_images"/>
   <layer name="wres_theme_styles"
      insert-after="wres_theme_templates"/>
-  <layer name="wres_theme_widget"
-     insert-after="wres_theme_styles"/>
   <layer name="wres_TEMPORARY"
-     insert-after="wres_theme_widget"/>     
-  <layer name="BuildingBlocksWidget"
-     insert-after="wres_TEMPORARY"/> 
+     insert-after="wres_theme_styles"/>     
   <layer name="sunburst_images"
-     insert-after="BuildingBlocksWidget"/>
+     insert-after="wres_TEMPORARY"/>
   <layer name="sunburst_styles"
      insert-after="sunburst_images"/>
   <layer name="sunburst_templates"

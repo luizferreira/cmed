@@ -11,8 +11,8 @@
     <metal:aux fill-slot="style_slot">
         <link rel="stylesheet" type="text/css"
             tal:attributes="href string:${portal_url}/doc_view.css" media="screen" />
-        <link rel="stylesheet" type="text/css"
-            tal:attributes="href string:${portal_url}/cmed_print.css" media="screen"/>
+        <!-- <link rel="stylesheet" type="text/css"
+            tal:attributes="href string:${portal_url}/cmed_print.css" media="screen"/> -->
             <link rel="stylesheet" type="text/css"
         tal:attributes="href string:${portal_url}/cmedPrint.css" media="print" />
     </metal:aux>

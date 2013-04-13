@@ -1,5 +1,4 @@
 # -*- extra stuff goes here -*-
-from visittemp import IVisitTemp # TODO: Retirar a partir de 09-2012
 from visit import IVisit
 from impresso import IImpresso
 from template import ITemplate

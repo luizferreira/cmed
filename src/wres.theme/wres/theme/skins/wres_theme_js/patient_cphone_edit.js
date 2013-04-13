@@ -1,11 +1,3 @@
-
-// function updateCPhone(){
-// 	hidden_cphone = $('input[name="contactPhone"]');
-// 	ddd = $("select#acontactPhone").val();
-// 	phone = $("input#cphone_number").val();
-// 	hidden_cphone.val(ddd+phone);
-// }
-
 function getResidencial(){
 	ddd = $("select#ahomePhone").val();
 	phone = $('input[name="ahomePhone"]').val();
@@ -20,7 +12,7 @@ function getResidencial(){
 		$("select#acontactPhone").val(ddd);
 		$("input#cphone_number").val(phone);
 		$("div#cphone_field").show('slow');
-		updateCPhone();
+		updateCPhone(ddd+phone);
 	}
 }
 
@@ -38,7 +30,7 @@ function getCell(){
 		$("select#acontactPhone").val(ddd);
 		$("input#cphone_number").val(phone);
 		$("div#cphone_field").show('slow');
-		updateCPhone();
+		updateCPhone(ddd+phone);
 	}
 }
 
@@ -53,6 +45,17 @@ function updateCPhoneQuickRegister(){
 	ddd = $("select#acontactPhone").val();
 	phone = $('input[name="acontactPhone"]').val();
 	hidden_cphone.val(ddd+phone);
+}
+
+/* funcao que atualiza o telefone de contato da visita de acordo
+   com o paciente selecionado */
+function updateCPhone(cphone) {
+	area_code = cphone.substring(0,2);
+	phone = cphone.substring(2);
+	$('select[name="acontactPhoneVisit"]').val(area_code);
+	$('input[name="acontactPhoneVisit"]').val(phone);
+	$('input[name="contactPhoneVisit"]').val(area_code+phone);
+	updateCPhoneQuickRegister()
 }
 
 

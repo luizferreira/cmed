@@ -4,14 +4,15 @@
     i18n_domain="wres.theme">
 
   <!-- File System Directory Views registration -->
-  <cmf:registerDirectory name="wres_theme_widget" recursive="True" />
+  <!-- <cmf:registerDirectory name="wres_theme_widget" recursive="True" /> -->
   <cmf:registerDirectory name="wres_theme_js"/>
   <cmf:registerDirectory name="wres_theme_scripts"/>
   <cmf:registerDirectory name="wres_theme_images"/>
   <cmf:registerDirectory name="wres_theme_templates"/>
   <cmf:registerDirectory name="wres_theme_styles"/>
+  <cmf:registerDirectory name="wres_TEMPORARY" />  
   <cmf:registerDirectory name="sunburst_theme" recursive="True" />
-  <cmf:registerDirectory name="wres_TEMPORARY" recursive="True" />  
+  
 
   <!-- Note: This could also be done for all folders at once
        by replacing the previous lines with this one:

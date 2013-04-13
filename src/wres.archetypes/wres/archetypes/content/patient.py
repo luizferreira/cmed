@@ -53,7 +53,7 @@ class Patient(wresuser.WRESUser):
     def getInformation(self):
         """
         Retorna um objeto do tipo json (JavaScript Object Notation).
-        Utilizado no tipo visita (BuildingBlocksWidget)
+        Utilizado no tipo visita 
         """
         return json.dumps({'fullName':self.getFullName(),'getLastDate': self.getLastVisitDate(), 'getContactPhone': self.getContactPhone(), 'UID': self.UID()})
 

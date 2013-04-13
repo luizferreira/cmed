@@ -25,35 +25,8 @@
 
                 <br />                
 
+               
 
-                <span tal:condition="python:(vlen &lt; 4 and format == 'flex') or (format == 'radio')"
-                      tal:attributes="id fieldName;">
-                    
-                    <!-- Radio when the vocab is short < 4 -->
-
-                    <tal:radios repeat="item vocab">
-
-                        <input class="noborder blurrable"
-                               type="radio"
-                               tal:attributes="name fieldName;
-                                               id string:${fieldName}_${repeat/item/number};
-                                               checked python:item in selection and 'checked' or None;
-                                               value item;"
-                               />
-
-                        <label tal:content="python:vocab.getValue(item)"
-                               i18n:translate=""
-                               tal:attributes="for string:${fieldName}_${repeat/item/number}" />
-
-                        <br />
-
-                    </tal:radios>
-
-                </span>
-
-                <tal:longVocab condition="python:(vlen >= 4 and format == 'flex') or (format in ('select', 'pulldown'))">
-
-                    <!-- Pulldown when longer -->
                     <!-- MODIFICADO PELA COMMUNI -->
                     <div id="goodMessage">
                       <span id="patientFullName"></span>
@@ -77,8 +50,6 @@
                     </select>
 
                     <!-- MODIFICADO PELA COMMUNI -->                    
-
-                </tal:longVocab>                
 
             </metal:fill>
 

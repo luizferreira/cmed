@@ -25,7 +25,7 @@ from wres.archetypes.content.schemas.visit import VisitSchema
 schemata.finalizeATCTSchema(VisitSchema, moveDiscussion=False)
 
 # usada para adicionar minutos do campo duração à data/hora de inicio
-# da visita
+# da visita 
 def addMinutes2Date (date, minutes):
     if (date._minute + minutes) >= 60:
         new_date_minute = date._minute + minutes - 60
@@ -162,20 +162,12 @@ class Visit(event.ATEvent):
             vt = getToolByName(portal, 'vocabulary_tool')
             vt.add2vocabulary('insurance', new_insurance, 1, 1)
 
-    def getStartDate(self):
+    def getStartDate(self): 
         return self.startDate
 
     def getSocialSecurity(self):
         patient = self.getPatient()
         return patient.getSocialSecurity()
-
-    # utilizado pela BuildingBlocksWidget para pegar um script do
-    # portal_skins
-    def popup_search_script(self, arg=None):
-        portal = getSite()
-        portal_skins = getToolByName(portal, 'portal_skins')
-        script = portal_skins.wres_theme_widget.popup_search_script
-        return script
 
     # utilizado pelo PatientWrapper em secretarydesktop
     def getPatientInfo(self):

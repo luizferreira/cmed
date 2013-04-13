@@ -1,5 +1,10 @@
 
-
+#patientFullName{
+  font-size: 17px;
+  color: rgb(0, 34, 95);
+  text-decoration: underline;
+  font-weight: bold;
+}
 
 #searchGadget{
   border: solid 2px #205C90;

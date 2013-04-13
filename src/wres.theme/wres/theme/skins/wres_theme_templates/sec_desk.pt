@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="cmed.css" media="screen"/>
 	 <link rel="stylesheet" type="text/css" href="jquery.qtip.css"/>
     <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'/>
-    <link rel="stylesheet" type="text/css" tal:attributes="href string:${portal_url}/cmed_print.css" media="screen"/>
+    <!-- <link rel="stylesheet" type="text/css" tal:attributes="href string:${portal_url}/cmed_print.css" media="screen"/> -->
     <link rel="stylesheet" type="text/css" tal:attributes="href string:${portal_url}/cmedPrint.css" media="print" />
   </metal:block>
 <metal:block fill-slot="javascript_head_slot">

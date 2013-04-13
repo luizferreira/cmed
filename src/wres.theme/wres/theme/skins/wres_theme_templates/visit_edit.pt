@@ -54,7 +54,7 @@
               </div>
 
               <div id="LSResult" style="">
-                <div class="LSShadow" id="LSShadow" style="width:80%; height: 80%; overflow-x: hidden; overflow-y:auto; margin-left:48px"></div>
+                <div class="LSShadow" id="LSShadow" style="width:80%; height: 70%; overflow-x: hidden; overflow-y:auto; margin-left:48px"></div>
               </div>
 
             </div>
@@ -65,7 +65,7 @@
     </div>
 
     <div id="createPatientBody">
-        <tal:define define="patient here/createNewPatient">
+        <tal:define define="patient here/createNewPatient;">
           <div class="quick_register" tal:define="fields python:context.get_quick_register_fields(patient);">     
             <form tal:define="errors options/state/getErrors"
               method="post">
@@ -88,7 +88,13 @@
       </div>
 
 
-    <div id="visitBody">
+    <div id="visitBody" style="height: 90%; overflow-x: hidden; overflow-y:auto;">
+      <div id="newPatientMSG" style="display:none">
+        <dl class="portalMessage info" style="font-size: 12px;">
+          <dt>Informação</dt>
+          <dd>Novo Paciente Registrado com Sucesso.</dd>
+        </dl>
+        </div>
       <metal:default_body use-macro="here/edit_macros/macros/body">
       </metal:default_body>
     </div>
