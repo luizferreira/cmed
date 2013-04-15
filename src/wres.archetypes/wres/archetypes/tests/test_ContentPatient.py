@@ -309,7 +309,7 @@ class TestSetup(unittest.TestCase):
         event_list = dict(chartdata.events).values()
         event_list.sort(cmp=Event._event_cmp)
         event_txt = event_list[0].eprint()
-        self.assertEqual('Paciente <a target="_blank" href="/plone/Patients/jsilva" >Joao Silva</a> adicionado.',event_txt)
+        self.assertEqual('Paciente <a class="" target="_blank" href="/plone/Patients/jsilva"> Joao Silva </a> adicionado.',event_txt)
         print "Done"
 
     def test_get_events(self):
@@ -331,7 +331,7 @@ class TestSetup(unittest.TestCase):
         #Check if the last event is correct
         events = patient.get_events()
         event_txt = events[-1:][0].eprint()
-        self.assertEqual('Paciente <a target="_blank" href="/plone/Patients/jsilva" >Joao Silva</a> adicionado.',event_txt)
+        self.assertEqual('Paciente <a class="" target="_blank" href="/plone/Patients/jsilva"> Joao Silva </a> adicionado.',event_txt)
         print "Done"
 
     def test_get_chart_data_map(self):

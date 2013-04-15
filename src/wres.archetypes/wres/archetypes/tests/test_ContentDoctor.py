@@ -157,14 +157,16 @@ class TestSetup(unittest.TestCase):
         print "----------------------------------------------"
         #Get requirements
         doctor = self.doctor
+
         info = {
-            'Nome Completo': 'Dráuzio Varela',
-            'CRM': '012302301',
-            'Telefone de Contato': '31 9785 0818',
-            'Seu endereço de e-mail': ' ',
-            'Confirmação do e-mail': ' ',
-            'Especialidade 1': 'Cardiologia',
-            'Especialidade 2': 'Outro',
+            'doctor_firstName': 'Dráuzio',
+            'doctor_lastName': 'Varela',
+            'doctor_ssn': '012302301',
+            'doctor_phone': '3133334444',
+            'doctor_email': 'aa@aa.com',
+            'doctor_email_conf': 'aa@aa.com',
+            'doctor_especialty1': 'cardiology',
+            'doctor_especialty2': 'internal'
         }
         doctor.fillFirstDoctorInfo(info)
         self.assertEqual(doctor.getFullName(), 'Dráuzio Varela')
