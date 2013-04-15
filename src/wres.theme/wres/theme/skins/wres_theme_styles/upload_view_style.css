@@ -1,3 +1,10 @@
+/*== Workaround TODO: Esconder o link "Adicionar...", o mesmo não é usado e
+ quebra a instância, serialize error.*/
+#plone-contentmenu-factories{
+    display:none;
+}
+/*FIM do workaround*/
+
 .no_files{
     color: #686868;
     font-style: italic;
