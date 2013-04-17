@@ -2,10 +2,24 @@
 Change log for CommuniMed
 =====================================
 
-0.3.0 (2013-03-28)
-==================
+0.14.0 (2013-03-28)
+===================
 
-- UPDATE: Novo site em produção
-- UPDATE: Página 404 do site
-- UPDATE: Configuração automática do DNS
-- UPDATE: Página 'Iniciando no CommuniMed'
+o Bugfixes
+
+- Novo site em produção
+- Página 404 do site
+- Configuração automática do DNS
+- Página 'Iniciando no CommuniMed'
+
+o Functionalities
+
+- Mensageiro instantâneo. [luizferreira] *
+- Nova interface de seleção de paciente no cadastro de visitas. [matheusaraujo] *
+- Versionamento e data de última atualização visíveis em todas as páginas. [carlosbarreto] *
+
+o Other improvements
+
+- Nothing
+
+\* Mudanças perceptíveis ao usuário.
