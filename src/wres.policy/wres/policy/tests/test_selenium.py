@@ -10,9 +10,6 @@ from Testing import ZopeTestCase
 import gocept.selenium.plonetesting.testing_plone
 from datetime import datetime
 
-
-
-
 Products.PloneTestCase.PloneTestCase.setupPloneSite(id='plone')
 
 wait_time = 3000
@@ -33,7 +30,8 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
 		
     def test_create_appointment(self):
         strBegin = strEnd = datetime.now().strftime("%Y-%m-%d")
-        
+
+        # Inicialização da instância e debug_init
 
         print "\nTeste criar consulta, SELENIUM, comecou"
         sel = self.selenium
@@ -50,48 +48,78 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
         sel.waitForPageToLoad()
         sel.click("id=user-name")
         sel.click("link=Sair")
+
+        # Acesso à nova instância
+
         sel.waitForPageToLoad()
         sel.type("id=__ac_name", "dteste")
         sel.type("id=__ac_password", "senha1")
         sel.click("name=submit")
         sel.waitForPageToLoad()
+
+        # Acessa calendário
+
         sel.click('//*[@id="portaltab-calendar"]/a')
         sel.waitForPageToLoad()
         calendarioLink = sel.getLocation()
+
+        # Clica no campo referente à data de hoje, 13:30 às 13:45, e preenche formulários
+
         sel.open("/plone/Appointments/dteste/createSFEvent?startDate=%s+13:30&endDate=%s+13:45&type_name=Visit" % (strBegin,strEnd))        
         sel.waitForPageToLoad()
-        # TODO Clean this comments one day
-        # sel.click('//*[@id="portaltab-calendar"]/a')
-        # sel.waitForPageToLoad()
-        # sel.click('//*[@id="contentview-solgemafullcalendar_view"]/a')
-        # sel.waitForPageToLoad()
-        # sel.select("id=form-widgets-defaultCalendarView", u"value=basicWeek")
-        # sel.click('id=form-buttons-apply')
-        # sel.waitForPageToLoad()
-        # sel.mouseDownAt('//*[@id="calendar"]/div[1]/div/table/tbody/tr/td[3]','')
-        # sel.mouseUp('//*[@id="calendar"]/div[1]/div/table/tbody/tr/td[3]')
-        # print "\n------>Forced Sleep: 2000 ms to create iframe"
-        # sel.pause(5000)
-        #sel.selenium.select_frame("SFEventEditIFRAME")
-        #print "\n------>Forced Sleep: 1000 ms get search_patient buttom"
-        #sel.pause(1000)
-        sel.click("id=popup_search_patient")
-        #Go to child window
-        sel.waitForPopUp("_blank")
-        sel.selectPopUp()
-        sel.type("id=searchGadget", "pte")
-        print "\n------>Forced Sleep: 2000 ms to get ajax service"
-        sel.pause(2000)
-        sel.click("class=contenttype-patient")
-        #Back to parent window
-        sel.selenium.select_window("null")
-        sel.type("id=duration", "15")
-        sel.select("id=visit_reason", u"value=outro")
-        sel.type("id=other_document_type", "Urgencia")
-        sel.select("id=insurance", u"value=outro_plano")
-        sel.type("id=other_insurance", "Salvador das Vidas")
+
+        # Preenche campo de busca pelo nome do paciente (já cadastrado) e seleciona os parametros da visita
+
+        sel.type("id=searchGadget","pte")
+        sel.pause(1000)
+        sel.click("//a[@class='contenttype-patient']")
+        sel.type("name=duration","25")
+        sel.select("id=visit_type", "label=Consulta")
+        sel.select("id=visit_reason", "label=Check up")
+        sel.select("id=insurance", "label=Unimed")
+
+        # Salva visita e verifica no calendário
+
         sel.click("name=form.button.save") 
-        sel.open(calendarioLink)        
+        sel.open(calendarioLink)
         sel.waitForPageToLoad()
         sel.assertTextPresent("Paciente Teste")
+
+        # Clica no campo referente à data de hoje, 13:45 às 14:00, e preenche formulários
+
+        sel.open("/plone/Appointments/dteste/createSFEvent?startDate=%s+13:45&endDate=%s+14:00&type_name=Visit" % (strBegin,strEnd))        
+        sel.waitForPageToLoad()
+
+        # Preenche campo de busca pelo nome do paciente não cadastrado e click em 'Adicionar Novo Paciente'
+
+        sel.type("id=searchGadget","car")
+        sel.pause(1000)
+        sel.click("//a[@class='link']")
+
+        # Preenche dados principais do novo paciente e o registra
+
+        sel.type("name=firstName","Paciente")
+        sel.type("name=lastName","Teste2")
+        sel.select('//*[@id="ahomePhone"]', "label=12")
+        sel.type('//*[@id="archetypes-fieldname-homePhone"]/input[1]', "34567890")
+        sel.select('//*[@id="amobile"]', "label=98")
+        sel.type('//*[@id="archetypes-fieldname-mobile"]/input[1]', "76543210")
+        sel.click('//*[@id="cphone_residencial"]')
+        sel.click('id=registerButton')
+        sel.pause(1000)
+
+        # A partir do novo usuárui cadastrado, preenche os dados da visita
+
+        sel.type("name=duration","25")
+        sel.select("id=visit_type", "label=Consulta")
+        sel.select("id=visit_reason", "label=Check up")
+        sel.select("id=insurance", "label=Unimed")
+
+        # Salva visita e verifica no calendário
+        
+        sel.click("name=form.button.save")
+        sel.open(calendarioLink)
+        sel.waitForPageToLoad()
+        sel.assertTextPresent("Paciente Teste2")
+
         print "\nTeste criar consulta, SELENIUM, terminou"
