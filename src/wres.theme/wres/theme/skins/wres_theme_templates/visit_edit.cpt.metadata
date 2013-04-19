@@ -1,0 +1,2 @@
+[actions]
+action.success..save = traverse_to:string:save

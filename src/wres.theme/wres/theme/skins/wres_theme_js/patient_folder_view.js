@@ -1,5 +1,5 @@
 //define the table search object, which can implement both functions and properties
-window.tableSearch = {};
+tableSearch = {};
 
 
 //initialize the search, setup the current object

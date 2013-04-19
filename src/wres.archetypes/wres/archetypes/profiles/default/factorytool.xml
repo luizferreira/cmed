@@ -10,7 +10,7 @@
 <object name="portal_factory" meta_type="Plone Factory Tool">
   <factorytypes>
     <!-- -*- extra stuff goes here -*- -->
-    <type portal_type="VisitTemp" /> <!-- TODO: Retirar a partir de 09-2012 -->
+    <!-- <type portal_type="VisitTemp" /> TODO: Retirar a partir de 09-2012 -->
     <type portal_type="Impresso" />
     <type portal_type="Template" />
     <type portal_type="TemplateFolder" />

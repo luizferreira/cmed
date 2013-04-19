@@ -6,6 +6,8 @@ class PatientSomeInfo():
 	name = ""
 	comp_name = ""
 	chartUrl = ""
+	id = ""
+	url = ""
 
 pc = context.portal_catalog
 
@@ -27,7 +29,9 @@ for brain in brains:
 	if birth:
 		patient.birth = birth.strftime('%d/%m/%Y')
 
-	patient.chartUrl = obj.absolute_url() + '/chartFolder'
+	patient.id = obj.id
+	patient.url = '/'.join(obj.getPhysicalPath())
+	patient.chartUrl = '/'.join(obj.getPhysicalPath()) + '/chartFolder'
 	patient.comp_name = strip_accents(unicode(patient.name, 'utf-8'))
 	listMetaPatients.append(patient)
 

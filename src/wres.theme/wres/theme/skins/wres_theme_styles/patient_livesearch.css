@@ -1,35 +1,3 @@
-
-#content #patient_folder ul {
-    position:relative;
-    left:-20px;
-    list-style: none outside none;
-    text-align: center;
-}
-
-#patient_folder span#ResultBox {
-    position:relative;
-    left:4%;
-    margin:0 auto;
-}
-
-#patient_folder  div#LSResult {
-    margin:0 auto;
-}
-
-#patient_folder div#portal-column-content {
-    position: relative;
-    float: left;
-    left: 100%;
-}
-
-#patient_folder div#LSResult fieldset {
-    width: 650px;
-}
-
-#patient_folder div#LSResult h2 {
-    display:none;
-}
-
-#patient_folder div#LSResult div.LSIEFix {
-    width: 470px;
+#LSResult{
+    font-size:12px;
 }

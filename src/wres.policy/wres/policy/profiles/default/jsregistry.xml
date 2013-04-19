@@ -7,7 +7,7 @@
 
  <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""
-    id="buildingblockwidget.js" inline="False"/>
+    id="visit_edit.js" inline="False"/>
 
  <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""

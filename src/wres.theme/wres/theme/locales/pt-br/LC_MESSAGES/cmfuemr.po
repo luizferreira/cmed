@@ -11753,6 +11753,9 @@ msgstr "Secretária"
 msgid "Visit"
 msgstr "Consulta"
 
+msgid "Visit Contact Phone"
+msgstr "Telefone de Contato"
+
 msgid "visit_temp_description"
 msgstr "Preencha os campos abaixo e clique em Salvar"
 

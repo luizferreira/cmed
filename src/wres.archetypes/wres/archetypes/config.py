@@ -5,7 +5,6 @@ PROJECTNAME = 'wres.archetypes'
 
 ADD_PERMISSIONS = {
     # -*- extra stuff goes here -*-
-    'VisitTemp': 'wres.archetypes: Add VisitTemp', # TODO:Retirar a partir de 09/2012
     'Impresso': 'wres.archetypes: Add Impresso',
     'Template': 'wres.archetypes: Add Template',
     'TemplateFolder': 'wres.archetypes: Add TemplateFolder',

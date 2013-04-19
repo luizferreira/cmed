@@ -222,10 +222,10 @@ function setDuration(){
     });
     $kssspinner.hide();
     jq('ul.formTabs a').click(function(event){
-      jq("iframe[name='SFEventEditIFRAME']", window.parent.document).height( jq("html").height()+30 );
+      jq("iframe[name='SFEventEditIFRAME']", window.parent.document).height("100%")
     });
     jq('select.formTabs').change(function(event){
-      jq("iframe[name='SFEventEditIFRAME']", window.parent.document).height( jq("html").height()+30 );
+      jq("iframe[name='SFEventEditIFRAME']", window.parent.document).height("100%")
     });
   
   //Ao editar uma consulta: Para enganar o validador caso o usuario coloque um start_date alem do antigo end_date,
@@ -319,8 +319,9 @@ function setDuration(){
 
       <script type="text/javascript">
         jq(document).ready(function(){
-            jq("iframe[name='SFEventEditIFRAME']", window.parent.document).height(jq('body.ajax_edition').height()+30)
+            jq("iframe[name='SFEventEditIFRAME']", window.parent.document).height("100%")
         });
+        
       </script>
 </body>
 </html>

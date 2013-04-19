@@ -32,7 +32,7 @@ class SecretaryDesktopData():
         for visit in visits:
             visit_dic = {}
             visit_dic['absolute_url'] = visit.absolute_url()
-            visit_dic['getContactPhone'] = visit.getContactPhone()
+            visit_dic['getContactPhone'] = visit.getContactPhoneVisit()
             visit_dic['getDoctor'] = visit.getDoctor()
             visit_dic['getPatient'] = visit.getPatient()
             visit_dic['getReviewState'] = visit.getReviewState()
@@ -98,8 +98,8 @@ class VisitWrapper():
     def absolute_url(self, arg=None):
         return self.brain.getURL()
     
-    def getContactPhone(self):
-        return self.brain_obj.getContactPhone()   
+    def getContactPhoneVisit(self):
+        return self.brain_obj.getContactPhoneVisit()   
     
     def getInsurance(self):
         return self.brain_obj.getInsurance()

@@ -95,7 +95,7 @@ def allow_modules():
     ModuleSecurityInfo('wres.theme.skins').declarePublic('wres_theme_custom_templates')
     ModuleSecurityInfo('wres.theme.skins').declarePublic('wres_theme_custom_images')
     ModuleSecurityInfo('wres.theme.skins').declarePublic('wres_theme_auxiliary')
-    ModuleSecurityInfo('wres.theme.skins').declarePublic('wres_theme_widgets')
+    # ModuleSecurityInfo('wres.theme.skins').declarePublic('wres_theme_widgets')
     ModuleSecurityInfo('wres.theme.skins').declarePublic('wres_theme_custom_styles')
 
 def init_tools(context):

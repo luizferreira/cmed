@@ -1,0 +1,58 @@
+
+    <metal:define define-macro="edit">
+
+        <metal:use use-macro="field_macro|context/widgets/field/macros/edit">
+
+            <metal:fill fill-slot="widget_body"
+                        tal:define="vocab python:field.Vocabulary(context);
+                                    vlen python:len(vocab);
+                                    selectionview context/@@at_selection_widget;
+                                    selection python:selectionview.getSelected(vocab, value);
+                                    format python:widget.format;
+                                    fieldName python:fieldName+':list';
+                                    uids python:same_type(value, []) and value or [value]">
+
+                <strong tal:condition="python:field.required"> 
+                  <tal:print content="python:field.widget.label" />
+                  <span class="required" title="Obrigatório" style="color: #f00;">
+                    ■
+                  </span>  
+                </strong>
+
+                <strong tal:condition="python:not field.required"> 
+                  <tal:print content="python:field.widget.label" />  
+                </strong> 
+
+                <br />                
+
+               
+
+                    <!-- MODIFICADO PELA COMMUNI -->
+                    <div id="goodMessage">
+                      <span id="patientFullName"></span>
+                    </div>
+
+                    <div style="display:none" id="badMessage">
+                      Houve um problema em selecionar o paciente, contate o suporte para solucioná-lo
+                    </div>
+                      
+                    <select style="display:none" tal:attributes="name fieldName;
+                                id fieldName;">
+
+                      <option value="no_patient" selected="selected">Procure ou Registre um Paciente&nbsp;&nbsp;</option>
+
+                     <tal:item tal:repeat="item vocab">
+                      <option selected="selected"
+                          tal:define="no_ref python: value is None and item == '';"
+                          tal:attributes="value item;
+                                  selected python:test((item in uids) or no_ref, 'selected', '')"></option>
+                     </tal:item>
+                    </select>
+
+                    <!-- MODIFICADO PELA COMMUNI -->                    
+
+            </metal:fill>
+
+        </metal:use>
+
+    </metal:define>

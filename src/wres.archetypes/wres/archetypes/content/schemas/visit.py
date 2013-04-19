@@ -13,21 +13,40 @@ from wres.brfields.content.BrFieldsAndWidgets import *
 from wres.brfields.validators import *
 
 from wres.archetypes.validators import *
-from wres.archetypes.widgets.BuildingBlocksWidget import BuildingBlocksWidget
 
 _ = MessageFactory("cmfuemr")
 
 MAIN = Schema((
 
+        # Workaround
+        # Os campos firstName e lastName estão aqui para não dar conflito no kssValidadeField
+        # ao registrar uma novo paciente. Este problema ocorre pois são usados campos do Patient
+        # no template visit_edit.pt, o kss tenta validar um campo do patient mas o contexto é a visita
+        # e assim ocorre um erro.
+        
+        StringField('firstName',
+        widget=StringWidget(
+            label=_('First Name'),
+            visible={'edit':'invisible','view':'invisible'},
+        ),
+    ),
+
+        StringField('lastName',
+            index="ZCTextIndex",
+            widget=StringWidget(
+                label=_('Last Name'),
+                visible={'edit':'invisible','view':'invisible'},
+            ),
+        ),
+
+        # Fim do workaround
+
         ReferenceField('patient',
             required = 1,
             relationship='patient',
             allowed_types=('Patient',),
-            validators = ('isValidReference',),
-            widget=BuildingBlocksWidget(label='Paciente',
-                                        blocks=({'id':'popup_search', 'value':_('Search'), 'search_template': 'popup_choose_patient'},
-                                                {'id':'popup_quick_register', 'value':_('Quick Register'), 'extra_fields':('birthDate', 'homePhone', 'mobile'), 'location':'/Patients'}),
-                                        helper_js=('buildingblockwidget.js',),
+            widget=SelectionWidget(label='Paciente',
+                                        macro_edit='visit_patient_selection_edit_macro',
                                         ),
         ),
 
@@ -39,9 +58,9 @@ MAIN = Schema((
             ),
         ),
 
-        BrPhoneField('contactPhone',
+        BrPhoneField('contactPhoneVisit',
             index=':schema',
-            widget=BrPhoneWidget(label=_('Contact Phone'),
+            widget=BrPhoneWidget(label=_('Visit Contact Phone'),
                                      description='You must enter only numbers',
                                      description_msgid='cmfuemr_help_contact_phone',
                                      i18n_domain='cmfuemr',

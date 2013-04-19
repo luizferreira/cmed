@@ -66,9 +66,9 @@
    <bound-workflow workflow_id="appointment_workflow"/>
   </type>
   <type type_id="VisitFolder"/>
-  <type type_id="VisitTemp">
+  <!-- <type type_id="VisitTemp">
    <bound-workflow workflow_id="appointment_workflow"/>
-  </type>
+  </type> -->
   <type type_id="WresAdmin"/>
  </bindings>
 </object>

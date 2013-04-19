@@ -22,7 +22,7 @@
                                             id python:'a%s' % fieldName;
                                             "
                              tal:define="vocab python:here.lstDDD();
-                                            value_ddd python:here.phoneFormat(value,'ddd');" onChange="updatePhone(this);">
+                                            value_ddd python:here.phoneFormat(value,'ddd');" onChange="updateCPhoneQuickRegister();">
 
                         <option tal:repeat="item vocab"
                                 tal:attributes="selected python:(str(item[0]) == str(value_ddd)) and 'selected' or None;
@@ -35,7 +35,7 @@
                     <input id="cphone_number"
                     tal:attributes="name python:'a%s' % fieldName;
                                     value python:here.phoneFormat(value,'phone')" 
-                                    type="text" size="8" maxlength="8" onKeyUp="updatePhone(this);" onchange="updatePhone(this);">
+                                    type="text" size="8" maxlength="8" onKeyUp="updateCPhoneQuickRegister();" onchange="updateCPhoneQuickRegister();">
 
                 </div>
 
@@ -49,7 +49,7 @@
                                         id python:'a%s' % fieldName;
                                         "
                          tal:define="vocab python:here.lstDDD();
-                                        value_ddd python:here.phoneFormat(value,'ddd');" onChange="updatePhone(this);">
+                                        value_ddd python:here.phoneFormat(value,'ddd');" onChange="updateCPhoneQuickRegister();">
 
                     <option tal:repeat="item vocab"
                             tal:attributes="selected python:(str(item[0]) == str(value_ddd)) and 'selected' or None;
@@ -61,7 +61,7 @@
                 </select>)
                 <input id="cphone_number" tal:attributes="name python:'a%s' % fieldName;
                                                           value python:here.phoneFormat(value,'phone')" 
-                        type="text" size="8" maxlength="8" onKeyUp="updatePhone(this);" onchange="updatePhone(this);">
+                        type="text" size="8" maxlength="8" onKeyUp="updateCPhoneQuickRegister();" onchange="updateCPhoneQuickRegister();">
                 
                 <input type="hidden" tal:attributes="name fieldName;
                                        value value" maxlength="10">
