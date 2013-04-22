@@ -93,3 +93,5 @@ a.contenttype-patient:active,.link:active {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
+
+div#habla_window_div { display: none !important; }
