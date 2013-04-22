@@ -60,10 +60,12 @@ class VisitFolder(folder.ATFolder):
 		return o
 
     def saveNewDataPatient(self,firstName,lastName,contactPhone):
-		# firstName = self.REQUEST.get("firstName")
+		"""
+		Return patient saved by quick register way.
+		"""
+		#firstName = self.REQUEST.get("firstName")
 		# lastName = self.REQUEST.get("lastName")
 		# contactPhone = self.REQUEST.get("contactPhone")
-
 		portal = getSite()
 		patient = self.createNewPatient()
 
@@ -76,7 +78,7 @@ class VisitFolder(folder.ATFolder):
 		
 		patient = patient.portal_factory.doCreate(patient, new_id)
 		patient.processForm()
-		return patient
+		return json.dumps({"url": "/".join(patient.getPhysicalPath()),"name": patient.getFullName()})
 
 
 		

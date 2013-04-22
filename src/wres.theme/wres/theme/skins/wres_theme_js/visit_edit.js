@@ -8,10 +8,9 @@ $(document).ready(function(){
 		firstName = $("#firstName").val()
 		lastName = $("#lastName").val()
 		contactPhone = $('input[name="contactPhone"]').val()
-		patientID = $("#patientID").val()
 		path = $("#visitFolderURL").val()
-		$.get(path + "/save_quick_patient",
-			{"firstName":firstName,"lastName":lastName,"contactPhone":contactPhone,"patientID":patientID},
+		$.get(path + "/saveNewDataPatient",
+			{"firstName":firstName,"lastName":lastName,"contactPhone":contactPhone},
 			function(data){
 				data = JSON.parse(data)
 				$("#newPatientMSG").fadeIn()
