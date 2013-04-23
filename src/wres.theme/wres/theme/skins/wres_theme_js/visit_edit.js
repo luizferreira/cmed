@@ -9,7 +9,7 @@ $(document).ready(function(){
 		lastName = $("#lastName").val()
 		contactPhone = $('input[name="contactPhone"]').val()
 		path = $("#visitFolderURL").val()
-		$.get(path + "/saveNewDataPatient",
+		$.post(path + "/saveNewDataPatient",
 			{"firstName":firstName,"lastName":lastName,"contactPhone":contactPhone},
 			function(data){
 				data = JSON.parse(data)
