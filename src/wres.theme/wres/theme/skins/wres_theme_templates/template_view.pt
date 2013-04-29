@@ -37,7 +37,7 @@
 ====================================
 -->
     <span id="print_button" style="float:right">
-        <a title="" href="javascript:print();" class="visualNoPrint">Imprimir</a>
+        <a title="" href="javascript:print();" class="visualNoPrint">Visualizar impressão</a>
     </span>
     <br/>
      <div>
