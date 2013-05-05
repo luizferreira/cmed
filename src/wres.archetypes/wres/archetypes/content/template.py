@@ -8,6 +8,7 @@ from zope.interface import implements
 from Products.Archetypes.atapi import *
 from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
+from Products.CMFCore.utils import getToolByName
 
 # -*- Message Factory Imported Here -*-
 
@@ -58,5 +59,19 @@ class Template(base.ATCTContent):
 
     def manage_afterAdd(self, item=None, container=None):
 		self.manage_permission('View management screens', [DOCTOR_ROLE, MANAGER_ROLE], acquire=False)
+
+    def getDocumentOwnerName(self):
+        """
+        Return the authors' full name.
+        """
+        user_id = self.owner_info()['id']
+
+        if user_id == "admin":
+            return "admin"
+
+        pm = getToolByName(self, "portal_membership")
+        member = pm.getMemberById(user_id)
+        return member.getProperty("fullname")
+
 
 registerType(Template, PROJECTNAME)
