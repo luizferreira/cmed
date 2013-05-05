@@ -8,6 +8,7 @@ from zope.interface import implements
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import folder
 from Products.ATContentTypes.content import schemata
+from Products.CMFCore.utils import getToolByName
 
 # -*- Message Factory Imported Here -*-
 
@@ -33,5 +34,21 @@ class TemplateFolder(folder.ATFolder):
 
     meta_type = "TemplateFolder"
     schema = TemplateFolderSchema
+
+    def getDocumentTemplates(self):
+        """
+        Search catalog for Templates. Used by the TemplateFolder view
+        (template_folder_view.pt)
+        """
+        catalog = getToolByName(self,"portal_catalog")
+        path = '/'.join(self.getPhysicalPath())
+        query = {'portal_type': 'Template', 'path': path, 'sort_on': 'sortable_title'}
+        results = catalog.searchResults(query)
+        docs = []
+        for brain in results:
+            # the getObject here is only acceptable since the view that uses
+            # this code is not linked in the system (only by URL).
+            docs.append(brain.getObject())
+        return docs
 
 atapi.registerType(TemplateFolder, PROJECTNAME)
