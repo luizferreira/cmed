@@ -33,5 +33,7 @@
     
     </genericsetup:importStep>    
 
+    <include file="upgrades.zcml" />
+
     
 </configure>
