@@ -45,7 +45,7 @@ MAIN = Schema((
             required = 1,
             relationship='patient',
             allowed_types=('Patient',),
-            widget=SelectionWidget(label='Paciente',
+            widget=ReferenceWidget(label='Paciente',
                                         macro_edit='visit_patient_selection_edit_macro',
                                         ),
         ),
