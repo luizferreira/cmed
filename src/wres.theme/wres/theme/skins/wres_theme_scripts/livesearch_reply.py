@@ -131,8 +131,9 @@ if not results:
     write('''<h2 id="results_title">%s</h2>''' % "Resultados")
     write('''<div class="LSIEFix">''')
     write('''<div id="LSNothingFound">%s</div>''' % ts.translate(label_no_results_found, context=REQUEST))
-    if building_search:
-        write('''<div><a class="link" onClick="createPatient()">Adicionar Novo Paciente</a></div>''')
+    # esse link foi colocado estaticamente na propria pagina.
+    # if building_search:
+    #     write('''<div><a class="link" onClick="createPatient()">Adicionar Novo Paciente</a></div>''')
     write('''<div class="LSRow">''')
     write('''</div>''')
     write('''</div>''')
@@ -218,8 +219,9 @@ else:
         # write( '<a href="%s" style="font-weight:normal">%s</a>' % ('search?SearchableText=' + searchterms, ts.translate(label_show_all, context=REQUEST)))
         write('''</li>''')
     write('''</ul>''')
-    if building_search:
-        write('''<div><a class="link" onClick="createPatient()">Adicionar Novo Paciente</a></div>''')
+    # este link foi colocado estaticamente na propria pagina.
+    # if building_search:
+    #     write('''<div><a class="link" onClick="createPatient()">Adicionar Novo Paciente</a></div>''')
     write('''</div>''')
     write('''</div>''')
 

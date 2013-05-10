@@ -3,6 +3,7 @@
 """
 
 from Products.Archetypes.atapi import *
+from Products.statusmessages.interfaces import IStatusMessage
 from zope.app.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 
@@ -98,6 +99,11 @@ class Visit(event.ATEvent):
         self.portal_workflow.doActionFor(self, 'schedule')
 
         self.setTitle(patient.Title())
+
+        # limpa a pilha de messagens e evita que apareça a mensagem "Suas alteraçoes
+        # foram salvas." fora de contexto (já que Visit é salva utilizando Ajax)
+        messages = IStatusMessage(self.REQUEST)
+        messages.show() 
 
         self.at_post_edit_script()
 
