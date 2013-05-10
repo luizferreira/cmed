@@ -56,7 +56,7 @@ def create_uemr_user(related_object, user_id, email='', fullname=''):
                 'username': user_id,
                 'email': email,
                 'fullname': fullname,
-                'related_object': '/'.join(related_object.getPhysicalPath()),
+                'related_object': '/'.join(related_object.getPhysicalPath()[2:]), # removing instance name from path.
             },
         )
     else:
@@ -67,7 +67,7 @@ def create_uemr_user(related_object, user_id, email='', fullname=''):
                 'username': user_id,
                 'email': email,
                 'fullname': fullname,
-                'related_object': '/'.join(related_object.getPhysicalPath()),
+                'related_object': '/'.join(related_object.getPhysicalPath()[2:]), # removing instance name from path.
             },
         )
     #uf.changeUser(user_id, groups=[related_object.getGroup()])

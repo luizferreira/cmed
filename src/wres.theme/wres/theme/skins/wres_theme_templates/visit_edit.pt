@@ -56,13 +56,15 @@
               </div>
 
               <div id="LSResult" style="">
-                <div class="LSShadow" id="LSShadow" style="width:80%; height: 70%; overflow-x: hidden; overflow-y:auto; margin-left:48px"></div>
+                <div class="LSShadow" id="LSShadow" style="width:80%; height: 65%; overflow-x: hidden; overflow-y:auto; margin-left:48px"></div>
               </div>
 
             </div>
 
           </form>
         </div>
+        <br />
+        <div style="font-size:14px;color:#205C90"><a class="link" onClick="createPatient()">Adicionar Novo Paciente</a></div>
       </center>
     </div>
 

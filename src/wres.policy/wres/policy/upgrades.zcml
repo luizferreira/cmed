@@ -1,0 +1,42 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="wres.policy">
+       
+<!--     <gs:upgradeStep
+        title="Upgrade CommuniMed to 0.14"
+        description="CommuniMed upgrade step"
+        source="1000"
+        destination="0.14"
+        handler=".upgrades.upgrade_to_0_14"
+        profile="wres.policy:default" /> -->
+
+
+    <genericsetup:upgradeSteps
+        source="*"
+        destination="0.14"
+        profile="wres.policy:default">
+
+        <genericsetup:upgradeStep
+            title="Run all import steps"
+            description="Run all import steps"
+            handler=".upgrades.0_14.reinstall_wres"/>
+
+        <genericsetup:upgradeStep
+            title="'Delete Objects' for doctors in 'Modelos'"
+            description="Assigning a permission"
+            handler=".upgrades.0_14.assign_permission"/>
+
+        <genericsetup:upgradeStep
+            title="'Delete Objects' for doctors in 'Arquivos Externos'"
+            description="Assigning a permission"
+            handler=".upgrades.0_14.assign_permission2"/>
+
+        <genericsetup:upgradeStep
+            title="New field chartSystemID"
+            description="Fill chartSystemID field in old patients and PatientFolder"
+            handler=".upgrades.0_14.chart_system_id_update"/>            
+
+    </genericsetup:upgradeSteps>
+       
+</configure>
