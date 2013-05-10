@@ -1,3 +1,5 @@
+<tal:block metal:define-macro="master"
+           >
 <html xmlns="http://www.w3.org/1999/xhtml"
   xml:lang="en"
   lang="en"
@@ -6,6 +8,7 @@
   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
   i18n:domain="plone">
 
+
   <metal:head define-macro="topslot">
     <link rel="stylesheet" type="text/css" href="visit_edit.css" />
     <link rel="stylesheet" type="text/css" href="patient_livesearch.css" />
@@ -13,7 +16,6 @@
 
 
  <metal:head define-macro="javascript_head">
-   <script type="text/javascript" src="visit_edit.js"></script>
    <script type="text/javascript" src="patient_cphone_edit.js"></script>
  </metal:head>
 
@@ -109,3 +111,4 @@
  </body>
 
 </html>
+</tal:block>
