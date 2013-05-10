@@ -68,6 +68,7 @@ function getAttributesFromRemoteObj(path, attrs, handler){
 function populate(title, path){
 //	alert("Funcao: " + "populate\n" + "title: " + title + "\n" + "path: " + path);
     var handler = function(result){
+
 		addOption(document, 'patient:list', title, result.UID);
 		selectOption(document, 'patient:list', result.UID);
 	    setTextElement(document, 'contactPhone', result.getContactPhone);
