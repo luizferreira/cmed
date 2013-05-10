@@ -1,7 +1,27 @@
 # coding=utf-8
-# from Products.CMFCore.utils import getToolByName
 
-default_profile = 'profile-wres.policy:default'
+def chart_system_id_update(context):
+    print "Preenchendo o campo chartSystemID nos pacientes antigos"
+
+    patient_folder = context.Patients
+    patient_folder.setLastChartSystemID(0)
+    
+    catalog = context.portal_catalog
+    query = dict(meta_type="Patient", sort_on="created")
+    brains = catalog.searchResults(query)
+    import ipdb; ipdb.set_trace()
+    for b in brains:
+        print b.getPath()
+        obj = b.getObject()
+        nextChartSystemID = patient_folder.getLastChartSystemID() + 1
+        obj.setChartSystemID(nextChartSystemID)
+        patient_folder.setLastChartSystemID(nextChartSystemID)        
+        obj.reindexObject()
+    
+    patient_folder.reindexObject()
+
+    print "..."
+    print "Pronto!\n"
 
 def assign_permission(context):
     print "Médicos precisam ter 'Delete Objects' em 'Modelos'"

@@ -18,6 +18,11 @@
         profile="wres.policy:default">
 
         <genericsetup:upgradeStep
+            title="Run all import steps"
+            description="Run all import steps"
+            handler=".upgrades.0_14.reinstall_wres"/>
+
+        <genericsetup:upgradeStep
             title="'Delete Objects' for doctors in 'Modelos'"
             description="Assigning a permission"
             handler=".upgrades.0_14.assign_permission"/>
@@ -28,9 +33,9 @@
             handler=".upgrades.0_14.assign_permission2"/>
 
         <genericsetup:upgradeStep
-            title="Run all import steps"
-            description="Run all import steps"
-            handler=".upgrades.0_14.reinstall_wres"/>
+            title="New field chartSystemID"
+            description="Fill chartSystemID field in old patients and PatientFolder"
+            handler=".upgrades.0_14.chart_system_id_update"/>            
 
     </genericsetup:upgradeSteps>
        
