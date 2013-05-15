@@ -44,6 +44,9 @@
 
 	</li>
 	<li><br/>
+		<p class="subtitle_menu"><a tal:attributes="href python: 'http://localhost:80/' + context.getBackupLink()">Download Backup.</a></p>
+	</li>
+	<li><br/>
 		<p class="subtitle_menu">Visite o nosso site:</p>
 		<p>
 			<a target="_blank" href="http://communimed.com.br/" title="Site CommuniMed">www.communimed.com.br</a>
