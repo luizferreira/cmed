@@ -344,7 +344,7 @@ class PatientHandler(BaseHandler):
         self.write('address2 ', obj.getAddress2())
         self.write('city ', obj.getCity())
         self.write('state ', obj.getState())
-        self.write('chart ', obj.getChart())
+        self.write('chart ', obj.getChartSystemID())
         doctor = obj.getDoctor()
         if doctor is not None:
             self.write('doctor ', doctor.getId())
