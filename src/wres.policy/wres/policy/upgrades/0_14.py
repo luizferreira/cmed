@@ -9,7 +9,6 @@ def chart_system_id_update(context):
     catalog = context.portal_catalog
     query = dict(meta_type="Patient", sort_on="created")
     brains = catalog.searchResults(query)
-    import ipdb; ipdb.set_trace()
     for b in brains:
         print b.getPath()
         obj = b.getObject()
