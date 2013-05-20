@@ -32,7 +32,7 @@
 			</p>
 		</div>
 	</div>
-<ul class="help_navigation" style="list-style-type: none;">
+<ul class="help_navigation" style="list-style-type: none;" tal:define="bkpLink context/getBackupLink">
 	<li>
 		<h3 class="title_menu">+ Ajuda</h3><br/>
 	</li>
@@ -43,8 +43,8 @@
 		</p>
 
 	</li>
-	<li><br/>
-		<p class="subtitle_menu"><a tal:attributes="href python: 'http://localhost:80/' + context.getBackupLink()">Download Backup.</a></p>
+	<li tal:condition="bkpLink"><br/>
+		<p class="subtitle_menu"><a tal:attributes="href python: 'http://localhost:80/' + bkpLink">Download Backup.</a></p>
 	</li>
 	<li><br/>
 		<p class="subtitle_menu">Visite o nosso site:</p>

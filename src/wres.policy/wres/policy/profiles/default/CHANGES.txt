@@ -23,3 +23,10 @@ o Other improvements
 - Nothing
 
 \* Mudanças perceptíveis ao usuário.
+
+0.15.0 (2014-05-15)
+===================
+
+o Functionalities
+- Backup
+
