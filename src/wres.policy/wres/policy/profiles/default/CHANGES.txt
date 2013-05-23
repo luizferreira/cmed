@@ -2,6 +2,14 @@
 Change log for CommuniMed
 =====================================
 
+0.14.1 (2013-05-23)
+===================
+
+o Bugfixes
+
+- Problema na edição de Visita. [luizferreira]
+- Botão "Excluir Selecinado" não aparecia em Upload. [luizferreira]
+
 0.14.0 (2013-03-28)
 ===================
 
