@@ -56,8 +56,8 @@
                     </div>
                 </tal:for>
                 <br/>
-                <input tal:condition="python: urls[0]" type="submit" value="Excluir Selecionados"/>
-                <div class="no_files" tal:condition="not: python: urls[0]">
+                <input tal:condition="python: urls[0] or urls[1]" type="submit" value="Excluir Selecionados"/>
+                <div class="no_files" tal:condition="not: python:urls[0] or urls[1]">
                     Não há arquivos externos deste paciente
                 </div>
 

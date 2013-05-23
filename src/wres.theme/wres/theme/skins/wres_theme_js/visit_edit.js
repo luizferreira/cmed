@@ -1,34 +1,42 @@
 $(document).ready(function(){
-	$("#popup_search_patient").hide()
-	$("#popup_quick_register_patient").hide()
-	$("#visitBody").hide()
-	$("#createPatientBody").hide()
+	$("#popup_search_patient").hide();
+	$("#popup_quick_register_patient").hide();
+    /* o que será exibido depede se está editando ou adicionando uma visita,
+    caso esteja editando (URL contém 'SFAjax_base_edit'), deve-se esconder
+    a pesquisa de paciente e aparecer o formulário de edição. */
+    if(document.URL.indexOf("SFAjax_base_edit") !== -1) {
+        $("#searchPatient").hide();
+    }
+    else {
+        $("#visitBody").hide();
+    }
+	$("#createPatientBody").hide();
 
 	$("#registerButton").click(function(){
-		firstName = $("#firstName").val()
-		lastName = $("#lastName").val()
-		contactPhone = $('input[name="contactPhone"]').val()
-		path = $("#visitFolderURL").val()
+		firstName = $("#firstName").val();
+		lastName = $("#lastName").val();
+		contactPhone = $('input[name="contactPhone"]').val();
+		path = $("#visitFolderURL").val();
 		$.post(path + "/saveNewDataPatient",
 			{"firstName":firstName,"lastName":lastName,"contactPhone":contactPhone},
 			function(data){
-				data = JSON.parse(data)
-				$("#newPatientMSG").fadeIn()
-				choosePatient(data.name,data.url)
-		})
-	})
+				data = JSON.parse(data);
+				$("#newPatientMSG").fadeIn();
+				choosePatient(data.name,data.url);
+		});
+	});
 });
 
-function choosePatient(patient_name, patient_url){	
-	$("#searchPatient").hide()
-    $("#createPatientBody").hide()
-    $("#visitBody").show()
-    populate(patient_name,patient_url)
+function choosePatient(patient_name, patient_url){
+	$("#searchPatient").hide();
+    $("#createPatientBody").hide();
+    $("#visitBody").show();
+    populate(patient_name,patient_url);
 }
 
-function createPatient(){	
-	$("#searchPatient").hide()
-    $("#createPatientBody").fadeIn()
+function createPatient(){
+	$("#searchPatient").hide();
+    $("#createPatientBody").fadeIn();
 }
 
 
