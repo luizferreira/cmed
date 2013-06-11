@@ -31,7 +31,7 @@ for brain in brains:
 
 	patient.id = obj.id
 	patient.url = '/'.join(obj.getPhysicalPath())
-	patient.chartUrl = '/'.join(obj.getPhysicalPath()) + '/chartFolder'
+	patient.chartUrl = '/'.join(obj.getPhysicalPath()) + '/initChart'
 	patient.comp_name = strip_accents(unicode(patient.name, 'utf-8'))
 	listMetaPatients.append(patient)
 

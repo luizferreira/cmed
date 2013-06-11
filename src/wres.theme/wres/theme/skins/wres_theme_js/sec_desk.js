@@ -73,7 +73,7 @@ function loadPatientTip(index){
      var AmIDoctor = $("#AmIDoctor").val()
      if (AmIDoctor == 1){
         $("#patient_link"+index).qtip({
-            content: "<a href='"+patient_url+"'>Dados</a><br><a href='"+patient_url+"/chartFolder"+"'>Prontuário</a>",
+            content: "<a href='"+patient_url+"'>Dados</a><br><a href='"+patient_url+"/initChart"+"'>Prontuário</a>",
             show: {
                 event: 'click',
             },

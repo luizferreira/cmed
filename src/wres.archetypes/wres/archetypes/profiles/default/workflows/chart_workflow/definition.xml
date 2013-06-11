@@ -4,7 +4,7 @@
  <permission>Change portal events</permission>
  <permission>Modify portal content</permission>
  <permission>View</permission>
- <state state_id="ativo" title="Paciente Ativo">
+ <state state_id="ativo" title="Ativo">
   <exit-transition transition_id="desativar_patient"/>
   <permission-map name="Access contents information" acquired="True">
    <permission-role>Doctor</permission-role>
