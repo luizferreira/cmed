@@ -52,7 +52,7 @@
                         <a  class="fileLink" tal:attributes="href python:file[0]" >
                             <span class="fileName" tal:content="python:file[1]"></span>
                         </a>
-                        <input class="delete_checkbox" type="checkbox" tal:attributes="name python:file[0]" />
+                        <input class="delete_checkbox" type="checkbox" tal:attributes="name python:file[3]" />
                     </div>
                 </tal:for>
                 <br/>
