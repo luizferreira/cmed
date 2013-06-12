@@ -44,6 +44,7 @@ MEDICAL_SPECIALTIES = DisplayList((
     ('preventive', _('Preventive Medicine')), # Medicina Preventiva
     ('nephrology', _('Nephrology')), # Nefrologia
     ('neurology', _('Neurology')), # Neurologia
+    ('neurosurgery', _('Neurosurgery')), # Neurocirurgia
     ('obstetrics', _('Obstetrics & Gynecology')), # Obstetrícia e Ginecologia
     ('ophthalmology', _('Ophthalmology')), # OftalmologiaOftalmologia
     ('oncology', _('Oncology (Cancer)')), # Oncologia (Câncer)
