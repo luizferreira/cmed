@@ -121,6 +121,15 @@ class Patient(wresuser.WRESUser):
         return self._getSubObject('chartFolder')
     chartFolder = ComputedAttribute(chartFolder, 1)
 
+    def initChart(self):
+        """
+        Inicializa chartFolder_hidden e redireciona para o mesmo.
+        É a maneira correta de acessar o prontuário, caso não se tenha certeza
+        que ele já foi criado.
+        """
+        chart = self._getSubObject('chartFolder')
+        return self.REQUEST.response.redirect('/'.join(chart.getPhysicalPath()), 301)
+
 #    as duas funcoes abaixo sao necessarias no tipo Visit.
     security.declarePublic('getLastVisitDate')
     def getLastVisitDate(self, strftime='%d/%m/%Y'):

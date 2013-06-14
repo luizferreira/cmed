@@ -50,7 +50,7 @@
  <transition transition_id="inactivate" title=""
              new_state="inactive" trigger="USER"
              before_script="" after_script="">
-  <action url="javascript:askConfirmation('inactivate')" category="workflow">Desativar</action>
+  <action url="javascript:askConfirmation('inactivate')" category="workflow">Desativar Paciente</action>
   <guard>
    <guard-role>Doctor</guard-role>
    <guard-role>Secretary</guard-role>

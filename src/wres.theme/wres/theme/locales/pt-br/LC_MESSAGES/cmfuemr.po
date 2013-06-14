@@ -1220,6 +1220,10 @@ msgstr "Cirurgia Neurológica"
 msgid "Neurology"
 msgstr "Neurologia"
 
+#: vocabularies.py
+msgid "Neurosurgery"
+msgstr "Neurocirurgia"
+
 #. Default: "New"
 #: uemr_templates\diagnoses_codes_listview-search.pt
 #: uemr_templates\insurances_view.pt

@@ -21,7 +21,26 @@ function askConfirmation(inactivate){
             text:'Sim',
             class:'save',
             click: function(){
-                parent.location= document.URL + "patient_status_modify?workflow_action=inactivate";
+                index = document.URL.indexOf("chartFolder");
+                var newURL = "";
+                if (document.URL.indexOf("chartFolder_hidden") != -1) {
+                    // Desativando prontuário.
+                    patientURL = document.URL.substring(0, index);
+                    newURL = patientURL + "chartFolder_hidden/patient_status_modify?workflow_action=inactivate";
+                }
+                else {
+                    // Desativando pelo view do paciente.
+                    patientURL = document.URL;
+                    if (patientURL.charAt(patientURL.length-1) == "/") {
+                        newURL = patientURL + "patient_status_modify?workflow_action=inactivate";
+                    }
+                    else {
+                        // Caso a URL esteja 'pteste/template_view' dará um NotFound, mas isso não acontece. (hopefully)
+                        newURL = patientURL + "/patient_status_modify?workflow_action=inactivate";
+                    }
+
+                }
+                parent.location = newURL;
             }
         },
         {
