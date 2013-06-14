@@ -11,5 +11,7 @@
     <index name="getProviderId" meta_type="FieldIndex">
         <indexed_attr value="getProviderId" />
     </index>
+    <column value="getInsurance"/>
+    <column value="getVisit_reason"/>
     <column value="asc2title"/>
 </object>

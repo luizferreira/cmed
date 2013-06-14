@@ -11,105 +11,198 @@
     <metal:block fill-slot="style_slot">
         <link rel="stylesheet" type="text/css" href="generic_richtext_edit.css" />
     </metal:block>
+
+    <metal:block fill-slot="javascript_head_slot">
+        <script type="text/javascript" src="highstock.js"></script>
+        <tal:block tal:define="pCriados context/getPatientsCreated; dCriados context/getDocumentsCreated; vStatus context/getVisitsStatus; vInsurance context/getVisitsInsurance; vReason context/getVisitsReason;">
+            <script tal:content="string: var patientDados = ${pCriados}; var documentDados = ${dCriados}; var visitStatus = ${vStatus}; var visitInsurance = ${vInsurance}; var visitReason = ${vReason};"></script>
+            <script type="text/javascript">
+                for(i=0;i<patientDados.length;i++){
+                    patientDados[i][0] = patientDados[i][0]*86400000;
+                }
+                for(i=0;i<documentDados.length;i++){
+                    documentDados[i][0] = documentDados[i][0]*86400000;
+                }
+                $(document).ready(function(){
+                    $('#pCriados_graph').highcharts('StockChart', {
+                        chart: {
+                            backgroundColor: null
+                        },
+                        credits:{
+                            enabled: false
+                        },
+                        series: [{
+                            type: 'column',
+                            pointInterval: 86400000,
+                            data: patientDados,
+                            name: 'Pacientes Criados',
+                            dataGrouping: {
+                                forced: true,
+                                groupPixelWidth: 100
+                            }
+                        }]
+                    });
+
+                    $('#dCriados_graph').highcharts('StockChart', {
+                        chart: {
+                            backgroundColor: null
+                        },
+                        credits:{
+                            enabled: false
+                        },
+                        series: [{
+                            type: 'column',
+                            data: documentDados,
+                            name: 'Documentos Criados',
+                            dataGrouping: {
+                                forced: true,
+                                groupPixelWidth: 200
+                            }
+                        }]
+                    });
+
+                    $('#visitaStatusGraph').highcharts({
+                        chart: {
+                            backgroundColor: null
+                        },
+                        title: {
+                            text: 'Visitas por Status'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: false
+                                },
+                                showInLegend: true
+                            }
+                        },
+                        credits:{
+                            enabled: false
+                        },
+                        legend: {
+                            enabled: true,
+                            layout: 'vertical',
+                            useHTML: true,
+                            labelFormatter: function () {
+                                var total = 0, percentage;
+                                $.each(this.series.data, function() { 
+                                    total+=this.y;
+                                });
+                                percentage=((this.y/total)*100).toFixed(2); 
+                                return this.name +'('+ this.y+'): '+percentage+'%'; 
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            name: 'Visitas por Status',
+                            data: visitStatus
+                        }]
+                    });
+
+                    $('#visitaPlanoGraph').highcharts({
+                        chart: {
+                            backgroundColor: null
+                        },
+                        title: {
+                            text: 'Visitas por Plano de Saúde'
+                        },
+                        credits:{
+                            enabled: false
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: false
+                                },
+                                showInLegend: true
+                            }
+                        },
+                        legend: {
+                            enabled: true,
+                            maxHeight: 60,
+                            labelFormatter: function () {
+                                var total = 0, percentage;
+                                $.each(this.series.data, function() { 
+                                    total+=this.y;
+                                });
+                                percentage=((this.y/total)*100).toFixed(2); 
+                                return this.name +'('+ this.y+'): '+percentage+'%'; 
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            name: 'Visitas por Status',
+                            data: visitInsurance
+                        }]
+                    });
+
+                    $('#visitaRazaoGraph').highcharts({
+                        chart: {
+                            backgroundColor: null
+                        },
+                        title: {
+                            text: 'Visitas por Razão'
+                        },
+                        credits:{
+                            enabled: false
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: false
+                                },
+                                showInLegend: true
+                            }
+                        },
+                        legend: {
+                            enabled: true,
+                            layout: 'vertical',
+                            useHTML: true,
+                            labelFormatter: function () {
+                                var total = 0, percentage;
+                                $.each(this.series.data, function() { 
+                                    total+=this.y;
+                                });
+                                percentage=((this.y/total)*100).toFixed(2); 
+                                return this.name +'('+ this.y+'): '+percentage+'%'; 
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            name: 'Visitas por Status',
+                            data: visitReason
+                        }]
+                    });
+                });
+            </script>
+        </tal:block>
+   </metal:block>
 </head>
 
 <body>
-    <div metal:fill-slot="main"
-         tal:define="title string:Relatórios;
-                     form_data python:request.form">
-        <h1>
-            <a tal:content="string:${title}">Title</a>
-        </h1>
-        <fieldset>
-        <br/>
-        <div id="initial_buttons_div">
-            <span class="button" id="patients" style="cursor: hand; cursor: pointer">ANUAL</span> <!--- <span class="button" id="visits" style="cursor: hand; cursor: pointer">DETALHADO</span>-->
+    <div metal:fill-slot="main">
+        <div id="pCriados_div">
+            <h2>Pacientes Criados</h2>
+            <div id="pCriados_graph" height=400></div>
         </div>
-        <br/>
-            <form tal:attributes="action template/id">
-                <input type="hidden" name="form.submitted" value="1" />
-                <table class="listing width-100">
-                    <thead>
-                        <th>Item</th>
-                        <th>Índice</th>
-                        <th>Ano</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <select name="type" selected="GenericDocument">
-                                    <option value="Patient">Pacientes</option>
-                                    <option value="GenericDocument">Documentos</option>
-                                    <option value="Impresso">Impressos</option>
-                                    <option value="Visit">Consultas</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="index">
-                                    <option value="created">criados</option>
-                                    <option value="modified">modificados</option>
-                                    <option value="end">finalizados (consultas apenas)</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select name="year" tal:define="date python:int(context.getTodayDate().year());
-                                                                numeros python:xrange(0,11);">
-                                    <option  tal:repeat="numero numeros" 
-                                             tal:attributes="value python:date-numero" 
-                                             tal:content="python:date-numero">Ano</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <input id="generate" type="submit" name="form.button.save" value="Gerar Relatório" class="context"/>
-                <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
-            </form>
-            <br/>
-            <div tal:condition="python:form_data.has_key('year')">
-                <span tal:define="retorno python:context.getReportsByYear(form_data['year'], form_data['type'], form_data['index'])">
-                    <!--<span tal:define="graphic python:context.generate_anual_graphics(retorno)"> gerar gráficos futuramente-->
-                        <b><span i18n:translate="" tal:content="python:form_data['type']"></span>s
-                        <span i18n:translate="" tal:content="python:form_data['index']"></span>(as)
-                        <span i18n:translate="" tal:condition="python:form_data['type'] == ''">Resultados</span>:</b><br/>
-                        <table class="listing width-100">
-                            <tr>
-                                <th>Ano</th>
-                                <th>Total</th>
-                                <th>Jan</th>
-                                <th>Fev</th>
-                                <th>Mar</th>
-                                <th>Abr</th>
-                                <th>Mai</th>
-                                <th>Jun</th>
-                                <th>Jul</th>
-                                <th>Ago</th>
-                                <th>Set</th>
-                                <th>Out</th>
-                                <th>Nov</th>
-                                <th>Dez</th>
-                            </tr>
-                            <tr>
-                                <td tal:content="retorno/year">2010</td>
-                                <td tal:content="retorno/contador">12</td>
-                                <td tal:content="retorno/Jan">0</td>
-                                <td tal:content="retorno/Feb">0</td>
-                                <td tal:content="retorno/Mar">0</td>
-                                <td tal:content="retorno/Apr">0</td>
-                                <td tal:content="retorno/May">0</td>
-                                <td tal:content="retorno/Jun">0</td>
-                                <td tal:content="retorno/Jul">0</td>
-                                <td tal:content="retorno/Aug">0</td>
-                                <td tal:content="retorno/Sep">0</td>
-                                <td tal:content="retorno/Oct">0</td>
-                                <td tal:content="retorno/Nov">0</td>
-                                <td tal:content="retorno/Dec">0</td>
-                            </tr>
-                        </table>
-                    </span>
-                <!--</span>-->
-            </div>
-        </fieldset>  
+        <div id="dCriados_div">
+            <h2>Documentos Criados</h2>
+            <div id="dCriados_graph" height=400></div>
+        </div>
+        <div id="visitas_div">
+            <h2>Relação de Visitas por Característica</h2>
+            <center>    
+                <div id="visitaStatusGraph" style="width: 33%; height: auto; float:left" ></div>
+                <div id="visitaPlanoGraph"  style="width: 33%; height: auto; float:left" ></div>
+                <div id="visitaRazaoGraph"  style="width: 33%; height: auto; float:left" ></div>
+            </center>
+        </div>
     </div>
 </body>
 </html>
