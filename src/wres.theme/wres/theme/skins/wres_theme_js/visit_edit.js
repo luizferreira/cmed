@@ -39,8 +39,6 @@ function createPatient(){
     $("#createPatientBody").fadeIn();
 }
 
-
-
 // =========================================================================
 // PARTE DO ANTIGO buildingblockswidget.js ---------------------------------
 // =========================================================================
@@ -57,36 +55,29 @@ function triggerEvent(element, eventType, canBubble) {
     }
 }
 
-
-
 /* função faz uma requisição GET, usando json no patient.py do archetypes para pegar carregar informaçoes do mesmo. */
-function getAttributesFromRemoteObj(path, attrs, handler){
+function getAttributesFromRemoteObj(path, handler){
     var url = path + "/getInformation";
     $.get(url,function(result){
-    	result = JSON.parse(result)
-    	handler(result)
+        result = JSON.parse(result);
+        handler(result);
     });
 
 }
 
-
-
-
 /* função que controla o processo de seleção do item (e.g paciente) */
 function populate(title, path){
-//	alert("Funcao: " + "populate\n" + "title: " + title + "\n" + "path: " + path);
     var handler = function(result){
 
 		addOption(document, 'patient:list', title, result.UID);
 		selectOption(document, 'patient:list', result.UID);
-	    setTextElement(document, 'contactPhone', result.getContactPhone);
-	    updateCPhone(result.getContactPhone);
-    	setTextElement(document, 'lastOfficeVisit', result.getLastVisitDate);
-    	setTextElement(document, 'ext', result.getExt);
-    	$("#patientFullName").html(result.fullName)
-	}
-	var attrs = ['UID', 'getContactPhone', 'getLastVisitDate', 'getExt'];
-	getAttributesFromRemoteObj(path, attrs, handler);
+        setTextElement(document, 'contactPhone', result.getContactPhone);
+        updateCPhone(result.getContactPhone);
+        setTextElement(document, 'lastOfficeVisit', result.getLastVisitDate);
+        setTextElement(document, 'insurance', result.getInsurance);
+        $("#patientFullName").html(result.fullName);
+    };
+	getAttributesFromRemoteObj(path, handler);
 }
 
 /* altera o texto de um determinado elemento htlm do schema. */

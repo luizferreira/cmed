@@ -137,6 +137,10 @@ class Visit(event.ATEvent):
         # voltar ao estado inicial, para recomeçar o processo de confirmaçao, etc.
         # self.portal_workflow.doActionFor(self, 'schedule')
 
+        # preenche o campo convênio de paciente com o convênio desta visita.
+        patient = self.getPatient()
+        patient.setInsurance(self.getInsurance())
+
         #esse trecho calcula o endDate com base no startDate e na duracao da consulta.
         self.endDate = addMinutes2Date(self.start(), self.getDuration())
         self.addVisitType()

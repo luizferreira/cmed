@@ -91,7 +91,7 @@ MAIN = Schema((
 		required=False,
         vocabulary = "getInsurancesNames",
         widget = SelectionWidget(
-                label = 'Plano de Saúde',
+                label = 'Convênio',
                 macro_edit='insurance_selection_edit_macro',
                 helper_js=('insurance_selection_edit.js', ),
                 ),

@@ -7,6 +7,7 @@ from AccessControl import ClassSecurityInfo
 import json
 
 from zope.interface import implements
+from zope.app.component.hooks import getSite
 
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import schemata
@@ -37,6 +38,18 @@ class Patient(wresuser.WRESUser):
 
     security = ClassSecurityInfo()
 
+    def addInsurance(self):
+        """
+        Verifica se o convênio preenchido já existe no vocabulário. Caso não
+        exista, o mesmo é adicionado.
+        """
+        new_insurance = self.getInsurance()
+        dl = self.getInsurancesNames()
+        if new_insurance not in dl:
+            portal = getSite()
+            vt = getToolByName(portal, 'vocabulary_tool')
+            vt.add2vocabulary('insurance', new_insurance, 1, 1)
+
     def SearchableText(self):
         """
         Returns strings that can be searched by the SearchableText catalog index.
@@ -53,9 +66,29 @@ class Patient(wresuser.WRESUser):
     def getInformation(self):
         """
         Retorna um objeto do tipo json (JavaScript Object Notation).
-        Utilizado no tipo visita 
+        Utilizado no tipo visita
         """
-        return json.dumps({'fullName':self.getFullName(),'getLastDate': self.getLastVisitDate(), 'getContactPhone': self.getContactPhone(), 'UID': self.UID()})
+        return json.dumps({
+            'fullName': self.getFullName(),
+            'getLastDate': self.getLastVisitDate(),
+            'getContactPhone': self.getContactPhone(),
+            'UID': self.UID(),
+            'getInsurance': self.getInsurance(),
+        })
+
+    def getInsurancesNames(self):
+        """
+        Consulta vocabulário de convênios e retorna a lista.
+        """
+        dl = atapi.DisplayList()
+        dl.add('', '')
+        portal = getSite()
+        vt = getToolByName(portal, 'vocabulary_tool')
+        vocab_list = vt.get_vocabulary('insurance', 2)
+        for vocab in vocab_list:
+            dl.add(vocab, vocab)
+        dl.add('outro_plano', 'Outro')
+        return dl
 
     def getGroup(self):
         """
@@ -138,7 +171,7 @@ class Patient(wresuser.WRESUser):
         If it not exists return "No visits concluded"
         """
         if not hasattr(self, 'lastVisitDate'):
-            return 'No visits concluded'
+            return u"Nenhuma visita concluída anteriormente"
         else:
             return self.lastVisitDate.strftime(strftime)
 
@@ -149,7 +182,7 @@ class Patient(wresuser.WRESUser):
         Obs: O parametro "date" precisar possuir a funcao strftime()
         """
         self.lastVisitDate = date
-        if not hasattr(date,"strftime"):
+        if not hasattr(date, "strftime"):
             raise ValueError("Tipo de data invalida")
 
     def Title(self):
@@ -199,6 +232,7 @@ class Patient(wresuser.WRESUser):
         name was changed, the name will be formated.
         """
         wresuser.WRESUser.at_post_edit_script(self)
+        self.addInsurance()  # verifica se o convênio preenchido já existe no vocab
 
 
     #the 3 functions bellow are needed to create a patient user

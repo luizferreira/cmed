@@ -2,6 +2,24 @@
 Change log for CommuniMed
 =====================================
 
+0.15 (unreleased)
+===================
+
+o Functionalities
+
+- Relatórios gráficos adicionados à seção Clínica (em Administrativo). [carlosbarreto]
+
+o Bugfixes
+
+- Corrigido erro ao deletar um arquivo externo. [luizferreira]
+- Corrigido erros relacionados a desativação de um paciente [luizferreira]
+
+o Other improvements
+
+- Especialidade Neurocirurgia adicionada. [luizferreira]
+- Campo CEP de paciente posicionado junto ao endereço. [luizferreira]
+- Campo Convênio adicionado também no cadastro de paciente. [luizferreira]
+
 0.14.2 (2013-06-04)
 ===================
 

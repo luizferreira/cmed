@@ -297,6 +297,16 @@ MAIN = Schema((
         ),
     ),
 
+    StringField('insurance',
+        required=False,
+        vocabulary = "getInsurancesNames",
+        widget = SelectionWidget(
+                label = 'Convênio',
+                macro_edit='insurance_selection_edit_macro',
+                helper_js=('insurance_selection_edit.js', ),
+                ),
+    ),
+
     IntegerField('chartSystemID',
         default=0,
         index="FieldIndex:schema",
