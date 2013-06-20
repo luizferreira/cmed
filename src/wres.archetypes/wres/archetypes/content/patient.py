@@ -69,10 +69,9 @@ class Patient(wresuser.WRESUser):
         Utilizado no tipo visita
         """
         return json.dumps({
-            'fullName': self.getFullName(),
-            'getLastDate': self.getLastVisitDate(),
-            'getContactPhone': self.getContactPhone(),
             'UID': self.UID(),
+            'fullName': u"%s (%s)" % (self.getFullName(), self.getLastVisitDate()),
+            'getContactPhone': self.getContactPhone(),
             'getInsurance': self.getInsurance(),
         })
 
@@ -173,7 +172,7 @@ class Patient(wresuser.WRESUser):
         if not hasattr(self, 'lastVisitDate'):
             return u"Nenhuma visita concluída anteriormente"
         else:
-            return self.lastVisitDate.strftime(strftime)
+            return u"Última visita: %s" % self.lastVisitDate.strftime(strftime)
 
     security.declarePublic('setLastVisitDate')
     def setLastVisitDate(self, date):

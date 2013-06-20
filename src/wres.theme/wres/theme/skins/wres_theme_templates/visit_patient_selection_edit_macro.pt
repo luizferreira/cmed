@@ -12,22 +12,8 @@
                                     fieldName python:fieldName+':list';
                                     uids python:same_type(value, []) and value or [value]">
 
-                <strong tal:condition="python:field.required"> 
-                  <tal:print content="python:field.widget.label" />
-                  <span class="required" title="Obrigatório" style="color: #f00;">
-                    ■
-                  </span>  
-                </strong>
-
-                <strong tal:condition="python:not field.required"> 
-                  <tal:print content="python:field.widget.label" />  
-                </strong> 
-
-                <br />                
-
-               
-
                     <!-- MODIFICADO PELA COMMUNI -->
+
                     <div id="goodMessage">
                       <span id="patientFullName"></span>
                     </div>

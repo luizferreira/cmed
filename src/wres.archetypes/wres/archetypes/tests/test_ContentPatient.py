@@ -186,7 +186,7 @@ class TestSetup(unittest.TestCase):
         import datetime
         DATE = datetime.datetime(2009,5,25)
         patient.lastVisitDate = DATE
-        self.assertEqual('25/05/2009',patient.getLastVisitDate())
+        self.assertEqual('Última visita: 25/05/2009',patient.getLastVisitDate())
         print "Done"
     
     def test_setLastVisitDate(self):
@@ -199,13 +199,13 @@ class TestSetup(unittest.TestCase):
         try:
             patient.setLastVisitDate("03/07/1961")
         except ValueError as error:
-            self.assertEqual('Tipo de data invalida',str(error))
+            self.assertEqual('Tipo de data invalida', str(error))
             
         #Set valid date
         import datetime
         DATE = datetime.datetime(2009,4,21)
         patient.setLastVisitDate(DATE)
-        self.assertEqual('21/04/2009',patient.getLastVisitDate())
+        self.assertEqual('Última visita: 21/04/2009',patient.getLastVisitDate())
         print "Done"
     
     def test_Title(self):

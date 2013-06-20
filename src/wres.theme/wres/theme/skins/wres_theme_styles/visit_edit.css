@@ -1,9 +1,9 @@
 
 #patientFullName{
-  font-size: 17px;
-  color: rgb(0, 34, 95);
+  color: rgb(31, 91, 144);
+  font-size: 13px;
   text-decoration: underline;
-  font-weight: bold;
+  font-style: italic;
 }
 
 #searchGadget{
@@ -21,17 +21,20 @@
   color: #205C90;
   margin-left: -40px !important;
 }
+
 a.contenttype-patient:link, a.classe1:visited,.link:visited {
   text-decoration: none;
-  }
+}
+
 a.contenttype-patient:hover,.link:hover {
   text-decoration: underline; 
   color: #205C90;
   cursor: pointer;
 }
+
 a.contenttype-patient:active,.link:active {
   text-decoration: none
-  }
+}
 
 #content ul {
       list-style-type: none !important;

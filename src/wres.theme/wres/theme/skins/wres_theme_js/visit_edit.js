@@ -68,12 +68,10 @@ function getAttributesFromRemoteObj(path, handler){
 /* função que controla o processo de seleção do item (e.g paciente) */
 function populate(title, path){
     var handler = function(result){
-
 		addOption(document, 'patient:list', title, result.UID);
 		selectOption(document, 'patient:list', result.UID);
         setTextElement(document, 'contactPhone', result.getContactPhone);
         updateCPhone(result.getContactPhone);
-        setTextElement(document, 'lastOfficeVisit', result.getLastVisitDate);
         setTextElement(document, 'insurance', result.getInsurance);
         $("#patientFullName").html(result.fullName);
     };
