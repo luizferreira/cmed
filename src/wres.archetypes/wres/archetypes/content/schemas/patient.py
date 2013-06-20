@@ -272,6 +272,13 @@ MAIN = Schema((
         ),
     ),
 
+    CEPField('zipcode',
+        searchable=1,
+        widget=CEPWidget(
+            label=_('ZipCode'),
+        ),
+    ),    
+
     StringField('state',
         widget=StringWidget(
 	        label=_('State'),
@@ -347,13 +354,6 @@ COMPLEMENTAR = Schema((
     	widget=StringWidget(
 	       label=_('Indicado Por'),
 	   ),
-    ),
-
-    CEPField('zipcode',
-        searchable=1,
-        widget=CEPWidget(
-            label=_('ZipCode'),
-        ),
     ),
 
     StringField('pis_pasep',
