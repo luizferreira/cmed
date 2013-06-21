@@ -297,11 +297,13 @@ def changePortalLanguage(portal):
 def loadCIDVocabulary(portal, context):
     print "Carregando CID do arquivo CID.txt ..."
     vt = getToolByName(portal, 'vocabulary_tool')
-    CID_desc = context.readDataFile('../../CID_desc.txt')
-    CID_code = context.readDataFile('../../CID_code.txt')
+    if not vt.vocabulary_exist("CID_desc"):
+        CID_desc = context.readDataFile('../../CID_desc.txt')
+        vt.add_vocab('CID_desc', CID_desc)
+    if not vt.vocabulary_exist("CID_code"):        
+        CID_code = context.readDataFile('../../CID_code.txt')
+        vt.add_vocab('CID_code', CID_code)
     print "Inserindo CID no Portal ..."
-    vt.add_vocab('CID_desc', CID_desc)
-    vt.add_vocab('CID_code', CID_code)
 
 #===========================================================================
 # Carrega o vocabulario de tipos insurance.
@@ -309,11 +311,12 @@ def loadCIDVocabulary(portal, context):
 #===========================================================================
 def loadInsuranceVocabulary(portal):
     vt = getToolByName(portal, 'vocabulary_tool')
-    insurance = []
-    insurance.append('bradesco saude')
-    insurance.append('particular')
-    insurance.append('unimed')
-    vt.add_vocab('insurance', insurance)
+    if not vt.vocabulary_exist("insurance"):
+        insurance = []
+        insurance.append('bradesco saude')
+        insurance.append('particular')
+        insurance.append('unimed')
+        vt.add_vocab('insurance', insurance)
 
 #===========================================================================
 # Carrega o vocabulario de tipos de documentos.
@@ -321,21 +324,23 @@ def loadInsuranceVocabulary(portal):
 #===========================================================================
 def loadDocumentTypesVocabulary(portal):
     vt = getToolByName(portal, 'vocabulary_tool')
-    document_types = []
-    document_types.append('primeira consulta')
-    document_types.append('consulta')
-    document_types.append('retorno')
-    vt.add_vocab('document_types', document_types)
+    if not vt.vocabulary_exist("document_types"):
+        document_types = []
+        document_types.append('primeira consulta')
+        document_types.append('consulta')
+        document_types.append('retorno')
+        vt.add_vocab('document_types', document_types)
 
 def loadImpressoTypesVocaburary(portal):
     ''' Carrega o vocabulario de tipo de impressos '''
     vt = getToolByName(portal, 'vocabulary_tool')
-    types = []
-    types.append('atestado')
-    types.append('laudo')
-    types.append('licença')
-    types.append('pedido de exame')
-    vt.add_vocab('impresso_types', types)
+    if not vt.vocabulary_exist("impresso_types"):
+        types = []
+        types.append('atestado')
+        types.append('laudo')
+        types.append('licença')
+        types.append('pedido de exame')
+        vt.add_vocab('impresso_types', types)
 
 #===========================================================================
 # Carrega o vocabulario de tipos e da razão das visitas.
@@ -343,40 +348,47 @@ def loadImpressoTypesVocaburary(portal):
 #===========================================================================
 def loadVisitVocabularies(portal):
     vt = getToolByName(portal, 'vocabulary_tool')
-    visit_types = []
-    visit_types.append('1a consulta')
-    visit_types.append('cirurgia')
-    visit_types.append('consulta')
-    visit_types.append('retorno')
-    vt.add_vocab('visit_types', visit_types)
 
-    visit_reason = []
-    visit_reason.append('acompanhamento')
-    visit_reason.append('check up')
-    vt.add_vocab('visit_reason', visit_reason)
+    if not vt.vocabulary_exist("visit_types"):
+        visit_types = []
+        visit_types.append('1a consulta')
+        visit_types.append('cirurgia')
+        visit_types.append('consulta')
+        visit_types.append('retorno')
+        vt.add_vocab('visit_types', visit_types)
+
+    if not vt.vocabulary_exist("visit_reason"):
+        visit_reason = []
+        visit_reason.append('acompanhamento')
+        visit_reason.append('check up')
+        vt.add_vocab('visit_reason', visit_reason)
 
 #=============================================================================
 #  Carrega a versão do sistema para uma variável no vocabulary_tools
 #  Carlos
 #=============================================================================
 def loadVersionVocabulary(portal, context):
-    import string
-    vt = getToolByName(portal, 'vocabulary_tool')
-    VRS = context.readDataFile("CHANGES.txt")
+    """
+    Carrega o a versão e a data da mesma em uma propriedade do VocabularyTool.
+    Deve ser carregada independente se já existe ou não.
+    """
     print "Inserindo a versão do Portal ..."
-    VRS = VRS[string.find(VRS,'=\n\n')+3:len(VRS)-1]
-    versaoV = VRS[0:string.find(VRS,' (')]
-    dataV = VRS[string.find(VRS,' (')+2:string.find(VRS,')\n')]
-    vt.add2vocabulary('cmed_version',versaoV,0)
-    vt.add2vocabulary('cmed_data',dataV,0)
+    vt = getToolByName(portal, 'vocabulary_tool')
+    changes_data = context.readDataFile("CHANGES.txt")
+    changes_data = changes_data[changes_data.find('=\n\n')+3:len(changes_data)-1]
+    version = changes_data[0:changes_data.find(' (')]
+    version_date = changes_data[changes_data.find(' (')+2:changes_data.find(')\n')]
+    vt.add_vocab('cmed_version', version)
+    vt.add_vocab('cmed_data', version_date)
 
 def loadDEFVocabulary(portal,context):
     #Dicionario de especialidades farmaceuticas
-    vt = getToolByName(portal, 'vocabulary_tool')
     print "Carregando DEF do arquivo DEF.txt ..."
-    DEF = context.readDataFile("../../DEF.txt")
+    vt = getToolByName(portal, 'vocabulary_tool')
+    if not vt.vocabulary_exist("visit_reason"):
+        DEF = context.readDataFile("../../DEF.txt")
+        vt.add_vocab('DEF', DEF)
     print "Inserindo DEF no Portal ..."
-    vt.add_vocab('DEF', DEF)
 
 def mailHostConfiguration(portal):
     '''Configura servidor de email (mesmos campos de Configuracao do Site -> E-mail)'''

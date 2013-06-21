@@ -41,7 +41,12 @@ class VocabularyTool(SimpleItem, PropertyManager):
             self.manage_changeProperties(**{property_name: to_persist})
         else:
             self.manage_addProperty(property_name, [], 'lines')
-            self.manage_changeProperties(**{property_name: to_persist})        
+            self.manage_changeProperties(**{property_name: to_persist})
+
+    security.declarePublic('vocabulary_exist')
+    def vocabulary_exist(self, vocab_name):
+        property_name = self.__get_property_name(self.property_prefix, vocab_name)
+        return self.hasProperty(property_name)
 
     security.declarePublic('add_vocabulary')
     def add_vocab(self, new_vocab_name, new_vocab_content):

@@ -14,6 +14,7 @@ o Bugfixes
 
 - Corrigido erro ao deletar um arquivo externo. [luizferreira]
 - Corrigido erros relacionados a desativação de um paciente [luizferreira]
+- A atualização do sistema (upgradeSteps) não mais reseta os vocabulários do sistema. [luizferreira]
 
 o Other improvements
 
