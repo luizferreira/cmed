@@ -69,7 +69,6 @@ class Clinic(base.ATCTContent):
         val = []
         pc = getToolByName(self,"portal_catalog")
         for i in pc.search({"Type":"Visit"}):
-            print "|%s|" % i.getVisit_reason
             add = 1
             if i.getInsurance!="":
                 for j in range(0, len(val)):

@@ -38,7 +38,11 @@
                             name: 'Pacientes Criados',
                             dataGrouping: {
                                 forced: true,
-                                groupPixelWidth: 100
+                                groupPixelWidth: 100,
+                                units: [
+                                    ['day',[1]],
+                                    ['month',[1, 3, 6]]
+                                ]
                             }
                         }]
                     });
@@ -179,6 +183,48 @@
                             data: visitReason
                         }]
                     });
+                    // Escondendo e mostrando os graficos certos
+                    if(patientDados.length<1){
+                        $('#pCriados_div').hide();
+                    }
+                    if(documentDados.length<1){
+                        $('#dCriados_div').hide();
+                    }
+                    if((visitStatus[0][1]<1) && (visitStatus[1][1]<1) && (visitStatus[2][1]<1)){
+                        $('#visitaStatusGraph').hide();
+                    }
+                    if(visitInsurance.length<1){
+                        $('#visitaPlanoGraph').hide();
+                    }
+                    if(visitReason.length<1){
+                        $('#visitaRazaoGraph').hide();
+                    }
+                    if($('#visitaStatusGraph').is(':hidden') && $('#visitaPlanoGraph').is(':hidden') && $('#visitaRazaoGraph').is(':hidden')){
+                        $('#visitas_div').hide();
+                    }
+
+                    if($('#visitaStatusGraph').is(':visible') && $('#visitaPlanoGraph').is(':hidden') && $('#visitaRazaoGraph').is(':hidden')){
+                        $('#visitaStatusGraph').css('width','100%');
+                    }
+                    if($('#visitaStatusGraph').is(':hidden') && $('#visitaPlanoGraph').is(':visible') && $('#visitaRazaoGraph').is(':hidden')){
+                        $('#visitaPlanoGraph').css('width','100%');
+                    }
+                    if($('#visitaStatusGraph').is(':hidden') && $('#visitaPlanoGraph').is(':hidden') && $('#visitaRazaoGraph').is(':visible')){
+                        $('#visitaRazaoGraph').css('width','100%');
+                    }
+
+                    if($('#visitaStatusGraph').is(':visible') && $('#visitaPlanoGraph').is(':visible') && $('#visitaRazaoGraph').is(':hidden')){
+                        $('#visitaStatusGraph').css('width','50%');
+                        $('#visitaPlanoGraph').css('width','50%');
+                    }
+                    if($('#visitaStatusGraph').is(':hidden') && $('#visitaPlanoGraph').is(':visible') && $('#visitaRazaoGraph').is(':visible')){
+                        $('#visitaPlanoGraph').css('width','50%');
+                        $('#visitaRazaoGraph').css('width','50%');
+                    }
+                    if($('#visitaStatusGraph').is(':visible') && $('#visitaPlanoGraph').is(':hidden') && $('#visitaRazaoGraph').is(':visible')){
+                        $('#visitaStatusGraph').css('width','50%');
+                        $('#visitaRazaoGraph').css('width','50%');
+                    }
                 });
             </script>
         </tal:block>
