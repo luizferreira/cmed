@@ -17,6 +17,47 @@
         <tal:block tal:define="pCriados context/getPatientsCreated; dCriados context/getDocumentsCreated; vStatus context/getVisitsStatus; vInsurance context/getVisitsInsurance; vReason context/getVisitsReason;">
             <script tal:content="string: var patientDados = ${pCriados}; var documentDados = ${dCriados}; var visitStatus = ${vStatus}; var visitInsurance = ${vInsurance}; var visitReason = ${vReason};"></script>
             <script type="text/javascript">
+                Highcharts.setOptions({ 
+                    lang: { 
+                        months: [
+                            'Janeiro', 
+                            'Fevereiro', 
+                            'Março', 
+                            'Abril', 
+                            'Maio', 
+                            'Junho', 
+                            'Julho', 
+                            'Agosto', 
+                            'Setembro', 
+                            'Outubro', 
+                            'Novembro', 
+                            'Dezembro'
+                        ],
+                        weekdays: [
+                            'Domingo',
+                            'Segunda-feira',
+                            'Terça-feira',
+                            'Quarta-feira',
+                            'Quinta-feira',
+                            'Sexta-feira',
+                            'Sábado'
+                        ],
+                        shortMonths: [
+                            'Jan', 
+                            'Fev', 
+                            'Mar', 
+                            'Abr', 
+                            'Mai', 
+                            'Jun', 
+                            'Jul', 
+                            'Ago', 
+                            'Set', 
+                            'Out', 
+                            'Nov', 
+                            'Dez'
+                        ]
+                    }
+                });
                 for(i=0;i<patientDados.length;i++){
                     patientDados[i][0] = patientDados[i][0]*86400000;
                 }
@@ -33,18 +74,23 @@
                         },
                         series: [{
                             type: 'column',
-                            pointInterval: 86400000,
                             data: patientDados,
                             name: 'Pacientes Criados',
                             dataGrouping: {
                                 forced: true,
-                                groupPixelWidth: 100,
-                                units: [
-                                    ['day',[1]],
-                                    ['month',[1, 3, 6]]
+                                groupPixelWidth: 200,
+                                units : [
+                                    ['month',[1]]
                                 ]
                             }
-                        }]
+                        }],
+                        xAxis: {
+                            type: 'datetime',
+                            dateTimeLabelFormats: {
+                                month: '%b',
+                            },
+                            tickInterval: 86400000 * 31
+                        }
                     });
 
                     $('#dCriados_graph').highcharts('StockChart', {
@@ -60,9 +106,19 @@
                             name: 'Documentos Criados',
                             dataGrouping: {
                                 forced: true,
-                                groupPixelWidth: 200
+                                groupPixelWidth: 200,
+                                units : [
+                                    ['month',[1]]
+                                ]
                             }
-                        }]
+                        }],
+                        xAxis: {
+                            type: 'datetime',
+                            dateTimeLabelFormats: {
+                                month: '%b',
+                            },
+                            tickInterval: 86400000 * 31
+                        }
                     });
 
                     $('#visitaStatusGraph').highcharts({

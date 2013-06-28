@@ -72,7 +72,6 @@ class Clinic(base.ATCTContent):
             add = 1
             if i.getInsurance!="":
                 for j in range(0, len(val)):
-                    print "%d, %d" % (j, len(val))
                     if val[j][0] == i.getInsurance:
                         val[j][1]+= 1
                         add = 0
@@ -86,11 +85,9 @@ class Clinic(base.ATCTContent):
         val = []
         pc = getToolByName(self,"portal_catalog")
         for i in pc.search({"Type":"Visit"}):
-            print "|%s|" % i.getVisit_reason
             add = 1
             if i.getVisit_reason!="":
                 for j in range(0, len(val)):
-                    print "%d, %d" % (j, len(val))
                     if val[j][0] == i.getVisit_reason:
                         val[j][1]+= 1
                         add = 0
