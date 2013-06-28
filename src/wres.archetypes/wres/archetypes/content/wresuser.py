@@ -107,13 +107,6 @@ class WRESUser(folder.ATFolder):
             subclasses.
         """
 
-    def getParsedLastName(self):
-        """
-        Utilizado para indexar o parsedLastName do tipo
-        """
-        from wres.policy.utils.utils import do_transformation
-        return do_transformation(self.getLastName())
-
 #    Se for patient, o login sera luizfonseca, senao sera lfonseca.
 #    No estagio atual, falta modificar o title. No membership ja
 #    esta criando um usuario com a id certa.

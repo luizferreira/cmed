@@ -21,14 +21,6 @@
             results python:context.portal_catalog.searchResults({'meta_type': meta_type});
             start python:int(path('request/start | nothing') or 0);
             batch python:modules['ZTUtils'].Batch(results, size=50, start=start);">
-            <!-- searchableText request/searchableText | string:;
-            searchableTextt python:searchableText;
-            meta_type string:Doctor;
-            results python:context.portal_catalog.searchResults({'meta_type': meta_type, 'getParsedLastName': searchableTextt});
-            start python:int(path('request/start | nothing') or 0);
-            batch python:modules['ZTUtils'].Batch(results, size=25, start=start);
-            previous python:batch.previous;
-            next python:batch.next;"> -->
         <h1>
             <a i18n:translate="" tal:content="string:${title}">Title</a>
         </h1>
