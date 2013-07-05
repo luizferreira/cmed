@@ -37,8 +37,8 @@
                                 <td tal:content="python:document.getDoctor().Title()">Doutor Teste</td>
 
                                 <td>
-                                    <span tal:define="date document/creation_date"
-                                          tal:content="python:date.strftime('%d/%m/%Y - %H:%M')">
+                                    <span tal:define="date document/getDateOfVisit"
+                                          tal:content="python:date.strftime('%d/%m/%Y')">
                                         09/26/2005
                                     </span>
                                 </td>

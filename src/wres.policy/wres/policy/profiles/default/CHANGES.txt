@@ -23,6 +23,7 @@ o Other improvements
 - Patch de seguraça 2013-06-18 aplicado. (Build) [luizferreira]
 - Campo Convênio adicionado também no cadastro de paciente. [luizferreira]
 - Informação da última visita adicionado no cadastro de visitas. [luizferreira]
+- Data mostrada na pasta de Documentos agora é a data da visita. [luizferreira]
 
 0.14.2 (2013-06-04)
 ===================
