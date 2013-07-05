@@ -131,7 +131,7 @@ function add_form_row(){
                                 'tal:attributes="value data/value | nothing" />'+
                             '</td>'+
                             '<td>'+
-                                '<input id="date_form'+counter+'"' +' type="text" name="date_form'+counter+'"' +' size="7"'+
+                                '<input id="date_form'+counter+'"' +' type="text" name="date_form'+counter+'"' +
                                 'tal:attributes="value data/date | python:context.getTodayDate().strftime('+"'%d/%m/%Y'" + ')"/>' +
                             '</td>'+
                         '</tr>"'

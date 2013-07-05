@@ -1,6 +1,9 @@
+# coding=utf8
+
 """Definition of the ChartFolder content type
 """
 
+from DateTime import DateTime
 from zope.interface import implements
 
 from Products.Archetypes import atapi
@@ -65,6 +68,38 @@ class ChartFolder(folder.ATFolder):
     
 #    def at_post_create_script(self):
 #        self.create_hidden_object('upload', 'Upload', 'Folder')
+
+    def listExams(self):
+        """
+        Retorna uma lista de exames (usado por show_exams e chart_summary).
+        """
+
+        def str2DateTime(date):
+            """
+            Trasforma '31/01/2013' em um objetivo Datetime() correspondente.
+            """
+            # trasforma "31/01/2013" em "01/31/2013", formato US, que é usado
+            # pelo DateTime.
+            date = date[3:6] + date[:3] + date[-4:]
+            return DateTime(date)
+
+        def exam_cmp(exam1, exam2):
+            """
+            used for sorting exams by date.
+            """
+            date1 = str2DateTime(exam1["date"])
+            date2 = str2DateTime(exam2["date"])
+            if date1 < date2:
+                return -1
+            if date1 == date2:
+                return 0
+            else:
+                return 1
+
+        labs = self.chart_data.get_entry('laboratory').values()
+        labs = [exam["data"] for exam in labs]
+        labs.sort(cmp=exam_cmp)
+        return labs
         
     def manage_afterAdd(self, item=None, container=None):
         """ Essa funcao e' chamada logo apos a adicao (addChartFolder) de um archetype """ 

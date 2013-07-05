@@ -60,7 +60,7 @@
                                     tal:attributes="value data/value | nothing" />
                             </td>
                             <td>
-                                <input id="date_form0" type="text" name="date_form0" size="7"
+                                <input id="date_form0" type="text" name="date_form0"
                                     tal:attributes="value data/date | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
                             </td>
                         </tr>
@@ -73,7 +73,7 @@
             </form>
         </fieldset>
     </div>
-    <div tal:define="exams context/getExamsData" tal:condition="exams">
+    <div tal:define="exams context/listExams" tal:condition="exams">
         <fieldset class="cmed">
             <legend i18n:translate="cmfuemr_description_exams">Exames Registrados</legend>
             <table class="listing width-100">

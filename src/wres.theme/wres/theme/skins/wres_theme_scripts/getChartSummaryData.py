@@ -87,7 +87,7 @@ if not authorize:
 result = {}
 result['problems'] = context.getProblemListData()
 result['medications'] = context.getShowMedicationsData()
-result['laboratory'] = context.getExamsData()
+result['laboratory'] = context.listExams()
 result['events'] = context.get_events()
 result['documents_list'] = getNewDocumentsList()
 result['impressos_list'] = getImpressoList()
