@@ -119,6 +119,14 @@ INFO = Schema((
        ),
     ),
 
+   ImageField('logo',
+       max_size=(160,160),
+       widget=ImageWidget(
+           label='Logo da Clínica',
+           description='Imagem usada em documentos impressos.'
+        ),
+   ),
+
 ))
 
 set_schemata_properties(INFO, schemata='Informacoes da Clinica')

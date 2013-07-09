@@ -31,7 +31,15 @@ Use header without patient_info
 -->
 
 <metal:def define-macro="header">
-  <img class="document_clinic_logo" tal:attributes="src python: str(context.absolute_url()) + '/logo.png'" style="max-height:50px" />
+  
+  <tal:if condition="context/Clinic/getLogo">
+    <img class="document_clinic_logo" tal:attributes="src python:str(context.absolute_url()) + '/Clinic/logo'" style="max-height:75px; max-width:200px;" />
+  </tal:if>
+
+  <tal:if condition="not: context/Clinic/getLogo">
+    <img class="document_clinic_logo" tal:attributes="src python: str(context.absolute_url()) + '/logo.png'" style="max-height:75px; max-width:200px;" />
+  </tal:if>
+
   <center>
    <!--
     ====================================
@@ -42,8 +50,10 @@ Use header without patient_info
     <div tal:define="clinicData python:context.getClinic();">
       <div class="clinic_title"
       tal:content="clinicData/getName | nothing" >CARDIOLOGY ASSOCIATES OF FLORIDA</div>
-      <div class="clinic_subtitle"
-      tal:content="clinicData/getEndereco | nothing">7715 SW 71th STREET, SUITE 101- NEW YORK, FL 66286</div>
+      <div class="clinic_subtitle" tal:condition="clinicData/getStreet">
+        <span tal:content="clinicData/getStreet | nothing">Av. Afonso Pena </span>, 
+        <span tal:content="clinicData/getNumber"> 1500 </span>
+      </div>
       <div class="clinic_phone" tal:condition="clinicData/getPhone">
         <b>Telefone:</b>
            <metal:macro use-macro="python:clinicData.widget('phone',mode='view')"> </metal:macro>

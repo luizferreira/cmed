@@ -47,8 +47,10 @@
      <div>
             <div class="clinic_title"
                     tal:content="clinicData/getName | nothing" >CARDIOLOGY ASSOCIATES OF FLORIDA</div>
-            <div class="clinic_subtitle"
-                    tal:content="clinicData/getEndereco | nothing">7715 SW 71th STREET, SUITE 101- NEW YORK, FL 66286</div>        
+            <div class="clinic_subtitle" tal:condition="clinicData/getStreet">
+                <span tal:content="clinicData/getStreet | nothing">Av. Afonso Pena </span>, 
+                <span tal:content="clinicData/getNumber"> 1500 </span>
+            </div>       
             <div class="clinic_phone">
                 Telefone: <metal:macro use-macro="python:clinicData.widget('phone',mode='view')"> </metal:macro> 
                 <span tal:condition="python:clinicData.getFax() != ''">
