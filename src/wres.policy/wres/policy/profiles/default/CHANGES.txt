@@ -15,6 +15,7 @@ o Bugfixes
 - Corrigido erro ao deletar um arquivo externo. [luizferreira]
 - Corrigido erros relacionados a desativação de um paciente [luizferreira]
 - A atualização do sistema (upgradeSteps) não mais reseta os vocabulários do sistema. [luizferreira]
+- Corrigido erro ao cadastrar paciente com acento no nome pelo registro rápido do calendário. [luizferreira]
 
 o Other improvements
 

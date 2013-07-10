@@ -70,7 +70,7 @@ class Patient(wresuser.WRESUser):
         """
         return json.dumps({
             'UID': self.UID(),
-            'fullName': u"%s (%s)" % (self.getFullName(), self.getLastVisitDate()),
+            'fullName': "%s (%s)" % (self.getFullName(), self.getLastVisitDate()),
             'getContactPhone': self.getContactPhone(),
             'getInsurance': self.getInsurance(),
         })
@@ -170,9 +170,9 @@ class Patient(wresuser.WRESUser):
         If it not exists return "No visits concluded"
         """
         if not hasattr(self, 'lastVisitDate'):
-            return u"Nenhuma visita concluída anteriormente"
+            return "Nenhuma visita concluída anteriormente"
         else:
-            return u"Última visita: %s" % self.lastVisitDate.strftime(strftime)
+            return "Última visita: %s" % self.lastVisitDate.strftime(strftime)
 
     security.declarePublic('setLastVisitDate')
     def setLastVisitDate(self, date):
