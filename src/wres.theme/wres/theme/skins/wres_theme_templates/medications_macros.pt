@@ -5,6 +5,13 @@
                 error_message errors/error_message | nothing"     
     i18n:domain="cmfuemr">
 
+    <style>
+        form#add_medication table td {
+            background: #DDD;
+            padding-right: 30px;
+        }
+    </style>
+
     <!-- portal status message -->
     <dl class="portalMessage info"
         tal:condition="portal_status_msg"> 
@@ -20,10 +27,10 @@
       <a tal:attributes="href string: ${portal_url}?tourId=7_d_criar_imprimir_prescricoes-gerando-e&skinId=sunburst" class="btn btn-info">Aprenda +</a>
     </div>
     <fieldset class="cmed">
-        <legend> Medicamento </legend>        
-        <form tal:attributes="action template/id">
+        <legend> Novo Medicamento </legend>        
+        <form id="add_medication" tal:attributes="action template/id">
             <input type="hidden" name="form.submitted" value="1" />
-            <table class="listing width-100">
+            <table class="listing width-100 nosort">
                 <thead>
                     <th>Medicamento</th>
                     <th>Concentração</th>
@@ -34,26 +41,29 @@
                 <tbody>
                     <tr>
                         <td tal:define="vocab context/getDEF">
-                            <input type="text" name="medication" autocomplete="off"
+                            <input class="width-100" type="text" name="medication" autocomplete="off"
                                 tal:attributes="value data/medication | nothing;
                                 onkeyup string:actb(this, event, ${vocab})" />
                         </td>
                         <td>
-                            <input type="text" name="concentration" size="7"
+                            <input class="width-100" type="text" name="concentration"
                                 tal:attributes="value data/concentration | nothing" />
                         </td>
                         <td>
-                            <input type="text" name="quantity" size="10"
+                            <input class="width-100" type="text" name="quantity"
                                 tal:attributes="value data/quantity | nothing" />
                         </td>
                         <td>
-                            <input type="text" id="use" name="use"
-                                tal:attributes="value data/use | nothing"/>
+                            <select class="width-100" name="use_type"
+                                tal:attributes="value data/use_type | nothing">
+                                <option value="internal"> Interno </option>
+                                <option value="external"> Externo </option>
+                            </select>
                             <input type="hidden" name="start" size="7"
                                 tal:attributes="value data/start | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
                         </td>
                         <td>
-                            <select name="status">
+                            <select class="width-100" name="status">
                             <option value="active">Prescrito</option>
                             <option value="inactive">Histórico</option>
                             </select>
@@ -61,6 +71,21 @@
                     </tr>
                 </tbody>
             </table>
+
+            <table class="listing width-100 nosort">
+                <thead>
+                    <th>Instruções</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input class="width-100" type="text" id="use" name="use"
+                                tal:attributes="value data/use | nothing"/>                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
             <metal:buttons define-slot="buttons">
                 <input id="add_new" type="submit" name="form.button.save" value="Adicionar Medicamento" class="context"/>
                 <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
@@ -76,6 +101,13 @@
                 error_message errors/error_message | nothing"     
     i18n:domain="cmfuemr">
 
+    <style>
+        form#edit_medication table td {
+            background: #DDD;
+            padding-right: 30px;
+        }
+    </style>    
+
     <!-- portal status message -->
     <dl class="portalMessage info"
         tal:condition="portal_status_msg"> 
@@ -90,7 +122,7 @@
 
     <fieldset class="cmed">
         <legend> Medicamento </legend>        
-        <form tal:attributes="action template/id">
+        <form id="edit_medication" tal:attributes="action template/id">
             <input type="hidden" name="form.submitted" value="1" />
             <table class="listing width-100">
                 <thead>
@@ -102,27 +134,45 @@
                 <tbody>
                     <tr>
                         <td tal:define="vocab context/getDEF">
-                            <input type="text" name="medication" autocomplete="off"
+                            <input class="width-100" type="text" name="medication" autocomplete="off"
                                 tal:attributes="value data/medication | nothing;
                                 onkeyup string:actb(this, event, ${vocab})" />
                         </td>
                         <td>
-                            <input type="text" name="concentration" size="7"
+                            <input class="width-100" type="text" name="concentration"
                                 tal:attributes="value data/concentration | nothing" />
                         </td>
                         <td>
-                            <input type="text" name="quantity" size="10"
+                            <input class="width-100" type="text" name="quantity"
                                 tal:attributes="value data/quantity | nothing" />
                         </td>
                         <td>
-                            <input type="text" id="use" name="use"
-                                tal:attributes="value data/use | nothing"/>
-                            <input type="hidden" name="start" size="7"
+                            <select class="width-100" name="use_type"
+                                tal:attributes="value data/use_type | nothing">
+                                <option value="internal"> Interno </option>
+                                <option value="external"> Externo </option>
+                            </select>
+                            <input type="hidden" name="start"
                                 tal:attributes="value data/start | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
                         </td>
                     </tr>
                 </tbody>
             </table>
+
+            <table class="listing width-100 nosort">
+                <thead>
+                    <th>Instruções</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input class="width-100" type="text" id="use" name="use"
+                                tal:attributes="value data/use | nothing"/>                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
             <metal:buttons define-slot="buttons">
                 <input id="add_new" type="submit" name="form.button.save" value="Adicionar Medicamento" class="context"/>
                 <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />

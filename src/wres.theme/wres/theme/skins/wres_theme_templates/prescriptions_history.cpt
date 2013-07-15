@@ -1,7 +1,6 @@
 <metal:history define-macro="history" tal:define="template_data context/getPrescriptionsData" i18n:domain="cmfuemr">
     
     <h1>Histórico de Prescrições</h1>
-    <br />
     <fieldset class="cmed">
     <legend> Prescrições </legend>    
     
