@@ -101,11 +101,11 @@ Use header without patient_info
 -->
  <span class="lineSignature">_________________________</span> <br>
     
-    Criado por <span class="doctor" style="font-weight:bold" tal:content="doctor_name | nothing" i18n:translate="">
+    <span class="doctor" style="font-weight:bold" tal:content="doctor_name | nothing" i18n:translate="">
     <span>Nome do Doutor</span>
     </span><br/> 
     <label style="display:none" tal:content="document_date" id="doc_date">Data</label>
-      <div class="date"></div>
+    <div class="date"></div>
 </metal:def>
   <!--
 ====================================

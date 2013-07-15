@@ -107,10 +107,10 @@ Document Footer
 <br />
     <span class="lineSignature">_________________________</span> <br>
     
-    Criado por <span class="doctor" tal:content="doctor_name" i18n:translate="">
+    <span class="doctor" tal:content="doctor_name" i18n:translate="">
     Nome do Doutor
     </span><br>
-    Data da Criação: <span tal:content="python:context.creation_date.strftime('%d/%m/%Y')">Data de criação</span>
+    <div class="date"></div>
     
     </metal:body_macro>
 

@@ -27,6 +27,7 @@ o Other improvements
 - Data mostrada na pasta de Documentos agora é a data da visita. [luizferreira]
 - Exames ordenados corretamente de acordo com a data. [luizferreira]
 - Possibilidade de inserir logo da clínica. [luizferreira]
+- Texto "Criado por" retirado do rodapé dos documentos. [luizferreira]
 
 0.14.2 (2013-06-04)
 ===================
