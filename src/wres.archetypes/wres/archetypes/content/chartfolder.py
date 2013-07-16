@@ -100,7 +100,38 @@ class ChartFolder(folder.ATFolder):
         labs = [exam["data"] for exam in labs]
         labs.sort(cmp=exam_cmp)
         return labs
-        
+
+    def printPrescriptionMedicationsData(self, pid):
+        """
+        o Calcula a largura da linha (conjunto de underscores) na prescrição.
+        o Agrupa os medicamentos em Uso interno e externo.
+        """
+        prescription = self.chart_data.get_entry_item(pid, 'prescriptions')
+
+        # calcula o valor da largura do maior campo concentração entre os
+        # medicamentos da prescrição.
+        max_quantity_len = 0
+        for medication in prescription['data']['medications']:
+            if len(medication['data']['quantity']) > max_quantity_len:
+                max_quantity_len = len(medication['data']['quantity'])
+
+        def undescore_len(medication):
+            max_line_size = 65
+            undescore_len = max_line_size - max_quantity_len
+            undescore_len -= len(medication['data']['medication'])
+            undescore_len -= len(medication['data']['concentration'])
+
+            return undescore_len
+
+        medications = {"externos": [], "internos": []}
+        for medication in prescription['data']['medications']:
+            if medication['data']['use_type'] == "Externo":
+                medications["externos"].append((medication, undescore_len(medication)))
+            else:
+                medications["internos"].append((medication, undescore_len(medication)))
+
+        return medications
+
     def manage_afterAdd(self, item=None, container=None):
         """ Essa funcao e' chamada logo apos a adicao (addChartFolder) de um archetype """ 
         self.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)

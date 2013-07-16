@@ -5,10 +5,10 @@
 	
     <head>
             <metal:javascript_slot fill-slot="javascript_head_slot">
-                    <script type="text/javascript" src="js/general_format.js"
+<!--                     <script type="text/javascript" src="js/general_format.js"
                             tal:attributes="src string:${portal_url}/uemr_widgets/js/general_format.js"></script>
                     <script type="text/javascript" src="js/birthdate_format.js"
-                            tal:attributes="src string:${portal_url}/uemr_widgets/js/birthdate_format.js"></script>
+                            tal:attributes="src string:${portal_url}/uemr_widgets/js/birthdate_format.js"></script> -->
                     <script type="text/javascript" src="show_problems.js"></script>
             </metal:javascript_slot>
             

@@ -58,9 +58,9 @@ INFO = Schema((
         ),
     ),
 
-    IntegerField('number',
-        validators = ('isInt',),
-        widget=IntegerWidget(
+    StringField('number',
+        # validators = ('isInt',),
+        widget=StringWidget(
             label='Número',
         ),
     ),
@@ -120,10 +120,10 @@ INFO = Schema((
     ),
 
    ImageField('logo',
-       max_size=(160,160),
+       max_size=(1600,160),
        widget=ImageWidget(
            label='Logo da Clínica',
-           description='Imagem usada em documentos impressos.'
+           description='A imagem será colocada no cabeçalho dos documentos impressos. Largura: 845px; Altura: 75px.'
         ),
    ),
 

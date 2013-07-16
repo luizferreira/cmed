@@ -56,8 +56,8 @@
                         <td>
                             <select class="width-100" name="use_type"
                                 tal:attributes="value data/use_type | nothing">
-                                <option value="internal"> Interno </option>
-                                <option value="external"> Externo </option>
+                                <option value="Interno"> Interno </option>
+                                <option value="Externo"> Externo </option>
                             </select>
                             <input type="hidden" name="start" size="7"
                                 tal:attributes="value data/start | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
@@ -149,8 +149,13 @@
                         <td>
                             <select class="width-100" name="use_type"
                                 tal:attributes="value data/use_type | nothing">
-                                <option value="internal"> Interno </option>
-                                <option value="external"> Externo </option>
+                                <option value="Interno"> Interno </option>
+                                <tal:if condition="python:data['use_type'] == 'Externo'">
+                                    <option value="Externo" selected="selected"> Externo </option>
+                                </tal:if>
+                                <tal:if condition="python:data['use_type'] != 'Externo'">
+                                    <option value="Externo"> Externo </option>
+                                </tal:if>                                
                             </select>
                             <input type="hidden" name="start"
                                 tal:attributes="value data/start | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
@@ -177,6 +182,7 @@
                 <input id="add_new" type="submit" name="form.button.save" value="Adicionar Medicamento" class="context"/>
                 <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
             </metal:buttons>
+            
         </form>
     </fieldset>
 </metal:add_new>
@@ -189,11 +195,12 @@
                 <table class="listing width-100">
                     <thead>
                         <th>#</th>
-                        <th>Marcar</th>
+                        <th>-</th>
                         <th>Medicamento</th>
                         <th>Concentração</th>
-                        <th>Quantidade</th>
+                        <th>Qtd</th>
                         <th>Uso</th>
+                        <th>Instruções</th>
                         <th tal:condition="context/TestRoles">Ações</th>
                     </thead>
                     <tbody>
@@ -203,9 +210,10 @@
                                 <td class="width-1 center">
                                     <input type="checkbox" name="checks" tal:attributes="value medication/id | nothing" checked/>
                                 </td>
-                                <td class="width-1" tal:content="medication/medication">Tylenol</td>
+                                <td tal:content="medication/medication">Tylenol</td>
                                 <td class="width-1" tal:content="medication/concentration">100mg</td>
-                                <td class="width-15" tal:content="medication/quantity">60 comprimidos</td>
+                                <td class="width-1" tal:content="medication/quantity">60 comprimidos</td>
+                                <td class="width-1" tal:content="medication/use_type | nothing">Interno</td>                                
                                 <td tal:content="medication/use">2x ao dia</td>
                                 <td class="width-16" i18n:translate="" tal:condition="context/TestRoles">
                                     <input type="button" class="context" value="Editar" name="form.button.edit"
@@ -226,7 +234,7 @@
 
 <metal:mh define-macro="medications_history_table">
     <fieldset class="cmed" tal:define="data template_data/inactive" tal:condition="data">
-            <legend i18n:translate="">Medicamentos Históricos</legend>
+            <legend>Histórico de Medicamentos</legend>
             <tal:macro metal:define-macro="show_medications">
                 <table class="listing width-100">
                     <thead>

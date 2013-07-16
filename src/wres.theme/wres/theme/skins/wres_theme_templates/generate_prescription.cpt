@@ -16,7 +16,7 @@
                 <fieldset class="cmed">
                 <legend> Prescrição </legend>    
                     <div id="presc" tal:define="data context/getGeneratePrescriptionsData">
-                        Data: <input type="text" name="date" size="7" 
+                        <b>Data:</b> <input type="text" name="date" size="14" 
                             tal:attributes="value data/start | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
                         <br />
                         <br />
@@ -42,6 +42,12 @@
                                 </tal:loop>
                             </tbody>
                         </table>
+
+                        <b>Recomendações Gerais</b>
+                        <textarea rows="3" name="recomendations"></textarea>
+                        <br />
+                        <br />
+
                         <input type="submit" id="confirm" name="form.button.confirm" value="Confirmar" class="context"/>
                         <input type="submit" name="form.button.cancel" value="Cancelar" class="context"/>
                         <input type="hidden" name="form.submitted" value="1" />

@@ -12,7 +12,7 @@
 from DateTime import DateTime
 
 request = context.REQUEST
-vars = ['medication', 'concentration', 'quantity', 'use', 'start', 'status']
+vars = ['medication', 'concentration', 'quantity', 'use', 'start', 'status', 'use_type']
 medication = {}
 for var in vars:
     medication[var] = request[var]
@@ -25,9 +25,8 @@ if medication['status'] == 'active':
     medication['end_date'] = ''
 else:
     medication['end_date'] = DateTime().strftime('%d/%m/%Y')
-    
+
 context.chart_data.save_entry(context, 'medications', **medication)
 
 state.set(portal_status_message='Medicamento adicionado.')
 return state
-

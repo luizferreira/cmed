@@ -16,5 +16,6 @@ member = context.portal_membership.getAuthenticatedMember()
 prescription['doctor'] = member.id
 prescription['date'] = request['date']
 prescription['medications'] = medications
+prescription['recomendations'] = request['recomendations']
 id = context.chart_data.save_entry(context, 'prescriptions', **prescription)
 container.REQUEST.RESPONSE.redirect(context.absolute_url()+'/print_prescription?id='+id)
