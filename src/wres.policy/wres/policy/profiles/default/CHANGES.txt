@@ -2,6 +2,21 @@
 Change log for CommuniMed
 =====================================
 
+0.16.0 (unreleased)
+===================
+
+o Bugfixes
+
+- Nothing yet
+
+o Functionalities
+
+- Nothing yet
+
+o Other improvements
+
+- Nothing yet
+
 0.15.0 (2013-07-25)
 ===================
 
