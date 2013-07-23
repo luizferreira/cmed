@@ -2,13 +2,12 @@
 Change log for CommuniMed
 =====================================
 
-0.15.0 (unreleased)
+0.15.0 (2013-07-25)
 ===================
 
 o Functionalities
 
 - Relatórios gráficos adicionados à seção Clínica (em Administrativo). [carlosbarreto]
-- Backup pessoal (falta testar, linkar no sistema e definir complexidade de implantação). [matheusaraujo]
 
 o Bugfixes
 
@@ -28,6 +27,7 @@ o Other improvements
 - Exames ordenados corretamente de acordo com a data. [luizferreira]
 - Possibilidade de inserir logo da clínica. [luizferreira]
 - Texto "Criado por" retirado do rodapé dos documentos. [luizferreira]
+- Layout de prescrição totalmente reformulado de acordo com os padrões do CFM. [luizferreira]
 
 0.14.2 (2013-06-04)
 ===================
