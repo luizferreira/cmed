@@ -38,5 +38,22 @@
             handler=".upgrades.0_14.chart_system_id_update"/>            
 
     </genericsetup:upgradeSteps>
+
+    <genericsetup:upgradeSteps
+        source="0.14"
+        destination="0.15"
+        profile="wres.policy:default">
+
+        <genericsetup:upgradeStep
+            title="Run all import steps"
+            description="Run all import steps"
+            handler=".upgrades.utils.reinstall_wres"/>
+
+        <genericsetup:upgradeStep
+            title="Inicializa o campo use_type dos medicamentos"
+            description=""
+            handler=".upgrades.0_15.initialize_medications_use_type"/>        
+
+    </genericsetup:upgradeSteps>    
        
 </configure>

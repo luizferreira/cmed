@@ -135,7 +135,7 @@
                                      externos python:medications['externos'];
                                      internos python:medications['internos'];">
 
-                        <center style="text-decoration:underline"> Uso Externo </center> <br />
+                        <center tal:condition="externos" style="text-decoration:underline"> Uso Externo </center> <br />
                         <div tal:repeat="medication externos">                            
                             <tal:def define="med python:medication[0];
                                              undescore_len python:medication[1]">
@@ -146,7 +146,7 @@
                             </tal:def>
                         </div>
 
-                        <center style="text-decoration:underline"> Uso Interno </center> <br />
+                        <center tal:condition="internos" style="text-decoration:underline"> Uso Interno </center> <br />
                         <div tal:repeat="medication internos">
                             <tal:def define="med python:medication[0];
                                              undescore_len python:medication[1]">
