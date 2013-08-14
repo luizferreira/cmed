@@ -42,25 +42,25 @@
                     <tr>
                         <td tal:define="vocab context/getDEF">
                             <input class="width-100" type="text" name="medication" autocomplete="off"
-                                tal:attributes="value data/medication | nothing;
+                                tal:attributes="value request/medication | nothing;
                                 onkeyup string:actb(this, event, ${vocab})" />
                         </td>
                         <td>
                             <input class="width-100" type="text" name="concentration"
-                                tal:attributes="value data/concentration | nothing" />
+                                tal:attributes="value request/concentration | nothing" />
                         </td>
                         <td>
                             <input class="width-100" type="text" name="quantity"
-                                tal:attributes="value data/quantity | nothing" />
+                                tal:attributes="value request/quantity | nothing" />
                         </td>
                         <td>
                             <select class="width-100" name="use_type"
-                                tal:attributes="value data/use_type | nothing">
+                                tal:attributes="value request/use_type | nothing">
                                 <option value="Interno"> Interno </option>
                                 <option value="Externo"> Externo </option>
                             </select>
                             <input type="hidden" name="start" size="7"
-                                tal:attributes="value data/start | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
+                                tal:attributes="value request/start | python:context.getTodayDate().strftime('%d/%m/%Y')"/>
                         </td>
                         <td>
                             <select class="width-100" name="status">
@@ -80,7 +80,7 @@
                     <tr>
                         <td>
                             <input class="width-100" type="text" id="use" name="use"
-                                tal:attributes="value data/use | nothing"/>                            
+                                tal:attributes="value request/use | nothing"/>                            
                         </td>
                     </tr>
                 </tbody>
