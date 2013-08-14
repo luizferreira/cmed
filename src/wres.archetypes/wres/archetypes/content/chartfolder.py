@@ -36,6 +36,16 @@ schemata.finalizeATCTSchema(
 )
 
 
+def str2DateTime(date):
+    """
+    o Trasforma '31/01/2013' em um objetivo Datetime() correspondente.
+    o Usado para ordenar chart datas. (vide listExams por exmeplo)
+    """
+    # trasforma "31/01/2013" em "01/31/2013", formato US, que é usado
+    # pelo DateTime.
+    date = date[3:6] + date[:3] + date[-4:]
+    return DateTime(date)
+
 class ChartFolder(folder.ATFolder):
     """Chart Folder of Patients"""
     implements(IChartFolder)
@@ -73,15 +83,6 @@ class ChartFolder(folder.ATFolder):
         """
         Retorna uma lista de exames (usado por show_exams e chart_summary).
         """
-
-        def str2DateTime(date):
-            """
-            Trasforma '31/01/2013' em um objetivo Datetime() correspondente.
-            """
-            # trasforma "31/01/2013" em "01/31/2013", formato US, que é usado
-            # pelo DateTime.
-            date = date[3:6] + date[:3] + date[-4:]
-            return DateTime(date)
 
         def exam_cmp(exam1, exam2):
             """
@@ -131,6 +132,30 @@ class ChartFolder(folder.ATFolder):
                 medications["internos"].append((medication, undescore_len(medication)))
 
         return medications
+
+    def getPrescriptionsData(self):
+        """
+        o Retorna a lista de medicamentos ordenado pela data.
+        o Usado no show_medications.cpt para mostra o histórico de prescrições.
+        """
+
+        def presc_cmp(presc1, presc2):
+            """
+            used for sorting exams by date.
+            """
+            date1 = str2DateTime(presc1["data"]["date"])
+            date2 = str2DateTime(presc2["data"]["date"])
+            if date1 < date2:
+                return -1
+            if date1 == date2:
+                return 0
+            else:
+                return 1
+
+        prescriptions = self.chart_data.get_entry('prescriptions')
+        prescriptions = prescriptions.values()
+        prescriptions.sort(cmp=presc_cmp)
+        return prescriptions
 
     def manage_afterAdd(self, item=None, container=None):
         """ Essa funcao e' chamada logo apos a adicao (addChartFolder) de um archetype """ 
