@@ -79,6 +79,30 @@ class ChartFolder(folder.ATFolder):
 #    def at_post_create_script(self):
 #        self.create_hidden_object('upload', 'Upload', 'Folder')
 
+    def getPrescriptionsData(self):
+        """
+        o Retorna a lista de medicamentos ordenado pela data.
+        o Usado no show_medications.cpt para mostra o histórico de prescrições.
+        """
+
+        def presc_cmp(presc1, presc2):
+            """
+            used for sorting exams by date.
+            """
+            date1 = str2DateTime(presc1["data"]["date"])
+            date2 = str2DateTime(presc2["data"]["date"])
+            if date1 < date2:
+                return -1
+            if date1 == date2:
+                return 0
+            else:
+                return 1
+
+        prescriptions = self.chart_data.get_entry('prescriptions')
+        prescriptions = prescriptions.values()
+        prescriptions.sort(cmp=presc_cmp)
+        return prescriptions
+
     def listExams(self):
         """
         Retorna uma lista de exames (usado por show_exams e chart_summary).
@@ -101,6 +125,29 @@ class ChartFolder(folder.ATFolder):
         labs = [exam["data"] for exam in labs]
         labs.sort(cmp=exam_cmp)
         return labs
+
+    def manage_afterAdd(self, item=None, container=None):
+        """ Essa funcao e' chamada logo apos a adicao (addChartFolder) de um archetype """ 
+        self.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
+        self.create_hidden_object('documents', 'Consultas', 'DocumentFolder')
+        self.documents.title = 'Consultas'
+        self.documents.setLocallyAllowedTypes('GenericDocument')
+        self.documents.setImmediatelyAddableTypes('GenericDocument')
+        self.documents.setConstrainTypesMode(1)
+        self.documents.reindexObject()
+
+        self.create_hidden_object('impressos', 'Impressos', 'DocumentFolder')
+        self.impressos.title = 'Impressos'
+        self.impressos.setLocallyAllowedTypes('Impresso')
+        self.impressos.setImmediatelyAddableTypes('Impresso')
+        self.impressos.setConstrainTypesMode(1)
+        self.impressos.reindexObject()        
+            
+        self.create_hidden_object('exams', 'Exames', 'UploadChartFolder')
+        self.exams.title = 'Exames'               
+                   
+        self.create_hidden_object('upload', 'Documentos Externos', 'UploadChartFolder')
+        self.upload.title = 'Documentos Externos'
 
     def printPrescriptionMedicationsData(self, pid):
         """
@@ -132,53 +179,5 @@ class ChartFolder(folder.ATFolder):
                 medications["internos"].append((medication, undescore_len(medication)))
 
         return medications
-
-    def getPrescriptionsData(self):
-        """
-        o Retorna a lista de medicamentos ordenado pela data.
-        o Usado no show_medications.cpt para mostra o histórico de prescrições.
-        """
-
-        def presc_cmp(presc1, presc2):
-            """
-            used for sorting exams by date.
-            """
-            date1 = str2DateTime(presc1["data"]["date"])
-            date2 = str2DateTime(presc2["data"]["date"])
-            if date1 < date2:
-                return -1
-            if date1 == date2:
-                return 0
-            else:
-                return 1
-
-        prescriptions = self.chart_data.get_entry('prescriptions')
-        prescriptions = prescriptions.values()
-        prescriptions.sort(cmp=presc_cmp)
-        return prescriptions
-
-    def manage_afterAdd(self, item=None, container=None):
-        """ Essa funcao e' chamada logo apos a adicao (addChartFolder) de um archetype """ 
-        self.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, TRANSCRIPTIONIST_ROLE], acquire = False)
-        self.create_hidden_object('documents', 'Consultas', 'DocumentFolder')
-        self.documents.title = 'Consultas'
-        self.documents.setLocallyAllowedTypes('GenericDocument')
-        self.documents.setImmediatelyAddableTypes('GenericDocument')
-        self.documents.setConstrainTypesMode(1)
-        self.documents.reindexObject()
-
-        self.create_hidden_object('impressos', 'Impressos', 'DocumentFolder')
-        self.impressos.title = 'Impressos'
-        self.impressos.setLocallyAllowedTypes('Impresso')
-        self.impressos.setImmediatelyAddableTypes('Impresso')
-        self.impressos.setConstrainTypesMode(1)
-        self.impressos.reindexObject()        
-            
-        self.create_hidden_object('exams', 'Exames', 'UploadChartFolder')
-        self.exams.title = 'Exames'               
-                   
-        self.create_hidden_object('upload', 'Documentos Externos', 'UploadChartFolder')
-        self.upload.title = 'Documentos Externos'
-
 
 atapi.registerType(ChartFolder, PROJECTNAME)
