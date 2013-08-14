@@ -11,11 +11,11 @@ o Functionalities
 
 o Bugfixes
 
-- Nothing yet
+- Ao tentar criar um medicamento com um campo faltante, os dados não voltam preenchidos. [luizferreira]
 
 o Other improvements
 
-- Nothing yet
+- Ordenar histórico de prescrições corretamente. [luizferreira]
 
 0.15.0 (2013-07-25)
 ===================
