@@ -16,6 +16,7 @@ o Bugfixes
 o Other improvements
 
 - Ordenar histórico de prescrições corretamente. [luizferreira]
+- Replicação dos backups diários. [luizferreira]
 
 0.15.0 (2013-07-25)
 ===================
