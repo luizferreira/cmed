@@ -54,7 +54,7 @@ MAIN = Schema((
             required=1,
             widget=IntegerWidget(
                 label=_('Duration'),
-                description=_('Can be used to filter visits in calendar'),
+                description='Duração em minutos',
             ),
         ),
 
@@ -73,7 +73,7 @@ MAIN = Schema((
             vocabulary = "getTypesOfVisit",
             widget = SelectionWidget(
                     label = 'Tipo de Visita',
-                    description=_('Can be used to filter visits in calendar'),
+                    description='Pode ser usado para filtrar visitas no calendário',
             ),
         ),
 
