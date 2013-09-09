@@ -92,7 +92,6 @@ class TestSetup(unittest.TestCase):
         print "----------------------------------------------"
         print "Modulo: ContentVisit   Test:getStartDate"
         print "Modulo: ContentVisit   Test:getSocialSecurity"
-        print "Modulo: ContentVisit   Test:popup_search_script"
         print "Modulo: ContentVisit   Test:getPatientInfo"
         print "----------------------------------------------"
         #Get requirements
@@ -100,7 +99,6 @@ class TestSetup(unittest.TestCase):
         visit.setStartDate(DateTime('10/10/2012'))
         self.assertEqual(visit.getStartDate(), DateTime('10/10/2012')) #StartDate
         self.assertEqual(visit.getSocialSecurity(), '12131415') #SocialSecurity
-        self.assertEqual(visit.popup_search_script().getId(), 'popup_search_script') #popup_search_script
         patient = visit.getPatientInfo()
         self.assertEqual(patient['Title'], 'Joao Silva') #getPatientInfo
         self.assertEqual(patient['absolute_url'], 'http://nohost/plone/Patients/asilva') #getPatientInfo

@@ -206,12 +206,12 @@ class TestSetup(unittest.TestCase):
         self.failUnless(self.verifyChartPatient(PATIENT_ID))
         
         browser.open(PATIENT_URL + "/chartFolder_hidden/show_medications")
-        
         browser.getControl(name='medication').value = medication
         browser.getControl(name='concentration').value = concentration
         browser.getControl(name='quantity').value = quantity
-        browser.getControl(name='use').value = use
+        browser.getControl(name='use_type').value = ['Interno']
         browser.getControl(name='status').value = [status]
+        browser.getControl(name='use').value = use
         browser.getControl(name="form.button.save").click()
         
     def edit_medications(self,PATIENT_ID,PATIENT_URL):
@@ -634,10 +634,10 @@ class TestSetup(unittest.TestCase):
         #Generate Prescriptions
         self.generate_prescription(PATIENT_ID,PATIENT_URL)
         self.failUnless("Energil C" in browser.contents)
-        self.failUnless("CRM:" in browser.contents)
+        self.failUnless("RECEITA" in browser.contents)
         #Visualize Prescription
         self.visualize_prescription(PATIENT_ID,PATIENT_URL)
-        self.failUnless("CRM:" in browser.contents)
+        self.failUnless("RECEITA" in browser.contents)
         self.failUnless("Energil C" in browser.contents)
         #Edit Medications
         self.edit_medications(PATIENT_ID,PATIENT_URL)
@@ -669,10 +669,10 @@ class TestSetup(unittest.TestCase):
         #Generate Prescriptions
         self.generate_prescription(PATIENT_ID,PATIENT_URL)
         self.failUnless("Energil C" in browser.contents)
-        self.failUnless("CRM:" in browser.contents)
+        self.failUnless("RECEITA" in browser.contents)
         #Visualize Prescription
         self.visualize_prescription(PATIENT_ID,PATIENT_URL)
-        self.failUnless("CRM:" in browser.contents)
+        self.failUnless("RECEITA" in browser.contents)
         self.failUnless("Energil C" in browser.contents)
         #Edit Medications
         self.edit_medications(PATIENT_ID,PATIENT_URL)
@@ -704,7 +704,6 @@ class TestSetup(unittest.TestCase):
         #Create document
         document_id = self.create_document(PATIENT_ID, PATIENT_URL)
         self.failUnless("As alterações foram salvas." in browser.contents)
-        self.failUnless("Criado por" in browser.contents)
         #Edit document
         self.edit_document(PATIENT_ID,PATIENT_URL,document_id)
         
@@ -715,7 +714,6 @@ class TestSetup(unittest.TestCase):
         #Create document
         document_id = self.create_document(PATIENT_ID, PATIENT_URL)
         self.failUnless("As alterações foram salvas." in browser.contents)
-        self.failUnless("Criado por" in browser.contents)
         #Edit document
         self.edit_document(PATIENT_ID,PATIENT_URL,document_id)
         
@@ -736,7 +734,6 @@ class TestSetup(unittest.TestCase):
         #Create document
         impresso_id = self.create_impresso(PATIENT_ID, PATIENT_URL)
         self.failUnless("As alterações foram salvas." in browser.contents)
-        self.failUnless("Criado por" in browser.contents)
         #Edit document
         self.edit_impresso(PATIENT_ID,PATIENT_URL,impresso_id)
         
@@ -747,7 +744,6 @@ class TestSetup(unittest.TestCase):
         #Create document
         impresso_id = self.create_impresso(PATIENT_ID, PATIENT_URL)
         self.failUnless("As alterações foram salvas." in browser.contents)
-        self.failUnless("Criado por" in browser.contents)
         #Edit document
         self.edit_impresso(PATIENT_ID,PATIENT_URL,impresso_id)
         

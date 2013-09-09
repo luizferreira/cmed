@@ -180,7 +180,7 @@ class TestSetup(unittest.TestCase):
         patient = self.patient
         
         #Fist test, without lastVisitDate
-        self.assertEqual('No visits concluded',patient.getLastVisitDate())
+        self.assertEqual('Nenhuma visita concluída anteriormente',patient.getLastVisitDate())
         
         #Test with lastVisitDate
         import datetime

@@ -167,7 +167,7 @@ class Patient(wresuser.WRESUser):
     def getLastVisitDate(self, strftime='%d/%m/%Y'):
         """
         Return the patient's attribute: lastVisitDate in %d/%m/%Y
-        If it not exists return "No visits concluded"
+        If it not exists return "Nenhuma visita concluída anteriormente"
         """
         if not hasattr(self, 'lastVisitDate'):
             return "Nenhuma visita concluída anteriormente"
