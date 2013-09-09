@@ -12,6 +12,7 @@ o Functionalities
 o Bugfixes
 
 - Ao tentar criar um medicamento com um campo faltante, os dados não voltam preenchidos. [luizferreira]
+- Traduzido dois trechos que estavam em inglês no calendário. [luizferreira]
 
 o Other improvements
 
