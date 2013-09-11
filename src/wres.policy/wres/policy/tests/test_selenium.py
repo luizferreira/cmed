@@ -40,7 +40,10 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
         sel.click("name=submit")
         sel.waitForPageToLoad()
         #   EXECUTA DEBUG_INIT
-        sel.open("/plone/debug_init")
+        try:
+            sel.open("/plone/debug_init")
+        except:
+            sel.open("/plone/debug_init")
         # sel.waitForPageToLoad()
         #   SAI DO ADMIN E ENTRA COMO DTESTE
         sel.open("/plone")
