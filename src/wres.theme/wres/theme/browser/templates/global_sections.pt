@@ -2,6 +2,10 @@
      tal:condition="portal_tabs"
      i18n:domain="plone">
 
+     <style>
+
+     </style>
+
     <h5 class="hiddenStructure" i18n:translate="heading_sections">Sections</h5>
 
     <ul id="portal-globalnav" class="navmenu"
@@ -22,26 +26,9 @@
 
         <li tal:condition="python:context.verifyRole(['Manager', 'Contributor'])"
             id="adm_li" tal:define="portal_url context/getPortalURL">
-            <a id="adm_a">
-                Administrativo<span class="arrowDownAlternative">▼</span>
+            <a tal:attributes="href string:${portal_url}/configuration">
+                Configurações
             </a>
-            <ul id="section-adm" class="submenu">
-                <li id="start">
-                    <a class="startlist" href="#adm1">&nbsp;</a>
-                </li>
-                <li id="second">
-                    <a class="second" tal:attributes="href string:${portal_url}/Clinic">Clínica</a>
-                </li>
-                <li>
-                    <a tal:attributes="href string:${portal_url}/Doctors">Médicos</a>
-                </li>
-<!--                 <li>
-                    <a tal:attributes="href string:${portal_url}/Templates">Modelos</a>
-                </li> -->
-                <li id="end">
-                    <a class="endlist" tal:attributes="href string:${portal_url}/Secretaries">Secretárias</a>
-                </li>
-            </ul>
         </li>
     </ul>
 </tal:sections>

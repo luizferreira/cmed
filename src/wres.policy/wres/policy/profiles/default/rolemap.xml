@@ -42,6 +42,10 @@
       <role name="Manager"/>
       <role name="UemrAdmin"/>
     </permission> 
+    <permission name="wres.archetypes: Add CmedConfiguration" acquire="False">
+      <role name="Manager" />
+      <role name="Contributor" />
+    </permission>
     <permission name="wres.archetypes: Add Admin" acquire="False">
       <role name="Contributor"/>
       <role name="Manager"/>

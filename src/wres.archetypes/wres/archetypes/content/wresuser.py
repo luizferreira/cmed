@@ -93,6 +93,9 @@ class WRESUser(folder.ATFolder):
 
     security = ClassSecurityInfo()
 
+    def isAtCreation(self):
+        return getattr(self, '_at_creation_flag')
+
     def getFullName(self):
         return self.getFirstName() + ' ' + self.getLastName()
 
@@ -173,5 +176,76 @@ class WRESUser(folder.ATFolder):
             cap_name.append(part)
         cap_name = ' '.join(cap_name)
         return cap_name
+
+    def post_validate(self, REQUEST, errrors):
+        """
+        o Aqui mudamos a senha. Importante destacar que, neste momento, a 
+          senha atual e as novas senhas já foram validadas. (no validador 
+          individual no campo password e no método pre_validate)
+        o Utilizamos esse método porque ele garante que todas as validações já
+          foram feitas. Se isso não fosse verdade, a validação da senha atual
+          não passaria, uma vez que acabamos de mudá-la.
+        """
+        if self.getNewPassword():
+
+            rtool = self.portal_registration
+            rtool.editMember(self.getId(), properties={}, password=self.getNewPassword())
+
+            # não precisamos armazenar nada nos campos de passwords, eles são
+            # usados apenas como método de entrada e validação. Além disso, eles
+            # não criptografam os valores armazendos.
+            self.setPassword('')
+            self.setNewPassword('')
+            self.setNewPasswordConfirmation('')
+
+            # TODO: enviar e-mail.
+
+    def pre_validate(self, REQUEST, errrors):
+        """
+        o pre_validate é um método especial, que caso esteja presente na classe é
+          chamado antes da validação de cada campo individualmente. 
+        o Existe também post_validate, que é chamado depois.
+        o O funcionamento é simples, acesse os campos e valores pela variável REQUEST
+          e escreva os erros no dicionário errrors.
+        o Este método:
+            o confirma que as duas novas senhas são iguais
+            o garante que o campo Senha Atual está preenchido (caso seja o próprio
+              usuário mudando a sua senha).
+            o torna o campo newPassword obrigatório caso esteja se criando um novo
+              usuário.
+            o torna o campo newPassword obrigatório caso o usuário preencheu a senha
+              atual.
+        """
+        if 'newPassword' in REQUEST.form:
+            if REQUEST.form['newPassword']:
+                if REQUEST.form['newPassword'] != REQUEST.form['newPasswordConfirmation']:
+                    errrors['newPassword']='Senha não confere.'
+                    errrors['newPasswordConfirmation']='Senha não confere.'
+                # caso o campo senha atual não esteja sendo mostrado (no caso de um
+                # UemrAdmin estar editando a senha de outro médico, por exemplo), não
+                # verificamos se a senha atual foi preenchida.
+                if self.showPasswordCondition():
+                    if not REQUEST.form['password']:
+                        errrors['password']='Você precisa fornecer a senha atual.'
+            # caso seja um novo usuário, precisamos nos certificar que a senha está sendo
+            # preenchida.
+            elif self.isAtCreation():
+                    errrors['newPassword']='Você precisa definir uma senha para o novo usuário.'
+                    errrors['newPasswordConfirmation']='Você precisa confirmar a senha do novo usuário.'
+            # o campo password estará no formulário apenas se é o o próprio usuário
+            # editando o seus dados.
+            elif 'password' in REQUEST.form:
+                if REQUEST.form['password']:
+                    errrors['newPassword']='Você precisa fornecer a nova senha.'
+                    errrors['newPasswordConfirmation']='Você precisa confirmar a nova senha.'
+
+    def showPasswordCondition(self):
+        """
+        O campo password (Senha Atual) só é mostrado caso o usuário autenticado
+        seja o próprio usuário ao qual o conteúdo Doctor se refere (ele esteja
+        mudando a própria senha). Pois não faz sentido ele colocar a sua senha 
+        atual quando estiver editando a senha de outro membro.
+        """
+        return self.portal_membership.getAuthenticatedMember().getId() == self.getId()                
 
 atapi.registerType(WRESUser, PROJECTNAME)

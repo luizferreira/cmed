@@ -141,6 +141,17 @@ def createContactPage(portal):
     contact.setExcludeFromNav(True)
     contact.reindexObject()
 
+def createConfigurationFolder(portal):
+    """ Cria a pasta de configuracao """
+    print '*** Criando pasta de configuracao...'
+    configuration_folder = getOrCreateType(portal, portal, 'configuration', 'CmedConfiguration')
+    configuration_folder.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE], acquire = False)
+    configuration_folder.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE], acquire = False)
+    configuration_folder.setTitle('Configurações')
+    configuration_folder.setExcludeFromNav(True)
+    configuration_folder.reindexObject()
+    print '*** Criando pasta de configuracao...... OK'
+
 def createReferringProviderFolder(portal):
     """ Cria a pasta de medicos indicantes """
     print '*** Criando pasta de medicos indicantes...'
@@ -574,6 +585,7 @@ def setupVarious(context):
         createTemplateFolder(portal)
         createDoctorFolder(portal)
         createContactPage(portal)
+        createConfigurationFolder(portal)
 
         createPatientFolder(portal)
         createSecretaryFolder(portal)

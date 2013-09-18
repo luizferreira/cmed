@@ -13,7 +13,19 @@
 	<metal:aux fill-slot="style_slot">
 		<link rel="Stylesheet" type="text/css"
         tal:attributes="href string:${portal_url}/ajuda_view.css" />
+
+		<!-- Destaca o link Ajuda  -->
+		<style>
+			dl.help#portal-feedbackhelp {
+			    background:#205C90;
+			}
+
+			dl.help#portal-feedbackhelp dt a {
+			    color:white;
+			}
+		</style>
 	</metal:aux>
+
 </head>
 
 <body>
@@ -39,7 +51,7 @@
 	<li>
 		<p class="subtitle_menu">Manual:</p>
 		<p>
-			<a target="_blank" href="http://communimed.com.br/ajuda-1" title="Manual CommuniMed">Leia o manual de úsuário do CommuniMed.</a>
+			<a target="_blank" href="http://communimed.com.br/ajuda-1" title="Manual CommuniMed">Leia o manual de usuário do CommuniMed.</a>
 		</p>
 
 	</li>
