@@ -218,7 +218,7 @@ PASSWORD = Schema((
             widget=PasswordWidget(
                 label='Nova Senha',
                 macro_edit='cmed_password_widget',
-                condition='python:object.showPasswordCondition()',
+                condition='python:object.showNewPasswordCondition()',
             ),
         ),
          StringField('newPasswordConfirmation',
@@ -226,7 +226,7 @@ PASSWORD = Schema((
             widget=PasswordWidget(
                 label='Confirmação da Senha',
                 macro_edit='cmed_password_widget',
-                condition='python:object.showPasswordCondition()',
+                condition='python:object.showNewPasswordCondition()',
             ),
         ),
 ))
