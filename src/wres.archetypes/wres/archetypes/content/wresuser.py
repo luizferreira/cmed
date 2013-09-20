@@ -186,19 +186,22 @@ class WRESUser(folder.ATFolder):
           foram feitas. Se isso não fosse verdade, a validação da senha atual
           não passaria, uma vez que acabamos de mudá-la.
         """
-        if self.getNewPassword():
+        # precisamos verificar que o objeto possui o campo newPassword, uma vez 
+        # que, apesar de não possuir uma senha, o paciente também é um wresuser.
+        if hasattr(self, 'getNewPassword'):
+            if self.getNewPassword():
 
-            rtool = self.portal_registration
-            rtool.editMember(self.getId(), properties={}, password=self.getNewPassword())
+                rtool = self.portal_registration
+                rtool.editMember(self.getId(), properties={}, password=self.getNewPassword())
 
-            # não precisamos armazenar nada nos campos de passwords, eles são
-            # usados apenas como método de entrada e validação. Além disso, eles
-            # não criptografam os valores armazendos.
-            self.setPassword('')
-            self.setNewPassword('')
-            self.setNewPasswordConfirmation('')
+                # não precisamos armazenar nada nos campos de passwords, eles são
+                # usados apenas como método de entrada e validação. Além disso, eles
+                # não criptografam os valores armazendos.
+                self.setPassword('')
+                self.setNewPassword('')
+                self.setNewPasswordConfirmation('')
 
-            # TODO: enviar e-mail.
+                # TODO: enviar e-mail.
 
     def pre_validate(self, REQUEST, errrors):
         """
