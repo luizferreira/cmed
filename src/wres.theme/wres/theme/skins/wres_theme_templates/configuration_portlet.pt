@@ -35,34 +35,34 @@
 
                     <li tal:condition="python:data['links']['clinic']" class="navTreeItem visualNoMarker navTreeFolderish">
                         <tal:if condition="python:data['current']=='clinic'">
-                            <a class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['clinic']"> Clínica </a>
+                            <a id="configuration_clinic" class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['clinic']"> Clínica </a>
                         </tal:if>
                         <tal:if condition="python:data['current']!='clinic'">
-                            <a class="navTreeFolderish" tal:attributes="href python:data['links']['clinic']"> Clínica </a>
+                            <a id="configuration_clinic" class="navTreeFolderish" tal:attributes="href python:data['links']['clinic']"> Clínica </a>
                         </tal:if>
                     </li>
                     <li tal:condition="python:data['links']['mydata']" class="navTreeItem visualNoMarker navTreeFolderish">
                         <tal:if condition="python:data['current']=='mydata'">
-                            <a class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['mydata']"> Meus Dados </a>
+                            <a id="configuration_mydata" class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['mydata']"> Meus Dados </a>
                         </tal:if>
                         <tal:if condition="python:data['current']!='mydata'">
-                            <a class="navTreeFolderish" tal:attributes="href python:data['links']['mydata']"> Meus Dados </a>
+                            <a id="configuration_mydata" class="navTreeFolderish" tal:attributes="href python:data['links']['mydata']"> Meus Dados </a>
                         </tal:if>                        
                     </li>
                     <li class="navTreeItem visualNoMarker navTreeFolderish">
                         <tal:if condition="python:data['current']=='doctorfolder'">
-                            <a class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['doctorfolder']"> Médicos </a>
+                            <a id="configuration_doctorfolder" class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['doctorfolder']"> Médicos </a>
                         </tal:if>
                         <tal:if condition="python:data['current']!='doctorfolder'">
-                            <a class="navTreeFolderish" tal:attributes="href python:data['links']['doctorfolder']"> Médicos </a>
+                            <a id="configuration_doctorfolder" class="navTreeFolderish" tal:attributes="href python:data['links']['doctorfolder']"> Médicos </a>
                         </tal:if>                        
                     </li>
                     <li class="navTreeItem visualNoMarker navTreeFolderish">
                         <tal:if condition="python:data['current']=='secretaryfolder'">
-                            <a class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['secretaryfolder']"> Secretárias </a>
+                            <a id="configuration_secretaryfolder" class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['secretaryfolder']"> Secretárias </a>
                         </tal:if>
                         <tal:if condition="python:data['current']!='secretaryfolder'">
-                            <a class="navTreeFolderish" tal:attributes="href python:data['links']['secretaryfolder']"> Secretárias </a>
+                            <a id="configuration_secretaryfolder" class="navTreeFolderish" tal:attributes="href python:data['links']['secretaryfolder']"> Secretárias </a>
                         </tal:if>
                     </li>
 
