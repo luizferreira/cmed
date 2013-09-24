@@ -1,23 +1,25 @@
-import requests
-from Products.CMFCore.utils import getToolByName
+# As requisicoes ao cstat agora sao assincronas. Retirar a partir de DEZ/2013
 
-def request_stat_registration(context):
+# import requests
+# from Products.CMFCore.utils import getToolByName
 
-    prefix = 'cmed_'
-    site = "http://cstat.communi.com.br/cmed_stat"
+# def request_stat_registration(context):
 
-    mt = getToolByName(context, 'portal_membership')
-    member = mt.getAuthenticatedMember()
-    username = member.getUserName()
+#     prefix = 'cmed_'
+#     site = "http://cstat.communi.com.br/cmed_stat"
 
-    params = {}
-    params[prefix + 'url'] = context.REQUEST.URL
-    params[prefix + 'user'] = username
-    params[prefix + 'roles'] = '__'.join(member.getRoles())
+#     mt = getToolByName(context, 'portal_membership')
+#     member = mt.getAuthenticatedMember()
+#     username = member.getUserName()
 
-    try:
-        result = requests.get(site, params=params)
-    except requests.ConnectionError:
-        result = None
+#     params = {}
+#     params[prefix + 'url'] = context.REQUEST.URL
+#     params[prefix + 'user'] = username
+#     params[prefix + 'roles'] = '__'.join(member.getRoles())
 
-    return result
+#     try:
+#         result = requests.get(site, params=params)
+#     except requests.ConnectionError:
+#         result = None
+
+#     return result

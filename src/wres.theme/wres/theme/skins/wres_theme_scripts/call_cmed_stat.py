@@ -1,5 +1,7 @@
-from wres.policy.cmedstat import request_stat_registration
+# As requisicoes ao cstat agora sao assincronas. Retirar a partir de DEZ/2013
 
-res = request_stat_registration(context)
+# from wres.policy.cmedstat import request_stat_registration
 
-return res
+# res = request_stat_registration(context)
+
+# return res
