@@ -2,6 +2,14 @@
 Change log for CommuniMed
 =====================================
 
+0.15.1 (2013-09-25)
+===================
+
+o Bugfixes
+
+- Requisição do cstat precisa ser assíncrona. [luizferreira]
+
+
 0.15.0 (2013-07-25)
 ===================
 
