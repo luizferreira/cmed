@@ -1,6 +1,5 @@
 <script type="text/javascript">
     var cstat_data_url = document.URL + '/cstat_data'
-    alert(document.URL);
 
     $.get(cstat_data_url, function(data) {
 
