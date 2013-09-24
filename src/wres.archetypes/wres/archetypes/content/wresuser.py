@@ -12,6 +12,8 @@ from Products.CMFCore.utils import getToolByName
 
 from AccessControl import ClassSecurityInfo
 
+from plone import api
+
 from wres.archetypes.interfaces import IWRESUser
 from wres.archetypes.config import PROJECTNAME
 from wres.policy.utils.utils import create_base_of_id
@@ -201,7 +203,20 @@ class WRESUser(folder.ATFolder):
                 self.setNewPassword('')
                 self.setNewPasswordConfirmation('')
 
-                # TODO: enviar e-mail.
+                try:
+                    # envia e-mail notificando usuário da mudança de senha.
+                    doctor_mail = self.getEmail()
+                    message = "Sua senha foi alterada com sucesso!\n\n"
+                    message += "--\n"
+                    message += "Equipe CommuniMed\n"
+                    api.portal.send_email(
+                        recipient=doctor_mail,
+                        sender='suporte@communi.com.br',
+                        subject="CommuniMed: alteração de senha",
+                        body=message,
+                    )
+                except:
+                    pass
 
     def pre_validate(self, REQUEST, errrors):
         """

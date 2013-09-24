@@ -406,8 +406,8 @@ def mailHostConfiguration(portal):
     mail_host = portal.MailHost
     mail_host.smtp_host = 'localhost'
     mail_host.smtp_port = 25
-    portal.email_from_name = 'Equipe de Desenvolvimento/Suporte'
-    portal.email_from_address = 'desenvolvimento@communi.com.br'
+    portal.email_from_name = 'Equipe de Suporte'
+    portal.email_from_address = 'suporte@communi.com.br'
 
 def addUpgradeExternalMethods(portal):
     '''
