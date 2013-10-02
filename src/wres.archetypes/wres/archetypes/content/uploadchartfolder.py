@@ -1,3 +1,5 @@
+## coding=utf-8
+
 """Definition of the UploadChartFolder content type
 """
 
@@ -43,42 +45,42 @@ class UploadChartFolder(folder.ATFolder):
         """
 
         pc = getToolByName(self, 'portal_catalog')
-        imagens = []
-        other_files = []
+        cp = self.getPhysicalPath()
+        patient_path = '/'.join(cp[:cp.index('Patients')+2])
 
-        def getPatientId(self):
-            if self.meta_type == 'Patient':
-                return self.getId()
-            else:
-                return getPatientId(self.aq_inner.aq_parent)
+        # build list of images to be previewed
+        images = []
+        brains = pc.search({'portal_type': 'Image', 'path': patient_path})
+        for br in brains:
+            parts = br.getPath().split("/")[2:] # preciso do path começando no 'Patients'
+            images.append( 
+                {
+                    'path': '/'.join(parts),
+                }
+            )
 
-        def getFilesAndImages(self):
-            #Get Imagens
-            portal = self.getPortal()
-            patientPath = '/' + portal.getId() + '/Patients/' + getPatientId(self) + '/'
-            brains = pc.search({'portal_type': 'Image', 'path': patientPath})
-            index = 0
-            for brain in brains:
-                parts = brain.getPath().split("/")
-                parts.pop(0)
-                parts.pop(0)
-                path = '/'.join(parts)
-                date = brain.created.strftime("%y/%m/%d")
-                name = parts[-1].split('.')[0]
-                imagens.append((path, date, name, index))
-                index = index + 1
+        # build list of all files (including images)
+        files = []
+        # increment list of brains using '+='
+        brains += pc.search({'portal_type': 'File', 'path': patient_path})
+        for br in brains:
+            icon = br.getIcon
+            if not icon:
+                icon = 'f.png'
+            files.append(
+                {
+                    'path': br.getURL(),
+                    'name': br.Title,
+                    'icon': icon,
+                    'uid': br.UID,
+                    'date': br.created.strftime("%d/%m/%Y"),
+                }
+            )
 
-            #Get Other Files
-            brains += pc.search({'portal_type': 'File', 'path': patientPath})
-            for brain in brains:
-                filePath = brain.getURL()
-                name = brain.Title
-                icon = brain.getIcon
-                file = (filePath, name, icon, brain.UID)
-                other_files.append(file)
-            return [imagens, other_files]
-
-        return getFilesAndImages(self)
+        return {
+            'all_files': files,
+            'preview_images': images,
+        }
 
     def deleteExternalFile(self):
         """
