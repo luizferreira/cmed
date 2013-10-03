@@ -205,31 +205,58 @@ MAIN = Schema((
 ))
 set_schemata_properties(MAIN, schemata='Principal')
 
-OTHER = Schema((   
-         StringField('initial',
-            widget=StringWidget(label=_('Initial'),
+PASSWORD = Schema((
+         StringField('password',
+            validators = ('isCurrentPassword',),
+            widget=PasswordWidget(
+                label='Senha Atual',
+                condition='python:object.showPasswordCondition()',
             ),
         ),
-        StringField('signature',
-            index=':schema',
-            widget=StringWidget(label=_('Signature'),
-                                description='Enter with the doctor signature label.',
-                                description_msgid='cmfuemr_help_signature',
-                                i18n_domain='cmfuemr',
+         StringField('newPassword',
+            required=False,
+            widget=PasswordWidget(
+                label='Nova Senha',
+                macro_edit='cmed_password_widget',
+                condition='python:object.showNewPasswordCondition()',
             ),
         ),
-        # StringField('dea',
-        #             widget=StringWidget(label=_('DEA #'),
-        #             ),
-        # ),
-        # TODO: retirar (May2012)
-        StringField('credentials',
-            widget=StringWidget(label=_('Credentials'),
+         StringField('newPasswordConfirmation',
+            required=False,
+            widget=PasswordWidget(
+                label='Confirmação da Senha',
+                macro_edit='cmed_password_widget',
+                condition='python:object.showNewPasswordCondition()',
             ),
         ),
-                                                             
 ))
-set_schemata_properties(OTHER, schemata='Outro')
+set_schemata_properties(PASSWORD, schemata='Senha')
+
+# OTHER = Schema((   
+#          StringField('initial',
+#             widget=StringWidget(label=_('Initial'),
+#             ),
+#         ),
+#         StringField('signature',
+#             index=':schema',
+#             widget=StringWidget(label=_('Signature'),
+#                                 description='Enter with the doctor signature label.',
+#                                 description_msgid='cmfuemr_help_signature',
+#                                 i18n_domain='cmfuemr',
+#             ),
+#         ),
+#         # StringField('dea',
+#         #             widget=StringWidget(label=_('DEA #'),
+#         #             ),
+#         # ),
+#         # TODO: retirar (May2012)
+#         StringField('credentials',
+#             widget=StringWidget(label=_('Credentials'),
+#             ),
+#         ),
+                                                             
+# ))
+# set_schemata_properties(OTHER, schemata='Outro')
 
 SIGN_PASSWORD = Schema((
     StringField('signPassword',
@@ -245,6 +272,6 @@ set_schemata_properties(SIGN_PASSWORD, schemata='Assinatura Eletronica')
         
 baseSchema = finalizeSchema(wresuser.WRESUserSchema.copy())
 
-DoctorSchema = baseSchema + MAIN + OTHER + SIGN_PASSWORD
+DoctorSchema = baseSchema + MAIN + PASSWORD + SIGN_PASSWORD
 
 set_schemata_properties(DoctorSchema, read_permission=VIEW_DOCTOR, write_permission=EDIT_DOCTOR) 

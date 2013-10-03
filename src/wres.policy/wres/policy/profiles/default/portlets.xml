@@ -28,6 +28,50 @@
         <property name="template">to_compare_portlet</property>
     </assignment>
 
+    <!-- configuration portlet -->
+    <assignment name="configuration_portlet" category="content_type" key="CmedConfiguration"
+    manager="plone.leftcolumn" type="portlets.Classic" visible="True">
+        <property name="macro">portlet</property>
+        <property name="template">configuration_portlet</property>
+    </assignment>    
+    <assignment name="configuration_portlet" category="content_type" key="SecretaryFolder"
+    manager="plone.leftcolumn" type="portlets.Classic" visible="True">
+        <property name="macro">portlet</property>
+        <property name="template">configuration_portlet</property>
+    </assignment>
+    <assignment name="configuration_portlet" category="content_type" key="Secretary"
+    manager="plone.leftcolumn" type="portlets.Classic" visible="True">
+        <property name="macro">portlet</property>
+        <property name="template">configuration_portlet</property>
+    </assignment>
+    <assignment name="configuration_portlet" category="content_type" key="DoctorFolder"
+    manager="plone.leftcolumn" type="portlets.Classic" visible="True">
+        <property name="macro">portlet</property>
+        <property name="template">configuration_portlet</property>
+    </assignment>    
+    <assignment name="configuration_portlet" category="content_type" key="Doctor"
+    manager="plone.leftcolumn" type="portlets.Classic" visible="True">
+        <property name="macro">portlet</property>
+        <property name="template">configuration_portlet</property>
+    </assignment>  
+    <assignment name="configuration_portlet" category="content_type" key="Clinic"
+    manager="plone.leftcolumn" type="portlets.Classic" visible="True">
+        <property name="macro">portlet</property>
+        <property name="template">configuration_portlet</property>
+    </assignment>          
+
+    <assignment name="upload" category="content_type" key="UploadChartFolder"
+    manager="plone.rightcolumn" type="collective.quickupload.QuickUploadPortlet" visible="True">
+        <property name="header">Envio Rápido de Arquivos</property>
+    </assignment>
+
+    <assignment name="to_compare" category="content_type" key="UploadChartFolder"
+    manager="plone.rightcolumn" type="portlets.Classic" visible="True">
+        <property name="header">Ir para o modo Comparação de Imagens</property>
+        <property name="macro">to_compare_macro</property>
+        <property name="template">to_compare_portlet</property>
+    </assignment>    
+
     <!-- inicio - associando o patient portlet ao prontuario e paciente -->
 
     <assignment name="patient_portlet" category="content_type" key="Patient"
@@ -169,12 +213,13 @@
     <assignment name="review-list" category="context" key="/"
     manager="plone.rightcolumn" type="portlets.Review" visible="True"/>
 
+    <!-- Retira o agenda_navigation da Secretary de alguns lugares. -->
+    <blacklist category="group" location="/Clinic" manager="plone.leftcolumn" status="block"/>
+    <blacklist category="group" location="/configuration" manager="plone.leftcolumn" status="block"/>
     <blacklist category="group" location="/Patients" manager="plone.leftcolumn" status="block"/>
     <blacklist category="group" location="/Doctors" manager="plone.leftcolumn" status="block"/>
     <blacklist category="group" location="/Secretaries" manager="plone.leftcolumn" status="block"/>
     <blacklist category="group" location="/Insurances" manager="plone.leftcolumn" status="block"/>
     <blacklist category="group" location="/Ajuda" manager="plone.leftcolumn" status="block"/>
-
-
 
 </portlets>

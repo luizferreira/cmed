@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+    <title>Configurações</title>
+
+    <metal:aux fill-slot="style_slot">
+        <link rel="Stylesheet" type="text/css"
+        tal:attributes="href string:${portal_url}/ajuda_view.css" />
+    </metal:aux>
+</head>
+
+<body>
+    <div metal:fill-slot="content" id="content">
+        <div id="main_chart_print">
+            <div class="help_title">Configurações</div>
+            <br />
+            <div class="help_content">
+                <img src="left_arrow.png" id="left_arrow" alt="tour"/>
+                <div style="margin-left: 50px">
+                    Na seção de configurações você pode realizar operações como:
+                    <ul>
+                        <li> Editar os seus dados pessoais; </li>
+                        <li> Alterar sua senha; </li>
+                        <li> Adicionar um médico; </li>
+                        <li> Adicionar uma secretária; </li>
+                        <li> Editar dados da clínica/consultório; </li>
+                        <li> Etc. </li>
+                    </ul>
+                </div>
+<!--                 <img src="right_arrow.png" id="right_arrow" alt="menu"/>
+                <p style="margin-right: 50px"> -->
+                    Caso precise de ajuda, não hesite em entrar em contato, será um prazer ajudá-lo!
+                <!-- </p> -->
+            </div>
+        </div>
+        <ul class="help_navigation" style="list-style-type: none;" tal:define="bkpLink context/getBackupLink">
+            <li>
+                <h3 class="title_menu">Obter Ajuda</h3><br/>
+            </li>
+            <li>
+                <p class="subtitle_menu">Chat:</p>
+                <p>
+                    Mande-nos uma mensagem no chat.
+                </p>
+            </li>
+            <li><br/>
+                <p class="subtitle_menu">Manual:</p>
+                <p>
+                    <a target="_blank" href="http://communimed.com.br/ajuda-1" title="Manual CommuniMed">Leia o manual de usuário do CommuniMed.</a>
+                </p>
+
+            </li>
+            <li tal:condition="bkpLink"><br/>
+                <p class="subtitle_menu"><a tal:attributes="href python: 'http://localhost:80/' + bkpLink">Download Backup.</a></p>
+            </li>
+            <li><br/>
+                <p class="subtitle_menu">Mande-nos um email:</p>
+                <p style="color: #427597;"><a target="_blank" href="mailto:suporte@communimed.com.br">
+                    suporte@communimed.com.br</a>
+                </p>
+            </li>
+            <li><br/>
+                <p class="subtitle_menu">Canal no Youtube:</p>
+                <p style="color: #427597;"><a target="_blank" href="http://www.youtube.com/user/CommuniMed?feature=watch">
+                    Vídeos demonstrativos do sistema<br/><br/>
+                    <img src="ytube.png" id="ytube" alt="canal" style="border-bottom: 1px solid white"/></a>
+                </p>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
