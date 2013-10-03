@@ -1,0 +1,76 @@
+<html xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      i18n:domain="cmfuemr">
+<body>
+<div metal:define-macro="portlet">
+
+    <!-- enquanto este portlet estiver renderizado, a seção Configurações na navegação
+    principal deve ser destacada. -->
+    <style>
+        #portal-globalnav #adm_li a {
+            background: #205c90;
+            color:white;
+        }
+        #portal-globalnav #adm_li a:hover {
+            background: #ddd;
+            color: #205c90;            
+        }
+    </style>
+
+    <dl class="portlet portletNavigationTree" tal:define="data context/configuration_portlet_script">
+
+        <dt>
+            <a tal:attributes="href python:data['links']['configuration']">
+                Configurações
+            </a>
+        </dt>        
+
+        <div class="portletBody" id="body_chartnavigation_portlet"
+            tal:define="
+                meta_type string:Doctor;
+                brains python:context.portal_catalog.searchResults({'meta_type': meta_type})">
+
+            <dd class="portletItem lastItem">
+                <ul class="navTree navTreeLevel0">
+
+                    <li tal:condition="python:data['links']['clinic']" class="navTreeItem visualNoMarker navTreeFolderish">
+                        <tal:if condition="python:data['current']=='clinic'">
+                            <a id="configuration_clinic" class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['clinic']"> Clínica </a>
+                        </tal:if>
+                        <tal:if condition="python:data['current']!='clinic'">
+                            <a id="configuration_clinic" class="navTreeFolderish" tal:attributes="href python:data['links']['clinic']"> Clínica </a>
+                        </tal:if>
+                    </li>
+                    <li tal:condition="python:data['links']['mydata']" class="navTreeItem visualNoMarker navTreeFolderish">
+                        <tal:if condition="python:data['current']=='mydata'">
+                            <a id="configuration_mydata" class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['mydata']"> Meus Dados </a>
+                        </tal:if>
+                        <tal:if condition="python:data['current']!='mydata'">
+                            <a id="configuration_mydata" class="navTreeFolderish" tal:attributes="href python:data['links']['mydata']"> Meus Dados </a>
+                        </tal:if>                        
+                    </li>
+                    <li class="navTreeItem visualNoMarker navTreeFolderish">
+                        <tal:if condition="python:data['current']=='doctorfolder'">
+                            <a id="configuration_doctorfolder" class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['doctorfolder']"> Médicos </a>
+                        </tal:if>
+                        <tal:if condition="python:data['current']!='doctorfolder'">
+                            <a id="configuration_doctorfolder" class="navTreeFolderish" tal:attributes="href python:data['links']['doctorfolder']"> Médicos </a>
+                        </tal:if>                        
+                    </li>
+                    <li class="navTreeItem visualNoMarker navTreeFolderish">
+                        <tal:if condition="python:data['current']=='secretaryfolder'">
+                            <a id="configuration_secretaryfolder" class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['secretaryfolder']"> Secretárias </a>
+                        </tal:if>
+                        <tal:if condition="python:data['current']!='secretaryfolder'">
+                            <a id="configuration_secretaryfolder" class="navTreeFolderish" tal:attributes="href python:data['links']['secretaryfolder']"> Secretárias </a>
+                        </tal:if>
+                    </li>
+
+                </ul>
+            </dd>          
+        </div>
+    </dl>
+</div>
+
+</body>
+</html>

@@ -93,47 +93,12 @@
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4); /*shadow effect*/
 }
 
-/* IMPROVING APPEARENCE ON MENU AND SUBMENU */
-
+/*SEÇÃO CONFIGURAÇÕES*/
 li#adm_li {
   border-left:0.1em solid white;
   float:right;
 }
-
-li#adm_li a#adm_a {
+li#adm_li a {
   color: #205C90;
-  width: 85px; padding-bottom: 1.1em;
-}
-
-li#adm_li a#adm_a:hover {
-  color: white;
-  /*background: #205C90;;*/
-}
-
-ul#section-adm li#start a{
-    background: transparent;
-    padding: 0px;
-    height: 7px;
-}
-
-ul#section-adm li#end a{
-    -webkit-border-bottom-left-radius: 10px;
-    -moz-border-radius-bottomleft: 10px;
-    border-bottom-left-radius: 10px;
-}
-
-ul#section-adm li#second a{
-    -webkit-border-top-left-radius: 10px;
-    -webkit-border-top-right-radius: 10px;
-    -moz-border-radius-topleft: 10px;
-    -moz-border-radius-topright: 10px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-ul#section-adm li a{
-    width:88px;
-}
-ul#section-adm li {
-    border-bottom: 1px white;
+  width: 85px;  
 }

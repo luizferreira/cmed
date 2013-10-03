@@ -54,11 +54,3 @@ padding: 10px 0 0 0;
 #main_chart_print {
 width: 1000px;
 }
-
-dl.help#portal-feedbackhelp {
-    background:#205C90;
-}
-
-dl.help#portal-feedbackhelp dt a {
-    color:white;
-}

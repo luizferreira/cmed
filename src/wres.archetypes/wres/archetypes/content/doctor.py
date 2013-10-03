@@ -210,4 +210,13 @@ class Doctor(wresuser.WRESUser):
         self.setSpecialty2(info['doctor_especialty2'])
         self.at_post_create_script()
 
+    def showNewPasswordCondition(self):
+        """
+        Para o médico, os campos de nova senha são mostrados apenas em dois casos:
+        -> É o próprio médico quem está editando.
+        -> O médico está sendo criado no momento. (não queremos gerar uma senha padrão)
+        """
+        isItMe = self.portal_membership.getAuthenticatedMember().getId() == self.getId()
+        return isItMe or self.isAtCreation()
+
 atapi.registerType(Doctor, PROJECTNAME)
