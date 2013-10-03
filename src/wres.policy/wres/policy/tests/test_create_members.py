@@ -70,16 +70,23 @@ class TestSetup(unittest.TestCase):
         browser = self.browser
         browser.open(portal.absolute_url() + '/view')
 
-        # entra na pasta Doctors e vai pra pagina de adicao de doutor
-        browser.getLink("Médicos").click()
-        browser.open(browser.url + "/createObject?type_name=Doctor")
+        # entra na pasta de configurações.
+        browser.getLink('Configurações').click()
+
+        # entra na pasta de médicos.
+        browser.getLink('Médicos').click()
+
+        # clica no link de adição
+        browser.getLink(id='doctor').click()
 
         # preenche os dados do medico
         browser.getControl(name='firstName').value = fname
         browser.getControl(name='lastName').value = lname        
-        browser.getControl(name='email').value = "aa@aa.com"
+        browser.getControl(name='email').value = 'aa@aa.com'
         browser.getControl(name='specialty1').value = [specialty]
-        browser.getControl(name="form.button.save").click()
+        browser.getControl(name='newPassword').value = 'senha1'
+        browser.getControl(name='newPasswordConfirmation').value = 'senha1'
+        browser.getControl(name='form.button.save').click()
         
     
     def create_secretary(self,fname="Viviane",lname="Secretaria"):
@@ -88,15 +95,21 @@ class TestSetup(unittest.TestCase):
         browser = self.browser
         browser.open(portal.absolute_url() + '/view')
 
-        # entra na pasta Secretary vai pra pagina de adicao de secretaria
-        browser.getLink("Secretárias").click()
-        browser.open(browser.url + "/createObject?type_name=Secretary")
+        # entra na pasta de configurações.
+        browser.getLink('Configurações').click()
 
+        # entra na pasta de secretárias.
+        browser.getLink("Secretárias").click()
+
+        # clica no link de adição
+        browser.getLink(id='secretary').click()
 
         # preenche os dados do medico
         browser.getControl(name='firstName').value = fname
         browser.getControl(name='lastName').value = lname
         browser.getControl(name='email').value = "aa@aa.com"
+        browser.getControl(name='newPassword').value = 'senha1'
+        browser.getControl(name='newPasswordConfirmation').value = 'senha1'        
         browser.getControl(name="form.button.save").click()
 
     def create_patient(self,fname="Marcos",lname="Paciente"):
@@ -225,7 +238,6 @@ class TestSetup(unittest.TestCase):
         setRoles(portal, TEST_USER_ID, MANAGER_ROLES)
         self.create_doctor()
         # testa a url e a mensagem de status
-        #import ipdb;ipdb.set_trace()
         self.assertEqual(portal.absolute_url() + "/Doctors/jdoutor/", browser.url)
         self.assertEqual(True, "As alterações foram salvas." in browser.contents)  
 
@@ -242,9 +254,12 @@ class TestSetup(unittest.TestCase):
         print "As Secretary - False Case"
         logout(self)
         login_as_secretary(self)
-        self.create_doctor()
-        # testa a url e a mensagem de status
-        self.failUnless("Privilégios Insuficientes" in browser.contents)
+
+        # quando o self.create_doctor() tentar clicar no link de adicionar médico
+        # um LinkNotFoundError deve ser levantado, uma vez que o link não aparece
+        # pra quem não tem permissão.
+        from mechanize import LinkNotFoundError
+        self.assertRaises(LinkNotFoundError, self.create_doctor)
         
         print "\n::::Teste criar doutor passou!" 
         
