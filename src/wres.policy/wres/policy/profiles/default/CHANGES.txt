@@ -8,16 +8,20 @@ Change log for CommuniMed
 o Functionalities
 
 - Backup pessoal (falta testar, linkar no sistema e definir complexidade de implantação). [matheusaraujo]
+- Tela de configurações unificada. [luizferreira]
 
 o Bugfixes
 
 - Ao tentar criar um medicamento com um campo faltante, os dados não voltam preenchidos. [luizferreira]
 - Traduzido dois trechos que estavam em inglês no calendário. [luizferreira]
+- Suporte aos telefones celulares com 9 dígitos. [luizferreira]
 
 o Other improvements
 
 - Ordenar histórico de prescrições corretamente. [luizferreira]
 - Replicação dos backups diários. [luizferreira]
+- O layout da pasta de arquivos externos do prontuário foi melhorado [luizferreira]
+- O processo de mudança de senha foi simplificado. [luizferreira]
 
 0.15.0 (2013-07-25)
 ===================
