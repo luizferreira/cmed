@@ -43,7 +43,7 @@
                     </select>)
                 <input tal:attributes="name python:'a%s' % fieldName;
                                        
-                                       value python:here.phoneFormat(value,'phone')" type="text" size="8" maxlength="8" onKeyUp="updatePhone(this);" onchange="updatePhone(this);">
+                                       value python:here.phoneFormat(value,'phone')" type="text" size="10" maxlength="9" onKeyUp="updatePhone(this);" onchange="updatePhone(this);">
                 
                 <input type="hidden" id="contactPhone" tal:attributes="name fieldName;
                                        value value" maxlength="10">

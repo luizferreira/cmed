@@ -137,6 +137,7 @@ listValidators.append(ValidadorCEP('isCEP', title='CEP Validator', description='
 class ValidadorBrPhone:
     """
     Validador para telefones brasileiros. Suportando os formatos:
+        XXXXXXXXXXX (DD123456789) - Algumas regiões já adotam cel com 9 dígitos
         XXXXXXXXXX (1155553211) - Novos telefones
         XXXXXXXXX  (115552133) - Antigos telefones
         0n00XXXXXXX (n sendo 3 ou 8)
@@ -155,11 +156,11 @@ class ValidadorBrPhone:
         
         phone = ''.join([c for c in value if c.isdigit()])
         status = True
-        
+
         if phone.startswith('0'):
-            if not((len(phone) in [10,11]) and phone.isdigit()):
+            if not((len(phone) in [10,11,12]) and phone.isdigit()):
                 status = False
-        elif not(len(phone) in [9,10] and phone.isdigit()):
+        elif not(len(phone) in [9,10,11] and phone.isdigit()):
             status = False
         
         return status or _(u"Telefone inválido")
