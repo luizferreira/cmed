@@ -54,6 +54,18 @@
             description=""
             handler=".upgrades.0_15.initialize_medications_use_type"/>        
 
-    </genericsetup:upgradeSteps>    
+    </genericsetup:upgradeSteps>
        
+    <genericsetup:upgradeSteps
+        source="0.15"
+        destination="0.16"
+        profile="wres.policy:default">
+
+        <genericsetup:upgradeStep
+            title="Run all import steps"
+            description="Run all import steps"
+            handler=".upgrades.utils.reinstall_wres"/>
+
+    </genericsetup:upgradeSteps> 
+
 </configure>
