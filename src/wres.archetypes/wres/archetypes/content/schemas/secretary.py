@@ -88,6 +88,31 @@ MAIN = Schema((
 ))
 set_schemata_properties(MAIN, schemata='Principal')
         
+PASSWORD = Schema((
+         StringField('password',
+            validators = ('isCurrentPassword',),
+            widget=PasswordWidget(
+                label='Senha Atual',
+                condition='python:object.showPasswordCondition()',
+            ),
+        ),
+         StringField('newPassword',
+            required=False,
+            widget=PasswordWidget(
+                label='Nova Senha',
+                macro_edit='cmed_password_widget',
+            ),
+        ),
+         StringField('newPasswordConfirmation',
+            required=False,
+            widget=PasswordWidget(
+                label='Confirmação da Senha',
+                macro_edit='cmed_password_widget',
+            ),
+        ),
+))
+set_schemata_properties(PASSWORD, schemata='Senha')
+
 baseSchema = finalizeSchema(wresuser.WRESUserSchema.copy())
 
-SecretarySchema = baseSchema + MAIN
+SecretarySchema = baseSchema + MAIN + PASSWORD

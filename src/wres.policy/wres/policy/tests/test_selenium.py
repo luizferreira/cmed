@@ -32,7 +32,7 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
         sel = self.selenium
         #   INICIA A INSTANCIA
         sel.open("/plone")
-        sel.click("id=personaltools-login")
+        # sel.click("id=personaltools-login")
         sel.waitForPageToLoad()
         #   LOGA COMO ADMIN
         sel.type("id=__ac_name", "admin")
@@ -40,8 +40,11 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
         sel.click("name=submit")
         sel.waitForPageToLoad()
         #   EXECUTA DEBUG_INIT
-        sel.open("/plone/debug_init")
-        sel.waitForPageToLoad()
+        try:
+            sel.open("/plone/debug_init")
+        except:
+            sel.open("/plone/debug_init")
+        # sel.waitForPageToLoad()
         #   SAI DO ADMIN E ENTRA COMO DTESTE
         sel.open("/plone")
         sel.waitForPageToLoad()
@@ -86,7 +89,8 @@ class Plone4Tests(gocept.selenium.plone.TestCase):
         sel.click("name=form.button.save")
         sel.waitForPageToLoad()
         sel.assertTextPresent("Paciente Teste")
-        print "\nTeste criar documento comcluido"
+        sel.assertTextPresent(u"As alterações foram salvas.")
+        print "\nTeste criar documento concluido"
 
     def test_create_appointment(self):
         strBegin = strEnd = datetime.now().strftime("%Y-%m-%d")

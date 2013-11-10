@@ -1,4 +1,5 @@
 # -*- extra stuff goes here -*-
+from cmedconfiguration import ICmedConfiguration
 from visit import IVisit
 from impresso import IImpresso
 from template import ITemplate

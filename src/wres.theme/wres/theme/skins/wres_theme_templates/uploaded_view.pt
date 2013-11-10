@@ -10,6 +10,7 @@
     <metal:aux fill-slot="style_slot">
         <link type="text/css" href="galleryStyles.css" rel="stylesheet" />
         <link type="text/css" href="upload_view_style.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="cmed.css" />
     </metal:aux>
 	<metal:block fill-slot="javascript_head_slot">
         <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
@@ -28,52 +29,49 @@
 <body>
 
 <div metal:fill-slot="main" id="main_chart_print" 
-        tal:define="urls context/getUploadData" >
+        tal:define="view_data context/getUploadData" >
 
-<table id="filesTable">
-    <tr>
-        <th width="350px">
-            <div tal:condition="python: urls[0]">
-                Arquivos <span class="to_right">Excluir?</span>
-            </div>
-        </th>
-        <th align="center">
-            <div>
-                Imagens
-            </div>
-        </th>
-    </tr>
-    <tr>
-        <td align="top" class="top_align"> 
-            <form action="deleteExternalFile" method="GET"> 
-                <tal:for repeat="file python:urls[1]"> 
-                    <div>
-                        <img tal:attributes="src python:file[2]"/>
-                        <a  class="fileLink" tal:attributes="href python:file[0]" >
-                            <span class="fileName" tal:content="python:file[1]"></span>
-                        </a>
-                        <input class="delete_checkbox" type="checkbox" tal:attributes="name python:file[3]" />
-                    </div>
-                </tal:for>
-                <br/>
-                <input tal:condition="python: urls[0] or urls[1]" type="submit" value="Excluir Selecionados"/>
-                <div class="no_files" tal:condition="not: python:urls[0] or urls[1]">
-                    Não há arquivos externos deste paciente
-                </div>
+    <div id="filesList">
+        <h2> Lista de Arquivos </h2>
+        
+        <form tal:condition="python:view_data['all_files']" action="deleteExternalFile" method="GET"> 
+            <table class="listing cmed">
+                <tr>
+                    <th> - </th>
+                    <th> Título </th>
+                    <th> Data do Upload </th>
+                </tr>
+                <tr tal:repeat="file python:view_data['all_files']">
+                    <td> <input class="delete_checkbox" type="checkbox" tal:attributes="name python:file['uid']" /> </td>
+                    <td> 
+                        <img tal:attributes="src python:file['icon']"/>
+                        <a  class="fileLink" tal:attributes="href python:file['path']">
+                            <span class="fileName" tal:content="python:file['name']"></span>
+                        </a> 
+                    </td>
+                    <td>
+                        <tal:print content="python:file['date']" />
+                    </td> 
+                </tr>
+            </table>
+            <input type="submit" value="Excluir Selecionados"/>
+        </form>
+        <div class="no_files" tal:condition="not: python:view_data['all_files']">
+            Não há arquivos externos deste paciente
+        </div>
+        
+    </div>
 
-            </form>
-        </td>
-        <td>
-            <span class="mensageOnImage" id="image_name">Nome: <span id="selection"></span></span>
-            <div class="pikachoose">
-                <ul id="pictures">
-                    <li tal:repeat="url python:urls[0]"><a tal:attributes="href python:url[0]"><img tal:attributes="src python:url[0]"/></a></li>
-                </ul>
-            </div>
-        </td>
-    </tr>
-</table>
-
+    <br />
+    <div id="carrousel">
+        <h2> Pré-visualização de Imagens </h2>
+        <span class="mensageOnImage" id="image_name">Nome: <span id="selection"></span></span>
+        <div class="pikachoose">
+            <ul id="pictures">
+                <li tal:repeat="image python:view_data['preview_images']"><a id="imageLink" tal:attributes="href python:image['path']"><img tal:attributes="src python:image['path']"/></a></li>
+            </ul>
+        </div>
+    </div>
 
 </div>
 

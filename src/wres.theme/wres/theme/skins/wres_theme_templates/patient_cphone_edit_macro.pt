@@ -35,7 +35,7 @@
                     <input id="cphone_number"
                     tal:attributes="name python:'a%s' % fieldName;
                                     value python:here.phoneFormat(value,'phone')" 
-                                    type="text" size="8" maxlength="8" onKeyUp="updateCPhoneQuickRegister();" onchange="updateCPhoneQuickRegister();">
+                                    type="text" size="10" maxlength="9" onKeyUp="updateCPhoneQuickRegister();" onchange="updateCPhoneQuickRegister();">
 
                 </div>
 

@@ -16,10 +16,10 @@
     vertical-align:text-top;
 }
 
-.delete_checkbox{
+/*.delete_checkbox{
     float:right;
     margin-right:20px;
-}
+}*/
 /*
 Content
 */
@@ -68,8 +68,17 @@ width: 30px;
 .pika-stage, .pika-textnav {
 width: 450px;
 }
-.pikachoose {
+
+.pikachoose .pika-stage a {
+    border:none !important;
+}
+
+/*.pikachoose {
 width: 500px;
+margin: 0 auto;
+}*/
+.pikachoose {
+width: 100%;
 margin: 0 auto;
 }
 tal a img{
@@ -124,9 +133,16 @@ font-size: 80%;
     border-radius:5px;
 }
 
-div.pika-stage {
+/*div.pika-stage {
     height: 350px;
     width: 500px;
+    min-height: 350px;
+    padding: 5px 0px 5px 0px
+}*/
+
+div.pika-stage {
+    height: 350px;
+    width: 100%;
     min-height: 350px;
     padding: 5px 0px 5px 0px
 }
@@ -137,9 +153,14 @@ div.pika-stage {
 }
 */
 
-div.pika-stage img{
+/*div.pika-stage img{
     max-height: 350px;
     max-width: 500px;
+}*/
+
+div.pika-stage img{
+    max-height: 350px;
+    max-width: 100%;
 }
 
 dl.portlet a:hover {

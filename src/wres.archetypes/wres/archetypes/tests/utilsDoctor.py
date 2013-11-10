@@ -66,8 +66,8 @@ def set_doctor_information(d
     d.setCel("31 9877 0801")
     d.setSpecialty1("cardiology")
     d.setSpecialty2("other")
-    d.setInitial("V. Frank")
-    d.setSignature("Vitao")
-    d.setCredentials("Credenciado Plus")
+    # d.setInitial("V. Frank")
+    # d.setSignature("Vitao")
+    # d.setCredentials("Credenciado Plus")
     d.reindexObject()
 

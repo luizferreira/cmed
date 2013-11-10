@@ -24,6 +24,7 @@ def reinstall_wres(context):
     context.runImportStepFromProfile(default_profile, 'cookie_authentication')
     context.runImportStepFromProfile(default_profile, 'mailhost')
     context.runImportStepFromProfile(default_profile, 'properties')
+    context.runImportStepFromProfile(default_profile, 'portlets')
     context.runImportStepFromProfile(default_profile, 'rolemap')
     context.runImportStepFromProfile(default_profile, 'skins')
 

@@ -13,6 +13,12 @@
         />
   </class>  
   --> <!-- -*- extra stuff goes here -*- -->
+  <class class=".cmedconfiguration.CmedConfiguration">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.ICmedConfiguration"
+        />
+  </class>
   <class class=".visit.Visit">
     <require
         permission="zope2.View"
