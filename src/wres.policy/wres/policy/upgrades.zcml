@@ -66,6 +66,11 @@
             description="Run all import steps"
             handler=".upgrades.utils.reinstall_wres"/>
 
+        <genericsetup:upgradeStep
+            title="Cria a pasta de configuracao"
+            description=""
+            handler=".upgrades.0_16.create_configuration_folder"/>
+
     </genericsetup:upgradeSteps> 
 
 </configure>
