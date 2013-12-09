@@ -2,11 +2,19 @@
 Change log for CommuniMed
 =====================================
 
+0.17.0 (Unreleased)
+===================
+
+o Functionalities
+
+- Back to development.
+
 0.16.0 (2013-12-09)
 ===================
 
 o Functionalities
 
+- Backup pessoal (falta testar, linkar no sistema e definir complexidade de implantação). [matheusaraujo]
 - Tela de configurações unificada. [luizferreira]
 
 o Bugfixes
