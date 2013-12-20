@@ -9,6 +9,13 @@ o Functionalities
 
 - Back to development.
 
+0.16.1 (2013-12-20)
+===================
+
+o Bugfixes
+
+- Bug nos links do configuration_portlet. [luizferreira]
+
 0.16.0 (2013-12-09)
 ===================
 
