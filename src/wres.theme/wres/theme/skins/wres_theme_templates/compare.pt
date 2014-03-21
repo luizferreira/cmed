@@ -13,8 +13,7 @@
 <body>
     <div id="main_chart_print" 
             tal:define="ImagesAndFiles context/getUploadData;
-            images python:ImagesAndFiles[0];
-            files  python:ImagesAndFiles[1];">
+            images python:ImagesAndFiles['preview_images'];">
         <table id="table">
             <tr>
                 <th colspan="2" align="center" width="100px">
@@ -29,9 +28,9 @@
                         <span class="mensageOnImage" id="selection"></span>
                         <ul id="pictures">
                             <li tal:repeat="image python:images">
-                                <span class="image_date" tal:content="python:image[1]"></span>
-                                <a tal:attributes="href python:image[0]">
-                                <img tal:attributes="src python:image[0]"/>
+                                <span class="image_date" tal:content="python:image['date']"></span>
+                                <a tal:attributes="href python:image['path']">
+                                <img tal:attributes="src python:image['path']"/>
                                 </a></li>
                             
                         </ul>
@@ -41,7 +40,7 @@
                     <div id="gallery2" class="pikachoose">
                         <span class="mensageOnImage" id="selection2"></span>
                         <ul id="pictures2">
-                            <li tal:repeat="image python:images"><span class="image_date" tal:content="python:image[1]"></span><a tal:attributes="href python:image[0]"><img tal:attributes="src python:image[0]"/></a></li>
+                            <li tal:repeat="image python:images"><span class="image_date" tal:content="python:image['date']"></span><a tal:attributes="href python:image['path']"><img tal:attributes="src python:image['path']"/></a></li>
                         </ul>
                     </div>
                 </td>
@@ -53,16 +52,20 @@
             <tr>
                 <td style="background: #DEE7EC;">
                     <span tal:repeat="image python:images">
-                        <input type="radio" class="left" name="left" tal:attributes="value python:image[0];
-                                                                        id  python:image[3]">
-                        <span tal:content="python:image[2]">nome da imagem</span><br/>
+                        <input type="radio" class="left" name="left" 
+                            tal:attributes="value python:image['path'];
+                                            id  python:image['index']">
+                        <span tal:content="python:image['name']">nome da imagem</span>
+                        (<tal:print content="python:image['date']" />)<br/>
                     </span><br/>
                 </td>
                 <td style="background: #DEE7EC;">
                     <span tal:repeat="image python:images">
-                        <input type="radio" class="right" name="right" tal:attributes="value python:image[0];
-                                                                         id  python:image[3]">
-                        <span tal:content="python:image[2]">nome da imagem</span><br/>
+                        <input type="radio" class="right" name="right" 
+                               tal:attributes="value python:image['path'];
+                                               id  python:image['index']">
+                        <span tal:content="python:image['name']">nome da imagem</span> 
+                        (<tal:print content="python:image['date']" />)<br/>
                     </span><br/>
                 </td>
             </tr>

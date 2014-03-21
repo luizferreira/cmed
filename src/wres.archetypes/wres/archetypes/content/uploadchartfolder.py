@@ -51,13 +51,19 @@ class UploadChartFolder(folder.ATFolder):
         # build list of images to be previewed
         images = []
         brains = pc.search({'portal_type': 'Image', 'path': patient_path})
+        index = 0
         for br in brains:
             parts = br.getPath().split("/")[2:] # preciso do path começando no 'Patients'
             images.append( 
                 {
                     'path': '/'.join(parts),
+                    'name': br.Title,
+                    'uid': br.UID,
+                    'date': br.created.strftime("%d/%m/%Y"),
+                    'index': index,
                 }
             )
+            index += 1
 
         # build list of all files (including images)
         files = []
