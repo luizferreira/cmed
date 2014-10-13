@@ -396,7 +396,7 @@ PRINT MACROS VISITS
         <br />
     </div>
 
-  <table class="seclisting_print cmedPrint" tal:condition="doctor_visits">
+<!--   <table class="seclisting_print cmedPrint" tal:condition="doctor_visits">
     <thead>
                     <metal:thead define-slot="thead">
                         <th style="width:5%;text-align: center;">Horário</th>
@@ -425,7 +425,7 @@ PRINT MACROS VISITS
                                 <input id="visit_url" style="display:none" tal:attributes="value visit/absolute_url"/>
                             </td>
                             <td style="text-align: center;">
-                                    <!-- Link para o nome do paciente-->
+                                    <!-- Link para o nome do paciente->
                                 <a  href="javascript: void(0)"
                                     tal:attributes="id python: 'patient_link' + str(repeat['visit'].index);
                                     onmouseover string:loadPatientTip(${repeat/visit/index})"
@@ -460,7 +460,7 @@ PRINT MACROS VISITS
                     </tr>
                 </tal:for>
             </tbody>
-  </table>
+  </table> -->
     <!-- Do not remove this div, it is used to show "Detalhes da Consulta" in a dialog_content -->
     <div id="dialog_content" style="display:none">
     </div>

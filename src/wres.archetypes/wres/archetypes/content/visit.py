@@ -48,6 +48,15 @@ class Visit(event.ATEvent):
     meta_type = "Visit"
     schema = VisitSchema
 
+    def getRemoteUrl(self):
+        """
+        Usamos essa metadata column para guardar a URL do paciente. Com isso 
+        evitamos um getObject na Agenda (sec_desk)
+        """
+        patient = self.getPatient()
+        if patient:
+            return patient.absolute_url()
+
     def getDoctor(self):
         portal = getSite()
         pai = self.getParentNode()

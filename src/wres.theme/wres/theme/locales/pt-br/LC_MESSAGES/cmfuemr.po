@@ -11678,7 +11678,7 @@ msgstr "Não veio"
 #. Default: "="
 #: uemr_templates_mig\secretary_desktop_view.pt
 msgid "non-show"
-msgstr "Não veio"
+msgstr "Ausente"
 
 #. Default: "="
 #: uemr_templates_mig\secretary_desktop_view.pt
@@ -11688,12 +11688,27 @@ msgstr "Check-in"
 #. Default: "="
 #: uemr_templates_mig\secretary_desktop_view.pt
 msgid "concluded"
-msgstr "Concluído"
+msgstr "Concluída"
 
 #. Default: "="
 #: uemr_templates_mig\secretary_desktop_view.pt
 msgid "scheduled"
-msgstr "Agendado"
+msgstr "Agendada"
+
+#. Default: "="
+#: uemr_templates_mig\secretary_desktop_view.pt
+msgid "confirmed"
+msgstr "Confirmada"
+
+#. Default: "="
+#: uemr_templates_mig\secretary_desktop_view.pt
+msgid "running"
+msgstr "Presente"
+
+#. Default: "="
+#: uemr_templates_mig\secretary_desktop_view.pt
+msgid "unscheduled"
+msgstr "Desmarcada"
 
 #. Default: "="
 #: uemr_templates_mig\select_doctor.pt

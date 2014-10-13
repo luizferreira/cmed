@@ -2,6 +2,13 @@
 Change log for CommuniMed
 =====================================
 
+0.18.0 (2014-10-13)
+===================
+
+o Other improvements
+
+- Otimizando em até 10 vezes o desempenho da Agenda. [luizferreira]
+
 0.17.0 (Unreleased)
 ===================
 

@@ -7,12 +7,12 @@
 ##parameters=visit
 color = ''
 state = visit["getReviewState"]
-if state == "Concluida":
+if state == "concluded":
     color = "green"
-elif state == "Ausente" or state == "Desmarcada":
+elif state == "non-show" or state == "unscheduled":
     color = "red"
-elif state == "Confirmada":
+elif state == "confirmed":
     color = "light"
-elif state == "Presente":
+elif state == "running":
     color = "yellow"
 return color

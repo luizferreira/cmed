@@ -60,15 +60,15 @@
 		</thead>
 		<tbody>
                 <tal:for tal:repeat="visit doctor_visits">
-                    <tr tal:define="doctor python:visit['getDoctor'];
-                                    doctor_id doctor/getId;
+                    <tr tal:define="doctor python:visit['doctor'];
+                                    doctor_id python:visit['doctor_id'];
                                     row_number repeat/visit/number;
                                     color python:context.getRowColor(visit);"
                             tal:attributes="class string:$doctor_id $color visit;
                                             id string:row_$row_number">
                             <metal:trow define-slot="trow">
                             <tal:block_aux tal:define="visit_id python:visit['absolute_url'].split('/')[-1];
-                                                       patient python:visit['getPatient'];">
+                                                       patient python:visit['patient'];">
                             <td style="text-align: center;">
                                 <a tal:attributes="name visit_id" />
                                 <a class="visit_link"
@@ -77,15 +77,15 @@
                                     i18n:translate=""
                                     onclick="timeClick()">Feb 1, 2005 5:17 pm</a>
                                 <img class="no_print" tal:attributes="src string:${portal_url}/popup_icon.gif;" />
-                                <input id="visit_url" style="display:none" tal:attributes="value visit/absolute_url"/>
+                                <input id="visit_url" style="display:none" tal:attributes="value python:visit['absolute_url']"/>
                             </td>
                             <td style="text-align: center;">
                                     <!-- Link para o nome do paciente-->
                                 <a  href="javascript: void(0)"
                                     tal:attributes="id python: 'patient_link' + str(repeat['visit'].index);
                                     onmouseover string:loadPatientTip(${repeat/visit/index})"
-                                    tal:content="python:patient.Title()" i18n:translate="" > Nome do Paciente </a>
-                                <input style="display:none" tal:attributes="value python:patient.absolute_url();
+                                    tal:content="python:visit['patient_title']" i18n:translate="" > Nome do Paciente </a>
+                                <input style="display:none" tal:attributes="value python:visit['patient_absolute_url'];
                                 id python: 'patient_url' + str(repeat['visit'].index)"/>
                                 <input id="AmIDoctor" style="display:none" tal:attributes="value python:context.TestRoles()"/>
                             </td>
@@ -104,19 +104,19 @@
                             </td>
 
                             <td style="text-align: center;">
-                                <div tal:content="visit/getVisit_type | nothing">
+                                <div tal:content="python:visit['visit_type']">
 
                                 </div>
                             </td>
 
                             <td style="text-align: center;">
-                                <div tal:content="visit/getVisit_reason | nothing">
+                                <div tal:content="python:visit['visit_reason']">
 
                                 </div>
                             </td>
 
                             <td style="text-align: center;">
-                                <div tal:content="visit/getInsurance">
+                                <div tal:content="python:visit['insurance']">
                                 </div>
                             </td>
                             </tal:block_aux>
@@ -132,29 +132,35 @@
 </metal:def>
 
 <metal:def define-macro="change_cell"
-   tal:define="review_state visit/getReviewState;
+   tal:define="review_state python:visit['raw_status'];
                visit_concluded python:review_state == 'concluded';
                doctor doctor"
 	i18n:domain="cmfuemr">
 
 	<span i18n:translate="" tal:condition="visit_concluded" tal:replace="review_state"> </span>
-	<tal:notconcluded tal:condition="not:visit_concluded">
-		<tal:links repeat="action visit/getWorkflowActions">
-			<tal:defines tal:define="action_id python:action.get('id');
-                                                 visit_url visit/absolute_url"
-                                tal:condition="python:action_id != 'reschedule'">
-				<a class="change_state_link"
-				   href=""
-				   tal:define="action_id python:action.get('id')"
-				   tal:content="python:action.get('name')"
-				   tal:attributes="href python:visit_url + '/content_status_modify?workflow_action=' + action_id"></a>
-				<tal:hifen condition="not:repeat/action/end">-</tal:hifen>
-			</tal:defines>
-			<tal:not tal:condition="not:action">
-			 -
-			 </tal:not>
-		</tal:links>
-	</tal:notconcluded>
+    <tal:notconcluded tal:condition="not:visit_concluded">
+        <tal:links repeat="action python:visit['possible_transitions']">
+
+            <tal:defines 
+                tal:define="action_id python:action[0];
+                            action_title python:action[1];
+                            visit_url python:visit['absolute_url']"
+                tal:condition="python:action_id != 'reschedule'">
+
+                <a class="change_state_link"
+                   href=""
+                   tal:content="action_title"
+                   tal:attributes="href python:visit_url + '/content_status_modify?workflow_action=' + action_id"></a>
+
+                <tal:hifen condition="not:repeat/action/end">-</tal:hifen>
+            </tal:defines>
+
+            <tal:not tal:condition="not:action">
+             -
+            </tal:not>
+
+        </tal:links>
+    </tal:notconcluded>
 </metal:def>
 
 

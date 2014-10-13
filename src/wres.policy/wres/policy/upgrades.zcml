@@ -11,6 +11,51 @@
         handler=".upgrades.upgrade_to_0_14"
         profile="wres.policy:default" /> -->
 
+    <genericsetup:upgradeSteps
+        source="*"
+        destination="0.18"
+        profile="wres.policy:default">
+
+        <genericsetup:upgradeStep
+            title="Reinstala o catalogo"
+            description=""
+            handler=".upgrades.0_18.reinstall_catalog"/>
+
+    </genericsetup:upgradeSteps> 
+       
+    <genericsetup:upgradeSteps
+        source="0.15"
+        destination="0.16"
+        profile="wres.policy:default">
+
+        <genericsetup:upgradeStep
+            title="Run all import steps"
+            description="Run all import steps"
+            handler=".upgrades.utils.reinstall_wres"/>
+
+        <genericsetup:upgradeStep
+            title="Cria a pasta de configuracao"
+            description=""
+            handler=".upgrades.0_16.create_configuration_folder"/>
+
+    </genericsetup:upgradeSteps> 
+
+    <genericsetup:upgradeSteps
+        source="0.14"
+        destination="0.15"
+        profile="wres.policy:default">
+
+        <genericsetup:upgradeStep
+            title="Run all import steps"
+            description="Run all import steps"
+            handler=".upgrades.utils.reinstall_wres"/>
+
+        <genericsetup:upgradeStep
+            title="Inicializa o campo use_type dos medicamentos"
+            description=""
+            handler=".upgrades.0_15.initialize_medications_use_type"/>        
+
+    </genericsetup:upgradeSteps>
 
     <genericsetup:upgradeSteps
         source="*"
@@ -39,38 +84,5 @@
 
     </genericsetup:upgradeSteps>
 
-    <genericsetup:upgradeSteps
-        source="0.14"
-        destination="0.15"
-        profile="wres.policy:default">
-
-        <genericsetup:upgradeStep
-            title="Run all import steps"
-            description="Run all import steps"
-            handler=".upgrades.utils.reinstall_wres"/>
-
-        <genericsetup:upgradeStep
-            title="Inicializa o campo use_type dos medicamentos"
-            description=""
-            handler=".upgrades.0_15.initialize_medications_use_type"/>        
-
-    </genericsetup:upgradeSteps>
-       
-    <genericsetup:upgradeSteps
-        source="0.15"
-        destination="0.16"
-        profile="wres.policy:default">
-
-        <genericsetup:upgradeStep
-            title="Run all import steps"
-            description="Run all import steps"
-            handler=".upgrades.utils.reinstall_wres"/>
-
-        <genericsetup:upgradeStep
-            title="Cria a pasta de configuracao"
-            description=""
-            handler=".upgrades.0_16.create_configuration_folder"/>
-
-    </genericsetup:upgradeSteps> 
 
 </configure>

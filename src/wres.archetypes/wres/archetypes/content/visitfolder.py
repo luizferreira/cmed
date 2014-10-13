@@ -1,3 +1,5 @@
+## coding=utf-8
+
 """Definition of the VisitFolder content type
 """
 
@@ -81,7 +83,46 @@ class VisitFolder(folder.ATFolder):
 		return json.dumps({"url": "/".join(patient.getPhysicalPath()),"name": patient.getFullName()})
 
 
-		
+    # def create_dummy_visits(self):
+    #     """
+    #     Cria visitas para realização de testes.
+    #     """
+    #     from random import randint
+    #     from DateTime import DateTime
+
+    #     visits_number = 10
+
+    #     patients = self.portal_catalog(portal_type='Patient')
+
+    #     for v in range(visits_number):
+
+    #         oid = str(randint(1, 100000000)) + str(randint(1, 100000000))
+    #         new_visit = self.invokeFactory(id=oid, type_name='Visit')
+    #         new_visit = self.get(oid)
+
+    #         start_hour = randint(8, 17)
+    #         start_minute = randint(1, 59)
+
+    #         today = DateTime()
+    #         start_date = DateTime(today.year(), today.month(), today.day(), start_hour, start_minute)
+    #         if start_minute < 45:
+    #             end_date = DateTime(today.year(), today.month(), today.day(), start_hour, start_minute+15)
+    #         else:
+    #             end_date = DateTime(today.year(), today.month(), today.day(), start_hour+1, start_minute-45)
+
+    #         new_visit.setStartDate(start_date)
+    #         new_visit.setEndDate(end_date)
+    #         new_visit.setDuration(15)
+
+    #         patient = patients[randint(0, len(patients)-1)].getObject()
+    #         new_visit.setPatient(patient)
+
+    #         new_visit = new_visit.portal_factory.doCreate(new_visit, oid)
+    #         new_visit.processForm()
+
+    #         new_visit.reindexObject()
+
+    #     import ipdb; ipdb.set_trace()
 
 
 
