@@ -48,6 +48,45 @@ class PatientFolder(folder.ATFolder):
         #Start LastChartSystemID couter
         self.setLastChartSystemID(0)
 
-    # -*- Your ATSchema to Python Property Bridges Here ... -*-
+    def patient_folder_view_data(self):
+        """
+        Alimenta patient_folder_view.pt
+        """
+
+        data = []
+
+        member = self.portal_membership.getAuthenticatedMember()
+
+        brains = self.portal_catalog.search({'portal_type': 'Patient'}, sort_index='sortable_title')
+
+        for br in brains:
+
+            if br.review_state == 'inactive':
+                continue
+
+            patient = {
+                'id': '',
+                'name': '',
+                'phone': '',
+                'birth': '',
+                'url': '',
+                'chartUrl': '',
+            }
+
+            patient['id'] = br.getId
+            patient['name'] = br.Title
+            patient['url'] = br.getPath()
+            if br.genericColumn1:
+                patient['birth'] = br.genericColumn1.strftime('%d/%m/%Y')
+            if br.genericColumn2:
+                patient['phone'] = '(' + br.genericColumn2[:2] + ')' +  br.genericColumn2[2:6]+ '-' +br.genericColumn2[6:]
+            if 'Secretary' in member.getRoles():
+                patient['chartUrl'] = br.getPath()
+            else:
+                patient['chartUrl'] = br.getPath() + '/initChart'
+            data.append(patient)
+
+        return data
+
 
 registerType(PatientFolder, PROJECTNAME)

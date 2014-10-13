@@ -51,7 +51,9 @@
 
       </form>
       <br/><br/>
-    <tal:define define="allPatients context/getAllPatient;numberPatients python:len(allPatients)">
+    <tal:define define="
+        allPatients context/patient_folder_view_data;
+        numberPatients python:len(allPatients);">
       <div class="tableContainer">
         <div id="semResultado" style="display:none;font-weight:bold" >Nenhum resultado encontrado.</div>
         <table class="listing cmed" id="tabela" class="tabela">
@@ -68,20 +70,20 @@
             </th>
           </thead>
           <tbody id="data"  class="scrollContent" class="tabela">
-            <tal:for repeat="patient python:allPatients">
+            <tal:for repeat="patient allPatients">
             <tr>
               
               <td class="index-col" tal:content="python: repeat['patient'].index + 1">
               </td>
               
               <td>
-                <a id="celulas" tal:attributes="href patient/chartUrl | nothing" tal:content="patient/name | nothing"></a>
+                <a id="celulas" tal:attributes="href python:patient['chartUrl']" tal:content="python:patient['name']"></a>
               </td>
               
-              <td id="celulas" tal:content="patient/phone | nothing">
+              <td id="celulas" tal:content="python:patient['phone']">
               </td>
 
-              <td id="celulas" tal:content="patient/birth | nothing">
+              <td id="celulas" tal:content="python:patient['birth']">
               </td>
             
             </tr>

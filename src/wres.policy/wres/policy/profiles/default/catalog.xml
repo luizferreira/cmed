@@ -10,4 +10,9 @@
     <column value="getInsurance"/>
     <column value="getVisit_reason"/>
     <column value="asc2title"/>
+    
+    <!-- Colunas genericas -->
+    <column value="genericColumn1"/>
+    <column value="genericColumn2"/>
+
 </object>

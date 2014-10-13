@@ -38,6 +38,18 @@ class Patient(wresuser.WRESUser):
 
     security = ClassSecurityInfo()
 
+    def genericColumn1(self):
+        """
+        genericColumn1 é uma metadata column de propósitos gerais
+        """
+        return self.getBirthDate()
+
+    def genericColumn2(self):
+        """
+        genericColumn2 é uma metadata column de propósitos gerais
+        """
+        return self.getContactPhone()
+
     def addInsurance(self):
         """
         Verifica se o convênio preenchido já existe no vocabulário. Caso não
