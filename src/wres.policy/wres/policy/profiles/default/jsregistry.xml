@@ -18,11 +18,6 @@
     id="sec_desk.js" inline="False"/>
 
  <javascript authenticated="False" cacheable="True" compression="safe"
-    conditionalcomment="" cookable="True" enabled="True"
-    expression="python: context.getPhysicalPath()[-1]==&quot;Agenda&quot; or context.getPhysicalPath()[-1]==&quot;sec_desk&quot; or context.getPhysicalPath()[-1]==&quot;Appointments&quot;"
-    id="temporizador.js" inline="False"/>
-
- <javascript authenticated="False" cacheable="True" compression="safe"
     conditionalcomment="" cookable="True" enabled="True" expression=""
     id="jquery.qtip.js" inline="False"/>
 
