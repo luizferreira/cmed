@@ -2,13 +2,18 @@
 Change log for CommuniMed
 =====================================
 
-1.0.0 (2014-10-20)
+1.0.0 (2014-11-03)
 ===================
 
 o Other improvements
 
 - Otimizando desempenho da pasta de pacientes. [luizferreira]
 - Otimizando desempenho da seleção de pacientes durante marcação de consulta. [luizferreira]
+- Otimizando desempenho da busca ativa de pacientes. [luizferreira]
+
+o Bugfixes
+
+- Corrigindo bug na pesquisa ativa de pacientes para a secretária. [luizferreira]
 
 0.18.0 (2014-10-13)
 ===================
