@@ -34,7 +34,7 @@ if siteProperties is not None:
 
 # SIMPLE CONFIGURATION
 USE_ICON = True
-MAX_TITLE = 29
+MAX_TITLE = 35
 MAX_DESCRIPTION = 93
 
 # generate a result set for the query
@@ -75,25 +75,15 @@ site_encoding = context.plone_utils.getSiteEncoding()
 if path is None:
     path = getNavigationRoot(context)
 
-# Este trecho faz com que funcione para o search do building blocks (visit)
+# '*' no final do path indica que a busca esta sendo realizada para selecionar 
+# um paciente para uma consulta.
+selecting_patient_for_visit = False
 if path[-1] == '*':
-    building_search = True
     path = path[0:-1]
-else:
-    building_search = False
+    selecting_patient_for_visit = True
 
-# transforming this in a 'only chart search' #cmed
-# results = catalog(SearchableText=r, portal_type='Patient', path=path, sort_limit=limit)
-results_aux = catalog(SearchableText=r, portal_type='Patient', path=path)
-results = []
-for result in results_aux:
-    patient = result.getObject()
-    if patient.getState_cmed() == 'inactive':
-        continue
-    results.append(patient)
-
-# removing yellow highlight #cmed
-# searchterm_query = '?searchterm=%s'%url_quote_plus(q)
+# no Cmed esta busca eh usada apenas para pacientes, e os inativos nao sao mostrados
+pbrains = catalog(SearchableText=r, portal_type='Patient', review_state='active')
 
 REQUEST = context.REQUEST
 RESPONSE = REQUEST.RESPONSE
@@ -112,28 +102,22 @@ ts = getToolByName(context, 'translation_service')
 output = []
 
 def verifyViewChartPermission():
-    portal = context.portal_url.getPortalObject()
-    userRoles = portal.portal_membership.getAuthenticatedMember().getRoles()
+    userRoles = context.portal_membership.getAuthenticatedMember().getRoles()
     roles = ['Transcriptionist','Manager','Doctor']
-    verify = 0
     for role in roles:
      if role in userRoles:
-       verify = 1
-    return verify
-
+       return 1
+    return 0
 
 def write(s):
     output.append(safe_unicode(s))
 
-if not results:
+if not pbrains:
     write('''<fieldset class="livesearchContainer cmedgray">''')
     write('''<legend id="livesearchLegend">%s</legend>''' % "Resultados")
     write('''<h2 id="results_title">%s</h2>''' % "Resultados")
     write('''<div class="LSIEFix">''')
     write('''<div id="LSNothingFound">%s</div>''' % ts.translate(label_no_results_found, context=REQUEST))
-    # esse link foi colocado estaticamente na propria pagina.
-    # if building_search:
-    #     write('''<div><a class="link" onClick="createPatient()">Adicionar Novo Paciente</a></div>''')
     write('''<div class="LSRow">''')
     write('''</div>''')
     write('''</div>''')
@@ -146,15 +130,15 @@ else:
     write('''<div class="LSIEFix">''')
     write('''<ul class="LSTable">''')
 
-    for patient in results[:limit]:
-        #get patient
-        icon = plone_view.getIcon(result)
-        itemUrl = result.getURL()
-        if result.portal_type in useViewAction:
-            itemUrl += '/view'
-        # removing yellow highlight #cmed
-        # itemUrl = itemUrl + searchterm_query
+    view_chart_permission = verifyViewChartPermission()
 
+    for patient in pbrains[:limit]:
+
+        #get patient
+        icon = plone_view.getIcon(patient)
+        itemUrl = patient.getURL()
+        if patient.portal_type in useViewAction:
+            itemUrl += '/view'
 
         write('''<li class="LSRow" style="width:425px;">''')
         write(icon.html_tag() or '')
@@ -163,65 +147,52 @@ else:
             display_title = ''.join((full_title[:MAX_TITLE],'...'))
         else:
             display_title = full_title
-        #import pdb; pdb.set_trace()
         full_title = full_title.replace('"', '&quot;')
-        klass = 'contenttype-%s' % ploneUtils.normalizeString(result.portal_type)
+        klass = 'contenttype-%s' % ploneUtils.normalizeString(patient.portal_type)
 
         # tratamento especial para o tipo patient
         # o primeiro if se refere ao Procurar do adicionar consulta1
         # o elif se refere a pesquisa da pasta Patients
-        if building_search:
-            dt = patient.getBirthDate()
-            cf = patient.getContactPhone()
-            formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])
-            ppath = patient.absolute_url_path()
-            if dt == None:
-                write('''<a title="%s" class="%s" onClick="choosePatient('%s', '%s')">%s (%s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone))
+        dt = patient.genericColumn1
+        cf = patient.genericColumn2
+        formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])
+        if selecting_patient_for_visit:
+            ppath = patient.getURL()
+            if dt:
+                write('''<a title="%s" class="%s" onClick="choosePatient('%s', '%s')">%s</a>''' % (full_title, klass, display_title, ppath, display_title))
             else:
-                write('''<a title="%s" class="%s" onClick="choosePatient('%s', '%s')">%s (%s * %s)</a>''' % (full_title, klass, display_title, ppath, display_title, formatted_phone, dt.strftime("%d/%m/%Y")))
+                write('''<a title="%s" class="%s" onClick="choosePatient('%s', '%s')">%s</a>''' % (full_title, klass, display_title, ppath, display_title))
         else:
-            dt = patient.getBirthDate()
-            cf = patient.getContactPhone()
-            #Added the ID to the link to help amberjack
-            patient_id_pessoal = patient.getId() + "_pessoal"
-            patient_id_prontuario = patient.getId() + "_prontuario"
-            formatted_phone = "%s %s-%s" % (cf[:2], cf[2:6], cf[6:10])
-            pchart_url = patient.absolute_url()+'/initChart'
+            # add the ID to the link to help amberjack
+            patient_id_pessoal = patient.getId + "_pessoal"
+            patient_id_prontuario = patient.getId + "_prontuario"
+            pchart_url = patient.getURL()+'/initChart'
 
-            if dt == None:
-                display_text = "%s (%s)" % (display_title, formatted_phone )
+            if view_chart_permission:
+                patient_url = patient.getURL()+'/initChart'
             else:
-                display_text = "%s (%s * %s)" % (display_title, formatted_phone, dt.strftime("%d/%m/%Y") )
-            if verifyViewChartPermission():
-                write('''<a href="%s" id="%s" title="%s" class="%s">%s</a>''' % (pchart_url, patient_id_pessoal,full_title, klass, display_text))
-            else:
-                write('''<a href="%s" id="%s" title="%s" class="%s">%s</a>''' % (itemUrl, patient_id_pessoal,full_title, klass, display_text))
+                patient_url = patient.getURL()+'/view'
 
+            # escreve a linha referente ao paciente
+            write('''<a href="%s" id="%s" title="%s" class="%s">%s</a>''' % (patient_url, patient_id_pessoal,full_title, klass, display_title))
 
-        # only patients returned in search, so this doenst make sense anymore #cmed
-        # else:
-        #     write('''<a href="%s" title="%s" class="%s">%s</a>''' % (itemUrl, full_title, klass, display_title))
-        display_description = safe_unicode(result.Description)
-        if len(display_description) > MAX_DESCRIPTION:
-            display_description = ''.join((display_description[:MAX_DESCRIPTION],'...'))
-        # need to quote it, to avoid injection of html containing javascript and other evil stuff
-        display_description = html_quote(display_description)
-        write('''<div class="LSDescr">%s</div>''' % (display_description))
+        # a descricao do item mostra o telefone e a data de nascimento
+        if dt == None:
+            display_description = html_quote("(%s)" % (formatted_phone))
+        else:
+            display_description = html_quote("(%s * %s)" % (formatted_phone, dt.strftime("%d/%m/%Y")))
+
+        write('''<span class="LSDescr">%s</span>''' % (display_description))
         write('''</li>''')
         full_title, display_title, display_description = None, None, None
 
     write('''<br />''')
-    if len(results)>limit:
-        # add a more... row
+    if len(pbrains)>limit:
         write('''<li class="LSRow" style="width:425px;">''')
-        # just print a message when the results explodes #cmed
-        write( '<span style="font-weight:normal; font-size:80%">Alguns resultados não foram exibidos, refina melhor a sua busca.</span>' )
-        # write( '<a href="%s" style="font-weight:normal">%s</a>' % ('search?SearchableText=' + searchterms, ts.translate(label_show_all, context=REQUEST)))
+        # imprime uma mensagem quando há resultados que não foram mostrados por causa do limite
+        write( '<span style="color:red; font-weight:normal; font-size:80%">Alguns resultados não foram exibidos, refina melhor a sua busca.</span>' )
         write('''</li>''')
     write('''</ul>''')
-    # este link foi colocado estaticamente na propria pagina.
-    # if building_search:
-    #     write('''<div><a class="link" onClick="createPatient()">Adicionar Novo Paciente</a></div>''')
     write('''</div>''')
     write('''</div>''')
 
