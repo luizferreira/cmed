@@ -3,6 +3,7 @@
 """Definition of the Patient content type
 """
 from AccessControl import ClassSecurityInfo
+from DateTime import DateTime
 
 import json
 
@@ -243,6 +244,7 @@ class Patient(wresuser.WRESUser):
         name was changed, the name will be formated.
         """
         wresuser.WRESUser.at_post_edit_script(self)
+        self.reindexVisits() # atualize o Title das visitas caso necessário
         self.addInsurance()  # verifica se o convênio preenchido já existe no vocab
 
 
@@ -346,6 +348,19 @@ class Patient(wresuser.WRESUser):
         pw = getToolByName(portal,"portal_workflow")
         state = pw.getStatusOf("patient_workflow",self)
         return state['review_state']
+
+    def reindexVisits(self):
+        """
+        Visits title are based on patient title. So, when editing a patient we
+        need to reindex visits (just present and future ones) in order to garantee
+        that their name are ok
+        """
+        start = DateTime().earliestTime() # nao precisamos reindexar visitas antigas
+        end = DateTime(2100, 1, 1)   # far away in the future
+        date_range_query = {'query': (start, end), 'range': 'min:max'}
+        brains = self.portal_catalog(portal_type='Visit', LTitle=self.getId(), start=date_range_query)
+        for br in brains:
+            br.getObject().reindexObject() # reindexa a visita
 
     def setReaderLocalRole(self):
         #Add Reader Role

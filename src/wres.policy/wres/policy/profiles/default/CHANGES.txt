@@ -2,6 +2,14 @@
 Change log for CommuniMed
 =====================================
 
+1.0.1 (2014-11-04)
+===================
+
+o Bugfixes
+
+- Corrigindo o botão Imprimir na Agenda. [luizferreira]
+- Corrigindo o nome do paciente na Agenda quando ele é mudado. [luizferreira]
+
 1.0.0 (2014-11-03)
 ===================
 

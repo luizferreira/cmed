@@ -48,6 +48,20 @@ class Visit(event.ATEvent):
     meta_type = "Visit"
     schema = VisitSchema
 
+    def lower_title(self):
+        """
+        Método referente ao índice LTitle que guardará o ID do paciente
+        """
+        patient = self.getPatient()
+        if patient:
+            return patient.getId()
+
+    def Title(self):
+        patient = self.getPatient()
+        if patient:
+            return patient.Title()
+        return ''
+
     def getRemoteUrl(self):
         """
         Usamos essa metadata column para guardar a URL do paciente. Com isso 
