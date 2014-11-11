@@ -1,6 +1,6 @@
 
 <metal:def define-macro="doctor_select">
-	<div id="doctor_select_div" class="no_print">
+	<div id="doctor_select_div" class="visualNoPrint">
             <select name="doctor_id" id="doctor_select">
                 <option selected="" value=""> Todos os médicos </option>
                 <tal:for repeat="doctor doctors">
@@ -48,15 +48,15 @@
 <metal:def define-macro="visits_table" i18n:domain="cmfuemr">
 	<table class="seclisting width-100 visits_table cmed" id="visit_table" tal:condition="doctor_visits">
 		<thead>
-                    <metal:thead define-slot="thead">
-                        <th style="width:6%;text-align: center;">Horário</th>
-                        <th style="width:18%;text-align: center;">Paciente</th>
-                        <th style="width:10%;text-align: center;">Status</th>
-                        <th style="width:28%;text-align: center;">Alterar</th>
-                        <th style="width:10%;text-align: center;">Tipo</th>
-                        <th style="width:10%;text-align: center;">Razão</th>
-                        <th style="width:12%;text-align: center;">Convênio</th>
-                    </metal:thead>
+            <metal:thead define-slot="thead">
+                <th style="width:6%;text-align: center;">Horário</th>
+                <th style="width:18%;text-align: center;">Paciente</th>
+                <th style="width:10%;text-align: center;">Status</th>
+                <th style="width:28%;text-align: center;">Alterar</th>
+                <th style="width:10%;text-align: center;">Tipo</th>
+                <th style="width:10%;text-align: center;">Razão</th>
+                <th style="width:12%;text-align: center;">Convênio</th>
+            </metal:thead>
 		</thead>
 		<tbody>
                 <tal:for tal:repeat="visit doctor_visits">
@@ -76,7 +76,7 @@
                                     tal:content="python:visit['start'].strftime('%H:%M')"
                                     i18n:translate=""
                                     onclick="timeClick()">Feb 1, 2005 5:17 pm</a>
-                                <img class="no_print" tal:attributes="src string:${portal_url}/popup_icon.gif;" />
+                                <img class="visualNoPrint" tal:attributes="src string:${portal_url}/popup_icon.gif;" />
                                 <input id="visit_url" style="display:none" tal:attributes="value python:visit['absolute_url']"/>
                             </td>
                             <td style="text-align: center;">
@@ -96,7 +96,7 @@
                             </td>
 
                             <!-- Conteudo da celula CHANGE  -->
-                            <td style="text-align: center;">
+                            <td style="text-align: center;" class="visualNoPrint">
                                 <img id="loadergif" tal:attributes="src string:${portal_url}/ajaxloader.gif;" style="display: none;" />
                                 <div tal:define="repeat_number repeat/visit/number" tal:attributes="id string:change_cell_div_${repeat_number}">
                                         <metal:change use-macro="here/sec_desk_macros/macros/change_cell" />

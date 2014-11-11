@@ -36,9 +36,10 @@ Use header without patient_info
     <img class="document_clinic_logo" tal:attributes="src python:str(context.absolute_url()) + '/Clinic/logo'" style="max-height:75px; max-width:200px;" />
   </tal:if>
 
-  <tal:if condition="not: context/Clinic/getLogo">
+  <!-- Retirando a logo do Cmed -->
+<!--   <tal:if condition="not: context/Clinic/getLogo">
     <img class="document_clinic_logo" tal:attributes="src python: str(context.absolute_url()) + '/logo.png'" style="max-height:75px; max-width:200px;" />
-  </tal:if>
+  </tal:if> -->
 
   <center>
    <!--
@@ -330,7 +331,8 @@ Use header without patient_info
         <td style="padding:0px">
           <dl id="day-tables">
             <div id="hoje-table">
-              <p class="day-title">Hoje - <span class="date"></span></p>
+              <p id="today-title" class="day-title"><span class="date"></span></p>
+              <p id="tomorrow-title" class="day-title"><span class="tomorrow-string"></span></p>
               <dd id="fieldset-today">
                 <div class="show_visits" id="show_today_visits">
                   <div metal:use-macro="context/print_pages_macros/macros/show_visits_print">
@@ -340,7 +342,7 @@ Use header without patient_info
               </dd>
             </div>
 
-          <div id="amanha-table">
+<!--           <div id="amanha-table">
             <p class="day-title">Amanhã - <span class="tomorrow-string"></span></p>
             <dd id="fieldset-tomorrow">
 
@@ -362,7 +364,7 @@ Use header without patient_info
 
               </div>
             </dd>
-          </div>
+          </div> -->
           </dl>
           
         </td>
@@ -396,7 +398,7 @@ PRINT MACROS VISITS
         <br />
     </div>
 
-<!--   <table class="seclisting_print cmedPrint" tal:condition="doctor_visits">
+  <table id="print-table" class="seclisting_print cmedPrint" tal:condition="doctor_visits">
     <thead>
                     <metal:thead define-slot="thead">
                         <th style="width:5%;text-align: center;">Horário</th>
@@ -407,60 +409,11 @@ PRINT MACROS VISITS
                         <th style="width:15%;text-align: center;">Convênio</th>
                     </metal:thead>
     </thead>
-    <tbody>
-                <tal:for tal:repeat="visit doctor_visits">
-                    <tr tal:define="doctor python:visit['getDoctor'];
-                                    doctor_id doctor/getId;
-                                    row_number repeat/visit/number;
-                                    color python:context.getRowColor(visit);"
-                            tal:attributes="class string:$doctor_id $color visit;
-                                            id string:row_$row_number">
-                            <metal:trow define-slot="trow">
-                            <tal:block_aux tal:define="visit_id python:visit['absolute_url'].split('/')[-1];
-                                                       patient python:visit['getPatient'];">
-                            <td style="text-align: center;">
-                                <div tal:content="python:visit['start'].strftime('%H:%M')">
-                                </div>
-                                <img class="visualNoPrint" tal:attributes="src string:${portal_url}/popup_icon.gif;" />
-                                <input id="visit_url" style="display:none" tal:attributes="value visit/absolute_url"/>
-                            </td>
-                            <td style="text-align: center;">
-                                    <!-- Link para o nome do paciente->
-                                <a  href="javascript: void(0)"
-                                    tal:attributes="id python: 'patient_link' + str(repeat['visit'].index);
-                                    onmouseover string:loadPatientTip(${repeat/visit/index})"
-                                    tal:content="python:patient.Title()" i18n:translate="" > Nome do Paciente </a>
-                                <input style="display:none" tal:attributes="value python:patient.absolute_url();
-                                id python: 'patient_url' + str(repeat['visit'].index)"/>
-                                <input id="AmIDoctor" style="display:none" tal:attributes="value python:context.TestRoles()"/>
-                            </td>
 
-                            <td class="desktop_visit_status"
-                                tal:content="python:visit['getReviewState']" i18n:translate=""
-                                style="text-align: center;">Status
-                            </td>
-                            <td style="text-align: center;">
-                                <div tal:content="visit/getVisit_type | nothing">
+    <!-- O tbody é preenchido via JQuery logo antes de gerar a impressão -->
+    <tbody></tbody>
 
-                                </div>
-                            </td>
-
-                            <td style="text-align: center;">
-                                <div tal:content="visit/getVisit_reason | nothing">
-
-                                </div>
-                            </td>
-
-                            <td style="text-align: center;">
-                                <div tal:content="visit/getInsurance">
-                                </div>
-                            </td>
-                            </tal:block_aux>
-                        </metal:trow>
-                    </tr>
-                </tal:for>
-            </tbody>
-  </table> -->
+  </table>
     <!-- Do not remove this div, it is used to show "Detalhes da Consulta" in a dialog_content -->
     <div id="dialog_content" style="display:none">
     </div>
