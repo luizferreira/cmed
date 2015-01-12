@@ -81,6 +81,7 @@ selecting_patient_for_visit = False
 if path[-1] == '*':
     path = path[0:-1]
     selecting_patient_for_visit = True
+    limit = 20 # aumenta o limite de resultados na adição de visita
 
 # no Cmed esta busca eh usada apenas para pacientes, e os inativos nao sao mostrados
 pbrains = catalog(SearchableText=r, portal_type='Patient', review_state='active')
@@ -131,6 +132,13 @@ else:
     write('''<ul class="LSTable">''')
 
     view_chart_permission = verifyViewChartPermission()
+
+    # imprime a mensagem também no início dos resultados para garantir que será vista.
+    if len(pbrains)>limit:
+        write('''<li class="LSRow" style="width:425px;">''')
+        # imprime uma mensagem quando há resultados que não foram mostrados por causa do limite
+        write( '<span style="color:red; font-weight:normal;">Alguns resultados não foram exibidos, refina melhor a sua busca.</span>' )
+        write('''</li>''')
 
     for patient in pbrains[:limit]:
 
@@ -190,7 +198,7 @@ else:
     if len(pbrains)>limit:
         write('''<li class="LSRow" style="width:425px;">''')
         # imprime uma mensagem quando há resultados que não foram mostrados por causa do limite
-        write( '<span style="color:red; font-weight:normal; font-size:80%">Alguns resultados não foram exibidos, refina melhor a sua busca.</span>' )
+        write( '<span style="color:red; font-weight:normal;">Alguns resultados não foram exibidos, refina melhor a sua busca.</span>' )
         write('''</li>''')
     write('''</ul>''')
     write('''</div>''')
