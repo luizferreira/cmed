@@ -76,8 +76,10 @@ Use header without patient_info
             <tr>
                  <td class="document_item_title">Nome: </td>
                  <td> <span class="item_content" tal:content="patientData/getFullName |nothing"></span></td>
-                 <td class="document_item_title">Registro no Sistema: </td>
-                 <td><span class="document_item_content" tal:content="patientData/getChartSystemID | nothing"></span><br></td>
+<!--                  <td class="document_item_title">Registro no Sistema: </td>
+                 <td><span class="document_item_content" tal:content="patientData/getChartSystemID | nothing"></span><br></td> -->
+                 <td class="document_item_title">Data: </td>
+                 <td><span class="item_content" tal:content="python:context.dateOfVisit.strftime('%d/%m/%Y')"></span><br></td>
             </tr>
             <tr>
                  <td class="document_item_title">Data de Nascimento: </td>
