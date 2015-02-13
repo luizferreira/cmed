@@ -85,12 +85,34 @@ function get_correspondent(campo, lista1, lista2) {
 
 
 $(document).ready(function(){
-	$("input#add_new").click(fill_hidden_start_date)
+	$("input#add_new").click(fill_hidden_start_date);
 
-	$("input#add_new").click(fill_hidden_end_date)
+	$("input#add_new").click(fill_hidden_end_date);
 
-//  	$("input#problem").blur(function(){get_correspondent($this)})
-// 
-// 	$("input#code").blur(get_correspondent)
+
+    huge_CIDdesc = null;
+    huge_CIDcode = null;
+
+    // carrega o autocomplete
+    $.get("./getCID_desc", function(data){
+        huge_CIDdesc = eval(data);
+        $( "#problem" ).autocomplete({minLength: 3, source: huge_CIDdesc});
+    });
+
+    // carrega o autocomplete
+    $.get("./getCID_code", function(data){
+        huge_CIDcode = eval(data);
+        $( "#code" ).autocomplete({minLength: 1, source: eval(data)});
+    });
+
+    // blur é disparado quando o elemento perde o foco
+    $("#problem").blur(function() {
+        get_correspondent(this, huge_CIDdesc, huge_CIDcode);
+    });
+    
+    // assim que ele perde o foco ele pega a descrição equivalente ao código e preenche o outro campo
+    $("#code").blur(function() {
+        get_correspondent(this, huge_CIDcode, huge_CIDdesc);
+    });
 
 });

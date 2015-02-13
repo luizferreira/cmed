@@ -61,8 +61,7 @@
         <legend> Adicionar Diagnóstico </legend>        
         <form tal:attributes="action template/id">
             <input type="hidden" name="form.submitted" value="1" />
-            <table class="listing width-100" tal:define="vocab_desc context/getCID_desc;
-                                                         vocab_code context/getCID_code">
+            <table class="listing width-100">
                 <th>Diagnóstico</th>
                 <th>Código</th>
                 <th>Data</th>
@@ -70,15 +69,11 @@
                 <tr>
                     <td>
                         <input type="text" name="problem" id="problem" autocomplete="off"
-                            tal:attributes="value request/problem | nothing;
-                                            onkeyup string:actb(this, event, ${vocab_desc});
-                                            onchange string:get_correspondent(this, ${vocab_desc}, ${vocab_code})"/>
+                            tal:attributes="value request/problem | nothing;"/>
                     </td>
                     <td>
                         <input type="text" name="code" id="code" autocomplete="off"
-                            tal:attributes="value request/code | nothing;
-                                            onkeyup string:actb(this, event, ${vocab_code});
-                                            onchange string:get_correspondent(this, ${vocab_code}, ${vocab_desc})" />
+                            tal:attributes="value request/code | nothing;" />
                     </td>
                     <td>
                         <input type="text" id="started" name="shown_started" size="7"
@@ -138,23 +133,18 @@
         <legend> Editar Diagnóstico </legend>        
         <form tal:attributes="action template/id">
             <input type="hidden" name="form.submitted" value="1" />
-            <table class="listing width-100" tal:define="vocab_desc context/getCID_desc;
-                                                         vocab_code context/getCID_code">
+            <table class="listing width-100">
                 <th>Diagnóstico</th>
                 <th>Código</th>
                 <th>Data</th>
                 <tr>
                     <td>
                         <input type="text" name="problem" id="problem" autocomplete="off"
-                            tal:attributes="value request/problem | nothing;
-                                            onkeyup string:actb(this, event, ${vocab_desc});
-                                            onchange string:get_correspondent(this, ${vocab_desc}, ${vocab_code})"/>
+                            tal:attributes="value request/problem | nothing;"/>
                     </td>
                     <td>
                         <input type="text" name="code" id="code" autocomplete="off"
-                            tal:attributes="value request/code | nothing;
-                                            onkeyup string:actb(this, event, ${vocab_code});
-                                            onchange string:get_correspondent(this, ${vocab_code}, ${vocab_desc})" />
+                            tal:attributes="value request/code | nothing;" />
                     </td>
                     <td>
                         <input type="text" id="started" name="shown_started" size="7"
