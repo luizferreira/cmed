@@ -34,8 +34,7 @@
                     <div style="font-weight:bold" tal:content="title"> </div>
                     <div tal:condition="bdate" style="font-style:italic">
                         <span tal:content="python:bdate.strftime('%d/%m/%Y')"> 01/01/1990 </span>
-                        (<span tal:content="python:context.getPatientAge(bdate)"></span>
-                        <span> anos</span>)
+                        (<span tal:content="context/formattedAge"></span>)
                     </div>
                     <div tal:condition="email" tal:content="email" style="font-style:italic"> test@test.com </div>
                     <div style="font-style:italic">

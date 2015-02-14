@@ -2,6 +2,7 @@
 
 """Definition of the Patient content type
 """
+from datetime import date
 from AccessControl import ClassSecurityInfo
 from DateTime import DateTime
 
@@ -370,5 +371,34 @@ class Patient(wresuser.WRESUser):
         #Set Reader to view
         self.manage_permission('Access contents information', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, READER_ROLE], acquire = False)
         self.manage_permission('View', [MANAGER_ROLE, UEMRADMIN_ROLE, DOCTOR_ROLE, SECRETARY_ROLE, TRANSCRIPTIONIST_ROLE, READER_ROLE], acquire = False)        
+
+    def formattedAge(self):
+        """
+        Retorna a idade formatada, por ex: 10a2m (10 anos e 2 meses)
+        """
+
+        birthdate = self.getBirthDate()
+        birthdate = date(birthdate.year(), birthdate.month(), birthdate.day())
+        today = date.today()
+        
+        year_age = today.year - birthdate.year
+
+        # não se faz aniversário na virada do ano, precisamos ajustar
+        try:
+            birthday_this_year = date(today.year, birthdate.month, birthdate.day)
+        except: # caso tenha nascido em 29/02 de um ano bissexto
+            birthday_this_year = date(today.year, birthdate.month, birthdate.day-1)
+        if not today >= birthday_this_year: # se o aniversario ainda nao aconteceu neste ano
+            year_age -= 1
+
+        month_age = today.month - birthdate.month
+
+        # um mês é completado apenas quando o dia na data de aniversário é ultrapassado pela data de hoje
+        if not today.day >= birthdate.day:
+            month_age -= 1
+
+        month_age = month_age % 12
+
+        return '%sa%sm' % (year_age, month_age)
 
 atapi.registerType(Patient, PROJECTNAME)

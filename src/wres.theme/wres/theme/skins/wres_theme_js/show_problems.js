@@ -102,7 +102,7 @@ $(document).ready(function(){
     // carrega o autocomplete
     $.get("./getCID_code", function(data){
         huge_CIDcode = eval(data);
-        $( "#code" ).autocomplete({minLength: 1, source: eval(data)});
+        $( "#code" ).autocomplete({minLength: 1, source: huge_CIDcode});
     });
 
     // blur é disparado quando o elemento perde o foco
