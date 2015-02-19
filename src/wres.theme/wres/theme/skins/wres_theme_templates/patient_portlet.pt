@@ -46,6 +46,18 @@
                 </td>
             </tr>
         </table>
+        <div tal:condition="python: context.getNomeDoPai() or context.getNomeDaMae()" style="font-size:13px;">
+        <br />
+            <span style="color:#205C90; font-weight: bold;"> 
+                Filiação: <br />
+            </span>
+            <div>
+                <tal:print content="context/getNomeDoPai" />
+            </div>
+            <div>
+                <tal:print content="context/getNomeDaMae" />
+            </div>
+        </div >
 </div>
 
 </body>
