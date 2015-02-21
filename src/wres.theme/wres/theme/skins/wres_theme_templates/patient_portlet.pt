@@ -46,7 +46,12 @@
                 </td>
             </tr>
         </table>
-        <div tal:condition="python: context.getNomeDoPai() or context.getNomeDaMae()" style="font-size:13px;">
+        
+        <!-- 
+        Há duas condições para aparecer a informação Filiação no prontuário:
+        1. O paciente ter menos de 18 anos
+        2. O paciente ter preenchido pelo menos um dos campos nomeDoPai e nomeDaMae -->
+        <div tal:condition="python: context.getPatientAge(context.getBirthDate()) < 18 and (context.getNomeDoPai() or context.getNomeDaMae())" style="font-size:13px;">
         <br />
             <span style="color:#205C90; font-weight: bold;"> 
                 Filiação: <br />
