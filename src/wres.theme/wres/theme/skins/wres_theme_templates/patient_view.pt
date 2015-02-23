@@ -100,16 +100,16 @@
         <thead>
             <tr>
                 <th>
-                Evento
+                Data da última consulta concluída
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>
-                    <div class="label">
-                        <tal:print content="python: context.getLastVisitDate().split(':')[0]" />:
-                        <span class="dado" tal:content="python: context.getLastVisitDate().split(':')[1]" />
+                    <div>
+                        <span class="dado" 
+                            tal:content="context/getLastVisitDate" />
                     </div>
                 </td>
             </tr>
