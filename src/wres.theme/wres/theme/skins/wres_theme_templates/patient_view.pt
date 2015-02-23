@@ -96,6 +96,25 @@
             </tal:for>
         </tbody>
     </table>
+    <table class="listing nosort cmed width-100">
+        <thead>
+            <tr>
+                <th>
+                Evento
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="label">
+                        <tal:print content="python: context.getLastVisitDate().split(':')[0]" />:
+                        <span class="dado" tal:content="python: context.getLastVisitDate().split(':')[1]" />
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </center>
 
 

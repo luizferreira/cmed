@@ -3798,7 +3798,7 @@ msgid "Paper Chart Number"
 msgstr "Prontuário em Papel"
 
 msgid "Chart System ID"
-msgstr "ID do Prontário no sistema"
+msgstr "ID do Prontuário no sistema"
 
 msgid "cmfuemr_help_paper_chart_number"
 msgstr "Referência para Prontuário já existente (em Papel)."
