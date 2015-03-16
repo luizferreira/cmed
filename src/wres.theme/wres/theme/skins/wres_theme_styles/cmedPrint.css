@@ -33,11 +33,25 @@ fieldset {
     border: 0px;
     width: 100%;
 }
+
+/*Labels das informações do paciente no cabeçalho*/
 .document_item_title{
     font-size: 15px;
     font-weight: bold;
     text-align: left;
 }
+
+/*Retirando um page break colocando antes de tabelas no editor visual*/
+#cmed_document_print_body .pageBreak {
+    display: none;
+}
+
+/*Diminuindo a fonte e a margem na impressão*/
+#cmed_document_print_body p {
+    margin-bottom: 0;
+    font-size: 80%;
+}
+
 /*.document_item_content{
     font-size: 13px;
     text-align: left;

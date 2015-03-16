@@ -287,7 +287,7 @@ Use header without patient_info
   Body
   ------------------------------------
   -->
-  <div tal:define ="data context/getDataDoc">
+  <div id="cmed_document_print_body" tal:define ="data context/getDataDoc">
   <tal:for repeat="schemata data">
       <tal:fieldset_name define="fieldset_name python:schemata[0]">
           <fieldset id="fieldset_doc_view">
@@ -448,10 +448,7 @@ PRINT MACROS VISITS
   Body
   ------------------------------------
   -->
-  <br />
-  <br />
-  <br />
-  <div tal:define ="data context/getDataTemplate">
+  <div id="cmed_document_print_body" tal:define ="data context/getDataTemplate">
   <tal:for repeat="schemata data">
       <tal:fieldset_name define="fieldset_name python:schemata[0]">
           <fieldset id="fieldset_doc_view">
