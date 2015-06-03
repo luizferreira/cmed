@@ -306,6 +306,14 @@ def changePortalLanguage(portal):
 # Peter
 #===========================================================================
 def loadCIDVocabulary(portal, context):
+    """
+    O problema do encoding no diagnosticos foi resolvido configurando o servidor
+    para usar o locale LANG=pt_BR.UTF-8. 
+    Dessa forma, e importante configurar todos os servidores que rodam o cmed 
+    com esse locale:
+    sudo locale-gen pt_BR.UTF-8
+    sudo update-locale LANG=pt_BR.UTF-8
+    """
     print "Carregando CID do arquivo CID.txt ..."
     vt = getToolByName(portal, 'vocabulary_tool')
     if not vt.vocabulary_exist("CID_desc"):
