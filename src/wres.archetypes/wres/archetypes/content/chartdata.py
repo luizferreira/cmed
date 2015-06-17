@@ -179,7 +179,9 @@ class Event:
         pw = getToolByName(self.portal, 'portal_workflow')
         wf = getattr(pw, 'appointment_workflow')
         pc = getToolByName(self.portal, 'portal_catalog')
-        brains = pc.search({'id':self.related_obj.getId()})
+        # o getId algumas vezes retornava mais de um objeto nesta pesquisa. Por
+        # isso mudamos para UID.
+        brains = pc.search({'UID': self.related_obj.UID()})
         if len(brains) > 1:
             raise Exception('I found more than 1 visit with the same id.')
         brain = brains[0]
