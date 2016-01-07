@@ -10,17 +10,20 @@ request = context.REQUEST.form
 action = request['workflow_action']
 
 if action not in ['activate','inactivate']:
-	container.REQUEST.RESPONSE.redirect(container.Patients.absolute_url() + "?portal_error_message=Não foi possível realizar a operação")	
+    container.REQUEST.RESPONSE.redirect(container.Patients.absolute_url() + "?portal_error_message=Não foi possível realizar a operação")
 else:
-	if context.id == "chartFolder_hidden":
-		#Desativando paciente pelo prontuario
-		context = context.getParentNode()
-		context.doWorkflowAction(action)
-	else:
-		#Desativando paciente pelo view do paciente
-		context.doWorkflowAction(action)
+    if context.portal_type == "ChartFolder":
+        # desativando paciente pelo prontuario
+        patient = context.getParentNode()
+    else:
+        # desativando paciente pelo view do paciente
+        patient = context
 
-	if action == "activate":
-		container.REQUEST.RESPONSE.redirect(container.Patients.absolute_url() + "	?portal_status_message=" + context.getFullName() +  " foi reativado com sucesso")
-	else:	
-		container.REQUEST.RESPONSE.redirect(container.Patients.absolute_url() + "	?portal_status_message=" + context.getFullName() +  " foi desativado com sucesso")
+    patient.doWorkflowAction(action) # muda o estado
+
+    patient.showOrHide(action) # expira ou "desespira" o paciente.
+
+    if action == "activate":
+        container.REQUEST.RESPONSE.redirect(container.Patients.absolute_url() + "	?portal_status_message=" + context.getFullName() +  " foi reativado com sucesso")
+    else:
+        container.REQUEST.RESPONSE.redirect(container.Patients.absolute_url() + "	?portal_status_message=" + context.getFullName() +  " foi desativado com sucesso")

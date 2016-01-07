@@ -401,4 +401,18 @@ class Patient(wresuser.WRESUser):
 
         return '%sa%sm' % (year_age, month_age)
 
+    def showOrHide(self, action):
+        """
+        Este método é usado para expirar ou "desespirar" o paciente dependendo do estado
+        que ele assume.
+        Com isso, caso o paciente esteja Inativo, ele não será mostrado nas buscas.
+        """
+        if action == 'inactivate':
+            self.setExpirationDate("2000/01/01")  # expira o paciente
+        elif action == 'activate':
+            self.setExpirationDate("2499/12/31")  # desespira o paciente
+
+        self.reindexObject()
+
+
 atapi.registerType(Patient, PROJECTNAME)
