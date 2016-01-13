@@ -59,6 +59,9 @@ class PatientFolder(folder.ATFolder):
 
         brains = self.portal_catalog.search({'portal_type': 'Patient'}, sort_index='sortable_title')
 
+        # usamos base_url para o sistema nao adicionar o id do site na URL quando em producao
+        base_url = '/'.join(self.getPhysicalPath()) + '/'
+
         for br in brains:
 
             if br.review_state == 'inactive':
@@ -75,7 +78,7 @@ class PatientFolder(folder.ATFolder):
 
             patient['id'] = br.getId
             patient['name'] = br.Title
-            patient['url'] = br.getPath()
+            patient['url'] = base_url + br.getId
             if br.genericColumn1:
                 patient['birth'] = br.genericColumn1.strftime('%d/%m/%Y')
             if br.genericColumn2:
