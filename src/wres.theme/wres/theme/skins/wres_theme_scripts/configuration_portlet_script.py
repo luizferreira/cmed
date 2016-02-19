@@ -14,7 +14,7 @@ response['links']['doctorfolder'] = base + '/Doctors'
 response['links']['secretaryfolder'] = base + '/Secretaries'
 
 if 'Doctor' in user_roles or 'Manager' in user_roles:
-    response['links']['clinic'] = base + '/Clinic'
+    response['links']['clinic'] = base + '/Clinic/reports_folder_view'
 else:
     response['links']['clinic'] = ''
 

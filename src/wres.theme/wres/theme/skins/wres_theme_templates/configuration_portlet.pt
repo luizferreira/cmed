@@ -35,10 +35,10 @@
 
                     <li tal:condition="python:data['links']['clinic']" class="navTreeItem visualNoMarker navTreeFolderish">
                         <tal:if condition="python:data['current']=='clinic'">
-                            <a id="configuration_clinic" class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['clinic']"> Clínica </a>
+                            <a id="configuration_clinic" class="navTreeFolderish navTreeCurrentItem" tal:attributes="href python:data['links']['clinic']"> Clínica (+Relatórios) </a>
                         </tal:if>
                         <tal:if condition="python:data['current']!='clinic'">
-                            <a id="configuration_clinic" class="navTreeFolderish" tal:attributes="href python:data['links']['clinic']"> Clínica </a>
+                            <a id="configuration_clinic" class="navTreeFolderish" tal:attributes="href python:data['links']['clinic']"> Clínica (+Relatórios) </a>
                         </tal:if>
                     </li>
                     <li tal:condition="python:data['links']['mydata']" class="navTreeItem visualNoMarker navTreeFolderish">
