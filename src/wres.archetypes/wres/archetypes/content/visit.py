@@ -149,9 +149,6 @@ class Visit(event.ATEvent):
             criteria.setValue(new_tags)
             collection.reindexObject()
 
-        # TODO: maybe we need to test if the contact phone here is the same as the registered one in the
-        # patient chart.
-
         #change the state from non-scheduled to scheduled.
         #Do we need this here?
         # TODO: Retirar em 06/2013. Eh interessante isso msm? (voltar
@@ -163,6 +160,14 @@ class Visit(event.ATEvent):
         # preenche o campo convênio de paciente com o convênio desta visita.
         patient = self.getPatient()
         patient.setInsurance(self.getInsurance())
+
+        # test if the contact phone provided on visit registration is the same
+        # as the registered one in the patient chart. If not, we update the
+        # patient contact phone.
+        visit_contact_phone = self.getContactPhoneVisit()
+        if patient.getContactPhone() != visit_contact_phone:
+            patient.setContactPhone(visit_contact_phone)
+            patient.reindexObject()  # the contact phone is in the catalog
 
         #esse trecho calcula o endDate com base no startDate e na duracao da consulta.
         self.endDate = addMinutes2Date(self.start(), self.getDuration())
