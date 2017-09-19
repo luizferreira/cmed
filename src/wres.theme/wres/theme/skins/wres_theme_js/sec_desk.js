@@ -205,6 +205,28 @@ $(document).ready(function(){
         $("#content").append("<div style='position: absolute; top:75px; right:5px' class='aprenda'><a href='"+url_+"?tourId=3_d_configurando_calendario-configurando-o-seu&skinId=sunburst' class='btn btn-info'>Aprenda +</a></div>");
     }
 
+    $(".visit_link").click(function() {
+        event.preventDefault();
+        var data = {};
+        var url = $("#visit_url", $(this).parent()).val();
+        var extra = '/SFLight_visit_view';
+        var titulo = 'Detalhes da Consulta';
+        $dialog_content = $('#dialog_content');
+        $dialog_content.empty();
+        $dialog_content.dialog( "destroy" );
+        $.get(url+extra, data,
+              function (msg) {
+                  $dialog_content.append(msg);
+                  $dialog_content.dialog({
+                    width: 'auto',
+                    autoOpen: true,
+                    modal: true,
+                    title: titulo,
+                  });
+             }
+        );    
+    });
+
 });
 
 function patientClick(){
@@ -228,25 +250,4 @@ function patientClick(){
 	     }
 	);
 
-}
-
-function timeClick(){
-	var data = {};
-	var url = document.getElementById("visit_url").value;
-	var extra = '/SFLight_visit_view';
-	var titulo = 'Detalhes da Consulta';
-	$dialog_content = $('#dialog_content');
-	$dialog_content.empty();
-	$dialog_content.dialog( "destroy" );
-	$.get(url+extra, data,
-	      function (msg) {
-	          $dialog_content.append(msg);
-	          $dialog_content.dialog({
-	            width: 'auto',
-	            autoOpen: true,
-	            modal: true,
-	            title: titulo,
-	          });
-	     }
-	);
 }

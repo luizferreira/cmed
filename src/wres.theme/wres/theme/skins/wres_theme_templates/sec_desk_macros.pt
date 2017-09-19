@@ -72,10 +72,9 @@
                             <td style="text-align: center;">
                                 <a tal:attributes="name visit_id" />
                                 <a class="visit_link"
-                                    href="javascript: void(0)"
+                                    href=""
                                     tal:content="python:visit['start'].strftime('%H:%M')"
-                                    i18n:translate=""
-                                    onclick="timeClick()">Feb 1, 2005 5:17 pm</a>
+                                    i18n:translate="">Feb 1, 2005 5:17 pm</a>
                                 <img class="visualNoPrint" tal:attributes="src string:${portal_url}/popup_icon.gif;" />
                                 <input id="visit_url" style="display:none" tal:attributes="value python:visit['absolute_url']"/>
                             </td>
