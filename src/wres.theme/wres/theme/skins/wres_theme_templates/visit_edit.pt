@@ -97,7 +97,7 @@
           <dd>Novo Paciente Registrado com Sucesso.</dd>
         </dl>
         </div>
-      <metal:default_body use-macro="here/edit_macros/macros/body">
+      <metal:default_body use-macro="here/edit_macros_visit/macros/body">
       </metal:default_body>
     </div>
 
