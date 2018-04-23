@@ -1,12 +1,12 @@
 <script type="text/javascript">
     var cstat_data_url = document.URL + '/cstat_data'
 
-    $.get(cstat_data_url, function(data) {
+    // $.get(cstat_data_url, function(data) {
 
-        // data contem a URL que sera visitada no cstat para regitrar a 
-        // requisicao.
-        $.post(data);
+    //     // data contem a URL que sera visitada no cstat para regitrar a 
+    //     // requisicao.
+    //     $.post(data);
 
-    });
+    // });
 </script>
 
