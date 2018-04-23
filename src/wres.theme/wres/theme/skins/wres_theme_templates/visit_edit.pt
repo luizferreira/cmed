@@ -42,7 +42,11 @@
      <center>
       <h2> Buscar paciente para visita </h2>
       <div i18n:translate="" id="search_patient">
-        <form id="portletx_form" name="portletxform" method="post">
+
+        <!-- Preencher a action abaixo corrigi um problema muito estranho (porque apareceu do nada) no livesearch do calendario -->
+
+        <form id="portletx_form" name="portletxform" method="post" 
+            tal:attributes="action python:'/'.join(portal.getPhysicalPath())+'/search'">
           <div id="choose_patient" class="LSBox">
             <input id="searchGadget" class="inputLabel" style="width:300px"
              title="Digite o nome, CPF ou ID do paciente" autocomplete="on" name="Title" value="" />
