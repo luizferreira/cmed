@@ -19,7 +19,7 @@
         <div class="portletBody" id="body_chartnavigation_portlet"
             tal:define="
                 meta_type string:Doctor;
-                brains python:context.portal_catalog.searchResults({'meta_type': meta_type})">
+                brains python:context.portal_catalog.searchResults({'meta_type': meta_type, 'sort_on': 'sortable_title'})">
 
             <dd class="portletItem lastItem">
                 <ul class="navTree navTreeLevel0">

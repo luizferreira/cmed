@@ -4,7 +4,8 @@ portal = getWresSite()
 
 def getDoctors():
     doctor_folder = portal.Doctors
-    doctor_list = doctor_folder.listFolderContents() 
+    doctor_list = doctor_folder.listFolderContents()
+    doctor_list.sort(key=lambda x:x.firstName) 
     return  doctor_list
 
 def getLoggedDoctor():
