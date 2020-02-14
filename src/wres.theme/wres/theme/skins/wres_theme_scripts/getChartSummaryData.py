@@ -31,7 +31,11 @@ def getNewDocumentsList():
         item = {}
         item['type'] = obj.Title()
         item['date'] = obj.date.strftime('%d/%m/%Y')
-        item['doctor'] = str(obj.getDoctor().Title())
+        doctor = obj.getDoctor()
+        if doctor:
+            item['doctor'] = str(obj.getDoctor().Title())
+        else:
+            item['doctor'] = ''
         item['link'] = obj.absolute_url(1)
         retorno.append(item)
     return retorno

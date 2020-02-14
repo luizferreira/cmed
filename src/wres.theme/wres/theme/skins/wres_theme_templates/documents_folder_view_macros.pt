@@ -3,12 +3,12 @@
 <metal:body_macro define-macro="body_macro">
 <h1 tal:content="here/title_or_id">Title</h1><br />
 
-	<div tal:condition="not:documents">
-		<span style="font-style: italic">Não há documentos</span>
-	</div>
+    <div tal:condition="not:documents">
+        <span style="font-style: italic">Não há documentos</span>
+    </div>
 
-	<metal:documents_table define-macro="documents_table">
-		<tal:show_table condition="documents">
+    <metal:documents_table define-macro="documents_table">
+        <tal:show_table condition="documents">
             <div align="center">
                 <table style="width:100%" class="listing">
                     <thead>
@@ -23,7 +23,7 @@
                     </thead>
                     <tbody>
                         <tal:block repeat="document documents">
-                            <tr	tal:define="oddrow repeat/document/odd;"
+                            <tr tal:define="oddrow repeat/document/odd;"
                                 tal:attributes="class python:test(oddrow, 'even', 'odd')">
 
                                 <td tal:content="repeat/document/number">01</td>
@@ -34,7 +34,9 @@
                                     </a>
                                 </td>
 
-                                <td tal:content="python:document.getDoctor().Title()">Doutor Teste</td>
+                                <td 
+                                    tal:define="doc_title document/getDoctor/Title | nothing"
+                                    tal:content="doc_title">Doutor Teste</td>
 
                                 <td>
                                     <span tal:define="date document/getDateOfVisit"
@@ -61,8 +63,8 @@
                     </tbody>
                 </table>
             </div>
-		</tal:show_table>
-	</metal:documents_table>
+        </tal:show_table>
+    </metal:documents_table>
 
 </metal:body_macro>
 
