@@ -7,6 +7,15 @@ def i18n_patch():
     from plone.app.contentmenu.menu import FactoriesSubMenuItem
     FactoriesSubMenuItem.title = 'Adicionar...'
 
+def plone_app_form_patch():
+    '''
+    plone.app.form has a dumb max date set to 1/1/2021 which was not allowing secretaries to add
+    visits after 31/12/2020
+    '''
+    from DateTime.DateTime import DateTime                                          
+    import plone.app.form.widgets.datecomponents                                    
+    plone.app.form.widgets.datecomponents.PLONE_CEILING = DateTime(2500, 0) # 2499-12-31
+
 
 def hard_patch():
     '''
@@ -14,3 +23,4 @@ def hard_patch():
     to be called, you need to call it here.
     '''
     i18n_patch()
+    plone_app_form_patch()

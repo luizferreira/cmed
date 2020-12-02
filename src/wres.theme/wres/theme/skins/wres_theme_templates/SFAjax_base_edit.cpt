@@ -229,8 +229,8 @@ function setDuration(){
     });
   
   //Ao editar uma consulta: Para enganar o validador caso o usuario coloque um start_date alem do antigo end_date,
-  //o ano do end_date é setado para 2017. O enddate real é calculado no visitemp.py
-  //TODO: Mudar isso em 2017
+  //o ano do end_date é setado para 2025. O enddate real é calculado no visitemp.py
+  //TODO: Mudar isso em 2025
     $("#edit_form_startDate_0_year," +
       "#edit_form_startDate_0_month,"+
       "#edit_form_startDate_0_day,"+
@@ -238,7 +238,7 @@ function setDuration(){
       "#edit_form_startDate_0_minute").change(function(){
       
       endyear = $("#edit_form_endDate_1_year")[0]
-      endyear.selectedIndex = 17;
+      endyear.selectedIndex = 25;
     });
     
     endDateWidget = $("#archetypes-fieldname-endDate")[0]
